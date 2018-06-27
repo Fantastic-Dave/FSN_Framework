@@ -28,5 +28,5 @@ At no point does this license permit modification/distribution of the content to
 This license is revokable at any period and upon doing so the licensed individual must destroy all copies and cease use of the content immediately.
 
 Licensed developers are listed below with permission to modify listed files:
-- James Scott (jamessc0tt) | fsn_*/*.*
+- James Scott (jamessc0tt) | fsn_\*/\*.\*
 - Devyn Westfield (xLiquidx) | fsn_police/MDT/gui/\*.js fsn_police/MDT/gui/\*.html
