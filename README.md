@@ -20,3 +20,13 @@ set mysql_connection_string "server=127.0.0.1;database={DATABASE_NAME};userid={U
 
 ### Setting up your local server
 This is simple, download the latest FiveM Reborn server from the FiveM documenation site, then **REPLACE** all the resources with the ones from this GitHub. Then edit your fsn_server.cfg to include the requirements in /cfg_config.
+
+
+# License
+This software is licensed to Devyn Westfield for the sole use of Fusion Roleplay (fusionrolelay.com) any other use is strictly prohibited.
+At no point does this license permit modification/distribution of the content to any party other than the original sole creator.
+This license is revokable at any period and upon doing so the licensed individual must destroy all copies and cease use of the content immediately.
+
+Licensed developers are listed below with permission to modify listed files:
+- James Scott (jamessc0tt) | fsn_*/*.*
+- Devyn Westfield (xLiquidx) | fsn_police/MDT/gui/\*.js fsn_police/MDT/gui/\*.html
