@@ -1,0 +1,37 @@
+client_script 'client.lua'
+
+-- FUEL
+client_script 'fuel/client.lua'
+server_script 'fuel/server.lua'
+
+-- SPEED CAMERAS
+client_script 'speedcameras/client.lua'
+
+-- COMPASS
+client_script 'compass/essentials.lua'
+client_script 'compass/compass.lua'
+client_script 'compass/streetname.lua'
+
+-- CARHUD
+client_script 'carhud/carhud.lua'
+
+-- DAMAGE
+client_script 'damage/config.lua'
+client_script 'damage/client.lua'
+
+-- ENGINE
+client_script 'engine/client.lua'
+
+-- KEYS
+server_script 'keys/server.lua'
+
+-- INVENTORY
+client_script 'inventory/client.lua'
+server_script 'inventory/server.lua'
+
+-- CARWASH
+client_script 'carwash/client.lua'
+
+exports({
+  'GetVehicleInventory'
+})

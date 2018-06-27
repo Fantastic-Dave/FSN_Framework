@@ -1,0 +1,196 @@
+/*
+	Main phone
+*/
+* {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+}
+.main_phone {
+	position: fixed;
+	width: 300px;
+	height: auto;
+	bottom: 480px;
+	display: none; 
+}
+.phone_image {
+	width: 100%;
+	z-index: -100;
+	position:absolute;
+}
+.phone_screen {
+	position: absolute;
+	top: 0px;
+	margin-top: 79px;
+	margin-left: 44px;
+	width: 212px;
+	z-index: -1;
+	height: 380px;
+	z-index: 0;
+	background-image: url('img/home-background.png');
+}
+.status_bar {
+	width: 100%;
+	height: 15px;
+	background-color: black;
+	font-family: Arial;
+	font-size: 11px;
+	line-height: 15px;
+	text-align: right;
+	padding-right: 3px;
+	color: white;
+}
+.back_bar {
+	width: 100%;
+	position: absolute;
+	height: 7%;
+	background-color: black;
+	align-content: middle;
+}
+.back_bar img {
+	display: block;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*
+	Home Screen
+*/
+#screen-home {
+	display: none;
+	height: 93%;
+}
+.home_button {
+	width: 40px;
+	height: 50px;
+	padding: 5px;
+	color: white;
+	font-size: 8px;
+	font-family: Arial;
+	text-align: center;
+	display: inline-block;
+}
+.home_button img {
+	width: 95%;
+	margin-bottom: 2px;
+}
+
+/*
+	No Sim Screen
+*/
+#screen-nosim {
+	width: 100%;
+	height: 100%;
+	background-image: url('img/sim.png');
+	display: none;
+}
+
+/*
+	Messages Screen
+*/
+#screen-messages {
+	display: none;
+	background-color: white;
+	width: 100%;
+	height: 93%;
+}
+.msg_box {
+	width: 100%;
+	height: 55px;
+	border-bottom: 1px solid #d1d1d1;
+	padding-top: 5px;
+}
+.msg_title {
+	width: 100%;
+	margin: 2px;
+	margin-bottom: 4px;
+	font-size:14px;
+	font-family: Arial;
+	font-weight: bold;
+}
+.msg_preview {
+	width: 100%;
+	margin: 2px;
+	font-family: Arial;
+	font-size: 10px;
+}
+
+/*
+	Phone (Keypad) Screen
+*/
+#screen-phone {
+	display: none;
+	background-color: white;
+	width: 100%;
+	height: 93%;
+}
+.call_buttons {
+	width: 100%;
+	height: 250px;
+	padding-left: 20px;
+}
+.call_number_button {
+	position: relative;
+	width: 50px;
+	line-height: 50px;
+	text-align: center;
+	height: 50px;
+	margin: 3px;
+	border: 1px solid #d1d1d1;
+	border-radius: 50%;
+	float: left;
+	font-size: 25px;
+	font-family: Arial;
+}
+.call_input {
+	position: relative;
+	width: 80%;
+	height: 40px;
+	margin-top: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.call_input input {
+	width: 100%;
+	height: 90%;
+	border: 0px;
+	text-align: center;
+	font-family: Arial;
+	font-size: 20px;
+	border-bottom: 1px solid #d1d1d1;
+}
+.call_button {
+	position: relative;
+	height: 35px;
+	background-color: #1bb747;
+	box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+	border-radius: 10px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -10px;
+}
+.call_icon {
+	width: 20%;
+	float: left;
+	height: 100%;
+	border-right: 1px solid white;
+}
+.call_icon img {
+	width: 55%;
+	margin: 7px;
+	margin-left: 9px;
+}
+.call_text {
+	width: 70%;
+	float: left;
+	height: 100%;
+	font-weight: bold;
+	color: white;
+	font-family: Arial;
+	text-align: center;
+	line-height: 35px;
+}

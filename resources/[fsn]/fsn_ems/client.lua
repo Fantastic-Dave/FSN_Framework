@@ -1,0 +1,141 @@
+function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
+  SetTextFont(font)
+  SetTextProportional(0)
+  SetTextScale(scale, scale)
+  SetTextColour(r, g, b, a)
+  SetTextDropShadow(0, 0, 0, 0,255)
+  SetTextEdge(1, 0, 0, 0, 255)
+  SetTextDropShadow()
+  SetTextOutline()
+  SetTextCentre(centre)
+  SetTextEntry("STRING")
+  AddTextComponentString(text)
+  DrawText(x , y)
+end
+
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+    if IsEntityDead(GetPlayerPed(-1)) then
+      SetEntityHealth(GetPlayerPed(-1), GetEntityMaxHealth(GetPlayerPed(-1)))
+      TriggerEvent('fsn_ems:killMe')
+    end
+  end
+end)
+
+local currenttime = 0
+local deathtime = currenttime
+local amidead = false
+RegisterNetEvent('fsn_ems:reviveMe')
+AddEventHandler('fsn_ems:reviveMe', function()
+  amidead = false
+  deathtime = 0
+  NetworkResurrectLocalPlayer(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 0, false, false)
+  TriggerEvent('fsn_inventory:use:drink', 100)
+  TriggerEvent('fsn_inventory:use:food', 100)
+end)
+
+RegisterNetEvent('fsn_ems:killMe')
+AddEventHandler('fsn_ems:killMe', function()
+  if not amidead then
+    local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
+    if IsPedInAnyVehicle(GetPlayerPed(-1)) then
+  		local veh = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+      TaskLeaveVehicle(GetPlayerPed(-1), veh, 4160)
+    end
+    if exports.fsn_police:fsn_PDDuty() then
+      local pos = GetEntityCoords(GetPlayerPed(-1))
+      local coords = {
+        x = pos.x,
+        y = pos.y,
+        z = pos.z
+      }
+      TriggerServerEvent('fsn_police:dispatch', coords, 4)
+    end
+    TriggerServerEvent('fsn_police:CAD:10-43', x, y, z)
+    TriggerServerEvent('fsn_ems:CAD:10-43', x, y, z)
+    amidead = true
+    deathtime = currenttime
+  end
+end)
+
+-- thread to check if im dead
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+    if amidead then
+      SetPedToRagdoll(GetPlayerPed(-1), 1, 1000, 0, 0, 0, 0)
+      local def = deathtime + 300
+      if def > currenttime then
+        drawTxt('Wait '..tostring(def - currenttime)..' seconds to respawn ~b~||~w~ Wait for EMS',4,1,0.5,0.35,0.6,255,255,255,255)
+        drawTxt('~r~YOU ARE KNOCKED OUT AND CANNOT COMMUNICATE',4,1,0.5,0.25,0.6,255,255,255,255)
+      else
+        drawTxt('Press [E] to respawn',4,1,0.5,0.35,0.6,255,255,255,255)
+        drawTxt('~r~DO NOT RESPAWN IN A ROLEPLAY SITUATION',4,1,0.5,0.25,0.6,255,255,255,255)
+        if IsControlJustPressed(1, 38) then -- E
+          DoScreenFadeOut(200)
+          TriggerEvent('fsn_bank:change:bankandwallet', 0, false)
+          TriggerEvent('fsn_inventory:empty')
+          local hospital = {
+            {x = 337.21597290039, y = -1396.1442871094, z = 32.5090675354},
+            {x = 355.52011108398, y = -598.32464599609, z = 28.774812698364},
+            {x = 1839.5141601563, y = 3672.0124511719, z = 34.276752471924},
+            {x = -246.84455871582, y = 6331.107421875, z = 32.426181793213}
+          }
+          hospital = hospital[math.random(1, #hospital)]
+          amidead = false
+          deathtime = 0
+          NetworkResurrectLocalPlayer(hospital.x, hospital.y, hospital.z, 0, false, false)
+          TriggerEvent('fsn_inventory:use:drink', 100)
+          TriggerEvent('fsn_inventory:use:food', 100)
+          Citizen.Wait(2000)
+          DoScreenFadeIn(1500)
+          TriggerEvent('fsn_bank:change:bankMinus', 5000)
+          TriggerEvent("pNotify:SendNotification", {text = "You have been charged $5000 for medical bills.",
+              layout = "centerRight",
+              timeout = 5000,
+              progressBar = true,
+              type = "info",
+          })
+        end
+      end
+    end
+  end
+end)
+-- thread to check if im dead
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(1000)
+    currenttime = currenttime + 1
+  end
+end)
+
+------------------------------------------------- EMS system
+local hospitals = {
+  {
+    name = 'Crusade Road Emergency Unit',
+    x = 295.42825317383,
+    y = -1446.8900146484,
+    z = 29.966619491577
+  }
+}
+local healing = false
+local healstart = 0
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+    for k, hosp in pairs(hospitals) do
+      if GetDistanceBetweenCoords(hosp.x,hosp.y,hosp.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 and not healing then
+        DrawMarker(1,hosp.x,hosp.y,hosp.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+        if GetDistanceBetweenCoords(hosp.x,hosp.y,hosp.z,GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+          SetTextComponentFormat("STRING")
+        	AddTextComponentString("Press ~INPUT_PICKUP~ to see a doctor")
+        	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+          if IsControlJustPressed(0,38) then
+            TriggerEvent('fsn_progress:addBar', 'SEEING A DOCTOR', 30)
+          end
+        end
+      end
+    end
+  end
+end)

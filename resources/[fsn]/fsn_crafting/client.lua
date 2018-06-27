@@ -1,0 +1,143 @@
+local crafting_stations = {
+  ------------ WEED
+  {
+    blip = {
+      title = 'Weed Farming',
+      id = 496
+    },
+    loc = {x = 2219.7758789063, y = 5577.4584960938, z = 53.845291137695},
+    cost = 0,
+    required = {
+      item = 'none',
+      itemtitle = 'none',
+      amount = 0
+    },
+    gives = {
+      item = '2g_weed',
+      itemtitle = '2G Weed',
+      amount = 2
+    }
+  },
+  {
+    blip = {
+      title = 'Weed Crafting',
+      id = 496
+    },
+    loc = {x = 1968.2893066406, y = 3821.7421875, z = 32.396980285645},
+    cost = 200,
+    required = {
+      item = '2g_weed',
+      itemtitle = '2G Weed',
+      amount = 1
+    },
+    gives = {
+      item = 'joint',
+      itemtitle = 'Joint',
+      amount = 3
+    }
+  },
+
+  ------------ METH
+  {
+    blip = {
+      title = 'Meth Farming',
+      id = 403
+    },
+    loc = {x = 3623.6965332031, y = 3738.8859863281, z = 28.690086364746},
+    cost = 0,
+    required = {
+      item = 'none',
+      itemtitle = 'none',
+      amount = 0
+    },
+    gives = {
+      item = 'acetone',
+      itemtitle = 'Acetone',
+      amount = 2
+    }
+  },
+  {
+    blip = {
+      title = 'Meth Crafting',
+      id = 403
+    },
+    loc = {x = 1391.9617919922, y = 3606.8315429688, z = 38.941932678223},
+    cost = 50,
+    required = {
+      item = 'acetone',
+      itemtitle = 'Acetone',
+      amount = 1
+    },
+    gives = {
+      item = 'phosphorus',
+      itemtitle = 'Phosphorus',
+      amount = 1
+    }
+  },
+  {
+    blip = {
+      title = 'Meth Cooking',
+      id = 403
+    },
+    loc = {x = 2431.5795898438, y = 4963.7548828125, z = 42.347560882568},
+    cost = 200,
+    required = {
+      item = 'phosphorus',
+      itemtitle = 'Phosphorus',
+      amount = 1
+    },
+    gives = {
+      item = 'meth_rocks',
+      itemtitle = 'Meth Rocks',
+      amount = 4
+    }
+  },
+}
+
+Citizen.CreateThread(function()
+  for k, v in pairs(crafting_stations) do
+    local bleep = AddBlipForCoord(v.loc.x, v.loc.y, v.loc.z)
+    SetBlipSprite(bleep, v.blip.id)
+    SetBlipDisplay(bleep, 4)
+    SetBlipScale(bleep, 1.0)
+    SetBlipColour(bleep, 4)
+    SetBlipAsShortRange(bleep, true)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentString(v.blip.title)
+    EndTextCommandSetBlipName(bleep)
+  end
+  while true do
+    Citizen.Wait(0)
+    for k, v in pairs(crafting_stations) do
+      if GetDistanceBetweenCoords(v.loc.x,v.loc.y,v.loc.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
+        DrawMarker(1,v.loc.x,v.loc.y,v.loc.z-1,0,0,0,0,0,0,5.001,5.0001,0.4001,0,155,255,175,0,0,0,0)
+        if GetDistanceBetweenCoords(v.loc.x,v.loc.y,v.loc.z,GetEntityCoords(GetPlayerPed(-1)), true) < 5 then
+          SetTextComponentFormat("STRING")
+          AddTextComponentString("Press ~INPUT_PICKUP~ to get ~g~"..v.gives.itemtitle)
+          DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+          if IsControlJustPressed(0,38) then
+            if exports.fsn_main:fsn_GetWallet() >= v.cost then
+              if exports.fsn_inventory:fsn_GetItemAmount(v.required.item) >= v.required.amount then
+                local waittime = math.random(3000,6000)
+                TriggerEvent('fsn_notify:displayNotification', 'Gathering ['..v.gives.amount..'X] '..v.gives.itemtitle, 'centerLeft', waittime, 'info')
+                Citizen.Wait(waittime)
+                if v.required.item ~= 'none' then
+                  TriggerEvent('fsn_inventory:item:take', v.required.item, v.required.amount)
+                end
+                TriggerEvent('fsn_notify:displayNotification', 'Gathered ['..v.gives.amount..'X] '..v.gives.itemtitle, 'centerRight', 3500, 'success')
+                if v.cost > 0 then
+                  TriggerEvent('fsn_bank:change:walletMinus', v.cost)
+                end
+                TriggerEvent('fsn_inventory:item:add', v.gives.item, v.gives.amount)
+              else
+                TriggerEvent('fsn_notify:displayNotification', 'You don\'t have any '..v.required.itemtitle, 'centerRight', 3500, 'error')
+              end
+            else
+              TriggerEvent('fsn_notify:displayNotification', 'You don\'t have $'..v.cost..'!!!', 'centerRight', 3500, 'error')
+            end
+          end
+        end
+      end
+    end
+  end
+end)
