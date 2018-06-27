@@ -1,3 +1,11 @@
+ui_page 'gui/index.html'
+
+files({
+  "gui/ui.html",
+	"gui/ui.js",
+	"gui/ui.css"
+})
+
 client_script 'entarable/properties.lua'
 client_script 'enterable/client.lua'
 

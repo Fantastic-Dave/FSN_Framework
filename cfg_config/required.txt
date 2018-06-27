@@ -31,6 +31,7 @@ start fsn_store_guns
 start fsn_phone
 start fsn_customs
 start fsn_carstore
+start fsn_properties
 
 # police uniforms
 start pd_uni
