@@ -1,3 +1,4 @@
+-- shared functions
 function fsn_drawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
     local px,py,pz=table.unpack(GetGameplayCamCoords())
