@@ -95,11 +95,11 @@ end)
 RegisterServerEvent('fsn_properties:door:unlock')
 AddEventHandler('fsn_properties:door:unlock', function(propertyid, doorid)
   enterable_properties[propertyid].doors[doorid].locked = false
-  TriggerClientEvent('fsn_properties:doors:init', -1, enterable_properties)
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
 end)
 
 RegisterServerEvent('fsn_properties:door:lock')
 AddEventHandler('fsn_properties:door:lock', function(propertyid, doorid)
   enterable_properties[propertyid].doors[doorid].locked = true
-  TriggerClientEvent('fsn_properties:doors:init', -1, enterable_properties)
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
 end)
