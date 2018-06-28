@@ -24,5 +24,5 @@ server_script 'playermanager/server.lua'
 exports {
 	"fsn_GetWallet",
   "fsn_CharID",
-  "fsn_GetPlayerFromCharacterId"
 }
+server_export 'fsn_GetPlayerFromCharacterId'

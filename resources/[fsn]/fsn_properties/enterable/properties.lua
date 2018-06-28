@@ -157,7 +157,7 @@ AddEventHandler('fsn_properties:enterable:access:allow', function(propid, pid)
   for k, v in pairs(enterable_properties) do
     if v.db_id == propid then
       table.insert(v.coowners,#v.coowners+1,pid)
-      TriggerClientEvent('fsn_notify:displayNotification', source, 'You granted #'..pid..' access to your property #'..propid, 'centerLeft', 8000, 'success')
+      TriggerClientEvent('fsn_notify:displayNotification', source, 'You granted ID#'..pid..' access to your property #'..propid, 'centerLeft', 8000, 'success')
       if exports.fsn_main:fsn_GetPlayerFromCharacterId(pid) ~= 0 then
         TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromCharacterId(pid), 'You were granted access to property #'..propid, 'centerLeft', 8000, 'success')
       end
@@ -172,10 +172,11 @@ AddEventHandler('fsn_properties:enterable:access:revoke', function(propid, pid)
     if v.db_id == propid then
       for key, value in pairs(v.coowners) do
         if v == pid then
-          table.remove(v.coowners, key)
+          pid_key = key
         end
       end
-      TriggerClientEvent('fsn_notify:displayNotification', source, 'You removed #'..pid..' from your property #'..propid, 'centerLeft', 8000, 'success')
+      table.remove(v.coowners,key)
+      TriggerClientEvent('fsn_notify:displayNotification', source, 'You removed ID#'..pid..' from your property #'..propid, 'centerLeft', 8000, 'success')
       if exports.fsn_main:fsn_GetPlayerFromCharacterId(pid) ~= 0 then
         TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromCharacterId(pid), 'Your access to property #'..propid..' has been revoked!', 'centerLeft', 8000, 'error')
       end

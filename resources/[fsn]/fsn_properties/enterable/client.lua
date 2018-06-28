@@ -69,7 +69,7 @@ AddEventHandler('fsn_properties:menu:access:allow', function(id)
       while UpdateOnscreenKeyboard() == 0 or editOpen do
         Wait(0)
         drawTxt('Input #ID',4,1,0.5,0.35,0.6,255,255,255,255)
-        drawTxt('~r~In order to limit errors, revoking multiple people\'s access is disabled.',4,1,0.5,0.49,0.4,255,255,255,255)
+        drawTxt('~r~DO NOT USE THE OVERHEAD NUMBER, USE #ID FROM THEIR ID CARD.',4,1,0.5,0.49,0.4,255,255,255,255)
         if UpdateOnscreenKeyboard() ~= 0 then
           editOpen = false
           if UpdateOnscreenKeyboard() == 1 then
@@ -111,7 +111,7 @@ AddEventHandler('fsn_properties:menu:access:revoke', function(id)
       while UpdateOnscreenKeyboard() == 0 or editOpen do
         Wait(0)
         drawTxt('Input #ID',4,1,0.5,0.35,0.6,255,255,255,255)
-        drawTxt('~r~In order to limit errors, revoking multiple people\'s access is disabled.',4,1,0.5,0.49,0.4,255,255,255,255)
+        drawTxt('~r~DO NOT USE THE OVERHEAD NUMBER, USE #ID FROM THEIR ID CARD.',4,1,0.5,0.49,0.4,255,255,255,255)
         if UpdateOnscreenKeyboard() ~= 0 then
           editOpen = false
           if UpdateOnscreenKeyboard() == 1 then
