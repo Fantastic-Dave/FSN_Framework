@@ -188,3 +188,8 @@ AddEventHandler('fsn_properties:enterable:access:revoke', function(propid, pid)
   end
   TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
 end)
+
+RegisterServerEvent('fsn_properties:enterable:inventory:enter')
+AddEventHandler('fsn_properties:enterable:inventory:enter', function(item, amount)
+
+end)
