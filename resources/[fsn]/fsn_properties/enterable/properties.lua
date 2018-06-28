@@ -161,6 +161,8 @@ AddEventHandler('fsn_properties:enterable:access:allow', function(propid, pid)
       if exports.fsn_main:fsn_GetPlayerFromCharacterId(pid) ~= 0 then
         TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromCharacterId(pid), 'You were granted access to property #'..propid, 'centerLeft', 8000, 'success')
       end
+
+      MySQL.Async.execute('UPDATE `fsn_properties` SET `property_coowners` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.coowners)}, function(rowsChanged) end)
     end
   end
   TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
@@ -180,6 +182,8 @@ AddEventHandler('fsn_properties:enterable:access:revoke', function(propid, pid)
       if exports.fsn_main:fsn_GetPlayerFromCharacterId(pid) ~= 0 then
         TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromCharacterId(pid), 'Your access to property #'..propid..' has been revoked!', 'centerLeft', 8000, 'error')
       end
+
+      MySQL.Async.execute('UPDATE `fsn_properties` SET `property_coowners` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.coowners)}, function(rowsChanged) end)
     end
   end
   TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
