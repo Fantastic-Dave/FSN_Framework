@@ -62,6 +62,16 @@ AddEventHandler('fsn_main:getCharacter', function(char_id)
   end
 end)
 
+function fsn_GetPlayerFromCharacterId(id)
+  local idee = 0
+  for k, v in pairs(current_characters) do
+    if v.char_id == id then
+      idee = v.ply_id
+    end
+  end
+  return idee
+end
+
 RegisterServerEvent('fsn_main:money:Set')
 AddEventHandler('fsn_main:money:Set', function(ply, amt)
   local indexid = 0
