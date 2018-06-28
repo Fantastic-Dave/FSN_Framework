@@ -30,3 +30,5 @@ This license is revokable at any period and upon doing so the licensed individua
 Licensed developers are listed below with permission to modify listed files:
 - James Scott (jamessc0tt) | fsn_\*/\*.\*
 - Devyn Westfield (xLiquidx) | fsn_police/MDT/gui/\*.js fsn_police/MDT/gui/\*.html
+
+// GIT PUSHES ARE RECORDED IN #change-logs //
