@@ -65,7 +65,7 @@ end)
 function fsn_GetPlayerFromCharacterId(id)
   local idee = 0
   for k, v in pairs(current_characters) do
-    if v.char_id == id then
+    if v.char_id == tonumber(id) then
       idee = v.ply_id
     end
   end
