@@ -1,15 +1,16 @@
-ui_page 'gui/index.html'
+-- Tell FiveM's NUI system what the main html file is for this resource
+ui_page "nui/ui.html"
 
-files({
-  "gui/ui.html",
-	"gui/ui.js",
-	"gui/ui.css"
-})
+-- Add the files that need to be used/loaded
+files {
+	"nui/ui.html",
+	"nui/ui.js",
+	"nui/ui.css"
+}
+
 
 client_script 'client.lua'
-
 client_script 'enterable/client.lua'
-
 client_script 'nonenterable/client.lua'
 
 server_script 'enterable/properties.lua'
