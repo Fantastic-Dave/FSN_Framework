@@ -17,37 +17,3 @@ function fsn_drawText3D(x,y,z, text)
         DrawText(_x,_y)
     end
 end
-
-local menuEnabled = false
-
-function ToggleActionMenu()
-	menuEnabled = not menuEnabled
-	if ( menuEnabled ) then
-		SetNuiFocus( true, true )
-		SendNUIMessage({
-			showmenu = true
-		})
-	else
-		SetNuiFocus( false )
-
-		SendNUIMessage({
-			hidemenu = true
-		})
-	end
-end
-
-RegisterNUICallback( "ButtonClick", function( data, cb )
-	if ( data == "button1" ) then
-		chatPrint( "Button 1 pressed!" )
-	elseif ( data == "button2" ) then
-		chatPrint( "Button 2 pressed!" )
-	elseif ( data == "button3" ) then
-		chatPrint( "Button 3 pressed!" )
-	elseif ( data == "button4" ) then
-		chatPrint( "Button 4 pressed!" )
-	elseif ( data == "exit" ) then
-		ToggleActionMenu()
-		return
-	end
-	ToggleActionMenu()
-end )
