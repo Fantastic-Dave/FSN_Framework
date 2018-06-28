@@ -61,6 +61,7 @@ Citizen.CreateThread(function()
             			showmenu = true,
                   updateProperty = true,
                   owned = true,
+                  propertyOwner = propertyOwner,
                   propertyAccess = hasKeys,
                   policeHC = hc,
                 })
