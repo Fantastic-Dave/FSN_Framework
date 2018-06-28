@@ -238,8 +238,6 @@ AddEventHandler('fsn_inventory:item:drop', function(item)
     Citizen.CreateThread(function()
   		local editOpen = true
   		DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8S", "", "", "", "", "", 64)
-  		local targetCharID = DecorGetInt(ped, "charID")
-
   		while UpdateOnscreenKeyboard() == 0 or editOpen do
   			if UpdateOnscreenKeyboard() == 1 then
   				editOpen = false

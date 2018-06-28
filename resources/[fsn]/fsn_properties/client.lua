@@ -17,9 +17,32 @@ function fsn_drawText3D(x,y,z, text)
         DrawText(_x,_y)
     end
 end
-
+function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
+  SetTextFont(font)
+  SetTextProportional(0)
+  SetTextScale(scale, scale)
+  SetTextColour(r, g, b, a)
+  SetTextDropShadow(0, 0, 0, 0,255)
+  SetTextEdge(1, 0, 0, 0, 255)
+  SetTextDropShadow()
+  SetTextOutline()
+  SetTextCentre(centre)
+  SetTextEntry("STRING")
+  AddTextComponentString(text)
+  DrawText(x , y)
+end
+function fsn_SplitString(inputstr, sep)
+    if sep == nil then
+        sep = "%s"
+    end
+    local t={} ; i=1
+    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+        t[i] = str
+        i = i + 1
+    end
+    return t
+end
 menuEnabled = false
-
 function ToggleActionMenu()
 	menuEnabled = not menuEnabled
 	if ( menuEnabled ) then
@@ -35,19 +58,33 @@ function ToggleActionMenu()
 		})
 	end
 end
-local last_click = 0 
+local last_click = 0
+
+RegisterNetEvent('fsn_properties:buy')
+RegisterNetEvent('fsn_properties:menu:access:allow')
+RegisterNetEvent('fsn_properties:menu:access:view')
+RegisterNetEvent('fsn_properties:menu:access:revoke')
 RegisterNUICallback( "ButtonClick", function( data, cb )
   if last_click + 10 > GetNetworkTime() then return end
   last_click = GetNetworkTime()
-	if ( data == "button1" ) then
-		chatPrint( "Button 1 pressed!" )
-	elseif ( data == "button2" ) then
-		chatPrint( "Button 2 pressed!" )
-	elseif ( data == "button3" ) then
-		chatPrint( "Button 3 pressed!" )
-	elseif ( data == "button4" ) then
-		chatPrint( "Button 4 pressed!" )
-	elseif ( data == "exit" ) then
+  local split = fsn_SplitString(data, "-")
+  if split[1] == 'buy' then
+    local id = tonumber(split[2])
+    TriggerEvent('fsn_properties:buy', id)
+  end
+  ------------------------------- ACCESS
+  if split[1] == 'access' then
+    if split[2] == 'allow' then
+      TriggerEvent('fsn_properties:menu:access:allow', tonumber(split[3]))
+    end
+    if split[2] == 'view' then
+      TriggerEvent('fsn_properties:menu:access:view', tonumber(split[3]))
+    end
+    if split[2] == 'revoke' then
+      TriggerEvent('fsn_properties:menu:access:revoke', tonumber(split[3]))
+    end
+  end
+  if ( data == "exit" ) then
 		ToggleActionMenu()
 		return
 	end

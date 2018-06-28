@@ -37,6 +37,104 @@ AddEventHandler('fsn_properties:doors:update', function(tbl)
   enterable_properties = tbl
 end)
 
+AddEventHandler('fsn_properties:buy', function(id)
+  local price = 0
+  for k, _prop in pairs(enterable_properties) do
+    if _prop.db_id == id then
+      price = _prop.price
+    end
+  end
+  if price ~= 0 then
+    if exports.fsn_main:fsn_GetWallet() >= price then
+      -- buy things
+    else
+      TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 5000, 'error')
+    end
+  end
+end)
+
+------------------------------------------------- MENU
+AddEventHandler('fsn_properties:menu:access:allow', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    Citizen.CreateThread(function()
+      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 10)
+      local editOpen = true
+      while UpdateOnscreenKeyboard() == 0 or editOpen do
+        Wait(0)
+        drawTxt('Input #ID',4,1,0.5,0.35,0.6,255,255,255,255)
+        drawTxt('~r~In order to limit errors, revoking multiple people\'s access is disabled.',4,1,0.5,0.49,0.4,255,255,255,255)
+        if UpdateOnscreenKeyboard() ~= 0 then
+          editOpen = false
+          if UpdateOnscreenKeyboard() == 1 then
+            res = tostring(GetOnscreenKeyboardResult())
+            TriggerServerEvent('fsn_properties:enterable:access:allow', id, res)
+          end
+          break
+        end
+      end
+    end)
+  end
+end)
+AddEventHandler('fsn_properties:menu:access:view', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    local str = table.concat(_property.coowners,", ",1,#_property.coowners)
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^4:fsn_properties:^0^r #IDs with access to this property: '..str)
+    TriggerEvent('fsn_notify:displayNotification', 'Check the chatbox!!', 'centerLeft', 5000, 'info')
+  end
+end)
+AddEventHandler('fsn_properties:menu:access:revoke', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    Citizen.CreateThread(function()
+      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 10)
+      local editOpen = true
+      while UpdateOnscreenKeyboard() == 0 or editOpen do
+        Wait(0)
+        drawTxt('Input #ID',4,1,0.5,0.35,0.6,255,255,255,255)
+        drawTxt('~r~In order to limit errors, revoking multiple people\'s access is disabled.',4,1,0.5,0.49,0.4,255,255,255,255)
+        if UpdateOnscreenKeyboard() ~= 0 then
+          editOpen = false
+          if UpdateOnscreenKeyboard() == 1 then
+            res = tostring(GetOnscreenKeyboardResult())
+            usr = false
+            for k, v in pairs(_property.coowners) do
+              if v == res then
+                usr = true
+              end
+            end
+            if usr then
+              TriggerServerEvent('fsn_properties:enterable:access:revoke', id, res)
+            else
+              TriggerEvent('fsn_notify:displayNotification', 'This #ID does not have access to your property.', 'centerLeft', 5000, 'error')
+            end
+          end
+          break
+        end
+      end
+    end)
+  end
+end)
+
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
@@ -53,18 +151,26 @@ Citizen.CreateThread(function()
               if property.owner ~= -1 then
                 TriggerEvent('chatMessage', '', {255,255,255}, '^*^4:fsn_properties:^0^r This property (#'..property.db_id..') is owned by '..property.owner)
                 if exports.fsn_police:fsn_getPDLevel() > 6 then hc = true else hc = false end
-                if property.owner == char_id then propertyOwner = true else propertyOwner = false end
                 local hasKeys = false for k, v in pairs(property.coowners) do if v == char_id then hasKeys = true end end
+                if property.owner == char_id then propertyOwner = true hasKeys = true else propertyOwner = false end
                 menuEnabled = not menuEnabled
-                SetNuiFocus( true, true )
-            		SendNUIMessage({
-            			showmenu = true,
-                  updateProperty = true,
-                  owned = true,
-                  propertyOwner = propertyOwner,
-                  propertyAccess = hasKeys,
-                  policeHC = hc,
-                })
+                if hasKeys or hc then
+                  SetNuiFocus( true, true )
+              		SendNUIMessage({
+              			showmenu = true,
+                    updateProperty = true,
+                    owned = true,
+                    property_id = property.db_id,
+                    inventory = json.encode(property.inventory),
+                    weapons = json.encode(property.weapons),
+                    money = property.money,
+                    propertyOwner = propertyOwner,
+                    propertyAccess = hasKeys,
+                    policeHC = hc,
+                  })
+                else
+                  TriggerEvent('fsn_notify:displayNotification', 'You do not have the keys to this property', 'centerLeft', 5000, 'error')
+                end
               else
                 TriggerEvent('chatMessage', '', {255,255,255}, '^*^4:fsn_properties:^0^r This property (#'..property.db_id..') is available to rent!')
                 menuEnabled = not menuEnabled

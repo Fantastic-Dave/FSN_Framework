@@ -4,14 +4,62 @@ $( function() {
     window.addEventListener( 'message', function( event ) {
         var item = event.data;
         if ( item.showmenu ) {
+			ResetMenu()
             actionContainer.show();
 			if (item.updateProperty) {
 				if (item.owned) {
-					
+					$('#property-info').html('')
+					if (item.propertyOwner) {
+						// Access menu 
+						$('#property-info').append('<button class="menuoption" data-sub="property-accessmenu">Access</button>')
+						$('#property-accessmenu').html('')
+						$('#property-accessmenu').append('<button class="menuoption" data-action="access-allow-'+item.property_id+'">Allow Access</button>'+
+							'<button class="menuoption" data-action="access-view-'+item.property_id+'">View Access</button>'+
+							'<button class="menuoption" data-action="access-revoke-'+item.property_id+'">Revoke Access</button>')
+					}
+					if (item.propertyAccess) {
+						// Inventory menu
+						$('#property-info').append('<button class="menuoption" data-sub="property-inventory">Inventory</button>')
+						$('#property-inventory').html('')
+						$('#property-inventory').append('<button class="menuoption" data-action="item-deposit-'+item.property_id+'"><b>Deposit Item</b></button>')
+						inv = JSON.parse(item.inventory)
+						jQuery.each(inv, function(i, val) {
+							if (i == 'dirty_money') {
+								$('#property-inventory').append('<button class="menuoption" data-action="item-take-'+i+'-'+item.property_id+'">'+val.display_name+' ($'+val.amount+')</button>')
+							} else {
+								$('#property-inventory').append('<button class="menuoption" data-action="item-take-'+i+'-'+item.property_id+'">['+val.amount+'X] '+val.display_name+'</button>')
+							}
+						});
+						
+						// Weapons menu
+						$('#property-info').append('<button class="menuoption" data-sub="property-weapons">Weapons</button>')
+						$('#property-weapons').html('')
+						$('#property-weapons').append('<button class="menuoption" data-action="weapon-deposit-'+item.property_id+'"><b>Deposit Weapon</b></button>')
+						inv = JSON.parse(item.weapons)
+						jQuery.each(inv, function(i, val) {
+							$('#property-weapons').append('<button class="menuoption" data-action="weapon-take-'+i+'-'+item.property_id+'">['+val.amount+'X] '+val.display_name+'</button>')
+						});
+						
+						// Money menu
+						$('#property-info').append('<button class="menuoption" data-sub="property-money">Money</button>')
+						$('#property-money').html('')
+						$('#property-money').append('<button class="menuoption"><b>$'+item.money+'</b></button>'+
+							'<button class="menuoption" data-action="money-withdraw-'+item.property_id+'">Withdraw Cash</button>'+
+							'<button class="menuoption" data-action="money-deposit-'+item.property_id+'">Deposit Cash</button>')
+					}
+					if (item.policeHC) {
+						$('#property-info').append('<button class="menuoption" data-sub="property-police" style="background-color:#b6d0f9">C/HC Options</button>')
+						$('#property-police').html('')
+						$('#property-police').append('<button class="menuoption" data-action="police-search-'+item.property_id+'" style="background-color:#b6d0f9">Search</button>'+
+							'<button class="menuoption" data-action="police-seize-'+item.property_id+'" style="background-color:#b6d0f9">Seize Property</button>'+
+							'<button class="menuoption" data-action="police-empty-'+item.property_id+'" style="background-color:#b6d0f9">Empty Property</button>'+
+							'<button class="menuoption" data-action="police-breach-'+item.property_id+'" style="background-color:#b6d0f9">Breach Property</button>')
+					}
+					$('#property-info').show()
+					init()
 				} else {
 					$('#property-info').html('')
 					$('#property-info').append('<button class="menuoption" data-action="buy-'+item.property_id+'">Buy Property ($'+item.price+')</button>')
-					$('#loading').hide()
 					$('#property-info').show()
 					init()
 				}
@@ -20,8 +68,7 @@ $( function() {
         if ( item.hidemenu ) {
             actionContainer.hide(); 
         }
-		
-		
+		init()
     } );
 } )
 

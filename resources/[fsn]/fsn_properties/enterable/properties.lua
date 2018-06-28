@@ -2,7 +2,7 @@ enterable_properties = {
   [1] = {
     title = 'Darnell Bros Factory',
     price = 25000,
-    owner = -1,
+    owner = 1,
     coowners = {},
     db_id = 1,
     blip = {x = 714.41790771484, y = -976.95068359375, z = 24.127908706665},
@@ -149,5 +149,37 @@ end)
 RegisterServerEvent('fsn_properties:door:lock')
 AddEventHandler('fsn_properties:door:lock', function(propertyid, doorid)
   enterable_properties[propertyid].doors[doorid].locked = true
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
+end)
+
+RegisterServerEvent('fsn_properties:enterable:access:allow')
+AddEventHandler('fsn_properties:enterable:access:allow', function(propid, pid)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      table.insert(v.coowners,#v.coowners+1,pid)
+      TriggerClientEvent('fsn_notify:displayNotification', source, 'You granted #'..pid..' access to your property #'..propid, 'centerLeft', 8000, 'success')
+      if exports.fsn_main:fsn_GetPlayerFromCharacterId(pid) ~= 0 then
+        TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromCharacterId(pid), 'You were granted access to property #'..propid, 'centerLeft', 8000, 'success')
+      end
+    end
+  end
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
+end)
+
+RegisterServerEvent('fsn_properties:enterable:access:revoke')
+AddEventHandler('fsn_properties:enterable:access:revoke', function(propid, pid)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      for key, value in pairs(v.coowners) do
+        if v == pid then
+          table.remove(v.coowners, key)
+        end
+      end
+      TriggerClientEvent('fsn_notify:displayNotification', source, 'You removed #'..pid..' from your property #'..propid, 'centerLeft', 8000, 'success')
+      if exports.fsn_main:fsn_GetPlayerFromCharacterId(pid) ~= 0 then
+        TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromCharacterId(pid), 'Your access to property #'..propid..' has been revoked!', 'centerLeft', 8000, 'error')
+      end
+    end
+  end
   TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
 end)

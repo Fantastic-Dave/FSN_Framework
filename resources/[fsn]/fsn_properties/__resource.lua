@@ -9,9 +9,10 @@ files {
 }
 
 
-client_script 'client.lua'
+
 client_script 'enterable/client.lua'
 client_script 'nonenterable/client.lua'
+client_script 'client.lua'
 
 server_script '@mysql-async/lib/MySQL.lua'
 server_script 'enterable/properties.lua'
