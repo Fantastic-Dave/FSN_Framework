@@ -18,7 +18,7 @@ function fsn_drawText3D(x,y,z, text)
     end
 end
 
-local menuEnabled = false
+menuEnabled = false
 
 function ToggleActionMenu()
 	menuEnabled = not menuEnabled
@@ -35,8 +35,10 @@ function ToggleActionMenu()
 		})
 	end
 end
-
+local last_click = 0 
 RegisterNUICallback( "ButtonClick", function( data, cb )
+  if last_click + 10 > GetNetworkTime() then return end
+  last_click = GetNetworkTime()
 	if ( data == "button1" ) then
 		chatPrint( "Button 1 pressed!" )
 	elseif ( data == "button2" ) then

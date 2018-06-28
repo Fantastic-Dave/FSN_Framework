@@ -4,12 +4,24 @@ $( function() {
     window.addEventListener( 'message', function( event ) {
         var item = event.data;
         if ( item.showmenu ) {
-            ResetMenu()
             actionContainer.show();
+			if (item.updateProperty) {
+				if (item.owned) {
+					
+				} else {
+					$('#property-info').html('')
+					$('#property-info').append('<button class="menuoption" data-action="buy-'+item.property_id+'">Buy Property ($'+item.price+')</button>')
+					$('#loading').hide()
+					$('#property-info').show()
+					init()
+				}
+			}
         }
         if ( item.hidemenu ) {
             actionContainer.hide(); 
         }
+		
+		
     } );
 } )
 

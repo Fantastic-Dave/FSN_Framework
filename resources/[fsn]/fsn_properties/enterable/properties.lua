@@ -1,7 +1,8 @@
 enterable_properties = {
   [1] = {
     title = 'Darnell Bros Factory',
-    owner = 1,
+    price = 25000,
+    owner = -1,
     coowners = {},
     db_id = 1,
     blip = {x = 714.41790771484, y = -976.95068359375, z = 24.127908706665},
@@ -19,7 +20,8 @@ enterable_properties = {
   },
   [2] = {
     title = 'Micheals Mansion',
-    owner = 1,
+    price = 25000,
+    owner = -1,
     coowners = {},
     db_id = 2,
     blip = {x = -821.80621337891, y = 174.43176269531, z = 71.542022705078},
@@ -39,7 +41,8 @@ enterable_properties = {
   },
   [3] = {
     title = 'Trevors Trailer',
-    owner = 1,
+    price = 25000,
+    owner = -1,
     coowners = {},
     db_id = 3,
     blip = {x = 1979.0842285156, y = 3818.0192871094, z = 32.537998199463},
@@ -53,7 +56,8 @@ enterable_properties = {
   },
   [4] = {
     title = 'Yellowjack',
-    owner = 1,
+    price = 25000,
+    owner = -1,
     coowners = {},
     db_id = 4,
     blip = {x = 1989.6041259766, y = 3054.9001464844, z = 47.215103149414},
@@ -67,7 +71,8 @@ enterable_properties = {
   },
   [5] = {
     title = 'Shitbag\'s Flat',
-    owner = 1,
+    price = 25000,
+    owner = -1,
     coowners = {},
     db_id = 5,
     blip = {x = -1148.9720458984, y = -1523.6121826172, z = 10.628059387207},
@@ -81,7 +86,8 @@ enterable_properties = {
   },
   [6] = {
     title = 'Franklin\'s aunt house',
-    owner = 1,
+    price = 25000,
+    owner = -1,
     coowners = {},
     db_id = 6,
     blip = {x = -13.11473941803, y = -1442.2130126953, z = 31.100654602051},
@@ -95,7 +101,8 @@ enterable_properties = {
   },
   [7] = {
     title = 'Stripclub',
-    owner = 1,
+    price = 25000,
+    owner = -1,
     coowners = {},
     db_id = 7,
     blip = {x = 127.66522216797, y = -1300.0837402344, z = 29.232746124268},
@@ -112,7 +119,8 @@ enterable_properties = {
   },
   [8] = {
     title = 'Devins Garage',
-    owner = 1,
+    price = 25000,
+    owner = -1,
     coowners = {},
     db_id = 8,
     blip = {x = 484.38977050781, y = -1310.3785400391, z = 29.229318618774},
@@ -126,8 +134,6 @@ enterable_properties = {
     },
   },
 }
-
-
 
 RegisterServerEvent('fsn_properties:doors:request')
 AddEventHandler('fsn_properties:doors:request', function()
