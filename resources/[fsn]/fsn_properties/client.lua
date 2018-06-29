@@ -70,6 +70,10 @@ RegisterNetEvent('fsn_properties:menu:weapon:deposit')
 RegisterNetEvent('fsn_properties:menu:weapon:take')
 RegisterNetEvent('fsn_properties:menu:money:withdraw')
 RegisterNetEvent('fsn_properties:menu:money:deposit')
+RegisterNetEvent('fsn_properties:menu:police:search')
+RegisterNetEvent('fsn_properties:menu:police:seize')
+RegisterNetEvent('fsn_properties:menu:police:empty')
+RegisterNetEvent('fsn_properties:menu:police:breach')
 RegisterNUICallback( "ButtonClick", function( data, cb )
   if last_click + 10 > GetNetworkTime() then return end
   last_click = GetNetworkTime()
@@ -115,6 +119,21 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
     end
     if split[2] == 'deposit' then
       TriggerEvent('fsn_properties:menu:money:deposit', tonumber(split[3]))
+    end
+  end
+  ------------------------------- POLICE
+  if split[1] == 'police' then
+    if split[2] == 'search' then
+      TriggerEvent('fsn_properties:menu:police:search', tonumber(split[3]))
+    end
+    if split[2] == 'seize' then
+      TriggerEvent('fsn_properties:menu:police:seize', tonumber(split[3]))
+    end
+    if split[2] == 'empty' then
+      TriggerEvent('fsn_properties:menu:police:empty', tonumber(split[3]))
+    end
+    if split[2] == 'breach' then
+      TriggerEvent('fsn_properties:menu:police:breach', tonumber(split[3]))
     end
   end
   if ( data == "exit" ) then

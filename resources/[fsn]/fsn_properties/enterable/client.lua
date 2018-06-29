@@ -372,6 +372,71 @@ AddEventHandler('fsn_properties:menu:money:deposit', function(id)
   end
 end)
 
+AddEventHandler('fsn_properties:menu:police:search', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    TriggerEvent('chatMessage', '', {255,255,255}, '^1SEARCH |^0 Money: $'.._property.money)
+    local invstr = ' '
+    for k, v in pairs(_property.inventory) do
+      invstr = '['..v.amount..'X] '..v.item_name..invstr..', '
+    end
+    TriggerEvent('chatMessage', '', {255,255,255}, '^1SEARCH |^0 Inventory: '..invstr)
+    local wepstr = ' '
+    for k, v in pairs(_property.weapons) do
+      wepstr = '['..v.amount..'X] '..k..wepstr
+    end
+    TriggerEvent('chatMessage', '', {255,255,255}, '^1SEARCH |^0 Weapons: '..wepstr)
+  end
+end)
+
+AddEventHandler('fsn_properties:menu:police:seize', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    TriggerServerEvent('fsn_properties:enterable:police:seize', id)
+  end
+end)
+
+AddEventHandler('fsn_properties:menu:police:empty', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    TriggerServerEvent('fsn_properties:enterable:police:empty', id)
+  end
+end)
+
+AddEventHandler('fsn_properties:menu:police:breach', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    for key, value in pairs(_property.doors) do
+      TriggerServerEvent('fsn_properties:door:unlock', _property.db_id, key)
+    end
+    TriggerEvent('fsn_notify:displayNotification', 'You breached all the doors in this building', 'centerLeft', 5000, 'success')
+  end
+end)
+
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)

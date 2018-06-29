@@ -294,3 +294,39 @@ AddEventHandler('fsn_properties:enterable:money:deposit', function(propid, amt)
   end
   TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
 end)
+
+RegisterServerEvent('fsn_properties:enterable:police:seize')
+AddEventHandler('fsn_properties:enterable:police:seize', function(propid)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      if exports.fsn_main:fsn_GetPlayerFromCharacterId(v.owner) ~= 0 then
+        TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromCharacterId(v.owner), 'Your property #'..propid..' has been seized by the police!', 'centerLeft', 8000, 'error')
+      end
+
+      v.owner = -1
+      TriggerClientEvent('fsn_notify:displayNotification', source, 'You seized Property #'..propid, 'centerRight', 8000, 'success')
+
+      TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*^4:fsn_properties:^0^r '..v.title..' (#'..propid..') has been seized by the police and is available to rent.')
+      MySQL.Async.execute('UPDATE `fsn_properties` SET `property_owner` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = v.owner}, function(rowsChanged) end)
+    end
+  end
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
+end)
+
+RegisterServerEvent('fsn_properties:enterable:police:empty')
+AddEventHandler('fsn_properties:enterable:police:empty', function(propid)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      v.money = 0
+      v.inventory = {}
+      v.weapons = {}
+      TriggerClientEvent('fsn_notify:displayNotification', source, 'You emptied Property #'..propid, 'centerRight', 8000, 'success')
+
+      if exports.fsn_main:fsn_GetPlayerFromCharacterId(v.owner) ~= 0 then
+        TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromCharacterId(v.owner), 'Your property #'..propid..' has been emptied by the police!', 'centerLeft', 8000, 'error')
+      end
+      MySQL.Async.execute('UPDATE `fsn_properties` SET `property_money` = 0, `property_inventory` = "{}", `property_weapons` = "{}" WHERE `property_id` = @id', {['@id'] = propid}, function(rowsChanged) end)
+    end
+  end
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
+end)
