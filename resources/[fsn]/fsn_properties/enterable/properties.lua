@@ -2,7 +2,8 @@ enterable_properties = {
   [1] = {
     title = 'Darnell Bros Factory',
     price = 25000,
-    owner = 1,
+    expiry = 0,
+    owner = -1,
     coowners = {},
     db_id = 1,
     blip = {x = 714.41790771484, y = -976.95068359375, z = 24.127908706665},
@@ -21,6 +22,7 @@ enterable_properties = {
   [2] = {
     title = 'Micheals Mansion',
     price = 25000,
+    expiry = 0,
     owner = -1,
     coowners = {},
     db_id = 2,
@@ -42,6 +44,7 @@ enterable_properties = {
   [3] = {
     title = 'Trevors Trailer',
     price = 25000,
+    expiry = 0,
     owner = -1,
     coowners = {},
     db_id = 3,
@@ -57,6 +60,7 @@ enterable_properties = {
   [4] = {
     title = 'Yellowjack',
     price = 25000,
+    expiry = 0,
     owner = -1,
     coowners = {},
     db_id = 4,
@@ -72,6 +76,7 @@ enterable_properties = {
   [5] = {
     title = 'Shitbag\'s Flat',
     price = 25000,
+    expiry = 0,
     owner = -1,
     coowners = {},
     db_id = 5,
@@ -87,6 +92,7 @@ enterable_properties = {
   [6] = {
     title = 'Franklin\'s aunt house',
     price = 25000,
+    expiry = 0,
     owner = -1,
     coowners = {},
     db_id = 6,
@@ -102,6 +108,7 @@ enterable_properties = {
   [7] = {
     title = 'Stripclub',
     price = 25000,
+    expiry = 0,
     owner = -1,
     coowners = {},
     db_id = 7,
@@ -120,6 +127,7 @@ enterable_properties = {
   [8] = {
     title = 'Devins Garage',
     price = 25000,
+    expiry = 0,
     owner = -1,
     coowners = {},
     db_id = 8,
@@ -329,4 +337,61 @@ AddEventHandler('fsn_properties:enterable:police:empty', function(propid)
     end
   end
   TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
+end)
+
+RegisterServerEvent('fsn_properties:enterable:buy')
+AddEventHandler('fsn_properties:enterable:buy', function(propid, charid)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      if v.owner ~= tostring(-1) then
+        v.owner = charid
+
+        local expire = os.time() + 604800
+        v.expiry = expire
+        TriggerClientEvent('fsn_notify:displayNotification', source, 'You bought property #'..propid, 'centerRight', 8000, 'success')
+        TriggerClientEvent('fsn_notify:displayNotification', source, 'Rent will be due in 7 days.', 'centerRight', 9000, 'info')
+
+        TriggerEvent('fsn_bank:change:walletMinus', source, v.price)
+
+        MySQL.Async.execute('UPDATE `fsn_properties` SET `property_owner` = @new, `property_expiry` = @expire WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = charid, ['@expire'] = expire}, function(rowsChanged) end)
+      else
+        TriggerClientEvent('fsn_notify:displayNotification', source, 'Somebody already bought this!!', 'centerRight', 8000, 'error')
+      end
+    end
+  end
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
+end)
+
+RegisterServerEvent('fsn_properties:enterable:checkRent')
+AddEventHandler('fsn_properties:enterable:checkRent', function(propid)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      local remaining = v.expiry - os.time()
+      local remaining_days = math.ceil(remaining / 86399)
+      TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^*^4:fsn_properties:^0^r Rent is due in: '..remaining_days..' days')
+    end
+  end
+end)
+
+RegisterServerEvent('fsn_properties:enterable:payRent')
+AddEventHandler('fsn_properties:enterable:payRent', function(propid)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      local remaining = v.expiry - os.time()
+      local remaining_days = math.ceil(remaining / 86399)
+      if remaining_days > 2 then
+        TriggerClientEvent('fsn_notify:displayNotification', source, 'You cannot pay rent until it is under 2 days due.', 'centerRight', 8000, 'error')
+      else
+        local expire = os.time() + 604800
+        local ass = 86400 * remaining_days
+        expire = expire + ass
+        v.expiry = expire
+
+        TriggerEvent('fsn_bank:change:walletMinus', source, v.price - math.ceil(v.price / 0.3))
+        TriggerClientEvent('fsn_notify:displayNotification', source, 'You paid your rent', 'centerRight', 8000, 'success')
+
+        MySQL.Async.execute('UPDATE `fsn_properties` SET `property_expiry` = @expire WHERE `property_id` = @id', {['@id'] = propid, ['@expire'] = expire}, function(rowsChanged) end)
+      end
+    end
+  end
 end)

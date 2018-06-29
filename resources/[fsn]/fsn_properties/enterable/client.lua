@@ -46,7 +46,7 @@ AddEventHandler('fsn_properties:buy', function(id)
   end
   if price ~= 0 then
     if exports.fsn_main:fsn_GetWallet() >= price then
-      -- buy things
+      TriggerServerEvent('fsn_properties:enterable:buy', id, char_id)
     else
       TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 5000, 'error')
     end
@@ -434,6 +434,36 @@ AddEventHandler('fsn_properties:menu:police:breach', function(id)
       TriggerServerEvent('fsn_properties:door:unlock', _property.db_id, key)
     end
     TriggerEvent('fsn_notify:displayNotification', 'You breached all the doors in this building', 'centerLeft', 5000, 'success')
+  end
+end)
+
+AddEventHandler('fsn_properties:menu:rent:check', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    TriggerServerEvent('fsn_properties:enterable:checkRent', id)
+  end
+end)
+
+AddEventHandler('fsn_properties:menu:rent:pay', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    if exports.fsn_main:fsn_GetWallet() >= _property.price then
+      TriggerServerEvent('fsn_properties:enterable:payRent', id)
+    else
+      TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!<br>Pay it soon before your lease expires!', 'centerLeft', 5000, 'error')
+    end
   end
 end)
 

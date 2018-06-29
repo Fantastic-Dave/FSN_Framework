@@ -1,0 +1,3 @@
+local day = 86400
+local week = 604800
+local month = 2629743

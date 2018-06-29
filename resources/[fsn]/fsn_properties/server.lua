@@ -6,6 +6,7 @@ function init()
       for k, _prop in pairs(enterable_properties) do
         if _prop.db_id == prop.property_id then
           _prop.owner = prop.property_owner
+          _prop.expiry = prop.property_expiry
           ----
           if prop.property_coowners ~= '' then
             _prop.coowners = json.decode(prop.property_coowners)

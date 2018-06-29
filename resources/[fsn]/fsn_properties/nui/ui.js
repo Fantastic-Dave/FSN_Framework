@@ -16,6 +16,10 @@ $( function() {
 						$('#property-accessmenu').append('<button class="menuoption" data-action="access-allow-'+item.property_id+'">Allow Access</button>'+
 							'<button class="menuoption" data-action="access-view-'+item.property_id+'">View Access</button>'+
 							'<button class="menuoption" data-action="access-revoke-'+item.property_id+'">Revoke Access</button>')
+						$('#property-info').append('<button class="menuoption" data-sub="property-rentmenu">Rent Options</button>')
+						$('#property-rentmenu').html('')
+						$('#property-rentmenu').append('<button class="menuoption" data-action="rent-check-'+item.property_id+'">Check Rent</button>'+
+							'<button class="menuoption" data-action="rent-pay-'+item.property_id+'">Pay Rent</button>')
 					}
 					if (item.propertyAccess) {
 						// Inventory menu
