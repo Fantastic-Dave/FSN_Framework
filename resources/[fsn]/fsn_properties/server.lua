@@ -7,6 +7,14 @@ function init()
         if _prop.db_id == prop.property_id then
           _prop.owner = prop.property_owner
           _prop.expiry = prop.property_expiry
+
+          local remaining = prop.property_expiry - os.time()
+          local remaining_days = math.ceil(remaining / 86399)
+          if remaining_days < 0 then
+            _prop.owner = -1
+            _prop.expiry = 0
+            print(':fsn_properties: '.._prop.title..' RENT RAN OUT, RESETTING TO UNSOLD')
+          end
           ----
           if prop.property_coowners ~= '' then
             _prop.coowners = json.decode(prop.property_coowners)

@@ -351,7 +351,7 @@ AddEventHandler('fsn_properties:enterable:buy', function(propid, charid)
         TriggerClientEvent('fsn_notify:displayNotification', source, 'You bought property #'..propid, 'centerRight', 8000, 'success')
         TriggerClientEvent('fsn_notify:displayNotification', source, 'Rent will be due in 7 days.', 'centerRight', 9000, 'info')
 
-        TriggerEvent('fsn_bank:change:walletMinus', source, v.price)
+        TriggerClientEvent('fsn_bank:change:walletMinus', source, v.price)
 
         MySQL.Async.execute('UPDATE `fsn_properties` SET `property_owner` = @new, `property_expiry` = @expire WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = charid, ['@expire'] = expire}, function(rowsChanged) end)
       else
@@ -387,7 +387,7 @@ AddEventHandler('fsn_properties:enterable:payRent', function(propid)
         expire = expire + ass
         v.expiry = expire
 
-        TriggerEvent('fsn_bank:change:walletMinus', source, v.price - math.ceil(v.price / 0.3))
+        TriggerClientEvent('fsn_bank:change:walletMinus', source, v.price - math.ceil(v.price / 0.3))
         TriggerClientEvent('fsn_notify:displayNotification', source, 'You paid your rent', 'centerRight', 8000, 'success')
 
         MySQL.Async.execute('UPDATE `fsn_properties` SET `property_expiry` = @expire WHERE `property_id` = @id', {['@id'] = propid, ['@expire'] = expire}, function(rowsChanged) end)
