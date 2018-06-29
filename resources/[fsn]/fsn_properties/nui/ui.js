@@ -37,7 +37,7 @@ $( function() {
 						$('#property-weapons').append('<button class="menuoption" data-action="weapon-deposit-'+item.property_id+'"><b>Deposit Weapon</b></button>')
 						inv = JSON.parse(item.weapons)
 						jQuery.each(inv, function(i, val) {
-							$('#property-weapons').append('<button class="menuoption" data-action="weapon-take-'+i+'-'+item.property_id+'">['+val.amount+'X] '+val.item_name+'</button>')
+							$('#property-weapons').append('<button class="menuoption" data-action="weapon-take-'+i+'-'+item.property_id+'">['+val.amount+'X] '+i+'</button>')
 						});
 						
 						// Money menu

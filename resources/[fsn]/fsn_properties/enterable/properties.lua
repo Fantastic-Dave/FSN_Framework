@@ -230,3 +230,38 @@ AddEventHandler('fsn_properties:enterable:inventory:take', function(propid, item
   end
   TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
 end)
+
+RegisterServerEvent('fsn_properties:enterable:weapon:enter')
+AddEventHandler('fsn_properties:enterable:weapon:enter', function(propid, item, item_name)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      if v.weapons[item_name] then
+        v.weapons[item_name].amount = v.weapons[item_name].amount + 1
+      else
+        v.weapons[item_name] = {}
+        v.weapons[item_name].hashKey = item
+        v.weapons[item_name].amount = 1
+      end
+      TriggerClientEvent('fsn_notify:displayNotification', source, 'You stored <b>'..item_name, 'centerLeft', 8000, 'success')
+      MySQL.Async.execute('UPDATE `fsn_properties` SET `property_weapons` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.weapons)}, function(rowsChanged) end)
+    end
+  end
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
+end)
+
+RegisterServerEvent('fsn_properties:enterable:weapon:take')
+AddEventHandler('fsn_properties:enterable:weapon:take', function(propid, item_name)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      if v.weapons[item_name].amount == 1 then
+        v.weapons[item_name] = nil
+      else
+         v.weapons[item_name].amount = v.weapons[item_name].amount - 1
+      end
+      TriggerClientEvent('fsn_notify:displayNotification', source, 'You equipped <b>'..item_name, 'centerRight', 8000, 'success')
+
+      MySQL.Async.execute('UPDATE `fsn_properties` SET `property_weapons` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.weapons)}, function(rowsChanged) end)
+    end
+  end
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
+end)

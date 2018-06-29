@@ -103,6 +103,7 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
       TriggerEvent('fsn_properties:menu:weapon:deposit', tonumber(split[3]))
     end
     if split[2] == 'take' then
+      TriggerEvent('fsn_properties:menu:weapon:take', tonumber(split[4]), split[3])
     end
   end
   if ( data == "exit" ) then

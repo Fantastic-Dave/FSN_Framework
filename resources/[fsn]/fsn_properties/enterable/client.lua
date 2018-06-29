@@ -216,8 +216,101 @@ AddEventHandler('fsn_properties:menu:inventory:take', function(item, propid)
   end
 end)
 
+AddEventHandler('fsn_properties:menu:weapon:take', function(propid, weapon)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      _property = v
+    end
+  end
+  if _property then
+    GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(weapon), 250, false, true)
+    TriggerServerEvent('fsn_properties:enterable:weapon:take', propid, weapon)
+  end
+end)
+
 AddEventHandler('fsn_properties:menu:weapon:deposit', function(pid)
-  local weapon = GetSelectedPedWeapon(GetPlayerPed(-1))
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == pid then
+      _property = v
+    end
+  end
+  if _property then
+    local savingWeapons = {
+      "WEAPON_KNIFE",
+      "WEAPON_NIGHTSTICK",
+      "WEAPON_HAMMER",
+      "WEAPON_BAT",
+      "WEAPON_GOLFCLUB",
+      "WEAPON_CROWBAR",
+      "WEAPON_PISTOL",
+      "WEAPON_COMBATPISTOL",
+      "WEAPON_APPISTOL",
+      "WEAPON_PISTOL50",
+      "WEAPON_MICROSMG",
+      "WEAPON_SMG",
+      "WEAPON_ASSAULTSMG",
+      "WEAPON_ASSAULTRIFLE",
+      "WEAPON_CARBINERIFLE",
+      "WEAPON_ADVANCEDRIFLE",
+      "WEAPON_MG",
+      "WEAPON_COMBATMG",
+      "WEAPON_PUMPSHOTGUN",
+      "WEAPON_SAWNOFFSHOTGUN",
+      "WEAPON_ASSAULTSHOTGUN",
+      "WEAPON_BULLPUPSHOTGUN",
+      "WEAPON_STUNGUN",
+      "WEAPON_SNIPERRIFLE",
+      "WEAPON_SMOKEGRENADE",
+      "WEAPON_BZGAS",
+      "WEAPON_MOLOTOV",
+      "WEAPON_FIREEXTINGUISHER",
+      "WEAPON_PETROLCAN",
+      "WEAPON_SNSPISTOL",
+      "WEAPON_SPECIALCARBINE",
+      "WEAPON_HEAVYPISTOL",
+      "WEAPON_BULLPUPRIFLE",
+      "WEAPON_HOMINGLAUNCHER",
+      "WEAPON_PROXMINE",
+      "WEAPON_SNOWBALL",
+      "WEAPON_VINTAGEPISTOL",
+      "WEAPON_DAGGER",
+      "WEAPON_FIREWORK",
+      "WEAPON_MUSKET",
+      "WEAPON_MARKSMANRIFLE",
+      "WEAPON_HEAVYSHOTGUN",
+      "WEAPON_GUSENBERG",
+      "WEAPON_HATCHET",
+      "WEAPON_COMBATPDW",
+      "WEAPON_KNUCKLE",
+      "WEAPON_MARKSMANPISTOL",
+      "WEAPON_BOTTLE",
+      "WEAPON_FLAREGUN",
+      "WEAPON_FLARE",
+      "WEAPON_REVOLVER",
+      "WEAPON_SWITCHBLADE",
+      "WEAPON_MACHETE",
+      "WEAPON_FLASHLIGHT",
+      "WEAPON_MACHINEPISTOL",
+      "WEAPON_DBSHOTGUN",
+      "WEAPON_COMPACTRIFLE"
+    }
+    local weapon = GetSelectedPedWeapon(GetPlayerPed(-1))
+    for k, v in pairs(savingWeapons) do
+      if GetHashKey(v) == weapon then
+        submitting = v
+      end
+    end
+    if submitting then
+      RemoveWeaponFromPed(GetPlayerPed(-1), GetHashKey(submitting))
+      TriggerServerEvent('fsn_properties:enterable:weapon:enter', pid, GetHashKey(submitting), submitting)
+    else
+      TriggerEvent('fsn_notify:displayNotification', 'You cannot put this weapon in your property', 'centerLeft', 5000, 'error')
+    end
+  end
 end)
 
 Citizen.CreateThread(function()
