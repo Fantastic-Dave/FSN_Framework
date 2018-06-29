@@ -4,6 +4,27 @@ local stores = {
 local character = {}
 local phoneEnabled = false
 
+function fsn_NearestPlayersC(x, y, z, radius)
+	local players = {}
+	for id = 0, 31 do
+		local ppos = GetEntityCoords(GetPlayerPed(id))
+		if GetDistanceBetweenCoords(ppos.x, ppos.y, ppos.z, x, y, z) < radius then
+			table.insert(players, #players+1, GetPlayerServerId(id))
+		end
+	end
+  return players
+end
+
+RegisterNetEvent('fsn_phone:displayNumber')
+AddEventHandler('fsn_phone:displayNumber', function()
+	if character.char_phone ~= -1 then
+		local pos = GetEntityCoords(GetPlayerPed(-1))
+	  TriggerServerEvent('fsn_phone:chat', '^*^3phone# |^0^r '..character.char_phone, fsn_NearestPlayersC(pos.x, pos.y, pos.z, 5))
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'You do not have a phone number!<br>Goto Lifeinvader to get one', 'centerLeft', 8000, 'error')
+	end
+end)
+
 AddEventHandler('fsn_main:character', function(char)
   character = char
 end)
@@ -56,7 +77,7 @@ end)
 RegisterNetEvent('fsn_phone:recieveMessage')
 AddEventHandler('fsn_phone:recieveMessage', function(msg)
   if msg.number == character.char_phone then
-		
+
   end
 end)
 
@@ -71,9 +92,6 @@ Citizen.CreateThread( function()
   end
 	while true do
 		Citizen.Wait(0)
-		if IsControlJustPressed(0,27) then
-			TriggerEvent('fsn_phone:togglePhone')
-		end
 		for k, v in pairs(stores) do
 			if GetDistanceBetweenCoords(v.x,v.y,v.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
         DrawMarker(1,v.x,v.y,v.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)

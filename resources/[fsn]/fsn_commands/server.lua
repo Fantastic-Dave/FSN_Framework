@@ -108,6 +108,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/phone' or split[1] == '/p' then
     TriggerClientEvent('fsn_phone:togglePhone', source)
   end
+  if split[1] == '/phonenumber' or split[1] == '/p#' then
+    TriggerClientEvent('fsn_phone:displayNumber', source)
+  end
   if split[1] == '/sit' or split[1] == '/s' then
     TriggerClientEvent('fsn_emotecontrol:sit', source)
   end
@@ -231,7 +234,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
             if split[3] == 'level' then
               if tonumber(split[4]) then
                 if tonumber(split[5]) then
-                  
+
                 else
                   TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a level.')
                 end
