@@ -10,7 +10,7 @@ function init()
 
           local remaining = prop.property_expiry - os.time()
           local remaining_days = math.ceil(remaining / 86399)
-          if remaining_days < 0 then
+          if prop.property_expiry ~= 0 and remaining_days < 0 then
             _prop.owner = -1
             _prop.expiry = 0
             print(':fsn_properties: '.._prop.title..' RENT RAN OUT, RESETTING TO UNSOLD')
