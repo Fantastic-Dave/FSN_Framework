@@ -43,7 +43,7 @@ $( function() {
 						// Money menu
 						$('#property-info').append('<button class="menuoption" data-sub="property-money">Money</button>')
 						$('#property-money').html('')
-						$('#property-money').append('<button class="menuoption"><b>$'+item.money+'</b></button>'+
+						$('#property-money').append('<button class="menuoption" style="background-color:rgba(255,255,255,0.0);color:green;font-size:20px;border:none;"><b>$'+item.money+'</b></button>'+
 							'<button class="menuoption" data-action="money-withdraw-'+item.property_id+'">Withdraw Cash</button>'+
 							'<button class="menuoption" data-action="money-deposit-'+item.property_id+'">Deposit Cash</button>')
 					}

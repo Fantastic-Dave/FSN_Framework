@@ -153,7 +153,7 @@ AddEventHandler('fsn_properties:menu:inventory:deposit', function(id)
       while UpdateOnscreenKeyboard() == 0 or editOpen do
         Wait(0)
         drawTxt('What would you like to deposit?',4,1,0.5,0.35,0.6,255,255,255,255)
-        drawTxt('~y~You should type it as it were to appear in your inventory!',4,1,0.5,0.49,0.4,255,255,255,255)
+        drawTxt('~y~You should type it as it were to appear in your inventory!',4,1,0.5,0.52,0.4,255,255,255,255)
         if UpdateOnscreenKeyboard() ~= 0 then
           editOpen = false
           if UpdateOnscreenKeyboard() == 1 then
@@ -310,6 +310,65 @@ AddEventHandler('fsn_properties:menu:weapon:deposit', function(pid)
     else
       TriggerEvent('fsn_notify:displayNotification', 'You cannot put this weapon in your property', 'centerLeft', 5000, 'error')
     end
+  end
+end)
+
+AddEventHandler('fsn_properties:menu:money:withdraw', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    Citizen.CreateThread(function()
+      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 20)
+      local editOpen = true
+      while UpdateOnscreenKeyboard() == 0 or editOpen do
+        Wait(0)
+        drawTxt('What would you like to withdraw?',4,1,0.5,0.35,0.6,255,255,255,255)
+        drawTxt('~r~Do NOT include the dollar symbol ($)',4,1,0.5,0.49,0.4,255,255,255,255)
+        if UpdateOnscreenKeyboard() ~= 0 then
+          editOpen = false
+          if UpdateOnscreenKeyboard() == 1 then
+            amount = tonumber(GetOnscreenKeyboardResult())
+            TriggerServerEvent('fsn_properties:enterable:money:withdraw', id, amount)
+          end
+        end
+      end
+    end)
+  end
+end)
+
+AddEventHandler('fsn_properties:menu:money:deposit', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    Citizen.CreateThread(function()
+      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 20)
+      local editOpen = true
+      while UpdateOnscreenKeyboard() == 0 or editOpen do
+        Wait(0)
+        drawTxt('What would you like to deposit?',4,1,0.5,0.35,0.6,255,255,255,255)
+        drawTxt('~r~Do NOT include the dollar symbol ($)',4,1,0.5,0.49,0.4,255,255,255,255)
+        if UpdateOnscreenKeyboard() ~= 0 then
+          editOpen = false
+          if UpdateOnscreenKeyboard() == 1 then
+            amount = tonumber(GetOnscreenKeyboardResult())
+            if exports.fsn_main:fsn_GetWallet() >= amount then
+              TriggerEvent('fsn_bank:change:walletMinus', amount)
+              TriggerServerEvent('fsn_properties:enterable:money:deposit', id, amount)
+            end
+          end
+        end
+      end
+    end)
   end
 end)
 

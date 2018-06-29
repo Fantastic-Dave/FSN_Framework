@@ -265,3 +265,32 @@ AddEventHandler('fsn_properties:enterable:weapon:take', function(propid, item_na
   end
   TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
 end)
+
+RegisterServerEvent('fsn_properties:enterable:money:withdraw')
+AddEventHandler('fsn_properties:enterable:money:withdraw', function(propid, amt)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      if v.money >= amt then
+        v.money = v.money - amt
+        TriggerClientEvent('fsn_bank:change:walletAdd', source, amt)
+      else
+        TriggerClientEvent('fsn_notify:displayNotification', source, 'There is not enough money in the property!', 'centerRight', 8000, 'error')
+      end
+
+      MySQL.Async.execute('UPDATE `fsn_properties` SET `property_money` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = v.money}, function(rowsChanged) end)
+    end
+  end
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
+end)
+
+RegisterServerEvent('fsn_properties:enterable:money:deposit')
+AddEventHandler('fsn_properties:enterable:money:deposit', function(propid, amt)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      v.money = v.money + amt
+
+      MySQL.Async.execute('UPDATE `fsn_properties` SET `property_money` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = v.money}, function(rowsChanged) end)
+    end
+  end
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
+end)

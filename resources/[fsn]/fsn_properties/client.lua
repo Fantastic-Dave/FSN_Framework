@@ -68,6 +68,8 @@ RegisterNetEvent('fsn_properties:menu:inventory:deposit')
 RegisterNetEvent('fsn_properties:menu:inventory:take')
 RegisterNetEvent('fsn_properties:menu:weapon:deposit')
 RegisterNetEvent('fsn_properties:menu:weapon:take')
+RegisterNetEvent('fsn_properties:menu:money:withdraw')
+RegisterNetEvent('fsn_properties:menu:money:deposit')
 RegisterNUICallback( "ButtonClick", function( data, cb )
   if last_click + 10 > GetNetworkTime() then return end
   last_click = GetNetworkTime()
@@ -104,6 +106,15 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
     end
     if split[2] == 'take' then
       TriggerEvent('fsn_properties:menu:weapon:take', tonumber(split[4]), split[3])
+    end
+  end
+  ------------------------------- MONEY
+  if split[1] == 'money' then
+    if split[2] == 'withdraw' then
+      TriggerEvent('fsn_properties:menu:money:withdraw', tonumber(split[3]))
+    end
+    if split[2] == 'deposit' then
+      TriggerEvent('fsn_properties:menu:money:deposit', tonumber(split[3]))
     end
   end
   if ( data == "exit" ) then
