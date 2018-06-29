@@ -13,5 +13,6 @@ exports({
   'fsn_HasPhone',
   'fsn_HasItem',
   'fsn_GetItemAmount',
+  'fsn_GetItemDetails',
   'EnumerateObjects'
 })

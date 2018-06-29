@@ -360,6 +360,10 @@ function fsn_HasItem(item)
   end
 end
 
+function fsn_GetItemDetails(item)
+  return items_table[item]
+end
+
 function fsn_GetItemAmount(item)
   if inventory[item] then
     return inventory[item].amount
