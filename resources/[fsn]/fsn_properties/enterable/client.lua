@@ -135,6 +135,91 @@ AddEventHandler('fsn_properties:menu:access:revoke', function(id)
   end
 end)
 
+local items = {
+  ["dirty money"] = "dirty_money",
+}
+AddEventHandler('fsn_properties:menu:inventory:deposit', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    Citizen.CreateThread(function()
+      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 64)
+      local editOpen = true
+      while UpdateOnscreenKeyboard() == 0 or editOpen do
+        Wait(0)
+        drawTxt('What would you like to deposit?',4,1,0.5,0.35,0.6,255,255,255,255)
+        drawTxt('~y~You should type it as it were to appear in your inventory!',4,1,0.5,0.49,0.4,255,255,255,255)
+        if UpdateOnscreenKeyboard() ~= 0 then
+          editOpen = false
+          if UpdateOnscreenKeyboard() == 1 then
+            item = string.lower(tostring(GetOnscreenKeyboardResult()))
+            item = items[item]
+            if item then
+              DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 30)
+              local editOpen = true
+              while UpdateOnscreenKeyboard() == 0 or editOpen do
+                Wait(0)
+                drawTxt('How many would you like to deposit?',4,1,0.5,0.35,0.6,255,255,255,255)
+                --drawTxt('~r~DO NOT USE THE OVERHEAD NUMBER, USE #ID FROM THEIR ID CARD.',4,1,0.5,0.49,0.4,255,255,255,255)
+                if UpdateOnscreenKeyboard() ~= 0 then
+                  editOpen = false
+                  if UpdateOnscreenKeyboard() == 1 then
+                    amount = tonumber(GetOnscreenKeyboardResult())
+                    if exports.fsn_inventory:fsn_GetItemAmount(item) >= amount then
+                      local _item = exports.fsn_inventory:fsn_GetItemDetails(item).display_name
+                      TriggerServerEvent('fsn_properties:enterable:inventory:enter', id, item, _item, amount)
+                    else
+                      TriggerEvent('fsn_notify:displayNotification', 'You dont have enough!', 'centerLeft', 5000, 'error')
+                    end
+                  end
+                end
+              end
+            else
+              TriggerEvent('fsn_notify:displayNotification', 'You entered an invalid value<br>Not all objects are able to be stored in a property!', 'centerLeft', 5000, 'error')
+            end
+          end
+        end
+      end
+    end)
+  end
+end)
+
+AddEventHandler('fsn_properties:menu:inventory:take', function(item, propid)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      _property = v
+    end
+  end
+  if _property then
+    Citizen.CreateThread(function()
+      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 10)
+      local editOpen = true
+      while UpdateOnscreenKeyboard() == 0 or editOpen do
+        Wait(0)
+        drawTxt('How many would you like to take?',4,1,0.5,0.35,0.6,255,255,255,255)
+        if UpdateOnscreenKeyboard() ~= 0 then
+          editOpen = false
+          if UpdateOnscreenKeyboard() == 1 then
+            amt = tonumber(GetOnscreenKeyboardResult())
+            TriggerServerEvent('fsn_properties:enterable:inventory:take', propid, item, amt)
+          end
+        end
+      end
+    end)
+  end
+end)
+
+AddEventHandler('fsn_properties:menu:weapon:deposit', function(pid)
+  local weapon = GetSelectedPedWeapon(GetPlayerPed(-1))
+end)
+
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
@@ -151,7 +236,7 @@ Citizen.CreateThread(function()
               if property.owner ~= -1 then
                 TriggerEvent('chatMessage', '', {255,255,255}, '^*^4:fsn_properties:^0^r This property (#'..property.db_id..') is owned by '..property.owner)
                 if exports.fsn_police:fsn_getPDLevel() > 6 then hc = true else hc = false end
-                local hasKeys = false for k, v in pairs(property.coowners) do if v == char_id then hasKeys = true end end
+                local hasKeys = false for k, v in pairs(property.coowners) do if v == tostring(char_id) then hasKeys = true end end
                 if property.owner == char_id then propertyOwner = true hasKeys = true else propertyOwner = false end
                 menuEnabled = not menuEnabled
                 if hasKeys or hc then

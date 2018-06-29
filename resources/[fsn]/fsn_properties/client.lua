@@ -64,6 +64,10 @@ RegisterNetEvent('fsn_properties:buy')
 RegisterNetEvent('fsn_properties:menu:access:allow')
 RegisterNetEvent('fsn_properties:menu:access:view')
 RegisterNetEvent('fsn_properties:menu:access:revoke')
+RegisterNetEvent('fsn_properties:menu:inventory:deposit')
+RegisterNetEvent('fsn_properties:menu:inventory:take')
+RegisterNetEvent('fsn_properties:menu:weapon:deposit')
+RegisterNetEvent('fsn_properties:menu:weapon:take')
 RegisterNUICallback( "ButtonClick", function( data, cb )
   if last_click + 10 > GetNetworkTime() then return end
   last_click = GetNetworkTime()
@@ -82,6 +86,23 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
     end
     if split[2] == 'revoke' then
       TriggerEvent('fsn_properties:menu:access:revoke', tonumber(split[3]))
+    end
+  end
+  ------------------------------- INVENTORY
+  if split[1] == 'item' then
+    if split[2] == 'deposit' then
+      TriggerEvent('fsn_properties:menu:inventory:deposit', tonumber(split[3]))
+    end
+    if split[2] == 'take' then
+      TriggerEvent('fsn_properties:menu:inventory:take', split[3], tonumber(split[4]))
+    end
+  end
+  ------------------------------- WEAPONS
+  if split[1] == 'weapon' then
+    if split[2] == 'deposit' then
+      TriggerEvent('fsn_properties:menu:weapon:deposit', tonumber(split[3]))
+    end
+    if split[2] == 'take' then
     end
   end
   if ( data == "exit" ) then

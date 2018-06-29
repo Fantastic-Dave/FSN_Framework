@@ -25,9 +25,9 @@ $( function() {
 						inv = JSON.parse(item.inventory)
 						jQuery.each(inv, function(i, val) {
 							if (i == 'dirty_money') {
-								$('#property-inventory').append('<button class="menuoption" data-action="item-take-'+i+'-'+item.property_id+'">'+val.display_name+' ($'+val.amount+')</button>')
+								$('#property-inventory').append('<button class="menuoption" data-action="item-take-'+i+'-'+item.property_id+'">'+val.item_name+' ($'+val.amount+')</button>')
 							} else {
-								$('#property-inventory').append('<button class="menuoption" data-action="item-take-'+i+'-'+item.property_id+'">['+val.amount+'X] '+val.display_name+'</button>')
+								$('#property-inventory').append('<button class="menuoption" data-action="item-take-'+i+'-'+item.property_id+'">['+val.amount+'X] '+val.item_name+'</button>')
 							}
 						});
 						
@@ -37,7 +37,7 @@ $( function() {
 						$('#property-weapons').append('<button class="menuoption" data-action="weapon-deposit-'+item.property_id+'"><b>Deposit Weapon</b></button>')
 						inv = JSON.parse(item.weapons)
 						jQuery.each(inv, function(i, val) {
-							$('#property-weapons').append('<button class="menuoption" data-action="weapon-take-'+i+'-'+item.property_id+'">['+val.amount+'X] '+val.display_name+'</button>')
+							$('#property-weapons').append('<button class="menuoption" data-action="weapon-take-'+i+'-'+item.property_id+'">['+val.amount+'X] '+val.item_name+'</button>')
 						});
 						
 						// Money menu
@@ -48,6 +48,7 @@ $( function() {
 							'<button class="menuoption" data-action="money-deposit-'+item.property_id+'">Deposit Cash</button>')
 					}
 					if (item.policeHC) {
+						// Police menu
 						$('#property-info').append('<button class="menuoption" data-sub="property-police" style="background-color:#b6d0f9">C/HC Options</button>')
 						$('#property-police').html('')
 						$('#property-police').append('<button class="menuoption" data-action="police-search-'+item.property_id+'" style="background-color:#b6d0f9">Search</button>'+

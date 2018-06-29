@@ -190,6 +190,43 @@ AddEventHandler('fsn_properties:enterable:access:revoke', function(propid, pid)
 end)
 
 RegisterServerEvent('fsn_properties:enterable:inventory:enter')
-AddEventHandler('fsn_properties:enterable:inventory:enter', function(item, amount)
+AddEventHandler('fsn_properties:enterable:inventory:enter', function(propid, item, item_name, amt)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      if v.inventory.item then
+        v.inventory[item].amount = v.inventory.item.amount + amt
+      else
+        v.inventory[item] = {}
+        v.inventory[item].item_name = item_name
+        v.inventory[item].amount = amt
+      end
 
+      MySQL.Async.execute('UPDATE `fsn_properties` SET `property_inventory` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.inventory)}, function(rowsChanged) end)
+    end
+  end
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
+end)
+
+RegisterServerEvent('fsn_properties:enterable:inventory:take')
+AddEventHandler('fsn_properties:enterable:inventory:take', function(propid, item, amt)
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == propid then
+      if v.inventory[item] then
+        if v.inventory[item].amount - amt < 0 then
+          TriggerClientEvent('fsn_notify:displayNotification', source, 'You dont have that many '..item, 'centerLeft', 8000, 'error')
+        else
+          v.inventory[item].amount = v.inventory[item].amount - amt
+          if v.inventory[item].amount == 0 then
+            v.inventory[item] = nil
+          end
+          TriggerClientEvent('fsn_inventory:item:add', source, item, amt)
+        end
+      else
+        TriggerClientEvent('fsn_notify:displayNotification', source, 'You dont have that many', 'centerLeft', 8000, 'error')
+      end
+
+      MySQL.Async.execute('UPDATE `fsn_properties` SET `property_inventory` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.inventory)}, function(rowsChanged) end)
+    end
+  end
+  TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
 end)
