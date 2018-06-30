@@ -266,8 +266,19 @@ AddEventHandler('chatMessage', function(source, auth, msg)
               local char = getCharacter(source)
               local officername = char.char_fname..' '..char.char_lname
               TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[4]), source)
-              TriggerClientEvent('fsn_notify:displayNotification', source, 'Searching '..tonumber(split[4]), 'centerRight', 7000, 'info')
-              TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[4]), 'You are being searched by officer <b>'..officername, 'centerRight', 7000, 'info')
+              TriggerClientEvent('fsn_notify:displayNotification', source, 'Searching <b>'..tonumber(split[4]), 'centerRight', 7000, 'info')
+              TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[4]), 'You are being searched by officer <b>'..officername..'</b><br><i>This search is for inventory items', 'centerRight', 7000, 'info')
+            else
+              TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
+            end
+          end
+          if split[3] == 'weapons' then
+            if split[4] then
+              local char = getCharacter(source)
+              local officername = char.char_fname..' '..char.char_lname
+              TriggerClientEvent('fsn_police:search:start:weapons', tonumber(split[4]), source)
+              TriggerClientEvent('fsn_notify:displayNotification', source, 'Patting down <b>'..tonumber(split[4]), 'centerRight', 7000, 'info')
+              TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[4]), 'You are being patted down by officer <b>'..officername..'</b><br><i>This search is for weapons', 'centerRight', 7000, 'info')
             else
               TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
             end
