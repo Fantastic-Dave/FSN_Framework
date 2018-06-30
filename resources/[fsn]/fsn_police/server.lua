@@ -141,3 +141,13 @@ AddEventHandler('fsn_police:search:end:inventory', function(inv_tbl, officerid)
   TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
   TriggerClientEvent('chatMessage', officerid, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
 end)
+
+RegisterServerEvent('fsn_police:search:end:weapons')
+AddEventHandler('fsn_police:search:end:weapons', function(wep_tbl, officerid)
+  local str = ''
+  for k, v in pairs(wep_tbl) do
+    str = str..v..', '
+  end
+  TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
+  TriggerClientEvent('chatMessage', officerid, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
+end)

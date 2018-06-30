@@ -455,6 +455,77 @@ AddEventHandler('fsn_police:handcuffs:soft', function(pl)
     cuffed[pl] = handCuffed
   end
 end)
+
+RegisterNetEvent('fsn_police:search:start:weapons')
+AddEventHandler('fsn_police:search:start:weapons', function(officerid)
+  local savingWeapons = {
+    "WEAPON_KNIFE",
+    "WEAPON_NIGHTSTICK",
+    "WEAPON_HAMMER",
+    "WEAPON_BAT",
+    "WEAPON_GOLFCLUB",
+    "WEAPON_CROWBAR",
+    "WEAPON_PISTOL",
+    "WEAPON_COMBATPISTOL",
+    "WEAPON_APPISTOL",
+    "WEAPON_PISTOL50",
+    "WEAPON_MICROSMG",
+    "WEAPON_SMG",
+    "WEAPON_ASSAULTSMG",
+    "WEAPON_ASSAULTRIFLE",
+    "WEAPON_CARBINERIFLE",
+    "WEAPON_ADVANCEDRIFLE",
+    "WEAPON_MG",
+    "WEAPON_COMBATMG",
+    "WEAPON_PUMPSHOTGUN",
+    "WEAPON_SAWNOFFSHOTGUN",
+    "WEAPON_ASSAULTSHOTGUN",
+    "WEAPON_BULLPUPSHOTGUN",
+    "WEAPON_STUNGUN",
+    "WEAPON_SNIPERRIFLE",
+    "WEAPON_SMOKEGRENADE",
+    "WEAPON_BZGAS",
+    "WEAPON_MOLOTOV",
+    "WEAPON_FIREEXTINGUISHER",
+    "WEAPON_PETROLCAN",
+    "WEAPON_SNSPISTOL",
+    "WEAPON_SPECIALCARBINE",
+    "WEAPON_HEAVYPISTOL",
+    "WEAPON_BULLPUPRIFLE",
+    "WEAPON_HOMINGLAUNCHER",
+    "WEAPON_PROXMINE",
+    "WEAPON_SNOWBALL",
+    "WEAPON_VINTAGEPISTOL",
+    "WEAPON_DAGGER",
+    "WEAPON_FIREWORK",
+    "WEAPON_MUSKET",
+    "WEAPON_MARKSMANRIFLE",
+    "WEAPON_HEAVYSHOTGUN",
+    "WEAPON_GUSENBERG",
+    "WEAPON_HATCHET",
+    "WEAPON_COMBATPDW",
+    "WEAPON_KNUCKLE",
+    "WEAPON_MARKSMANPISTOL",
+    "WEAPON_BOTTLE",
+    "WEAPON_FLAREGUN",
+    "WEAPON_FLARE",
+    "WEAPON_REVOLVER",
+    "WEAPON_SWITCHBLADE",
+    "WEAPON_MACHETE",
+    "WEAPON_FLASHLIGHT",
+    "WEAPON_MACHINEPISTOL",
+    "WEAPON_DBSHOTGUN",
+    "WEAPON_COMPACTRIFLE"
+  }
+  local my_weps = {}
+  for _gun, gun in pairs(savingWeapons) do
+    if HasPedGotWeapon(GetPlayerPed(-1), GetHashKey(gun)) then
+      table.insert(my_weps,#my_weps+1,gun)
+    end
+  end
+  TriggerServerEvent('fsn_police:search:end:weapons', my_weps, officerid)
+end)
+
 --------------------------------------------- DRAG xx
 local escorted = false
 RegisterNetEvent('fsn_police:toggleDrag')
