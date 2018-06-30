@@ -283,6 +283,17 @@ AddEventHandler('chatMessage', function(source, auth, msg)
               TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
             end
           end
+          if split[3] == 'money' then
+            if split[4] then
+              local char = getCharacter(source)
+              local officername = char.char_fname..' '..char.char_lname
+              TriggerClientEvent('fsn_police:search:start:money', tonumber(split[4]), source)
+              TriggerClientEvent('fsn_notify:displayNotification', source, 'Bank check <b>'..tonumber(split[4]), 'centerRight', 7000, 'info')
+              TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[4]), 'Your money is being checked by <b>'..officername..'</b><br><i>This does not include dirty money', 'centerRight', 7000, 'info')
+            else
+              TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
+            end
+          end
           if split[3] == 'strip' then
             if split[4] then
               local char = getCharacter(source)
