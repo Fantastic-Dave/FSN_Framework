@@ -261,6 +261,19 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     if fsn_policeOnDuty(source) then
       if split[2] then
         if split[2] == 'search' then
+          if split[3] == 'all' then
+            if split[4] then
+              local char = getCharacter(source)
+              local officername = char.char_fname..' '..char.char_lname
+              TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[4]), source)
+              TriggerClientEvent('fsn_police:search:start:weapons', tonumber(split[4]), source)
+              TriggerClientEvent('fsn_police:search:start:money', tonumber(split[4]), source)
+              TriggerClientEvent('fsn_notify:displayNotification', source, 'Searching everything of: <b>'..tonumber(split[4]), 'centerRight', 7000, 'info')
+              TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[4]), 'Everything is being searched by: <b>'..officername..'</b><br><i>Money, weapons and inventory', 'centerRight', 7000, 'info')
+            else
+              TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
+            end
+          end
           if split[3] == 'inventory' then
             if split[4] then
               local char = getCharacter(source)
