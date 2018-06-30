@@ -342,6 +342,11 @@ AddEventHandler("fsn_lscustoms:check3",function(title, data, cost, mod, back, na
   end
 end)
 -------------------------------------------- Money / Bank
+RegisterNetEvent('fsn_police:search:start:money')
+AddEventHandler('fsn_police:search:start:money', function(officerid)
+  TriggerServerEvent('fsn_police:search:end:money', officerid, {wallet=current_characters[current_character_index].char_money,bank=current_characters[current_character_index].char_bank})
+end)
+
 AddEventHandler('fsn_bank:change:bankandwallet', function(wallet, bank)
   if wallet == false then
     current_characters[current_character_index].char_money = current_characters[current_character_index].char_money
