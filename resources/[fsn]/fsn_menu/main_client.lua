@@ -113,12 +113,8 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
   last_click = GetNetworkTime()
 	local split = fsn_SplitString(data, "-")
   if ( data == "phone" ) then
-		SetNuiFocus( false )
-		SendNUIMessage({
-			hidemenu = true
-		})
-		menuEnabled = false
-		TriggerEvent('fsn_phone:togglePhone')
+		ToggleActionMenu()
+		ExecuteCommand('p')
   elseif split[1] == 'police' then
     if split[2] == 'command' then
       if split[3] == 'duty' then
