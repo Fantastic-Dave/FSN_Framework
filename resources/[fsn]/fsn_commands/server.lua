@@ -35,6 +35,27 @@ local pd_cars = {
   [1002] = "fbi2"
 }
 
+local clipsets = {
+  ["reset"] = 'reset',
+  ["franklin"] = 'move_characters@michael@fire',
+  ["flee"] = 'move_f@flee@a',
+  ["scared"] = 'move_f@scared',
+  ["sexy"] = 'move_f@sexy@a',
+  ["sexy"] = 'move_f@sexy@a',
+  ["tazered"] = 'MOVE_M@BAIL_BOND_TAZERED',
+  ["drunk1"] = "MOVE_M@DRUNK@SLIGHTLYDRUNK",
+  ["drunk2"] = "MOVE_M@DRUNK@MODERATEDRUNK",
+  ["drunk3"] = "MOVE_M@DRUNK@MODERATEDRUNK_HEAD_UP",
+  ["drunk4"] = "MOVE_M@DRUNK@VERYDRUNK",
+  ["gangster1"] = 'move_m@gangster@var_i',
+  ["gangster2"] = 'move_m@gangster@var_e',
+  ["gangster3"] = 'move_m@gangster@var_f',
+  ["jog"] = 'move_m@JOG@',
+  ["femme"] = 'MOVE_M@FEMME@',
+  ["posh"] = 'MOVE_M@POSH@',
+  ["tough"] = 'MOVE_M@TOUGH_GUY@'
+}
+
 function tobool(val)
   if val == 'true' then
     return true
@@ -105,6 +126,20 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- CHAT COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/walk' then
+    if clipsets[split[2]] then
+      TriggerClientEvent('fsn_commands:walk:set', -1, source, clipsets[split[2]])
+    else
+      TriggerClientEvent('fsn_notify:displayNotification', source, '/walktypes for a list of types.', 'centerRight', 4000, 'error')
+    end
+  end
+  if split[1] == '/walktypes' then
+    local str = ''
+    for k, v in pairs(clipsets) do
+      str = str..k..', '
+    end
+    TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Walk types: '..str)
+  end
   if split[1] == '/phone' or split[1] == '/p' then
     TriggerClientEvent('fsn_phone:togglePhone', source)
   end

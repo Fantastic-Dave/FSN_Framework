@@ -34,6 +34,22 @@ function fsn_NearestPlayersS(x, y, z, radius)
 	return players
 end
 
+RegisterNetEvent('fsn_commands:walk:set')
+AddEventHandler('fsn_commands:walk:set', function(src, set)
+	print('setting '..src..' to '..set)
+	if src == GetPlayerServerId(PlayerId()) then
+		ResetPedMovementClipset(GetPlayerPed(-1), 0.0)
+		if set ~= 'reset' then
+			SetPedMovementClipset(GetPlayerPed(-1), set, 0)
+		end
+	else
+		ResetPedMovementClipset(GetPlayerPed(GetPlayerFromServerId(src)), 0.0)
+		if set ~= 'reset' then
+			SetPedMovementClipset(GetPlayerPed(GetPlayerFromServerId(src)), set, 0)
+		end
+	end
+end)
+
 RegisterNetEvent('fsn_commands:me')
 AddEventHandler('fsn_commands:me', function(action)
 	local pos = GetEntityCoords(GetPlayerPed(-1))
