@@ -167,6 +167,17 @@ function fsn_computeCurrentSpace()
   return num
 end
 
+RegisterNetEvent('fsn_police:search:start:inventory')
+AddEventHandler('fsn_police:search:start:inventory', function(officerid)
+  local my_inv = {}
+  for k, v in pairs(inventory) do
+    local item = items_table[k].display_name
+    table.insert(my_inv,#my_inv+1,{amount = v.amount,display_name = item})
+  end
+  print(officerid)
+  TriggerServerEvent('fsn_police:search:end:inventory', my_inv, officerid)
+end)
+
 RegisterNetEvent('fsn_inventory:empty')
 AddEventHandler('fsn_inventory:empty', function()
   inventory = {}
