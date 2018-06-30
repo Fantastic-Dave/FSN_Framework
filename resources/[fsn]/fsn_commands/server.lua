@@ -108,7 +108,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/phone' or split[1] == '/p' then
     TriggerClientEvent('fsn_phone:togglePhone', source)
   end
-  if split[1] == '/phonenumber' or split[1] == '/p#' then
+  if split[1] == '/phonenumber' or split[1] == '/pn' then
     TriggerClientEvent('fsn_phone:displayNumber', source)
   end
   if split[1] == '/sit' or split[1] == '/s' then
