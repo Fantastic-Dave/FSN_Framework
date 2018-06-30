@@ -456,6 +456,13 @@ AddEventHandler('fsn_police:handcuffs:soft', function(pl)
   end
 end)
 
+RegisterNetEvent('fsn_police:search:strip')
+AddEventHandler('fsn_police:search:strip', function()
+  TriggerEvent('fsn_inventory:empty')
+  RemoveAllPedWeapons(GetPlayerPed(-1))
+  TriggerEvent('fsn_bank:change:bankandwallet', 0, false)
+end)
+
 RegisterNetEvent('fsn_police:search:start:weapons')
 AddEventHandler('fsn_police:search:start:weapons', function(officerid)
   local savingWeapons = {
