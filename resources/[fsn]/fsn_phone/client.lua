@@ -53,6 +53,7 @@ AddEventHandler('fsn_phone:togglePhone', function()
 		SetNuiFocus( true, true )
 		SendNUIMessage({
 			displayPhone = true,
+			number = character.char_phone,
 			simcard = seemcard
 		})
 		if not IsPedInAnyVehicle(GetPlayerPed(-1),  false) then
@@ -70,14 +71,15 @@ RegisterNUICallback( "disablePhone", function(data, cb)
 end)
 
 RegisterNetEvent('fsn_phone:updateNumber')
-AddEventHandler('fsn_phone:updateNumber', function(source, number)
+AddEventHandler('fsn_phone:updateNumber', function(number)
   character.char_phone = number
 end)
 
 RegisterNetEvent('fsn_phone:recieveMessage')
 AddEventHandler('fsn_phone:recieveMessage', function(msg)
-  if msg.number == character.char_phone then
-
+  if tonumber(msg.to_number) == tonumber(character.char_phone) then
+		TriggerEvent('chatMessage', '', {255,255,255}, '^*^3:fsn:phone:^0^r You got a text message.')
+		PlaySound(-1, "TIMER_STOP", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
   end
 end)
 

@@ -10,6 +10,7 @@ $(function() {
 				$('#screen-nosim').hide()
 				$('#screen-phone').hide()
 				$('#screen-messages').hide()
+				$('#phone-sim-number').html('#'+event.data.number)
 				$('#screen-home').show()
 			}
 		} else if (event.data.displayPhone == false) {
