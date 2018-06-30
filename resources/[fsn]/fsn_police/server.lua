@@ -131,3 +131,13 @@ RegisterServerEvent('fsn_police:requestUpdate')
 AddEventHandler('fsn_police:requestUpdate', function()
   TriggerClientEvent('fsn_police:update', source, onduty_police)
 end)
+
+RegisterServerEvent('fsn_police:search:end:inventory')
+AddEventHandler('fsn_police:search:end:inventory', function(inv_tbl, officerid)
+  local str = ''
+  for k, v in pairs(inv_tbl) do
+    str = str..'['..v.amount..'X] '..v.display_name..', '
+  end
+  TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
+  TriggerClientEvent('chatMessage', officerid, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
+end)
