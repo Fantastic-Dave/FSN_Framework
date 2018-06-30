@@ -141,6 +141,22 @@ enterable_properties = {
       [2] = {desc='garage',locked=true,hash=-190780785,loc={x=484.574,y=-1315.568,z=30.250},text={x=484.574,y=-1315.568,z=30.250}},
     },
   },
+  [9] = {
+    title = 'Lifeinvader Office',
+    price = 25000,
+    expiry = 0,
+    owner = -1,
+    coowners = {},
+    db_id = 8,
+    blip = {x = -1054.0124511719, y = -235.99578857422, z = 44.021156311035},
+    rob_spot = {x = -1051.818359375, y = -232.93724060059, z = 44.020915985107},
+    inventory = {},
+    weapons = {},
+    money = 0,
+    doors = {
+      [1] = {desc='front door',locked=true,hash=-495720969,loc={x=-1055.958,y=-236.425,z=44.170},text={x=-1055.958,y=-236.425,z=44.170}},
+    },
+  },
 }
 
 RegisterServerEvent('fsn_properties:doors:request')
