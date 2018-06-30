@@ -51,6 +51,7 @@ AddEventHandler('fsn_main:getCharacter', function(char_id)
       char_dob = char[1].char_dob,
       char_money = char[1].char_money,
       char_bank = char[1].char_bank,
+      char_phone = char[1].char_phone,
       char_police = char[1].char_police,
       char_ems = char[1].char_ems,
       char_twituname = char[1].char_twituname
@@ -71,6 +72,26 @@ function fsn_GetPlayerFromCharacterId(id)
   end
   return idee
 end
+
+function fsn_GetPlayerFromPhoneNumber(num)
+  local idee = 0
+  for k, v in pairs(current_characters) do
+    if v.char_phone == tonumber(num) then
+      idee = v.ply_id
+    end
+  end
+  return idee
+end
+
+RegisterServerEvent('fsn_main:updateCharNumber')
+AddEventHandler('fsn_main:updateCharNumber', function(charid, number)
+  for k, v in pairs(current_characters) do
+    if v.char_id == tonumber(charid) then
+      v.char_phone = tonumber(number)
+      print(v.char_id..' updated phone number to: '..v.char_phone)
+    end
+  end
+end)
 
 RegisterServerEvent('fsn_main:money:Set')
 AddEventHandler('fsn_main:money:Set', function(ply, amt)
