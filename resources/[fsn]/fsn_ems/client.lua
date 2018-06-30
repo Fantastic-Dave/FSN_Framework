@@ -26,6 +26,11 @@ end)
 local currenttime = 0
 local deathtime = currenttime
 local amidead = false
+
+function fsn_IsDead()
+  return amidead
+end
+
 RegisterNetEvent('fsn_ems:reviveMe')
 AddEventHandler('fsn_ems:reviveMe', function()
   amidead = false
