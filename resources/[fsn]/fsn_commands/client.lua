@@ -34,6 +34,21 @@ function fsn_NearestPlayersS(x, y, z, radius)
 	return players
 end
 
+RegisterNetEvent('fsn_commands:dropweapon')
+AddEventHandler('fsn_commands:dropweapon', function()
+	if exports.fsn_ems:fsn_IsDead() then
+			TriggerEvent('fsn_notify:displayNotification', 'Mate, you\'re downed, don\'t be so stupid.', 'centerLeft', 4000, 'error')
+	else
+		if GetSelectedPedWeapon(GetPlayerPed(-1)) ~= -1569615261 then
+			print('dropping '..GetSelectedPedWeapon(GetPlayerPed(-1)))
+			RemoveWeaponFromPed(GetPlayerPed(-1), GetSelectedPedWeapon(GetPlayerPed(-1)))
+			TriggerEvent('fsn_notify:displayNotification', 'Weapon dropped', 'centerLeft', 4000, 'success')
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'You cannot drop your fists!!', 'centerLeft', 4000, 'error')
+		end
+	end
+end)
+
 RegisterNetEvent('fsn_commands:walk:set')
 AddEventHandler('fsn_commands:walk:set', function(src, set)
 	print('setting '..src..' to '..set)
