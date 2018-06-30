@@ -26,24 +26,41 @@
 					</div>
 				</div>
 				<div id="screen-messages">
-					<div class="status_bar">
-					<div id="phone-sim-number"></div> <span>4G LTE</span>
+					<div class="status_bar"><div id="phone-sim-number"></div> <span>4G LTE</span></div>
+					<div class="message_button" onclick="displayMessage(false)">
+						<div class="call_icon">
+							<img id="home-button" src="img/message_button.png">
+						</div>
+						<div class="call_text">
+							NEW MESSAGE
+						</div>
 					</div>
-					<div class="messages-box" data-messageid="">
-						<div class="msg_box">
+					<div id="messages-append" class="messages-box">
+						
+					</div>
+				</div>
+				<div id="screen-message-view">
+					<div class="status_bar"><div id="phone-sim-number"></div> <span>4G LTE</span></div>
+					<div id="msg" class="messages-box">
+						<div id="view-message" class="view_msg_box">
 							<div class="msg_title">
-								Logan Whitehead (36512)
+								<span id="message-contact"></span> (<span id="message-number"></span>)
 							</div>
-							<div class="msg_preview">
-								I had lots of fun earlier!... Thanks, you really cheered me up.. You should have warned <b style="font-size:12px;">...</b>
+							<div class="talk-bubble tri-right left-top">
+							  <div class="talktext">
+								<p id="message-text"></p>
+							  </div>
 							</div>
+						</div>
+						<div class="view_msg_textbox">
+							<input id="textbox-number" type="text" placeholder="Number..."></text>
+							<textarea id="textbox-message" placeholder="Message..."></textarea>
+							<button onclick="sendTextMessage()">Send</button>
 						</div>
 					</div>
 				</div>
 				<div id="screen-phone">
-					<div class="status_bar">
-					<div id="phone-sim-number"></div> <span>4G LTE</span>
-					</div>
+					<div class="status_bar"><div id="phone-sim-number"></div> <span>4G LTE</span></div>
 					<div class="app_screen">
 						<div class="call_input">
 							<input id="call_input" type="textarea" />
@@ -99,7 +116,11 @@
 				<div id="screen-nosim">
 				</div>
 				<div id="home-button" class="back_bar">
-					<img src="img/main-square.png">
+					<div class="back_img_arrow">
+					</div>
+					<div class="back_img_home">
+						<img src="img/main-square.png">
+					</div>
 				</div>
 			</div>
 		</div>

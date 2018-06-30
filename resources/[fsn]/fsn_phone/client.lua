@@ -3,6 +3,7 @@ local stores = {
 }
 local character = {}
 local phoneEnabled = false
+local contacts = {}
 
 function fsn_NearestPlayersC(x, y, z, radius)
 	local players = {}
@@ -73,14 +74,38 @@ end)
 RegisterNetEvent('fsn_phone:updateNumber')
 AddEventHandler('fsn_phone:updateNumber', function(number)
   character.char_phone = number
+	TriggerServerEvent('fsn_main:updateCharNumber', character.char_id, character.char_phone)
 end)
 
 RegisterNetEvent('fsn_phone:recieveMessage')
 AddEventHandler('fsn_phone:recieveMessage', function(msg)
   if tonumber(msg.to_number) == tonumber(character.char_phone) then
-		TriggerEvent('chatMessage', '', {255,255,255}, '^*^3:fsn:phone:^0^r You got a text message.')
+		if msg.sender == false then
+			for k, v in pairs(contacts) do
+				if tonumber(v.number) == tonumber(msg.from_number) then
+					msg.sender = v.name
+				end
+			end
+			if msg.sender == false then
+				msg.sender = 'UNKNOWN CONTACT'
+			end
+		end
 		PlaySound(-1, "TIMER_STOP", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
+		SetNotificationTextEntry("STRING");
+		AddTextComponentString(msg.message);
+		SetNotificationMessage("CHAR_LIFEINVADER", "CHAR_LIFEINVADER", true, 1, msg.sender.." ("..tostring(msg.from_number)..")", "Text Message");
+		DrawNotification(false, true);
+		SendNUIMessage({
+			addMessage = true,
+			contact = msg.sender,
+			number = msg.from_number,
+			message = msg.message
+		})
   end
+end)
+
+RegisterNUICallback( "sendText", function( data, cb )
+	TriggerServerEvent('fsn_phone:sendMessage', data.num, character.char_phone, data.msg)
 end)
 
 Citizen.CreateThread( function()

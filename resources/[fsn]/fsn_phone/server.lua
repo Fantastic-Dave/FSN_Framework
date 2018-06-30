@@ -1,7 +1,7 @@
 RegisterServerEvent('fsn_phone:purchased')
 AddEventHandler('fsn_phone:purchased', function(charid)
   local src = source
-  local numbers = {0,1,2,3,4,5,6,7,8,9}
+  local numbers = {1,2,3,4,5,6,7,8,9}
   local tbl = {}
   for id = 1, 6 do
     table.insert(tbl,#tbl+1,numbers[math.random(1, #numbers)])
@@ -12,11 +12,27 @@ AddEventHandler('fsn_phone:purchased', function(charid)
     TriggerClientEvent('fsn_phone:updateNumber', src, number)
     TriggerClientEvent('fsn_phone:recieveMessage', src, {
       sender = 'Lifeinvader',
-      from_number = 00000,
+      from_number = 696969,
       to_number = number,
       message = 'Welcome to Lifeinvader! Your new mobile phone number is '..number..'. ~Lifeinvader Team'
     })
   end)
+end)
+
+RegisterServerEvent('fsn_phone:sendMessage')
+AddEventHandler('fsn_phone:sendMessage', function(tonum, fromnum, msg)
+  local client = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(tonum))
+  if client ~= 0 then
+    TriggerClientEvent('fsn_phone:recieveMessage', client, {
+      sender = false,
+      from_number = fromnum,
+      to_number = tonum,
+      message = msg
+    })
+    TriggerClientEvent('fsn_notify:displayNotification', source, 'Messaged delivered', 'centerRight', 8000, 'success')
+  else
+    TriggerClientEvent('fsn_notify:displayNotification', source, 'No player found with number <b>'..tonumber(tonum), 'centerRight', 8000, 'error')
+  end
 end)
 
 RegisterServerEvent('fsn_phone:chat')

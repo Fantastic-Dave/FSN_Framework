@@ -1,5 +1,76 @@
+var texts = []
+/*
+	{
+		luaid:1,
+		contact:"LIFEINVADER",
+		number:696969,
+		message:'Welcome to Lifeinvader!<br><br>Your new mobile phone number is <b style="color:#f44242">696969</b>.<br><br>~Lifeinvader Team'
+	},
+*/
+function displayMessage(jsid) {
+	var txt = texts[jsid]
+	if (txt) {
+		$('#message-text').html(txt.message)
+		$('#message-contact').text(txt.contact)
+		$('#message-number').text(txt.number)
+		$('#screen-messages').hide()
+		$('#screen-message-view').show()
+		$('#textbox-number').val(txt.number)
+	} else {
+		$('#message-text').html('')
+		$('#message-contact').text('')
+		$('#message-number').text('')
+		$('#screen-messages').hide()
+		$('#screen-message-view').show()
+		$('#textbox-number').val('')
+		$('#textbox-message').val('')
+	}
+}
+
+function sendTextMessage() {
+	var number = $('#textbox-number').val()
+	var message = $('#textbox-message').val()
+	
+	$.post('http://fsn_phone/sendText', JSON.stringify({
+		num:number,
+		msg:message
+	}));
+	
+	$('#textbox-number').val('')
+	$('#textbox-message').val('')
+	
+	//////// asss
+	$('#screen-message-view').hide()
+	
+	// Add the messages
+	$('#messages-append').html('')
+	for(var i = 0; i < texts.length; i++) {
+		var txt = texts[i]
+		var appendStr = '<div class="msg_box">'+
+			'<div class="msg_title">'+
+				txt.contact+' ('+txt.number+')'+
+			'</div>'+
+			'<div id="message-bubble" class="talk-bubble tri-right left-top" onclick="displayMessage('+i+')">'+
+			  '<div class="talktext">'+
+				'<p>'+txt.message+'</p>'+
+			  '</div>'+
+			'</div>'+
+		'</div>'
+		$('#messages-append').append(appendStr)
+	}
+	$('#screen-messages').show()
+}
+
 $(function() {
     window.addEventListener('message', function(event) {
+		if (event.data.addMessage == true) {
+			var json = 	{
+				contact:event.data.contact,
+				number:event.data.number,
+				message:event.data.message
+			}
+			texts.push(json)
+		}
 		if (event.data.displayPhone == true) {
 			$('#phone').show()
 			if (event.data.simcard == false) {
@@ -10,7 +81,7 @@ $(function() {
 				$('#screen-nosim').hide()
 				$('#screen-phone').hide()
 				$('#screen-messages').hide()
-				$('#phone-sim-number').html('#'+event.data.number)
+				$( "#phone-sim-number" ).text( '#'+event.data.number );
 				$('#screen-home').show()
 			}
 		} else if (event.data.displayPhone == false) {
@@ -32,15 +103,36 @@ document.body.onmouseup = function() {
 	/////////////////////////////////////////////////
 	if ($('#phone-button:hover').length != 0) {
 		$('#screen-home').hide()
+		$('#screen-message-view').hide()
+		$('#screen-messages').hide()
 		$('#screen-phone').show()
 	}
 	if ($('#messages-button:hover').length != 0) {
 		$('#screen-home').hide()
+		$('#screen-message-view').hide()
+		
+		// Add the messages
+		$('#messages-append').html('')
+		for(var i = 0; i < texts.length; i++) {
+			var txt = texts[i]
+			var appendStr = '<div class="msg_box">'+
+				'<div class="msg_title">'+
+					txt.contact+' ('+txt.number+')'+
+				'</div>'+
+				'<div id="message-bubble" class="talk-bubble tri-right left-top" onclick="displayMessage('+i+')">'+
+				  '<div class="talktext">'+
+					'<p>'+txt.message+'</p>'+
+				  '</div>'+
+				'</div>'+
+			'</div>'
+			$('#messages-append').append(appendStr)
+		}
 		$('#screen-messages').show()
 	}
-	if ($('#home-button:hover').length != 0) {
+	if ($('.back_img_home:hover').length != 0) {
 		$('#screen-phone').hide()
 		$('#screen-messages').hide()
+		$('#screen-message-view').hide()
 		$('#screen-home').show()
 	}
 	
