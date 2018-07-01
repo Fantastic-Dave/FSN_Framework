@@ -31,12 +31,6 @@ local settings = {
   current = 2
 }
 
-local onphone = false
-local vchannel =
-local zero
-local holding = false
-local _holding = false
-
 Citizen.CreateThread(function()
 	while true do Citizen.Wait(1)
     if NetworkIsPlayerTalking(PlayerId()) then
@@ -54,4 +48,71 @@ Citizen.CreateThread(function()
       NetworkSetVoiceActive(true)
     end
 	end
+end)
+--[[
+    PHONE CALL STUFFS
+]]--
+local onphone = false
+local callwith = 0
+local vchannel = 0
+local holding = false
+local _holding = false
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+    if onphone then
+      if _holding then
+        SetTextComponentFormat("STRING")
+        AddTextComponentString("Call: "..tostring(callwith).."#"..tostring(vchannel).." // ~r~HOLD~w~ \n~INPUT_SCRIPTED_FLY_ZUP~: end")
+        DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+        if IsControlJustPressed(0,11) then
+          TriggerServerEvent('fsn_voicecontrol:call:end', callwith)
+        end
+      elseif holding then
+        SetTextComponentFormat("STRING")
+        AddTextComponentString("Call: "..tostring(callwith).."#"..tostring(vchannel).." // ~o~HOLD~w~ \n~INPUT_SCRIPTED_FLY_ZUP~ unhold \n~INPUT_SCRIPTED_FLY_ZUP~: end")
+        DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+        if IsControlJustPressed(0,10) then
+          TriggerServerEvent('fsn_voicecontrol:call:unhold', callwith)
+        end
+        if IsControlJustPressed(0,11) then
+          TriggerServerEvent('fsn_voicecontrol:call:end', callwith)
+        end
+      else
+        SetTextComponentFormat("STRING")
+        AddTextComponentString("Call: "..tostring(callwith).."#"..tostring(vchannel).." // ~g~ACTIVE~w~ \n~INPUT_SCRIPTED_FLY_ZUP~ hold \n~INPUT_SCRIPTED_FLY_ZUP~ end")
+        DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+        if IsControlJustPressed(0,10) then
+          TriggerServerEvent('fsn_voicecontrol:call:hold', callwith)
+        end
+        if IsControlJustPressed(0,11) then
+          TriggerServerEvent('fsn_voicecontrol:call:end', callwith)
+        end
+      end
+    end
+  end
+end)
+
+RegisterNetEvent('fsn_voicecontrol:call:ring')
+AddEventHandler('fsn_voicecontrol:call:ring', function(callfrom)
+  local ringing = true
+  Citizen.CreateThread(function()
+    while true do
+      Citizen.Wait(0)
+
+        TriggerServerEvent('fsn_voicecontrol:call:answer', callfrom)
+        ringing = false
+    end
+  end)
+  Citizen.CreateThread(function()
+    while true do
+      Citizen.Wait(0)
+      if ringing then
+        TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 3, 'fsn_phonecall.ogg', 0.4)
+        Citizen.Wait(2500)
+      else
+        break
+      end
+    end
+  end)
 end)
