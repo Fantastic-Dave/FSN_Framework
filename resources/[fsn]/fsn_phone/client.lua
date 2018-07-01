@@ -98,6 +98,9 @@ AddEventHandler('fsn_phone:recieveMessage', function(msg)
 			end
 		end
 		PlaySound(-1, "TIMER_STOP", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
+		--TriggerServerEvent('InteractSound_SV:PlayOnAll', 'demo', 1.0)
+		--TriggerServerEvent('InteractSound_SV:PlayOnSource', 'fsn_phonecall', 1.0)
+		--TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 5, 'fsn_phonecall', 1.0)
 		SetNotificationTextEntry("STRING");
 		AddTextComponentString(msg.message);
 		SetNotificationMessage("CHAR_LIFEINVADER", "CHAR_LIFEINVADER", true, 1, msg.sender.." ("..tostring(msg.from_number)..")", "Text Message");
