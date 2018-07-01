@@ -97,8 +97,7 @@ AddEventHandler('fsn_phone:recieveMessage', function(msg)
 				msg.sender = 'UNKNOWN CONTACT'
 			end
 		end
-		--PlaySound(-1, "TIMER_STOP", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-		TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 3, 'fsn_phonecall.ogg', 0.4)
+		PlaySound(-1, "TIMER_STOP", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
 		SetNotificationTextEntry("STRING");
 		AddTextComponentString(msg.message);
 		SetNotificationMessage("CHAR_LIFEINVADER", "CHAR_LIFEINVADER", true, 1, msg.sender.." ("..tostring(msg.from_number)..")", "Text Message");
