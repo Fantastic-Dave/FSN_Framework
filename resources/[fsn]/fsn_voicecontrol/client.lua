@@ -31,6 +31,12 @@ local settings = {
   current = 2
 }
 
+local onphone = false
+local vchannel =
+local zero
+local holding = false
+local _holding = false
+
 Citizen.CreateThread(function()
 	while true do Citizen.Wait(1)
     if NetworkIsPlayerTalking(PlayerId()) then
