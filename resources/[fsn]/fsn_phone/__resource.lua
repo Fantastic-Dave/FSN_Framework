@@ -13,6 +13,7 @@ files({
   'gui/img/main-back.png',
   'gui/img/message_button.png',
   'gui/img/phone_button.png',
+  'gui/img/contact_button.png',
   'gui/img/icons/icon_contacts.png',
   'gui/img/icons/icon_fleeca.png',
   'gui/img/icons/icon_messages.png',

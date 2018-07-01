@@ -113,6 +113,89 @@
 }
 
 /*
+	Contacts Screen
+*/
+#screen-contact-view {
+	display: none;
+	background-color: white;
+	width: 100%;
+	height: 93%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.contactdetails_title {
+	font-family:Arial;
+	font-weight:bold;
+	font-size: 20px;
+	width: 100%;
+	text-align:center;
+	margin-top: 20px;
+}
+.contact_textarea {
+	position: relative;
+	width: 90%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family:Arial;
+	font-weight:bold;
+}
+.contact_textarea input {
+	margin: 3px;
+	height: 30px;
+	width: calc(100% - 6px);
+	margin-bottom: 10px;
+}
+#screen-contacts {
+	display: none;
+	background-color: white;
+	width: 100%;
+	height: 93%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.contact {
+	width: 100%;
+	height: 40px;
+	padding: 5px;
+	padding-top: 10px;
+	border-bottom: 1px solid #d1d1d1;
+}
+.contact_details {
+	width: 70%;
+	height: 100%;
+	float: left
+}
+.contact_button {
+	width: 30%;
+	height: 100%;
+	float: left;
+}
+.contact_button button {
+	width: 90%;
+	height: 90%;
+}
+.contact_title {
+	width: 100%;
+	height: 50%;
+	float:left;
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 100%;
+}
+.contact_desc {
+	width: 100%;
+	height: 40%;
+	float: left;
+	font-family: Arial;
+	font-style: italic;
+	line-height: 100%;
+	font-size: 13px;
+}
+
+/*
 	View message screen
 */
 #screen-message-view {
@@ -168,11 +251,15 @@
 	background-color: white;
 	width: 100%;
 	height: 93%;
-	overflow-y: scroll;
-	overflow-x: hidden;
 }
 .messages_newmessage {
 	
+}
+.messages-box {
+	width: 100%;
+	height: 80%;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 .msg_box {
 	width: 100%;

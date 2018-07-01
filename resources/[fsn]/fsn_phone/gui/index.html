@@ -16,7 +16,7 @@
 						<img src="img/icons/icon_messages.png">
 						MESSAGES
 					</div>
-					<div class="home_button">
+					<div id="contacts-button" class="home_button">
 						<img src="img/icons/icon_contacts.png">
 						CONTACTS
 					</div>
@@ -41,6 +41,7 @@
 				</div>
 				<div id="screen-message-view">
 					<div class="status_bar"><div id="phone-sim-number"></div> <span>4G LTE</span></div>
+					<div class="back_button"><button id="messages-button">< Back</button></div>
 					<div id="msg" class="messages-box">
 						<div id="view-message" class="view_msg_box">
 							<div class="msg_title">
@@ -56,6 +57,39 @@
 							<input id="textbox-number" type="text" placeholder="Number..."></text>
 							<textarea id="textbox-message" placeholder="Message..."></textarea>
 							<button onclick="sendTextMessage()">Send</button>
+						</div>
+					</div>
+				</div>
+				<div id="screen-contacts">
+					<div class="status_bar"><div id="phone-sim-number"></div> <span>4G LTE</span></div>
+					<div class="message_button" onclick="displayContact(false)">
+						<div class="call_icon">
+							<img id="home-button" src="img/contact_button.png">
+						</div>
+						<div class="call_text">
+							NEW CONTACT
+						</div>
+					</div>
+					<div id="contacts-append" class="messages-box">
+	
+					</div>
+				</div>
+				<div id="screen-contact-view">
+					<div class="status_bar"><div id="phone-sim-number"></div> <span>4G LTE</span></div>
+					<div class="back_button"><button id="contacts-button">< Back</button></div>
+					<div class="messages-box">
+						<div class="contactdetails_title">
+							CONTACT DETAILS
+						</div>
+						<div class="contact_textarea">
+							Name:
+							<input type="text" placeholder="Name..."\>
+							Phone#:
+							<input type="text" placeholder="Number..."\>
+						</div>
+						<div class="contact_buttons">
+							<button>Update</button>
+							<button>Delete</button>
 						</div>
 					</div>
 				</div>

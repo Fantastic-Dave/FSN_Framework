@@ -1,4 +1,11 @@
 var texts = []
+var contacts = [
+	{
+		luaid:1,
+		name:'Logan Whitehead',
+		number:07849891833
+	}
+]
 /*
 	{
 		luaid:1,
@@ -24,6 +31,17 @@ function displayMessage(jsid) {
 		$('#screen-message-view').show()
 		$('#textbox-number').val('')
 		$('#textbox-message').val('')
+	}
+}
+
+function displayContact(jsid) {
+	var ctc = contacts[jsid]
+	if (ctc) {
+		$('#screen-contacts').hide()
+		$('#screen-contact-view').show()
+	} else {
+		$('#screen-contacts').hide()
+		$('#screen-contact-view').show()
 	}
 }
 
@@ -104,12 +122,46 @@ document.body.onmouseup = function() {
 	if ($('#phone-button:hover').length != 0) {
 		$('#screen-home').hide()
 		$('#screen-message-view').hide()
+		$('#screen-contact-view').hide()
 		$('#screen-messages').hide()
+		$('#screen-contacts').hide()
 		$('#screen-phone').show()
+	}
+	if ($('#contacts-button:hover').length != 0) {
+		$('#screen-home').hide()
+		$('#screen-phone').hide()
+		$('#screen-message-view').hide()
+		$('#screen-contact-view').hide()
+		$('#screen-messages').hide()
+		
+		// Add the messages
+		$('#contacts-append').html('')
+		for(var i = 0; i < contacts.length; i++) {
+			var ctc = contacts[i]
+			var appendStr = '<div class="contact">'+
+				'<div class="contact_details">'+
+					'<div class="contact_title">'+
+						ctc.name+
+					'</div>'+
+					'<div class="contact_desc">'+
+						ctc.number+
+					'</div>'+
+				'</div>'+
+				'<div class="contact_button">'+
+					'<button>View</button>'+
+				'</div>'+
+			'</div>'
+			
+			$('#contacts-append').append(appendStr)
+		}
+		$('#screen-contacts').show()
 	}
 	if ($('#messages-button:hover').length != 0) {
 		$('#screen-home').hide()
+		$('#screen-phone').hide()
+		$('#screen-contacts').hide()
 		$('#screen-message-view').hide()
+		$('#screen-contact-view').hide()
 		
 		// Add the messages
 		$('#messages-append').html('')
@@ -133,6 +185,8 @@ document.body.onmouseup = function() {
 		$('#screen-phone').hide()
 		$('#screen-messages').hide()
 		$('#screen-message-view').hide()
+		$('#screen-contact-view').hide()
+		$('#screen-contacts').hide()
 		$('#screen-home').show()
 	}
 	
