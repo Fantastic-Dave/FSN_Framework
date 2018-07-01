@@ -52,6 +52,7 @@ AddEventHandler('fsn_main:getCharacter', function(char_id)
       char_money = char[1].char_money,
       char_bank = char[1].char_bank,
       char_phone = char[1].char_phone,
+      char_contacts = char[1].char_contacts,
       char_police = char[1].char_police,
       char_ems = char[1].char_ems,
       char_twituname = char[1].char_twituname
