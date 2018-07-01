@@ -19,6 +19,11 @@ AddEventHandler('fsn_phone:purchased', function(charid)
   end)
 end)
 
+RegisterServerEvent('fsn_phone:db:updateContacts')
+AddEventHandler('fsn_phone:db:updateContacts', function(charid, contactjson)
+  MySQL.Async.execute('UPDATE `fsn_characters` SET `char_contacts` = @contacts WHERE `fsn_characters`.`char_id` = @charid;', {['@charid'] = charid, ['@contacts'] = contactjson}, function(rowsChanged) end)
+end)
+
 RegisterServerEvent('fsn_phone:sendMessage')
 AddEventHandler('fsn_phone:sendMessage', function(tonum, fromnum, msg)
   --local from = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(tonum))

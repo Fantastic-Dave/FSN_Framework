@@ -18,7 +18,7 @@ end
 
 RegisterNetEvent('fsn_phone:displayNumber')
 AddEventHandler('fsn_phone:displayNumber', function()
-	if character.char_phone ~= -1 then
+	if character.char_phone and character.char_phone ~= -1 then
 		local pos = GetEntityCoords(GetPlayerPed(-1))
 	  TriggerServerEvent('fsn_phone:chat', '^*^3phone# |^0^r '..character.char_phone, fsn_NearestPlayersC(pos.x, pos.y, pos.z, 5))
 	else
@@ -28,6 +28,9 @@ end)
 
 AddEventHandler('fsn_main:character', function(char)
   character = char
+	if character.char_contacts ~= '' then
+		contacts = json.decode(character.char_contacts)
+	end
 end)
 
 RegisterNetEvent('fsn_phone:togglePhone')
@@ -56,6 +59,10 @@ AddEventHandler('fsn_phone:togglePhone', function()
 			displayPhone = true,
 			number = character.char_phone,
 			simcard = seemcard
+		})
+		SendNUIMessage({
+			updateContacts = true,
+			contacts = contacts
 		})
 		if not IsPedInAnyVehicle(GetPlayerPed(-1),  false) then
 			TaskStartScenarioInPlace(GetPlayerPed(-1), "WORLD_HUMAN_STAND_MOBILE", 0, true);
@@ -105,7 +112,57 @@ AddEventHandler('fsn_phone:recieveMessage', function(msg)
 end)
 
 RegisterNUICallback( "sendText", function( data, cb )
+	if not data.num or not character.char_phone or not data.msg then
+		TriggerEvent('chatMessage', '', {255,255,255}, '^*^3phone# |^0^r ^1An error occured sending your message')
+	return end
+	if data.num == '' or character.char_phone == '' or data.msg == '' then
+		TriggerEvent('chatMessage', '', {255,255,255}, '^*^3phone# |^0^r ^1An error occured sending your message')
+	return end
 	TriggerServerEvent('fsn_phone:sendMessage', data.num, character.char_phone, data.msg)
+end)
+
+RegisterNUICallback( "deleteContact", function( data, cb )
+	if data.luaid then
+		contacts[data.luaid] = nil
+		TriggerEvent('fsn_notify:displayNotification', 'Contacted deleted', 'centerRight', 5000, 'success')
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'Error occured deleting contact', 'centerRight', 5000, 'error')
+	end
+	SendNUIMessage({
+		updateContacts = true,
+		contacts = contacts
+	})
+	TriggerServerEvent('fsn_phone:db:updateContacts', character.char_id, json.encode(contacts))
+end)
+
+RegisterNUICallback( "updateContact", function( data, cb )
+	print('updating contact')
+	if data.luaid and data.name and data.number and contacts[data.luaid] then
+		contacts[data.luaid].name = data.name
+		contacts[data.luaid].number = data.number
+		TriggerEvent('fsn_notify:displayNotification', 'Contacted updated', 'centerRight', 5000, 'success')
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'Error occured updating contact', 'centerRight', 5000, 'error')
+	end
+	SendNUIMessage({
+		updateContacts = true,
+		contacts = contacts
+	})
+	TriggerServerEvent('fsn_phone:db:updateContacts', character.char_id, json.encode(contacts))
+end)
+
+RegisterNUICallback( "addContact", function( data, cb )
+	if data.name and data.number then
+		table.insert(contacts,#contacts+1,{luaid=#contacts+1,name=data.name,number=data.number})
+		TriggerEvent('fsn_notify:displayNotification', 'Contacted added', 'centerRight', 5000, 'success')
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'Error occured adding contact', 'centerRight', 5000, 'error')
+	end
+	SendNUIMessage({
+		updateContacts = true,
+		contacts = contacts
+	})
+	TriggerServerEvent('fsn_phone:db:updateContacts', character.char_id, json.encode(contacts))
 end)
 
 Citizen.CreateThread( function()

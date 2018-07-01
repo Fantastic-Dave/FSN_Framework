@@ -1,91 +1,5 @@
 var texts = []
-var contacts = [
-	{
-		luaid:1,
-		name:'Logan Whitehead',
-		number:07849891833
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	},
-	{
-		luaid:2,
-		name:'Anna Dicksucker',
-		number:999
-	}
-]
+var contacts = []
 contacts.sort(function(a, b) {
     return a.name > b.name;
 });
@@ -117,23 +31,115 @@ function displayMessage(jsid) {
 	}
 }
 
+function textNumber(num) {
+	$('#message-text').html('')
+	$('#message-contact').text('')
+	$('#message-number').text('')
+	$('#screen-messages').hide()
+	$('#textbox-number').val(num)
+	$('#textbox-message').val('')
+	$('#screen-contact-view').hide()
+	$('#screen-message-view').show()
+}
+
+function addUpdateContact(jsid) {
+	var ctc = contacts[jsid]
+	if (ctc) {
+		var nam = $('#ctc-name').val()
+		var num = $('#ctc-number').val()
+		$.post('http://fsn_phone/updateContact', JSON.stringify({
+			luaid:ctc.luaid,
+			name:nam,
+			number:num
+		}));
+	} else {
+		var nam = $('#ctc-name').val()
+		var num = $('#ctc-number').val()
+		$.post('http://fsn_phone/addContact', JSON.stringify({
+			name:nam,
+			number:num
+		}));
+	}
+	$('#screen-contact-view').hide()
+	$('#contacts-append').html('')
+		if (contacts.length > 0) {
+			contacts.sort();
+		}
+		for(var i = 0; i < contacts.length; i++) {
+			var ctc = contacts[i]
+			var appendStr = '<div class="contact">'+
+				'<div class="contact_details">'+
+					'<div class="contact_title">'+
+						ctc.name+
+					'</div>'+
+					'<div class="contact_desc">'+
+						ctc.number+
+					'</div>'+
+				'</div>'+
+				'<div class="contact_button">'+
+					'<button onclick="displayContact('+i+')">View</button>'+
+				'</div>'+
+			'</div>'
+			
+			$('#contacts-append').append(appendStr)
+		}
+		$('#screen-contacts').show()
+}
+
+function deleteContact(jsid) {
+	var ctc = contacts[jsid]
+	if (ctc) {
+		$.post('http://fsn_phone/deleteContact', JSON.stringify({
+			luaid:ctc.luaid,
+		}));
+	}
+	$('#screen-contact-view').hide()
+	$('#contacts-append').html('')
+		if (contacts.length > 0) {
+			contacts.sort();
+		}
+		for(var i = 0; i < contacts.length; i++) {
+			var ctc = contacts[i]
+			var appendStr = '<div class="contact">'+
+				'<div class="contact_details">'+
+					'<div class="contact_title">'+
+						ctc.name+
+					'</div>'+
+					'<div class="contact_desc">'+
+						ctc.number+
+					'</div>'+
+				'</div>'+
+				'<div class="contact_button">'+
+					'<button onclick="displayContact('+i+')">View</button>'+
+				'</div>'+
+			'</div>'
+			
+			$('#contacts-append').append(appendStr)
+		}
+		$('#screen-contacts').show()
+}
+
 function displayContact(jsid) {
 	var ctc = contacts[jsid]
 	if (ctc) {
+		$('#ctc-buttons').html('<div id="ctc-txt-buttons" class="contact_buttons" style="margin-top:15px;">'+
+			'<button onclick="textNumber('+ctc.number+')">TEXT CONTACT</button>'+
+			'<button onclick="callNumber('+ctc.number+')">CALL CONTACT</button>'+
+		'</div>')
 		$('#screen-contacts').hide()
 		$('#screen-contact-view').show()
 		$('#ctc-name').val(ctc.name)
 		$('#ctc-number').val(ctc.number)
-		$('.contact_buttons').html('<button onclick="addUpdateContact('+jsid+')">ADD/UPDATE</button>'+
+		$('#ctc-detail-buttons').html('<button onclick="addUpdateContact('+jsid+')">UPDATE</button>'+
 		'<button onclick="deleteContact('+jsid+')">DELETE</button>')
 		
 	} else {
+		$('#ctc-buttons').html('')
 		$('#screen-contacts').hide()
 		$('#screen-contact-view').show()
 		$('#ctc-name').val('')
 		$('#ctc-number').val('')
-		$('.contact_buttons').html('<button onclick="addUpdateContact(false)">ADD/UPDATE</button>'+
-		'<button onclick="deleteContact(false)">DELETE</button>')
+		$('.contact_buttons').html('<button onclick="addUpdateContact(false)">ADD</button>')
 	}
 }
 
@@ -173,6 +179,9 @@ function sendTextMessage() {
 
 $(function() {
     window.addEventListener('message', function(event) {
+		if (event.data.updateContacts == true) {
+			contacts = event.data.contacts
+		}
 		if (event.data.addMessage == true) {
 			var json = 	{
 				contact:event.data.contact,
@@ -228,7 +237,9 @@ document.body.onmouseup = function() {
 		
 		// Add the contacts
 		$('#contacts-append').html('')
-		contacts.sort();
+		if (contacts.length > 0) {
+			contacts.sort();
+		}
 		for(var i = 0; i < contacts.length; i++) {
 			var ctc = contacts[i]
 			var appendStr = '<div class="contact">'+
