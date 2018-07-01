@@ -832,7 +832,7 @@ Citizen.CreateThread(function()
 		if IsControlJustPressed(0,Keys["LEFTCTRL"]) then
 			stopAnim()
 		end
-		if IsControlJustPressed(0,Keys["PAGEUP"]) then
+		if IsControlJustPressed(0,166) then
 			NameOfMenu()                     -- Menu to draw
 			Menu.hidden = not Menu.hidden    -- Hide/Show the menu
 		end
