@@ -74,6 +74,16 @@ function fsn_GetPlayerFromCharacterId(id)
   return idee
 end
 
+function fsn_CharID(src)
+  local charid = 0
+  for k, v in pairs(current_characters) do
+    if v.ply_id == src then
+      charid = v.char_id
+    end
+  end
+  return charid
+end
+
 function fsn_GetPlayerFromPhoneNumber(num)
   local idee = 0
   for k, v in pairs(current_characters) do
