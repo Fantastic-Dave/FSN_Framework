@@ -4,8 +4,91 @@ var contacts = [
 		luaid:1,
 		name:'Logan Whitehead',
 		number:07849891833
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
+	},
+	{
+		luaid:2,
+		name:'Anna Dicksucker',
+		number:999
 	}
 ]
+contacts.sort(function(a, b) {
+    return a.name > b.name;
+});
 /*
 	{
 		luaid:1,
@@ -39,9 +122,18 @@ function displayContact(jsid) {
 	if (ctc) {
 		$('#screen-contacts').hide()
 		$('#screen-contact-view').show()
+		$('#ctc-name').val(ctc.name)
+		$('#ctc-number').val(ctc.number)
+		$('.contact_buttons').html('<button onclick="addUpdateContact('+jsid+')">ADD/UPDATE</button>'+
+		'<button onclick="deleteContact('+jsid+')">DELETE</button>')
+		
 	} else {
 		$('#screen-contacts').hide()
 		$('#screen-contact-view').show()
+		$('#ctc-name').val('')
+		$('#ctc-number').val('')
+		$('.contact_buttons').html('<button onclick="addUpdateContact(false)">ADD/UPDATE</button>'+
+		'<button onclick="deleteContact(false)">DELETE</button>')
 	}
 }
 
@@ -87,7 +179,7 @@ $(function() {
 				number:event.data.number,
 				message:event.data.message
 			}
-			texts.push(json)
+			texts.unshift(json)
 		}
 		if (event.data.displayPhone == true) {
 			$('#phone').show()
@@ -134,8 +226,9 @@ document.body.onmouseup = function() {
 		$('#screen-contact-view').hide()
 		$('#screen-messages').hide()
 		
-		// Add the messages
+		// Add the contacts
 		$('#contacts-append').html('')
+		contacts.sort();
 		for(var i = 0; i < contacts.length; i++) {
 			var ctc = contacts[i]
 			var appendStr = '<div class="contact">'+
@@ -148,7 +241,7 @@ document.body.onmouseup = function() {
 					'</div>'+
 				'</div>'+
 				'<div class="contact_button">'+
-					'<button>View</button>'+
+					'<button onclick="displayContact('+i+')">View</button>'+
 				'</div>'+
 			'</div>'
 			

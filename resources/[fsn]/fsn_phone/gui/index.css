@@ -147,6 +147,12 @@
 	width: calc(100% - 6px);
 	margin-bottom: 10px;
 }
+.contact_buttons button {
+	margin: 3px;
+	height: 30px;
+	width: calc(100% - 6px);
+	margin-bottom: 10px;
+}
 #screen-contacts {
 	display: none;
 	background-color: white;
