@@ -206,7 +206,13 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- HANDCUFFS COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
-  if split[1] == '/hdc' or split[1] == '/'..hdc then -- REMEMBER TO REMOVE OLD HDC
+  if split[1] == '/hdc' or split[1] == '/'..hdc then
+    if split[1] == '/hdc' then
+      if not fsn_isDeveloper(source) then
+        TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^r:FSN:^0^* You are not a developer, /hdc is not available to you')
+        return
+      end
+    end
     if split[2] == 'toggle' then
       local target = tonumber(split[3])
       TriggerClientEvent('fsn_police:handcuffs:hard', target, target)
