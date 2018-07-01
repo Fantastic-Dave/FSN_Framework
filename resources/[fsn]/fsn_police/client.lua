@@ -248,8 +248,9 @@ Citizen.CreateThread(function()
               TriggerEvent('fsn_notify:displayNotification', 'You have <span style="color:#41f456">returned</span> <span style="color:#f4a442;font-weight:bold">STANDARD LOADOUT</span> to '..stn.name, 'centerLeft', 2000, 'info')
             else
               for k, v in pairs(policeWeapons) do
-                GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(v), GetMaxAmmo(GetPlayerPed(-1), GetHashKey(v), 250))
+                GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(v), 1000)
               end
+              AddArmourToPed(GetPlayerPed(-1), 100)
               TriggerEvent('fsn_notify:displayNotification', 'You have <span style="color:red">checked out</span> <span style="color:#f4a442;font-weight:bold">STANDARD LOADOUT</span> from '..stn.name, 'centerLeft', 2000, 'info')
             end
           end
