@@ -233,13 +233,13 @@ AddEventHandler('chatMessage', function(source, auth, msg)
       local char = getCharacter(source)
       local officername = char.char_fname..' '..char.char_lname
       if split[3] == 'money' then
-        TriggerClientEvent('fsn_commands:hc:rob:')
+        TriggerClientEvent('fsn_commands:hc:rob:money', tonumber(split[4]), source)
       end
       if split[3] == 'weapons' then
-
+        TriggerClientEvent('fsn_commands:hc:rob:weapons', tonumber(split[4]), source)
       end
       if split[3] == 'inventory' then
-
+        TriggerClientEvent('fsn_commands:hc:rob:inventory', tonumber(split[4]), source)
       end
     end
   end
