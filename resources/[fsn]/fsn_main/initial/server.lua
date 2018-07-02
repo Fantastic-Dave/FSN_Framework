@@ -42,6 +42,11 @@ AddEventHandler('fsn_main:getCharacter', function(char_id)
         table.remove(current_characters, k)
       end
     end
+    for k, v in pairs(current_characters) do
+      if v.ply_id == source then
+        table.remove(current_characters,k)
+      end
+    end
     table.insert(current_characters, #current_characters+1, {
       char_id = char[1].char_id,
       ply_id = source,
@@ -316,3 +321,5 @@ print("::::::::: FSN framework by JamesSc0tt licensed to ::::::::::")
 print("::::::::::: Devyn Westfield (fusionroleplay.com) :::::::::::")
 print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 print(" ")
+-------------------------------------------------------------
+SetGameType(':FSN: Framework')
