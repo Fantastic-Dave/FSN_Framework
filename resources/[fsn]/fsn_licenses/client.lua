@@ -39,7 +39,8 @@ AddEventHandler('fsn_licenses:showid', function()
   local pos = GetEntityCoords(GetPlayerPed(-1))
   TriggerServerEvent('fsn_licenses:chat', name, {
     type = 'id',
-    charid = charid
+    charid = charid,
+    job = exports.fsn_jobs:fsn_GetJob(),
   }, fsn_NearestPlayersC(pos.x, pos.y, pos.z, 5))
 end)
 

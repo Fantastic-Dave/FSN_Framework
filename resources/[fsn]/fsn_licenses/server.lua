@@ -2,7 +2,7 @@ RegisterServerEvent('fsn_licenses:chat')
 AddEventHandler('fsn_licenses:chat', function(name, license, players)
   for k, v in pairs(players) do
     if license.type == 'id' then
-      TriggerClientEvent('chatMessage', v, '', {255,255,255}, '^1ID^0 | '..name..' | Ticket# '..source..' | ID# '..license.charid)
+      TriggerClientEvent('chatMessage', v, '', {255,255,255}, '^1ID^0 | '..name..' | '..license.job..' | Ticket# '..source..' | ID# '..license.charid)
     else
       TriggerClientEvent('chatMessage', v, '', {255,255,255}, '^1LICENSE^0 | '..name..' | T:'..license.type..' | I:'..license.infractions..' | S:'..license.status)
     end
