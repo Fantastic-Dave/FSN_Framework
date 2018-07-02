@@ -551,13 +551,14 @@ end)
 --------------------------------------------- No wanted xx
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(0)
-        if GetPlayerWantedLevel(PlayerId()) ~= 0 then
-            SetPlayerWantedLevel(PlayerId(), 0, false)
-			SetPoliceIgnorePlayer(PlayerId(), true)
-			SetDispatchCopsForPlayer(PlayerId(), false)
-            SetPlayerWantedLevelNow(PlayerId(), false)
-        end
+      Citizen.Wait(0)
+      if GetPlayerWantedLevel(PlayerId()) ~= 0 then
+        SetPlayerWantedLevel(PlayerId(), 0, false)
+			  SetPoliceIgnorePlayer(PlayerId(), true)
+		    SetDispatchCopsForPlayer(PlayerId(), false)
+        SetPlayerWantedLevelNow(PlayerId(), false)
+      end
+      DisablePlayerVehicleRewards(PlayerId())
     end
 end)
 
