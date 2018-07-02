@@ -23,16 +23,53 @@ function fsn_SplitString(inputstr, sep)
 end
 
 local pd_cars = {
-  [1] = "police",
-  [2] = "police2",
-  [3] = "police3",
-  [4] = "police4",
-  [5] = "police5",
-  [6] = "police6",
-  [7] = "police7",
-  [8] = "police8",
-  [1001] = "fbi",
-  [1002] = "fbi2"
+  --------------------
+  -- LSPD
+  --------------------
+  [101] = "police",
+  [102] = "police2",
+  [103] = "police3",
+  [104] = "police4",
+  [105] = "police5",
+  [106] = "police6",
+  [107] = "police7",
+  [108] = "police8",
+  --------------------
+  -- SHERIFF DEPT
+  --------------------
+  [201] = "sheriff",
+  [202] = "sheriff2",
+  [203] = "sheriff3",
+  [204] = "sheriff4",
+  [205] = "sheriff5",
+  [206] = "sheriff6",
+  [207] = "sheriff7",
+  --------------------
+  -- STATE POLICE
+  --------------------
+  [301] = "statep",
+  [302] = "statep2",
+  [303] = "statep3",
+  [304] = "statep4",
+  --------------------
+  -- UNMARKED
+  --------------------
+  [1001] = "um3",
+  [1002] = "um4",
+  [1003] = "um5",
+  [1004] = "dcharger",
+  [1005] = "unmarked8",
+  [1006] = "fbi",
+  [1007] = "fbi2",
+  --------------------
+  -- SUPERCARS
+  --------------------
+  [2001] = "lspd_lambo",
+  [2002] = "2015polstang",
+  [2003] = "audipd",
+  [2004] = "corvettepd",
+  [2005] = "mclarenpd",
+  [2006] = "porschepd"
 }
 
 local clipsets = {
