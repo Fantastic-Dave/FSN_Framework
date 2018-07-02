@@ -491,7 +491,7 @@ Citizen.CreateThread(function()
                         TriggerServerEvent('fsn_police:dispatch', coords, 3)
                       end
                     end
-                    TriggerEvent('fsn_notify:displayNotification', 'They are not interested and probably called the police!', 'centerLeft', 3000, 'info')
+                    TriggerEvent('fsn_notify:displayNotification', '', 'centerLeft', 3000, 'info')
                   end
                 end
               end
