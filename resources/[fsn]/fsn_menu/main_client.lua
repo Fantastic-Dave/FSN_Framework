@@ -46,9 +46,13 @@ end
 function ToggleActionMenu()
 	menuEnabled = not menuEnabled
 	if ( menuEnabled ) then
-    FreezeEntityPosition(GetPlayerPed(-1), 0)
-    SetEntityCollision(GetPlayerPed(-1), 1, 1)
-    ClearPedTasks(GetPlayerPed(-1))
+    if not IsPedInAnyVehicle(GetPlayerPed(-1)) then
+      if not IsPedGettingIntoAVehicle(GetPlayerPed(-1)) then
+        FreezeEntityPosition(GetPlayerPed(-1), 0)
+        SetEntityCollision(GetPlayerPed(-1), 1, 1)
+        ClearPedTasks(GetPlayerPed(-1))
+      end 
+    end
 
 		SetNuiFocus( true, true )
     if exports.fsn_police:fsn_PDDuty() then
