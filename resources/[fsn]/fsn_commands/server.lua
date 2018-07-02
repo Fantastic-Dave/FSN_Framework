@@ -139,6 +139,15 @@ end
 AddEventHandler('chatMessage', function(source, auth, msg)
   local split = fsn_SplitString(msg, ' ')
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  -- CLOTHING COMMANDS
+  -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/mask' then
+    TriggerClientEvent('fsn_commands:clothing:mask', source)
+  end
+  if split[1] == '/hat' then
+    TriggerClientEvent('fsn_commands:clothing:hat', source)
+  end
+  -------------------------------------------------------------------------------------------------------------------------------------------------
   -- CHAT COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/walk' then
@@ -386,7 +395,13 @@ AddEventHandler('chatMessage', function(source, auth, msg)
             if split[3] == 'level' then
               if tonumber(split[4]) then
                 if tonumber(split[5]) then
-
+                  if exports.fsn_main:fsn_CharID(tonumber(split[4])) then
+                    TriggerClientEvent('fsn_police:updateLevel', tonumber(split[4]), tonumber(split[5]))
+                    TriggerClientEvent('fsn_notify:displayNotification', source, 'You set '..tonumber(split[4])..'\'s (#'..exports.fsn_main:fsn_CharID(tonumber(split[4]))..') police level to <b>'..tonumber(split[5]), 'centerRight', 7000, 'info')
+                    MySQL.Sync.execute("UPDATE `fsn_characters` SET `char_police` = @popo WHERE `char_id` = @id", {['@id'] = exports.fsn_main:fsn_CharID(tonumber(split[4])), ['@popo'] = tonumber(split[5])})
+                  else
+                    TriggerClientEvent('fsn_notify:displayNotification', source, ':FSN: We\'re having issues finding that person.', 'centerRight', 7000, 'error')
+                  end
                 else
                   TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a level.')
                 end
@@ -550,6 +565,11 @@ AddEventHandler('chatMessage', function(source, auth, msg)
         end
         if split[2] == 'fix' then
           TriggerClientEvent('fsn_commands:police:fix', source)
+          local char = getCharacter(source)
+          local officername = char.char_fname..' '..char.char_lname
+          for k, v in pairs(onduty_police) do
+            TriggerClientEvent('chatMessage', v.ply_id, '^5^*:fsn_police:^0^r '..officername..' used /fix', {255,255,255}, '')
+          end
         end
         if split[2] == 'impound' then
           TriggerClientEvent('fsn_commands:police:impound', source)
