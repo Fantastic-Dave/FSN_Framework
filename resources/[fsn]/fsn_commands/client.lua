@@ -33,7 +33,64 @@ function fsn_NearestPlayersS(x, y, z, radius)
 	end
 	return players
 end
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-- CLOTHING COMMANDS
+-------------------------------------------------------------------------------------------------------------------------------------------------
+local mask = {
+	id = 0,
+	txt = 0,
+	pal = 0
+}
+RegisterNetEvent('fsn_commands:clothing:mask')
+AddEventHandler('fsn_commands:clothing:mask', function()
+	if mask.id ~= 0 then
+		SetPedComponentVariation(GetPlayerPed(-1), 1, mask.id, mask.txt, mask.pal)
+		mask.id = 0
+		mask.txt = 0
+		mask.pal = 0
+		---
+		local pos = GetEntityCoords(GetPlayerPed(-1))
+		local players = fsn_NearestPlayersS(pos.x, pos.y, pos.z, 10)
+		TriggerServerEvent('fsn_commands:me', 'puts their mask on', players)
+	else
+		mask.id = GetPedDrawableVariation(GetPlayerPed(-1), 1)
+		mask.txt = GetPedTextureVariation(GetPlayerPed(-1), 1)
+		mask.pal = GetPedPaletteVariation(GetPlayerPed(-1), 1)
+		SetPedComponentVariation(GetPlayerPed(-1), 1, 0, 0, 0)
+		---
+		local pos = GetEntityCoords(GetPlayerPed(-1))
+		local players = fsn_NearestPlayersS(pos.x, pos.y, pos.z, 10)
+		TriggerServerEvent('fsn_commands:me', 'takes their mask off', players)
+	end
+end)
 
+local hat = {
+	id = 0,
+	txt = 0
+}
+RegisterNetEvent('fsn_commands:clothing:hat')
+AddEventHandler('fsn_commands:clothing:hat', function()
+	if hat.id ~= 0 then
+		SetPedPropIndex(GetPlayerPed(-1), 0, hat.id, hat.txt, 0, true)
+		hat.id = 0
+		hat.txt = 0
+		---
+		local pos = GetEntityCoords(GetPlayerPed(-1))
+		local players = fsn_NearestPlayersS(pos.x, pos.y, pos.z, 10)
+		TriggerServerEvent('fsn_commands:me', 'puts their hat on', players)
+	else
+		hat.id = GetPedPropIndex(GetPlayerPed(-1), 0)
+		hat.txt = GetPedPropTextureIndex(GetPlayerPed(-1), 0)
+		SetPedPropIndex(GetPlayerPed(-1), 0, 8, 0, true)
+		---
+		local pos = GetEntityCoords(GetPlayerPed(-1))
+		local players = fsn_NearestPlayersS(pos.x, pos.y, pos.z, 10)
+		TriggerServerEvent('fsn_commands:me', 'takes their hat off', players)
+	end
+end)
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-- MISC COMMANDS
+-------------------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent('fsn_commands:dropweapon')
 AddEventHandler('fsn_commands:dropweapon', function()
 	if exports.fsn_ems:fsn_IsDead() then
@@ -78,6 +135,9 @@ AddEventHandler('fsn_commands:sendxyz', function()
   TriggerServerEvent('fsn_commands:printxyz', x, y, z, GetEntityHeading(GetPlayerPed(-1)))
 end)
 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-- DEV COMMANDS
+-------------------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent('fsn_commands:dev:spawnCar')
 AddEventHandler('fsn_commands:dev:spawnCar', function(car)
   local myPed = GetPlayerPed(-1)
@@ -114,6 +174,9 @@ AddEventHandler('fsn_commands:dev:fix', function()
 	end
 end)
 
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-- POLICE COMMANDS
+-------------------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent('fsn_commands:police:livery')
 AddEventHandler('fsn_commands:police:livery', function(num)
 	if IsPedInAnyVehicle(GetPlayerPed(-1)) then
