@@ -466,7 +466,7 @@ $(function() {
 				'<td>'+event.data.tencode+'</td>'+
 				'<td>'+event.data.name+'</td>'+
 				'<td>'+event.data.loc+'</td>'+
-				'<td><center><button id="disp-button" data-x="'+event.data.x+'" data-y="'+event.data.y+'" data-tencode="'+event.data.tencode+'" data-loc="'+event.data.loc+'">SET WAYPOIINT</button></center></td>'+
+				'<td><center><button id="disp-button" data-x="'+event.data.x+'" data-y="'+event.data.y+'" data-tencode="'+event.data.tencode+'" data-loc="'+event.data.loc+'">SET WAYPOINT</button></center></td>'+
 			'</tr>'
 			$('#dispatch-table').append(apstring)
 			init() 
