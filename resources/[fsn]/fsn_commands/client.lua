@@ -97,7 +97,6 @@ AddEventHandler('fsn_commands:dropweapon', function()
 			TriggerEvent('fsn_notify:displayNotification', 'Mate, you\'re downed, don\'t be so stupid.', 'centerLeft', 4000, 'error')
 	else
 		if GetSelectedPedWeapon(GetPlayerPed(-1)) ~= -1569615261 then
-			print('dropping '..GetSelectedPedWeapon(GetPlayerPed(-1)))
 			RemoveWeaponFromPed(GetPlayerPed(-1), GetSelectedPedWeapon(GetPlayerPed(-1)))
 			TriggerEvent('fsn_notify:displayNotification', 'Weapon dropped', 'centerLeft', 4000, 'success')
 		else
