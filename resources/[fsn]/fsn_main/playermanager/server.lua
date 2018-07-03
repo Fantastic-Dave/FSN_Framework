@@ -50,8 +50,8 @@ AddEventHandler('playerDropped', function()
   end
   for k, v in pairs(current_characters) do
     if v.ply_id == source then
+      print('REMOVING '..v.char_fname..v.char_lname..' FROM CHARACTERS TABLE')
       table.remove(current_characters, k)
-      print('REMOVING '..v.name..' FROM CHARACTERS TABLE')
       for k, v in pairs(current_characters) do
         print("{id = "..v.id..", name = "..v.name..", steamid = "..v.steamid..", adminlvl = "..v.adminlvl..", banned = "..tostring(v.banned).."}")
       end
