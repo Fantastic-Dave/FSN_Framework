@@ -52,9 +52,7 @@ AddEventHandler('playerDropped', function()
     if v.ply_id == source then
       print('REMOVING '..v.char_fname..v.char_lname..' FROM CHARACTERS TABLE')
       table.remove(current_characters, k)
-      for k, v in pairs(current_characters) do
-        print("{id = "..v.id..", name = "..v.name..", steamid = "..v.steamid..", adminlvl = "..v.adminlvl..", banned = "..tostring(v.banned).."}")
-      end
+      print(table.concat(current_characters," - ",1,#current_characters))
     end
   end
   TriggerEvent('fsn_main:updateCharacters', current_characters)
