@@ -51,7 +51,7 @@ function ToggleActionMenu()
         FreezeEntityPosition(GetPlayerPed(-1), 0)
         SetEntityCollision(GetPlayerPed(-1), 1, 1)
         ClearPedTasks(GetPlayerPed(-1))
-      end 
+      end
     end
 
 		SetNuiFocus( true, true )
@@ -120,6 +120,22 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
 		ToggleActionMenu()
 		ExecuteCommand('p')
   elseif split[1] == 'police' then
+    if split[2] == 'k9' then
+      if split[3] == 'toggle' then
+        TriggerEvent("K9:ToggleK9", 'a_c_husky')
+      end
+      if split[3] == 'action' then
+        if split[4] == 'sit' then
+          TriggerEvent('k9:anim', 'creatures@rottweiler@amb@world_dog_sitting@idle_a', 'idle_b')
+        end
+        if split[4] == 'laydown' then
+          TriggerEvent('k9:anim', 'creatures@rottweiler@amb@sleep_in_kennel@', 'sleep_in_kennel')
+        end
+      end
+      if split[3] == 'vehicle' then
+        TriggerServerEvent('K9:RequestVehicleToggle')
+      end
+    end
     if split[2] == 'command' then
       if split[3] == 'duty' then
         ExecuteCommand('police command duty '..GetPlayerServerId(PlayerId()))
