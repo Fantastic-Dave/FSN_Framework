@@ -81,22 +81,25 @@ AddEventHandler('chatMessage', function(source, auth, msg)
       if split[2] == 'ban' then
         if tonumber(split[3]) then
           local times = {
-            '1d'=86400,
-            '2d'=172800,
-            '3d'=259200,
-            '4d'=354600,
-            '5d'=432000,
-            '6d'=518400,
-            '1w'=604800,
-            '2w'=1209600,
-            '3w'=1814400,
-            '1m'=2629743,
-            '2m'=529486,
-            'perm' = 999999999999999999
+            ['1d']=86400,
+            ['2d']=172800,
+            ['3d']=259200,
+            ['4d']=354600,
+            ['5d']=432000,
+            ['6d']=518400,
+            ['1w']=604800,
+            ['2w']=1209600,
+            ['3w']=1814400,
+            ['1m']=2629743,
+            ['2m']=529486,
+            ['perm'] = 999999999999999999
           }
           if times[split[4]] then
             local unbantime = os.time() + times[split[4]]
-            
+            local reason = table.concat(split," ",5,#split)
+            local steamid = GetPlayerIdentifiers(tonumber(split[3]))[1]
+            MySQL.Async.execute('UPDATE `fsn_users` SET `banned` = @unban, `banned_r` = @reason WHERE `steamid` = @steamid', {['@unban']=unbantime, ['@reason']=reason, ['@steamid']=steamid}, function(rowsChanged)end)
+            DropPlayer(tonumber(split[3]), "You have been BANNED ("..split[4]..") by aID#"..fsn_GetAdminID(source).." for: "..reason)
           else
             TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r Time options: 1d, 2d, 3d, 4d, 5d, 6d, 1w, 2w, 3w, 1m, 2m, perm')
           end
