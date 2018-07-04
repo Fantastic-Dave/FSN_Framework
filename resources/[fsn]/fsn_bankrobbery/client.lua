@@ -154,7 +154,7 @@ local bankdoors = {
     openh = 141.799,
     closedh = 249.846,
     status = 'closed'
-  }},
+  }, vault={robbed=false,x = 149.14091491699, y = -1048.4520263672, z = 29.346370697021}},
   -- VINEWOOD
   [2] = {hash=961976194,x=255.228,y=223.976,z=102.393,tx=255.228,ty=223.976,tz=102.393,unlocked=false,unlocktime=0,keypad={
     x = 253.19821166992,
@@ -167,7 +167,7 @@ local bankdoors = {
     openh = 36.399,
     closedh = 159.324,
     status = 'closed'
-  }},
+  }, vault={robbed=false,x = 262.9462890625, y = 214.70375061035, z = 101.68346405029}},
   -- PALETO
   [3] = {hash=-1185205679,x=-104.604,y=6473.443,z=31.79,tx=-104.604,ty=6473.443,tz=31.79,unlocked=false,unlocktime=0,keypad={
     x = -105.55908966064,
@@ -177,10 +177,12 @@ local bankdoors = {
     code = 0,
     difficulty = 4 --amount of numbers in the lock
   }, status={
-    openh = 45.200,
-    closedh = 162.799,
+    --openh = 45.200,
+    --closedh = 162.799,
+    openh = 162.799,
+    closedh= 45.200,
     status = 'closed'
-  }},
+  }, vault={robbed=false, x = -104.92517852783, y = 6476.5268554688, z = 31.626726150513}},
 }
 local banklocations = {
 
@@ -208,6 +210,11 @@ RegisterNetEvent('fsn_bankrobbery:openDoor')
 AddEventHandler('fsn_bankrobbery:openDoor', function(id)
   local door = bankdoors[id]
   local _door = GetClosestObjectOfType(door.x, door.y, door.z, 1.0, door.hash, false, false, false)
+  if GetDistanceBetweenCoords(GetEntityCoords(_door), GetEntityCoords(GetPlayerPed(-1))) < 10 then
+    --PlaySound(-1, "DOOR_OPEN", "CABLE_CAR_SOUNDS", 0, 0, 1)
+    PlaySoundFromEntity(-1, "DOOR_OPEN", _door, 'CABLE_CAR_SOUNDS', 0,0 )
+  end
+  Wait(1000)
   SetEntityHeading(_door, door.status.openh)
   door.status.status = 'open'
 end)
@@ -216,11 +223,25 @@ RegisterNetEvent('fsn_bankrobbery:closeDoor')
 AddEventHandler('fsn_bankrobbery:closeDoor', function(id)
   local door = bankdoors[id]
   local _door = GetClosestObjectOfType(door.x, door.y, door.z, 1.0, door.hash, false, false, false)
+  if GetDistanceBetweenCoords(GetEntityCoords(_door), GetEntityCoords(GetPlayerPed(-1))) < 10 then
+    --PlaySound(-1, "DOOR_OPEN", "CABLE_CAR_SOUNDS", 0, 0, 1)
+    PlaySoundFromEntity(-1, "DOOR_CLOSE", _door, 'CABLE_CAR_SOUNDS', 0,0 )
+  end
+  Wait(1000)
   SetEntityHeading(_door, door.status.closedh)
   door.status.status = 'closed'
 end)
 
 Citizen.CreateThread(function()
+  for k, v in pairs(bankdoors) do
+    local blip = AddBlipForCoord(v.keypad.x, v.keypad.y, v.keypad.z)
+    SetBlipSprite(blip, 277)
+    SetBlipColour(blip, 1)
+    SetBlipAsShortRange(blip, true)
+    BeginTextCommandSetBlipName("STRING")
+    AddTextComponentString("Unknown")
+    EndTextCommandSetBlipName(blip)
+  end
   while true do
     Citizen.Wait(0)
     if cracking then
@@ -260,7 +281,7 @@ Citizen.CreateThread(function()
                   }
                   TriggerServerEvent('fsn_police:dispatch', coords, 7)
                 end
-                DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "0000", "", "", "", door.keypad.difficulty)
+                DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", door.keypad.difficulty)
                 editOpen = true
                 door.keypad.crackattempts = door.keypad.crackattempts + 1
               end
@@ -274,17 +295,56 @@ Citizen.CreateThread(function()
       end
     end
     for k, door in pairs(bankdoors) do
+      if GetDistanceBetweenCoords(door.x, door.y, door.z, GetEntityCoords(GetPlayerPed(-1)), true) < 40 then
+        if GetDistanceBetweenCoords(door.vault.x, door.vault.y, door.vault.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 and door.unlocked then
+          DrawMarker(1,door.vault.x, door.vault.y, door.vault.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+          if GetDistanceBetweenCoords(door.vault.x, door.vault.y, door.vault.z, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+            if door.vault.robbed == false then
+              SetTextComponentFormat("STRING")
+            	AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~rob~w~ the vault")
+            	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+              if IsControlJustPressed(0,38) then
+                TriggerServerEvent('fsn_bankrobbery:payout', k)
+                door.vault.robbed = true
+              end
+            else
+              SetTextComponentFormat("STRING")
+            	AddTextComponentString("~r~You already emptied the vault")
+            	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+            end
+          end
+        end
+        local _door = GetClosestObjectOfType(door.x, door.y, door.z, 1.0, door.hash, false, false, false)
+        local CurrentHeading = GetEntityHeading(_door)
+        if door.status.status == 'closed' then
+          if CurrentHeading ~= door.status.closedh then
+            SetEntityHeading(_door, door.status.closedh)
+          end
+        else
+          if CurrentHeading ~= door.status.openh then
+            SetEntityHeading(_door, door.status.openh)
+          end
+        end
+      else
+        if door.unlocked then
+          door.unlocked = false
+          door.keypad.crackattempts = 0
+          door.keypad.code = 0
+          TriggerEvent('fsn_notify:displayNotification', 'You no longer have access to the vault!', 'centerRight', 5000, 'error')
+          TriggerServerEvent('fsn_bankrobbery:vault:close', k)
+        end
+      end
       if GetDistanceBetweenCoords(door.x, door.y, door.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
         local _door = GetClosestObjectOfType(door.x, door.y, door.z, 1.0, door.hash, false, false, false)
         local CurrentHeading = GetEntityHeading(_door)
-        ----- OLD DOOR THING
+        --[[
         if door.unlocked == true or exports.fsn_police:fsn_PDDuty() then
           fsn_drawText3D(door.tx,door.ty,door.tz+0.5, '~y~Hold [UP ARROW] to open door\nDEBUG: '..CurrentHeading)
           if IsControlPressed(1,27) then
             SetEntityHeading(_door, round(CurrentHeading, 1) -  0.4)
   					CurrentHeading = GetEntityHeading(_door)
           end
-          ----- OLD DOOR THING
+          ]]
           if door.status.status == 'open' then
             fsn_drawText3D(door.tx,door.ty,door.tz, 'Press [E] to ~r~close~w~ the vault!')
             if IsControlJustPressed(1,51) then
@@ -315,7 +375,7 @@ Citizen.CreateThread(function()
               ---------------------------------------------------
               print(door.keypad.code)
               door.keypad.crackattempts = door.keypad.crackattempts + 1
-              DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "0000", "", "", "", door.keypad.difficulty)
+              DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", door.keypad.difficulty)
               local editOpen = true
         			while UpdateOnscreenKeyboard() == 0 or editOpen do
                 drawTxt('Input a ~b~'..door.keypad.difficulty..'~w~ digit code:',4,1,0.5,0.30,0.6,255,255,255,255)
@@ -337,7 +397,7 @@ Citizen.CreateThread(function()
                         }
                         TriggerServerEvent('fsn_police:dispatch', coords, 7)
                       end
-                      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "0000", "", "", "", door.keypad.difficulty)
+                      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", door.keypad.difficulty)
                       editOpen = true
                       door.keypad.crackattempts = door.keypad.crackattempts + 1
                     end
