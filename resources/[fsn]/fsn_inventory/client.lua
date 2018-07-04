@@ -252,7 +252,16 @@ AddEventHandler('fsn_inventory:item:drop', function(item)
   		while UpdateOnscreenKeyboard() == 0 or editOpen do
   			if UpdateOnscreenKeyboard() == 1 then
   				editOpen = false
-  				qty = tonumber(GetOnscreenKeyboardResult())
+  				qty = GetOnscreenKeyboardResult()
+          if qty == 'all' then
+            qty = fsn_GetItemAmount(item)
+          else
+            if tonumber(qty) then
+              qty = math.floor(tonumber(qty))
+            else
+              TriggerEvent('fsn_notify:displayNotification', 'Enter an amount or "all"', 'centerLeft', 3000, 'error')
+            end
+          end
           if fsn_GetItemAmount(item) < qty then
             TriggerEvent('fsn_notify:displayNotification', 'You do not have '..qty..' '..items_table[item].display_name..'s', 'centerLeft', 3000, 'error')
             return
