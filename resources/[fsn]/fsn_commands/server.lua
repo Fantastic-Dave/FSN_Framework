@@ -236,6 +236,10 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if msg == '/money' then
     TriggerClientEvent('fsn_main:displayBankandMoney', source)
   end
+  if msg == '/quit' then
+    TriggerClientEvent('fsn_jobs:quit', source)
+    TriggerClientEvent('fsn_notify:displayNotification', source, 'You have quit your job.', 'centerRight', 5000, 'success')
+  end
   if msg == '/save' then
     TriggerClientEvent('fsn_main:characterSaving', source)
   end
