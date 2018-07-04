@@ -1,0 +1,118 @@
+local admins = {'steam:11000010e0828a9'}
+local modertators = {}
+function fsn_SplitString(inputstr, sep)
+  if sep == nil then
+    sep = "%s"
+  end
+  local t={} ; i=1
+  for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+    t[i] = str
+    i = i + 1
+  end
+  return t
+end
+function fsn_isAdmin(src)
+  local sid = GetPlayerIdentifiers(src)
+  sid = sid[1]
+  for k, v in pairs(admins) do
+    if v == sid then
+      return true
+    end
+  end
+  return false
+end
+function fsn_GetAdminID(src)
+  local sid = GetPlayerIdentifiers(src)
+  sid = sid[1]
+  for k, v in pairs(admins) do
+    if v == sid then
+      return k
+    end
+  end
+end
+function fsn_isModerator(src)
+  local sid = GetPlayerIdentifiers(src)
+  sid = sid[1]
+  for k, v in pairs(modertators) do
+    if v == sid then
+      return true
+    end
+  end
+  return false
+end
+function fsn_GetModeratorID(src)
+  local sid = GetPlayerIdentifiers(src)
+  sid = sid[1]
+  for k, v in pairs(modertators) do
+    if v == sid then
+      return k
+    end
+  end
+end
+AddEventHandler('chatMessage', function(source, auth, msg)
+  local split = fsn_SplitString(msg, ' ')
+  if split[1] == '/admin' then
+    if fsn_isAdmin(source) then
+      if split[2] == 'goto' then
+        if tonumber(split[3]) then
+          TriggerClientEvent('fsn_admin:sendMe', source, tonumber(split[3]))
+          TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^1^*:fsn_admin:^0^r ^2'..source..'^0 teleported to ^2'..split[3])
+        else
+          TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r There is an issue with the arguments you provided.')
+        end
+      end
+      if split[2] == 'bring' then
+        if tonumber(split[3]) then
+          TriggerClientEvent('fsn_admin:sendMe', tonumber(split[3]), source)
+          TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^1^*:fsn_admin:^0^r ^2'..source..'^0 brought ^2'..split[3])
+        else
+          TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r There is an issue with the arguments you provided.')
+        end
+      end
+      if split[2] == 'kick' then
+        if tonumber(split[3]) then
+          local reason = table.concat(split, " ", 4, #split)
+          DropPlayer(tonumber(split[3]), "You have been kicked by aID#"..fsn_GetAdminID(source).." for: "..reason)
+          TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^1^*:fsn_admin:^0^r ^2'..source..'^0 kicked ^2'..split[3]..'^0 for: '..reason)
+        else
+          TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r There is an issue with the arguments you provided.')
+        end
+      end
+      if split[2] == 'ban' then
+        if tonumber(split[3]) then
+          local times = {
+            '1d'=86400,
+            '2d'=172800,
+            '3d'=259200,
+            '4d'=354600,
+            '5d'=432000,
+            '6d'=518400,
+            '1w'=604800,
+            '2w'=1209600,
+            '3w'=1814400,
+            '1m'=2629743,
+            '2m'=529486,
+            'perm' = 999999999999999999
+          }
+          if times[split[4]] then
+            local unbantime = os.time() + times[split[4]]
+            
+          else
+            TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r Time options: 1d, 2d, 3d, 4d, 5d, 6d, 1w, 2w, 3w, 1m, 2m, perm')
+          end
+        else
+          TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r There is an issue with the arguments you provided.')
+        end
+      end
+    else
+      TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r You aren\'t an admin.')
+    end
+  end
+  if split[1] == '/mod' then
+    if fsn_isModerator(source) then
+
+    else
+      TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r You aren\'t a moderator.')
+    end
+  end
+end)
