@@ -2,7 +2,6 @@ $(function() {
   window.addEventListener('message', function(event) {
 		if (event.data.enable == true) {
 			if (event.data.players) {
-				console.log('im a cock')
 				var players = inv = JSON.parse(event.data.players)
 				var shit = document.querySelectorAll('[data-input="javascript"]')
 				for (var i = 0; i < shit.length; i++) {

@@ -39,7 +39,6 @@ local isPlayerMenuActive = false
 
 local function fsn_displayPlayerMenu()
   if not isPlayerMenuActive then
-    print('activating playerlist')
     local players = {}
     for k, v in pairs(current_characters) do
       table.insert(players, #players+1, {
@@ -59,7 +58,6 @@ end
 
 local function fsn_hidePlayerMenu()
   if isPlayerMenuActive then
-    print('deactivating playerlist')
     SendNUIMessage({
       enable = false
     })
