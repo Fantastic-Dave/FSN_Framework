@@ -197,7 +197,8 @@ local language = {}
     AddEventHandler("K9:ToggleVehicle", function(isRestricted, vehList)
         if not searching then
             if IsPedInAnyVehicle(spawned_ped, false) then
-                TaskLeaveVehicle(spawned_ped, GetVehiclePedIsIn(spawned_ped, false), 256)
+                TaskLeaveVehicle(spawned_ped, GetVehiclePedIsIn(spawned_ped, false), 16)
+                SPlaceObjectOnGroundProperly(spawned_ped)
                 Notification(tostring(k9_name .. " " .. language.exit))
             else
                 if not IsPedInAnyVehicle(GetLocalPed(), false) then
@@ -207,11 +208,11 @@ local language = {}
                     if door ~= false then
                         if isRestricted then
                             if CheckVehicleRestriction(vehicle, vehList) then
-                                TaskEnterVehicle(spawned_ped, vehicle, -1, door, 2.0, 1, 0)
+                                TaskEnterVehicle(spawned_ped, vehicle, -1, door, 2.0, 16, 0)
                                 Notification(tostring(k9_name .. " " .. language.enter))
                             end
                         else
-                            TaskEnterVehicle(spawned_ped, vehicle, -1, door, 2.0, 1, 0)
+                            TaskEnterVehicle(spawned_ped, vehicle, -1, door, 2.0, 16, 0)
                             Notification(tostring(k9_name .. " " .. language.enter))
                         end
                     end
@@ -220,11 +221,11 @@ local language = {}
                     local door = 1
                     if isRestricted then
                         if CheckVehicleRestriction(vehicle, vehList) then
-                            TaskEnterVehicle(spawned_ped, vehicle, -1, door, 2.0, 1, 0)
+                            TaskEnterVehicle(spawned_ped, vehicle, -1, door, 2.0, 16, 0)
                             Notification(tostring(k9_name .. " " .. language.enter))
                         end
                     else
-                        TaskEnterVehicle(spawned_ped, vehicle, -1, door, 2.0, 1, 0)
+                        TaskEnterVehicle(spawned_ped, vehicle, -1, door, 2.0, 16, 0)
                         Notification(tostring(k9_name .. " " .. language.enter))
                     end
                 end
