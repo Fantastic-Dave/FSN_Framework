@@ -52,7 +52,6 @@ AddEventHandler('playerDropped', function()
     if v.ply_id == source then
       print('REMOVING '..v.char_fname..v.char_lname..' FROM CHARACTERS TABLE')
       table.remove(current_characters, k)
-      print(table.concat(current_characters," - ",1,#current_characters))
     end
   end
   TriggerEvent('fsn_main:updateCharacters', current_characters)
