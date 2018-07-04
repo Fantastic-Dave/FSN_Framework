@@ -11,21 +11,26 @@ Config.RequireSteam = true
 Config.PriorityOnly = true -- whitelist only server
 
 Config.IsBanned = function(src, callback)
-    callback(false) -- not banned
-    -- or callback(true, "reason") -- banned and the reason
+  local steamid = GetPlayerIdentifiers(src)[1]
+  local seequel = MySQL.Sync.fetchAll('SELECT * FROM `fsn_users` WHERE `steamid` = "'..steamid..'"')
+  if seequel[1].banned > os.time() then
+    callback(true, "You have been banned: "..seequel[1].banned_r)
+  else
+    callback(false)
+  end
 end
 
 -- easy localization
 Config.Language = {
-    joining = "Joining...",
-    connecting = "Connecting...",
-    err = "Error: Couldn't retrieve any of your id's, try restarting.",
-    _err = "There was an error",
-    pos = "[Auto Queue] You are %d/%d in queue",
-    connectingerr = "Error adding you to connecting list",
-    banned = "You are banned, you may appeal it at www.whatever.net | Reason: %s",
+    joining = "Queue | Joining the server...",
+    connecting = "Queue | Connnecting to the server...",
+    err = "Error | Restart FiveM to join this server.",
+    _err = "Error | Something went wrong",
+    pos = "Queue | You are %d/%d in queue",
+    connectingerr = "Error | Issues with the list, try again",
+    banned = "Error | %s",
     steam = "Error: Steam must be running",
-    prio = "You have to be whitelisted to join this server."
+    prio = "Error | You are not whitelisted to join this server."
 }
 -----------------------------------------------------------------------------------------------------------------------
 
