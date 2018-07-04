@@ -51,6 +51,7 @@ Citizen.CreateThread(function()
 		local MyPed = GetPlayerPed(-1)
 
 		if(IsPedInAnyVehicle(MyPed, false))then
+			DisplayRadar(true)
 			local MyPedVeh = GetVehiclePedIsIn(GetPlayerPed(-1),false)
 			local PlateVeh = GetVehicleNumberPlateText(MyPedVeh)
 			local VehStopped = IsVehicleStopped(MyPedVeh)
@@ -93,6 +94,8 @@ Citizen.CreateThread(function()
 					drawTxt(UI.x + 0.81, 	UI.y + 1.42, 1.0,1.0,0.64 , [[Carhud ~r~ERROR~w~ ~c~in ~w~HUD Speed~c~ config (something else than ~y~'kmh'~c~ or ~y~'mph'~c~)]], 255, 255, 255, 255)
 				end
 			end
+		else
+			DisplayRadar(false)
 		end
 	end
 end)
