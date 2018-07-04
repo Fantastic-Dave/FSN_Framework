@@ -55,7 +55,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     if fsn_isAdmin(source) then
       if split[2] == 'goto' then
         if tonumber(split[3]) then
-          TriggerClientEvent('fsn_admin:sendMe', source, tonumber(split[3]))
+          TriggerClientEvent('fsn_admin:requestXYZ', source, tonumber(split[3]), source)
           TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^1^*:fsn_admin:^0^r ^2'..source..'^0 teleported to ^2'..split[3])
         else
           TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r There is an issue with the arguments you provided.')
@@ -63,7 +63,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
       end
       if split[2] == 'bring' then
         if tonumber(split[3]) then
-          TriggerClientEvent('fsn_admin:sendMe', tonumber(split[3]), source)
+          TriggerClientEvent('fsn_admin:requestXYZ', tonumber(split[3]), source, tonumber(split[3]))
           TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^1^*:fsn_admin:^0^r ^2'..source..'^0 brought ^2'..split[3])
         else
           TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r There is an issue with the arguments you provided.')
@@ -118,4 +118,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
       TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r You aren\'t a moderator.')
     end
   end
+end)
+
+RegisterServerEvent('fsn_admin:sendXYZ')
+AddEventHandler('fsn_admin:sendXYZ', function(sendto, xyz)
+  TriggerClientEvent('fsn_admin:recieveXYZ', sendto, xyz)
 end)
