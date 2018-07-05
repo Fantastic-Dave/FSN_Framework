@@ -4,7 +4,8 @@ local Config = {}
 Config.Priority = {
     ["ip:127.0.0.1"] = 85,
     ["steam:11000010e0828a9"] = 999,
-    ["steam:11000011098d978"] = 20
+    ["steam:11000011098d978"] = 20,
+    ["steam:110000109927e1f"] = 1
 }
 
 Config.RequireSteam = true
