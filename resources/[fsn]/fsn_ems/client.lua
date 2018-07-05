@@ -116,6 +116,76 @@ Citizen.CreateThread(function()
 end)
 
 ------------------------------------------------- EMS system
+amiems = false
+emsonduty = false ----------------- REMEMBER TO CHANGE THESE
+emslevel = 0
+
+AddEventHandler('fsn_main:character', function(char)
+  TriggerServerEvent('fsn_ems:requestUpdate')
+  if char.char_ems > 0 then
+    amiems = true
+    emslevel = char.char_ems
+  else
+    amiems = false
+    emslevel = 0
+  end
+end)
+
+local onduty_ems = {}
+RegisterNetEvent('fsn_ems:update')
+AddEventHandler('fsn_ems:update', function(ems)
+  onduty_ems = ems
+end)
+
+RegisterNetEvent('fsn_ems:updateLevel')
+AddEventHandler('fsn_ems:updateLevel', function(emslvl)
+  TriggerServerEvent('fsn_ems:requestUpdate')
+  if emslvl > 0 then
+    TriggerEvent('fsn_notify:displayNotification', 'Your <span>EMS</span> whitelist has been updated to: '..emslvl, 'centerLeft', 6000, 'info')
+    amiems = true
+    emslevel = emslvl
+  else
+    TriggerEvent('fsn_notify:displayNotification', 'Your <span style="color:#72a8ff;font-weight:bold">EMS</span> whitelist has been removed.', 'centerLeft', 6000, 'error')
+    amiems = false
+    emslevel = 0
+  end
+end)
+local clockInStations = {
+{x = 1191.9343261719, y = -1474.7747802734, z = 34.859516143799}
+}
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+    for k, hosp in pairs(clockInStations) do
+      if GetDistanceBetweenCoords(hosp.x,hosp.y,hosp.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 and amiems then
+        DrawMarker(1,hosp.x,hosp.y,hosp.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+        if GetDistanceBetweenCoords(hosp.x,hosp.y,hosp.z,GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+          if emsonduty then
+            SetTextComponentFormat("STRING")
+          	AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~clock out~w~ as ~p~EMS")
+          	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+          else
+            SetTextComponentFormat("STRING")
+          	AddTextComponentString("Press ~INPUT_PICKUP~ to ~g~clock in~w~ as ~p~EMS")
+          	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+          end
+          if IsControlJustPressed(0,38) then
+            if emsonduty then
+              emsonduty = false
+              TriggerEvent('fsn_notify:displayNotification', 'Thanks for your service!', 'centerLeft', 2000, 'info')
+              TriggerServerEvent('fsn_ems:offDuty')
+            else
+              emsonduty = true
+              TriggerEvent('fsn_notify:displayNotification', 'You have clocked in as <span style="color: #f45942">EMS</span> (lvl: '..emslevel..')', 'centerLeft', 6000, 'info')
+              TriggerServerEvent('fsn_ems:onDuty', emslevel)
+            end
+          end
+        end
+      end
+    end
+  end
+end)
+--[[
 local hospitals = {
   {
     name = 'Crusade Road Emergency Unit',
@@ -144,3 +214,4 @@ Citizen.CreateThread(function()
     end
   end
 end)
+]]
