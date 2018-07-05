@@ -6,8 +6,8 @@
    <Item>
       <modelName>battalion</modelName>
       <txdName>battalion</txdName>
-      <handlingId>DOMINATOR</handlingId>
-      <gameName>DOMINATO</gameName>
+      <handlingId>sheriff</handlingId>
+      <gameName>Battalion</gameName>
       <vehicleMakeName>VAPID</vehicleMakeName>
       <expressionDictName>null</expressionDictName>
       <expressionName>null</expressionName>
