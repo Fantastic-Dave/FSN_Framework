@@ -3,7 +3,7 @@ enterable_properties = {
     title = 'Darnell Bros Factory',
     price = 25000,
     expiry = 0,
-    owner = -1,
+    owner = 6,
     coowners = {},
     db_id = 1,
     blip = {x = 714.41790771484, y = -976.95068359375, z = 24.127908706665},

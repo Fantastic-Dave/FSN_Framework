@@ -76,6 +76,7 @@ RegisterNetEvent('fsn_properties:menu:police:empty')
 RegisterNetEvent('fsn_properties:menu:police:breach')
 RegisterNetEvent('fsn_properties:menu:rent:check')
 RegisterNetEvent('fsn_properties:menu:rent:pay')
+RegisterNetEvent('fsn_properties:menu:robbery')
 RegisterNUICallback( "ButtonClick", function( data, cb )
   if last_click + 10 > GetNetworkTime() then return end
   last_click = GetNetworkTime()
@@ -83,6 +84,10 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
   if split[1] == 'buy' then
     local id = tonumber(split[2])
     TriggerEvent('fsn_properties:buy', id)
+  end
+  if split[1] == 'robbery' then
+    local id = tonumber(split[2])
+    TriggerEvent('fsn_properties:menu:robbery', id)
   end
   ------------------------------- ACCESS
   if split[1] == 'access' then

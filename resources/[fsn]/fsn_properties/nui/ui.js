@@ -9,6 +9,10 @@ $( function() {
 			if (item.updateProperty) {
 				if (item.owned) {
 					$('#property-info').html('')
+					if (item.robbery) {
+						$('#property-info').append('<button class="menuoption" data-action="rent-check-'+item.property_id+'">Property Info</button>'+
+						'<button class="menuoption" data-action="robbery-'+item.property_id+'">Rob Property</button>')	
+					}
 					if (item.propertyOwner) {
 						// Access menu 
 						$('#property-info').append('<button class="menuoption" data-sub="property-accessmenu">Access</button>')

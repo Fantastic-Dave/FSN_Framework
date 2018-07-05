@@ -4,6 +4,9 @@ AddEventHandler('fsn_main:character', function(char)
   char_id = char.char_id
   TriggerServerEvent('fsn_properties:doors:request')
 end)
+
+TriggerServerEvent('fsn_properties:doors:request')
+
 RegisterNetEvent('fsn_properties:doors:init')
 AddEventHandler('fsn_properties:doors:init', function(tbl)
   enterable_properties = tbl
@@ -21,6 +24,7 @@ AddEventHandler('fsn_properties:doors:init', function(tbl)
       AddTextComponentString("House")
       EndTextCommandSetBlipName(blip)
     end
+    --[[
     if v.rob_spot ~= false then
       local blip = AddBlipForCoord(v.rob_spot.x, v.rob_spot.y, v.rob_spot.z)
       SetBlipSprite(blip, 277)
@@ -30,6 +34,7 @@ AddEventHandler('fsn_properties:doors:init', function(tbl)
       AddTextComponentString("Unknown")
       EndTextCommandSetBlipName(blip)
     end
+    ]]
   end
 end)
 RegisterNetEvent('fsn_properties:doors:update')
@@ -371,6 +376,57 @@ AddEventHandler('fsn_properties:menu:money:deposit', function(id)
     end)
   end
 end)
+local robbing = false
+local robbery = 0
+AddEventHandler('fsn_properties:menu:robbery', function(id)
+  local _index = 0
+  local _property = false
+  for k, v in pairs(enterable_properties) do
+    if v.db_id == id then
+      _property = v
+    end
+  end
+  if _property then
+    if robbery + 300000 > GetNetworkTime() then
+      TriggerEvent('fsn_notify:displayNotification', 'This cannot be robbed yet', 'centerLeft', 5000, 'error')
+      return
+    end
+    local time = 0
+    robbery = GetNetworkTime()
+    robbing = true
+    Citizen.CreateThread(function()
+      while true do
+        Citizen.Wait(1000)
+        time = time + 1
+        if not robbing then
+          break
+        end
+        if time == 300 then
+          -- WIN WOO
+          TriggerEvent('fsn_notify:displayNotification', 'Property robbed', 'centerLeft', 5000, 'success')
+          robbing=false
+          break
+        end
+      end
+    end)
+    Citizen.CreateThread(function()
+      while true do
+        Citizen.Wait(0)
+        if not robbing then
+          break
+        end
+        if GetDistanceBetweenCoords(_property.blip.x, _property.blip.y, _property.blip.z, GetEntityCoords(GetPlayerPed(-1)), true) < 4 then
+          drawTxt('~r~Robbing Property',4,1,0.5,0.35,0.6,255,255,255,255)
+          drawTxt('Wait ~b~'..fsn_SplitString(tostring(time-300), '-')[1]..'~w~ seconds',4,1,0.5,0.40,0.4,255,255,255,255)
+        else
+          TriggerEvent('fsn_notify:displayNotification', 'You got too far away from the property', 'centerRight', 5000, 'error')
+          robbing = false
+          break
+        end
+      end
+    end)
+  end
+end)
 
 AddEventHandler('fsn_properties:menu:police:search', function(id)
   local _index = 0
@@ -475,7 +531,7 @@ Citizen.CreateThread(function()
         ------------------------------------------ Management section
         if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, property.blip.x, property.blip.y, property.blip.z, true) < 5 then
           DrawMarker(1,property.blip.x,property.blip.y,property.blip.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
-          if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, property.blip.x, property.blip.y, property.blip.z, true) < 1 and not menuEnabled then
+          if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, property.blip.x, property.blip.y, property.blip.z, true) < 1 and not menuEnabled and not robbing then
             SetTextComponentFormat("STRING")
           	AddTextComponentString("Press ~INPUT_PICKUP~ to view the property")
           	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
@@ -502,6 +558,16 @@ Citizen.CreateThread(function()
                   })
                 else
                   TriggerEvent('fsn_notify:displayNotification', 'You do not have the keys to this property', 'centerLeft', 5000, 'error')
+                  SetNuiFocus( true, true )
+                	SendNUIMessage({
+                		showmenu = true,
+                    updateProperty = true,
+                    owned = true,
+                    robbery = true,
+                    property_id = property.db_id,
+                    propertyOwner = false,
+                    propertyAccess = false
+                  })
                 end
               else
                 TriggerEvent('chatMessage', '', {255,255,255}, '^*^4:fsn_properties:^0^r This property (#'..property.db_id..') is available to rent!')
@@ -518,6 +584,7 @@ Citizen.CreateThread(function()
   					end
           end
         end
+        --[[
         ------------------------------------------ Robbery stuff
         if GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, property.rob_spot.x, property.rob_spot.y, property.rob_spot.z, true) < 5 then
           DrawMarker(1,property.rob_spot.x,property.rob_spot.y,property.rob_spot.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,255,0,0,175,0,0,0,0)
@@ -530,6 +597,7 @@ Citizen.CreateThread(function()
   					end
           end
         end
+        ]]
         ------------------------------------------ Door stuff
         for _doork, _door in pairs(property.doors) do
           local door = GetClosestObjectOfType(_door.loc.x, _door.loc.y, _door.loc.z, 1.0, _door.hash, false, false, false)
