@@ -120,6 +120,27 @@ amiems = false
 emsonduty = false ----------------- REMEMBER TO CHANGE THESE
 emslevel = 0
 
+RegisterNetEvent('fsn_ems:911r')
+AddEventHandler('fsn_ems:911r', function(nineoneone, at, msg)
+  if emsonduty then
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^1 911R #'..nineoneone..' ('..at..') | ^0^r'..msg)
+  end
+end)
+
+RegisterNetEvent('fsn_ems:911')
+AddEventHandler('fsn_ems:911', function(nineoneone, at, msg)
+  if emsonduty then
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^1 911 #'..nineoneone..' ('..at..') | ^0^r'..msg)
+  end
+end)
+
+function fsn_EMSDuty()
+  return emsonduty
+end
+
+function fsn_getEMSLevel()
+  return emslevel
+end
 AddEventHandler('fsn_main:character', function(char)
   TriggerServerEvent('fsn_ems:requestUpdate')
   if char.char_ems > 0 then
