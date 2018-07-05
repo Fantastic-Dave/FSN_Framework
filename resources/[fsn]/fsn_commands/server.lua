@@ -173,6 +173,8 @@ function fsn_getHDC()
   return hdc
 end
 
+local nineoneones = {}
+local nineoneone = 0
 AddEventHandler('chatMessage', function(source, auth, msg)
   local split = fsn_SplitString(msg, ' ')
   -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -187,6 +189,33 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- CHAT COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/911' then
+    local char = getCharacter(source)
+    local at = char.char_fname..' '..string.sub(char.char_lname, 1, 1)
+    local msg = table.concat(split, " ", 2, #split)
+    nineoneone = nineoneone + 1
+    table.insert(nineoneones, nineoneone, source)
+    TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^*^1 911 |^r^0 '..msg)
+    TriggerClientEvent('fsn_police:911', -1, nineoneone, at, msg)
+    TriggerClientEvent('fsn_ems:911', -1, nineoneone, at, msg)
+  end
+  if split[1] == '/911r' then
+    if fsn_emsOnDuty(source) or fsn_policeOnDuty(source) then
+      local char = getCharacter(source)
+      local at = char.char_fname..' '..string.sub(char.char_lname, 1, 1)
+      local src = nineoneones[tonumber(split[2])]
+      local msg = table.concat(split, " ", 3, #split)
+      if src then
+        TriggerClientEvent('chatMessage', src, '', {255,255,255}, '^*^1 911 Responder |^r^0 '..msg)
+        TriggerClientEvent('fsn_police:911r', -1, split[2], at, msg)
+        TriggerClientEvent('fsn_ems:911r', -1, split[2], at, msg)
+      else
+        TriggerClientEvent('fsn_notify:displayNotification', source, 'Could not find this 911 call.', 'centerRight', 4000, 'error')
+      end
+    else
+      TriggerClientEvent('fsn_notify:displayNotification', source, 'You are not on duty.', 'centerRight', 4000, 'error')
+    end
+  end
   if split[1] == '/walk' then
     if clipsets[split[2]] then
       TriggerClientEvent('fsn_commands:walk:set', -1, source, clipsets[split[2]])
