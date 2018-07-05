@@ -2,6 +2,21 @@ amicop = false
 pdonduty = false ----------------- REMEMBER TO CHANGE THESE
 policelevel = 0
 
+RegisterNetEvent('fsn_police:911r')
+AddEventHandler('fsn_police:911r', function(nineoneone, at, msg)
+  if pdonduty then
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^1 911R #'..nineoneone..' ('..at..') | ^0^r'..msg)
+  end
+end)
+
+RegisterNetEvent('fsn_police:911')
+AddEventHandler('fsn_police:911', function(nineoneone, at, msg)
+  if pdonduty then
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^1 911 #'..nineoneone..' ('..at..') | ^0^r'..msg)
+  end
+end)
+
+
 function fsn_PDDuty()
   if pdonduty then
     return true
