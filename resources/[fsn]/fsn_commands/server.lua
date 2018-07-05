@@ -21,7 +21,13 @@ function fsn_SplitString(inputstr, sep)
     end
     return t
 end
-
+local ems_cars = {
+  [1] = "firetruk",
+  [2] = "ambulance",
+  [3] = "ems_raptor",
+  [4] = "ems_bike",
+  [5] = "battalion"
+}
 local pd_cars = {
   --------------------
   -- LSPD
@@ -134,6 +140,18 @@ function fsn_emsOnDuty(id)
   for k, v in pairs(onduty_ems) do
     if v.ply_id == id then
       return true
+    end
+  end
+  return false
+end
+function fsn_emsCommand(id)
+  for k, v in pairs(onduty_ems) do
+    if v.ply_id == id then
+      if v.ply_lvl > 6 then
+        return true
+      else
+        return false
+      end
     end
   end
   return false
@@ -385,7 +403,55 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/ems' then
     if fsn_emsOnDuty(source) then
-
+      if split[2] == 'car' then
+        if tonumber(split[3]) then
+          TriggerClientEvent('fsn_commands:police:car', source, ems_cars[tonumber(split[3])])
+        else
+          TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
+        end
+      end
+      if split[2] == 'command' then
+        if fsn_emsCommand(source) then
+          if split[3] == 'level' then
+            if tonumber(split[4]) then
+              if tonumber(split[5]) then
+                if exports.fsn_main:fsn_CharID(tonumber(split[4])) then
+                  TriggerClientEvent('fsn_ems:updateLevel', tonumber(split[4]), tonumber(split[5]))
+                  TriggerClientEvent('fsn_notify:displayNotification', source, 'You set '..tonumber(split[4])..'\'s (#'..exports.fsn_main:fsn_CharID(tonumber(split[4]))..') EMS level to <b>'..tonumber(split[5]), 'centerRight', 7000, 'info')
+                  MySQL.Sync.execute("UPDATE `fsn_characters` SET `char_ems` = @popo WHERE `char_id` = @id", {['@id'] = exports.fsn_main:fsn_CharID(tonumber(split[4])), ['@popo'] = tonumber(split[5])})
+                else
+                  TriggerClientEvent('fsn_notify:displayNotification', source, ':FSN: We\'re having issues finding that person.', 'centerRight', 7000, 'error')
+                end
+              else
+                TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a level.')
+              end
+            else
+              TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
+            end
+          end
+        else
+          TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You are not EMS command.')
+        end
+      end
+      if split[2] == 'escort' then
+        TriggerClientEvent('fsn_police:toggleDrag', tonumber(split[3]), source)
+      end
+      if split[2] == 'vehicle' then
+        if split[3] and tonumber(split[3]) then
+          TriggerClientEvent('fsn_police:putMeInVeh', split[3])
+        end
+      end
+      if split[2] == 'revive' then
+        if split[3] then
+          if split[3] ~= source then
+            TriggerClientEvent('fsn_ems:reviveMe', tonumber(split[3]))
+          else
+            TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You are not a god. You cannot revive yourself.')
+          end
+        else
+          TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
+        end
+      end
     end
   end
   -------------------------------------------------------------------------------------------------------------------------------------------------
