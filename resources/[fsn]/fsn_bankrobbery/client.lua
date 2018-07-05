@@ -337,8 +337,8 @@ Citizen.CreateThread(function()
       if GetDistanceBetweenCoords(door.x, door.y, door.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
         local _door = GetClosestObjectOfType(door.x, door.y, door.z, 1.0, door.hash, false, false, false)
         local CurrentHeading = GetEntityHeading(_door)
-        --[[
         if door.unlocked == true or exports.fsn_police:fsn_PDDuty() then
+          --[[
           fsn_drawText3D(door.tx,door.ty,door.tz+0.5, '~y~Hold [UP ARROW] to open door\nDEBUG: '..CurrentHeading)
           if IsControlPressed(1,27) then
             SetEntityHeading(_door, round(CurrentHeading, 1) -  0.4)
@@ -373,7 +373,7 @@ Citizen.CreateThread(function()
                 door.keypad.code = code
               end
               ---------------------------------------------------
-              print(door.keypad.code)
+              --print(door.keypad.code)
               door.keypad.crackattempts = door.keypad.crackattempts + 1
               DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", door.keypad.difficulty)
               local editOpen = true
