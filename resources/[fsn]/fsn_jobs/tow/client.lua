@@ -181,6 +181,7 @@ end
 function ReturnTruck()
   Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(towtruck))
   TriggerServerEvent('jTow:return', GetPlayerServerId(PlayerId()))
+  fsn_SetJob('Unemployed')
   towtruck = false
   inService = true
 end
@@ -210,6 +211,7 @@ Citizen.CreateThread(function()
             DisplayHelpText(v.gettext)
             if IsControlJustPressed(1,51) then
               TriggerEvent('fsn_bank:change:walletMinus', 1500)
+              fsn_SetJob('Mechanic')
               SpawnTowTruck(v.spawn.x,v.spawn.y,v.spawn.z)
             end
           end

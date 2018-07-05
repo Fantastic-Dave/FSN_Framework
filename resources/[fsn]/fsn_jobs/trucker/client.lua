@@ -68,6 +68,7 @@ function getNewJob(cost)
     EndTextCommandSetBlipName(trailer_blip)
     SetBlipAsShortRange(trailer_blip, false)
   end
+  fsn_SetJob('Trucker')
 end
 
 Citizen.CreateThread(function()
@@ -100,6 +101,7 @@ Citizen.CreateThread(function()
         mission_index = 0
         trailer_blip = false
         mission_blip = false
+        fsn_SetJob('Unemployed')
       end
       if IsVehicleAttachedToTrailer(cur_truck) then
         if trailer_blip then
