@@ -133,6 +133,36 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
 		ToggleActionMenu()
 		ExecuteCommand('p')
   elseif split[1] == 'ems' then
+    if split[2] == 'command' then
+      if split[3] == 'level' then
+        ToggleActionMenu()
+        local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+        if ply and ply ~= GetPlayerServerId(PlayerId()) then
+          Citizen.CreateThread(function()
+            DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", 2)
+            local editOpen = true
+            while UpdateOnscreenKeyboard() == 0 or editOpen do
+              drawTxt('What ~r~EMS~w~ level do you wish to give to ~y~'..ply..'~w~?',4,1,0.5,0.35,0.6,255,255,255,255)
+              if UpdateOnscreenKeyboard() ~= 0 then
+                editOpen = false
+                if UpdateOnscreenKeyboard() == 1 then
+                  input = tonumber(GetOnscreenKeyboardResult())
+                  if input then
+                    ExecuteCommand('ems command level '..ply..' '..input)
+                  else
+                    TriggerEvent('chatMessage', '', {255,255,255}, '^4FSN | ^0Something was wrong with what you entered!')
+                  end
+                end
+                break
+              end
+            Wait(1)
+            end
+          end)
+        else
+          TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+        end
+      end
+    end
     if split[2] == 'escort' then
       local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
       if ply and ply ~= GetPlayerServerId(PlayerId()) then
@@ -191,7 +221,6 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
       if split[3] == 'level' then
         ToggleActionMenu()
         local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
-        ply = 3
         if ply and ply ~= GetPlayerServerId(PlayerId()) then
           Citizen.CreateThread(function()
             DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", 2)
