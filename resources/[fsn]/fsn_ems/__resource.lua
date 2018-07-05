@@ -2,5 +2,7 @@ client_script 'client.lua'
 server_script 'server.lua'
 
 exports({
-  'fsn_IsDead'
+  'fsn_IsDead',
+  'fsn_EMSDuty',
+  'fsn_getEMSLevel',
 })
