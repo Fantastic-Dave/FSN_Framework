@@ -134,7 +134,7 @@ document.body.onmouseup = function() {
 				char_desc: $('#create-desc').val()
 			}))
 			$('#charactercreation').slideUp();
-			setTimeout(function(){$('#loading').slideDown()}, 500);
+			setTimeout(function(){$('#loading').slideDown() setTimeout(function(){$('#loading').slideUp() $('#motd').slideDown();}, 500);}, 500);
 		}
 	}
 	if ($('#select_1:hover').length != 0) {
