@@ -35,9 +35,9 @@ Citizen.CreateThread(function()
 	      drawRct(UI.x + 0.0149, UI.y + 0.800, hunger_bar,0.0080,17, 160, 41,130) -- main-bar (hunger)
 	      drawRct(UI.x + 0.0942, UI.y + 0.800, thirst_bar,0.0080,0, 250, 255,130) -- main-bar (thirst)
 			else
-				drawRct(UI.x + 0.0149, UI.y + 0.697, 0.1569,0.0140,0,0,0,130) -- bar at top
-	      drawRct(UI.x + 0.0149, UI.y + 0.700, 0.0771,0.0080,255,255,255,60) -- sub-bar (hunger)
-	      drawRct(UI.x + 0.0941, UI.y + 0.700, 0.0771,0.0080,255,255,255,60) -- sub-bar (thirst)
+				drawRct(UI.x + 0.0149, UI.y + 0.97695, 0.1569,0.0140,0,0,0,130) -- bar at top
+	      drawRct(UI.x + 0.0149, UI.y + 0.980, 0.0771,0.0080,255,255,255,60) -- sub-bar (hunger)
+	      drawRct(UI.x + 0.0941, UI.y + 0.980, 0.0771,0.0080,255,255,255,60) -- sub-bar (thirst)
 
 
 	      local hunger_bar = 0.07715 / 100
@@ -45,8 +45,8 @@ Citizen.CreateThread(function()
 
 	      local thirst_bar = 0.07715 / 100
 	      thirst_bar = thirst_bar * thirst
-	      drawRct(UI.x + 0.0149, UI.y + 0.700, hunger_bar,0.0080,17, 160, 41,130) -- main-bar (hunger)
-	      drawRct(UI.x + 0.0942, UI.y + 0.700, thirst_bar,0.0080,0, 250, 255,130) -- main-bar (thirst)
+	      drawRct(UI.x + 0.0149, UI.y + 0.980, hunger_bar,0.0080,17, 160, 41,130) -- main-bar (hunger)
+	      drawRct(UI.x + 0.0942, UI.y + 0.980, thirst_bar,0.0080,0, 250, 255,130) -- main-bar (thirst)
 			end
 
       --drawRct(UI.x + 0.0149, UI.y + 0.800, 0.07715,0.0080,17, 160, 41,130) -- main-bar (hunger)
