@@ -132,6 +132,31 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
   if ( data == "phone" ) then
 		ToggleActionMenu()
 		ExecuteCommand('p')
+  elseif split[1] == 'ems' then
+    if split[2] == 'escort' then
+      local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+      if ply and ply ~= GetPlayerServerId(PlayerId()) then
+        ExecuteCommand('ems escort '..ply)
+      else
+        TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+      end
+    end
+    if split[2] == 'vehicle' then
+      local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+      if ply and ply ~= GetPlayerServerId(PlayerId()) then
+        ExecuteCommand('ems vehicle '..ply)
+      else
+        TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+      end
+    end
+    if split[2] == 'revive' then
+      local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+      if ply and ply ~= GetPlayerServerId(PlayerId()) then
+        ExecuteCommand('ems revive '..ply)
+      else
+        TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+      end
+    end
   elseif split[1] == 'police' then
     if split[2] == 'k9' then
       if split[3] == 'toggle' then

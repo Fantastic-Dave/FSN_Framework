@@ -16,7 +16,6 @@ AddEventHandler('fsn_police:911', function(nineoneone, at, msg)
   end
 end)
 
-
 function fsn_PDDuty()
   if pdonduty then
     return true
@@ -27,7 +26,6 @@ end
 function fsn_getPDLevel()
   return policelevel
 end
-
 
 function getNearestVeh()
 local pos = GetEntityCoords(GetPlayerPed(-1))
@@ -40,12 +38,16 @@ end
 
 RegisterNetEvent('fsn_police:putMeInVeh')
 AddEventHandler('fsn_police:putMeInVeh', function()
-  local curpos = GetEntityCoords(GetPlayerPed(-1))
-  local car = getNearestVeh()--GetClosestVehicle(curpos.x, curpos.y, curpos.z, 3.000, 0, 70)
-  if IsVehicleSeatFree(car, 2) then
-  	TaskWarpPedIntoVehicle(GetPlayerPed(-1), car, 2)
+  if not IsPedInAnyVehicle(GetPlayerPed(-1)) then
+    local curpos = GetEntityCoords(GetPlayerPed(-1))
+    local car = getNearestVeh()--GetClosestVehicle(curpos.x, curpos.y, curpos.z, 3.000, 0, 70)
+    if IsVehicleSeatFree(car, 2) then
+    	TaskWarpPedIntoVehicle(GetPlayerPed(-1), car, 2)
+    else
+    	TaskWarpPedIntoVehicle(GetPlayerPed(-1), car, 1)
+    end
   else
-  	TaskWarpPedIntoVehicle(GetPlayerPed(-1), car, 1)
+    TaskLeaveVehicle(GetPlayerPed(-1), GetVehiclePedIsIn(GetPlayerPed(-1)), 16)
   end
 end)
 
@@ -556,6 +558,9 @@ AddEventHandler('fsn_police:toggleDrag', function(officer)
   if not escorted then
     local myPed = GetPlayerPed(-1)
     local pdPed = GetPlayerPed(GetPlayerFromServerId(officer))
+    if IsPedInAnyVehicle(GetPlayerPed(-1)) then
+      TaskLeaveVehicle(GetPlayerPed(-1), GetVehiclePedIsIn(GetPlayerPed(-1)), 16)
+    end
     AttachEntityToEntity(myPed, pdPed, 4103, 11816, 0.48, 0.00, 0.0, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
     escorted = true
   else
