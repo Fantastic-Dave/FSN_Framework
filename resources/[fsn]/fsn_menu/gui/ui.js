@@ -47,6 +47,17 @@ $( function() {
 				$('#policebutton').hide()
 				$('#pdcommandbutton').hide()
 			}
+			if (item.ems) {
+				$('#emsbutton').show()
+				if (item.emscommand) {
+					$('#emscommandbutton').show()					
+				} else {
+					$('#emscommandbutton').hide()
+				}
+			} else {
+				$('#emsbutton').hide()
+				$('#emscommandbutton').hide()
+			}
         }
 
         // Hide the menu 

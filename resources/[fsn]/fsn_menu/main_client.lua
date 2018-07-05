@@ -66,6 +66,17 @@ function ToggleActionMenu()
       police = false
       pdcommand = false
     end
+    if exports.fsn_ems:fsn_EMSDuty() then
+      if exports.fsn_ems:fsn_getEMSLevel() > 6 then
+        emscommand = true
+      else
+        emscommand = false
+      end
+      ems = true
+    else
+      ems = false
+      emscommand = false
+    end
     if IsPedInAnyVehicle(GetPlayerPed(-1)) then
       vehicle = true
       lookingatvehicle = false
@@ -84,7 +95,9 @@ function ToggleActionMenu()
 			vehicle = vehicle,
       lookingatvehicle = lookingatvehicle,
       police = police,
-      pdcommand = pdcommand
+      pdcommand = pdcommand,
+      ems = ems,
+      emscommand = emscommand
 		})
 	else
 		SetNuiFocus( false )
