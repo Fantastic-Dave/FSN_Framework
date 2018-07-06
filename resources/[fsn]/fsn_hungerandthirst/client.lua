@@ -5,7 +5,7 @@ local UI = {
 	x =  0.000 ,	-- Base Screen Coords 	+ 	 x
 	y = -0.001 ,	-- Base Screen Coords 	+ 	-y
 }
-local init = true
+local init = false
 
 function drawRct(x,y,width,height,r,g,b,a)
 	DrawRect(x + width/2, y + height/2, width, height, r, g, b, a)
