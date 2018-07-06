@@ -21,19 +21,54 @@ local function fsn_taxiAddBlip()
   SetBlipAsShortRange(yourtaxi_blip, false)
 end
 
+local dispatch_calls = {}
+local disp_id = 0
+local last_disp = 0
 RegisterNetEvent('fsn_jobs:taxi:request')
-AddEventHandler('fsn_jobs:taxi:request', function(x,y,z)
+AddEventHandler('fsn_jobs:taxi:request', function(tbl)
   if istaxi then
-
+    local x = tbl.x
+    local y = tbl.y
+    local var1, var2 = GetStreetNameAtCoord(x, y, z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
+    local sname = GetStreetNameFromHashKey(var1)
+    disp_id = #dispatch_calls+1
+    last_disp = current_time
+    table.insert(dispatch_calls, disp_id, {
+      type = 'taxi call',
+      cx = x,
+      cy = y
+    })
+    SetNotificationTextEntry("STRING");
+    AddTextComponentString('Location: ~y~'..sname);
+    SetNotificationMessage("CHAR_DEFAULT", "CHAR_DEFAULT", true, 1, "Taxi Dispatch", "");
+    DrawNotification(false, true);
   end
 end)
 RegisterNetEvent('fsn_jobs:taxi:accepted')
 AddEventHandler('fsn_jobs:taxi:accepted', function(taxi)
   yourtaxi = taxi
 end)
+Citizen.CreateThread(function()
+   while true do
+     Citizen.Wait(0)
+     if disp_id ~= 0 then
+       if last_disp + 10 > current_time then
+         SetTextComponentFormat("STRING")
+         AddTextComponentString("Press ~INPUT_MP_TEXT_CHAT_TEAM~ to ~g~accept~w~ the call\nPress ~INPUT_PUSH_TO_TALK~ to ~r~decline~w~ the call")
+         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+         if IsControlJustPressed(0, 246) then
+           SetNewWaypoint(dispatch_calls[disp_id].cx, dispatch_calls[disp_id].cy)
+           last_disp = 0
+         end
+         if IsControlJustPressed(0, 249) then
+           last_disp = 0
+         end
+       end
+     end
+   end
+end)
 
 Citizen.CreateThread(function()
-  -- Blip creation
 	for k,v in pairs(taxirank) do
 		local blip = AddBlipForCoord(v.x, v.y, v.z)
 		SetBlipSprite(blip, 56)
@@ -50,9 +85,6 @@ Citizen.CreateThread(function()
       if DoesBlipExist(yourtaxi_blip) then
         RemoveBlip(yourtaxi_blip)
       end
-    end
-    if istaxi then
-
     end
     for k, v in pairs(taxirank) do
       if GetDistanceBetweenCoords(v.x,v.y,v.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
@@ -81,6 +113,7 @@ Citizen.CreateThread(function()
             	TriggerEvent('fsn_cargarage:makeMine', mytaxi, GetDisplayNameFromVehicleModel(GetEntityModel(mytaxi)), GetVehicleNumberPlateText(mytaxi))
               istaxi = true
               fsn_SetJob('Taxi Driver')
+              TriggerEvent('fsn_bank:change:walletMinus', 250)
             end
           else
             SetTextComponentFormat("STRING")
