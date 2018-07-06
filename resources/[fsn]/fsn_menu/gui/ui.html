@@ -24,15 +24,22 @@
         		is the same id as the div below. All submenus must also have a data-parent attribute. 
         	 -->
         	<div id="mainmenu">
-				<button class="menuoption" data-action="phone">PHONE</button>
-				<button class="menuoption" data-sub="licenses">ID/LICENSES</button>
+				<button id="phonebutton" class="menuoption" data-action="phone">PHONE</button>
+				<button id="licensebutton" class="menuoption" data-sub="licenses">ID/LICENSES</button>
 				<button id="vehiclebutton" class="menuoption" data-sub="vehicle">VEHICLE</button>
 				<button id="vehicleinvbutton" class="menuoption" data-sub="vehicleinventory">VEHICLE INVENTORY</button>
-				<button class="menuoption" data-sub="inventorysubmenu">INVENTORY</button>
+				<button id="inventorybutton" class="menuoption" data-sub="inventorysubmenu">INVENTORY</button>
+				<button class="menuoption" data-sub="servicesubmenu">SERVICES</button>
 				<button id="policebutton" class="menuoption" data-sub="police" style="background-color:#b6d0f9">POLICE</button>
 				<button id="pdcommandbutton" class="menuoption" data-sub="police-command" style="background-color:#b6d0f9">C/HC OPTIONS</button>
 				<button id="emsbutton" class="menuoption" data-sub="ems" style="background-color:#ff8e8e">EMS</button>
 				<button id="emscommandbutton" class="menuoption" data-sub="ems-command" style="background-color:#ff8e8e">C/HC OPTIONS</button>
+			</div>
+			
+			<div id="servicesubmenu" data-parent="mainmenu" style="display: none;">
+				<button class="menuoption" data-action="service-ems">REQUEST EMS</button>
+				<button class="menuoption" data-action="service-taxi">REQUEST TAXI</button>
+				<button class="menuoption" data-action="service-tow">REQUEST TOW</button>
 			</div>
 			
 			<div id="licenses" data-parent="mainmenu" style="display: none;">
