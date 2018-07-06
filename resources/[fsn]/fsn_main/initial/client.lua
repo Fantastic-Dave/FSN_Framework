@@ -655,6 +655,7 @@ Citizen.CreateThread(function()
           if IsControlJustPressed(0,38) then
             --midswap = true
             --swapstart = GetNetworkTime()
+            TriggerEvent('fsn_notify:displayNotification', 'This feature has been temporarily disabled.', 'centerRight', 4000, 'error')
           end
         end
       end
