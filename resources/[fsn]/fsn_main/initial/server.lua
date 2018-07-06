@@ -27,7 +27,7 @@ AddEventHandler('playerDropped', function()
   end
   TriggerEvent('fsn_main:updateCharacters', current_characters)
 end)
-
+]]
 RegisterServerEvent('fsn_main:requestCharacters')
 AddEventHandler('fsn_main:requestCharacters', function()
   local steamid = GetPlayerIdentifiers(source)
@@ -35,7 +35,7 @@ AddEventHandler('fsn_main:requestCharacters', function()
   local characters = MySQL.Sync.fetchAll("SELECT * FROM `fsn_characters` WHERE `steamid` = '"..steamid.."'")
   TriggerClientEvent('fsn_main:sendCharacters', source, characters)
 end)
-]]
+
 RegisterServerEvent('fsn_main:update:myCharacter')
 AddEventHandler('fsn_main:update:myCharacter', function(index, char)
   current_characters[index] = char
