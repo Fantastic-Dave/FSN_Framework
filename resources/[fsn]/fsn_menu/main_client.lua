@@ -92,6 +92,7 @@ function ToggleActionMenu()
     end
 		SendNUIMessage({
 			showmenu = true,
+      dead = exports.fsn_ems:fsn_IsDead(),
 			vehicle = vehicle,
       lookingatvehicle = lookingatvehicle,
       police = police,
@@ -132,6 +133,19 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
   if ( data == "phone" ) then
 		ToggleActionMenu()
 		ExecuteCommand('p')
+  elseif split[1] == 'service' then
+    if split[2] == 'ems' then
+        ExecuteCommand('service request ems')
+        ToggleActionMenu()
+    end
+    if split[2] == 'taxi' then
+        ExecuteCommand('service request taxi')
+        ToggleActionMenu()
+    end
+    if split[2] == 'tow' then
+        ExecuteCommand('service request tow')
+        ToggleActionMenu()
+    end
   elseif split[1] == 'ems' then
     if split[2] == 'command' then
       if split[3] == 'level' then

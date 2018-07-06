@@ -58,6 +58,21 @@ $( function() {
 				$('#emsbutton').hide()
 				$('#emscommandbutton').hide()
 			}
+			
+			if (item.dead) {
+				$('#phonebutton').hide()
+				$('#licensebutton').hide()
+				$('#inventorybutton').hide()
+				$('#vehiclebutton').hide()
+				$('#policebutton').hide()
+				$('#pdcommandbutton').hide()
+				$('#emsbutton').hide()
+				$('#emscommandbutton').hide()
+			} else {
+				$('#phonebutton').show()
+				$('#licensebutton').show()
+				$('#inventorybutton').show()
+			}
         }
 
         // Hide the menu 
