@@ -48,13 +48,6 @@ AddEventHandler('playerDropped', function()
       end
     end
   end
-  for k, v in pairs(current_characters) do
-    if v.ply_id == source then
-      print('REMOVING '..v.char_fname..v.char_lname..' FROM CHARACTERS TABLE')
-      table.remove(current_characters, k)
-    end
-  end
-  TriggerEvent('fsn_main:updateCharacters', current_characters)
 end)
 
 RegisterServerEvent('fsn_main:validatePlayer')
