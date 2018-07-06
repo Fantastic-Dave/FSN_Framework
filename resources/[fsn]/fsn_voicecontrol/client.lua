@@ -32,6 +32,8 @@ local settings = {
 }
 
 Citizen.CreateThread(function()
+NetworkSetTalkerProximity(settings.ranges[settings.current])
+      NetworkSetVoiceActive(true)
 	while true do Citizen.Wait(1)
     if NetworkIsPlayerTalking(PlayerId()) then
       drawTxt(UI.x + 0.517, UI.y + 1.434, 1.0,1.0,0.4, settings.voices[settings.current], 66, 220, 244, 255)
