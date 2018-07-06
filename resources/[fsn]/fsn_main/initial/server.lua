@@ -16,7 +16,7 @@ AddEventHandler('fsn_main:createCharacter', function(data)
   local characters = MySQL.Sync.fetchAll("SELECT * FROM `fsn_characters` WHERE `steamid` = '"..steamid.."'")
   TriggerClientEvent('fsn_main:sendCharacters', source, characters)
 end)
-
+--[[
 AddEventHandler('playerDropped', function()
   for k, v in pairs(current_characters) do
     if v.ply_id == source then
@@ -35,7 +35,7 @@ AddEventHandler('fsn_main:requestCharacters', function()
   local characters = MySQL.Sync.fetchAll("SELECT * FROM `fsn_characters` WHERE `steamid` = '"..steamid.."'")
   TriggerClientEvent('fsn_main:sendCharacters', source, characters)
 end)
-
+]]
 RegisterServerEvent('fsn_main:update:myCharacter')
 AddEventHandler('fsn_main:update:myCharacter', function(index, char)
   current_characters[index] = char
