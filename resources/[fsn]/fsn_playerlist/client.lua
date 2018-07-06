@@ -41,11 +41,15 @@ local function fsn_displayPlayerMenu()
   if not isPlayerMenuActive then
     local players = {}
     for k, v in pairs(current_characters) do
+	if NetworkIsPlayerActive(v.ply_id) then
       table.insert(players, #players+1, {
         ply_id = v.ply_id,
         ply_name = v.ply_name,
         char_name = v.char_fname..' '..v.char_lname
       })
+else
+	print(v.ply_id..'is not active!')
+end
     end
     players = json.encode(players)
     SendNUIMessage({
