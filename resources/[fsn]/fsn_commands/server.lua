@@ -205,6 +205,22 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     TriggerClientEvent('fsn_commands:clothing:hat', source)
   end
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  -- SERVICE COMMANDS
+  -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/service' then
+    if split[2] == 'request' then
+      if split[3] == 'taxi' then
+        TriggerClientEvent('fsn_commands:service:request', source, 'taxi')
+      end
+      if split[3] == 'ems' then
+        TriggerClientEvent('fsn_commands:service:request', source, 'ems')
+      end
+      if split[3] == 'tow' then
+        TriggerClientEvent('fsn_commands:service:request', source, 'tow')
+      end
+    end
+  end
+  -------------------------------------------------------------------------------------------------------------------------------------------------
   -- CHAT COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/911' then
@@ -735,6 +751,20 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     else
       TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You are not signed in on duty as a police officer.')
     end
+  end
+end)
+
+RegisterServerEvent('fsn_commands:service:sendrequest')
+AddEventHandler('fsn_commands:service:sendrequest', function(type, tbl)
+  TriggerClientEvent('fsn_notify:displayNotification', source, 'Notification sent to all '..type..' workers.', 'centerLeft', 8000, 'info')
+  if type == 'taxi' then
+    TriggerClientEvent('fsn_jobs:taxi:request', -1, tbl)
+  end
+  if type == 'tow' then
+    TriggerClientEvent('fsn_jobs:tow:request', -1, tbl)
+  end
+  if type == 'ems' then
+    TriggerClientEvent('fsn_jobs:ems:request', -1, tbl)
   end
 end)
 

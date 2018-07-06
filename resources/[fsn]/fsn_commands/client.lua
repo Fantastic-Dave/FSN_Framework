@@ -89,6 +89,14 @@ AddEventHandler('fsn_commands:clothing:hat', function()
 	end
 end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
+-- SERVICE COMMANDS
+-------------------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent('fsn_commands:service:request')
+AddEventHandler('fsn_commands:service:request', function(type)
+	local tbl = {x = GetEntityCoords(GetPlayerPed(-1)).x, y = GetEntityCoords(GetPlayerPed(-1)).y, z = GetEntityCoords(GetPlayerPed(-1)).z}
+	TriggerServerEvent('fsn_commands:service:sendrequest', type, tbl)
+end)
+-------------------------------------------------------------------------------------------------------------------------------------------------
 -- MISC COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent('fsn_commands:dropweapon')
