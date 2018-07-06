@@ -241,6 +241,7 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
         end
     end
     TriggerEvent('fsn_main:gui:both:display', char.char_money, char.char_bank)
+    TriggerEvent('chatMessage', '', {255,255,255}, '^1^*Warning:^r This is a beta release of the :FSN: Framework. We aren\'t expecting any bugs, but those that are found should be reported via dm to JamesSc0tt on discord or the forums.')
   end)
 end)
 
