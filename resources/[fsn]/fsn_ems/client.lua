@@ -206,7 +206,50 @@ Citizen.CreateThread(function()
     end
   end
 end)
---[[
+
+local dispatch_calls = {}
+local disp_id = 0
+local last_disp = 0
+RegisterNetEvent('fsn_jobs:ems:request')
+AddEventHandler('fsn_jobs:ems:request', function(tbl)
+  if emsonduty then
+    local x = tbl.x
+    local y = tbl.y
+    local var1, var2 = GetStreetNameAtCoord(x, y, z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
+    local sname = GetStreetNameFromHashKey(var1)
+    disp_id = #dispatch_calls+1
+    last_disp = currenttime
+    table.insert(dispatch_calls, disp_id, {
+      type = 'ems call',
+      cx = x,
+      cy = y
+    })
+    SetNotificationTextEntry("STRING");
+    AddTextComponentString('Location: ~y~'..sname);
+    SetNotificationMessage("CHAR_DEFAULT", "CHAR_DEFAULT", true, 1, "DISPATCH", "");
+    DrawNotification(false, true);
+  end
+end)
+Citizen.CreateThread(function()
+   while true do
+     Citizen.Wait(0)
+     if disp_id ~= 0 then
+       if last_disp + 10 > currenttime then
+         SetTextComponentFormat("STRING")
+         AddTextComponentString("Press ~INPUT_MP_TEXT_CHAT_TEAM~ to ~g~accept~w~ the call\nPress ~INPUT_PUSH_TO_TALK~ to ~r~decline~w~ the call")
+         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+         if IsControlJustPressed(0, 246) then
+           SetNewWaypoint(dispatch_calls[disp_id].cx, dispatch_calls[disp_id].cy)
+           last_disp = 0
+         end
+         if IsControlJustPressed(0, 249) then
+           last_disp = 0
+         end
+       end
+     end
+   end
+end)
+
 local hospitals = {
   {
     name = 'Crusade Road Emergency Unit',
@@ -235,4 +278,3 @@ Citizen.CreateThread(function()
     end
   end
 end)
-]]
