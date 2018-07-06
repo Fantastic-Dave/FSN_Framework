@@ -1,4 +1,5 @@
 client_script 'client.lua'
+server_script 'server.lua'
 
 -- trucker job
 client_script 'trucker/client.lua'

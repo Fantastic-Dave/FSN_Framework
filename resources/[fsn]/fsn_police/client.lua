@@ -230,12 +230,14 @@ Citizen.CreateThread(function()
             if pdonduty then
               pdonduty = false
               TriggerEvent('fsn_notify:displayNotification', 'Thanks for your service!', 'centerLeft', 2000, 'info')
+              exports.fsn_jobs:fsn_SetJob('Unemployed')
               for k, v in pairs(pdCarBlips) do
                 RemoveBlip(v.blip)
                 pdCarBlips[k] = nil
               end
               TriggerServerEvent('fsn_police:offDuty')
             else
+              exports.fsn_jobs:fsn_SetJob('Police')
               pdonduty = true
               TriggerEvent('fsn_notify:displayNotification', 'You have clocked in as <span style="color: #42b6f4">police</span> (lvl: '..policelevel..') @ '..stn.name, 'centerLeft', 2000, 'info')
               TriggerServerEvent('fsn_police:onDuty', policelevel)

@@ -20,3 +20,26 @@ Citizen.CreateThread(function()
     current_time = current_time + 1
   end
 end)
+
+RegisterNetEvent('fsn_jobs:paycheck')
+AddEventHandler('fsn_jobs:paycheck', function()
+  if curjob == 'Police' then
+    TriggerEvent('fsn_bank:change:bankAdd', 350)
+    TriggerEvent('fsn_notify:displayNotification', 'Salary: $350', 'centerLeft', 5000, 'info')
+  elseif curjob == 'EMS' then
+    TriggerEvent('fsn_bank:change:bankAdd', 350)
+    TriggerEvent('fsn_notify:displayNotification', 'Salary: $350', 'centerLeft', 5000, 'info')
+  elseif curjob == 'Mechanic' then
+    TriggerEvent('fsn_bank:change:bankAdd', 250)
+    TriggerEvent('fsn_notify:displayNotification', 'Salary: $250', 'centerLeft', 5000, 'info')
+  elseif curjob == 'Taxi Driver' then
+    TriggerEvent('fsn_bank:change:bankAdd', 150)
+    TriggerEvent('fsn_notify:displayNotification', 'Salary: $100', 'centerLeft', 5000, 'info')
+  elseif curjob == 'Truck Driver' then
+    TriggerEvent('fsn_bank:change:bankAdd', 100)
+    TriggerEvent('fsn_notify:displayNotification', 'Salary: $100', 'centerLeft', 5000, 'info')
+  else
+    TriggerEvent('fsn_bank:change:bankAdd', 50)
+    TriggerEvent('fsn_notify:displayNotification', 'Salary: $50', 'centerLeft', 5000, 'info')
+  end
+end)

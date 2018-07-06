@@ -195,10 +195,12 @@ Citizen.CreateThread(function()
               emsonduty = false
               TriggerEvent('fsn_notify:displayNotification', 'Thanks for your service!', 'centerLeft', 2000, 'info')
               TriggerServerEvent('fsn_ems:offDuty')
+              exports.fsn_jobs:fsn_SetJob('Unemployed')
             else
               emsonduty = true
               TriggerEvent('fsn_notify:displayNotification', 'You have clocked in as <span style="color: #f45942">EMS</span> (lvl: '..emslevel..')', 'centerLeft', 6000, 'info')
               TriggerServerEvent('fsn_ems:onDuty', emslevel)
+              exports.fsn_jobs:fsn_SetJob('EMS')
             end
           end
         end

@@ -1,5 +1,6 @@
 local fsn_spawned = false
 local current_character_id = 0
+local current_character = {}
 RegisterNetEvent('spawnme')
 AddEventHandler('spawnme', function()
   fsn_spawned = true
@@ -194,7 +195,7 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
   local char = character[1]
   local model = tonumber(char.char_model)
   current_character_id = char.char_id
-
+  current_character = char
   SetNuiFocus(false,false)
   SendNUIMessage({type='charMenu', enable=false})
   SetEntityCoords(GetPlayerPed(-1), mainSpawn.x, mainSpawn.y, mainSpawn.z)
@@ -246,12 +247,12 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
 end)
 
 AddEventHandler('fsn_bank:request:both', function()
-  TriggerEvent('fsn_bank:update:both', current_characters[current_character_index].char_money, current_characters[current_character_index].char_bank)
+  TriggerEvent('fsn_bank:update:both', current_character.char_money, current_character.char_bank)
 end)
 
 RegisterNetEvent('fsn_main:displayBankandMoney')
 AddEventHandler('fsn_main:displayBankandMoney', function()
-  local char = current_characters[current_character_index]
+  local char = current_character
   TriggerEvent('fsn_main:gui:both:display', char.char_money, char.char_bank)
 end)
 
@@ -317,7 +318,7 @@ end)
 
 -------------------------------------------- LSCustoms
 AddEventHandler("fsn_lscustoms:check",function(title, data, cost, value)
-  if current_characters[current_character_index].char_money >= cost then
+  if current_character.char_money >= cost then
     TriggerEvent("fsn_lscustoms:receive", source, title, data, value)
     TriggerEvent('fsn_bank:change:walletMinus', cost)
   else
@@ -326,7 +327,7 @@ AddEventHandler("fsn_lscustoms:check",function(title, data, cost, value)
 end)
 
 AddEventHandler("fsn_lscustoms:check2", function(title, data, cost, value, back)
-  if current_characters[current_character_index].char_money >= cost then
+  if current_character.char_money >= cost then
     TriggerEvent("fsn_lscustoms:receive2", source, title, data, value, back)
     TriggerEvent('fsn_bank:change:walletMinus', cost)
   else
@@ -335,7 +336,7 @@ AddEventHandler("fsn_lscustoms:check2", function(title, data, cost, value, back)
 end)
 
 AddEventHandler("fsn_lscustoms:check3",function(title, data, cost, mod, back, name, wtype)
-  if current_characters[current_character_index].char_money >= cost then
+  if current_character.char_money >= cost then
     TriggerEvent("fsn_lscustoms:receive3", source, title, data, mod, back, name, wtype)
     TriggerEvent('fsn_bank:change:walletMinus', cost)
   else
@@ -345,64 +346,64 @@ end)
 -------------------------------------------- Money / Bank
 RegisterNetEvent('fsn_police:search:start:money')
 AddEventHandler('fsn_police:search:start:money', function(officerid)
-  TriggerServerEvent('fsn_police:search:end:money', officerid, {wallet=current_characters[current_character_index].char_money,bank=current_characters[current_character_index].char_bank})
+  TriggerServerEvent('fsn_police:search:end:money', officerid, {wallet=current_character.char_money,bank=current_character.char_bank})
 end)
 
 AddEventHandler('fsn_bank:change:bankandwallet', function(wallet, bank)
   if wallet == false then
-    current_characters[current_character_index].char_money = current_characters[current_character_index].char_money
+    current_character.char_money = current_character.char_money
   else
-    current_characters[current_character_index].char_money = wallet
+    current_character.char_money = wallet
   end
   if bank == false then
-    current_characters[current_character_index].char_bank = current_characters[current_character_index].char_bank
+    current_character.char_bank = current_character.char_bank
   else
-    current_characters[current_character_index].char_bank = bank
+    current_character.char_bank = bank
   end
-  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_characters[current_character_index])
-  TriggerServerEvent('fsn_bank:database:update', current_characters[current_character_index].char_id, wallet, bank)
+  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
+  TriggerServerEvent('fsn_bank:database:update', current_character.char_id, wallet, bank)
 end)
 
 RegisterNetEvent('fsn_bank:change:walletAdd')
 RegisterNetEvent('fsn_bank:change:walletMinus')
 AddEventHandler('fsn_bank:change:walletAdd', function(amt)
-  current_characters[current_character_index].char_money = current_characters[current_character_index].char_money + amt
-  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_characters[current_character_index])
-  TriggerServerEvent('fsn_bank:database:update', current_characters[current_character_index].char_id, current_characters[current_character_index].char_money + amt, false)
+  current_character.char_money = current_character.char_money + amt
+  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
+  TriggerServerEvent('fsn_bank:database:update', current_character.char_id, current_character.char_money + amt, false)
 
-  TriggerEvent('fsn_main:gui:money:change', current_characters[current_character_index].char_money, amt)
+  TriggerEvent('fsn_main:gui:money:change', current_character.char_money, amt)
 end)
 
 AddEventHandler('fsn_bank:change:walletMinus', function(amt)
-  current_characters[current_character_index].char_money = current_characters[current_character_index].char_money - amt
-  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_characters[current_character_index])
-  TriggerServerEvent('fsn_bank:database:update', current_characters[current_character_index].char_id, current_characters[current_character_index].char_money - amt, false)
+  current_character.char_money = current_character.char_money - amt
+  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
+  TriggerServerEvent('fsn_bank:database:update', current_character.char_id, current_character.char_money - amt, false)
 
   amt = tonumber('-'..amt)
-  TriggerEvent('fsn_main:gui:money:change', current_characters[current_character_index].char_money, amt)
+  TriggerEvent('fsn_main:gui:money:change', current_character.char_money, amt)
 end)
 
 RegisterNetEvent('fsn_bank:change:bankAdd')
 RegisterNetEvent('fsn_bank:change:bankMinus')
 AddEventHandler('fsn_bank:change:bankAdd', function(amt)
-  current_characters[current_character_index].char_bank = current_characters[current_character_index].char_bank + amt
-  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_characters[current_character_index])
-  TriggerServerEvent('fsn_bank:database:update', current_characters[current_character_index].char_id, false, current_characters[current_character_index].char_bank + amt)
+  current_character.char_bank = current_character.char_bank + amt
+  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
+  TriggerServerEvent('fsn_bank:database:update', current_character.char_id, false, current_character.char_bank + amt)
 
-  TriggerEvent('fsn_main:gui:bank:change', current_characters[current_character_index].char_bank, amt)
+  TriggerEvent('fsn_main:gui:bank:change', current_character.char_bank, amt)
 end)
 
 AddEventHandler('fsn_bank:change:bankMinus', function(amt)
-  current_characters[current_character_index].char_bank = current_characters[current_character_index].char_bank - amt
-  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_characters[current_character_index])
-  TriggerServerEvent('fsn_bank:database:update', current_characters[current_character_index].char_id, false, current_characters[current_character_index].char_bank - amt)
+  current_character.char_bank = current_character.char_bank - amt
+  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
+  TriggerServerEvent('fsn_bank:database:update', current_character.char_id, false, current_character.char_bank - amt)
 
   amt = tonumber('-'..amt)
-  TriggerEvent('fsn_main:gui:bank:change', current_characters[current_character_index].char_bank, amt)
+  TriggerEvent('fsn_main:gui:bank:change', current_character.char_bank, amt)
 end)
 -------------------------------------------- Store stuffs
 AddEventHandler('fsn_inventory:buyItem', function(item, price, amount)
-  if price <= current_characters[current_character_index].char_money then
+  if price <= current_character.char_money then
     TriggerEvent('fsn_inventory:item:add', item, amount)
     TriggerEvent('fsn_bank:change:walletMinus', price)
   else
@@ -664,10 +665,10 @@ Citizen.CreateThread(function()
 end)
 ------------------------------------------------------------- export stuff
 function fsn_GetWallet()
-  return current_characters[current_character_index].char_money
+  return current_character.char_money
 end
 function fsn_CharID()
-  return current_characters[current_character_index].char_id
+  return current_character.char_id
 end
 print(" ")
 print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
