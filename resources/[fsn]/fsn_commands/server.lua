@@ -186,10 +186,12 @@ local function randomString(length)
     math.randomseed(os.clock()^5)
     return randomString(length - 1) .. charset[math.random(1, #charset)]
 end
+
 local hdc = randomString(6)
-function fsn_getHDC()
-  return hdc
-end
+RegisterServerEvent('fsn_commands:requestHDC')
+AddEventHandler('fsn_commands:requestHDC', function()
+  TriggerClientEvent('fsn_commands:getHDC', source, hdc)
+end)
 
 local nineoneones = {}
 local nineoneone = 0
@@ -325,34 +327,29 @@ AddEventHandler('chatMessage', function(source, auth, msg)
         TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^r:FSN:^0^* You are not a developer, /hdc is not available to you')
         return
       end
-    end
-    if split[2] == 'toggle' then
-      local target = tonumber(split[3])
-      TriggerClientEvent('fsn_police:handcuffs:hard', target, target)
-    end
-    if split[2] == 'escort' then
-      TriggerClientEvent('fsn_police:toggleDrag', tonumber(split[3]), source)
-    end
-    if split[2] == 'search' then
-      local char = getCharacter(source)
-      local officername = char.char_fname..' '..char.char_lname
-      TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[3]), source)
-      TriggerClientEvent('fsn_police:search:start:weapons', tonumber(split[3]), source)
-      TriggerClientEvent('fsn_police:search:start:money', tonumber(split[3]), source)
-      TriggerClientEvent('fsn_notify:displayNotification', source, 'Searching everything of: <b>'..tonumber(split[3]), 'centerRight', 7000, 'info')
-      TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[3]), 'Everything is being searched by: <b>'..officername..'</b><br><i>Money, weapons and inventory', 'centerRight', 7000, 'info')
-    end
-    if split[2] == 'rob' then
-      local char = getCharacter(source)
-      local officername = char.char_fname..' '..char.char_lname
-      if split[3] == 'money' then
-        TriggerClientEvent('fsn_commands:hc:rob:money', tonumber(split[4]), source)
+      if split[2] == 'toggle' then
+        local target = tonumber(split[3])
+        TriggerClientEvent('fsn_police:handcuffs:hard', target, target)
       end
-      if split[3] == 'weapons' then
-        TriggerClientEvent('fsn_commands:hc:rob:weapons', tonumber(split[4]), source)
+      if split[2] == 'escort' then
+        TriggerClientEvent('fsn_police:toggleDrag', tonumber(split[3]), source)
       end
-      if split[3] == 'inventory' then
-        TriggerClientEvent('fsn_commands:hc:rob:inventory', tonumber(split[4]), source)
+      if split[2] == 'search' then
+        local char = getCharacter(source)
+        local officername = char.char_fname..' '..char.char_lname
+        TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[3]), source)
+        TriggerClientEvent('fsn_police:search:start:weapons', tonumber(split[3]), source)
+        TriggerClientEvent('fsn_police:search:start:money', tonumber(split[3]), source)
+        TriggerClientEvent('fsn_notify:displayNotification', source, 'Searching everything of: <b>'..tonumber(split[3]), 'centerRight', 7000, 'info')
+        TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[3]), 'Everything is being searched by: <b>'..officername..'</b><br><i>Money, weapons and inventory', 'centerRight', 7000, 'info')
+      end
+      if split[2] == 'rob' then
+        local char = getCharacter(source)
+        local officername = char.char_fname..' '..char.char_lname
+        TriggerClientEvent('fsn_commands:hc:rob', tonumber(split[4]), source)
+      end
+      if split[2] == 'takephone' then
+        TriggerClientEvent('fsn_commands:hc:takephone', tonumber(split[3]))
       end
     end
   end

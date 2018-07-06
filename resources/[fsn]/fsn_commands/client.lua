@@ -99,6 +99,25 @@ end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- MISC COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent('fsn_commands:hc:takephone')
+AddEventHandler('fsn_commands:hc:takephone', function()
+	TriggerEvent('fsn_notify:displayNotification', 'Your phone has been taken!', 'centerRight', 8000, 'success')
+	if exports.fsn_inventory:fsn_HasItem('phone') then
+		TriggerEvent('fsn_inventory:item:take', 'phone', 1)
+	end
+end)
+RegisterNetEvent('fsn_commands:getHDC')
+AddEventHandler('fsn_commands:getHDC', function(hdc)
+	handcuffcommand = hdc
+end)
+function fsn_getHDC()
+	return handcuffcommand
+end
+
+AddEventHandler('fsn_main:character', function()
+	TriggerServerEvent('fsn_commands:requestHDC')
+end)
+
 RegisterNetEvent('fsn_commands:dropweapon')
 AddEventHandler('fsn_commands:dropweapon', function()
 	if exports.fsn_ems:fsn_IsDead() then
@@ -115,7 +134,6 @@ end)
 
 RegisterNetEvent('fsn_commands:walk:set')
 AddEventHandler('fsn_commands:walk:set', function(src, set)
-	print('setting '..src..' to '..set)
 	if src == GetPlayerServerId(PlayerId()) then
 		ResetPedMovementClipset(GetPlayerPed(-1), 0.0)
 		if set ~= 'reset' then
@@ -289,7 +307,6 @@ RegisterNetEvent('fsn_police:runplate:target')
 AddEventHandler('fsn_police:runplate:target', function()
 	local car = fsn_lookingAt()
 	local plater = GetVehicleNumberPlateText(car)
-	print('running plate '..plater)
 	TriggerServerEvent('fsn_police:runplate::target', plater)
 end)
 

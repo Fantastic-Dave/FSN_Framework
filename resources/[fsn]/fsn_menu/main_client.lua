@@ -126,6 +126,11 @@ local windows = {
   [4] = false
 }
 local last_click = 0
+RegisterNetEvent('fsn_commands:getHDC')
+AddEventHandler('fsn_commands:getHDC', function(hdc)
+	hdccommand = hdc
+end)
+
 RegisterNUICallback( "ButtonClick", function( data, cb )
   if last_click + 10 > GetNetworkTime() then return end
   last_click = GetNetworkTime()
@@ -133,6 +138,47 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
   if ( data == "phone" ) then
 		ToggleActionMenu()
 		ExecuteCommand('p')
+  elseif split[1] == 'hdc' then
+    if split[2] == 'escort' then
+      local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+      if ply and ply ~= GetPlayerServerId(PlayerId()) then
+        ExecuteCommand(hdccommand..' escort '..ply)
+      else
+        TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+      end
+    end
+    if split[2] == 'cuff' then
+      local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+      if ply and ply ~= GetPlayerServerId(PlayerId()) then
+        ExecuteCommand(hdccommand..' toggle '..ply)
+      else
+        TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+      end
+    end
+    if split[2] == 'search' then
+      local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+      if ply and ply ~= GetPlayerServerId(PlayerId()) then
+        ExecuteCommand(hdccommand..' search '..ply)
+      else
+        TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+      end
+    end
+    if split[2] == 'rob' then
+      local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+      if ply and ply ~= GetPlayerServerId(PlayerId()) then
+        ExecuteCommand(hdccommand..' rob '..ply)
+      else
+        TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+      end
+    end
+    if split[2] == 'takephone' then
+      local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+      if ply and ply ~= GetPlayerServerId(PlayerId()) then
+        ExecuteCommand(hdccommand..' takephone '..ply)
+      else
+        TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+      end
+    end
   elseif split[1] == 'service' then
     if split[2] == 'ems' then
         ExecuteCommand('service request ems')
