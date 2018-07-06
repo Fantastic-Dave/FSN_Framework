@@ -11,8 +11,8 @@ local stations = {
     intake = {x=410.6350402832,y=-1640.0428466797,z=29.291925430298},
     name = "Tow Rental",
     blip = 68,
-    gettext = "Press ~INPUT_CONTEXT~ to ~b~rent ~w~a ~o~Tow Truck",
-    returntext = "Press ~INPUT_CONTEXT~ to ~r~return ~w~your ~o~Tow Truck",
+    gettext = "Press ~INPUT_CONTEXT~ to get a ~o~Tow Truck~w~ (~g~$2500~w~)",
+    returntext = "Press ~INPUT_CONTEXT~ to ~r~return ~w~your ~o~Tow Truck~w~ (~g~+$1000~w~)",
     cost = 1000,
     ret = 800,
     enabled = true
@@ -127,6 +127,8 @@ function SpawnTowTruck(x, y, z)
   	--SetEntityInvincible(taxi, false)
   	SetEntityAsMissionEntity(towtruck, true, true)
     DecorSetInt(towtruck, 'carOwner', GetPlayerServerId(PlayerId()))
+
+    TriggerEvent('fsn_cargarage:makeMine', towtruck, GetDisplayNameFromVehicleModel(GetEntityModel(towtruck)), GetVehicleNumberPlateText(towtruck))
     inService = true
   end
 end
@@ -182,9 +184,53 @@ function ReturnTruck()
   Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(towtruck))
   TriggerServerEvent('jTow:return', GetPlayerServerId(PlayerId()))
   fsn_SetJob('Unemployed')
+  TriggerEvent('fsn_bank:change:walletAdd', 1500)
   towtruck = false
-  inService = true
+  inService = false
 end
+
+local dispatch_calls = {}
+local disp_id = 0
+local last_disp = 0
+RegisterNetEvent('fsn_jobs:tow:request')
+AddEventHandler('fsn_jobs:tow:request', function(tbl)
+  if inService then
+    local x = tbl.x
+    local y = tbl.y
+    local var1, var2 = GetStreetNameAtCoord(x, y, z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
+    local sname = GetStreetNameFromHashKey(var1)
+    disp_id = #dispatch_calls+1
+    last_disp = current_time
+    table.insert(dispatch_calls, disp_id, {
+      type = 'tow call',
+      cx = x,
+      cy = y
+    })
+    SetNotificationTextEntry("STRING");
+    AddTextComponentString('Location: ~y~'..sname);
+    SetNotificationMessage("CHAR_DEFAULT", "CHAR_DEFAULT", true, 1, "Tow Dispatch", "");
+    DrawNotification(false, true);
+  end
+end)
+Citizen.CreateThread(function()
+   while true do
+     Citizen.Wait(0)
+     if disp_id ~= 0 then
+       if last_disp + 10 > current_time then
+         SetTextComponentFormat("STRING")
+         AddTextComponentString("Press ~INPUT_MP_TEXT_CHAT_TEAM~ to ~g~accept~w~ the call\nPress ~INPUT_PUSH_TO_TALK~ to ~r~decline~w~ the call")
+         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+         if IsControlJustPressed(0, 246) then
+           SetNewWaypoint(dispatch_calls[disp_id].cx, dispatch_calls[disp_id].cy)
+           last_disp = 0
+         end
+         if IsControlJustPressed(0, 249) then
+           last_disp = 0
+         end
+       end
+     end
+   end
+end)
 
 Citizen.CreateThread(function()
 	-- Blip creation
@@ -210,9 +256,18 @@ Citizen.CreateThread(function()
           else
             DisplayHelpText(v.gettext)
             if IsControlJustPressed(1,51) then
-              TriggerEvent('fsn_bank:change:walletMinus', 1500)
-              fsn_SetJob('Mechanic')
-              SpawnTowTruck(v.spawn.x,v.spawn.y,v.spawn.z)
+              if exports.fsn_main:fsn_GetWallet() >= 1500 then
+                TriggerEvent('fsn_bank:change:walletMinus', 1500)
+                fsn_SetJob('Mechanic')
+                SpawnTowTruck(v.spawn.x,v.spawn.y,v.spawn.z)
+              else
+                TriggerEvent("pNotify:SendNotification", {text = "You cannot afford the deposit!",
+                  layout = "centerRight",
+                  timeout = 1600,
+                  progressBar = false,
+                  type = "error",
+                })
+              end
             end
           end
         end
