@@ -36,28 +36,40 @@ function fsn_drawPlayerId(x,y,z, text, talking) -- some useful function, use it 
 end
 
 local isPlayerMenuActive = false
+current_characters = {}
+RegisterNetEvent('fsn_main:updateCharacters')
+AddEventHandler('fsn_main:updateCharacters', function(tbl)
+  current_characters = tbl
+end)
 
-local function fsn_displayPlayerMenu()
-  if not isPlayerMenuActive then
-    local players = {}
-    for k, v in pairs(current_characters) do
-	if NetworkIsPlayerActive(v.ply_id) then
-      table.insert(players, #players+1, {
-        ply_id = v.ply_id,
-        ply_name = v.ply_name,
-        char_name = v.char_fname..' '..v.char_lname
-      })
-else
-	print(v.ply_id..'is not active!')
-end
+function fsn_displayPlayerMenu()
+  local players = {}
+  for i=0,31 do
+    if NetworkIsPlayerActive(i) then
+      local idee = 0
+      for k, v in pairs(current_characters) do
+        if GetPlayerServerId(i) == v.ply_id then
+          idee = k
+        end
+      end
+      if GetPlayerPed(i) then
+        local character = current_characters[idee]
+        if character then
+          table.insert(players, #players+1, {
+            ply_id = character.ply_id,
+            ply_name = character.ply_name,
+            char_name = character.char_fname..' '..character.char_lname
+          })
+        end
+      end
     end
-    players = json.encode(players)
-    SendNUIMessage({
-      enable = true,
-      players = players
-    })
-    isPlayerMenuActive = true
   end
+  players = json.encode(players)
+  SendNUIMessage({
+    enable = true,
+    players = players
+  })
+  isPlayerMenuActive = true
 end
 
 local function fsn_hidePlayerMenu()
