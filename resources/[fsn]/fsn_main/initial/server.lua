@@ -312,13 +312,15 @@ end)
 RegisterServerEvent('fsn_police:chat:ticket')
 AddEventHandler('fsn_police:chat:ticket', function(suspectID, jailFine, jailTime, charges)
   for k, v in pairs(current_characters) do
-    print(v.ply_id..' != '..suspectID)
-    if v.ply_id == tonumber(suspectID) then
-      if tonumber(jailTime) > 0 then
-        TriggerClientEvent('chatMessage', -1, '', {255,255,255}, v.char_fname..' '..v.char_lname.. ' has been JAILED for ^3'..jailTime..'^0 months for ^1'..charges)
-      end
-      if tonumber(jailFine) > 0 then
-        TriggerClientEvent('chatMessage', -1, '', {255,255,255}, v.char_fname..' '..v.char_lname.. ' has been FINED ^3$'..jailFine..'^0 for ^1'..charges)
+    if v.ply_id then
+      print(v.ply_id..' != '..suspectID)
+      if v.ply_id == tonumber(suspectID) then
+        if tonumber(jailTime) > 0 then
+          TriggerClientEvent('chatMessage', -1, '', {255,255,255}, v.char_fname..' '..v.char_lname.. ' has been JAILED for ^3'..jailTime..'^0 months for ^1'..charges)
+        end
+        if tonumber(jailFine) > 0 then
+          TriggerClientEvent('chatMessage', -1, '', {255,255,255}, v.char_fname..' '..v.char_lname.. ' has been FINED ^3$'..jailFine..'^0 for ^1'..charges)
+        end
       end
     end
   end
