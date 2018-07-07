@@ -2,6 +2,12 @@ local current_time = 0
 local cracking = false
 local start_time = 0
 local cracking_id = 0
+local onduty_police = {}
+AddEventHandler('fsn_police:update', function(cops)
+  print(':fsn_police: There are '..#cops..' on duty!')
+  onduty_police = cops
+end)
+
 function fsn_drawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
     local px,py,pz=table.unpack(GetGameplayCamCoords())
@@ -358,78 +364,84 @@ Citizen.CreateThread(function()
           end
         else
           if GetDistanceBetweenCoords(door.keypad.x, door.keypad.y, door.keypad.z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
-            if not cracking then
-              SetTextComponentFormat("STRING")
-              AddTextComponentString("Press ~INPUT_PICKUP~ to input a code\nPress ~INPUT_LOOK_BEHIND~ to begin cracking")
-              DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-            end
-            if IsControlJustPressed(1,51) and not cracking then
-              ---------------------------------------------------
-              if door.keypad.crackattempts == 0 then
-                local code = ''
-                for i=1,door.keypad.difficulty do
-                  code = code..tostring(math.random(0,9))
-                end
-                door.keypad.code = code
+            if #onduty_police >= 3 then
+              if not cracking then
+                SetTextComponentFormat("STRING")
+                AddTextComponentString("Press ~INPUT_PICKUP~ to input a code\nPress ~INPUT_LOOK_BEHIND~ to begin cracking")
+                DisplayHelpTextFromStringLabel(0, 0, 1, -1)
               end
-              ---------------------------------------------------
-              --print(door.keypad.code)
-              door.keypad.crackattempts = door.keypad.crackattempts + 1
-              DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", door.keypad.difficulty)
-              local editOpen = true
-        			while UpdateOnscreenKeyboard() == 0 or editOpen do
-                drawTxt('Input a ~b~'..door.keypad.difficulty..'~w~ digit code:',4,1,0.5,0.30,0.6,255,255,255,255)
-        				if UpdateOnscreenKeyboard() ~= 0 then
-        					editOpen = false
-                  if UpdateOnscreenKeyboard() == 1 then
-                    codeinput = tostring(GetOnscreenKeyboardResult())
-                    if codeinput == door.keypad.code then
-                      resultDisplay(true)
-                      door.unlocked = true
-                    else
-                      resultDisplay(false)
-                      if door.keypad.crackattempts > 3 then
-                        local pos = GetEntityCoords(GetPlayerPed(-1))
-                        local coords = {
-                          x = pos.x,
-                          y = pos.y,
-                          z = pos.z
-                        }
-                        TriggerServerEvent('fsn_police:dispatch', coords, 7)
-                      end
-                      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", door.keypad.difficulty)
-                      editOpen = true
-                      door.keypad.crackattempts = door.keypad.crackattempts + 1
-                    end
+              if IsControlJustPressed(1,51) and not cracking then
+                ---------------------------------------------------
+                if door.keypad.crackattempts == 0 then
+                  local code = ''
+                  for i=1,door.keypad.difficulty do
+                    code = code..tostring(math.random(0,9))
                   end
-        				end
-        			Wait(1)
-        	    end
-            end
-            if IsControlJustPressed(1, 26) and not cracking then
-			local pos = GetEntityCoords(GetPlayerPed(-1))
-			local coords = {
-				x = pos.x,
-				y = pos.y,
-				z = pos.z
-			}
-			TriggerServerEvent('fsn_police:dispatch', coords, 7)
-              while not HasAnimDictLoaded('mp_heists@keypad@') do
-                RequestAnimDict('mp_heists@keypad@')
-                Citizen.Wait(5)
+                  door.keypad.code = code
+                end
+                ---------------------------------------------------
+                --print(door.keypad.code)
+                door.keypad.crackattempts = door.keypad.crackattempts + 1
+                DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", door.keypad.difficulty)
+                local editOpen = true
+          			while UpdateOnscreenKeyboard() == 0 or editOpen do
+                  drawTxt('Input a ~b~'..door.keypad.difficulty..'~w~ digit code:',4,1,0.5,0.30,0.6,255,255,255,255)
+          				if UpdateOnscreenKeyboard() ~= 0 then
+          					editOpen = false
+                    if UpdateOnscreenKeyboard() == 1 then
+                      codeinput = tostring(GetOnscreenKeyboardResult())
+                      if codeinput == door.keypad.code then
+                        resultDisplay(true)
+                        door.unlocked = true
+                      else
+                        resultDisplay(false)
+                        if door.keypad.crackattempts > 3 then
+                          local pos = GetEntityCoords(GetPlayerPed(-1))
+                          local coords = {
+                            x = pos.x,
+                            y = pos.y,
+                            z = pos.z
+                          }
+                          TriggerServerEvent('fsn_police:dispatch', coords, 7)
+                        end
+                        DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", door.keypad.difficulty)
+                        editOpen = true
+                        door.keypad.crackattempts = door.keypad.crackattempts + 1
+                      end
+                    end
+          				end
+          			Wait(1)
+          	    end
               end
-              RequestAnimSet( "move_ped_crouched" )
-              while ( not HasAnimSetLoaded( "move_ped_crouched" ) ) do
-                  Citizen.Wait( 100 )
+              if IsControlJustPressed(1, 26) and not cracking then
+          			local pos = GetEntityCoords(GetPlayerPed(-1))
+          			local coords = {
+          				x = pos.x,
+          				y = pos.y,
+          				z = pos.z
+          			}
+          			TriggerServerEvent('fsn_police:dispatch', coords, 7)
+                while not HasAnimDictLoaded('mp_heists@keypad@') do
+                  RequestAnimDict('mp_heists@keypad@')
+                  Citizen.Wait(5)
+                end
+                RequestAnimSet( "move_ped_crouched" )
+                while ( not HasAnimSetLoaded( "move_ped_crouched" ) ) do
+                    Citizen.Wait( 100 )
+                end
+                SetPedMovementClipset( GetPlayerPed(-1), "move_ped_crouched", 0.25 )
+                FreezeEntityPosition(GetPlayerPed(-1), true)
+                TaskPlayAnim(GetPlayerPed(-1), 'mp_heists@keypad@', 'enter', 8.0, 1.0, -1, 0, 1.0, 0, 0, 0)
+                Citizen.Wait(1)
+                TaskPlayAnim(GetPlayerPed(-1), 'mp_heists@keypad@', 'idle_a', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
+                start_time = current_time
+                cracking_id = k
+                cracking = true
               end
-              SetPedMovementClipset( GetPlayerPed(-1), "move_ped_crouched", 0.25 )
-              FreezeEntityPosition(GetPlayerPed(-1), true)
-              TaskPlayAnim(GetPlayerPed(-1), 'mp_heists@keypad@', 'enter', 8.0, 1.0, -1, 0, 1.0, 0, 0, 0)
-              Citizen.Wait(1)
-              TaskPlayAnim(GetPlayerPed(-1), 'mp_heists@keypad@', 'idle_a', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
-              start_time = current_time
-              cracking_id = k
-              cracking = true
+            else
+              SetTextComponentFormat("STRING")
+              AddTextComponentString("~r~Not enough cops for a heist")
+              DisplayHelpTextFromStringLabel(0, 0, 1, -1)
             end
           else
             if door.keypad.code ~= 0 then
