@@ -38,7 +38,12 @@ end)
 
 RegisterServerEvent('fsn_main:update:myCharacter')
 AddEventHandler('fsn_main:update:myCharacter', function(index, char)
-  current_characters[index] = char
+  for k, v in pairs(current_characters) do
+    if v.ply_id == source then
+      v = char
+    end
+  end
+  --current_characters[index] = char
 end)
 
 RegisterServerEvent('fsn_main:getCharacter')
@@ -48,6 +53,7 @@ AddEventHandler('fsn_main:getCharacter', function(char_id)
   local char = MySQL.Sync.fetchAll("SELECT * FROM `fsn_characters` WHERE `char_id` = '"..char_id.."'")
   if char[1].steamid == steamid then
     TriggerClientEvent('fsn_main:initiateCharacter', source, char)
+    --[[
     for k, v in pairs(current_characters) do
       if v.ply_id == source then
         table.remove(current_characters, k)
@@ -58,6 +64,7 @@ AddEventHandler('fsn_main:getCharacter', function(char_id)
         table.remove(current_characters,k)
       end
     end
+    ]]
     table.insert(current_characters, #current_characters+1, {
       char_id = char[1].char_id,
       ply_id = source,
@@ -77,6 +84,13 @@ AddEventHandler('fsn_main:getCharacter', function(char_id)
     TriggerEvent('fsn_main:updateCharacters', current_characters)
   else
     DropPlayer(source, ':FSN: You tried to load a character you do not own.')
+  end
+end)
+
+AddEventHandler('fsn_main:updateCharacters', function(char)
+  for k, c in pairs(char) do
+    print(':DEBUG: Character Update')
+    print(c.ply_id..'> F: '..c.char_fname..', L: '..c.char_lname)    
   end
 end)
 
