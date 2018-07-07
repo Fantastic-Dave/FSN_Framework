@@ -88,9 +88,9 @@ AddEventHandler('fsn_main:getCharacter', function(char_id)
 end)
 
 AddEventHandler('fsn_main:updateCharacters', function(char)
+  print(':DEBUG: Character Update')
   for k, c in pairs(char) do
-    print(':DEBUG: Character Update')
-    print(c.ply_id..'> F: '..c.char_fname..', L: '..c.char_lname)    
+    print(c.ply_id..'> F: '..c.char_fname..', L: '..c.char_lname)
   end
 end)
 
