@@ -534,6 +534,25 @@ AddEventHandler('chatMessage', function(source, auth, msg)
         end
         if split[2] == 'command' then
           if fsn_policeCommand(source) then
+            if split[3] == 'givelicense' then
+              if tonumber(split[4]) then
+                if split[5] == 'driver' or split[5] == 'drivers' then
+                  TriggerClientEvent('fsn_licenses:police:give', tonumber(split[4]), 'driver')
+                  TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[4]), 'You were granted a <b>Drivers License</b> with 0 infractions', 'centerRight', 7000, 'info')
+                  TriggerClientEvent('fsn_notify:displayNotification', source, 'You granted '..split[4]..' a <b>Drivers License', 'centerRight', 7000, 'info')
+                elseif split[5] == 'weapon' or split[5] == 'weapons' then
+                  TriggerClientEvent('fsn_licenses:police:give', tonumber(split[4]), 'weapon')
+                  TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[4]), 'You were granted a <b>Weapons License</b> with 0 infractions', 'centerRight', 7000, 'info')
+                  TriggerClientEvent('fsn_notify:displayNotification', source, 'You granted '..split[4]..' a <b>Weapons License', 'centerRight', 7000, 'info')
+                elseif split[5] == 'pilot' or split[5] == 'pilots' then
+                  TriggerClientEvent('fsn_licenses:police:give', tonumber(split[4]), 'pilot')
+                  TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[4]), 'You were granted a <b>Pilots License</b> with 0 infractions', 'centerRight', 7000, 'info')
+                  TriggerClientEvent('fsn_notify:displayNotification', source, 'You granted '..split[4]..' a <b>Pilots License', 'centerRight', 7000, 'info')
+                else
+                  TriggerClientEvent('fsn_notify:displayNotification', source, ':FSN: That is not a valid license type.', 'centerRight', 7000, 'error')
+                end
+              end
+            end
             if split[3] == 'duty' then
               if tonumber(split[4]) then
                 TriggerClientEvent('fsn_police:command:duty', tonumber(split[4]))

@@ -91,11 +91,21 @@ AddEventHandler('fsn_licenses:display', function(type)
     end
   elseif type == 'weapon' then
     if licenses["weapon"] then
-      TriggerServerEvent('fsn_licenses:chat', name, licenses["weapons"], fsn_NearestPlayersC(pos.x, pos.y, pos.z, 5))
+      TriggerServerEvent('fsn_licenses:chat', name, licenses["weapon"], fsn_NearestPlayersC(pos.x, pos.y, pos.z, 5))
     else
       TriggerEvent('fsn_notify:displayNotification', 'You do not have a weapons license.', 'centerLeft', 4000, 'error')
     end
   end
+end)
+
+RegisterNetEvent('fsn_licenses:police:give')
+AddEventHandler('fsn_licenses:police:give', function(type)
+  licenses[type] = {}
+  licenses[type].date = GetNetworkTime()
+  licenses[type].type = type
+  licenses[type].infractions = 0
+  licenses[type].status = 'ACTIVE'
+  TriggerServerEvent('fsn_licenses:update', charid, json.encode(licenses))
 end)
 
 function fsn_hasLicense(type)

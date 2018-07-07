@@ -265,6 +265,16 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
       end
     end
     if split[2] == 'command' then
+      if split[3] == 'license' then
+        ToggleActionMenu()
+        local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+        if ply and ply ~= GetPlayerServerId(PlayerId()) then
+          --/pd command givelicense 1 pilot
+          ExecuteCommand('pd command givelicense '..ply..' '..split[4])
+        else
+          TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+        end
+      end
       if split[3] == 'duty' then
         ExecuteCommand('police command duty '..GetPlayerServerId(PlayerId()))
         ToggleActionMenu()
