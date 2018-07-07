@@ -407,6 +407,13 @@ Citizen.CreateThread(function()
         	    end
             end
             if IsControlJustPressed(1, 26) and not cracking then
+			local pos = GetEntityCoords(GetPlayerPed(-1))
+			local coords = {
+				x = pos.x,
+				y = pos.y,
+				z = pos.z
+			}
+			TriggerServerEvent('fsn_police:dispatch', coords, 7)
               while not HasAnimDictLoaded('mp_heists@keypad@') do
                 RequestAnimDict('mp_heists@keypad@')
                 Citizen.Wait(5)

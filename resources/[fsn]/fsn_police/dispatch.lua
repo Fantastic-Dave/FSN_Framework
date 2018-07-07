@@ -79,6 +79,9 @@ function displayDispatch(x,y,z,id)
         cx = x,
         cy = y
       })
+	  if id == 7 then
+		TriggerEvent('chatMessage', '', {255,255,255}, '^6^*:fsn_police:^0^r A BANK IS BEING ROBBED @ '..sname)
+	  end
       SetNotificationTextEntry("STRING");
       AddTextComponentString('Call: ~r~'..actions[id].tencode..'~w~ ('..actions[id].name..')\nLocation: ~y~'..sname);
       SetNotificationMessage("CHAR_DEFAULT", "CHAR_DEFAULT", true, 1, "~g~DISPATCH:~s~", "");
