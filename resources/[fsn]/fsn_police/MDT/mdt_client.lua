@@ -26,7 +26,7 @@ end)
 
 RegisterNUICallback("booking-submit-now", function(data, cb)
   TriggerEvent('fsn_police:MDT:toggle')
-  --TriggerServerEvent('fsn_police:database:CPIC', data)
+  TriggerServerEvent('fsn_police:database:CPIC', data)
   TriggerServerEvent('fsn_police:chat:ticket', data.suspectID, data.jailFine, data.jailTime, data.charges)
   -- TICKET
   if tonumber(data.jailFine) > 0 then
