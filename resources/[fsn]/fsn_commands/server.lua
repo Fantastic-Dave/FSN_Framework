@@ -473,6 +473,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/police' or split[1] == '/pd' then
     if fsn_policeOnDuty(source) then
       if split[2] then
+        if split[2] == 'cpic' then
+          TriggerClientEvent('fsn_commands:police:cpic:trigger', source, split[3])
+        end
         if split[2] == 'search' then
           if split[3] == 'all' then
             if split[4] then

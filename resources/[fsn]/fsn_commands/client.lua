@@ -202,6 +202,10 @@ end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- POLICE COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent('fsn_commands:police:cpic:trigger')
+AddEventHandler('fsn_commands:police:cpic:trigger', function(id)
+	TriggerServerEvent('fsn_police:database:CPIC:search', id)
+end)
 RegisterNetEvent('fsn_commands:police:livery')
 AddEventHandler('fsn_commands:police:livery', function(num)
 	if IsPedInAnyVehicle(GetPlayerPed(-1)) then
