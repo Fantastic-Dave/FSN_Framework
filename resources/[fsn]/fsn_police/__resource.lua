@@ -4,6 +4,7 @@ server_script 'server.lua'
 
 
 client_script 'MDT/mdt_client.lua'
+server_script 'MDT/mdt_server.lua'
 ui_page 'MDT/gui/index.html'
 files({
   'MDT/gui/index.html',

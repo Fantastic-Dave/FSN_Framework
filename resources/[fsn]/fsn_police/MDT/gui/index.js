@@ -344,7 +344,7 @@ var charges = [
 var currentCharges = []
 
 function updateCharges() {
-	var str = '('+timeNow()+' - A-3)'
+	var str = ''
 	if (currentCharges.length > 0) {
 		for(var i = 0; i < currentCharges.length; i++) {
 			var obj = currentCharges[i];
