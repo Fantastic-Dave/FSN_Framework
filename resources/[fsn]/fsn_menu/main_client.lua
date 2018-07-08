@@ -248,6 +248,63 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
       end
     end
   elseif split[1] == 'police' then
+    if split[2] == 'search' then
+      --/police search all 1
+      if split[3] == 'cpic' then
+        ToggleActionMenu()
+        local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+        if ply and ply ~= GetPlayerServerId(PlayerId()) then
+          ExecuteCommand('pd cpic '..ply)
+        else
+          TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+        end
+      end
+      if split[3] == 'all' then
+        ToggleActionMenu()
+        local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+        if ply and ply ~= GetPlayerServerId(PlayerId()) then
+          ExecuteCommand('pd search all '..ply)
+        else
+          TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+        end
+      end
+      if split[3] == 'weapons' then
+        ToggleActionMenu()
+        local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+        if ply and ply ~= GetPlayerServerId(PlayerId()) then
+          ExecuteCommand('pd search weapons '..ply)
+        else
+          TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+        end
+      end
+      if split[3] == 'inventory' then
+        ToggleActionMenu()
+        local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+        if ply and ply ~= GetPlayerServerId(PlayerId()) then
+          ExecuteCommand('pd search inventory '..ply)
+        else
+          TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+        end
+      end
+      if split[3] == 'money' then
+        ToggleActionMenu()
+        local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+        if ply and ply ~= GetPlayerServerId(PlayerId()) then
+          ExecuteCommand('pd search money '..ply)
+        else
+          TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+        end
+      end
+      if split[3] == 'strip' then
+        ToggleActionMenu()
+        local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+        if ply and ply ~= GetPlayerServerId(PlayerId()) then
+          ExecuteCommand('pd search strip '..ply)
+        else
+          TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+        end
+      end
+    end
     if split[2] == 'k9' then
       if split[3] == 'toggle' then
         TriggerEvent("K9:ToggleK9", 'a_c_husky')
@@ -269,7 +326,6 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
         ToggleActionMenu()
         local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
         if ply and ply ~= GetPlayerServerId(PlayerId()) then
-          --/pd command givelicense 1 pilot
           ExecuteCommand('pd command givelicense '..ply..' '..split[4])
         else
           TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')

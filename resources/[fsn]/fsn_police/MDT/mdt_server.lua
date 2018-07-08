@@ -25,6 +25,7 @@ RegisterServerEvent('fsn_police:database:CPIC:search')
 AddEventHandler('fsn_police:database:CPIC:search', function(id)
   local res = {}
   local src = source
+  id = exports.fsn_main:fsn_CharID(id)
   MySQL.Async.fetchAll('SELECT * FROM `fsn_tickets` WHERE `receiver_id` = @id', {['@id'] = id}, function(results)
     for k, v in pairs(results) do
       local ass = os.date("*t", v.ticket_date)
