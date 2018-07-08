@@ -29,8 +29,12 @@ AddEventHandler('fsn_police:database:CPIC:search:result', function(data)
   if MDTOpen then
 
   else
-    for k, v in pairs(data) do
-      TriggerEvent('chatMessage', '', {255,255,255}, '^*^3CPIC ('..v.receiver_id..') | ^2JAILED: ^r^0'..v.ticket_jailtime..' ^*^2| TICKET:^r^0 $'..v.ticket_amount..' ^*^2| CHARGES:^r^0 '..v.ticket_charges..' ^*^2| OFFICER:^r^0 '..v.officer_name..' ^*^2| DATE:^r^0 '..v.ticket_date)
+    if #data > 0 then
+      for k, v in pairs(data) do
+        TriggerEvent('chatMessage', '', {255,255,255}, '^*^3CPIC ('..v.receiver_id..') | ^2JAILED: ^r^0'..v.ticket_jailtime..' ^*^2| TICKET:^r^0 $'..v.ticket_amount..' ^*^2| CHARGES:^r^0 '..v.ticket_charges..' ^*^2| OFFICER:^r^0 '..v.officer_name..' ^*^2| DATE:^r^0 '..v.ticket_date)
+      end
+    else
+      TriggerEvent('chatMessage', '', {255,255,255}, '^*^3CPIC | ^r^2No criminal record found.')
     end
   end
 end)
