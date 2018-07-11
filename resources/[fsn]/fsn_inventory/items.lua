@@ -1,3 +1,4 @@
+picklocking = false
 items_table = {
   ["repair_kit"] = {
     display_name = 'Repair Kit',
@@ -19,13 +20,15 @@ items_table = {
     weight = 0.0,
     desc = 'Launder this.',
     use = 'unavailable',
+    modelhash = 290621560
   },
   ["backpack"] = {
     display_name = 'Backpack',
     weight = 3.0,
     desc = 'This lets you hold more',
     use = 'unavailable',
-	price = 1000
+	  price = 1000,
+    modelhash = 332394125
   },
   ["beef_jerky"] = {
     display_name = 'Beef Jerky',
@@ -35,7 +38,8 @@ items_table = {
       TriggerEvent('fsn_inventory:use:food', 15)
       TriggerEvent('fsn_inventory:item:take', 'beef_jerky', 1)
     end,
-	price = 4
+  	price = 4,
+    modelhash = -2054442544
   },
   ["cupcake"] = {
     display_name = 'Cupcake',
@@ -45,7 +49,8 @@ items_table = {
       TriggerEvent('fsn_inventory:use:food', 5)
       TriggerEvent('fsn_inventory:item:take', 'cupcake', 1)
     end,
-	price = 1
+  	price = 1,
+    modelhash = -2054442544
   },
   ["microwave_burrito"] = {
     display_name = 'Microwave Burrito',
@@ -55,7 +60,8 @@ items_table = {
       TriggerEvent('fsn_inventory:use:food', 20)
       TriggerEvent('fsn_inventory:item:take', 'microwave_burrito', 1)
     end,
-	price = 8
+  	price = 8,
+    modelhash = -2054442544
   },
   ["panini"] = {
     display_name = 'Panini',
@@ -65,7 +71,8 @@ items_table = {
       TriggerEvent('fsn_inventory:use:food', 15)
       TriggerEvent('fsn_inventory:item:take', 'panini', 1)
     end,
-	price = 6
+  	price = 6,
+    modelhash = -2054442544
   },
   ["pepsi"] = {
     display_name = 'Pepsi',
@@ -75,7 +82,8 @@ items_table = {
       TriggerEvent('fsn_inventory:use:drink', 10)
       TriggerEvent('fsn_inventory:item:take', 'pepsi', 1)
     end,
-	price = 5
+  	price = 5,
+    modelhash = -1301244203
   },
   ["pepsi_max"] = {
     display_name = 'Pepsi Max',
@@ -85,7 +93,8 @@ items_table = {
       TriggerEvent('fsn_inventory:use:drink', 15)
       TriggerEvent('fsn_inventory:item:take', 'pepsi_max', 1)
     end,
-	price = 6
+	price = 6,
+  modelhash = -1301244203
   },
   ["water"] = {
     display_name = 'Water',
@@ -95,7 +104,8 @@ items_table = {
       TriggerEvent('fsn_inventory:use:drink', 20)
       TriggerEvent('fsn_inventory:item:take', 'water', 1)
     end,
-	price = 3
+	  price = 3,
+    modelhash = -1301244203
   },
   ["coffee"] = {
     display_name = 'Coffee',
@@ -105,31 +115,38 @@ items_table = {
       TriggerEvent('fsn_inventory:use:drink', 25)
       TriggerEvent('fsn_inventory:item:take', 'coffee', 1)
     end,
-	price = 10
+	  price = 10,
+    modelhash = -1301244203
   },
   ["lockpick"] = {
     display_name = 'Lockpick',
     weight = 1.5,
     desc = 'you dodgy guy',
     use = function()
-      FreezeEntityPosition(GetPlayerPed(-1), true)
-      while ( not HasAnimDictLoaded( "mini@safe_cracking" ) ) do
-          RequestAnimDict( "mini@safe_cracking" )
-          Citizen.Wait( 5 )
+      if not picklocking then
+        picklocking = true
+        FreezeEntityPosition(GetPlayerPed(-1), true)
+        while ( not HasAnimDictLoaded( "mini@safe_cracking" ) ) do
+            RequestAnimDict( "mini@safe_cracking" )
+            Citizen.Wait( 5 )
+        end
+        TaskPlayAnim(GetPlayerPed(-1), "mini@safe_cracking", "idle_base", 8.0, 1.0, 6000, 2, 0, 0, 1, 1 )
+        TriggerEvent('fsn_vehiclecontrol:lockpick')
+        Citizen.Wait(6000)
+        FreezeEntityPosition(GetPlayerPed(-1), false)
+        picklocking = false
       end
-      TaskPlayAnim(GetPlayerPed(-1), "mini@safe_cracking", "idle_base", 8.0, 1.0, 6000, 2, 0, 0, 1, 1 )
-      TriggerEvent('fsn_vehiclecontrol:lockpick')
-      Citizen.Wait(6000)
-      FreezeEntityPosition(GetPlayerPed(-1), false)
     end,
-	price = 250
+	  price = 250,
+    modelhash = 495450405
   },
   ["handcuffs"] = {
     display_name = 'Handcuffs',
     weight = 3,
     desc = 'you dodgy guy',
     use = 'unavailable',
-	  price = 1500
+	  price = 1500,
+    modelhash = 1070220657
   },
   ["phone"] = {
     display_name = 'Phone',
@@ -138,6 +155,7 @@ items_table = {
     use = function()
       TriggerEvent('fsn_phone:togglePhone')
     end,
+    modelhash = 974883178,
     price = 2500
   },
   ["2g_weed"] = {
@@ -147,7 +165,7 @@ items_table = {
     use = function()
       TriggerEvent('fsn_notify:displayNotification', 'Head to weed crafting to roll a joint', 'centerLeft', 3500, 'error')
     end,
-    modelhash = 1125649061,
+    modelhash = -1964997422,
     price = 0
   },
   ["joint"] = {
@@ -157,7 +175,7 @@ items_table = {
     use = function()
       TriggerEvent('fsn_notify:displayNotification', 'Sell this joint to locals<br>We\'re working on making these smokable', 'centerLeft', 3500, 'error')
     end,
-    modelhash = -1630172026,
+    modelhash = -1199910959,
     price = 0
   },
   ["acetone"] = {
@@ -167,6 +185,7 @@ items_table = {
     use = function()
       TriggerEvent('fsn_notify:displayNotification', 'Head to Meth Crafting to cook this.', 'centerLeft', 3500, 'error')
     end,
+    modelhash = -1964997422,
     price = 0
   },
   ["phosphorus"] = {
@@ -176,6 +195,7 @@ items_table = {
     use = function()
       TriggerEvent('fsn_notify:displayNotification', 'Head to Meth Cooking to cook this.', 'centerLeft', 3500, 'error')
     end,
+    modelhash = -1964997422,
     price = 0
   },
   ["meth_rocks"] = {
@@ -186,7 +206,7 @@ items_table = {
       TriggerEvent('fsn_notify:displayNotification', 'Sell this meth to locals<br>We\'re working on making these takeable', 'centerLeft', 3500, 'error')
     end,
     price = 0,
-    hashmodel = 1808635348
+    hashmodel = 285917444
   },
   ["packaged_cocaine"] = {
     display_name = 'Packaged Cocaine',
