@@ -189,7 +189,7 @@ local my_entities = {}
 --------------------------------------------------------------------------------------------------------
 RegisterNetEvent('fsn_inventory:itemhasdropped')
 AddEventHandler('fsn_inventory:itemhasdropped', function(item, hash, xyz, amount, pickupid)
-  TriggerEvent('fsn_notify:displayNotification', item..' was dropped @ '..xyz[1], 'centerLeft', 3000, 'error')
+  --TriggerEvent('fsn_notify:displayNotification', item..' was dropped @ '..xyz[1], 'centerLeft', 3000, 'error')
   table.insert(dropped_entities,#dropped_entities+1, {
     item = item,
     hash = hash,
@@ -219,7 +219,11 @@ Citizen.CreateThread(function()
         			end
             end
           end
-
+          while not HasAnimDictLoaded('pickup_object') do
+            RequestAnimDict('pickup_object')
+            Citizen.Wait(5)
+          end
+          TaskPlayAnim(GetPlayerPed(-1), 'pickup_object', 'pickup_low', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
           SetEntityAsMissionEntity(object, true, true)
 		      DeleteObject(object)
           if DoesObjectOfTypeExistAtCoords(obj.xyz[1], obj.xyz[2], obj.xyz[3], 5.0, obj.hash, true) then
@@ -228,6 +232,9 @@ Citizen.CreateThread(function()
             DeleteObject(object)
           end
           TriggerServerEvent('fsn_inventory:itempickup', obj.pickupid)
+          TriggerEvent('fsn_commands:me', 'picked up '..obj.amount..' '..items_table[obj.item].display_name)
+          Citizen.Wait(1000)
+          ClearPedTasks(GetPlayerPed(-1))
         end
       end
     end
@@ -451,9 +458,9 @@ Citizen.CreateThread(function()
         if drugas ~= false and not selling then
           for obj in EnumeratePeds() do
             if obj ~= GetPlayerPed(-1) and not IsEntityDead(obj) and not IsPedInAnyVehicle(obj) and GetDistanceBetweenCoords(GetEntityCoords(obj), GetEntityCoords(GetPlayerPed(-1))) < 2 and not IsEntityDead(obj) then
-              fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '')
-              if table.contains(sold_peds, GetEntityModel(obj)) then
-
+              --fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '')
+              if table.contains(sold_peds, obj) then
+                fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '~R~Already bought')
               else
                 local netId = NetworkGetNetworkIdFromEntity(obj)
                 if not NetworkHasControlOfNetworkId(netId) then
@@ -462,11 +469,12 @@ Citizen.CreateThread(function()
             				Citizen.Wait(1)
             			end
                 end
-                SetTextComponentFormat("STRING")
-                AddTextComponentString("Press ~INPUT_PICKUP~ to sell ~g~"..items_table[drugas].display_name)
-                DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+                fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, 'Press ~g~E~w~ to sell '..drugas)
+                --SetTextComponentFormat("STRING")
+                --AddTextComponentString("Press ~INPUT_PICKUP~ to sell ~g~"..items_table[drugas].display_name)
+                --DisplayHelpTextFromStringLabel(0, 0, 1, -1)
                 if IsControlJustPressed(0, 38) then
-                  table.insert(sold_peds, #sold_peds+1, {GetEntityModel(obj), true})
+                  table.insert(sold_peds, #sold_peds+1, {obj, true})
                   TriggerEvent('fsn_notify:displayNotification', 'You ask if they would like to buy...', 'centerLeft', 3000, 'info')
                   Citizen.Wait(1000)
                   local try = math.random(0, 100)
@@ -500,7 +508,7 @@ Citizen.CreateThread(function()
                         TriggerServerEvent('fsn_police:dispatch', coords, 3)
                       end
                     end
-                    TriggerEvent('fsn_notify:displayNotification', '', 'centerLeft', 3000, 'info')
+                    TriggerEvent('fsn_notify:displayNotification', 'They are not interested', 'centerLeft', 3000, 'error')
                   end
                 end
               end
@@ -1114,10 +1122,13 @@ Citizen.CreateThread(function()
               DisplayHelpTextFromStringLabel(0, 0, 1, -1)
               if IsControlJustPressed(0, 38) then
                 --TriggerEvent('chatMessage', 'Dealer', {244, 223, 66}, 'Deliver these '..quote[2]..' drug packages for me, and I\'ll do you '..quote[1]..' on those unmarked bills')
-              SetNotificationTextEntry("STRING");
-              AddTextComponentString('Deliver these ~r~'..quote[2]..'~w~ drug packages for me, and I\'ll do you ~r~'..quote[1]..'~w~ on those unmarked bills');
-              SetNotificationMessage("CHAR_RON", "CHAR_RON", true, 1, "~y~Dealer's offer:~s~", "");
-              DrawNotification(false, true);
+                local amount = inventory["dirty_money"].amount
+                local minus = inventory["dirty_money"].amount / quote[1]
+                amount = amount - math.floor(minus)
+                SetNotificationTextEntry("STRING");
+                AddTextComponentString('Deliver these ~r~'..quote[2]..'~w~ drug packages for me, and I\'ll do you ~g~$'..amount..'~w~ (~g~'..quote[1]'%~w~) on those unmarked bills');
+                SetNotificationMessage("CHAR_RON", "CHAR_RON", true, 1, "~y~Dealer's offer:~s~", "");
+                DrawNotification(false, true);
                 quoted = true
                 needed_delivery = quote[2]
               end
