@@ -429,7 +429,7 @@ function booking_reset() {
 }
 
 function booking_submit_now() {
-	if ($("#booking-player-id").val() != '' && $("#booking-player-name").val() != '' && $("#booking-officer-name").val() != '' && $("#booking-charges-textarea").val() != '' && $("#booking-fine", "#booking-jail").val() != '') {
+	if ($("#booking-player-id").val() != '' && $("#booking-player-name").val() != '' && $("#booking-officer-name").val() != '' && $("#booking-charges-textarea").val() != '' && $("#booking-fine").val() != '', $("#booking-jail").val() != '') {
 		
 		$.post('http://fsn_police/booking-submit-now', JSON.stringify({
 			"suspectID":$("#booking-player-id").val(),
@@ -450,7 +450,23 @@ function booking_submit_now() {
 }
 
 function booking_submit_warrant() {
-	
+	if ($("#booking-description").val() != '' && $("#booking-player-name").val() != '' && $("#booking-officer-name").val() != '' && $("#booking-charges-textarea").val() != '' && $("#booking-fine").val() != '', $("#booking-jail").val() != '') {	
+		$.post('http://fsn_police/booking-submit-warrant', JSON.stringify({
+			"situationDesc":$("#booking-description").val(),
+			"suspectName":$("#booking-player-name").val(),
+			"officerName":$("#booking-officer-name").val(),
+			"charges":$("#booking-charges-textarea").val(),
+			"jailTime":$("#booking-jail").val(),
+			"jailFine":$("#booking-fine").val(),
+		}));
+	} else {
+		$('#booking-warrant-button').css('background-color','red')
+		$('#booking-warrant-button').text('ERROR: MISSING VALUE')
+		setTimeout(function(){
+			$('#booking-warrant-button').css('background-color','orange')
+			$('#booking-warrant-button').text('SUBMIT WARRANT')
+		}, 2000)
+	}
 }
 
 $(function() {

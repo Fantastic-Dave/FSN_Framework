@@ -25,8 +25,9 @@ RegisterServerEvent('fsn_police:database:CPIC:search')
 AddEventHandler('fsn_police:database:CPIC:search', function(id)
   local res = {}
   local src = source
-  id = exports.fsn_main:fsn_CharID(id)
-  MySQL.Async.fetchAll('SELECT * FROM `fsn_tickets` WHERE `receiver_id` = @id', {['@id'] = id}, function(results)
+  local idee = exports.fsn_main:fsn_CharID(id)
+  print(':fsn_police: Running CPIC for : (C: '..idee..' / S: '..id)
+  MySQL.Async.fetchAll('SELECT * FROM `fsn_tickets` WHERE `receiver_id` = @id', {['@id'] = idee}, function(results)
     for k, v in pairs(results) do
       local ass = os.date("*t", v.ticket_date)
       v.ticket_date = ass.hour..':'..ass.min..' '..ass.month..'/'..ass.day..'/'..ass.year
