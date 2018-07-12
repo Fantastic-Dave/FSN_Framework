@@ -231,6 +231,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     local msg = table.concat(split, " ", 2, #split)
     nineoneone = nineoneone + 1
     table.insert(nineoneones, nineoneone, source)
+    TriggerClientEvent('fsn_emotecontrol:phone:call1', source)
     TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^*^1 911 |^r^0 '..msg)
     TriggerClientEvent('fsn_police:911', -1, nineoneone, at, msg)
     TriggerClientEvent('fsn_ems:911', -1, nineoneone, at, msg)
@@ -473,6 +474,11 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/police' or split[1] == '/pd' then
     if fsn_policeOnDuty(source) then
       if split[2] then
+        if split[2] == 'emote' or split[2] == 'e' then
+          if split[3] == 'ticket' then
+            TriggerClientEvent('fsn_emotecontrol:police:ticket', source)
+          end
+        end
         if split[2] == 'cpic' then
           TriggerClientEvent('fsn_commands:police:cpic:trigger', source, split[3])
         end
