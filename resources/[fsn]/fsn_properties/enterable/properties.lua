@@ -147,7 +147,7 @@ enterable_properties = {
     expiry = 0,
     owner = -1,
     coowners = {},
-    db_id = 8,
+    db_id = 9,
     blip = {x = -1054.0124511719, y = -235.99578857422, z = 44.021156311035},
     rob_spot = {x = -1051.818359375, y = -232.93724060059, z = 44.020915985107},
     inventory = {},
