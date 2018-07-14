@@ -478,6 +478,10 @@ Citizen.CreateThread(function()
                   TriggerEvent('fsn_notify:displayNotification', 'You ask if they would like to buy...', 'centerLeft', 3000, 'info')
                   Citizen.Wait(1000)
                   local try = math.random(0, 100)
+                  if not NetworkIsPlayerTalking(PlayerId()) then
+                    TriggerEvent('fsn_notify:displayNotification', 'How do you expect to sell drugs without talking?', 'centerLeft', 3000, 'error')
+                      try = 57
+                  end
                   if try > 58 then
                     selling = true
                     selling_ped = obj
