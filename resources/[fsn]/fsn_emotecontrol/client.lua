@@ -285,6 +285,17 @@ local lPed = GetPlayerPed(-1)
 TaskStartScenarioInPlace(lPed, scenario, 0, 1)
 end
 
+RegisterNetEvent('fsn_emotecontrol:play')
+AddEventHandler('fsn_emotecontrol:play', function(type, dict, anim)
+	if type == 'scenario' then
+		scenarioPlayer(dict)
+	elseif type == 'anim' then
+		animPlayer(dict, anim)
+	elseif type == 'halfanim' then
+		halfanimPlayer(dict, anim)
+	end
+end)
+
 function friendly()
 	ClearMenu()
 	Menu.addTitle("Friendly")
