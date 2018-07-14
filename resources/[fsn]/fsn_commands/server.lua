@@ -78,6 +78,90 @@ local pd_cars = {
   [2006] = "porschepd"
 }
 
+local emotes = {
+  scenario = {
+    ["binoculars"] = "WORLD_HUMAN_BINOCULARS",
+    ["slumped"] = "WORLD_HUMAN_BUM_SLUMPED",
+    ["bummed"] = "WORLD_HUMAN_BUM_STANDING",
+    ["cheering"] = "WORLD_HUMAN_CHEERING",
+    ["drinking"] = "WORLD_HUMAN_DRINKING",
+    ["usemap"] = "WORLD_HUMAN_TOURIST_MAP",
+    ["takepicture"] = "WORLD_HUMAN_TOURIST_MOBILE",
+    ["record"] = "WORLD_HUMAN_MOBILE_FILM_SHOCKING",
+    ["call"] = "WORLD_HUMAN_STAND_MOBILE",
+    ["text"] = "WORLD_HUMAN_STAND_MOBILE_UPRIGHT",
+    ["guard"] = "WORLD_HUMAN_GUARD_STAND",
+    ["hangout"] = "WORLD_HUMAN_HANG_OUT_STREET",
+    ["smoke"] = "WORLD_HUMAN_SMOKING",
+    ["smokepot"] = "WORLD_HUMAN_SMOKING_POT",
+    ["sunbathe1"] = "WORLD_HUMAN_SUNBATHE",
+    ["sunbathe2"] = "WORLD_HUMAN_SUNBATHE_BACK",
+    ["yoga"] = "WORLD_HUMAN_YOGA",
+    ["jogging"] = "WORLD_HUMAN_JOG_STANDING",
+    ["leaning"] = "WORLD_HUMAN_LEANING",
+    ["cleaning"] = "WORLD_HUMAN_CLEANING",
+    ["flexing"] = "WORLD_HUMAN_MUSCLE_FLEX",
+    ["partying"] = "WORLD_HUMAN_PARTYING",
+    ["sit1"] = "WORLD_HUMAN_PICNIC",
+    ["highclass"] = "WORLD_HUMAN_PROSTITUTE_HIGH_CLASS",
+    ["lowclass"] = "WORLD_HUMAN_PROSTITUTE_LOW_CLASS",
+    ["impatient1"] = "WORLD_HUMAN_STAND_IMPATIENT",
+    ["impatient2"] = "WORLD_HUMAN_STAND_IMPATIENT_UPRIGHT",
+    ["impatient3"] = "PROP_HUMAN_STAND_IMPATIENT",
+    ["cop"] = "WORLD_HUMAN_COP_IDLES",
+    ["notepad"] = "CODE_HUMAN_MEDIC_TIME_OF_DEATH",
+    ["statue"] = "WORLD_HUMAN_HUMAN_STATUE",
+    ["bumrail"] = "PROP_HUMAN_BUM_SHOPPING_CART",
+    ["chinups"] = "PROP_HUMAN_MUSCLE_CHIN_UPS",
+    ["benchpress"] = "PROP_HUMAN_SEAT_MUSCLE_BENCH_PRESS",
+    ["sunlounger"] = "PROP_HUMAN_SEAT_SUNLOUNGER",
+    ["kneel1"] = "CODE_HUMAN_MEDIC_KNEEL",
+    ["kneel2"] = "CODE_HUMAN_MEDIC_TEND_TO_DEAD",
+  },
+  anim = {
+    ["dancem2"] = {"move_clown@p_m_two_idles@", "fidget_short_dance"},
+    ["dancem3"] = {"special_ped@mountain_dancer@monologue_3@monologue_3a", "mnt_dnc_buttwag"},
+    ["dancem4"] = {"missfbi3_sniping", "dance_m_default"},
+    ["dancef1"] = {"mini@strip_club@private_dance@part1", "priv_dance_p1"},
+    ["dancef2"] = {"mini@strip_club@private_dance@part2", "priv_dance_p2"},
+    ["dancef3"] = {"mini@strip_club@private_dance@part3", "priv_dance_p3"},
+    ["dancef4"] = {"mp_am_stripper","lap_dance_girl"},
+    ["pole"] = {"mini@strip_club@pole_dance@pole_dance1", "pd_dance_01"},
+    ["sit2"] = {"rcm_barry3", "barry_3_sit_loop"},
+    ["sit3"] = {"switch@michael@sitting", "idle"},
+    ["sit4"] = {"switch@michael@restaurant", "001510_02_gc_mics3_ig_1_base_amanda"},
+    ["sit5"] = {"amb@prop_human_seat_deckchair@female@idle_a", "idle_a"},
+    ["sit6"] = {"timetable@amanda@ig_12", "amanda_idle_a"},
+    ["sit7"] = {"amb@world_human_picnic@female@idle_a", "idle_b"},
+    ["sit8"] = {"amb@world_human_picnic@male@idle_a", "idle_b"},
+    ["sleep"] = {"timetable@tracy@sleep@", "idle_c"},
+    ["meditate"] = {"rcmcollect_paperleadinout@", "meditiate_idle"},
+    ["situps"] = {"amb@world_human_sit_ups@male@base", "base"},
+    ["pushups"] = {"amb@world_human_push_ups@male@base", "base"},
+    ["yoga1"] = {"amb@world_human_yoga@female@base", "base_a"},
+    ["yoga2"] = {"amb@world_human_yoga@female@base", "base_b"},
+    ["yoga3"] = {"amb@world_human_yoga@female@base", "base_c"},
+    ["cry"] = {"missfam4leadinoutmcs2", "tracy_loop"},
+    ["shakebutt"] = {"switch@trevor@mocks_lapdance", "001443_01_trvs_28_idle_stripper"},
+    ["pee"] = {"misscarsteal2peeing", "peeing_loop"},
+    ["poo"] = {"missfbi3ig_0", "shit_loop_trev"},
+  },
+  halfanim = {
+    ["wave1"] = {"random@car_thief@victimpoints_ig_3", "arms_waving"},
+    ["wave2"] = {"random@gang_intimidation@", "001445_01_gangintimidation_1_female_idle_b"},
+    ["hug1"] = {"mp_ped_interaction", "hugs_guy_a"},
+    ["hug2"] = {"mp_ped_interaction", "hugs_guy_b"},
+    ["kiss1"] = {"mp_ped_interaction", "kisses_guy_a"},
+    ["kiss2"] = {"mp_ped_interaction", "kisses_guy_b"},
+    ["petsteve"] = {"creatures@rottweiler@tricks@", "petting_franklin"},
+    ["dancem1"] = {"misschinese2_crystalmazemcs1_cs", "dance_loop_tao"},
+    ["handsup"] = {"random@mugging3", "handsup_standing_base"},
+    ["cuffed"] = {"mp_arresting", "idle"},
+    ["fapping"] = {"switch@trevor@jerking_off", "trev_jerking_off_loop"},
+    ["shakefist"] = {"amb@code_human_in_car_mp_actions@dance@bodhi@ds@base", "idle_a_fp"},
+  }
+}
+
 local clipsets = {
   ["reset"] = 'reset',
   ["franklin"] = 'move_characters@michael@fire',
@@ -200,11 +284,14 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- CLOTHING COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
-  if split[1] == '/mask' then
+  if split[1] == '/mask' or split[1] == '/m' then
     TriggerClientEvent('fsn_commands:clothing:mask', source)
   end
-  if split[1] == '/hat' then
+  if split[1] == '/hat' or split[1] == '/h' then
     TriggerClientEvent('fsn_commands:clothing:hat', source)
+  end
+  if split[1] == '/glasses' or split[1] == '/g' then
+    TriggerClientEvent('fsn_commands:clothing:glasses', source)
   end
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- SERVICE COMMANDS
@@ -299,6 +386,31 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- MISC COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/emote' or split[1] == '/e' then
+    if emotes.scenario[split[2]] then
+      TriggerClientEvent('fsn_emotecontrol:play', source, 'scenario', emotes.scenario[split[2]])
+    elseif emotes.anim[split[2]] then
+      TriggerClientEvent('fsn_emotecontrol:play', source, 'anim', emotes.anim[split[2]][1], emotes.anim[split[2]][2])
+    elseif emotes.halfanim[split[2]] then
+      TriggerClientEvent('fsn_emotecontrol:play', source, 'halfanim', emotes.halfanim[split[2]][1], emotes.halfanim[split[2]][2])
+    else
+      local str1 = '^*^4Emotes (1/3) | ^0^r '
+      for k, v in pairs(emotes.scenario) do
+        str1 = str1..', '..k
+      end
+      local str2 = '^*^4Emotes (2/3) | ^0^r '
+      for k, v in pairs(emotes.anim) do
+        str2 = str2..', '..k
+      end
+      local str3 = '^*^4Emotes (3/3) | ^0^r '
+      for k, v in pairs(emotes.halfanim) do
+        str3 = str3..', '..k
+      end
+      TriggerClientEvent('chatMessage', source, '', {255,255,255}, str1)
+      TriggerClientEvent('chatMessage', source, '', {255,255,255}, str2)
+      TriggerClientEvent('chatMessage', source, '', {255,255,255}, str3)
+    end
+  end
   if msg == '/money' then
     TriggerClientEvent('fsn_main:displayBankandMoney', source)
   end
