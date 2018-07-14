@@ -43,3 +43,12 @@ AddEventHandler('fsn_jobs:paycheck', function()
     TriggerEvent('fsn_notify:displayNotification', 'Salary: $50', 'centerLeft', 5000, 'info')
   end
 end)
+
+function table.contains(table, element)
+  for _, value in pairs(table) do
+    if value[1] == element then
+      return true
+    end
+  end
+  return false
+end
