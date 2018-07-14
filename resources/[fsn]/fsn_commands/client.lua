@@ -88,6 +88,31 @@ AddEventHandler('fsn_commands:clothing:hat', function()
 		TriggerServerEvent('fsn_commands:me', 'takes their hat off', players)
 	end
 end)
+
+local glasses = {
+	id = 0,
+	txt = 0
+}
+RegisterNetEvent('fsn_commands:clothing:glasses')
+AddEventHandler('fsn_commands:clothing:glasses', function()
+	if glasses.id ~= 0 then
+		SetPedPropIndex(GetPlayerPed(-1), 1, glasses.id, glasses.txt, 0, true)
+		glasses.id = 0
+		glasses.txt = 0
+		---
+		local pos = GetEntityCoords(GetPlayerPed(-1))
+		local players = fsn_NearestPlayersS(pos.x, pos.y, pos.z, 10)
+		TriggerServerEvent('fsn_commands:me', 'puts their glasses on', players)
+	else
+		glasses.id = GetPedPropIndex(GetPlayerPed(-1), 1)
+		glasses.txt = GetPedPropTextureIndex(GetPlayerPed(-1), 1)
+		SetPedPropIndex(GetPlayerPed(-1), 1, 0, 0, true)
+		---
+		local pos = GetEntityCoords(GetPlayerPed(-1))
+		local players = fsn_NearestPlayersS(pos.x, pos.y, pos.z, 10)
+		TriggerServerEvent('fsn_commands:me', 'takes their glasses off', players)
+	end
+end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- SERVICE COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
