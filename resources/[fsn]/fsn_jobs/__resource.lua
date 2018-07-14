@@ -4,6 +4,12 @@ server_script 'server.lua'
 -- trucker job
 client_script 'trucker/client.lua'
 
+-- hunting job
+client_script 'hunting/client.lua'
+
+-- farming job
+client_script 'farming/client.lua'
+
 -- scrap job
 client_script 'scrap/client.lua'
 
