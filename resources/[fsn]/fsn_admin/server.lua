@@ -51,11 +51,25 @@ function fsn_GetModeratorID(src)
 end
 AddEventHandler('chatMessage', function(source, auth, msg)
   local split = fsn_SplitString(msg, ' ')
+  if split[1] == '/ac' then
+    if fsn_isAdmin(source) then
+      for _, ply in pairs(GetPlayers()) do
+        if fsn_isAdmin(ply) then
+          local msg = table.concat(split, " ", 2, #split)
+          TriggerClientEvent('chatMessage', ply, '', {255,255,255}, '^1^*:fsn_admin: ^8[aID#'..fsn_GetAdminID(source)..']^0^r '..msg)
+        end
+      end
+    end
+  end
   if split[1] == '/admin' then
     if fsn_isAdmin(source) then
+      if split[2] == 'announce' then
+        local msg = table.concat(split, " ", 3, #split)
+        TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^1^*:fsn_admin:^0 ^8[ANNOUNCEMENT] ^r^0'..msg)
+      end
       if split[2] == 'goto' then
         if tonumber(split[3]) then
-          TriggerClientEvent('fsn_admin:requestXYZ', source, tonumber(split[3]), source)
+          TriggerClientEvent('fsn_admin:requestXYZ', tonumber(split[3]), source, tonumber(split[3]))
           TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^1^*:fsn_admin:^0^r ^2'..source..'^0 teleported to ^2'..split[3])
         else
           TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r There is an issue with the arguments you provided.')
@@ -63,7 +77,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
       end
       if split[2] == 'bring' then
         if tonumber(split[3]) then
-          TriggerClientEvent('fsn_admin:requestXYZ', tonumber(split[3]), source, tonumber(split[3]))
+          TriggerClientEvent('fsn_admin:requestXYZ', source, tonumber(split[3]), source)
           TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^1^*:fsn_admin:^0^r ^2'..source..'^0 brought ^2'..split[3])
         else
           TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r There is an issue with the arguments you provided.')
