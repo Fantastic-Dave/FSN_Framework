@@ -15,6 +15,22 @@ items_table = {
     modelhash = -1674314660,
     price = 250
   },
+  ["uncooked_meat"] = {
+    display_name = 'Uncooked Meat',
+    weight = 0.3,
+    desc = 'Use this to repair your vehicle.',
+    use = function()
+    end,
+    modelhash = 611319348
+  },
+  ["cooked_meat"] = {
+    display_name = 'Cooked Meat',
+    weight = 0.3,
+    desc = 'Use this to repair your vehicle.',
+    use = function()
+    end,
+    modelhash = 1302435108
+  },
   ["dirty_money"] = {
     display_name = 'Dirty money',
     weight = 0.0,
