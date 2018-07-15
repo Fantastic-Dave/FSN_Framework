@@ -27,6 +27,9 @@ local hashes = {
 }
 local harvesting = false
 local harvestingstart = 0
+local cooking = false
+local cookingend = 0
+local cookingadd = 0
 function fsn_drawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
     local px,py,pz=table.unpack(GetGameplayCamCoords())
@@ -46,8 +49,67 @@ function fsn_drawText3D(x,y,z, text)
     end
 end
 Citizen.CreateThread(function()
+  --144.10649108887, -1480.7464599609, 29.357044219971
+  local bleep = AddBlipForCoord(144.10649108887, -1480.7464599609, 29.357044219971)
+  SetBlipSprite(bleep, 439)
+  SetBlipScale(bleep, 0.8)
+  SetBlipAsShortRange(bleep, true)
+  BeginTextCommandSetBlipName("STRING")
+    AddTextComponentString("Lucky Plucker")
+  EndTextCommandSetBlipName(bleep)
+  local bleep = AddBlipForCoord(974.604, -2165.881, 29.16)
+  SetBlipSprite(bleep, 273)
+  SetBlipScale(bleep, 0.8)
+  SetBlipAsShortRange(bleep, true)
+  BeginTextCommandSetBlipName("STRING")
+    AddTextComponentString("Butchers")
+  EndTextCommandSetBlipName(bleep)
   while true do
     Citizen.Wait(0)
+    if GetDistanceBetweenCoords(144.10649108887, -1480.7464599609, 29.357044219971, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
+      DrawMarker(1,144.10649108887, -1480.7464599609, 28.357044219971,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+      if GetDistanceBetweenCoords(144.10649108887, -1480.7464599609, 29.357044219971, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+        SetTextComponentFormat("STRING")
+        AddTextComponentString("Press ~INPUT_PICKUP~ to sell your ~p~Cooked Meat")
+        DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+        if IsControlJustPressed(0,51) then
+          if exports.fsn_inventory:fsn_HasItem('cooked_meat') then
+            TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(400, 1500) * exports.fsn_inventory:fsn_GetItemAmount('cooked_meat'))
+            TriggerEvent('fsn_inventory:item:take', 'cooked_meat', exports.fsn_inventory:fsn_GetItemAmount('cooked_meat'))
+            cookingend = GetNetworkTime() + cookingadd
+            cooking = true
+          else
+            TriggerEvent('fsn_notify:displayNotification', 'You don\'t have any cooked meat', 'centerLeft', 4000, 'error')
+          end
+        end
+      end
+    end
+    if GetDistanceBetweenCoords(974.604, -2165.881, 29.16, GetEntityCoords(GetPlayerPed(-1)), true) < 3 then
+      if not cooking then
+        fsn_drawText3D(974.604, -2165.881, 29.16, 'Press [~g~E~w~] to cook your meat')
+        if IsControlJustPressed(0,51) then
+          if exports.fsn_inventory:fsn_HasItem('uncooked_meat') then
+            cookingadd = 2200 * exports.fsn_inventory:fsn_GetItemAmount('uncooked_meat')
+            TriggerEvent('fsn_inventory:item:take', 'uncooked_meat', exports.fsn_inventory:fsn_GetItemAmount('uncooked_meat'))
+            cookingend = GetNetworkTime() + cookingadd
+            cooking = true
+          else
+            TriggerEvent('fsn_notify:displayNotification', 'You don\'t have any uncooked meat', 'centerLeft', 4000, 'error')
+          end
+        end
+      else
+        local divid = cookingadd / 2
+        if cookingend - GetNetworkTime() < divid then
+          fsn_drawText3D(974.604, -2165.881, 29.16, '~p~Cooking meat...')
+          if GetNetworkTime() > cookingend then
+            cooking = false
+            TriggerEvent('fsn_inventory:item:add', 'cooked_meat', cookingadd / 2200)
+          end
+        else
+          fsn_drawText3D(974.604, -2165.881, 29.16, '~o~Preparing to cook...')
+        end
+      end
+    end
     for k, v in pairs(droppeditems) do
       if GetDistanceBetweenCoords(GetEntityCoords(v[1]), GetEntityCoords(GetPlayerPed(-1)), true) < 5 then
         if v[2] == nil then
@@ -61,6 +123,7 @@ Citizen.CreateThread(function()
           else
             fsn_drawText3D(GetEntityCoords(v[1]).x,GetEntityCoords(v[1]).y,GetEntityCoords(v[1]).z, 'Harvesting...')
             if harvestingstart + 6000 < GetNetworkTime() then
+              TriggerEvent('fsn_inventory:item:add', 'uncooked_meat', math.random(3,10))
               v[2] = true
               harvesting = false
               harvestingstart = 0
