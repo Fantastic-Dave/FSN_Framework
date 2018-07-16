@@ -75,7 +75,11 @@ Citizen.CreateThread(function()
         drawTxt('Wait '..tostring(def - currenttime)..' seconds to respawn ~b~||~w~ Wait for EMS',4,1,0.5,0.35,0.6,255,255,255,255)
         drawTxt('~r~YOU ARE KNOCKED OUT AND CANNOT COMMUNICATE',4,1,0.5,0.25,0.6,255,255,255,255)
       else
-        drawTxt('Press [E] to respawn',4,1,0.5,0.35,0.6,255,255,255,255)
+        if #onduty_ems > 0 then
+          drawTxt('Press [E] to respawn ($5000)',4,1,0.5,0.35,0.6,255,255,255,255)
+        else
+          drawTxt('Press [E] to respawn ($500)',4,1,0.5,0.35,0.6,255,255,255,255)
+        end
         drawTxt('~r~DO NOT RESPAWN IN A ROLEPLAY SITUATION',4,1,0.5,0.25,0.6,255,255,255,255)
         if IsControlJustPressed(1, 38) then -- E
           DoScreenFadeOut(200)
@@ -95,13 +99,23 @@ Citizen.CreateThread(function()
           TriggerEvent('fsn_inventory:use:food', 100)
           Citizen.Wait(2000)
           DoScreenFadeIn(1500)
-          TriggerEvent('fsn_bank:change:bankMinus', 5000)
-          TriggerEvent("pNotify:SendNotification", {text = "You have been charged $5000 for medical bills.",
-              layout = "centerRight",
-              timeout = 5000,
-              progressBar = true,
-              type = "info",
-          })
+          if #onduty_ems > 0 then
+            TriggerEvent('fsn_bank:change:bankMinus', 5000)
+            TriggerEvent("pNotify:SendNotification", {text = "You have been charged $5000 for medical bills.",
+                layout = "centerRight",
+                timeout = 5000,
+                progressBar = true,
+                type = "info",
+            })
+          else
+            TriggerEvent('fsn_bank:change:bankMinus', 500)
+            TriggerEvent("pNotify:SendNotification", {text = "You have been charged $500 for medical bills.",
+                layout = "centerRight",
+                timeout = 5000,
+                progressBar = true,
+                type = "info",
+            })
+          end
         end
       end
     end
