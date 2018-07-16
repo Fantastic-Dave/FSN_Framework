@@ -1,5 +1,6 @@
 seatbelt = false
 cruise = false
+notified = false
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
@@ -12,30 +13,36 @@ Citizen.CreateThread(function()
 		end
 		local ped = GetPlayerPed(-1)
 		if IsPedInAnyVehicle(ped) then
-			if IsControlJustPressed(0, 19) then
-				if IsControlPressed(0, 21) then
+			if not notified then
+				TriggerEvent('fsn_notify:displayNotification', 'Click it or ticket! <span style="color:#42f486;font-weight:bold">LSHIFT + S</span> to activate your seatbelt!', 'centerLeft', 4500, 'info')
+				notified = true
+			end
+			if IsControlPressed(0, 21) then
+				if IsControlJustPressed(0, 33) then
 					if seatbelt then
 						SetPedConfigFlag(ped, 32, true)
 						TriggerEvent('fsn_commands:me', 'takes off their seatbelt')
 						seatbelt = false
+						notified = false
 					else
 						SetPedConfigFlag(ped, 32, false)
 						TriggerEvent('fsn_commands:me', 'puts on their seatbelt')
 						seatbelt = true
 					end
+				end
+			end
+			if IsControlJustPressed(0, 73) and GetPedInVehicleSeat(GetVehiclePedIsIn(GetPlayerPed(-1), false), -1) == GetPlayerPed(-1) then
+				if cruise then
+					SetEntityMaxSpeed(GetVehiclePedIsUsing(ped, true), 154.6465)
+					cruise = false
+					TriggerEvent('fsn_notify:displayNotification', 'Speed limiter: <span style="color:red;font-weight:bold">Disabled</span>', 'centerLeft', 2000, 'info')
 				else
-					if cruise then
-						SetEntityMaxSpeed(GetVehiclePedIsIn(ped, true), 154.6465)
-						cruise = false
-						TriggerEvent('fsn_notify:displayNotification', 'Speed limiter: <span style="color:red;font-weight:bold">Disabled</span>', 'centerLeft', 2000, 'info')
+					if math.floor(GetEntitySpeed(GetVehiclePedIsUsing(ped, true))* 2.236936) >= 30 then
+						SetEntityMaxSpeed(GetVehiclePedIsUsing(ped, true), GetEntitySpeed(GetVehiclePedIsUsing(ped, true)))
+						cruise = true
+						TriggerEvent('fsn_notify:displayNotification', 'Speed limiter: <span style="color:green;font-weight:bold">Enabled</span>', 'centerLeft', 2000, 'info')
 					else
-						if math.floor(GetEntitySpeed(GetVehiclePedIsIn(ped, true))* 2.236936) >= 30 then
-							SetEntityMaxSpeed(GetVehiclePedIsIn(ped, true), GetEntitySpeed(GetVehiclePedIsIn(ped, true)))
-							cruise = true
-							TriggerEvent('fsn_notify:displayNotification', 'Speed limiter: <span style="color:green;font-weight:bold">Enabled</span>', 'centerLeft', 2000, 'info')
-						else
-							TriggerEvent('fsn_notify:displayNotification', 'Speed limiter not available under 30mph.', 'centerLeft', 2000, 'info')
-						end
+						TriggerEvent('fsn_notify:displayNotification', 'Speed limiter not available under 30mph.', 'centerLeft', 2000, 'info')
 					end
 				end
 			end
@@ -45,6 +52,9 @@ Citizen.CreateThread(function()
 			end
 			if cruise then
 				cruise = false
+			end
+			if notified then
+				notified = false
 			end
 		end
 	end
