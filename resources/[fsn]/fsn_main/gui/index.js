@@ -12,47 +12,47 @@ $(function() {
 			if (event.data.display == 'money') {
 				$('#money_replace').text(event.data.amount)
 				$('.money').fadeIn()
-				setTimeout(function(){$('.money').fadeOut()}, 1000)
+				setTimeout(function(){$('.money').fadeOut()}, 3000)
 			}
 			if (event.data.display == 'bank') {
 				$('#bank_replace').text(event.data.amount)
 				$('.bank').fadeIn()
-				setTimeout(function(){$('.bank').fadeOut()}, 1000)
+				setTimeout(function(){$('.bank').fadeOut()}, 3000)
 			}
 			if (event.data.display == 'both') {
 				$('#money_replace').text(event.data.moneyAmount)
 				$('.money').fadeIn()
-				setTimeout(function(){$('.money').fadeOut(400)}, 1000)
+				setTimeout(function(){$('.money').fadeOut(400)}, 3000)
 				$('#bank_replace').text(event.data.bankAmount)
 				$('.bank').fadeIn()
-				setTimeout(function(){$('.bank').fadeOut(400)}, 1000)
+				setTimeout(function(){$('.bank').fadeOut(400)}, 3000)
 			}
 			if (event.data.display == 'bankChange') {
 				$('#bank_replace').text(event.data.bankAmount)
 				$('.bank').fadeIn()
-				setTimeout(function(){$('.bank').fadeOut(400)}, 1000)
+				setTimeout(function(){$('.bank').fadeOut(400)}, 3000)
 				if (event.data.changeAmount > 0) {
 					$('#bank_change_plus').text(event.data.changeAmount)
 					$('.bankPlus').fadeIn()
-					setTimeout(function(){$('.bankPlus').fadeOut(400)}, 1000)
+					setTimeout(function(){$('.bankPlus').fadeOut(400)}, 3000)
 				} else {
 					$('#bank_change_minus').text(event.data.changeAmount)
 					$('.bankMinus').fadeIn()
-					setTimeout(function(){$('.bankMinus').fadeOut(400)}, 1000)
+					setTimeout(function(){$('.bankMinus').fadeOut(400)}, 3000)
 				}
 			}
 			if (event.data.display == 'moneyChange') {
 				$('#money_replace').text(event.data.moneyAmount)
 				$('.money').fadeIn()
-				setTimeout(function(){$('.money').fadeOut(400)}, 1000)
+				setTimeout(function(){$('.money').fadeOut(400)}, 3000)
 				if (event.data.changeAmount > 0) {
 					$('#money_change_plus').text(event.data.changeAmount)
 					$('.moneyPlus').fadeIn()
-					setTimeout(function(){$('.moneyPlus').fadeOut(400)}, 1000)
+					setTimeout(function(){$('.moneyPlus').fadeOut(400)}, 3000)
 				} else {
 					$('#money_change_minus').text(event.data.changeAmount)
 					$('.moneyMinus').fadeIn()
-					setTimeout(function(){$('.moneyMinus').fadeOut(400)}, 1000)
+					setTimeout(function(){$('.moneyMinus').fadeOut(400)}, 3000)
 				}
 			}
 		}
