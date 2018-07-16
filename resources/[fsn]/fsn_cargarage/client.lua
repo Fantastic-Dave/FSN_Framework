@@ -167,7 +167,7 @@ local function fsn_SpawnVehicle(vehid)
 		SetVehicleHasBeenOwnedByPlayer(personalvehicle, true)
 		local id = NetworkGetNetworkIdFromEntity(personalvehicle)
 		SetNetworkIdCanMigrate(id, true)
-		Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalvehicle))
+		--Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalvehicle))
 		-- shit to make it look right
 		SetVehicleModKit(personalvehicle, 0)
 		SetVehicleWheelType(personalvehicle, tonumber(veh.veh_wheeltype));
@@ -195,6 +195,7 @@ local function fsn_SpawnVehicle(vehid)
 			plate = veh.veh_plate,
 			model = veh.veh_name
 		})
+		SetEntityAsMissionEntity(personalvehicle, true, true)
 		TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', veh.veh_plate, 1)
 	end)
 end
