@@ -44,6 +44,10 @@ function spawnTruck(cost)
 end
 
 function getNewJob(cost)
+  if DoesEntityExist(cur_trailer) then
+    SetEntityAsMissionEntity( cur_trailer, true, true )
+    Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( cur_trailer ) )
+  end
   local index = math.random(1, #jobs)
   local job = jobs[index]
   mission_index = index
@@ -53,10 +57,16 @@ function getNewJob(cost)
 	    Wait(.5)
 	end
   if not IsAnyVehicleNearPoint(job.pickup.x, job.pickup.y, job.pickup.z, 6.0) then
+    if mission_blip then
+      RemoveBlip(mission_blip)
+      mission_blip = false
+    end
 		cur_trailer = CreateVehicle(RequestModel(hashKey),job.pickup.x, job.pickup.y, job.pickup.z,job.pickup.h,true,false)
 		SetVehicleOnGroundProperly(cur_trailer)
   	TriggerEvent('fsn_cargarage:makeMine', cur_trailer, GetDisplayNameFromVehicleModel(GetEntityModel(cur_trailer)), GetVehicleNumberPlateText(cur_trailer))
-    TriggerEvent('fsn_bank:change:walletMinus', cost)
+    if cost ~= 0 then
+      TriggerEvent('fsn_bank:change:walletMinus', cost)
+    end
     TaskWarpPedIntoVehicle(GetPlayerPed(-1),cur_trailer,-1)
 
     trailer_blip = AddBlipForCoord(job.pickup.x, job.pickup.y, job.pickup.z)
@@ -67,6 +77,10 @@ function getNewJob(cost)
     AddTextComponentString("Trailer")
     EndTextCommandSetBlipName(trailer_blip)
     SetBlipAsShortRange(trailer_blip, false)
+    TriggerEvent('fsn_notify:displayNotification', 'Delivery #'..mission_index..' marked on the GPS', 'centerLeft', 8000, 'info')
+  else
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^1:FSN:^0^r Something is blocking your trailer spawning')
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^1:FSN:^0^r Get out of the truck and get a new job, you\'ve not been charged')
   end
   fsn_SetJob('Trucker')
 end
@@ -93,21 +107,24 @@ Citizen.CreateThread(function()
         DeleteEntity(cur_trailer)
         if mission_blip then
           RemoveBlip(mission_blip)
+          mission_blip = false
         end
         if trailer_blip then
           RemoveBlip(trailer_blip)
+          trailer_blip = false
         end
         cur_trailer = false
         mission_index = 0
         trailer_blip = false
         mission_blip = false
-        fsn_SetJob('Unemployed')
+        fsn_SetJob('Returning Trucker')
       end
       if IsVehicleAttachedToTrailer(cur_truck) then
         if trailer_blip then
           local job = jobs[mission_index]
           if not mission_blip then
             mission_blip = AddBlipForCoord(job.dropoff.x, job.dropoff.y, job.dropoff.z)
+            print('DEBUG: '..job.dropoff.x..', '..job.dropoff.y..', '..job.dropoff.z)
             SetBlipSprite(mission_blip, 1)
             SetBlipColour(mission_blip, 1)
             SetBlipRoute(mission_blip, true)
@@ -116,35 +133,82 @@ Citizen.CreateThread(function()
             EndTextCommandSetBlipName(mission_blip)
             SetBlipAsShortRange(mission_blip, false)
           end
-          RemoveBlip(trailer_blip)
+          if trailer_blip then
+            RemoveBlip(trailer_blip)
+            trailer_blip = false
+          end
         end
       end
     end
     -----------------------------------------------------------------
     -- Truck/Job shit
     -----------------------------------------------------------------
-    if GetDistanceBetweenCoords(truckspawn.x,truckspawn.y,truckspawn.z, GetEntityCoords(GetPlayerPed(-1))) < 5 and not IsPedInAnyVehicle(GetPlayerPed(-1)) and mission_index == 0 then
-      if cur_truck then
-        SetTextComponentFormat("STRING")
-        AddTextComponentString("Press ~INPUT_PICKUP~ to get a new job (~g~$0~w~)")
-        DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-        if IsControlJustPressed(0,38) then
-          if exports.fsn_main:fsn_GetWallet() >= 0 then
-            getNewJob(0)
-          else
-            TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
+    if GetDistanceBetweenCoords(truckspawn.x,truckspawn.y,truckspawn.z, GetEntityCoords(GetPlayerPed(-1))) < 5 and not IsPedInAnyVehicle(GetPlayerPed(-1)) then
+      if mission_index == 0 then
+        if cur_truck then
+          SetTextComponentFormat("STRING")
+          AddTextComponentString("Press ~INPUT_PICKUP~ to get a new job (~g~$1000~w~)")
+          DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+          if IsControlJustPressed(0,38) then
+            if exports.fsn_main:fsn_GetWallet() >= 1000 then
+              getNewJob(1000)
+            else
+              TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
+            end
+          end
+        else
+          SetTextComponentFormat("STRING")
+          AddTextComponentString("Press ~INPUT_PICKUP~ to get a truck & job (~g~$3000~w~)")
+          DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+          if IsControlJustPressed(0,38) then
+            if exports.fsn_main:fsn_GetWallet() >= 3000 then
+              spawnTruck(3000)
+            else
+              TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
+            end
           end
         end
       else
         SetTextComponentFormat("STRING")
-        AddTextComponentString("Press ~INPUT_PICKUP~ to get a truck & job (~g~$0~w~)")
+        AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~return~w~ your truck\nPress ~INPUT_VEH_DUCK~ to ~g~get~w~ a new job ($1000)")
         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-        if IsControlJustPressed(0,38) then
-          if exports.fsn_main:fsn_GetWallet() >= 0 then
-            spawnTruck(0)
+        if IsControlJustPressed(0,73) then
+          if exports.fsn_main:fsn_GetWallet() >= 1000 then
+            if trailer_blip then
+              RemoveBlip(trailer_blip)
+              trailer_blip = false
+            end
+            print('just pressed x')
+            getNewJob(1000)
           else
             TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
           end
+        end
+        if IsControlJustPressed(0,38) then
+          if mission_blip then
+            RemoveBlip(mission_blip)
+            mission_blip = false
+          end
+          if trailer_blip then
+            RemoveBlip(trailer_blip)
+            trailer_blip = false
+          end
+          mission_index = 0
+          if DoesEntityExist(cur_truck) then
+            TriggerEvent('fsn_bank:change:walletAdd', 2400)
+            SetEntityAsMissionEntity( cur_truck, true, true )
+            Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( cur_truck ) )
+          else
+            TriggerEvent('fsn_notify:displayNotification', 'You destroyed/lost your truck! Fined $2500!', 'centerRight', 4000, 'error')
+            TriggerEvent('fsn_bank:change:bankMinus', 2500)
+          end
+          if DoesEntityExist(cur_trailer) then
+            SetEntityAsMissionEntity( cur_trailer, true, true )
+            Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( cur_trailer ) )
+          end
+          cur_truck = false
+          cur_trailer = false
+          fsn_SetJob('Unemployed')
         end
       end
     end
