@@ -1132,7 +1132,7 @@ Citizen.CreateThread(function()
                 local minus = inventory["dirty_money"].amount / quote[1]
                 amount = amount - math.floor(minus)
                 SetNotificationTextEntry("STRING");
-                AddTextComponentString('Deliver these ~r~'..quote[2]..'~w~ drug packages for me, and I\'ll do you ~g~$'..amount..'~w~ (~g~'..quote[1]'%~w~) on those unmarked bills');
+                AddTextComponentString('Deliver these ~r~'..quote[2]..'~w~ drug packages for me, and I\'ll do you ~g~$'..amount..'~w~ (~g~'..quote[1]..'%~w~) on those unmarked bills');
                 SetNotificationMessage("CHAR_RON", "CHAR_RON", true, 1, "~y~Dealer's offer:~s~", "");
                 DrawNotification(false, true);
                 quoted = true
