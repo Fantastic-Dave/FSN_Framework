@@ -152,7 +152,7 @@ AddEventHandler('fsn_vehiclecontrol:damage:repair', function()
 		if GetVehicleEngineHealth(vehicle) < cfg.cascadingFailureThreshold + 5 then
 			if GetVehicleOilLevel(vehicle) > 0 then
 				SetVehicleUndriveable(vehicle,false)
-				SetVehicleEngineHealth(vehicle, cfg.cascadingFailureThreshold + 5)
+				SetVehicleEngineHealth(vehicle, cfg.cascadingFailureThreshold + 10)
 				SetVehiclePetrolTankHealth(vehicle, 750.0)
 				healthEngineLast=cfg.cascadingFailureThreshold +5
 				healthPetrolTankLast=750.0
