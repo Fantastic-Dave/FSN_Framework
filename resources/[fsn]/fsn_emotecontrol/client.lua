@@ -923,11 +923,11 @@ Citizen.CreateThread(function()
 			halfanimPlayer("random@shop_robbery", "kneel_loop_p")
 		end
 		-- if shift is also pressed
-		if IsControlPressed(1, 21) then
-			if IsControlJustPressed(1, 46) then --Start holding X
-				halfanimPlayer("switch@trevor@jerking_off", "trev_jerking_off_loop")
-			end
-		end
+		--if IsControlPressed(1, 21) then
+		--	if IsControlJustPressed(1, 46) then --Start holding X
+		--		halfanimPlayer("switch@trevor@jerking_off", "trev_jerking_off_loop")
+		--	end
+		--end
 	end
 end)
 local crouched = false
