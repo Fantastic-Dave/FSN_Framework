@@ -29,6 +29,7 @@
    for k, v in pairs(onduty_ems) do
      if v.ply_id == source then
        table.remove(onduty_ems, k)
+       print(':fsn_ems: '..source..' has clocked out and disconnected.')
      end
    end
    TriggerClientEvent('fsn_ems:update', -1, onduty_ems)

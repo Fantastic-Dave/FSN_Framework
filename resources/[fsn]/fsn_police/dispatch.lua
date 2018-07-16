@@ -38,6 +38,11 @@ local actions = {
     name = 'Speeding Vehicle',
     tencode = '10-98',
     reward = 500
+  },
+  [9] = {
+    name = 'EMS Request',
+    tencode = '10-47',
+    reward = 500
   }
 }
 local dispatch_calls = {}

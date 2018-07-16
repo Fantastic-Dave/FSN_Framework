@@ -214,6 +214,14 @@ local disp_id = 0
 local last_disp = 0
 RegisterNetEvent('fsn_jobs:ems:request')
 AddEventHandler('fsn_jobs:ems:request', function(tbl)
+  if exports.fsn_police:fsn_PDDuty() then
+    if #onduty_ems < 2 then
+      TriggerEvent('fsn_police:dispatchcall', tbl, 9)
+    end
+    local var1, var2 = GetStreetNameAtCoord(x, y, z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
+    local sname = GetStreetNameFromHashKey(var1)
+    TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:DISPATCH:^0^r (10-47) EMS requested @ ^4'..sname)
+  end
   if emsonduty then
     local x = tbl.x
     local y = tbl.y

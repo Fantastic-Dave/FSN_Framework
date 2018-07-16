@@ -132,7 +132,7 @@ AddEventHandler('fsn_commands:getHDC', function(hdc)
 end)
 
 RegisterNUICallback( "ButtonClick", function( data, cb )
-  if last_click + 10 > GetNetworkTime() then return end
+  if last_click + 1000 > GetNetworkTime() then print('toosoon') return end
   last_click = GetNetworkTime()
 	local split = fsn_SplitString(data, "-")
   if ( data == "phone" ) then
