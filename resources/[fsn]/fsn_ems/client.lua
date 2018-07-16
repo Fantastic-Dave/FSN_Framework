@@ -227,6 +227,7 @@ AddEventHandler('fsn_jobs:ems:request', function(tbl)
     local y = tbl.y
     local var1, var2 = GetStreetNameAtCoord(x, y, z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
     local sname = GetStreetNameFromHashKey(var1)
+    TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:DISPATCH:^0^r (10-47) EMS requested @ ^4'..sname)
     disp_id = #dispatch_calls+1
     last_disp = currenttime
     table.insert(dispatch_calls, disp_id, {
