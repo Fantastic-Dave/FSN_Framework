@@ -1,6 +1,6 @@
 amb@bagels@male@walking@
 	static
-
+ 
 amb@code_human_cower@female@base
 	base
 
