@@ -1,3 +1,11 @@
+DensityMultiplier = 0.5
+Citizen.CreateThread(function()
+	while true do
+	    Citizen.Wait(0)
+	    SetVehicleDensityMultiplierThisFrame(DensityMultiplier)
+	    SetRandomVehicleDensityMultiplierThisFrame(DensityMultiplier)
+	end
+end)
 local fsn_spawned = false
 local current_character_id = 0
 local current_character = {}
