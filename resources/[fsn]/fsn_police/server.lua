@@ -53,8 +53,8 @@ local rnd_names = {
 }
 
 RegisterServerEvent('fsn_police:dispatch')
-AddEventHandler('fsn_police:dispatch', function(coords, id)
-  TriggerClientEvent('fsn_police:dispatchcall', -1, coords, id)
+AddEventHandler('fsn_police:dispatch', function(coords, id, chatPrint)
+  TriggerClientEvent('fsn_police:dispatchcall', -1, coords, id, chatPrint)
 end)
 
 RegisterServerEvent('fsn_police:runplate::target')
