@@ -1,8 +1,8 @@
 local restarts = {};
 restarts[#restarts + 1] = {07, 00};
-restarts[#restarts + 1] = {12, 00};
-restarts[#restarts + 1] = {18, 00};
-restarts[#restarts + 1] = {24, 00};
+restarts[#restarts + 1] = {13, 00};
+restarts[#restarts + 1] = {19, 00};
+restarts[#restarts + 1] = {01, 00};
 
 function announceRestart()
  local hour = os.date("%H");
