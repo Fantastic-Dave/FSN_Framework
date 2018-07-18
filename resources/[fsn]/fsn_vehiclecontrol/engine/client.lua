@@ -1,3 +1,166 @@
+local vehicle_colours = {
+	'Black',
+	'Graphite',
+	'Black Steel',
+	'Silver',
+	'Bluish Silver',
+	'Rolled Steel',
+	'Shadow Silver',
+	'Stone Silver',
+	'Midnight Silver',
+	'Cast Iron Silver',
+	'Anthractite Black',
+	'Matte Black',
+	'Matte Gray',
+	'Light Gray',
+	'Util Black',
+	'Util Black Poly',
+	'Util Dark Silver',
+	'Util Silver',
+	'Util Gun Metal',
+	'Util Shadow Silver',
+	'Worn Black',
+	'Worn Graphite',
+	'Worn Silver Gray',
+	'Worn Silver',
+	'Worn Blue Silver',
+	'Worn Shadow Silver',
+	'Red',
+	'Torino Red',
+	'Formula Red',
+	'Blaze Red',
+	'Grace Red',
+	'Garnet Red',
+	'Sunset Red',
+	'Cabernet Red',
+	'Candy Red',
+	'Sunrise Orange',
+	'Gold',
+	'Orange',
+	'Red',
+	'Dark Red',
+	'Matte Orange',
+	'Yellow',
+	'Util Red',
+	'Util Bright Red',
+	'Util Garnet Red',
+	'Worn Red',
+	'Worn Golden Red',
+	'Worn Dark Red',
+	'Dark Green',
+	'Metallic Racing Green',
+	'Sea Green',
+	'Olive Green',
+	'Bright Green',
+	'Metalic Gasoline Green',
+	'Matte Lime Green',
+	'Dark Green',
+	'Worn Green',
+	'Worn Sea Wash',
+	'Metallic Midnight Blue',
+	'Metallic Dark Blue',
+	'Galaxy Blue',
+	'Dark Blue',
+	'Saxon Blue',
+	'Blue',
+	'Mariner Blue',
+	'Harbor Blue',
+	'Diamond Blue',
+	'Surf Blue',
+	'Nautical Blue',
+	'Ultra Blue',
+	'Schafter Purple',
+	'Metallic Ultra Blue',
+	'Racing Blue',
+	'Light Blue',
+	'Util Midnight Blue',
+	'Util Blue',
+	'Util Sea Foam Blue',
+	'Util Lightening Blue',
+	'Util Maui Blue Poly',
+	'Util Bright Blue',
+	'Slate Blue',
+	'Dark Blue',
+	'Blue',
+	'Matte Midnight Blue',
+	'Worn Dark Blue',
+	'Worn Blue',
+	'Baby Blue',
+	'Yellow',
+	'Race Yellow',
+	'Bronze',
+	'Dew Yellow',
+	'Metallic Lime',
+	'Metalic Champagne',
+	'Feltzer Brown',
+	'Creek Brown',
+	'Chocolate Brown',
+	'Maple Brown',
+	'Saddle Brown',
+	'Straw Brown',
+	'Moss Brown',
+	'Bison Brown',
+	'Woodbeech Brown',
+	'Beechwood Brown',
+	'Straw Brown',
+	'Sandy Brown',
+	'Bleached Brown',
+	'Cream',
+	'Util Brown',
+	'Util Medium Brown',
+	'Util Light Brown',
+	'Ice White',
+	'Frost White',
+	'Worn Honey Beige',
+	'Worn Brown',
+	'Dark Brown',
+	'Worn Straw Beige',
+	'Brushed Steel',
+	'Brushed Black Steel',
+	'Brushed Alluminum',
+	'Chrome',
+	'Worn Off-White',
+	'Util Off-White',
+	'Worn Orange',
+	'Worn Light Orange',
+	'Pea Green',
+	'Worn Taxi Yellow',
+	'Police Blue',
+	'Green',
+	'Matte Brown',
+	'Worn Orange',
+	'Ice White',
+	'Worn White',
+	'Worn Olive Army Green',
+	'Pure White',
+	'Hot Pink',
+	'Salmon Pink',
+	'Pfistrer Pink',
+	'Bright Orange',
+	'Green',
+	'Flourescent Blue',
+	'Midnight Blue',
+	'Midnight Purple',
+	'Wine Red',
+	'Hunter Green',
+	'Bright Purple',
+	'Midnight Purple',
+	'Carbon Black',
+	'Matte Purple',
+	'Matte Dark Purple',
+	'Metallic Lava Red',
+	'Olive Green',
+	'Matte Olive Orab',
+	'Dark Earth',
+	'Desert Tan',
+	'Matte Foilage Green',
+	'Default Alloy',
+	'Epsilon Blue',
+	'Pure Gold',
+	'Brushed Gold',
+	'Secret Gold'
+}
+
 OnAtEnter = false
 UseKey = true
 if UseKey then
@@ -79,6 +242,23 @@ AddEventHandler('fsn_vehiclecontrol:lockpick', function()
 			return
 		end
 		if math.random(1,100) < 65 then
+			if math.random(1,100) < 40 then
+				print('telling police')
+				local pos = GetEntityCoords(GetPlayerPed(-1))
+				local coords = {
+					x = pos.x,
+					y = pos.y,
+					z = pos.z
+				}
+				local colour = table.pack(GetVehicleColours(GetVehiclePedIsIn(GetPlayerPed(-1), false)))
+				colour = colour[1]
+				colour = vehicle_colours[colour+1]
+				local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(GetVehiclePedIsIn(GetPlayerPed(-1), false)))
+				local plate = GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1), false))
+				TriggerServerEvent('fsn_police:dispatch', coords, 10, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
+			else
+				print('not telling police')
+			end
 			TriggerEvent('fsn_commands:me', 'failed to hotwire the vehicle...')
 			TriggerEvent('fsn_notify:displayNotification', 'You broke the lockpick.', 'centerLeft', 5000, 'error')
 			TriggerEvent('fsn_inventory:item:take', 'lockpick', 1)
@@ -89,7 +269,12 @@ AddEventHandler('fsn_vehiclecontrol:lockpick', function()
 				y = pos.y,
 				z = pos.z
 			}
-			TriggerServerEvent('fsn_police:dispatch', coords, 2)
+			local colour = table.pack(GetVehicleColours(GetVehiclePedIsIn(GetPlayerPed(-1), false)))
+			colour = colour[1]
+			colour = vehicle_colours[colour+1]
+			local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(GetVehiclePedIsIn(GetPlayerPed(-1), false)))
+			local plate = GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1), false))
+			TriggerServerEvent('fsn_police:dispatch', coords, 2, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
 			TriggerEvent('fsn_commands:me', 'successfully hotwired the vehicle...')
 			table.insert(myKeys, {GetVehiclePedIsIn(GetPlayerPed(-1), false),true})
 			TriggerEvent('fsn_notify:displayNotification', 'You got keys to this vehicle!', 'centerRight', 3000, 'info')
@@ -101,6 +286,23 @@ AddEventHandler('fsn_vehiclecontrol:lockpick', function()
 			StartVehicleAlarm(veh)
 			Citizen.Wait(6000)
 			if math.random(1,100) < 65 then
+				if math.random(1,100) < 40 then
+					print('telling police')
+					local pos = GetEntityCoords(GetPlayerPed(-1))
+					local coords = {
+						x = pos.x,
+						y = pos.y,
+						z = pos.z
+					}
+					local colour = table.pack(GetVehicleColours(veh))
+					colour = colour[1]
+					colour = vehicle_colours[colour+1]
+					local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(veh))
+					local plate = GetVehicleNumberPlateText(veh)
+					TriggerServerEvent('fsn_police:dispatch', coords, 10, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
+				else
+					print('not telling police')
+				end
 				TriggerEvent('fsn_commands:me', 'failed to lockpick the vehicle...')
 				TriggerEvent('fsn_notify:displayNotification', 'You broke the lockpick.', 'centerLeft', 5000, 'error')
 				TriggerEvent('fsn_inventory:item:take', 'lockpick', 1)
@@ -111,7 +313,12 @@ AddEventHandler('fsn_vehiclecontrol:lockpick', function()
 					y = pos.y,
 					z = pos.z
 				}
-				TriggerServerEvent('fsn_police:dispatch', coords, 2)
+				local colour = table.pack(GetVehicleColours(veh))
+				colour = colour[1]
+				colour = vehicle_colours[colour+1]
+				local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(veh))
+				local plate = GetVehicleNumberPlateText(veh)
+				TriggerServerEvent('fsn_police:dispatch', coords, 2, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
 				TriggerEvent('fsn_commands:me', 'successfully lockpicked the vehicle...')
 				table.insert(myKeys, {veh,true})
 				SetVehicleDoorsLockedForAllPlayers(veh, false)

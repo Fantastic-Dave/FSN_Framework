@@ -43,7 +43,12 @@ local actions = {
     name = 'EMS Request',
     tencode = '10-47',
     reward = 500
-  }
+  },
+  [10] = {
+    name = "Attempted Car Theft",
+    tencode = '10-60',
+    reward = 800
+  },
 }
 local dispatch_calls = {}
 local disp_enable = false
@@ -63,10 +68,15 @@ AddEventHandler('fsn_police:dispatch:toggle', function()
   end
 end)
 
-function displayDispatch(x,y,z,id)
+function displayDispatch(x,y,z,id,chatPrint)
   if pdonduty then
     local var1, var2 = GetStreetNameAtCoord(x, y, z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
     local sname = GetStreetNameFromHashKey(var1)
+    if chatPrint then
+      TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:DISPATCH:^0^r '..chatPrint)
+    else
+      --TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:DISPATCH:^0^r This dispatch call has no details')
+    end
     SendNUIMessage({
       addDispatch = true,
       tencode = actions[id].tencode,
@@ -96,8 +106,12 @@ function displayDispatch(x,y,z,id)
 end
 
 RegisterNetEvent('fsn_police:dispatchcall')
-AddEventHandler('fsn_police:dispatchcall', function(tbl, id)
-  displayDispatch(tbl.x,tbl.y,tbl.z,id)
+AddEventHandler('fsn_police:dispatchcall', function(tbl, id, chatPrint)
+  if chatPrint then
+    displayDispatch(tbl.x,tbl.y,tbl.z,id, chatPrint)
+  else
+    displayDispatch(tbl.x,tbl.y,tbl.z,id)
+  end
 end)
 
 Citizen.CreateThread(function()
