@@ -1,0 +1,826 @@
+#define SKEL_ROOT 0x0
+#define SKEL_Pelvis 0x2e28
+#define SKEL_L_Thigh 0xe39f
+#define SKEL_L_Calf 0xf9bb
+#define SKEL_L_Foot 0x3779
+#define SKEL_L_Toe0 0x83c
+#define IK_L_Foot 0xfedd
+#define PH_L_Foot 0xe175
+#define MH_L_Knee 0xb3fe
+#define SKEL_R_Thigh 0xca72
+#define SKEL_R_Calf 0x9000
+#define SKEL_R_Foot 0xcc4d
+#define SKEL_R_Toe0 0x512d
+#define IK_R_Foot 0x8aae
+#define PH_R_Foot 0x60e6
+#define MH_R_Knee 0x3fcf
+#define RB_L_ThighRoll 0x5c57
+#define RB_R_ThighRoll 0x192a
+#define SKEL_Spine_Root 0xe0fd
+#define SKEL_Spine0 0x5c01
+#define SKEL_Spine1 0x60f0
+#define SKEL_Spine2 0x60f1
+#define SKEL_Spine3 0x60f2
+#define SKEL_L_Clavicle 0xfcd9
+#define SKEL_L_UpperArm 0xb1c5
+#define SKEL_L_Forearm 0xeeeb
+#define SKEL_L_Hand 0x49d9
+#define SKEL_L_Finger00 0x67f2
+#define SKEL_L_Finger01 0xff9
+#define SKEL_L_Finger02 0xffa
+#define SKEL_L_Finger10 0x67f3
+#define SKEL_L_Finger11 0x1049
+#define SKEL_L_Finger12 0x104a
+#define SKEL_L_Finger20 0x67f4
+#define SKEL_L_Finger21 0x1059
+#define SKEL_L_Finger22 0x105a
+#define SKEL_L_Finger30 0x67f5
+#define SKEL_L_Finger31 0x1029
+#define SKEL_L_Finger32 0x102a
+#define SKEL_L_Finger40 0x67f6
+#define SKEL_L_Finger41 0x1039
+#define SKEL_L_Finger42 0x103a
+#define PH_L_Hand 0xeb95
+#define IK_L_Hand 0x8cbd
+#define RB_L_ForeArmRoll 0xee4f
+#define RB_L_ArmRoll 0x1470
+#define MH_L_Elbow 0x58b7
+#define SKEL_R_Clavicle 0x29d2
+#define SKEL_R_UpperArm 0x9d4d
+#define SKEL_R_Forearm 0x6e5c
+#define SKEL_R_Hand 0xdead
+#define SKEL_R_Finger00 0xe5f2
+#define SKEL_R_Finger01 0xfa10
+#define SKEL_R_Finger02 0xfa11
+#define SKEL_R_Finger10 0xe5f3
+#define SKEL_R_Finger11 0xfa60
+#define SKEL_R_Finger12 0xfa61
+#define SKEL_R_Finger20 0xe5f4
+#define SKEL_R_Finger21 0xfa70
+#define SKEL_R_Finger22 0xfa71
+#define SKEL_R_Finger30 0xe5f5
+#define SKEL_R_Finger31 0xfa40
+#define SKEL_R_Finger32 0xfa41
+#define SKEL_R_Finger40 0xe5f6
+#define SKEL_R_Finger41 0xfa50
+#define SKEL_R_Finger42 0xfa51
+#define PH_R_Hand 0x6f06
+#define IK_R_Hand 0x188e
+#define RB_R_ForeArmRoll 0xab22
+#define RB_R_ArmRoll 0x90ff
+#define MH_R_Elbow 0xbb0
+#define SKEL_Neck_1 0x9995
+#define SKEL_Head 0x796e
+#define IK_Head 0x322c
+#define FACIAL_facialRoot 0xfe2c
+#define FB_L_Brow_Out_000 0xe3db
+#define FB_L_Lid_Upper_000 0xb2b6
+#define FB_L_Eye_000 0x62ac
+#define FB_L_CheekBone_000 0x542e
+#define FB_L_Lip_Corner_000 0x74ac
+#define FB_R_Lid_Upper_000 0xaa10
+#define FB_R_Eye_000 0x6b52
+#define FB_R_CheekBone_000 0x4b88
+#define FB_R_Brow_Out_000 0x54c
+#define FB_R_Lip_Corner_000 0x2ba6
+#define FB_Brow_Centre_000 0x9149
+#define FB_UpperLipRoot_000 0x4ed2
+#define FB_UpperLip_000 0xf18f
+#define FB_L_Lip_Top_000 0x4f37
+#define FB_R_Lip_Top_000 0x4537
+#define FB_Jaw_000 0xb4a0
+#define FB_LowerLipRoot_000 0x4324
+#define FB_LowerLip_000 0x508f
+#define FB_L_Lip_Bot_000 0xb93b
+#define FB_R_Lip_Bot_000 0xc33b
+#define FB_Tongue_000 0xb987
+#define RB_Neck_1 0x8b93
+#define IK_Root 0xdd1c
+ 
+"BONENAME","BONETYPE","BONETAG"
+"SKEL_ROOT","4215","0"
+"SKEL_Pelvis","4103","11816"
+"SKEL_L_Thigh","4103","58271"
+"SKEL_L_Calf","4103","63931"
+"SKEL_L_Foot","4103","14201"
+"SKEL_L_Toe0","7","2108"
+"IK_L_Foot","119","65245"
+"PH_L_Foot","119","57717"
+"MH_L_Knee","119","46078"
+"SKEL_R_Thigh","4103","51826"
+"SKEL_R_Calf","4103","36864"
+"SKEL_R_Foot","4103","52301"
+"SKEL_R_Toe0","7","20781"
+"IK_R_Foot","119","35502"
+"PH_R_Foot","119","24806"
+"MH_R_Knee","119","16335"
+"RB_L_ThighRoll","7","23639"
+"RB_R_ThighRoll","7","6442"
+"SKEL_Spine_Root","4103","57597"
+"SKEL_Spine0","4103","23553"
+"SKEL_Spine1","4103","24816"
+"SKEL_Spine2","4103","24817"
+"SKEL_Spine3","4103","24818"
+"SKEL_L_Clavicle","4103","64729"
+"SKEL_L_UpperArm","4103","45509"
+"SKEL_L_Forearm","4215","61163"
+"SKEL_L_Hand","4215","18905"
+"SKEL_L_Finger00","4103","26610"
+"SKEL_L_Finger01","4103","4089"
+"SKEL_L_Finger02","7","4090"
+"SKEL_L_Finger10","4103","26611"
+"SKEL_L_Finger11","4103","4169"
+"SKEL_L_Finger12","7","4170"
+"SKEL_L_Finger20","4103","26612"
+"SKEL_L_Finger21","4103","4185"
+"SKEL_L_Finger22","7","4186"
+"SKEL_L_Finger30","4103","26613"
+"SKEL_L_Finger31","4103","4137"
+"SKEL_L_Finger32","7","4138"
+"SKEL_L_Finger40","4103","26614"
+"SKEL_L_Finger41","4103","4153"
+"SKEL_L_Finger42","7","4154"
+"PH_L_Hand","119","60309"
+"IK_L_Hand","119","36029"
+"RB_L_ForeArmRoll","7","61007"
+"RB_L_ArmRoll","7","5232"
+"MH_L_Elbow","119","22711"
+"SKEL_R_Clavicle","4103","10706"
+"SKEL_R_UpperArm","4103","40269"
+"SKEL_R_Forearm","4215","28252"
+"SKEL_R_Hand","4215","57005"
+"SKEL_R_Finger00","4103","58866"
+"SKEL_R_Finger01","4103","64016"
+"SKEL_R_Finger02","7","64017"
+"SKEL_R_Finger10","4103","58867"
+"SKEL_R_Finger11","4103","64096"
+"SKEL_R_Finger12","7","64097"
+"SKEL_R_Finger20","4103","58868"
+"SKEL_R_Finger21","4103","64112"
+"SKEL_R_Finger22","7","64113"
+"SKEL_R_Finger30","4103","58869"
+"SKEL_R_Finger31","4103","64064"
+"SKEL_R_Finger32","7","64065"
+"SKEL_R_Finger40","4103","58870"
+"SKEL_R_Finger41","4103","64080"
+"SKEL_R_Finger42","7","64081"
+"PH_R_Hand","119","28422"
+"IK_R_Hand","119","6286"
+"RB_R_ForeArmRoll","7","43810"
+"RB_R_ArmRoll","7","37119"
+"MH_R_Elbow","119","2992"
+"SKEL_Neck_1","4103","39317"
+"SKEL_Head","4103","31086"
+"IK_Head","119","12844"
+"FACIAL_facialRoot","4103","65068"
+"FB_L_Brow_Out_000","1799","58331"
+"FB_L_Lid_Upper_000","1911","45750"
+"FB_L_Eye_000","1799","25260"
+"FB_L_CheekBone_000","1799","21550"
+"FB_L_Lip_Corner_000","1911","29868"
+"FB_R_Lid_Upper_000","1911","43536"
+"FB_R_Eye_000","1799","27474"
+"FB_R_CheekBone_000","1799","19336"
+"FB_R_Brow_Out_000","1799","1356"
+"FB_R_Lip_Corner_000","1911","11174"
+"FB_Brow_Centre_000","1799","37193"
+"FB_UpperLipRoot_000","5895","20178"
+"FB_UpperLip_000","6007","61839"
+"FB_L_Lip_Top_000","1911","20279"
+"FB_R_Lip_Top_000","1911","17719"
+"FB_Jaw_000","5895","46240"
+"FB_LowerLipRoot_000","5895","17188"
+"FB_LowerLip_000","6007","20623"
+"FB_L_Lip_Bot_000","1911","47419"
+"FB_R_Lip_Bot_000","1911","49979"
+"FB_Tongue_000","1911","47495"
+"RB_Neck_1","7","35731"
+"IK_Root","119","56604"
+ 
+ 
+ 
+OLD
+---------------------------
+Head:31086
+Right Wrist:28422
+Left Wrist:60309
+Right Hand:57005
+Chest:24818
+Month:39317
+Left Wrist:18905
+Left Knee:63931
+Right Knee:36864
+Left Shoe:14201
+Right Shoe:52301
+Vagaina:51826
+Umbilical:11816
+Right Shoulder:40269
+Right Arm:28252
+Left Shoulder:45509
+Left Arm:61163
+ 
+ 
+ 
+ 
+Vehicle Bones:
+chassis
+chassis_lowlod
+chassis_dummy
+seat_dside_f
+seat_dside_r
+seat_dside_r1
+seat_dside_r2
+seat_dside_r3
+seat_dside_r4
+seat_dside_r5
+seat_dside_r6
+seat_dside_r7
+seat_pside_f
+seat_pside_r
+seat_pside_r1
+seat_pside_r2
+seat_pside_r3
+seat_pside_r4
+seat_pside_r5
+seat_pside_r6
+seat_pside_r7
+window_lf1
+window_lf2
+window_lf3
+window_rf1
+window_rf2
+window_rf3
+window_lr1
+window_lr2
+window_lr3
+window_rr1
+window_rr2
+window_rr3
+door_dside_f
+door_dside_r
+door_pside_f
+door_pside_r
+handle_dside_f
+handle_dside_r
+handle_pside_f
+handle_pside_r
+wheel_lf
+wheel_rf
+wheel_lm1
+wheel_rm1
+wheel_lm2
+wheel_rm2
+wheel_lm3
+wheel_rm3
+wheel_lr
+wheel_rr
+suspension_lf
+suspension_rf
+suspension_lm
+suspension_rm
+suspension_lr
+suspension_rr
+spring_rf
+spring_lf
+spring_rr
+spring_lr
+transmission_f
+transmission_m
+transmission_r
+hub_lf
+hub_rf
+hub_lm1
+hub_rm1
+hub_lm2
+hub_rm2
+hub_lm3
+hub_rm3
+hub_lr
+hub_rr
+windscreen
+windscreen_r
+window_lf
+window_rf
+window_lr
+window_rr
+window_lm
+window_rm
+bodyshell
+bumper_f
+bumper_r
+wing_rf
+wing_lf
+bonnet
+boot
+exhaust
+exhaust_2
+exhaust_3
+exhaust_4
+exhaust_5
+exhaust_6
+exhaust_7
+exhaust_8
+exhaust_9
+exhaust_10
+exhaust_11
+exhaust_12
+exhaust_13
+exhaust_14
+exhaust_15
+exhaust_16
+engine
+overheat
+overheat_2
+petrolcap
+petroltank
+petroltank_l
+petroltank_r
+steering
+hbgrip_l
+hbgrip_r
+headlight_l
+headlight_r
+taillight_l
+taillight_r
+indicator_lf
+indicator_rf
+indicator_lr
+indicator_rr
+brakelight_l
+brakelight_r
+brakelight_m
+reversinglight_l
+reversinglight_r
+extralight_1
+extralight_2
+extralight_3
+extralight_4
+numberplate
+interiorlight
+siren1
+siren2
+siren3
+siren4
+siren5
+siren6
+siren7
+siren8
+siren9
+siren10
+siren11
+siren12
+siren13
+siren14
+siren15
+siren16
+siren17
+siren18
+siren19
+siren20
+siren_glass1
+siren_glass2
+siren_glass3
+siren_glass4
+siren_glass5
+siren_glass6
+siren_glass7
+siren_glass8
+siren_glass9
+siren_glass10
+siren_glass11
+siren_glass12
+siren_glass13
+siren_glass14
+siren_glass15
+siren_glass16
+siren_glass17
+siren_glass18
+siren_glass19
+siren_glass20
+spoiler
+struts
+misc_a
+misc_b
+misc_c
+misc_d
+misc_e
+misc_f
+misc_g
+misc_h
+misc_i
+misc_j
+misc_k
+misc_l
+misc_m
+misc_n
+misc_o
+misc_p
+misc_q
+misc_r
+misc_s
+misc_t
+misc_u
+misc_v
+misc_w
+misc_x
+misc_y
+misc_z
+misc_1
+misc_2
+weapon_1a
+weapon_1b
+weapon_1c
+weapon_1d
+weapon_1a_rot
+weapon_1b_rot
+weapon_1c_rot
+weapon_1d_rot
+weapon_2a
+weapon_2b
+weapon_2c
+weapon_2d
+weapon_2a_rot
+weapon_2b_rot
+weapon_2c_rot
+weapon_2d_rot
+weapon_3a
+weapon_3b
+weapon_3c
+weapon_3d
+weapon_3a_rot
+weapon_3b_rot
+weapon_3c_rot
+weapon_3d_rot
+weapon_4a
+weapon_4b
+weapon_4c
+weapon_4d
+weapon_4a_rot
+weapon_4b_rot
+weapon_4c_rot
+weapon_4d_rot
+turret_1base
+turret_1barrel
+turret_2base
+turret_2barrel
+turret_3base
+turret_3barrel
+ammobelt
+searchlight_base
+searchlight_light
+attach_female
+roof
+roof2
+soft_1
+soft_2
+soft_3
+soft_4
+soft_5
+soft_6
+soft_7
+soft_8
+soft_9
+soft_10
+soft_11
+soft_12
+soft_13
+forks
+mast
+carriage
+fork_l
+fork_r
+forks_attach
+frame_1
+frame_2
+frame_3
+frame_pickup_1
+frame_pickup_2
+frame_pickup_3
+frame_pickup_4
+freight_cont
+freight_bogey
+freightgrain_slidedoor
+door_hatch_r
+door_hatch_l
+tow_arm
+tow_mount_a
+tow_mount_b
+tipper
+combine_reel
+combine_auger
+slipstream_l
+slipstream_r
+arm_1
+arm_2
+arm_3
+arm_4
+scoop
+boom
+stick
+bucket
+shovel_2
+shovel_3
+Lookat_UpprPiston_head
+Lookat_LowrPiston_boom
+Boom_Driver
+cutter_driver
+vehicle_blocker
+extra_1
+extra_2
+extra_3
+extra_4
+extra_5
+extra_6
+extra_7
+extra_8
+extra_9
+extra_ten
+extra_11
+extra_12
+break_extra_1
+break_extra_2
+break_extra_3
+break_extra_4
+break_extra_5
+break_extra_6
+break_extra_7
+break_extra_8
+break_extra_9
+break_extra_10
+mod_col_1
+mod_col_2
+mod_col_3
+mod_col_4
+mod_col_5
+handlebars
+forks_u
+forks_l
+wheel_f
+swingarm
+wheel_r
+crank
+pedal_r
+pedal_l
+static_prop
+moving_prop
+static_prop2
+moving_prop2
+rudder
+rudder2
+wheel_rf1_dummy
+wheel_rf2_dummy
+wheel_rf3_dummy
+wheel_rb1_dummy
+wheel_rb2_dummy
+wheel_rb3_dummy
+wheel_lf1_dummy
+wheel_lf2_dummy
+wheel_lf3_dummy
+wheel_lb1_dummy
+wheel_lb2_dummy
+wheel_lb3_dummy
+bogie_front
+bogie_rear
+rotor_main
+rotor_rear
+rotor_main_2
+rotor_rear_2
+elevators
+tail
+outriggers_l
+outriggers_r
+rope_attach_a
+rope_attach_b
+prop_1
+prop_2
+elevator_l
+elevator_r
+rudder_l
+rudder_r
+prop_3
+prop_4
+prop_5
+prop_6
+prop_7
+prop_8
+rudder_2
+aileron_l
+aileron_r
+airbrake_l
+airbrake_r
+wing_l
+wing_r
+wing_lr
+wing_rr
+engine_l
+engine_r
+nozzles_f
+nozzles_r
+afterburner
+wingtip_1
+wingtip_2
+gear_door_fl
+gear_door_fr
+gear_door_rl1
+gear_door_rr1
+gear_door_rl2
+gear_door_rr2
+gear_door_rml
+gear_door_rmr
+gear_f
+gear_rl
+gear_lm1
+gear_rr
+gear_rm1
+gear_rm
+prop_left
+prop_right
+legs
+attach_male
+draft_animal_attach_lr
+draft_animal_attach_rr
+draft_animal_attach_lm
+draft_animal_attach_rm
+draft_animal_attach_lf
+draft_animal_attach_rf
+wheelcover_l
+wheelcover_r
+barracks
+pontoon_l
+pontoon_r
+no_ped_col_step_l
+no_ped_col_strut_1_l
+no_ped_col_strut_2_l
+no_ped_col_step_r
+no_ped_col_strut_1_r
+no_ped_col_strut_2_r
+light_cover
+emissives
+neon_l
+neon_r
+neon_f
+neon_b
+dashglow
+doorlight_lf
+doorlight_rf
+doorlight_lr
+doorlight_rr
+unknown_id
+dials
+engineblock
+bobble_head
+bobble_base
+bobble_hand
+chassis_Control
+ 
+ 
+Weapon Bones:
+gun_root
+gun_gripr
+gun_gripl
+gun_muzzle
+gun_vfx_eject
+gun_magazine
+gun_ammo
+gun_vfx_projtrail
+gun_barrels
+WAPClip
+WAPClip_2
+WAPScop
+WAPScop_2
+WAPGrip
+WAPGrip_2
+WAPSupp
+WAPSupp_2
+WAPFlsh
+WAPFlsh_2
+WAPStck
+WAPSeWp
+WAPLasr
+WAPLasr_2
+WAPFlshLasr
+WAPFlshLasr_2
+NM_Butt_Marker
+Gun_GripR
+Gun_Nuzzle
+gun_drum
+ 
+ 
+ 
+Ped Bones:
+BONETAG_PELVIS
+BONETAG_L_THIGH
+BONETAG_L_CALF
+BONETAG_L_FOOT
+BONETAG_L_PH_FOOT
+BONETAG_R_THIGH
+BONETAG_R_CALF
+BONETAG_R_FOOT
+BONETAG_R_PH_FOOT
+BONETAG_SPINE_ROOT
+BONETAG_SPINE
+BONETAG_SPINE1
+BONETAG_SPINE2
+BONETAG_SPINE3
+BONETAG_L_CLAVICLE
+BONETAG_L_UPPERARM
+BONETAG_L_FOREARM
+BONETAG_L_HAND
+BONETAG_L_FINGER0
+BONETAG_L_FINGER01
+BONETAG_L_FINGER02
+BONETAG_L_FINGER1
+BONETAG_L_FINGER11
+BONETAG_L_FINGER12
+BONETAG_L_FINGER2
+BONETAG_L_FINGER21
+BONETAG_L_FINGER22
+BONETAG_L_FINGER3
+BONETAG_L_FINGER31
+BONETAG_L_FINGER32
+BONETAG_L_FINGER4
+BONETAG_L_FINGER41
+BONETAG_L_FINGER42
+BONETAG_L_PH_HAND
+BONETAG_R_CLAVICLE
+BONETAG_R_UPPERARM
+BONETAG_R_FOREARM
+BONETAG_R_HAND
+BONETAG_R_FINGER0
+BONETAG_R_FINGER01
+BONETAG_R_FINGER02
+BONETAG_R_FINGER1
+BONETAG_R_FINGER11
+BONETAG_R_FINGER12
+BONETAG_R_FINGER2
+BONETAG_R_FINGER21
+BONETAG_R_FINGER22
+BONETAG_R_FINGER3
+BONETAG_R_FINGER31
+BONETAG_R_FINGER32
+BONETAG_R_FINGER4
+BONETAG_R_FINGER41
+BONETAG_R_FINGER42
+BONETAG_R_PH_HAND
+BONETAG_NECK
+BONETAG_HEAD
+ 
+ 
+Object Bones:
+ROPE_ATTATCH
+ 
+ 
+ 
+ 
+Untested:
+ 
+p_head
+p_eyes
+p_ears
+p_mouth
+p_lhand
+p_rhand
+p_lwrist
+p_rwrist
+p_lhip
+p_lfoot
+p_rfoot
+ph_lhand
+ph_rhand
+SKEL_Head
+SKEL_L_Hand
+SKEL_R_Hand
+RB_L_ForeArmRoll
+RB_R_ForeArmRoll
+SKEL_Pelvis
+SKEL_L_Foot
+SKEL_R_Foot
+PH_L_Hand
+PH_R_Hand
+SKEL_Spine3
+BUTTOCKS
+THIGH_LEFT
+SHIN_LEFT
+THIGH_RIGHT
+SHIN_RIGHT
+SPINE0
+SPINE1
+SPINE2
+SPINE3
+CLAVICLE_LEFT
+UPPER_ARM_LEFT
+LOWER_ARM_LEFT
+HAND_LEFT
+CLAVICLE_RIGHT
+UPPER_ARM_RIGHT
+LOWER_ARM_RIGHT
+HAND_RIGHT
+NECK
+PHYS_PED_CAPSULE
+PLASTIC_HIGH_DENSITY_CLEAR
+PLASTIC_HOLLOW_CLEAR
+PLASTIC_CLEAR
+CAR_SOFTTOP_CLEAR
+CAR_ENGINE
+PHYS_CAR_VOID
+ANIMAL_DEFAULT
