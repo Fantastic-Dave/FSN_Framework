@@ -586,9 +586,6 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/police' or split[1] == '/pd' then
     if fsn_policeOnDuty(source) then
       if split[2] then
-        if split[2] == 'radar' then
-          TriggerClientEvent('fsn_police:radar:toggle', source)
-        end
         if split[2] == 'emote' or split[2] == 'e' then
           if split[3] == 'ticket' then
             TriggerClientEvent('fsn_emotecontrol:police:ticket', source)

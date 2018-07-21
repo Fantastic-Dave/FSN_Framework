@@ -33,7 +33,6 @@ function spawnTruck(cost)
 	end
 	if not IsAnyVehicleNearPoint(truckspawn.x, truckspawn.y, truckspawn.z, 6.0) then
 		cur_truck = CreateVehicle(RequestModel(hashKey),truckspawn.x, truckspawn.y, truckspawn.z,truckspawn.h,true,false)
-    TriggerEvent('fsn_fuel:update', GetVehicleNumberPlateText(cur_truck), 100)
 		SetVehicleOnGroundProperly(cur_truck)
   	TriggerEvent('fsn_cargarage:makeMine', cur_truck, GetDisplayNameFromVehicleModel(GetEntityModel(cur_truck)), GetVehicleNumberPlateText(cur_truck))
     TriggerEvent('fsn_bank:change:walletMinus', cost)

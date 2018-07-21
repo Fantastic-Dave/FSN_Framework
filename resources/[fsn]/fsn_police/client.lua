@@ -150,9 +150,6 @@ AddEventHandler('fsn_police:update', function(cops)
   print(':fsn_police: There are '..#cops..' on duty!')
   onduty_police = cops
 end)
-function fsn_getCopAmt()
-  return #onduty_police
-end
 
 local function fsn_policeEquipped()
   -- maybe add other loadouts later?
@@ -160,11 +157,10 @@ local function fsn_policeEquipped()
     "WEAPON_STUNGUN",
     "WEAPON_FLARE",
     "WEAPON_NIGHTSTICK",
-    "WEAPON_CARBINERIFLE",
+    "WEAPON_ASSAULTRIFLE",
     "WEAPON_PUMPSHOTGUN",
     "WEAPON_FIREEXTINGUISHER",
     "WEAPON_COMBATPISTOL",
-    "WEAPON_FLASHLIGHT",
     "WEAPON_KNIFE"
   }
   for i=1, #policeWeapons do

@@ -13,7 +13,7 @@ RegisterNetEvent('spawnme')
 AddEventHandler('spawnme', function()
   fsn_spawned = true
 end)
-local function freezePlayer(id, freeze) 
+local function freezePlayer(id, freeze)
     local player = id
     SetPlayerControl(player, not freeze, false)
 

@@ -1,9 +1,3 @@
-local onduty_ems = {}
-RegisterNetEvent('fsn_ems:update')
-AddEventHandler('fsn_ems:update', function(ems)
-  onduty_ems = ems
-end)
-
 function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
   SetTextFont(font)
   SetTextProportional(0)
@@ -170,6 +164,12 @@ AddEventHandler('fsn_main:character', function(char)
     amiems = false
     emslevel = 0
   end
+end)
+
+local onduty_ems = {}
+RegisterNetEvent('fsn_ems:update')
+AddEventHandler('fsn_ems:update', function(ems)
+  onduty_ems = ems
 end)
 
 RegisterNetEvent('fsn_ems:updateLevel')

@@ -94,13 +94,6 @@ local weapon_models = {}
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(500)
-	if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
-		for k, v in pairs(weapon_models) do
-			DetachEntity(weapon_models[k].obj, true, true)
-            DeleteObject(weapon_models[k].obj)
-            weapon_models[k] = nil
-		end
-	end
     for k, wepdetails in pairs(weapons) do
       if HasPedGotWeapon(GetPlayerPed(-1), GetHashKey(wepdetails.name), false) then
         if GetSelectedPedWeapon(GetPlayerPed(-1)) == GetHashKey(wepdetails.name) then
@@ -130,7 +123,6 @@ Citizen.CreateThread(function()
                 local object = CreateObject(GetHashKey(wepdetails.model), bonePos.x, bonePos.y, bonePos.z, true, true, true)
                 weapon_models[wepdetails.name] = {}
                 weapon_models[wepdetails.name].obj = object
-				SetEntityCollision(object, false, false)
                 AttachEntityToEntity(object, GetPlayerPed(-1), GetPedBoneIndex(GetPlayerPed(-1), wepdetails.bone), wepdetails.x, wepdetails.y, wepdetails.z, wepdetails.xRot, wepdetails.yRot, wepdetails.zRot, false, false, false, false, 2, true)
               end
             end

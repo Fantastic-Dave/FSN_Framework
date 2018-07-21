@@ -1,10 +1,7 @@
-resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
-
 client_script 'client.lua'
 client_script 'dispatch.lua'
 server_script 'server.lua'
 
-client_script 'radar/client.lua'
 
 client_script 'MDT/mdt_client.lua'
 server_script 'MDT/mdt_server.lua'
@@ -28,6 +25,5 @@ server_script '@mysql-async/lib/MySQL.lua'
 
 exports({
   'fsn_PDDuty',
-  'fsn_getPDLevel',
-  'fsn_getCopAmt'
+  'fsn_getPDLevel'
 })

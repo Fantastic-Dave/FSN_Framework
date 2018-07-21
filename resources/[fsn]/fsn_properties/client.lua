@@ -77,9 +77,8 @@ RegisterNetEvent('fsn_properties:menu:police:breach')
 RegisterNetEvent('fsn_properties:menu:rent:check')
 RegisterNetEvent('fsn_properties:menu:rent:pay')
 RegisterNetEvent('fsn_properties:menu:robbery')
-local last_click = 0
 RegisterNUICallback( "ButtonClick", function( data, cb )
-  if last_click + 1000 > GetNetworkTime() then print('toosoon') return end
+  if last_click + 10 > GetNetworkTime() then return end
   last_click = GetNetworkTime()
   local split = fsn_SplitString(data, "-")
   if split[1] == 'buy' then

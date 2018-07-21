@@ -49,9 +49,6 @@ myGarage.boats = {}
 local myVehicles = {}
 local menuEnabled = false
 
-AddEventHandler('fsn_main:character', function()
-	TriggerServerEvent('fsn_cargarage:reset', exports.fsn_main:fsn_CharID())
-end)
 
 RegisterNetEvent('fsn_cargarage:makeMine')
 AddEventHandler('fsn_cargarage:makeMine', function(ent, classname, plate)

@@ -6,17 +6,14 @@ AddEventHandler('fsn_fuel:update', function(car, fuelamount)
   if table.contains(vehicles, car) then
     for k, v in pairs(vehicles) do
       if v[1] == car then
-        v[2] = fuelamount
-        fuel_amount = fuel_amount
+        vehicles[k][2] = fuelamount
       end
     end
   else
     table.insert(vehicles, {car, fuelamount})
-    fuel_amount = fuelamount
   end
 end)
 
-local notified = false
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(1500)
@@ -35,27 +32,16 @@ Citizen.CreateThread(function()
         elseif speed > 120 then
           consumption = 0.4
         end
-        if table.contains(vehicles, GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1)))) then
+        if table.contains(vehicles, GetVehiclePedIsIn(GetPlayerPed(-1))) then
           for _, car in pairs(vehicles) do
-            if car[1] == GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1))) then
+            if car[1] == GetVehiclePedIsIn(GetPlayerPed(-1)) then
               if fuel_amount - consumption <= 0 then
                 fuel_amount = 0
               else
                 fuel_amount = fuel_amount - consumption
               end
               vehicles[_][2] = fuel_amount
-              TriggerServerEvent('fsn_fuel:update', GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1))), fuel_amount)
-            end
-          end
-          if fuel_amount < 20 then
-            if not notified then
-              TriggerEvent('fsn_notify:displayNotification', 'You are running out of fuel!!', 'centerRight', 3000, 'error')
-              notified = true
-              PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-              Citizen.Wait(100)
-              PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
-              Citizen.Wait(100)
-              PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
+              TriggerServerEvent('fsn_fuel:update', GetVehiclePedIsIn(GetPlayerPed(-1)), fuel_amount)
             end
           end
           if fuel_amount == 0 then
@@ -67,11 +53,9 @@ Citizen.CreateThread(function()
           end
         else
           fuel_amount = math.random(5, 100)
-          table.insert(vehicles, {GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1))), fuel_amount})
+          table.insert(vehicles, {GetVehiclePedIsIn(GetPlayerPed(-1)), fuel_amount})
         end
       end
-    else
-      notified = false
     end
   end
 end)
