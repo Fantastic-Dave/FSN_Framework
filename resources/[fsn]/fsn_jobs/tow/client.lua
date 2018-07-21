@@ -127,6 +127,7 @@ function SpawnTowTruck(x, y, z)
   	--SetEntityInvincible(taxi, false)
   	SetEntityAsMissionEntity(towtruck, true, true)
     DecorSetInt(towtruck, 'carOwner', GetPlayerServerId(PlayerId()))
+    TriggerEvent('fsn_fuel:update', GetVehicleNumberPlateText(towtruck), 100)
 
     TriggerEvent('fsn_cargarage:makeMine', towtruck, GetDisplayNameFromVehicleModel(GetEntityModel(towtruck)), GetVehicleNumberPlateText(towtruck))
     inService = true

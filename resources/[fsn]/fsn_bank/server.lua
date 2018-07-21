@@ -1,12 +1,14 @@
 RegisterServerEvent('fsn_bank:database:update')
 AddEventHandler('fsn_bank:database:update', function(charid, wallet, bank)
-  if wallet == false then
+  if bank ~= false then
     MySQL.Sync.execute("UPDATE fsn_characters SET char_bank=@bank WHERE char_id=@char_id", {['@char_id'] = charid, ['@bank'] = bank})
-  elseif bank == false then
-    MySQL.Sync.execute("UPDATE fsn_characters SET char_money=@wallet WHERE char_id=@char_id", {['@char_id'] = charid, ['@wallet'] = wallet})
-  else
-    MySQL.Sync.execute("UPDATE fsn_characters SET char_money=@wallet, char_bank=@bank WHERE char_id=@char_id", {['@char_id'] = charid, ['@wallet'] = wallet, ['@bank'] = bank})
   end
+  if wallet ~= false then
+    MySQL.Sync.execute("UPDATE fsn_characters SET char_money=@wallet WHERE char_id=@char_id", {['@char_id'] = charid, ['@wallet'] = wallet})
+  end
+  --else
+  --  MySQL.Sync.execute("UPDATE fsn_characters SET char_money=@wallet, char_bank=@bank WHERE char_id=@char_id", {['@char_id'] = charid, ['@wallet'] = wallet, ['@bank'] = bank})
+  --end
 end)
 
 RegisterServerEvent('fsn_bank:transfer')
