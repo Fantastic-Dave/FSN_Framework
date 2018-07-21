@@ -74,7 +74,12 @@ Citizen.CreateThread(function()
         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
         if IsControlJustPressed(0,51) then
           if exports.fsn_inventory:fsn_HasItem('cooked_meat') then
-            TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(400, 1500) * exports.fsn_inventory:fsn_GetItemAmount('cooked_meat'))
+            if exports.fsn_police:fsn_getCopAmt() < 1 then
+              TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(200, 800) * exports.fsn_inventory:fsn_GetItemAmount('cooked_meat'))
+              TriggerEvent('chatMessage', '', {255,255,255}, '^8^*:FSN:^0^r This is a police related action, there are no police online so your earnings have been halved.')
+            else
+              TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(400, 1000) * exports.fsn_inventory:fsn_GetItemAmount('cooked_meat'))
+            end
             TriggerEvent('fsn_inventory:item:take', 'cooked_meat', exports.fsn_inventory:fsn_GetItemAmount('cooked_meat'))
             cookingend = GetNetworkTime() + cookingadd
             cooking = true
