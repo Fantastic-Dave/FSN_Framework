@@ -102,13 +102,14 @@ Citizen.CreateThread(function()
                 Wait(1)
               end
               local personalvehicle = CreateVehicle(model, spawn.x, spawn.y, spawn.z, spawn.h, true, false)
+              TriggerEvent('fsn_fuel:update', GetVehicleNumberPlateText(personalvehicle), 100)
               mytaxi = personalvehicle
               SetModelAsNoLongerNeeded(model)
               SetVehicleOnGroundProperly(personalvehicle)
               SetVehicleHasBeenOwnedByPlayer(personalvehicle, true)
               local id = NetworkGetNetworkIdFromEntity(personalvehicle)
               SetNetworkIdCanMigrate(id, true)
-              Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalvehicle))
+              --Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalvehicle))
               TriggerEvent('fsn_notify:displayNotification', 'Get your taxi from the carpark!', 'centerRight', 4000, 'info')
             	TriggerEvent('fsn_cargarage:makeMine', mytaxi, GetDisplayNameFromVehicleModel(GetEntityModel(mytaxi)), GetVehicleNumberPlateText(mytaxi))
               istaxi = true

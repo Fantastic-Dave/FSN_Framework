@@ -549,6 +549,10 @@ Citizen.CreateThread(function()
         end
         local price = math.random(drugs[selling_item].street_price - 100, drugs[selling_item].street_price + 100)
         price = price * sold_amount
+        if exports.fsn_police:fsn_getCopAmt() < 1 then
+          TriggerEvent('chatMessage', '', {255,255,255}, '^8^*:FSN:^0^r This is a police related action, there are no police online so your earnings have been halved.')
+          price = price / 2
+        end
         TriggerEvent('fsn_notify:displayNotification', 'They bought '..sold_amount..' '..items_table[selling_item].display_name..' for '..price..'DM', 'centerLeft', 3000, 'info')
         TriggerEvent('fsn_inventory:item:add', 'dirty_money', price)
         TriggerEvent('fsn_inventory:item:take', selling_item, sold_amount)

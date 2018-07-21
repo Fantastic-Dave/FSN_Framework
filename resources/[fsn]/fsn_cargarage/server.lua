@@ -12,6 +12,12 @@ AddEventHandler('fsn_cargarage:updateVehicle', function(savetable)
     ['@veh_colours'] = colours
   })
 end)
+
+RegisterServerEvent('fsn_cargarage:reset')
+AddEventHandler('fsn_cargarage:reset', function(charid)
+  MySQL.Sync.execute('UPDATE `fsn_vehicles` SET `veh_status` = 0 WHERE `veh_status` = 1 AND `char_id` = @charid', {['@charid'] = charid})
+end)
+
 --------------------------------------------------------------------------------
 RegisterServerEvent('fsn_cargarage:requestVehicles')
 AddEventHandler('fsn_cargarage:requestVehicles', function(type, charid)
