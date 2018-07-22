@@ -94,55 +94,56 @@ local weapon_models = {}
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(500)
-	if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
-		for k, v in pairs(weapon_models) do
-			DetachEntity(weapon_models[k].obj, true, true)
-            DeleteObject(weapon_models[k].obj)
-            weapon_models[k] = nil
+		if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
+			for k, v in pairs(weapon_models) do
+				DetachEntity(weapon_models[k].obj, true, true)
+	      DeleteObject(weapon_models[k].obj)
+	      weapon_models[k] = nil
+			end
+		else
+	    for k, wepdetails in pairs(weapons) do
+	      if HasPedGotWeapon(GetPlayerPed(-1), GetHashKey(wepdetails.name), false) then
+	        if GetSelectedPedWeapon(GetPlayerPed(-1)) == GetHashKey(wepdetails.name) then
+	          if weapon_models[wepdetails.name] then
+	            DetachEntity(weapon_models[wepdetails.name].obj, true, true)
+	            DeleteObject(weapon_models[wepdetails.name].obj)
+	            weapon_models[wepdetails.name] = nil
+	          end
+	        else
+	          if not weapon_models[wepdetails.name] then
+	            if wepdetails.model ~= '' then
+	              local bonePos = GetWorldPositionOfEntityBone(GetPlayerPed(-1), GetPedBoneIndex(GetPlayerPed(-1), wepdetails.bone))
+	              local startLoad = GetNetworkTime()
+	              RequestModel(GetHashKey(wepdetails.model))
+	              while not HasModelLoaded(GetHashKey(wepdetails.model)) do
+	                Wait(0)
+	                print(':fsn_weaponcontrol: Loading model for: '..wepdetails.name)
+	                if startLoad+500 < GetNetworkTime() then
+	                  print(':fsn_weaponcontrol: Loading FAILED for model: '..wepdetails.name)
+	                  --TriggerEvent('fsn_notify:displayNotification', ':fsn_weaponcontrol: Loading FAILED for model: '..wepdetails.name, 'centerRight', 3000, 'error')
+	                else
+	                  Wait(1)
+	                end
+	              end
+	              if HasModelLoaded(GetHashKey(wepdetails.model)) then
+	                print(':fsn_weaponcontrol: Adding weapon for: '..wepdetails.name)
+	                local object = CreateObject(GetHashKey(wepdetails.model), bonePos.x, bonePos.y, bonePos.z, true, true, true)
+	                weapon_models[wepdetails.name] = {}
+	                weapon_models[wepdetails.name].obj = object
+									SetEntityCollision(object, false, false)
+	                AttachEntityToEntity(object, GetPlayerPed(-1), GetPedBoneIndex(GetPlayerPed(-1), wepdetails.bone), wepdetails.x, wepdetails.y, wepdetails.z, wepdetails.xRot, wepdetails.yRot, wepdetails.zRot, false, false, false, false, 2, true)
+	              end
+	            end
+	          end
+	        end
+	      else
+	        if weapon_models[wepdetails.name] then
+	          DetachEntity(weapon_models[wepdetails.name].obj, true, true)
+	          DeleteObject(weapon_models[wepdetails.name].obj)
+	          weapon_models[wepdetails.name] = nil
+	        end
+	      end
+	    end
 		end
-	end
-    for k, wepdetails in pairs(weapons) do
-      if HasPedGotWeapon(GetPlayerPed(-1), GetHashKey(wepdetails.name), false) then
-        if GetSelectedPedWeapon(GetPlayerPed(-1)) == GetHashKey(wepdetails.name) then
-          if weapon_models[wepdetails.name] then
-            DetachEntity(weapon_models[wepdetails.name].obj, true, true)
-            DeleteObject(weapon_models[wepdetails.name].obj)
-            weapon_models[wepdetails.name] = nil
-          end
-        else
-          if not weapon_models[wepdetails.name] then
-            if wepdetails.model ~= '' then
-              local bonePos = GetWorldPositionOfEntityBone(GetPlayerPed(-1), GetPedBoneIndex(GetPlayerPed(-1), wepdetails.bone))
-              local startLoad = GetNetworkTime()
-              RequestModel(GetHashKey(wepdetails.model))
-              while not HasModelLoaded(GetHashKey(wepdetails.model)) do
-                Wait(0)
-                print(':fsn_weaponcontrol: Loading model for: '..wepdetails.name)
-                if startLoad+500 < GetNetworkTime() then
-                  print(':fsn_weaponcontrol: Loading FAILED for model: '..wepdetails.name)
-                  --TriggerEvent('fsn_notify:displayNotification', ':fsn_weaponcontrol: Loading FAILED for model: '..wepdetails.name, 'centerRight', 3000, 'error')
-                else
-                  Wait(1)
-                end
-              end
-              if HasModelLoaded(GetHashKey(wepdetails.model)) then
-                print(':fsn_weaponcontrol: Adding weapon for: '..wepdetails.name)
-                local object = CreateObject(GetHashKey(wepdetails.model), bonePos.x, bonePos.y, bonePos.z, true, true, true)
-                weapon_models[wepdetails.name] = {}
-                weapon_models[wepdetails.name].obj = object
-				SetEntityCollision(object, false, false)
-                AttachEntityToEntity(object, GetPlayerPed(-1), GetPedBoneIndex(GetPlayerPed(-1), wepdetails.bone), wepdetails.x, wepdetails.y, wepdetails.z, wepdetails.xRot, wepdetails.yRot, wepdetails.zRot, false, false, false, false, 2, true)
-              end
-            end
-          end
-        end
-      else
-        if weapon_models[wepdetails.name] then
-          DetachEntity(weapon_models[wepdetails.name].obj, true, true)
-          DeleteObject(weapon_models[wepdetails.name].obj)
-          weapon_models[wepdetails.name] = nil
-        end
-      end
-    end
   end
 end)
