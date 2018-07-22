@@ -12,7 +12,11 @@ AddEventHandler('fsn_fuel:update', function(car, fuelamount)
     end
   else
     table.insert(vehicles, {car, fuelamount})
-    fuel_amount = fuelamount
+    if IsPedInAnyVehicle(GetPlayerPed(-1)) then
+      if GetVehiclePedIsIn(GetPlayerPed(-1)) == car then
+        fuel_amount = fuelamount
+      end
+    end
   end
 end)
 
@@ -126,7 +130,7 @@ Citizen.CreateThread(function()
           if veh then
             local veh_index = 0
             for k, v in pairs(vehicles) do
-              if v[1] == veh then
+              if v[1] == GetVehicleNumberPlateText(veh) then
                 veh_index = k
               end
             end
