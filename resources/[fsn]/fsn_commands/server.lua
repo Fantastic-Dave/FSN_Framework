@@ -32,31 +32,16 @@ local pd_cars = {
   --------------------
   -- LSPD
   --------------------
-  [101] = "police",
-  [102] = "police2",
-  [103] = "police3",
-  [104] = "police4",
-  [105] = "police5",
-  [106] = "police6",
-  [107] = "police7",
-  [108] = "police8",
-  --------------------
-  -- SHERIFF DEPT
-  --------------------
-  [201] = "sheriff",
-  [202] = "sheriff2",
-  [203] = "sheriff3",
-  [204] = "sheriff4",
-  [205] = "sheriff5",
-  [206] = "sheriff6",
-  [207] = "sheriff7",
-  --------------------
-  -- STATE POLICE
-  --------------------
-  [301] = "statep",
-  [302] = "statep2",
-  [303] = "statep3",
-  [304] = "statep4",
+  [101] = "hwaycar",
+  [102] = "hwaycar2",
+  [103] = "hwaycar3",
+  [104] = "hwaycar4",
+  [105] = "hwaycar5",
+  [106] = "hwaycar6",
+  [107] = "hwaycar7",
+  [108] = "hwaycar8",
+  [109] = "hwaycar9",
+  [110] = "hwaycar10"
   --------------------
   -- UNMARKED
   --------------------
@@ -70,12 +55,11 @@ local pd_cars = {
   --------------------
   -- SUPERCARS
   --------------------
-  [2001] = "lspd_lambo",
-  [2002] = "2015polstang",
-  [2003] = "audipd",
-  [2004] = "corvettepd",
-  [2005] = "mclarenpd",
-  [2006] = "porschepd"
+  [2001] = "2015polstang",
+  [2002] = "audipd",
+  [2003] = "corvettepd",
+  [2004] = "mclarenpd",
+  [2005] = "porschepd"
 }
 
 local emotes = {
