@@ -90,11 +90,10 @@ local weapons = {
 	{name = 'GADGET_PARACHUTE', 		bone = 24818, x = 65536.0, y = 65536.0, z = 65536.0, xRot = 0.0, yRot = 0.0, zRot = 0.0, category = 'others', 	model = 'p_parachute_s'}
 }
 local weapon_models = {}
-
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(500)
-		if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
+		if IsPedInAnyVehicle(GetPlayerPed(-1), false) or IsPedGettingIntoAVehicle(GetPlayerPed(-1)) then
 			for k, v in pairs(weapon_models) do
 				DetachEntity(weapon_models[k].obj, true, true)
 	      DeleteObject(weapon_models[k].obj)
@@ -117,7 +116,7 @@ Citizen.CreateThread(function()
 	              RequestModel(GetHashKey(wepdetails.model))
 	              while not HasModelLoaded(GetHashKey(wepdetails.model)) do
 	                Wait(0)
-	                print(':fsn_weaponcontrol: Loading model for: '..wepdetails.name)
+	                --print(':fsn_weaponcontrol: Loading model for: '..wepdetails.name)
 	                if startLoad+500 < GetNetworkTime() then
 	                  print(':fsn_weaponcontrol: Loading FAILED for model: '..wepdetails.name)
 	                  --TriggerEvent('fsn_notify:displayNotification', ':fsn_weaponcontrol: Loading FAILED for model: '..wepdetails.name, 'centerRight', 3000, 'error')
@@ -126,7 +125,7 @@ Citizen.CreateThread(function()
 	                end
 	              end
 	              if HasModelLoaded(GetHashKey(wepdetails.model)) then
-	                print(':fsn_weaponcontrol: Adding weapon for: '..wepdetails.name)
+	                --print(':fsn_weaponcontrol: Adding weapon for: '..wepdetails.name)
 	                local object = CreateObject(GetHashKey(wepdetails.model), bonePos.x, bonePos.y, bonePos.z, true, true, true)
 	                weapon_models[wepdetails.name] = {}
 	                weapon_models[wepdetails.name].obj = object
