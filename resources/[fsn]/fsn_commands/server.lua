@@ -41,7 +41,7 @@ local pd_cars = {
   [107] = "hwaycar7",
   [108] = "hwaycar8",
   [109] = "hwaycar9",
-  [110] = "hwaycar10"
+  [110] = "hwaycar10",
   --------------------
   -- UNMARKED
   --------------------
