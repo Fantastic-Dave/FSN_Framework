@@ -69,7 +69,7 @@ AddEventHandler('fsn_police:runplate', function(src, plate)
       TriggerClientEvent('fsn_police:MDT:vehicledetails', src, rnd_names[math.random(1,#rnd_names)], false, false)
     else
       MySQL.Async.fetchAll('SELECT * FROM `fsn_characters` WHERE `char_id` = @charid', {['@charid'] = vehicle[1].char_id}, function(char)
-        MySQL.Async.fetchAll('SELECT * FROM `fsn_warrants` WHERE `suspect_name` = @name AND `war_status` = "active"', {['@name'] = char[1].char_fname..' '..char[1].char_lname}, function(warrants)
+        MySQL.Async.fetchAll('SELECT * FROM `fsn_warrants` WHERE `suspect_name` LIKE @name AND `war_status` = "active"', {['@name'] = char[1].char_fname..' '..char[1].char_lname}, function(warrants)
           if warrants[1] then
             TriggerClientEvent('fsn_police:MDT:vehicledetails', src, char[1].char_fname..' '..char[1].char_lname, true, vehicle[1])
           else
