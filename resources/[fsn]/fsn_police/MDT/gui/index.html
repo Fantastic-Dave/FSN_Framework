@@ -41,14 +41,16 @@
 						<div class="cpic_title" style="text-align:center;margin-top:20px;margin-bottom:20px;display:none">
 							LOADING...
 						</div>
-						<div class="cpic_results">
+						<div id="warrants_update" class="cpic_results" style="display:block">
+                            <button id="refreshwarrantsbuttton" class="cpic_searchbutton" type="submit" style="height:30px;background-color:#ffc57f" onclick="requestWarrants()">REFRESH</button>
 							<table>
+                                <!--
 								<tr>
 									<th>ID</th>
 									<th>Charges</th>
 									<th>Time/Fine</th>
 								</tr>
-								<!--
+
 								<tr>
 									<td>1</td>
 									<td>Logan Whitehead</td>

@@ -439,6 +439,7 @@ function booking_submit_now() {
 			"jailTime":$("#booking-jail").val(),
 			"jailFine":$("#booking-fine").val(),
 		}));
+        booking_reset()
 	} else {
 		$('#booking-now-button').css('background-color','red')
 		$('#booking-now-button').text('ERROR: MISSING VALUE')
@@ -459,6 +460,7 @@ function booking_submit_warrant() {
 			"jailTime":$("#booking-jail").val(),
 			"jailFine":$("#booking-fine").val(),
 		}));
+        booking_reset()
 	} else {
 		$('#booking-warrant-button').css('background-color','red')
 		$('#booking-warrant-button').text('ERROR: MISSING VALUE')
@@ -469,6 +471,23 @@ function booking_submit_warrant() {
 	}
 }
 
+function requestWarrants() {
+	$('#refreshwarrantsbuttton').text('Refreshing...')
+    $.post('http://fsn_police/mdt-request-warrants', JSON.stringify({
+		"name":$("#booking-description").val()
+	}))
+}
+function removeWarrant(id) {
+    $.post('http://fsn_police/mdt-remove-warrant', JSON.stringify({
+        "id":id
+    }))
+
+    $.post('http://fsn_police/mdt-request-warrants', JSON.stringify({
+        "name":$("#booking-description").val()
+    }))
+}
+
+
 $(function() {
     window.addEventListener('message', function(event) {
 		if (event.data.displayMDT) {
@@ -476,6 +495,34 @@ $(function() {
 		} else {
 			$('#main-computer').hide()
 		}
+		if (event.data.updateWarrants) {
+		    $('#warrants_update').html('<button id="refreshwarrantsbuttton" class="cpic_searchbutton" type="submit" style="height:30px;background-color:#ffc57f" onclick="requestWarrants()">REFRESH</button>' +
+                '<table id="warrants_append">' +
+                    '<tr>' +
+                        '<th>ID</th>' +
+                        '<th>Name</th>' +
+                        '<th>Officer</th>' +
+                        '<th>Charges</th>' +
+                        '<th>Desc</th>' +
+                        '<th>Time/Fine</th>' +
+                        '<th>Admin</th>' +
+                    '</tr>' +
+                '</table>')
+            if (event.data.warrants.length > 0) {
+                for(var i = 0; i < event.data.warrants.length; i++) {
+                    var obj = event.data.warrants[i];
+                    $('#warrants_append').append('<tr>' +
+                        '<td>'+obj.war_id+'</td>' +
+                        '<td>'+obj.suspect_name+'</td>' +
+                        '<td>'+obj.officer_name+'</td>' +
+                        '<td>'+obj.war_charges+'</td>' +
+                        '<td>'+obj.war_desc+'</td>' +
+                        '<td>'+obj.war_times+'/$'+obj.war_fine+'</td>' +
+                        '<td><button onclick="removeWarrant('+obj.war_id+')">Remove</button></td>' +
+                        '</tr>')
+                }
+            }
+        }
 		if (event.data.addDispatch) {
 			var apstring = '<tr>'+
 				'<td>'+timeNow()+'</td>'+
