@@ -58,6 +58,31 @@ RegisterNUICallback("booking-submit-now", function(data, cb)
   end
 end)
 
+RegisterNUICallback("booking-submit-warrant", function(data, cb)
+  TriggerEvent('fsn_police:MDT:toggle')
+  --TriggerEvent('chatMessage', '', {255,255,255}, '^6MDT |^0 Warrant submitted. Reference ID: '..)
+  TriggerServerEvent('fsn_police:MDT:warrant', data)
+end)
+
+RegisterNUICallback('mdt-remove-warrant', function(data, cb)
+  TriggerServerEvent('fsn_police:MDTremovewarrant', data.id)
+end)
+RegisterNUICallback('mdt-request-warrants', function(data, cb)
+  if data.name ~= '' then
+    TriggerServerEvent('fsn_police:MDT:requestwarrants', data.name)
+  else
+    TriggerServerEvent('fsn_police:MDT:requestwarrants', false)
+  end
+end)
+RegisterNetEvent('fsn_police:MDT:receivewarrants')
+AddEventHandler('fsn_police:MDT:receivewarrants', function(warrants)
+  SendNUIMessage({
+    displayMDT = true,
+    updateWarrants = true,
+    warrants = warrants
+  })
+end)
+
 RegisterNUICallback("closeMDT", function(data, cb)
 	TriggerEvent('fsn_police:MDT:toggle')
 end)
