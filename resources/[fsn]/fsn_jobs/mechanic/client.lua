@@ -1,0 +1,129 @@
+local clockloc = {x = 548.83673095703, y = -188.42317199707, z = 54.481338500977}
+local carloc = {
+  inside = {x = 545.96234130859, y = -176.90148925781, z = 54.43835067749, h = 91.259986877441},
+  out = {x = 532.19537353516, y = -177.41616821289, z = 54.462707519531}
+}
+local carinfo = {
+  inspected = false,
+  inspect = {x = 542.20849609375, y = -176.93003845215, z = 54.503692626953},
+  repair = {
+    [1] = {x = 545.9482421875, y = -175.42169189453, z = 54.481334686279, h = 176.73480224609},
+    [2] = {x = 548.60986328125, y = -176.71714782715, z = 54.481338500977, h = 85.204887390137},
+    [3] = {x = 546.12677001953, y = -178.63162231445, z = 54.481338500977, h = 356.86795043945}
+  }
+}
+local ismech = false
+local carinloc = false
+local repspot = -1
+
+RegisterNetEvent('fsn_jobs:mechanic:toggleduty')
+AddEventHandler('fsn_jobs:mechanic:toggleduty', function()
+  if ismech then
+    ismech = false
+    TriggerEvent('fsn_notify:displayNotification', 'You are no longer a mechanic.', 'centerLeft', 4000, 'error')
+    fsn_SetJob('Unemployed')
+  else
+    ismech = true
+    TriggerEvent('fsn_notify:displayNotification', 'You have signed on duty! Await customers.', 'centerLeft', 4000, 'success')
+     fsn_SetJob('Mechanic')
+  end
+end)
+
+function InspectVehicle()
+  if carinloc then
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^3HEALTH |^r^0 Engine: '..math.floor(GetVehicleEngineHealth(carinloc))..'/1000')
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^3HEALTH |^r^0 Body: '..math.floor(GetVehicleBodyHealth(carinloc))..'/1000')
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^3HEALTH |^r^0 Tank: '..math.floor(GetVehiclePetrolTankHealth(carinloc))..'/1000')
+    carinfo.inspected = true
+    repspot = 1
+  else
+    TriggerEvent('fsn_notify:displayNotification', 'No vehicle detected!<br>Try readding the car into the garage', 'centerLeft', 3000, 'error')
+  end
+end
+
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+    if ismech then
+      if carinloc then
+        if not carinfo.inspected then
+          DrawMarker(1,carinfo.inspect.x, carinfo.inspect.y, carinfo.inspect.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+          if GetDistanceBetweenCoords(carinfo.inspect.x, carinfo.inspect.y, carinfo.inspect.z, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+            SetTextComponentFormat("STRING")
+            AddTextComponentString("Press ~INPUT_PICKUP~ to inspect the vehicle")
+            DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+            if IsControlJustPressed(0, 51) then
+              SetVehicleDoorOpen(carinloc, 4, false, false)
+              TriggerEvent('fsn_notify:displayNotification', 'Inspecting...', 'centerLeft', 5000, 'info')
+              Citizen.Wait(5000)
+              InspectVehicle()
+            end
+          end
+        else
+          if repspot > 0 then
+            local reep = carinfo.repair[repspot]
+            DrawMarker(1,reep.x, reep.y, reep.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+          end
+        end
+      end
+      if GetDistanceBetweenCoords(carloc.out.x, carloc.out.y, carloc.out.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
+        DrawMarker(1,carloc.out.x, carloc.out.y, carloc.out.z-1,0,0,0,0,0,0,4.001,4.0001,0.4001,0,155,255,175,0,0,0,0)
+        if GetDistanceBetweenCoords(carloc.out.x, carloc.out.y, carloc.out.z, GetEntityCoords(GetPlayerPed(-1)), true) < 5 then
+          if IsPedInAnyVehicle(GetPlayerPed(-1)) then
+            SetTextComponentFormat("STRING")
+            AddTextComponentString("Press ~INPUT_VEH_HEADLIGHT~ to put the car in the garage")
+            DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+            if IsControlJustPressed(0, 74) then
+              carinloc = GetVehiclePedIsUsing(GetPlayerPed(-1))
+              if carinloc then
+                TaskLeaveVehicle(GetPlayerPed(-1), carinloc, 16)
+                SetVehicleDoorsShut(carinloc, false)
+                Citizen.Wait(850)
+                SetEntityCollision(carinloc, false, false)
+                SetEntityHeading(carinloc, carloc.inside.h)
+                SetEntityCoords(carinloc, carloc.inside.x, carloc.inside.y, carloc.inside.z, false, false, false, false)
+                FreezeEntityPosition(carinloc, true)
+              else
+                TriggerEvent('fsn_notify:displayNotification', 'No vehicle detected!', 'centerLeft', 3000, 'error')
+              end
+            end
+          else
+            if carinloc then
+              SetTextComponentFormat("STRING")
+              AddTextComponentString("Press ~INPUT_PICKUP~ to retrieve the vehicle")
+              DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+              if IsControlJustPressed(0, 51) then
+                SetVehicleDoorsShut(carinloc, false)
+                SetEntityCoords(carinloc, carloc.out.x, carloc.out.y, carloc.out.z, false, false, false, false)
+                SetEntityCollision(carinloc, true, true)
+                FreezeEntityPosition(carinloc, false)
+                carinfo.inspected = false
+                carinloc = false
+              end
+            end
+          end
+        end
+      end
+    end
+    if GetDistanceBetweenCoords(clockloc.x, clockloc.y, clockloc.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
+      DrawMarker(1,clockloc.x, clockloc.y, clockloc.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+      if GetDistanceBetweenCoords(clockloc.x, clockloc.y, clockloc.z, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+        if ismech then
+          SetTextComponentFormat("STRING")
+          AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~quit")
+          DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+          if IsControlJustPressed(0, 51) then
+            TriggerServerEvent('fsn_jobs:mechanic:toggle')
+          end
+        else
+          SetTextComponentFormat("STRING")
+          AddTextComponentString("Press ~INPUT_PICKUP~ to become a ~g~mechanic")
+          DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+          if IsControlJustPressed(0, 51) then
+            TriggerServerEvent('fsn_jobs:mechanic:toggle')
+          end
+        end
+      end
+    end
+  end
+end)
