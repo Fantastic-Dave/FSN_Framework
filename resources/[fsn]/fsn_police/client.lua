@@ -2,6 +2,17 @@ amicop = false
 pdonduty = false ----------------- REMEMBER TO CHANGE THESE
 policelevel = 0
 
+function showLoadingPrompt(showText, showTime, showType)
+  Citizen.CreateThread(function()
+    Citizen.Wait(0)
+    N_0xaba17d7ce615adbf("STRING") -- set type
+    AddTextComponentString(showText) -- sets the text
+    N_0xbd12f8228410d9b4(showType) -- show promt (types = 3)
+    Citizen.Wait(showTime) -- show time
+    N_0x10d373323e5b9c0d() -- remove promt
+  end)
+end
+
 RegisterNetEvent('fsn_police:911r')
 AddEventHandler('fsn_police:911r', function(nineoneone, at, msg)
   if pdonduty then
@@ -195,6 +206,23 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
     if pdonduty then
+      for id = 0, 32 do
+        if NetworkIsPlayerActive(id) then
+          local ped = GetPlayerPed(id)
+          if GetDistanceBetweenCoords(ped, GetPlayerPed(-1), true) < 2 and ped ~= GetPlayerPed(-1) then
+            if DecorGetBool(GetPlayerPed(id), "hardcuff") then
+              showLoadingPrompt("[SHIFT + Y] uncuff "..GetPlayerServerId(id), 3000, 3)
+            else
+              showLoadingPrompt("[SHIFT + Y] cuff "..GetPlayerServerId(id), 3000, 3)
+            end
+            if IsControlPressed() then
+              if IsControlJustPressed() then
+                ExecuteCommand('pd c '..GetPlayerServerId(id))
+              end
+            end
+          end
+        end
+      end
       for id = 0, 32 do
         if NetworkIsPlayerActive(id) then
           local ped = GetPlayerPed(id)
