@@ -1001,7 +1001,7 @@ local function fsn_StartLaundering()
   SetModelAsNoLongerNeeded(vehicle)
   Citizen.InvokeNative(0xB736A491E64A32CF,Citizen.PointerValueIntInitialized(spawned_car))
   laundervan = spawned_car
-  SetEntityAsMissionEntity(laundervan, true, true)
+  SetEntityAsMissionEntity(laundervan, false, true)
   TriggerEvent('fsn_cargarage:makeMine', spawned_car, GetDisplayNameFromVehicleModel(GetEntityModel(spawned_car)), GetVehicleNumberPlateText(spawned_car))
   current_delivery = math.random(1, #launder_deliveries)
   laundering = true

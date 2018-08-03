@@ -198,7 +198,7 @@ local function fsn_SpawnVehicle(vehid)
 			plate = veh.veh_plate,
 			model = veh.veh_name
 		})
-		SetEntityAsMissionEntity(personalvehicle, true, true)
+		SetEntityAsMissionEntity(personalvehicle, false, true)
 		TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', veh.veh_plate, 1)
 	end)
 end
@@ -245,7 +245,7 @@ Citizen.CreateThread(function()
 						AddTextComponentString("Press ~INPUT_CELLPHONE_SELECT~ to ~r~return~w~ your vehicle")
 						DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 						if IsControlJustPressed(1, 18) then
-					    SetEntityAsMissionEntity( vehicle, true, true )
+					    SetEntityAsMissionEntity( vehicle, false, true )
 							TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', GetVehicleNumberPlateText(vehicle), 0)
 					    Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( vehicle ) )
 
