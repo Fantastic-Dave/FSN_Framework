@@ -2,6 +2,7 @@
 client_script 'initial/client.lua'
 client_script 'hud/client.lua'
 client_script 'playermanager/client.lua'
+client_script 'imanager/client.lua'
 
 -- gui stuffs
 ui_page 'gui/index.html'
@@ -18,6 +19,7 @@ files({
 server_script '@mysql-async/lib/MySQL.lua'
 server_script 'initial/server.lua'
 server_script 'playermanager/server.lua'
+server_script 'imanager/server.lua'
 
 
 -- exports
