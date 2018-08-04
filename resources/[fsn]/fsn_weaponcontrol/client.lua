@@ -92,7 +92,7 @@ local weapons = {
 local weapon_models = {}
 Citizen.CreateThread(function()
   while true do
-    Citizen.Wait(500)
+    Citizen.Wait(0)
 		if IsPedInAnyVehicle(GetPlayerPed(-1), false) or IsPedGettingIntoAVehicle(GetPlayerPed(-1)) then
 			for k, v in pairs(weapon_models) do
 				DetachEntity(weapon_models[k].obj, true, true)
