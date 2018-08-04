@@ -178,6 +178,8 @@ AddEventHandler('fsn_properties:menu:inventory:deposit', function(id)
                     if exports.fsn_inventory:fsn_GetItemAmount(item) >= amount then
                       local _item = exports.fsn_inventory:fsn_GetItemDetails(item).display_name
                       TriggerServerEvent('fsn_properties:enterable:inventory:enter', id, item, _item, amount)
+                      print('removing '..amount..' '..item)
+                      TriggerEvent('fsn_inventory:item:take', item, amount)
                     else
                       TriggerEvent('fsn_notify:displayNotification', 'You dont have enough!', 'centerLeft', 5000, 'error')
                     end
