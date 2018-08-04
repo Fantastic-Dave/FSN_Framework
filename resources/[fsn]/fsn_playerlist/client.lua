@@ -64,19 +64,27 @@ function fsn_displayPlayerMenu()
       end
     end
   end
+  --[[
   players = json.encode(players)
   SendNUIMessage({
     enable = true,
     players = players
   })
+  ]]
+TriggerEvent('chatMessage', '', {255,255,255}, '^1^*NOTICE |^0^r Use "/playerinfo ID" for reporting.')
+  --if #players < 2 then
+  --  TriggerEvent('chatMessage', '', {255,255,255}, '^8You are alone in the server. You may be instanced. View ^6http://servers.fivem.net/^8 to see if there are other online players.')
+  --end
   isPlayerMenuActive = true
 end
 
 local function fsn_hidePlayerMenu()
   if isPlayerMenuActive then
+    --[[
     SendNUIMessage({
       enable = false
     })
+    ]]
     isPlayerMenuActive = false
   end
 end
@@ -102,10 +110,11 @@ Citizen.CreateThread(function()
       end
     end
     Citizen.Wait(0)
-    if IsControlPressed(0,20) then
-      fsn_displayPlayerMenu()
-    else
-      fsn_hidePlayerMenu()
+    if IsControlJustPressed(0,20) then
+      TriggerEvent('chatMessage', '', {255,255,255}, '^1^*NOTICE |^0^r Use "/playerinfo ID" for reporting.')
+    --  fsn_displayPlayerMenu()
+    --else
+    --  fsn_hidePlayerMenu()
     end
   end
 end)
