@@ -296,6 +296,18 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- CHAT COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/playerinfo' then
+    if split[2] and tonumber(split[2]) then
+      local char = getCharacter(tonumber(split[2]))
+      if char then
+        TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0 '..GetPlayerName(tonumber(split[2]))..'#'..split[2]..'^r | SteamID: '..GetPlayerIdentifiers(tonumber(split[2]))[1]..' | CharID: '..char.char_id)
+      else
+        TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Cannot find that character?????.')
+      end
+    else
+      TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r There was an issue with the arguments you provided.')
+    end
+  end
   if split[1] == '/911' then
     local char = getCharacter(source)
     local at = char.char_fname..' '..string.sub(char.char_lname, 1, 1)
