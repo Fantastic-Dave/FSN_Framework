@@ -206,6 +206,7 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
     if pdonduty then
+      --[[
       for id = 0, 32 do
         if NetworkIsPlayerActive(id) then
           local ped = GetPlayerPed(id)
@@ -223,6 +224,7 @@ Citizen.CreateThread(function()
           end
         end
       end
+      ]]
       for id = 0, 32 do
         if NetworkIsPlayerActive(id) then
           local ped = GetPlayerPed(id)
