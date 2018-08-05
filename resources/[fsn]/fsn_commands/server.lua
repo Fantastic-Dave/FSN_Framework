@@ -300,7 +300,11 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     if split[2] and tonumber(split[2]) then
       local char = getCharacter(tonumber(split[2]))
       if char then
-        TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0 '..GetPlayerName(tonumber(split[2]))..'#'..split[2]..'^r | SteamID: '..GetPlayerIdentifiers(tonumber(split[2]))[1]..' | CharID: '..char.char_id)
+        if GetPlayerName(tonumber(split[2])) then
+          TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0 '..GetPlayerName(tonumber(split[2]))..'#'..split[2]..'^r | SteamID: '..GetPlayerIdentifiers(tonumber(split[2]))[1]..' | CharID: '..char.char_id)
+        else
+          TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0 '..char.ply_name..'#'..split[2]..'^r | SteamID: ^8DISCONNECTED^0 | CharID: '..char.char_id)
+        end
       else
         TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Cannot find that character?????.')
       end
