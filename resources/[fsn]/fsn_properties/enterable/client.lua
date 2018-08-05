@@ -142,6 +142,26 @@ end)
 
 local items = {
   ["dirty money"] = "dirty_money",
+  ["repair kit"] = "repair_kit",
+  ["uncooked meat"] = "uncooked_meat",
+  ["cooked_meat"] = "cooked_meat",
+  ["beef jerky"] = "beef jerky",
+  ["cupcake"] = "cupcake",
+  ["microwave burrito"] = "microwave_burrito",
+  ["panini"] = "panini",
+  ["pepsi"] = "pepsi",
+  ["pepsi max"] = "pepsi_max",
+  ["water"] = "water",
+  ["coffee"] = "coffee",
+  ["lockpick"] = "lockpick",
+  ["handcuffs"] = "handcuffs",
+  ["phone"] = "phone",
+  ["2g weed"] = "2g_weed",
+  ["joint"] = "joint",
+  ["acetone"] = "acetone",
+  ["phosphorus"] = "phosphorus",
+  ["meth rocks"] = "meth_rocks",
+  ["packaged cocaine"] = "packaged_cocaine",
 }
 AddEventHandler('fsn_properties:menu:inventory:deposit', function(id)
   local _index = 0
@@ -178,7 +198,7 @@ AddEventHandler('fsn_properties:menu:inventory:deposit', function(id)
                     if exports.fsn_inventory:fsn_GetItemAmount(item) >= amount then
                       local _item = exports.fsn_inventory:fsn_GetItemDetails(item).display_name
                       TriggerServerEvent('fsn_properties:enterable:inventory:enter', id, item, _item, amount)
-                      print('removing '..amount..' '..item)
+                      --print('removing '..amount..' '..item)
                       TriggerEvent('fsn_inventory:item:take', item, amount)
                     else
                       TriggerEvent('fsn_notify:displayNotification', 'You dont have enough!', 'centerLeft', 5000, 'error')
