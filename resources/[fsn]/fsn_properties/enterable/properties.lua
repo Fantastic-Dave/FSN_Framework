@@ -217,8 +217,8 @@ RegisterServerEvent('fsn_properties:enterable:inventory:enter')
 AddEventHandler('fsn_properties:enterable:inventory:enter', function(propid, item, item_name, amt)
   for k, v in pairs(enterable_properties) do
     if v.db_id == propid then
-      if v.inventory.item then
-        v.inventory[item].amount = v.inventory.item.amount + amt
+      if v.inventory[item] then
+        v.inventory[item].amount = v.inventory[item].amount + amt
       else
         v.inventory[item] = {}
         v.inventory[item].item_name = item_name
@@ -228,6 +228,7 @@ AddEventHandler('fsn_properties:enterable:inventory:enter', function(propid, ite
       MySQL.Async.execute('UPDATE `fsn_properties` SET `property_inventory` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.inventory)}, function(rowsChanged) end)
     end
   end
+  TriggerClientEvent('fsn_notify:displayNotification', source, 'You deposited ['..tostring(amt)..'X] '..item_name, 'centerRight', 4000, 'info')
   TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
 end)
 
