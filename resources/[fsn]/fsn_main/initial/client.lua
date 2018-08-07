@@ -13,7 +13,7 @@ RegisterNetEvent('spawnme')
 AddEventHandler('spawnme', function()
   fsn_spawned = true
 end)
-local function freezePlayer(id, freeze) 
+local function freezePlayer(id, freeze)
     local player = id
     SetPlayerControl(player, not freeze, false)
 
@@ -379,16 +379,16 @@ RegisterNetEvent('fsn_bank:change:walletAdd')
 RegisterNetEvent('fsn_bank:change:walletMinus')
 AddEventHandler('fsn_bank:change:walletAdd', function(amt)
   current_character.char_money = current_character.char_money + amt
-  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
   TriggerServerEvent('fsn_bank:database:update', current_character.char_id, current_character.char_money + amt, false)
+  --TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
 
   TriggerEvent('fsn_main:gui:money:change', current_character.char_money, amt)
 end)
 
 AddEventHandler('fsn_bank:change:walletMinus', function(amt)
   current_character.char_money = current_character.char_money - amt
-  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
-  TriggerServerEvent('fsn_bank:database:update', current_character.char_id, current_character.char_money - amt, false)
+	TriggerServerEvent('fsn_bank:database:update', current_character.char_id, current_character.char_money - amt, false)
+  --TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
 
   amt = tonumber('-'..amt)
   TriggerEvent('fsn_main:gui:money:change', current_character.char_money, amt)
@@ -398,16 +398,16 @@ RegisterNetEvent('fsn_bank:change:bankAdd')
 RegisterNetEvent('fsn_bank:change:bankMinus')
 AddEventHandler('fsn_bank:change:bankAdd', function(amt)
   current_character.char_bank = current_character.char_bank + amt
-  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
-  TriggerServerEvent('fsn_bank:database:update', current_character.char_id, false, current_character.char_bank + amt)
+	TriggerServerEvent('fsn_bank:database:update', current_character.char_id, false, current_character.char_bank + amt)
+  --TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
 
   TriggerEvent('fsn_main:gui:bank:change', current_character.char_bank, amt)
 end)
 
 AddEventHandler('fsn_bank:change:bankMinus', function(amt)
   current_character.char_bank = current_character.char_bank - amt
-  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
   TriggerServerEvent('fsn_bank:database:update', current_character.char_id, false, current_character.char_bank - amt)
+  --TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
 
   amt = tonumber('-'..amt)
   TriggerEvent('fsn_main:gui:bank:change', current_character.char_bank, amt)
