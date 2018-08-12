@@ -61,8 +61,19 @@ AddEventHandler('chatMessage', function(source, auth, msg)
       end
     end
   end
+  if split[1] == '/am' or split[1] == '/amenu' then
+    if fsn_isAdmin(source) then
+      TriggerClientEvent('fsn_admin:menu:toggle', source)
+    end
+  end
   if split[1] == '/admin' then
     if fsn_isAdmin(source) then
+      if split[2] == 'freeze' then
+        if tonumber(split[3]) then
+          TriggerClientEvent('fsn_admin:FreezeMe', tonumber(split[3]), source)
+          TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^r^0 You toggled the frozen status of '..GetPlayerName(split[3]))
+        end
+      end
       if split[2] == 'menu' then
         TriggerClientEvent('fsn_admin:menu:toggle', source)
       end
