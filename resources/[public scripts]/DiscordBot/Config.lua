@@ -1,6 +1,6 @@
 DiscordWebhookSystemInfos = 'https://discordapp.com/api/webhooks/376325374164074499/eTIPeksX4TsCqex3BYd4jc4XcRIZSsLR9ZZwU3BkD9WPFddhn71tmMpyyUGwETNjic1e'
-DiscordWebhookKillinglogs = 'https://discordapp.com/api/webhooks/376325374164074499/eTIPeksX4TsCqex3BYd4jc4XcRIZSsLR9ZZwU3BkD9WPFddhn71tmMpyyUGwETNjic1e'
-DiscordWebhookChat = 'https://discordapp.com/api/webhooks/376325374164074499/eTIPeksX4TsCqex3BYd4jc4XcRIZSsLR9ZZwU3BkD9WPFddhn71tmMpyyUGwETNjic1e'
+DiscordWebhookKillinglogs = false --'https://discordapp.com/api/webhooks/376325374164074499/eTIPeksX4TsCqex3BYd4jc4XcRIZSsLR9ZZwU3BkD9WPFddhn71tmMpyyUGwETNjic1e'
+DiscordWebhookChat = false --'https://discordapp.com/api/webhooks/376325374164074499/eTIPeksX4TsCqex3BYd4jc4XcRIZSsLR9ZZwU3BkD9WPFddhn71tmMpyyUGwETNjic1e'
 
 SystemAvatar = 'https://wiki.fivem.net/w/images/d/db/FiveM-Wiki.png'
 
@@ -29,7 +29,7 @@ SpecialCommands = {
 				   {'/911', '**[911]: (CALLER ID: [ USERNAME_NEEDED_HERE | USERID_NEEDED_HERE ])**'},
 				  }
 
-						
+
 -- These blacklisted commands will not be printed in discord
 BlacklistedCommands = {
 					   '/AnyCommand',
@@ -47,4 +47,3 @@ TTSCommands = {
 			   '/Whatever',
 			   '/Whatever2',
 			  }
-
