@@ -20,7 +20,7 @@ client_scripts {
     "panels/UIMenuPercentagePanel.lua",
     "UIMenu.lua",
     "MenuPool.lua",
-    "MenuExample.lua",
+    "fsn_admin/a_menu.lua"
 }
 
 

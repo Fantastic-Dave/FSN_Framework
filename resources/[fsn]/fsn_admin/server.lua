@@ -63,6 +63,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   end
   if split[1] == '/admin' then
     if fsn_isAdmin(source) then
+      if split[2] == 'menu' then
+        TriggerClientEvent('fsn_admin:menu:toggle', source)
+      end
       if split[2] == 'announce' then
         local msg = table.concat(split, " ", 3, #split)
         TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^1^*:fsn_admin:^0 ^8[ANNOUNCEMENT] ^r^0'..msg)
