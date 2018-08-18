@@ -30,7 +30,7 @@ local ems_cars = {
 }
 local pd_cars = {
   --------------------
-  -- LSPD
+  -- SAHP
   --------------------
   [101] = "hwaycar",
   [102] = "hwaycar2",
@@ -42,6 +42,7 @@ local pd_cars = {
   [108] = "hwaycar8",
   [109] = "hwaycar9",
   [110] = "hwaycar10",
+  [201] = "policeb",
   --------------------
   -- UNMARKED
   --------------------
@@ -141,7 +142,7 @@ local emotes = {
     ["dancem1"] = {"misschinese2_crystalmazemcs1_cs", "dance_loop_tao"},
     ["handsup"] = {"random@mugging3", "handsup_standing_base"},
     ["cuffed"] = {"mp_arresting", "idle"},
-    ["fapping"] = {"switch@trevor@jerking_off", "trev_jerking_off_loop"},
+    --["fapping"] = {"switch@trevor@jerking_off", "trev_jerking_off_loop"},
     ["shakefist"] = {"amb@code_human_in_car_mp_actions@dance@bodhi@ds@base", "idle_a_fp"},
   }
 }
