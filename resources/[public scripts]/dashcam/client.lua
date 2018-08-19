@@ -24,7 +24,7 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-        if IsControlJustPressed(1, 26) and IsPedInAnyVehicle(GetPlayerPed(PlayerId()), false) then
+        if IsControlJustPressed(1, 128) and IsPedInAnyVehicle(GetPlayerPed(PlayerId()), false) then
             if dashcamActive then
                 DisableDash()
             else
