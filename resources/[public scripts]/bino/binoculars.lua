@@ -27,7 +27,7 @@ local Keys = {
 }
 
 local keybindEnabled = true -- When enabled, binocular are available by keybind
-local binocularKey = Keys["M"]
+local binocularKey = Keys["F10"]
 local storeBinoclarKey = Keys["BACKSPACE"]
 --Backspace to exit binoculars
 --Scroll wheel to zoom in/out
