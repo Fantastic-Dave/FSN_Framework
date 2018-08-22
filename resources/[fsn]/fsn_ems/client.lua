@@ -114,7 +114,7 @@ Citizen.CreateThread(function()
                 type = "info",
             })
           else
-            TriggerEvent('fsn_bank:change:bankMinus', 500)
+            TriggerEvent('fsn_bank:change:bankMinus', 0)
             TriggerEvent("pNotify:SendNotification", {text = "You have been charged $500 for medical bills.",
                 layout = "centerRight",
                 timeout = 5000,
