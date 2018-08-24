@@ -84,7 +84,7 @@ Citizen.CreateThread(function()
         if #onduty_ems > 0 then
           drawTxt('Press [E] to respawn ($5000)',4,1,0.5,0.35,0.6,255,255,255,255)
         else
-          drawTxt('Press [E] to respawn ($500)',4,1,0.5,0.35,0.6,255,255,255,255)
+          drawTxt('Press [E] to respawn (~b~FREE~w~)',4,1,0.5,0.35,0.6,255,255,255,255)
         end
         drawTxt('~r~DO NOT RESPAWN IN A ROLEPLAY SITUATION',4,1,0.5,0.25,0.6,255,255,255,255)
         if IsControlJustPressed(1, 38) then -- E
