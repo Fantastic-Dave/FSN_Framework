@@ -231,7 +231,17 @@ items_table = {
     use = function()
 
     end,
-  }
+  },
+  ["binoculars"] = {
+    display_name = 'Binoculars',
+    weight = 3,
+    desc = 'Look closely.',
+    use = function()
+		TriggerEvent('binoculars:Activate')
+    end,
+    modelhash = -736560690,
+    price = 250
+  },
 }
 
 --sendtojs = json.encode(items_table)

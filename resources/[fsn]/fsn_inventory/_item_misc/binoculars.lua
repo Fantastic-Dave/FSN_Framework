@@ -1,9 +1,3 @@
--- Source: https://github.com/ZAUB1/ESX-Binoculars author ZAUB1
--- Source script heavily based and used many elements of https://github.com/mraes/FiveM-scripts/tree/master/heli
-
--- This release: Removed unused code. Changed UI to use binocular scaleform.
---				 Fixed zoom in/out. Added keybind support
---				 twitch.tv/SerpicoTV
 --CONFIG--
 local fov_max = 70.0
 local fov_min = 5.0 -- max zoom level (smaller fov is more zoom)
@@ -25,24 +19,12 @@ local Keys = {
 	["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173,
 	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
 }
-
-local keybindEnabled = true -- When enabled, binocular are available by keybind
-local binocularKey = Keys["F10"]
-local storeBinoclarKey = Keys["BACKSPACE"]
---Backspace to exit binoculars
---Scroll wheel to zoom in/out
-
---THREADS--
-
 Citizen.CreateThread(function()
 	while true do
-
 		Citizen.Wait(10)
-
 		local lPed = GetPlayerPed(-1)
 		local vehicle = GetVehiclePedIsIn(lPed)
-
-		if binoculars or (keybindEnabled and IsControlJustReleased(1, binocularKey)) then
+		if binoculars then
 			binoculars = true
 			if not ( IsPedSittingInAnyVehicle( lPed ) ) then
 				Citizen.CreateThread(function()
@@ -50,48 +32,36 @@ Citizen.CreateThread(function()
 					PlayAmbientSpeech1(GetPlayerPed(-1), "GENERIC_CURSE_MED", "SPEECH_PARAMS_FORCE")
 				end)
 			end
-
 			Wait(2000)
-
 			SetTimecycleModifier("default")
-
 			SetTimecycleModifierStrength(0.3)
-
 			local scaleform = RequestScaleformMovie("BINOCULARS")
-
 			while not HasScaleformMovieLoaded(scaleform) do
 				Citizen.Wait(10)
 			end
-
 			local lPed = GetPlayerPed(-1)
 			local vehicle = GetVehiclePedIsIn(lPed)
 			local cam = CreateCam("DEFAULT_SCRIPTED_FLY_CAMERA", true)
-
 			AttachCamToEntity(cam, lPed, 0.0,0.0,1.0, true)
 			SetCamRot(cam, 0.0,0.0,GetEntityHeading(lPed))
 			SetCamFov(cam, fov)
 			RenderScriptCams(true, false, 0, 1, 0)
 			PushScaleformMovieFunction(scaleform, "SET_CAM_LOGO")
-			PushScaleformMovieFunctionParameterInt(0) -- 0 for nothing, 1 for LSPD logo
+			PushScaleformMovieFunctionParameterInt(0)
 			PopScaleformMovieFunctionVoid()
-
 			while binoculars and not IsEntityDead(lPed) and (GetVehiclePedIsIn(lPed) == vehicle) and true do
-				if IsControlJustPressed(0, storeBinoclarKey) then -- Toggle binoculars
+				if IsControlJustPressed(0, Keys['BACKSPACE']) or IsControlJustPressed(0, Keys['ESCAPE']) then
 					PlaySoundFrontend(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", false)
 					ClearPedTasks(GetPlayerPed(-1))
 					binoculars = false
 				end
-
 				local zoomvalue = (1.0/(fov_max-fov_min))*(fov-fov_min)
 				CheckInputRotation(cam, zoomvalue)
-
 				HandleZoom(cam)
 				HideHUDThisFrame()
-
 				DrawScaleformMovieFullscreen(scaleform, 255, 255, 255, 255)
 				Citizen.Wait(10)
 			end
-
 			binoculars = false
 			ClearTimecycleModifier()
 			fov = (fov_max+fov_min)*0.5
@@ -103,16 +73,12 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-
---EVENTS--
-
 -- Activate binoculars
 RegisterNetEvent('binoculars:Activate')
 AddEventHandler('binoculars:Activate', function()
 	binoculars = not binoculars
 end)
 
---FUNCTIONS--
 function HideHUDThisFrame()
 	HideHelpTextThisFrame()
 	HideHudAndRadarThisFrame()
@@ -146,7 +112,6 @@ end
 function HandleZoom(cam)
 	local lPed = GetPlayerPed(-1)
 	if not ( IsPedSittingInAnyVehicle( lPed ) ) then
-
 		if IsControlJustPressed(0,241) then -- Scrollup
 			fov = math.max(fov - zoomspeed, fov_min)
 		end

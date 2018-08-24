@@ -16,3 +16,6 @@ exports({
   'fsn_GetItemDetails',
   'EnumerateObjects'
 })
+
+-- Item scripts
+client_script '_item_misc/binoculars.lua'
