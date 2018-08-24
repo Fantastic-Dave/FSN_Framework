@@ -18,6 +18,11 @@ local spots = {
     enter = {x = -1048.2038574219, y = -238.30305480957, z = 44.021053314209},
     exit = {x = -1047.1921386719, y = -237.75674438477, z = 44.021053314209},
     locked = false
+  },
+  ["Comedy Club"] = {
+    enter = {x = -430.142, y = 261.665, z = 83.005},
+    exit = {x = -458.790, y = 284.750, z = 78.521},
+    locked = false
   }
 }
 
@@ -77,4 +82,4 @@ Citizen.CreateThread(function()
   end
 end)
 
-DoScreenFadeIn(0)
+SetEntityCoords(GetPlayerPed(-1), -458.790, 284.750, 78.521)
