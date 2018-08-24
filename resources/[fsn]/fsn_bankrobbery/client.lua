@@ -4,7 +4,6 @@ local start_time = 0
 local cracking_id = 0
 local onduty_police = {}
 AddEventHandler('fsn_police:update', function(cops)
-  print(':fsn_police: There are '..#cops..' on duty!')
   onduty_police = cops
 end)
 
@@ -351,15 +350,17 @@ Citizen.CreateThread(function()
   					CurrentHeading = GetEntityHeading(_door)
           end
           ]]
-          if door.status.status == 'open' then
-            fsn_drawText3D(door.tx,door.ty,door.tz, 'Press [E] to ~r~close~w~ the vault!')
-            if IsControlJustPressed(1,51) then
-              TriggerServerEvent('fsn_bankrobbery:vault:close', k)
-            end
-          else
-            fsn_drawText3D(door.tx,door.ty,door.tz, 'Press [E] to ~g~open~w~ the vault!')
-            if IsControlJustPressed(1,51) then
-              TriggerServerEvent('fsn_bankrobbery:vault:open', k)
+          if GetDistanceBetweenCoords(door.x, door.y, door.z, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+            if door.status.status == 'open' then
+              fsn_drawText3D(door.tx,door.ty,door.tz, 'Press [E] to ~r~close~w~ the vault!')
+              if IsControlJustPressed(1,51) then
+                TriggerServerEvent('fsn_bankrobbery:vault:close', k)
+              end
+            else
+              fsn_drawText3D(door.tx,door.ty,door.tz, 'Press [E] to ~g~open~w~ the vault!')
+              if IsControlJustPressed(1,51) then
+                TriggerServerEvent('fsn_bankrobbery:vault:open', k)
+              end
             end
           end
         else
@@ -440,7 +441,7 @@ Citizen.CreateThread(function()
               end
             else
               SetTextComponentFormat("STRING")
-              AddTextComponentString("~r~Not enough cops for a heist")
+              AddTextComponentString("~r~Not enough cops for a heist ("..#onduty_police.."/3)")
               DisplayHelpTextFromStringLabel(0, 0, 1, -1)
             end
           else
