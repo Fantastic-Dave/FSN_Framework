@@ -114,7 +114,6 @@ Citizen.CreateThread(function()
                 type = "info",
             })
           else
-            TriggerEvent('fsn_bank:change:bankMinus', 0)
             TriggerEvent("pNotify:SendNotification", {text = "The Government will pay for your medical bills.",
                 layout = "centerRight",
                 timeout = 5000,
