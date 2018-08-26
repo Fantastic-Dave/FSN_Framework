@@ -24,9 +24,9 @@ end
 local ems_cars = {
   [1] = "firetruk",
   [2] = "ambulance",
-  [3] = "ems_raptor",
-  [4] = "ems_bike",
-  [5] = "battalion"
+  [3] = "ems2",
+  [4] = "ems3",
+  [5] = "battalion",
 }
 local pd_cars = {
   --------------------
@@ -60,7 +60,7 @@ local pd_cars = {
   [2002] = "audipd",
   [2003] = "corvettepd",
   [2004] = "mclarenpd",
-  [2005] = "porschepd"
+  [2005] = "porschepd",
 }
 
 local emotes = {

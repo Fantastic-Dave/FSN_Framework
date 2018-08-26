@@ -1,7 +1,9 @@
 local restarts = {};
-restarts[#restarts + 1] = {07, 00};
+restarts[#restarts + 1] = {05, 00};
+restarts[#restarts + 1] = {09, 00};
 restarts[#restarts + 1] = {13, 00};
-restarts[#restarts + 1] = {19, 00};
+restarts[#restarts + 1] = {17, 00};
+restarts[#restarts + 1] = {21, 00};
 restarts[#restarts + 1] = {01, 00};
 
 function announceRestart()
