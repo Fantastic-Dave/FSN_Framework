@@ -59,7 +59,7 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(1000)
     clienttime = clienttime + 1
-    if clienttime / 60000 == math.floor(clienttime) / 60000 and init then
+    if clienttime / 90000 == math.floor(clienttime) / 90000 and init then
       if hunger - 0.03 <= 0 then
         TriggerEvent('fsn_ems:killMe')
       else
