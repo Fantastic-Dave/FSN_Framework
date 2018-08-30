@@ -22,6 +22,7 @@ local vehshop = {
 			buttons = {
 				{name = "Vehicles", description = ""},
 				{name = "Motorcycles", description = ""},
+				{name = "Bicycles", description = ""},
 			}
 		},
 		["vehicles"] = {
@@ -38,7 +39,8 @@ local vehshop = {
 				{name = "Off-Road", description = ''},
 				{name = "SUVs", description = ''},
 				{name = "Vans", description = ''},
-				{name = "Cycles", description = ''},
+				{name = "Bicycles", description = ''},
+				{name = "Bikes", description = ''},
 			}
 		},
 		["compacts"] = {
@@ -101,6 +103,7 @@ local vehshop = {
 				{name = "Rapid GT", costs = 140000, description = {}, model = "rapidgt"},
 				{name = "Rapid GT Convertible", costs = 150000, description = {}, model = "rapidgt2"},
 				{name = "Merc AMG 563", costs = 200000, description = {}, model = "schafter3"},
+				{name = "Ruston", costs = 200000, description = {}, model = "ruston"},
 				{name = "Sultan", costs = 12000, description = {}, model = "sultan"},
 				{name = "Surano", costs = 110000, description = {}, model = "surano"},
 				{name = "Tropos", costs = 816000, description = {}, model = "tropos"},
@@ -111,14 +114,19 @@ local vehshop = {
 			title = "sports classics",
 			name = "sportsclassics",
 			buttons = {
+			    {name = "B Type", costs = 100000, description = {}, model = "btype"},
+			    {name = "B Type 2", costs = 125000, description = {}, model = "btype2"},
+			    {name = "B Type 3", costs = 130000, description = {}, model = "btype3"},
 				{name = "Casco", costs = 680000, description = {}, model = "casco"},
 				{name = "Coquette Classic", costs = 665000, description = {}, model = "coquette2"},
+				{name = "Peyote", costs = 150000, description = {}, model = "btype2"},
 				{name = "JB 700", costs = 350000, description = {}, model = "jb700"},
 				{name = "Pigalle", costs = 400000, description = {}, model = "pigalle"},
 				{name = "Merc SL 500", costs = 850000, description = {}, model = "stinger"},
 				{name = "Stinger GT", costs = 875000, description = {}, model = "stingergt"},
 				{name = "Stirling GT", costs = 975000, description = {}, model = "feltzer3"},
-				{name = "Z-Type", costs = 950000, description = {}, model = "ztype"},
+				{name = "Tornado 6", costs = 680000, description = {}, model = "tornado6"},
+				{name = "Z-Type", costs = 800000, description = {}, model = "ztype"},
 			}
 		},
 		["super"] = {
@@ -159,10 +167,12 @@ local vehshop = {
 				{name = "Mustang", costs = 100000, description = {}, model = "dominator"},
 				{name = "Dukes", costs = 62000, description = {}, model = "dukes"},
 				{name = "BMW M5", costs = 50000, description = {}, model = "gauntlet"},
+				{name = "Gauntlet 2", costs = 75000, description = {}, model = "gauntlet2"},
 				-- {name = "Hotknife", costs = 90000, description = {}, model = "hotknife"}, -- Dragster!!
 				{name = "Faction", costs = 36000, description = {}, model = "faction"},
 				{name = "Nightshade", costs = 585000, description = {}, model = "nightshade"},
-				{name = "Picador", costs = 9000, description = {}, model = "picador"},
+				{name = "Picador", costs = 9000, description = {}, model = "picador"}, 
+                {name = "Rat Loader 2", costs = 350000, description = {}, model = "RatLoader2"},
 				{name = "Sabre Turbo", costs = 15000, description = {}, model = "sabregt"},
 				{name = "Subabru Impreza STi", costs = 65000, description = {}, model = "zion2"},
 				{name = "Tampa", costs = 375000, description = {}, model = "tampa"},
@@ -179,11 +189,13 @@ local vehshop = {
 				{name = "Brawler", costs = 715000, description = {}, model = "brawler"},
 				{name = "Bubsta 6x6", costs = 249000, description = {}, model = "dubsta3"},
 				{name = "Dune Buggy (R)", costs = 20000, description = {}, model = "dune"},
+				{name = "Beach Bum Caddy", costs = 35000, description = {}, model = "Kalahari"},
 				{name = "Rebel", costs = 22000, description = {}, model = "rebel2"},
 				{name = "Sandking", costs = 38000, description = {}, model = "sandking"},
 				--{name = "Jeep Trailcat 707hp", costs = 100000, description = {}, model = "trailcat"}, -- Logan please check
 				{name = "The Liberator (R)", costs = 2500000, description = {}, model = "monster"},
 				{name = "Trophy Truck (R)", costs =	 550000, description = {}, model = "trophytruck"},
+				{name = "Mesa - Sparklez Edt", costs = 150000, description = {}, model = "mesa3"},
 			}
 		},
 		["suvs"] = {
@@ -207,6 +219,7 @@ local vehshop = {
 			buttons = {
 				{name = "Ford F150", costs = 30000, description = {}, model = "bison"},
 				{name = "Bobcat XL", costs = 23000, description = {}, model = "bobcatxl"},
+				{name = "Brute Camper", costs = 50000, description = {}, model = "camper"},
 				{name = "Gang Burrito", costs = 65000, description = {}, model = "gburrito"},
 				{name = "Journey", costs = 25000, description = {}, model = "journey"},
 				{name = "Dodge", costs = 40000, description = {}, model = "minivan"},
@@ -249,6 +262,7 @@ local vehshop = {
 			title = "MOTORCYCLES",
 			name = "motorcycles",
 			buttons = {
+				{name = "Push Bike", costs = 10, description = {}, model = "tribike2"},
 				{name = "Akuma", costs = 9000, description = {}, model = "AKUMA"},
 				{name = "Bagger", costs = 7000, description = {}, model = "bagger"},
 				{name = "Bati 801", costs = 15000, description = {}, model = "bati"},
@@ -275,6 +289,19 @@ local vehshop = {
 				{name = "Thrust", costs = 75000, description = {}, model = "thrust"},
 				{name = "Vader", costs = 9000, description = {}, model = "vader"},
 				{name = "Vindicator", costs = 600000, description = {}, model = "vindicator"},
+			}
+		},
+		["bicycles"] = {
+			title = "Bicycles",
+			name = "bicycles",
+			buttons = {
+				{name = "BMX", costs = 400, description = {}, model = "bmx"},
+				{name = "Cruiser", costs = 300, description = {}, model = "cruiser"},
+				{name = "Fixter", costs = 450, description = {}, model = "fixter"},
+				{name = "Scorcher MTB", costs = 1300, description = {}, model = "scorcher"},
+				{name = "Whippet", costs = 1500, description = {}, model = "tribike"},
+				{name = "Endurex Ex1", costs = 1750, description = {}, model = "tribike2"},
+				{name = "TriCycles Torpedo", costs = 2000, description = {}, model = "tribike3"},
 			}
 		},
 	}
@@ -598,14 +625,14 @@ Citizen.CreateThread(function()
 					end
 					drawMenuButton(button,vehshop.menu.x,y,selected)
 					if button.costs ~= nil then
-						if vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "cycles" or vehshop.currentmenu == "motorcycles" then
+						if vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "motorcycles" or vehshop.currentmenu == "bicycles" then
 							DoesPlayerHaveVehicle(button.model,button,y,selected)
 						else
 						drawMenuRight(button.costs.."$",vehshop.menu.x,y,selected)
 						end
 					end
 					y = y + 0.04
-					if vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "cycles" or vehshop.currentmenu == "motorcycles" then
+					if vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "motorcycles" or vehshop.currentmenu == "bicycles" then
 						if selected then
 							if fakecar.model ~= button.model then
 								if DoesEntityExist(fakecar.car) then
@@ -690,8 +717,10 @@ function ButtonSelected(button)
 			OpenMenu('vehicles')
 		elseif btn == "Motorcycles" then
 			OpenMenu('motorcycles')
+		elseif btn == "Bicycles" then
+			OpenMenu('bicycles')
 		end
-	elseif this == "vehicles" then
+ elseif this == "vehicles" then
 		if btn == "Sports" then
 			OpenMenu('sports')
 		elseif btn == "Sedans" then
@@ -712,8 +741,10 @@ function ButtonSelected(button)
 			OpenMenu('suvs')
 		elseif btn == "Vans" then
 			OpenMenu('vans')
-		end
-	elseif this == "compacts" or this == "coupes" or this == "sedans" or this == "sports" or this == "sportsclassics" or this == "super" or this == "muscle" or this == "offroad" or this == "suvs" or this == "vans" or this == "industrial" or this == "cycles" or this == "motorcycles" then
+	    elseif btn == "Bicycles" then
+			OpenMenu('bicycles')
+			end
+	elseif this == "compacts" or this == "coupes" or this == "sedans" or this == "sports" or this == "sportsclassics" or this == "super" or this == "muscle" or this == "offroad" or this == "suvs" or this == "vans" or this == "industrial" or this == "motorcycles" or this == "bicycles" then
 		if tonumber(exports.fsn_main:fsn_GetWallet()) >= button.costs then
 			vehicle_price = button.costs
 			boughtcar = true
@@ -731,6 +762,8 @@ function OpenMenu(menu)
 	if menu == "vehicles" then
 		vehshop.lastmenu = "main"
 	elseif menu == "bikes"  then
+		vehshop.lastmenu = "main"
+	elseif menu == "bicycles"  then
 		vehshop.lastmenu = "main"
 	elseif menu == 'race_create_objects' then
 		vehshop.lastmenu = "main"
@@ -751,7 +784,7 @@ function Back()
 	backlock = true
 	if vehshop.currentmenu == "main" then
 		CloseCreator()
-	elseif vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "cycles" or vehshop.currentmenu == "motorcycles" then
+	elseif vehshop.currentmenu == "compacts" or vehshop.currentmenu == "coupes" or vehshop.currentmenu == "sedans" or vehshop.currentmenu == "sports" or vehshop.currentmenu == "sportsclassics" or vehshop.currentmenu == "super" or vehshop.currentmenu == "muscle" or vehshop.currentmenu == "offroad" or vehshop.currentmenu == "suvs" or vehshop.currentmenu == "vans" or vehshop.currentmenu == "industrial" or vehshop.currentmenu == "bicycles" or vehshop.currentmenu == "motorcycles" then
 		if DoesEntityExist(fakecar.car) then
 			Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(fakecar.car))
 		end
