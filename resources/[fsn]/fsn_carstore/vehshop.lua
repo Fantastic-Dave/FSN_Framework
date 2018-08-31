@@ -106,7 +106,7 @@ local vehshop = {
 				{name = "Ruston", costs = 200000, description = {}, model = "ruston"},
 				{name = "Sultan", costs = 12000, description = {}, model = "sultan"},
 				{name = "Surano", costs = 110000, description = {}, model = "surano"},
-				{name = "Tropos", costs = 816000, description = {}, model = "tropos"},
+				{name = "Tropos", costs = 650000, description = {}, model = "tropos"},
 				{name = "Verkierer", costs = 695000, description = {}, model = "verlierer2"},
 			}
 		},
@@ -126,7 +126,7 @@ local vehshop = {
 				{name = "Stinger GT", costs = 875000, description = {}, model = "stingergt"},
 				{name = "Stirling GT", costs = 975000, description = {}, model = "feltzer3"},
 				{name = "Tornado 6", costs = 680000, description = {}, model = "tornado6"},
-				{name = "Z-Type", costs = 800000, description = {}, model = "ztype"},
+				{name = "Z-Type", costs = 760000, description = {}, model = "ztype"},
 			}
 		},
 		["super"] = {
@@ -137,11 +137,11 @@ local vehshop = {
 				{name = "Banshee 900R", costs = 565000, description = {}, model = "banshee2"},
 				{name = "Ford GTS", costs = 200000, description = {}, model = "bullet"},
 				{name = "Lexus LFA", costs = 500000, description = {}, model = "cheetah"},
-				{name = "Entity XF", costs = 795000, description = {}, model = "entityxf"},
+				{name = "Entity XF", costs = 595000, description = {}, model = "entityxf"},
 				{name = "ETR1", costs = 199500, description = {}, model = "sheava"},
 				{name = "F320", costs = 200000, description = {}, model = "ninef"},
 				{name = "F430", costs = 200000, description = {}, model = "banshee"},
-				{name = "FMJ", costs = 1750000, description = {}, model = "fmj"},
+				{name = "FMJ", costs = 1350000, description = {}, model = "fmj"},
 				{name = "Infernus", costs = 440000, description = {}, model = "infernus"},
 				{name = "Osiris", costs = 1950000, description = {}, model = "osiris"},
 				{name = "RE-7B", costs = 2475000, description = {}, model = "le7b"},
@@ -170,7 +170,7 @@ local vehshop = {
 				{name = "Gauntlet 2", costs = 75000, description = {}, model = "gauntlet2"},
 				-- {name = "Hotknife", costs = 90000, description = {}, model = "hotknife"}, -- Dragster!!
 				{name = "Faction", costs = 36000, description = {}, model = "faction"},
-				{name = "Nightshade", costs = 585000, description = {}, model = "nightshade"},
+				{name = "Nightshade", costs = 385000, description = {}, model = "nightshade"},
 				{name = "Picador", costs = 9000, description = {}, model = "picador"}, 
                 {name = "Rat Loader 2", costs = 350000, description = {}, model = "RatLoader2"},
 				{name = "Sabre Turbo", costs = 15000, description = {}, model = "sabregt"},
@@ -186,12 +186,12 @@ local vehshop = {
 			buttons = {
 				{name = "Bifta", costs = 75000, description = {}, model = "bifta"},
 				{name = "Blazer", costs = 8000, description = {}, model = "blazer"},
-				{name = "Brawler", costs = 715000, description = {}, model = "brawler"},
+				{name = "Brawler", costs = 275000, description = {}, model = "brawler"},
 				{name = "Bubsta 6x6", costs = 249000, description = {}, model = "dubsta3"},
 				{name = "Dune Buggy (R)", costs = 20000, description = {}, model = "dune"},
 				{name = "Beach Bum Caddy", costs = 35000, description = {}, model = "Kalahari"},
 				{name = "Rebel", costs = 22000, description = {}, model = "rebel2"},
-				{name = "Sandking", costs = 38000, description = {}, model = "sandking"},
+				{name = "Sandking", costs = 95000, description = {}, model = "sandking"},
 				--{name = "Jeep Trailcat 707hp", costs = 100000, description = {}, model = "trailcat"}, -- Logan please check
 				{name = "The Liberator (R)", costs = 2500000, description = {}, model = "monster"},
 				{name = "Trophy Truck (R)", costs =	 550000, description = {}, model = "trophytruck"},
@@ -262,7 +262,6 @@ local vehshop = {
 			title = "MOTORCYCLES",
 			name = "motorcycles",
 			buttons = {
-				{name = "Push Bike", costs = 10, description = {}, model = "tribike2"},
 				{name = "Akuma", costs = 9000, description = {}, model = "AKUMA"},
 				{name = "Bagger", costs = 7000, description = {}, model = "bagger"},
 				{name = "Bati 801", costs = 15000, description = {}, model = "bati"},
@@ -288,7 +287,7 @@ local vehshop = {
 				{name = "Sovereign", costs = 90000, description = {}, model = "sovereign"},
 				{name = "Thrust", costs = 75000, description = {}, model = "thrust"},
 				{name = "Vader", costs = 9000, description = {}, model = "vader"},
-				{name = "Vindicator", costs = 600000, description = {}, model = "vindicator"},
+				{name = "Vindicator", costs = 500000, description = {}, model = "vindicator"},
 			}
 		},
 		["bicycles"] = {
