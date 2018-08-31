@@ -151,7 +151,7 @@ local vehshop = {
 				{name = "Vacca", costs = 240000, description = {}, model = "vacca"},
 				{name = "Voltic", costs = 150000, description = {}, model = "voltic"},
 				{name = "X80 Proto", costs = 2700000, description = {}, model = "prototipo"},
-				{name = "Zentorno", costs = 725000, description = {}, model = "zentorno"},
+				{name = "Zentorno", costs = 2725000, description = {}, model = "zentorno"},
 			}
 		},
 		["muscle"] = {
@@ -193,7 +193,7 @@ local vehshop = {
 				--{name = "Jeep Trailcat 707hp", costs = 100000, description = {}, model = "trailcat"}, -- Logan please check
 				{name = "The Liberator (R)", costs = 2500000, description = {}, model = "monster"},
 				{name = "Trophy Truck (R)", costs =	 550000, description = {}, model = "trophytruck"},
-				{name = "Mesa-Sparklez Edt.", costs = 950000, description = {}, model = "mesa3"},
+				{name = "Mesa-Sparklez Edt.", costs = 95000, description = {}, model = "mesa3"},
 			}
 		},
 		["suvs"] = {
@@ -229,7 +229,7 @@ local vehshop = {
 				{name = "Minivan 2", costs = 150000, description = {}, model = "minivan2"},
 				{name = "Paradise", costs = 25000, description = {}, model = "paradise"},
 				{name = "Rumpo", costs = 13000, description = {}, model = "rumpo"},
-				{name = "Rumpo 3", costs = 15000, description = {}, model = "rumpo3"},
+				{name = "Rumpo 3", costs = 135000, description = {}, model = "rumpo3"},
 				{name = "Surfer", costs = 11000, description = {}, model = "surfer"},
 				{name = "Youga", costs = 16000, description = {}, model = "youga"},
 			}
