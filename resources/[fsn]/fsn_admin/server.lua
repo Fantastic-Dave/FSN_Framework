@@ -143,7 +143,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     if fsn_isModerator(source) then
 
     else
-      TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r You aren\'t a moderator.')
+      TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_admin:^0^r You aren\'t a moderator, cunt.')
     end
   end
 end)

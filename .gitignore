@@ -1,1 +1,7 @@
 $GIT_DIR\resources\server.cfg
+resources/[public scripts]/bike/README.md
+*.cfg
+resources/[public scripts]/coordsaver/__resource.lua
+resources/[public scripts]/coordsaver/client.lua
+resources/[public scripts]/coordsaver/server.lua
+resources/fsn_server.cfg

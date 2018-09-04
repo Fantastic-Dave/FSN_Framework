@@ -17,8 +17,8 @@ items_table = {
   },
   ["uncooked_meat"] = {
     display_name = 'Uncooked Meat',
-    weight = 0.3,
-    desc = 'Use this to repair your vehicle.',
+    weight = 0.4,
+    desc = 'Use this to repair your vehicle...not.',
     use = function()
     end,
     modelhash = 611319348
@@ -26,7 +26,15 @@ items_table = {
   ["cooked_meat"] = {
     display_name = 'Cooked Meat',
     weight = 0.3,
-    desc = 'Use this to repair your vehicle.',
+    desc = 'Yum! Time to sell it on.',
+    use = function()
+    end,
+    modelhash = 1302435108
+  },
+  ["minced_meat"] = {
+    display_name = 'Minced Meat',
+    weight = 0.3,
+    desc = 'Time to make something meaty.',
     use = function()
     end,
     modelhash = 1302435108
@@ -48,7 +56,7 @@ items_table = {
   },
   ["beef_jerky"] = {
     display_name = 'Beef Jerky',
-    weight = 1,
+    weight = 0.5,
     desc = 'Eat some jerky then do the jerky.',
     use = function()
       TriggerEvent('fsn_inventory:use:food', 15)
@@ -59,7 +67,7 @@ items_table = {
   },
   ["cupcake"] = {
     display_name = 'Cupcake',
-    weight = 0.5,
+    weight = 0.3,
     desc = 'Eat some jerky then do the jerky.',
     use = function()
       TriggerEvent('fsn_inventory:use:food', 5)
@@ -68,12 +76,22 @@ items_table = {
   	price = 1,
     modelhash = -2054442544
   },
+  ["burger"] = {
+    display_name = 'Burger Supreme',
+    weight = 1.5,
+    desc = 'Aint no Doge in here',
+    use = function()
+     TriggerEvent('fsn_inventory:use:food', 23)
+     TriggerEvent('fsn_inventory:item:take', 'burger', 1)
+    end,
+    modelhash = -2054442544
+  },
   ["microwave_burrito"] = {
     display_name = 'Microwave Burrito',
     weight = 1.5,
     desc = 'Eat some jerky then do the jerky.',
     use = function()
-      TriggerEvent('fsn_inventory:use:food', 20)
+      TriggerEvent('fsn_inventory:use:food', 15)
       TriggerEvent('fsn_inventory:item:take', 'microwave_burrito', 1)
     end,
   	price = 8,
@@ -84,7 +102,7 @@ items_table = {
     weight = 1,
     desc = 'Eat some jerky then do the jerky.',
     use = function()
-      TriggerEvent('fsn_inventory:use:food', 15)
+      TriggerEvent('fsn_inventory:use:food', 13)
       TriggerEvent('fsn_inventory:item:take', 'panini', 1)
     end,
   	price = 6,
@@ -106,7 +124,7 @@ items_table = {
     weight = 1,
     desc = 'Healthy, I like it.',
     use = function()
-      TriggerEvent('fsn_inventory:use:drink', 15)
+      TriggerEvent('fsn_inventory:use:drink', 10)
       TriggerEvent('fsn_inventory:item:take', 'pepsi_max', 1)
     end,
 	price = 6,
@@ -115,12 +133,12 @@ items_table = {
   ["water"] = {
     display_name = 'Water',
     weight = 1,
-    desc = 'Healthy, I like it.',
+    desc = 'Bleh, Not so sure!.',
     use = function()
       TriggerEvent('fsn_inventory:use:drink', 20)
       TriggerEvent('fsn_inventory:item:take', 'water', 1)
     end,
-	  price = 3,
+	  price = 10,
     modelhash = -1301244203
   },
   ["coffee"] = {
@@ -167,7 +185,7 @@ items_table = {
   ["phone"] = {
     display_name = 'Phone',
     weight = 1,
-    desc = 'Use this to repair your vehicle.',
+    desc = 'Talkie walky....noice!',
     use = function()
       TriggerEvent('fsn_phone:togglePhone')
     end,
@@ -177,7 +195,7 @@ items_table = {
   ["2g_weed"] = {
     display_name = '2G Weed',
     weight = 2,
-    desc = 'asscheeks',
+    desc = '2g of weed for you.',
     use = function()
       TriggerEvent('fsn_notify:displayNotification', 'Head to weed crafting to roll a joint', 'centerLeft', 3500, 'error')
     end,
@@ -187,7 +205,7 @@ items_table = {
   ["joint"] = {
     display_name = 'Joint',
     weight = 0.6,
-    desc = 'asscheeks',
+    desc = 'Lets sell this Joint!?',
     use = function()
       TriggerEvent('fsn_notify:displayNotification', 'Sell this joint to locals<br>We\'re working on making these smokable', 'centerLeft', 3500, 'error')
     end,
@@ -197,7 +215,7 @@ items_table = {
   ["acetone"] = {
     display_name = 'Acetone',
     weight = 1.5,
-    desc = 'asscheeks',
+    desc = 'Need to make this into something.',
     use = function()
       TriggerEvent('fsn_notify:displayNotification', 'Head to Meth Crafting to cook this.', 'centerLeft', 3500, 'error')
     end,
@@ -207,7 +225,7 @@ items_table = {
   ["phosphorus"] = {
     display_name = 'Phosphorus',
     weight = 1.5,
-    desc = 'asscheeks',
+    desc = 'Lets go Meth cooking',
     use = function()
       TriggerEvent('fsn_notify:displayNotification', 'Head to Meth Cooking to cook this.', 'centerLeft', 3500, 'error')
     end,
@@ -217,7 +235,7 @@ items_table = {
   ["meth_rocks"] = {
     display_name = 'Meth Rocks',
     weight = 0.6,
-    desc = 'asscheeks',
+    desc = 'This Meth Rocks - Sell Sell!',
     use = function()
       TriggerEvent('fsn_notify:displayNotification', 'Sell this meth to locals<br>We\'re working on making these takeable', 'centerLeft', 3500, 'error')
     end,

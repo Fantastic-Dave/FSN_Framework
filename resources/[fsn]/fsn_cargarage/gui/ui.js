@@ -39,7 +39,7 @@ $( function() {
 					if (val.veh_status == 0) {
 						var color = 'green'
 						var stat = 'IN'
-						var price = 250
+						var price = 50
 					} else if (val.veh_status == 1) {
 						var color = 'orange'
 						var stat = 'OUT'

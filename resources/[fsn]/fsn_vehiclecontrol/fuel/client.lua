@@ -24,18 +24,18 @@ local notified = false
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(1500)
-    local consumption = 0.03
+    local consumption = 0.02
     local speed = GetEntitySpeed(GetVehiclePedIsIn(GetPlayerPed(-1), false)) * 2.236936
     if IsPedInAnyVehicle(GetPlayerPed(-1)) then
       if IsVehicleEngineOn(GetVehiclePedIsIn(GetPlayerPed(-1), false)) and GetPedInVehicleSeat(GetVehiclePedIsIn(GetPlayerPed(-1), false), -1) == GetPlayerPed(-1) then
         if speed <= 2 then
           consumption = 0.01
         elseif speed < 30 then
-          consumption = 0.04
+          consumption = 0.02
         elseif speed < 50 then
-          consumption = 0.06
+          consumption = 0.03
         elseif speed < 80  then
-          consumption = 0.11
+          consumption = 0.7
         elseif speed > 120 then
           consumption = 0.4
         end
@@ -70,7 +70,7 @@ Citizen.CreateThread(function()
             SetVehicleEngineOn(GetVehiclePedIsIn(GetPlayerPed(-1)), true, true, false)
           end
         else
-          fuel_amount = math.random(5, 100)
+          fuel_amount = math.random(30, 100)
           table.insert(vehicles, {GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1))), fuel_amount})
         end
       end
@@ -158,7 +158,7 @@ Citizen.CreateThread(function()
           end
         else
           if price ~= 0 then
-            if exports.fsn_police:fsn_PDDuty() then
+            if exports.fsn_police:fsn_PDDuty() or exports.fsn_ems:fsn_EMSDuty() then
               TriggerEvent('fsn_notify:displayNotification', 'State charged $'..price..' for fuel.', 'centerLeft', 2000, 'info')
               price = 0
             else

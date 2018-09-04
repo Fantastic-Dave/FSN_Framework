@@ -16,7 +16,7 @@ local HUD = {
 
 	SpeedIndicator 	= true,
 
-	ParkIndicator 	= false,
+	ParkIndicator 	= true,
 
 	Top 			= false, -- ALL TOP PANAL ( oil, dsc, plate, fluid, ac )
 

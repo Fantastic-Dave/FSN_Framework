@@ -92,7 +92,44 @@ local crafting_stations = {
       amount = 4
     }
   },
-}
+  ------------ Burgers
+  {
+    blip = {
+      title = 'Burger Manufacturing',
+      id = 273
+    },
+    loc = {x = 974.915, y = -2120.97, z = 31.3902},
+    cost = 0,
+    required = {
+      item = 'uncooked_meat',
+      itemtitle = 'Raw Meat',
+      amount = 3
+    },
+    gives = {
+      item = 'minced_meat',
+      itemtitle = 'Minced Meat',
+      amount = 1
+    }
+  },
+  {
+    blip = {
+      title = 'Burger Stand',
+      id = 467
+    },
+    loc = {x = -1856.4829101563, y = -1224.6036376953, z = 13.017220497131},
+    cost = 100,
+    required = {
+      item = 'minced_meat',
+      itemtitle = 'Minced Meat',
+      amount = 1
+    },
+    gives = {
+      item = 'burger',
+      itemtitle = 'Supreme Burger',
+      amount = 1
+    }
+  },
+ }
 
 Citizen.CreateThread(function()
   for k, v in pairs(crafting_stations) do
