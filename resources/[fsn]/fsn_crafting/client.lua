@@ -117,7 +117,7 @@ local crafting_stations = {
       id = 467
     },
     loc = {x = -1856.4829101563, y = -1224.6036376953, z = 13.017220497131},
-    cost = 100,
+    cost = 5,
     required = {
       item = 'minced_meat',
       itemtitle = 'Minced Meat',

@@ -20,7 +20,10 @@ local store_items = {
   WEAPON_BAT = 250,
   WEAPON_GOLFCLUB = 250,
   WEAPON_CROWBAR = 250,
-  WEAPON_PISTOL = 500
+  WEAPON_PISTOL = 500,
+  WEAPON_FLASHLIGHT = 350,
+  WEAPON_WRENCH = 250,
+  WEAPON_MUSKET = 5000
 }
 
 function fsn_SplitString(inputstr, sep)
