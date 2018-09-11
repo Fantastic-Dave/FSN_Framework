@@ -121,7 +121,7 @@ Citizen.CreateThread(function()
           if not harvesting then
             fsn_drawText3D(GetEntityCoords(v[1]).x,GetEntityCoords(v[1]).y,GetEntityCoords(v[1]).z, 'Press [~g~E~w~] to harvest')
             if IsControlJustPressed(0,51) then
-              TaskStartScenarioInPlace(GetPlayerPed(-1), "CODE_HUMAN_MEDIC_TEND_TO_DEAD", 0, 1)
+              TaskStartScenarioInPlace(GetPlayerPed(-1), "CODE_HUMAN_MEDIC_KNEEL", 0, 1)
               harvesting = true
               harvestingstart = GetNetworkTime()
             end
