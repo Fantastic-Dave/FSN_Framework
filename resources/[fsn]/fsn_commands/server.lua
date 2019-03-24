@@ -32,16 +32,14 @@ local pd_cars = {
   --------------------
   -- SAHP
   --------------------
-  [101] = "hwaycar",
-  [102] = "hwaycar2",
-  [103] = "hwaycar3",
-  [104] = "hwaycar4",
-  [105] = "hwaycar5",
-  [106] = "hwaycar6",
-  [107] = "hwaycar7",
-  [108] = "hwaycar8",
-  [109] = "hwaycar9",
-  [110] = "hwaycar10",
+  [101] = "police",
+  [102] = "police2",
+  [103] = "police3",
+  [104] = "police4",
+  [105] = "police5",
+  [106] = "police6",
+  [107] = "police7",
+  [108] = "police8",
   [201] = "policeb",
   --------------------
   -- UNMARKED
