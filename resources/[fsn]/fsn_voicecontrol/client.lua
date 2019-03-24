@@ -24,17 +24,15 @@ local settings = {
     [3] = "SHOUT"
   },
   ranges = {
-    [1] = 3.0,
-    [2] = 8.0,
-    [3] = 20.0
+    [1] = 25.01,
+    [2] = 25.01,
+    [3] = 25.01
   },
   current = 2
 }
-
+NetworkSetVoiceActive(true)
 Citizen.CreateThread(function()
-NetworkSetTalkerProximity(settings.ranges[settings.current])
-      NetworkSetVoiceActive(true)
-	while true do Citizen.Wait(1)
+  while true do Citizen.Wait(1)
     if NetworkIsPlayerTalking(PlayerId()) then
       drawTxt(UI.x + 0.517, UI.y + 1.434, 1.0,1.0,0.4, settings.voices[settings.current], 66, 220, 244, 255)
     else
@@ -46,15 +44,16 @@ NetworkSetTalkerProximity(settings.ranges[settings.current])
       else
         settings.current = 1
       end
-      NetworkSetTalkerProximity(settings.ranges[settings.current])
-      NetworkSetVoiceActive(true)
     end
 	end
 end)
 
 Citizen.CreateThread(function()
-	while true do Citizen.Wait(1)
-		NetworkSetTalkerProximity(settings.ranges[settings.current])
+	while true do
+		Citizen.Wait(0)
+        NetworkSetTalkerProximity(settings.voices[settings.current])
+        NetworkClearVoiceChannel()
+        NetworkSetVoiceActive(true)
 	end
 end)
 --[[
