@@ -51,6 +51,12 @@ NetworkSetTalkerProximity(settings.ranges[settings.current])
     end
 	end
 end)
+
+Citizen.CreateThread(function()
+	while true do Citizen.Wait(1)
+		NetworkSetTalkerProximity(settings.ranges[settings.current])
+	end
+end)
 --[[
     PHONE CALL STUFFS
 ]]--

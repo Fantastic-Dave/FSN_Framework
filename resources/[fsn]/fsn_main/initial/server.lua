@@ -12,7 +12,7 @@ AddEventHandler('fsn_main:createCharacter', function(data)
   end
   local steamid = GetPlayerIdentifiers(source)
   steamid = steamid[1]
-  MySQL.Sync.execute("INSERT INTO `fsn_characters` (`char_id`, `steamid`, `char_fname`, `char_lname`, `char_dob`, `char_desc`, `char_money`, `char_bank`, `char_model`, `mdl_extras`, `char_inventory`, `char_weapons`, `char_police`, `char_ems`) VALUES (NULL, @steamid, @char_fname, @char_lname, @char_dob, @char_desc, '500', '5000', '1885233650', '[]', '[]', '[]', '0', '0')", {['@steamid'] = steamid, ['@char_fname'] = data.char_fname, ['@char_lname'] = data.char_lname, ['@char_dob'] = data.char_dob, ['@char_desc'] = data.char_desc })
+  MySQL.Sync.execute("INSERT INTO `fsn_characters` (`char_id`, `steamid`, `char_fname`, `char_lname`, `char_dob`, `char_desc`, `char_licenses`, `char_contacts`, `char_money`, `char_bank`, `char_model`, `mdl_extras`, `char_inventory`, `char_weapons`, `char_police`, `char_ems`) VALUES (NULL, @steamid, @char_fname, @char_lname, @char_dob, @char_desc, '{}', '{}', '500', '5000', '1885233650', '[]', '[]', '[]', '0', '0')", {['@steamid'] = steamid, ['@char_fname'] = data.char_fname, ['@char_lname'] = data.char_lname, ['@char_dob'] = data.char_dob, ['@char_desc'] = data.char_desc })
   local characters = MySQL.Sync.fetchAll("SELECT * FROM `fsn_characters` WHERE `steamid` = '"..steamid.."'")
   TriggerClientEvent('fsn_main:sendCharacters', source, characters)
 end)
