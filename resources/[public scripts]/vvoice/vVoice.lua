@@ -1,8 +1,8 @@
 local voiceChatProximity = "veryclose" -- default: veryclose
 -- valid options are: veryclose, close, nearby, distant, far, veryfar, global.
 local voiceEnabled = true
-local allowProximityChange = true -- Allow people to change the chat proximity using /voice distance <proximity>
-local allowVoiceToggle = true -- Allow people to disable voice chat for themseleves using /voice toggle
+local allowProximityChange = false -- Allow people to change the chat proximity using /voice distance <proximity>
+local allowVoiceToggle = false -- Allow people to disable voice chat for themseleves using /voice toggle
 
 
 
