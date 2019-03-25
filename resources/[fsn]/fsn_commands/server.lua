@@ -30,7 +30,7 @@ local ems_cars = {
 }
 local pd_cars = {
   --------------------
-  -- SAHP
+  -- LSPD
   --------------------
   [101] = "police",
   [102] = "police2",
