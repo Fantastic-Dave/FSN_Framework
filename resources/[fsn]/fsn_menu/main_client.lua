@@ -309,6 +309,9 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
       if split[3] == 'toggle' then
         TriggerEvent("K9:ToggleK9", 'a_c_husky')
       end
+	  if split[3] == 'follow' then
+        TriggerEvent("K9:ToggleFollow")
+      end
       if split[3] == 'action' then
         if split[4] == 'sit' then
           TriggerEvent('k9:anim', 'creatures@rottweiler@amb@world_dog_sitting@idle_a', 'idle_b')
