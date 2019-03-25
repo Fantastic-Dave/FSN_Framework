@@ -1,5 +1,19 @@
 local vehicles = {}
-fuel_amount = 0
+fuel_amount = 100
+
+RegisterNetEvent('fsn_fuel:set')
+AddEventHandler('fsn_fuel:set', function(car, fuelamount)
+  if table.contains(vehicles, car) then
+    for k, v in pairs(vehicles) do
+      if v[1] == car then
+        v[2] = fuelamount
+      end
+    end
+  else
+	table.insert(vehicles, {car, fuelamount})
+  end
+end)
+
 
 RegisterNetEvent('fsn_fuel:update')
 AddEventHandler('fsn_fuel:update', function(car, fuelamount)
