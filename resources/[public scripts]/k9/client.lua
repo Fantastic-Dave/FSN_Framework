@@ -367,7 +367,7 @@ local language = {}
             end
 
             -- Trigger Attack
-            if IsControlJustPressed(1, 47) and IsPlayerFreeAiming(PlayerId()) then
+            if IsControlJustPressed(1, 51) and IsPlayerFreeAiming(PlayerId()) then
                 local bool, target = GetEntityPlayerIsFreeAimingAt(PlayerId())
 
                 if bool then
