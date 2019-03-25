@@ -138,7 +138,7 @@ items_table = {
       TriggerEvent('fsn_inventory:use:drink', 20)
       TriggerEvent('fsn_inventory:item:take', 'water', 1)
     end,
-	  price = 10,
+	  price = 3,
     modelhash = -1301244203
   },
   ["coffee"] = {
