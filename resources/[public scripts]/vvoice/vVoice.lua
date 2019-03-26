@@ -35,8 +35,14 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        NetworkSetTalkerProximity(20.01)
-        NetworkClearVoiceChannel()
+        NetworkSetTalkerProximity(10.01)
+        --NetworkClearVoiceChannel()
         NetworkSetVoiceActive(true)
     end
+end)
+
+AddEventHandler('fsn_main:updateCharacters', function()
+	NetworkSetTalkerProximity(10.01)
+	--NetworkClearVoiceChannel()
+	NetworkSetVoiceActive(true)
 end)
