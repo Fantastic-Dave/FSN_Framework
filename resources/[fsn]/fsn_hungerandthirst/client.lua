@@ -55,20 +55,37 @@ Citizen.CreateThread(function()
   end
 end)
 
+
+local notifstarve = false
+local notifthirst = false
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(1000)
     clienttime = clienttime + 1
     if clienttime / 1000 == math.floor(clienttime) / 1000 and init then
-      if hunger - 0.02 <= 0 then
-        TriggerEvent('fsn_ems:killMe')
+      if hunger - 0.01 <= 0 then
+		--TriggerEvent('fsn_ems:killMe')
+		local meenus = GetEntityMaxHealth(GetPlayerPed(-1)) / 50
+		SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))-meenus)
+		if notifstarve == false then
+			TriggerEvent('fsn_notify:displayNotification', 'You are <b>STARVING', 'centerLeft', 3000, 'info')
+			notifstarve = true
+		end
       else
         hunger = hunger - 0.02
+		notifstarve = false
       end
-      if thirst - 0.03 <= 0 then
-        TriggerEvent('fsn_ems:killMe')
+      if thirst - 0.02 <= 0 then
+		local meenus = GetEntityMaxHealth(GetPlayerPed(-1)) / 50
+		SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))-meenus)
+		if notifthirst == false then
+			TriggerEvent('fsn_notify:displayNotification', 'You are <b>THIRSTY', 'centerLeft', 3000, 'info')
+			notifthirst = true
+		end
+        --TriggerEvent('fsn_ems:killMe')
       else
         thirst = thirst - 0.05
+		notifthirst = false
       end
     end
   end
