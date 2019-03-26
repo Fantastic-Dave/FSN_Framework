@@ -183,9 +183,6 @@ end
 current_characters = {}
 RegisterNetEvent('fsn_main:updateCharacters')
 AddEventHandler('fsn_main:updateCharacters', function(tbl)
-  for k, c in pairs(tbl) do
-    print(c.ply_id..'> F: '..c.char_fname..', L: '..c.char_lname)
-  end
   current_characters = tbl
 end)
 current_character_index = 0
