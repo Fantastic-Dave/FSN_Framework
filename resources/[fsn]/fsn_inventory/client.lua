@@ -988,8 +988,8 @@ local function fsn_hasDirtyMoney()
 end
 
 local function fsn_StartLaundering()
-  --laundervan = CreateVehicle(GetHashKey("speedo2"), garagepos.x, garagepos.y, garagepos.z+2, 319.79782104492, true, true)
-  local car = 'speedo2'
+  --laundervan = CreateVehicle(GetHashKey("burrito"), garagepos.x, garagepos.y, garagepos.z+2, 319.79782104492, true, true)
+  local car = 'burrito'
   local vehicle = GetHashKey(car)
   RequestModel(vehicle)
   while not HasModelLoaded(vehicle) do
@@ -1019,7 +1019,7 @@ local function fsn_StartLaundering()
 end
 
 local function fsn_NextLaundering(trig)
-  if GetEntityModel(GetVehiclePedIsIn(GetPlayerPed(-1), true)) ~= GetHashKey("speedo2") then
+  if GetEntityModel(GetVehiclePedIsIn(GetPlayerPed(-1), true)) ~= GetHashKey("burrito") then
     TriggerEvent('fsn_notify:displayNotification', 'Deliveries must be completed in the vehicle provided', 'centerRight', 4000, 'error')
     return
   end
