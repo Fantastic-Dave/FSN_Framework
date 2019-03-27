@@ -764,19 +764,18 @@ AddEventHandler('chatMessage', function(source, auth, msg)
           end
         end
         if split[2] == 'revive' then
-          if #onduty_ems > 0 then
-            TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'EMS are online, reach them on the radio.')
-          else
-            if split[3] then
-              if split[3] ~= source then
-                TriggerClientEvent('fsn_ems:reviveMe', tonumber(split[3]))
-              else
-                TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You are not a god. You cannot revive yourself.')
-              end
-            else
-              TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
-            end
-          end
+			if #onduty_ems > 0 then
+			TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'EMS may be online, reach them on the radio.')
+			end
+			if split[3] then
+				if split[3] ~= source then
+					TriggerClientEvent('fsn_ems:reviveMe', tonumber(split[3]))
+				else
+					TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You are not a god. You cannot revive yourself.')
+				end
+			else
+				TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
+			end
         end
         if split[2] == 'softcuff' or split[2] == 'sc' then
           if split[3] then
