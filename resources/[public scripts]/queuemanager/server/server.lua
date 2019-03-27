@@ -7,7 +7,7 @@ Config.Priority = {
     ["steam:11000011098d978"] = 20,
 }
 
-Config.RequireSteam = false
+Config.RequireSteam = true
 Config.PriorityOnly = false -- whitelist only server
 
 Config.IsBanned = function(src, callback)
