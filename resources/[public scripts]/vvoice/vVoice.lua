@@ -36,14 +36,14 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         NetworkSetTalkerProximity(10.01)
-        --NetworkClearVoiceChannel()
+        NetworkClearVoiceChannel()
         NetworkSetVoiceActive(true)
     end
 end)
 
 AddEventHandler('fsn_main:updateCharacters', function()
 	NetworkSetTalkerProximity(10.01)
-	--NetworkClearVoiceChannel()
+	NetworkClearVoiceChannel()
 	NetworkSetVoiceActive(true)
 	TriggerEvent('chatMessage', '', {255,255,255}, '^1^*NOTICE:^r VOIP was reset because someone connected to the server.')
 end)
