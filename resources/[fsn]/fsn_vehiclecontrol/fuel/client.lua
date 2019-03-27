@@ -37,7 +37,7 @@ end)
 local notified = false
 Citizen.CreateThread(function()
   while true do
-    Citizen.Wait(1500)
+    Citizen.Wait(4000)
     local consumption = 0.02
     local speed = GetEntitySpeed(GetVehiclePedIsIn(GetPlayerPed(-1), false)) * 2.236936
     if IsPedInAnyVehicle(GetPlayerPed(-1)) then
@@ -161,7 +161,7 @@ Citizen.CreateThread(function()
                   if vehicles[veh_index][2]+0.2 < 100 then
                     vehicles[veh_index][2] = vehicles[veh_index][2]+0.2
                     fuel_amount = fuel_amount+0.2
-                    price = price + 1
+                    price = price + 0.5
                   else
                     fuel_amount = 100
                     vehicles[veh_index][2] = 100
