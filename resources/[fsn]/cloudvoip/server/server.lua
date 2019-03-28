@@ -1,8 +1,8 @@
 local radioChannels = {
-	["lspd"] = {name = "lspd", users = {}},
-	["bcso"] = {name = "bcso", users = {}},
-	["shared"] = {name = "shared", users = {}},
-	["ems"] = {name = "ems", users = {}},
+	["lspd"] = {name = "[LSPD]", users = {}},
+	["bcso"] = {name = "[BCSO]", users = {}},
+	["shared"] = {name = "[SHARED]", users = {}},
+	["ems"] = {name = "[EMS]", users = {}},
 }
 RegisterServerEvent("addUserToRadioChannel")
 AddEventHandler("addUserToRadioChannel", function(channel,userClientID)

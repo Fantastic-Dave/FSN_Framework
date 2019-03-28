@@ -355,3 +355,5 @@ function forceRespawn()
     spawnLock = false
     respawnForced = true
 end
+
+TriggerEvent('playerSpawned', spawn)

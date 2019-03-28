@@ -1,5 +1,4 @@
--- GLG Voice
-
+---------------------------------------- SOURCE
 local playerList = {}
 local userData = {}
 local refreshRate = 100
@@ -12,15 +11,15 @@ talkDistance[1] = 15
 talkDistance[2] = 2
 talkDistance[3] = 40
 local radioChannels = {
-	["lspd"] = {name = "lspd", users = {}},
-	["bcso"] = {name = "bcso", users = {}},
-	["shared"] = {name = "shared", users = {}},
-	["ems"] = {name = "ems", users = {}},
+	["lspd"] = {name = "[LSPD]", users = {}},
+	["bcso"] = {name = "[BCSO]", users = {}},
+	["shared"] = {name = "[SHARED]", users = {}},
+	["ems"] = {name = "[EMS]", users = {}},
 }
 local modeNames = {}
-modeNames[1] = "Talking"
-modeNames[2] = "Whispering"
-modeNames[3] = "Shouting"
+modeNames[1] = "NORMAL"
+modeNames[2] = "WHISPER"
+modeNames[3] = "SHOUT"
 local teamspeakChannel = "Servers/LIVE_SERVER1"--get channel path by typing in ts chat: /glgvoice channelpath
 local teamspeakChannelName = "LIVE_SERVER1"--user friendly name of channel
 local localClientID = -1
@@ -58,7 +57,7 @@ function init()
 	Citizen.CreateThread(function()
 		while true do
 			Citizen.Wait(5)
-			if(IsControlJustPressed(0, Keys["Z"])) then --switch talk mode hotkey
+			if(IsControlJustPressed(0, Keys["G"])) then --switch talk mode hotkey
 				if(not localMode) then
 					localMode = 1
 				end
@@ -72,11 +71,15 @@ function init()
 					mode = modeNames[localMode]
 				})
 			end
-			if (IsControlJustPressed(0, Keys["CAPS"])) then --start talking on radio hotkey
-				DecorSetInt(GetPlayerPed(-1), "radio:talking", 1)
-				SendNUIMessage({
-					type = "radioTalkingOn"
-				})
+			if (IsControlJustPressed(0, Keys["CAPS"]))  then --start talking on radio hotkey
+				for k, v in pairs(radioChannels) do
+					if v.users[tostring(localClientID)] then
+						DecorSetInt(GetPlayerPed(-1), "radio:talking", 1)
+						SendNUIMessage({
+							type = "radioTalkingOn"
+						})
+					end
+				end
 			end
 			if (IsControlJustReleased(0, Keys["CAPS"])) then --stop talking on radio hotkey
 				if(DecorGetInt(GetPlayerPed(-1), "radio:talking") == 1) then
@@ -86,9 +89,9 @@ function init()
 					})
 				end
 			end
-			if(IsControlPressed(0, Keys["LEFTSHIFT"]))then
+			if(true)then
 				-- ADD PD or EMS CHECK to join radio
-				if(IsControlJustPressed(0, Keys["K"]))then--join/switch radio hotkey
+				if(not IsControlPressed(0, Keys["LEFTSHIFT"]) and IsControlJustPressed(0, Keys["F9"]))then--join/switch radio hotkey
 					if(radioChannels["lspd"].users[tostring(localClientID)] == 1) then
 						TriggerServerEvent("addUserToRadioChannel", "bcso", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 						TriggerServerEvent("removeUserFromRadioChannel", "lspd", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
@@ -125,9 +128,15 @@ function init()
 							channel = "lspd"
 						})					
 					end
-				elseif(IsControlJustPressed(0, Keys["F9"])) then --leave radios hotkey
+				elseif(IsControlPressed(0, Keys["LEFTSHIFT"]) and IsControlJustPressed(0, Keys["F9"])) then --leave radios hotkey
 					if(radioChannels["lspd"].users[tostring(localClientID)] == 1) then
 						TriggerServerEvent("removeUserFromRadioChannel", "lspd", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
+					end
+					if(radioChannels["bcso"].users[tostring(localClientID)] == 1) then
+						TriggerServerEvent("removeUserFromRadioChannel", "bcso", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
+					end
+					if(radioChannels["shared"].users[tostring(localClientID)] == 1) then
+						TriggerServerEvent("removeUserFromRadioChannel", "shared", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 					end
 					if(radioChannels["ems"].users[tostring(localClientID)] == 1) then
 						TriggerServerEvent("removeUserFromRadioChannel", "ems", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
@@ -244,4 +253,41 @@ end)
 RegisterNetEvent("updateRadioChannels")
 AddEventHandler("updateRadioChannels", function(channels)
 	radioChannels = channels
+end)
+
+------------------------------------------------ SPECIFIC
+function drawTxt(x,y ,width,height,scale, text, r,g,b,a)
+    SetTextFont(4)
+    SetTextProportional(0)
+    SetTextScale(scale, scale)
+    SetTextColour(r, g, b, a)
+    SetTextDropShadow(0, 0, 0, 0,255)
+    SetTextEdge(2, 0, 0, 0, 255)
+    SetTextDropShadow()
+    SetTextOutline()
+    SetTextEntry("STRING")
+    AddTextComponentString(text)
+    DrawText(x - width/2, y - height/2 + 0.005)
+end
+local UI = {
+	x =  0.000,
+	y = -0.001,
+}
+Citizen.CreateThread(function()
+  while true do Citizen.Wait(1)
+	if DecorGetInt(GetPlayerPed(-1), "voip:talking") == 1 then
+      drawTxt(UI.x + 0.517, UI.y + 1.434, 1.0,1.0,0.4, modeNames[DecorGetInt(GetPlayerPed(-1), "voip:mode")], 66, 220, 244, 255)
+    else
+      drawTxt(UI.x + 0.517, UI.y + 1.434, 1.0,1.0,0.4, modeNames[DecorGetInt(GetPlayerPed(-1), "voip:mode")], 255, 255, 255, 255)
+    end
+	for k, v in pairs(radioChannels) do
+		if v.users[tostring(localClientID)] then
+			if DecorGetInt(GetPlayerPed(-1), "radio:talking") == 1 then
+				drawTxt(UI.x + 0.517, UI.y + 1.409, 1.0,1.0,0.4, v.name, 66, 220, 244, 255)		
+			else
+				drawTxt(UI.x + 0.517, UI.y + 1.409, 1.0,1.0,0.4, v.name, 255, 255, 255, 255)
+			end
+		end
+	end
+  end
 end)
