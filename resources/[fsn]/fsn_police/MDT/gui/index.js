@@ -175,7 +175,7 @@ var charges = [
 		"ticket":500		
 	},
 	{
-		"charge":"Grant Theft Auto",
+		"charge":"Grand Theft Auto",
 		"jail":20,
 		"ticket":1000		
 	},
