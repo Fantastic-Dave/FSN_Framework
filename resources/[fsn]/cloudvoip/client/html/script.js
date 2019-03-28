@@ -146,14 +146,14 @@ function messageReceived(event) {
 			}
 		}
 	}else if(event.data.type == "updateMode"){
-		document.getElementById("mode").innerHTML = event.data.mode;
+		//document.getElementById("mode").innerHTML = event.data.mode;
 	}else if(event.data.type == "setOnDuty"){
 		if (connection.readyState == connection.OPEN && status == 3) {
-			connection.send("setOnDuty");
+			//connection.send("setOnDuty");
 		}
 	}else if(event.data.type == "setOffDuty"){
 		if (connection.readyState == connection.OPEN && status == 3) {
-			connection.send("setOffDuty");
+			//connection.send("setOffDuty");
 		}
 	}else if(event.data.type == "radioTalkingOn"){
 		if (connection.readyState == connection.OPEN && status == 3) {
@@ -166,11 +166,11 @@ function messageReceived(event) {
 			document.getElementById("modeext").innerHTML = "";
 		}
 	}else if(event.data.type == "setChannel"){
-		document.getElementById("channel").innerHTML = "radio: " + event.data.channel;
-		connection.send("setOnDuty");
+		//document.getElementById("channel").innerHTML = "radio: " + event.data.channel;
+		//connection.send("setOnDuty");
 	}else if(event.data.type == "removeChannel"){
-		document.getElementById("channel").innerHTML = "";
-		connection.send("setOffDuty");
+		//document.getElementById("channel").innerHTML = "";
+		//connection.send("setOffDuty");
 	}
 }
 window.addEventListener("message", messageReceived, false);
