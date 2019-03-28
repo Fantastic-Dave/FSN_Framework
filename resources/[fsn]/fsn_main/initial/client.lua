@@ -136,13 +136,14 @@ end
 function fsn_mainSpawn()
   fsn_spawned = false
   local spawncoords = {x = -931.23278808594, y= 5587.6728515625, z= 91.584693908691}
-  DoScreenFadeOut(1500)
+  DoScreenFadeOut(500)
   --NetworkResurrectLocalPlayer(spawncoords.x, spawncoords.y, spawncoords.z, Citizen.PointerValueVector(), true, true, false)
   --TriggerEvent('PlayerSpawned')
   SetEntityCoords(GetPlayerPed(-1), spawncoords.x, spawncoords.y, spawncoords.z)
   freezePlayer(-1, true)
-  DoScreenFadeIn(1500)
   Citizen.CreateThread(function()
+	Citizen.Wait(2000)
+	DoScreenFadeIn(3500)
     while true do
       Citizen.Wait(0)
       if fsn_spawned then
@@ -244,6 +245,7 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
     TriggerEvent('fsn_police:init', char.char_police)
     TriggerEvent('fsn_jail:init', char.char_id)
     TriggerEvent('fsn_inventory:initChar', char.char_inventory)
+	TriggerEvent('fsn_ems:reviveMe')
     for k, v in pairs(current_characters) do
         if v.char_id == current_character_id then
           current_character_index = k
