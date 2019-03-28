@@ -13,8 +13,8 @@ end
 
 AddEventHandler('fsn_inventory:initChar', function()
   init = true
-	hunger = 100
-	thirst = 100
+	hunger = 0
+	thirst = 0
 end)
 
 Citizen.CreateThread(function()
@@ -58,31 +58,52 @@ end)
 
 local notifstarve = false
 local notifthirst = false
+local ded = false
+RegisterNetEvent('fsn_ems:reviveMe')
+AddEventHandler('fsn_ems:reviveMe', function()
+	ded = false
+end)
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(1000)
     clienttime = clienttime + 1
     if clienttime / 1000 == math.floor(clienttime) / 1000 and init then
       if hunger - 0.01 <= 0 then
-		--TriggerEvent('fsn_ems:killMe')
-		local meenus = GetEntityMaxHealth(GetPlayerPed(-1)) / 50 * 3
-		SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))-meenus)
-		if notifstarve == false then
-			TriggerEvent('fsn_notify:displayNotification', 'You are <b>STARVING', 'centerLeft', 3000, 'info')
-			notifstarve = true
+		local helf = GetEntityHealth(GetPlayerPed(-1))-3
+		print(helf)
+		if helf < 105 and not ded then
+			TriggerEvent('fsn_ems:killMe')
+			TriggerEvent('fsn_notify:displayNotification', 'You forgot to eat!', 'centerLeft', 5000, 'error')
+			ded = true
+		else
+			if not ded then
+				SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))-2)
+			end
+			if notifstarve == false then
+				TriggerEvent('fsn_notify:displayNotification', 'You are <b>STARVING', 'centerLeft', 3000, 'info')
+				notifstarve = true
+			end
 		end
       else
         hunger = hunger - 0.02
 		notifstarve = false
       end
       if thirst - 0.02 <= 0 then
-		local meenus = GetEntityMaxHealth(GetPlayerPed(-1)) / 50 * 3
-		SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))-meenus)
-		if notifthirst == false then
-			TriggerEvent('fsn_notify:displayNotification', 'You are <b>THIRSTY', 'centerLeft', 3000, 'info')
-			notifthirst = true
+		local helf = GetEntityHealth(GetPlayerPed(-1))-3
+		print(helf)
+		if helf < 105 and not ded then
+			TriggerEvent('fsn_ems:killMe')
+			TriggerEvent('fsn_notify:displayNotification', 'You forgot to drink!', 'centerLeft', 5000, 'error')
+			ded = true
+		else
+			if not ded then
+				SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))-2)
+			end
+			if notifthirst == false then
+				TriggerEvent('fsn_notify:displayNotification', 'You are <b>THIRSTY', 'centerLeft', 3000, 'info')
+				notifthirst = true
+			end
 		end
-        --TriggerEvent('fsn_ems:killMe')
       else
         thirst = thirst - 0.05
 		notifthirst = false
