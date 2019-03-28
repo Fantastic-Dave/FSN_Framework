@@ -1,4 +1,6 @@
 local onduty_ems = {}
+local bandw = false
+local pulsing = false
 RegisterNetEvent('fsn_ems:update')
 AddEventHandler('fsn_ems:update', function(ems)
   onduty_ems = ems
@@ -44,6 +46,7 @@ AddEventHandler('fsn_ems:reviveMe', function()
   NetworkResurrectLocalPlayer(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 0, false, false)
   TriggerEvent('fsn_inventory:use:drink', 100)
   TriggerEvent('fsn_inventory:use:food', 100)
+  ClearTimecycleModifier()
 end)
 
 RegisterNetEvent('fsn_ems:killMe')
@@ -67,6 +70,10 @@ AddEventHandler('fsn_ems:killMe', function()
     TriggerServerEvent('fsn_ems:CAD:10-43', x, y, z)
     amidead = true
     deathtime = currenttime
+	SetTimecycleModifier("dying")
+	SetTimecycleModifierStrength(1.0)
+	bandw = false
+	pulsing = true
   end
 end)
 
@@ -79,7 +86,7 @@ Citizen.CreateThread(function()
       local def = deathtime + 300
       if def > currenttime then
         drawTxt('Wait '..tostring(def - currenttime)..' seconds to respawn ~b~||~w~ Wait for EMS',4,1,0.5,0.35,0.6,255,255,255,255)
-        drawTxt('~r~YOU ARE KNOCKED OUT AND CANNOT COMMUNICATE',4,1,0.5,0.25,0.6,255,255,255,255)
+        drawTxt('~r~DO NOT USE ANY MECHANICS WHILST DOWN, YOU CAN TALK',4,1,0.5,0.25,0.6,255,255,255,255)
       else
         if #onduty_ems > 0 then
           drawTxt('Press [E] to respawn ($5000)',4,1,0.5,0.35,0.6,255,255,255,255)
@@ -190,6 +197,7 @@ local clockInStations = {
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
+	SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)
     for k, hosp in pairs(clockInStations) do
       if GetDistanceBetweenCoords(hosp.x,hosp.y,hosp.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 and amiems then
         DrawMarker(1,hosp.x,hosp.y,hosp.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
@@ -300,5 +308,37 @@ Citizen.CreateThread(function()
         end
       end
     end
+  end
+end)
+
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+	if pulsing then
+		DoScreenFadeOut(1000)
+		Citizen.Wait(1500)
+		DoScreenFadeIn(1000)
+		Citizen.Wait(4000)
+	end
+  end
+end)
+
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+	SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)
+	if GetEntityHealth(GetPlayerPed(-1)) < 130 then
+		if not bandw then
+			SetTimecycleModifier("dying")
+			SetTimecycleModifierStrength(1.0)
+			bandw = true
+		end
+	else
+		if not amidead then
+			ClearTimecycleModifier()
+			bandw = false
+			pulsing = false
+		end
+	end
   end
 end)
