@@ -18,9 +18,9 @@ function announceRestart()
    if (restartInMinutes > timeInMinutes and tonumber(second) == 00 and (timeUntil == 01 or timeUntil == 05 or timeUntil == 15 or timeUntil == 30)) then
      print(":fsn_admin: Server restart in " .. (timeUntil) .. " minutes");
      if (timeUntil == 01) then
-       TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*^1:FSN:^0^r The server will be restarting in ^4'..timeUntil..'^0 minutes!')
+       --TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*^1:FSN:^0^r The server will be restarting in ^4'..timeUntil..'^0 minutes!')
      else
-       TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*^1:FSN:^0^r The server will be restarting in ^4'..timeUntil..'^0 minutes!')
+       --TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*^1:FSN:^0^r The server will be restarting in ^4'..timeUntil..'^0 minutes!')
      end
      break;
    end
