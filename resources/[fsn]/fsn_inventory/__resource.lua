@@ -19,3 +19,4 @@ exports({
 
 -- Item scripts
 client_script '_item_misc/binoculars.lua'
+client_script '_item_misc/drug_selling.lua'
