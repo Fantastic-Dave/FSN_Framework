@@ -150,6 +150,11 @@ local maxspace = 30
 local spacewithbag = 60
 local init = true
 
+
+function fsn_GetInventory()
+	return inventory
+end
+
 function fsn_computeMaxSpace()
   if inventory["backpack"] then
     return spacewithbag
@@ -409,160 +414,6 @@ AddEventHandler('fsn_inventory:prebuy', function(item)
     TriggerEvent('fsn_notify:displayNotification', 'You cannot carry this!', 'centerLeft', 3000, 'error')
   else
     TriggerEvent('fsn_inventory:buyItem', item, items_table[item].price, 1)
-  end
-end)
------------------------------------------------------ Drug stuffs
-local drugs = {
-  ["packaged_cocaine"] = {
-    street_price = 800
-  },
-  ["meth_rocks"] = {
-    street_price = 450
-  },
-  ["joint"] = {
-    street_price = 300
-  }
-}
-
-function fsn_isPedPlayer(ped)
-  for id = 0, 31 do
-    if NetworkIsPlayerActive(id) then
-      if GetPlayerPed(id) == ped then
-        return true
-      end
-    end
-  end
-  return false
-end
-
-function fsn_getPlayerDrugs()
-  for k, v in pairs(drugs) do
-    if inventory[k] then
-      return k
-    end
-  end
-  return false
-end
-
-local selling = false
-local selling_item = ''
-local selling_start = 0
-local selling_ped = nil
-local sold_peds = {}
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if init then
-      local drugas = fsn_getPlayerDrugs()
-      if not IsPedInAnyVehicle(GetPlayerPed(-1)) then
-        if drugas ~= false and not selling then
-          for obj in EnumeratePeds() do
-            if obj ~= GetPlayerPed(-1) and not IsEntityDead(obj) and not IsPedInAnyVehicle(obj) and GetDistanceBetweenCoords(GetEntityCoords(obj), GetEntityCoords(GetPlayerPed(-1))) < 2 and not IsEntityDead(obj) then
-              --fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '')
-              if table.contains(sold_peds, obj) then
-                fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '~R~Already bought')
-              else
-                local netId = NetworkGetNetworkIdFromEntity(obj)
-                if not NetworkHasControlOfNetworkId(netId) then
-                  NetworkRequestControlOfNetworkId(netId)
-            			while not NetworkHasControlOfNetworkId(netId) do
-            				Citizen.Wait(1)
-            			end
-                end
-                fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, 'Press ~g~E~w~ to sell '..drugas)
-                --SetTextComponentFormat("STRING")
-                --AddTextComponentString("Press ~INPUT_PICKUP~ to sell ~g~"..items_table[drugas].display_name)
-                --DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-                if IsControlJustPressed(0, 38) then
-                  table.insert(sold_peds, #sold_peds+1, {obj, true})
-                  TriggerEvent('fsn_notify:displayNotification', 'You ask if they would like to buy...', 'centerLeft', 3000, 'info')
-                  Citizen.Wait(1000)
-                  local try = math.random(0, 100)
-                  --[[
-                  if not NetworkIsPlayerTalking(PlayerId()) then
-                    TriggerEvent('fsn_notify:displayNotification', 'How do you expect to sell drugs without talking?', 'centerLeft', 3000, 'error')
-                      try = 57
-                  end
-                  ]]
-                  if try > 58 then
-                    selling = true
-                    selling_ped = obj
-                    selling_item = drugas
-                    ClearPedTasksImmediately(obj)
-                    TaskStandStill(obj, 9000)
-                    selling_start = GetNetworkTime()
-                  else
-                    try = math.random(0, 100)
-                    if try > 20 then
-                      while not HasAnimDictLoaded('cellphone@') do
-                        RequestAnimDict('cellphone@')
-                        Citizen.Wait(5)
-                      end
-                      SetEntityAsMissionEntity(obj, true, true)
-					            --ResurrectPed(obj)
-                      ClearPedTasksImmediately(obj)
-                      SetEntityAsNoLongerNeeded(obj)
-                      TaskPlayAnim(obj, 'cellphone@', 'cellphone_call_listen_base', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
-                      fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '~R~Calling the police!')
-                      if not IsEntityDead(obj) then
-                        local pos = GetEntityCoords(obj)
-                        local coords = {
-                          x = pos.x,
-                          y = pos.y,
-                          z = pos.z
-                        }
-                        TriggerServerEvent('fsn_police:dispatch', coords, 3)
-                      end
-                    end
-                    TriggerEvent('fsn_notify:displayNotification', 'They are not interested', 'centerLeft', 3000, 'error')
-                  end
-                end
-              end
-            end
-          end
-        end
-      end
-    end
-  end
-end)
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if selling then
-      local rem = selling_start+8000
-      if rem > GetNetworkTime() then
-        if GetEntitySpeed(selling_ped) < 1 and not IsEntityDead(selling_ped) and GetDistanceBetweenCoords(GetEntityCoords(selling_ped), GetEntityCoords(GetPlayerPed(-1))) < 3 then
-          fsn_drawText3D(GetEntityCoords(selling_ped).x, GetEntityCoords(selling_ped).y, GetEntityCoords(selling_ped).z, 'Selling: ~b~'..string.sub(tostring(math.ceil(rem-GetNetworkTime())), 1, 1)..'s~w~ remaining')
-        else
-          if selling then
-            TriggerEvent('fsn_notify:displayNotification', 'The transaction was <span style="color:red">cancelled', 'centerLeft', 3000, 'info')
-            selling = false
-            selling_start = 0
-            selling_ped = false
-          end
-        end
-      else
-        if fsn_GetItemAmount(selling_item) < 7 then
-          sold_amount = fsn_GetItemAmount(selling_item)
-        else
-          sold_amount = math.random(1, 7)
-        end
-        local price = math.random(drugs[selling_item].street_price - 100, drugs[selling_item].street_price + 100)
-        price = price * sold_amount
-        if exports.fsn_police:fsn_getCopAmt() < 1 then
-          TriggerEvent('chatMessage', '', {255,255,255}, '^8^*:FSN:^0^r This is a police related action, there are no police online so your earnings have been halved.')
-          price = price / 2
-        end
-        TriggerEvent('fsn_notify:displayNotification', 'They bought '..sold_amount..' '..items_table[selling_item].display_name..' for '..price..'DM', 'centerLeft', 3000, 'info')
-        TriggerEvent('fsn_inventory:item:add', 'dirty_money', price)
-        TriggerEvent('fsn_inventory:item:take', selling_item, sold_amount)
-        if selling then
-          selling = false
-          selling_start = 0
-          selling_ped = false
-        end
-      end
-    end
   end
 end)
 ----------------------------------------------------------------------------- LAUNDERING
