@@ -2,202 +2,258 @@ var charges = [
 	{
 		"charge":"Jaywalking",
 		"jail":0,
-		"ticket":150		
+		"ticket":250		
 	},
 	{
 		"charge":"Evading",
 		"jail":5,
-		"ticket":250		
+		"ticket":1000		
 	},
 	{
 		"charge":"Reckless Evading",
 		"jail":10,
-		"ticket":500		
+		"ticket":2500		
 	},
 	{
-		"charge":"Illegal Passing",
-		"jail":0,
-		"ticket":150
+		"charge":"Vehicular Evasion",
+		"jail":5,
+		"ticket":1000		
 	},
 	{
 		"charge":"Failuire to Yeild to an Emergency Vehicle",
 		"jail":0,
-		"ticket":250		
+		"ticket":1000		
 	},
 	{
 		"charge":"Failure to Obey a Traffic Control Device",
 		"jail":0,
-		"ticket":150		
+		"ticket":500		
 	},
 	{
 		"charge":"Failure to Indicate Intention of Travel",
 		"jail":0,
-		"ticket":100		
+		"ticket":150		
 	},
 	{
 		"charge":"Operation of an Unroadworthy Vehicle",
 		"jail":0,
-		"ticket":200		
-	},
-	{
-		"charge":"Negligent Driving",
-		"jail":0,
-		"ticket":500		
+		"ticket":2000		
 	},
 	{
 		"charge":"Reckless Driving",
-		"jail":10,
+		"jail":5,
+		"ticket":5000		
+	},
+	{
+		"charge":"Third Degree Speeding (Under 60)",
+		"jail":0,
 		"ticket":500		
 	},
 	{
-		"charge":"Third Degree Speeding (Speed in Excess 0-35)",
-		"jail":0,
-		"ticket":150		
-	},
-	{
-		"charge":"Second Degree Speeding (Speed in Excess 36)",
-		"jail":0,
-		"ticket":250		
-	},
-	{
-		"charge":"First Degree Speeding (Speed in Excess 55)",
+		"charge":"Second Degree Speeding (Under 100)",
 		"jail":5,
-		"ticket":450		
+		"ticket":1000		
+	},
+	{
+		"charge":"First Degree Speeding (Over 100)",
+		"jail":10,
+		"ticket":2500		
+	},
+	{
+		"charge":"Unauthorised Operation of a Motor Vehicle",
+		"jail":10,
+		"ticket":1250		
 	},
 	{
 		"charge":"Unauthorized/Illegal Parking",
 		"jail":0,
-		"ticket":150		
+		"ticket":500		
 	},
 	{
 		"charge":"Driving Under the Influence",
 		"jail":5,
-		"ticket":350		
+		"ticket":1500		
 	},
 	{
 		"charge":"Assault (R)",
 		"jail":10,
-		"ticket":500		
+		"ticket":4000		
 	},
 	{
-		"charge":"Assault on Peace Officer (R)",
-		"jail":15,
-		"ticket":1000		
-	},
-	{
-		"charge":"Assault With a Deadly Weapon (R)",
+		"charge":"Aggrevated Assault/Battery (R)",
 		"jail":20,
-		"ticket":1500		
+		"ticket":8000		
+	},
+	{
+		"charge":"Aggrevated Assault/Battery With a Lethal Weapon (R)",
+		"jail":25,
+		"ticket":10000		
 	},
 	{
 		"charge":"Involuntary Manslaughter (R)",
-		"jail":15,
-		"ticket":1000		
+		"jail":10,
+		"ticket":8500		
 	},
 	{
 		"charge":"Vehicular Manslaughter (R)",
 		"jail":15,
-		"ticket":1000		
+		"ticket":15000		
 	},
 	{
 		"charge":"Second Degree Murder (R)",
-		"jail":40,
-		"ticket":2500		
+		"jail":35,
+		"ticket":20000		
 	},
 	{
 		"charge":"First Degree Murder (R)",
-		"jail":60,
-		"ticket":3500		
+		"jail":50,
+		"ticket":100000		
 	},
 	{
 		"charge":"Unlawful Imprisonment (R)",
-		"jail":15,
-		"ticket":1000		
+		"jail":10,
+		"ticket":5000		
 	},
 	{
 		"charge":"Kidnapping (R)",
-		"jail":20,
-		"ticket":1500		
+		"jail":15,
+		"ticket":8000		
 	},
 	{
 		"charge":"Impersonation (R)",
-		"jail":20,
-		"ticket":1000		
-	},
-	{
-		"charge":"Impersonation of a Peace Officer (R)",
-		"jail":30,
-		"ticket":1500		
+		"jail":0,
+		"ticket":10000		
 	},
 	{
 		"charge":"Stalking (R)",
 		"jail":5,
-		"ticket":250		
+		"ticket":2500		
 	},
 	{
-		"charge":"Criminal Threats (R)",
-		"jail":10,
-		"ticket":500		
-	},
-	{	
-		"charge":"Second Degree Possession of a CS",
-		"jail":10,
-		"ticket":500		
-	},
-	{
-		"charge":"First Degree Possession of a CS",
-		"jail":15,
-		"ticket":750		
-	},
-	{
-		"charge":"Distribution of a CS",
-		"jail":40,
-		"ticket":1500		
-	},
-	{
-		"charge":"Possession of CS paraphenalia",
+		"charge":"Threatening (R)",
 		"jail":5,
-		"ticket":250	
-	},
-	{
-		"charge":"Petty Theft",
-		"jail":0,
-		"ticket":250		
-	},
-	{
-		"charge":"Grand Theft",
-		"jail":5,
-		"ticket":500		
-	},
-	{
-		"charge":"Joyriding",
-		"jail":10,
-		"ticket":500		
-	},
-	{
-		"charge":"Grand Theft Auto",
-		"jail":20,
 		"ticket":1000		
 	},
 	{
-		"charge":"Tampering with a Vehicle",
+		"charge":"Assault (G)",
+		"jail":10,
+		"ticket":4000		
+	},
+	{
+		"charge":"Aggrevated Assault/Battery (G)",
+		"jail":20,
+		"ticket":8000		
+	},
+	{
+		"charge":"Aggrevated Assault/Battery With a Lethal Weapon (G)",
+		"jail":25,
+		"ticket":10000		
+	},
+	{
+		"charge":"Involuntary Manslaughter (G)",
+		"jail":10,
+		"ticket":8500		
+	},
+	{
+		"charge":"Vehicular Manslaughter (G)",
+		"jail":15,
+		"ticket":15000		
+	},
+	{
+		"charge":"Second Degree Murder (G)",
+		"jail":35,
+		"ticket":20000		
+	},
+	{
+		"charge":"First Degree Murder (G)",
+		"jail":50,
+		"ticket":100000		
+	},
+	{
+		"charge":"Unlawful Imprisonment (G)",
+		"jail":10,
+		"ticket":5000		
+	},
+	{
+		"charge":"Kidnapping (G)",
+		"jail":15,
+		"ticket":8000		
+	},
+	{
+		"charge":"Impersonation (G)",
+		"jail":0,
+		"ticket":10000		
+	},
+	{
+		"charge":"Stalking (G)",
 		"jail":5,
+		"ticket":2500		
+	},
+	{
+		"charge":"Threatening (G)",
+		"jail":5,
+		"ticket":1000		
+	},
+	{
+		"charge":"Second Degree Possession of a CS",
+		"jail":5,
+		"ticket":5000		
+	},
+	{
+		"charge":"First Degree Possession of a CS",
+		"jail":7,
+		"ticket":8000		
+	},
+	{
+		"charge":"Distribution of a CS",
+		"jail":8,
+		"ticket":5000		
+	},
+	{
+		"charge":"Possession of CS paraphenalia",
+		"jail":0,
 		"ticket":500		
+	},
+	{
+<<<<<<< HEAD
+		"charge":"Grand Theft Auto",
+		"jail":20,
+		"ticket":1000		
+=======
+		"charge":"Cultivation of a controlled substance",
+		"jail":5,
+		"ticket":2500		
+>>>>>>> parent of bfbcd15... Update index.js
+	},
+	{
+		"charge":"Petty Theft",
+		"jail":5,
+		"ticket":2500		
+	},
+	{
+		"charge":"Grand Theft",
+		"jail":10,
+		"ticket":5000		
+	},
+	{
+		"charge":"Grant Theft Auto",
+		"jail":10,
+		"ticket":5000		
 	},
 	{
 		"charge":"Second Degree Robbery",
-		"jail":20,
-		"ticket":1500		
+		"jail":10,
+		"ticket":5000		
 	},
 	{
 		"charge":"First Degree Robbery",
-		"jail":45,
-		"ticket":3000		
+		"jail":30,
+		"ticket":15000		
 	},
 	{
 		"charge":"Possesion of Stolen Property",
-		"jail":10,
-		"ticket":500		
+		"jail":5,
+		"ticket":2500		
 	},
 	{
 		"charge":"Tresspassing",
@@ -205,89 +261,89 @@ var charges = [
 		"ticket":500		
 	},
 	{
-		"charge":"Vandalism",
+		"charge":"Destruction of Property",
 		"jail":0,
-		"ticket":250		
+		"ticket":5000		
 	},
 	{
-		"charge":"Vandalism of Government Property",
+		"charge":"Destruction of Government Property",
 		"jail":5,
-		"ticket":500		
+		"ticket":5000		
 	},
 	{
 		"charge":"Bribery",
-		"jail":15,
-		"ticket":750		
+		"jail":5,
+		"ticket":1500		
 	},
 	{
 		"charge":"Conspiracy to commit a crime",
-		"jail":10,
-		"ticket":500		
+		"jail":5,
+		"ticket":1500		
 	},
 	{
-		"charge":"False Reporting",
-		"jail":10,
-		"ticket":500		
+		"charge":"False report of a crime",
+		"jail":0,
+		"ticket":1000		
 	},
 	{
 		"charge":"Obstruction of Justice",
-		"jail":15,
-		"ticket":1500		
-	},
-	{
-		"charge":"Initiation of a Riot",
-		"jail":40,
+		"jail":5,
 		"ticket":2500		
 	},
 	{
+		"charge":"Initiation of a Riot",
+		"jail":15,
+		"ticket":10000		
+	},
+	{
 		"charge":"Participation in a Riot",
-		"jail":30,
-		"ticket":1500		
+		"jail":5,
+		"ticket":5000		
 	},
 	{
 		"charge":"Resisting arrest",
 		"jail":5,
-		"ticket":250		
+		"ticket":2000		
 	},
 	{
 		"charge":"Terrorism",
-		"jail":90,
-		"ticket":15000		
+		"jail":120,
+		"ticket":500000		
 	},
 	{
 		"charge":"Loitering",
 		"jail":0,
-		"ticket":250		
+		"ticket":500		
 	},
 	{
 		"charge":"Criminal Possession of a Firearm (Class 1)",
-		"jail":10,
-		"ticket":500		
-	},
-	{
-		"charge":"Criminal Possession of a Firearm (Class 2)",
-		"jail":30,
-		"ticket":2500		
-	},
-	{
-		"charge":"Criminal Sale of a Firearm (Class 1)",
-		"jail":15,
-		"ticket":750		
-	},
-	{
-		"charge":"Criminal Sale of a Firearm (Class 2)",
-		"jail":30,
-		"ticket":4250		
-	},
-	{
-		"charge":"Criminal Use of a Firearm",
-		"jail":10,
-		"ticket":500		
-	},
-	{
-		"charge":"Brandishing",
 		"jail":5,
-		"ticket":500		
+		"ticket":1500		
+	},
+	{
+		"charge":"Criminal Possession of a Firearm (Class 2/3)",
+		"jail":10,
+		"ticket":5000		
+	},
+	{
+		"charge":"Unlicensed Distribution of a Firearm (Class 1)",
+		"jail":10,
+		"ticket":5000		
+	},
+	{
+		"charge":"Unlicensed Distribution of a Firearm (Class 2/3)",
+		"jail":20,
+		"ticket":10000		
+	},
+	{
+		"charge":"First Degree Firearm Misuse",
+		"jail":15,
+		"ticket":6000		
+	},
+	{
+		"charge":"Second Degree Firearm Misuse",
+		"jail":8,
+		"ticket":3000		
 	},
 ]
 
