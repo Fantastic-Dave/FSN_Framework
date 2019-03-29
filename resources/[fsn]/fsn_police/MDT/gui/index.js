@@ -216,9 +216,15 @@ var charges = [
 	},
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
 		"charge":"Grand Theft Auto",
 		"jail":20,
 		"ticket":1000		
+=======
+		"charge":"Cultivation of a controlled substance",
+		"jail":5,
+		"ticket":2500		
+>>>>>>> parent of bfbcd15... Update index.js
 =======
 		"charge":"Cultivation of a controlled substance",
 		"jail":5,
