@@ -1,5 +1,26 @@
 picklocking = false
 items_table = {
+  ["bandage"] = {
+    display_name = 'Bandage',
+    weight = 0.4,
+    desc = 'Use this to repair yourself.',
+    use = function()
+		  if GetEntityHealth(GetPlayerPed(-1)) < 131 then
+			  TriggerEvent('fsn_inventory:item:take', 'bandage', 1)
+			  while ( not HasAnimDictLoaded( "oddjobs@assassinate@guard" ) ) do
+				  RequestAnimDict( "oddjobs@assassinate@guard" )
+				  Citizen.Wait( 5 )
+			  end
+			  TaskPlayAnim(GetPlayerPed(-1), "oddjobs@assassinate@guard", "unarmed_fold_arms", 8.0, 1.0, 2500, 2, 0, 0, 0, 0 )  
+			  Citizen.Wait(1500)
+			  SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))+15)
+	  else
+		TriggerEvent('fsn_notify:displayNotification', 'You don\'t need to use a bandage!<br>Visit an EMS personnel or a hospital to heal more.', 'centerLeft', 3500, 'error')
+	  end
+    end,
+    modelhash = -2140074399,
+    price = 500
+  },
   ["repair_kit"] = {
     display_name = 'Repair Kit',
     weight = 0.2,
