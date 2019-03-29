@@ -300,10 +300,21 @@ Citizen.CreateThread(function()
         DrawMarker(1,hosp.x,hosp.y,hosp.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
         if GetDistanceBetweenCoords(hosp.x,hosp.y,hosp.z,GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
           SetTextComponentFormat("STRING")
-        	AddTextComponentString("Press ~INPUT_PICKUP~ to see a doctor")
+		  if #onduty_ems > 0 then
+        	AddTextComponentString("Press ~INPUT_PICKUP~ to see a doctor (FREE)")
+		  else
+        	AddTextComponentString("Press ~INPUT_PICKUP~ to see a doctor ($5000)")		  
+		  end
         	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
           if IsControlJustPressed(0,38) then
-            TriggerEvent('fsn_progress:addBar', 'SEEING A DOCTOR', 30)
+			  if #onduty_ems > 0 then
+				TriggerEvent('fsn_notify:displayNotification', 'As there are no EMS, your medical bills were covered by the state.', 'centerLeft', 6000, 'info')
+				TriggerEvent('fsn_ems:reviveMe')
+			  else
+				TriggerEvent('fsn_notify:displayNotification', 'EMS were available, so your bank has been charged $5000', 'centerLeft', 6000, 'info')  
+				TriggerEvent('fsn_ems:reviveMe')
+				TriggerEvent('fsn_bank:change:bankMinus', 5000)
+			  end
           end
         end
       end
