@@ -1,5 +1,10 @@
 var charges = [
 	{
+		"charge":"Jaywalking",
+		"jail":0,
+		"ticket":150		
+	},
+	{
 		"charge":"Evading",
 		"jail":5,
 		"ticket":250		
@@ -25,7 +30,7 @@ var charges = [
 		"ticket":150		
 	},
 	{
-		"charge":"Failure to Use Turn Signal",
+		"charge":"Failure to Indicate Intention of Travel",
 		"jail":0,
 		"ticket":100		
 	},
@@ -67,91 +72,42 @@ var charges = [
 	{
 		"charge":"Driving Under the Influence",
 		"jail":5,
-		"ticket":1500		
+		"ticket":350		
 	},
 	{
 		"charge":"Assault (R)",
 		"jail":10,
-		"ticket":1000
+		"ticket":500		
 	},
 	{
 		"charge":"Assault on Peace Officer (R)",
-		"jail":10,
-		"ticket":1000
-	},
-	{
-		"charge":"Assault with a Deadly Weapon (R)",
 		"jail":15,
-		"ticket":1500
+		"ticket":1000		
 	},
 	{
-		"charge":"Battery (R)",
+		"charge":"Assault With a Deadly Weapon (R)",
 		"jail":20,
-		"ticket":1500	
-	},
-	{
-		"charge":"Battery on a Peace Officer (R)",
-		"jail":20,
-		"ticket":1500
+		"ticket":1500		
 	},
 	{
 		"charge":"Involuntary Manslaughter (R)",
 		"jail":15,
-		"ticket":2500		
+		"ticket":1000		
 	},
 	{
 		"charge":"Vehicular Manslaughter (R)",
 		"jail":15,
-		"ticket":1000
-	},
-	{
-		"charge":"Attempted Murder (R)",
-		"jail":15,
-		"ticket":2500
-	},
-	{
-		"charge":"Attempted Murder of a Peace Officer (R)",
-		"jail":15,
-		"ticket":2500
+		"ticket":1000		
 	},
 	{
 		"charge":"Second Degree Murder (R)",
-		"jail":35,
-		"ticket":3500
-	},
-	{
-		"charge":"Second Degree Murder on a Peace Officer (R)",
-		"jail":35,
-		"ticket":3500
-	},
-	{
-		"charge":"Accessory to Second Degree Murder (R)",
 		"jail":40,
-		"ticket":3000
-	{
-		"charge":"Accessory to Second Degree Murder on a Peace Officer (R)",
-		"jail":40,
-		"ticket":3000
+		"ticket":2500		
 	},
 	{
 		"charge":"First Degree Murder (R)",
-		"jail":90,
-		"ticket":50000		
-	},
-	{
-		"charge":"First Degree Murder of a Peace officer (R)",
-		"jail":90,
-		"ticket":50000
-	},
-	{
-		"charge":"Accessory to First Degree Murder (R)",
-		"jail":90,
-		"ticket":45000
-	},
-	{
-		"charge":"Accessory to First Degree Murder of a Peace Officer (R)",
-		"jail":90,
-		"ticket":45000
+		"jail":60,
+		"ticket":3500		
 	},
 	{
 		"charge":"Unlawful Imprisonment (R)",
@@ -161,12 +117,7 @@ var charges = [
 	{
 		"charge":"Kidnapping (R)",
 		"jail":20,
-		"ticket":1500				
-	},
-	{
-		"charge":"Criminal Threats (R)",
-		"jail":10,
-		"ticket":500
+		"ticket":1500		
 	},
 	{
 		"charge":"Impersonation (R)",
@@ -176,52 +127,47 @@ var charges = [
 	{
 		"charge":"Impersonation of a Peace Officer (R)",
 		"jail":30,
-		"ticket":5500		
+		"ticket":1500		
 	},
 	{
 		"charge":"Stalking (R)",
 		"jail":5,
-		"ticket":250
+		"ticket":250		
 	},
 	{
-		"charge":"Threatening (R)",
-		"jail":5,
-		"ticket":500
+		"charge":"Criminal Threats (R)",
+		"jail":10,
+		"ticket":500		
 	},
 	{	
-		"charge":"Second Degree Possession of a CDS",
+		"charge":"Second Degree Possession of a CS",
 		"jail":10,
 		"ticket":500		
 	},
 	{
-		"charge":"First Degree Possession of a CDS",
+		"charge":"First Degree Possession of a CS",
 		"jail":15,
 		"ticket":750		
 	},
 	{
-		"charge":"Drug Trafficking",
-		"jail":20,
-		"ticket":2500		
+		"charge":"Distribution of a CS",
+		"jail":40,
+		"ticket":1500		
 	},
 	{
-		"charge":"Possession of CDS paraphenalia",
-		"jail":0,
-		"ticket":500
-	},
-	{
-		"charge":"Cultivation of a controlled substance",
+		"charge":"Possession of CS paraphenalia",
 		"jail":5,
-		"ticket":1500	
+		"ticket":250	
 	},
 	{
 		"charge":"Petty Theft",
 		"jail":0,
-		"ticket":500		
+		"ticket":250		
 	},
 	{
 		"charge":"Grand Theft",
 		"jail":5,
-		"ticket":1000		
+		"ticket":500		
 	},
 	{
 		"charge":"Joyriding",
@@ -250,12 +196,12 @@ var charges = [
 	},
 	{
 		"charge":"Possesion of Stolen Property",
-		"jail":5,
+		"jail":10,
 		"ticket":500		
 	},
 	{
 		"charge":"Tresspassing",
-		"jail":5,
+		"jail":0,
 		"ticket":500		
 	},
 	{
@@ -270,7 +216,7 @@ var charges = [
 	},
 	{
 		"charge":"Bribery",
-		"jail":10,
+		"jail":15,
 		"ticket":750		
 	},
 	{
@@ -289,9 +235,14 @@ var charges = [
 		"ticket":1500		
 	},
 	{
-		"charge":"Riot",
+		"charge":"Initiation of a Riot",
 		"jail":40,
-		"ticket":2500			
+		"ticket":2500		
+	},
+	{
+		"charge":"Participation in a Riot",
+		"jail":30,
+		"ticket":1500		
 	},
 	{
 		"charge":"Resisting arrest",
@@ -300,8 +251,8 @@ var charges = [
 	},
 	{
 		"charge":"Terrorism",
-		"jail":120,
-		"ticket":50000		
+		"jail":90,
+		"ticket":15000		
 	},
 	{
 		"charge":"Loitering",
@@ -316,27 +267,17 @@ var charges = [
 	{
 		"charge":"Criminal Possession of a Firearm (Class 2)",
 		"jail":30,
-		"ticket":2500
-	},
-	{
-		"charge":"Criminal Possession of a Firearm (Class 3)",
-		"jail":40,
-		"ticket":4500
+		"ticket":2500		
 	},
 	{
 		"charge":"Criminal Sale of a Firearm (Class 1)",
-		"jail":20,
+		"jail":15,
 		"ticket":750		
 	},
 	{
 		"charge":"Criminal Sale of a Firearm (Class 2)",
-		"jail":40,
-		"ticket":2500	
-	},
-	{
-		"charge":"Criminal Sale of a Firearm (Class 3)",
-		"jail":60,
-		"ticket":5000
+		"jail":30,
+		"ticket":4250		
 	},
 	{
 		"charge":"Criminal Use of a Firearm",
@@ -346,27 +287,7 @@ var charges = [
 	{
 		"charge":"Brandishing",
 		"jail":5,
-		"ticket":500
-	},
-	{
-		"charge":"Resisting Arrest",
-		"jail":5,
-		"ticket":250
-	},
-	{
-		"charge":"Jaywalking",
-		"jail":0,
-		"ticket":150		
-	},
-	{
-		"charge":"First Weapons License",
-		"jail":0,
-		"ticket":2500
-	},
-	{
-		"charge":"Weapons License",
-		"jail":0,
-		"ticket":5000
+		"ticket":500		
 	},
 ]
 
