@@ -45,6 +45,7 @@ AddEventHandler('fsn_jail:sendme', function(time)
     progressBar = true,
     type = "info"
   })
+  TriggerEvent('fsn_hungerandthirst:pause')
 end)
 
 RegisterNetEvent('fsn_jail:releaseme')
@@ -59,6 +60,7 @@ AddEventHandler('fsn_jail:releaseme', function()
     progressBar = true,
     type = "info"
   })
+  TriggerEvent('fsn_hungerandthirst:unpause')
 end)
 
 RegisterNetEvent('fsn_jail:init')
@@ -83,6 +85,10 @@ Citizen.CreateThread(function()
     if isinjail then
       Citizen.Wait(1000)
       jailtime = jailtime - 1
+	  if GetDistanceBetweenCoords(1691.8676757813, 2606.4614257813, 45.560329437256,GetEntityCoords(GetPlayerPed(-1)), true) > 330 then
+		SetEntityCoords(GetPlayerPed(-1), 1852.42, 2603.44,45.672)
+		TriggerEvent('fsn_notify:displayNotification', 'You must stay in jail for the entirity of your sentence!', 'centerRight', 6000, 'error')
+	  end
       if jailtime <= 0 then
         TriggerEvent('fsn_jail:releaseme')
       end
@@ -90,6 +96,16 @@ Citizen.CreateThread(function()
   end
 end)
 
+--[[
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+    if isinjail then
+		DrawMarker(1,1691.8676757813, 2606.4614257813, 45.560329437256,0,0,0,0,0,0,330.001,330.0001,30.4001,0,155,255,175,0,0,0,0)
+    end
+  end
+end)
+]]--
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
