@@ -30,26 +30,9 @@ function fsn_getPlayerDrugs()
   return false
 end
 
-
-function FindNearbyPed(Distance)
-    local TargetPed
-    local Handle, Ped = FindFirstPed()
-    repeat
-        local DistanceBetween = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), GetEntityCoords(Ped), true)
-        if DoesEntityExist(Ped) and not IsPedAPlayer(Ped) and DistanceBetween <= Distance then
-            TargetPed = Ped
-        end
-
-    Success, Ped = FindNextPed(Handle)
-    until not Success
-
-    EndFindPed(Handle)
-    return TargetPed
-end
-
 Citizen.CreateThread(function()
 	while true do Citizen.Wait(0)
-		local obj = FindNearbyPed(2)
+		local obj = exports['fsn_main']:fsn_FindNearbyPed(2)
 		if obj and IsPedHuman(obj) and not table.contains(sold_peds, obj) and fsn_getPlayerDrugs() ~= false then
 			if not selling then
 				fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '[~g~E~w~] Sell ~b~'..drugs[fsn_getPlayerDrugs()].name)
