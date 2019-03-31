@@ -503,8 +503,11 @@ function CloseCreator()
 			end
 			local windowtint = tonumber(GetVehicleWindowTint(personalvehicle));
 			local wheeltype = tonumber(GetVehicleWheelType(personalvehicle));
-
-			TriggerServerEvent('fsn_cargarage:buyVehicle', GetEntityModel(personalvehicle), classname, plate, vehicle_price)
+			local model = GetEntityModel(personalvehicle)
+			if GetEntityModel(personalvehicle) == 'sanchez01' then
+				model = 'sanchez'
+			end
+			TriggerServerEvent('fsn_cargarage:buyVehicle', model, classname, plate, vehicle_price)
 			TriggerEvent('fsn_cargarage:makeMine', personalvehicle, classname, plate)
 		end
 		vehshop.opened = false
