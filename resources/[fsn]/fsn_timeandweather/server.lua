@@ -24,8 +24,7 @@ AvailableWeatherTypes = {
     'NEUTRAL',
     'FOGGY',
     'OVERCAST',
-    'CLOUDS',
-    'CLEARING',
+    'CLOUDS'
 }
 CurrentWeather = "EXTRASUNNY"
 local baseTime = 0
