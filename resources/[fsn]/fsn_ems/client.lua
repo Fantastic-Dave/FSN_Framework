@@ -1,4 +1,4 @@
-local onduty_ems = {}
+onduty_ems = {}
 local bandw = false
 local pulsing = false
 RegisterNetEvent('fsn_ems:update')
@@ -31,7 +31,7 @@ Citizen.CreateThread(function()
   end
 end)
 
-local currenttime = 0
+currenttime = 0
 local deathtime = currenttime
 local amidead = false
 
@@ -192,7 +192,8 @@ AddEventHandler('fsn_ems:updateLevel', function(emslvl)
   end
 end)
 local clockInStations = {
-{x = 1191.9343261719, y = -1474.7747802734, z = 34.859516143799}
+{x = 1191.9343261719, y = -1474.7747802734, z = 34.859516143799},
+{x = 310.27493286133, y = -599.16485595703, z = 43.291816711426}
 }
 Citizen.CreateThread(function()
   while true do
@@ -329,7 +330,7 @@ Citizen.CreateThread(function()
 		DoScreenFadeOut(1000)
 		Citizen.Wait(1500)
 		DoScreenFadeIn(1000)
-		Citizen.Wait(4000)
+		Citizen.Wait(20000)
 	end
   end
 end)
