@@ -207,6 +207,7 @@ AddEventHandler('fsn_jobs:tow:request', function(tbl)
       cx = x,
       cy = y
     })
+	TriggerEvent("fsn_main:blip:add", "tow", "ALERT: Tow Request", 317, x, y, 0.0)
     SetNotificationTextEntry("STRING");
     AddTextComponentString('Location: ~y~'..sname);
     SetNotificationMessage("CHAR_DEFAULT", "CHAR_DEFAULT", true, 1, "Tow Dispatch", "");
