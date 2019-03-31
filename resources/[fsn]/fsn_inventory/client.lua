@@ -924,9 +924,10 @@ local function fsn_FinishLaundering()
     TriggerEvent('fsn_bank:change:walletAdd', amount)
     TriggerEvent('fsn_inventory:item:take', 'dirty_money', inventory["dirty_money"].amount)
   else
-    TriggerEvent('fsn_notify:displayNotification', 'Do not try to cheat my system, get outta here, you just lost all your DM and 20k.', 'centerLeft', 4000, 'info')
-    TriggerEvent('fsn_inventory:item:take', 'dirty_money', inventory["dirty_money"].amount)
-    TriggerEvent('fsn_bank:change:walletMinus', 20000)
+    TriggerEvent('fsn_notify:displayNotification', 'This is not the amount we agreed on!', 'centerLeft', 4000, 'error')
+	TriggerEvent('chatMessage', 'Dealer', {244, 223, 66}, 'The amount of dirty money in your inventory has changed, the dealer will no longer uphold his deal. Try again later.')
+    --TriggerEvent('fsn_inventory:item:take', 'dirty_money', inventory["dirty_money"].amount)
+    --TriggerEvent('fsn_bank:change:walletMinus', 20000)
   end
 
   SetEntityAsMissionEntity( laundervan, true, true )
