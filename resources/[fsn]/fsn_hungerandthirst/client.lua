@@ -55,6 +55,17 @@ Citizen.CreateThread(function()
   end
 end)
 
+local paused = false
+RegisterNetEvent('fsn_hungerandthirst:pause')
+RegisterNetEvent('fsn_hungerandthirst:unpause')
+AddEventHandler('fsn_hungerandthirst:pause', function()
+	paused = true
+	TriggerEvent('fsn_notify:displayNotification', 'Hunger and thirst usage has been paused', 'centerRight', 3000, 'info')
+end)
+AddEventHandler('fsn_hungerandthirst:unpause', function()
+	TriggerEvent('fsn_notify:displayNotification', 'Hunger and thirst usage has been reactivated', 'centerRight', 3000, 'info')
+	paused = false
+end)
 
 local notifstarve = false
 local notifthirst = false
@@ -68,7 +79,7 @@ Citizen.CreateThread(function()
     Citizen.Wait(1000)
     clienttime = clienttime + 1
     if clienttime / 1000 == math.floor(clienttime) / 1000 and init then
-      if hunger - 0.01 <= 0 then
+      if hunger - 0.006 <= 0 then
 		local helf = GetEntityHealth(GetPlayerPed(-1))-3
 		print(helf)
 		if helf < 105 and not ded then
@@ -85,10 +96,12 @@ Citizen.CreateThread(function()
 			end
 		end
       else
-        hunger = hunger - 0.02
+		if not paused then
+			hunger = hunger - 0.02
+		end
 		notifstarve = false
       end
-      if thirst - 0.02 <= 0 then
+      if thirst - 0.007 <= 0 then
 		local helf = GetEntityHealth(GetPlayerPed(-1))-3
 		print(helf)
 		if helf < 105 and not ded then
@@ -105,7 +118,9 @@ Citizen.CreateThread(function()
 			end
 		end
       else
-        thirst = thirst - 0.05
+		if not paused then
+			thirst = thirst - 0.05
+		end
 		notifthirst = false
       end
     end
