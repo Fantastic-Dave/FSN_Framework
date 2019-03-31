@@ -1,3 +1,4 @@
+local flaggedplates = {}
 local speed_cameras = {
 	{784.353088378906,-1005.27600097656,25.6527767181396, 94.677604675293},
 	{223.694885253906,-1040.59167480469,28.8767967224121, 62.378173828125},
@@ -43,16 +44,30 @@ local speed_cameras = {
 	{-117.894187927246,-712.510620117188,34.1800765991211, 338.447174072266}
 }
 
+RegisterNetEvent('fsn_vehiclecontrol:flagged:add')
+AddEventHandler('fsn_vehiclecontrol:flagged:add', function()
+
+end)
+
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
     for k, v in pairs(speed_cameras) do
       if GetDistanceBetweenCoords(v[1], v[2], v[3], GetEntityCoords(GetPlayerPed(-1)), true) < 30 then
         if IsPedInAnyVehicle(GetPlayerPed(-1)) and GetPedInVehicleSeat(GetVehiclePedIsIn(GetPlayerPed(-1),  false), -1) == GetPlayerPed(-1) then
-          local speed = GetEntitySpeed(GetVehiclePedIsIn(GetPlayerPed(-1),  false)) * 2.236936
+		  if table.contains(flaggedplates, GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1)))) then
+			local pos = GetEntityCoords(GetPlayerPed(-1))
+		        local coords = {
+		          x = pos.x,
+		          y = pos.y,
+		          z = pos.z
+		        }
+		        TriggerServerEvent('fsn_police:dispatch', coords, 11)
+		  end
+		  local speed = GetEntitySpeed(GetVehiclePedIsIn(GetPlayerPed(-1),  false)) * 2.236936
 			    speed = math.floor(speed)
           local try = math.random(0, 100)
-          if try > 40 and speed > 90 and GetVehicleClass(GetVehiclePedIsIn(GetPlayerPed(-1),  false)) ~= 18 then
+          if try > 30 and speed > 60 and GetVehicleClass(GetVehiclePedIsIn(GetPlayerPed(-1),  false)) ~= 18 then
 						local pos = GetEntityCoords(GetPlayerPed(-1))
 		        local coords = {
 		          x = pos.x,
