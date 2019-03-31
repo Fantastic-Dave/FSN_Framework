@@ -5,6 +5,7 @@ client_script 'dispatch.lua'
 server_script 'server.lua'
 
 client_script 'radar/client.lua'
+client_script 'pedmanagement/client.lua'
 
 client_script 'MDT/mdt_client.lua'
 server_script 'MDT/mdt_server.lua'
