@@ -40,7 +40,22 @@ local pd_cars = {
   [106] = "police6",
   [107] = "police7",
   [108] = "police8",
-  [201] = "policeb",
+  [109] = "policeb",
+  --------------------
+  -- SHERIFF
+  --------------------
+  [201] = "sheriff",
+  [202] = "sheriff2",
+  [203] = "sheriff3",
+  [204] = "sheriff4",
+  [205] = "sheriff5",
+  [206] = "sheriff6",
+  [207] = "sheriff7",
+  [208] = "sheriff8",
+  [209] = "sheriff9",
+  [210] = "sheriff10",
+  [211] = "sheriff11",
+  [212] = "sheriff12",
   --------------------
   -- UNMARKED
   --------------------
