@@ -4,6 +4,7 @@ client_script 'hud/client.lua'
 client_script 'playermanager/client.lua'
 client_script 'imanager/client.lua'
 client_script 'misc/exports.lua'
+client_script 'misc/blips.lua'
 
 -- gui stuffs
 ui_page 'gui/index.html'
