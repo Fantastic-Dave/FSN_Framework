@@ -261,6 +261,7 @@ AddEventHandler('fsn_jobs:ems:request', function(tbl)
     AddTextComponentString('Location: ~y~'..sname);
     SetNotificationMessage("CHAR_DEFAULT", "CHAR_DEFAULT", true, 1, "DISPATCH", "");
     DrawNotification(false, true);
+	TriggerEvent("fsn_main:blip:add", "ems", "ALERT: EMS Request", 310, x, y, z)
   end
 end)
 Citizen.CreateThread(function()
