@@ -3,6 +3,7 @@ client_script 'initial/client.lua'
 client_script 'hud/client.lua'
 client_script 'playermanager/client.lua'
 client_script 'imanager/client.lua'
+client_script 'misc/exports.lua'
 
 -- gui stuffs
 ui_page 'gui/index.html'
@@ -25,7 +26,8 @@ server_script 'imanager/server.lua'
 -- exports
 exports {
 	"fsn_GetWallet",
-  "fsn_CharID",
+	"fsn_CharID",
+	"fsn_FindNearbyPed"
 }
 server_export 'fsn_GetPlayerFromCharacterId'
 server_export 'fsn_GetPlayerFromPhoneNumber'
