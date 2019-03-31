@@ -158,12 +158,12 @@ function messageReceived(event) {
 	}else if(event.data.type == "radioTalkingOn"){
 		if (connection.readyState == connection.OPEN && status == 3) {
 			connection.send("radioTalkingOn");
-			document.getElementById("modeext").innerHTML = " on radio";
+			//document.getElementById("modeext").innerHTML = " on radio";
 		}
 	}else if(event.data.type == "radioTalkingOff"){
 		if (connection.readyState == connection.OPEN && status == 3) {
 			connection.send("radioTalkingOff");
-			document.getElementById("modeext").innerHTML = "";
+			//document.getElementById("modeext").innerHTML = "";
 		}
 	}else if(event.data.type == "setChannel"){
 		//document.getElementById("channel").innerHTML = "radio: " + event.data.channel;
