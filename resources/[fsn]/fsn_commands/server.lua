@@ -400,6 +400,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- MISC COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/clear' or split[1] == '/104' then
+	TriggerClientEvent('fsn_main:blip:clear', source)
+  end
   if split[1] == '/emote' or split[1] == '/e' then
     if emotes.scenario[split[2]] then
       TriggerClientEvent('fsn_emotecontrol:play', source, 'scenario', emotes.scenario[split[2]])
