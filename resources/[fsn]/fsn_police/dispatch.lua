@@ -2,52 +2,68 @@ local actions = {
   [1] = {
     name = "Shots Fired",
     tencode = '10-71',
-    reward = 1000
+    reward = 1000,
+	blip = 110
   },
   [2] = {
     name = "Car Theft",
     tencode = '10-60',
-    reward = 800
+    reward = 800,
+	blip = 380
   },
   [3] = {
     name = "CDS Complaint",
     tencode = '10-31',
-    reward = 350
+    reward = 350,
+	blip = 456
   },
   [4] = {
     name = "OFFICER DOWN",
     tencode = '10-13',
-    reward = 0
+    reward = 0,
+	blip = 310
   },
   [5] = {
     name = "Officer Backup Requested",
     tencode = '10-77',
-    reward = 0
+    reward = 0,
+	blip = 60
   },
   [6] = {
     name = "EMERGENCY OFFICER BACKUP",
     tencode = '10-78',
-    reward = 0
+    reward = 0,
+	blip = 461
   },
 [7] = {
     name = 'Bank Robbery',
     tencode = '10-90',
-    reward = 500
+    reward = 500,
+	blip = 207
   },
   [8] = {
     name = 'Speeding Vehicle',
     tencode = '10-98',
-    reward = 500
+    reward = 500,
+	blip = 315
   },
   [9] = {
     name = 'EMS Request',
     tencode = '10-47',
-    reward = 500
+    reward = 500,
+	blip = 310
   },
   [10] = {
     name = "Attempted Car Theft",
     tencode = '10-60',
-    reward = 800
+    reward = 800,
+	blip = 380
+  },
+  [11] = {
+    name = "Flagged Plate Location",
+    tencode = '10-61',
+    reward = 800,
+	blip = 304
   },
 }
 local dispatch_calls = {}
@@ -102,6 +118,9 @@ function displayDispatch(x,y,z,id,chatPrint)
       SetNotificationMessage("CHAR_DEFAULT", "CHAR_DEFAULT", true, 1, "~g~DISPATCH:~s~", "");
       DrawNotification(false, true);
     end
+	if actions[id].blip ~= false then
+		TriggerEvent("fsn_main:blip:add", "police", "ALERT: "..actions[id].tencode, actions[id].blip, x, y, z)
+	end
   end
 end
 
