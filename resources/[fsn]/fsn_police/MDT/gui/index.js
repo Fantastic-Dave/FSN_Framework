@@ -215,19 +215,9 @@ var charges = [
 		"ticket":500		
 	},
 	{
-		"charge":"Grand Theft Auto",
-		"jail":20,
-		"ticket":1000		
-	},
-	{
 		"charge":"Cultivation of a controlled substance",
 		"jail":5,
 		"ticket":2500
-	},
-	{
-		"charge":"Cultivation of a controlled substance",
-		"jail":5,
-		"ticket":2500		
 	},
 	{
 		"charge":"Petty Theft",
