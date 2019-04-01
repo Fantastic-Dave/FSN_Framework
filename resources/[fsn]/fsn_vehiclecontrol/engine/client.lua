@@ -243,7 +243,6 @@ AddEventHandler('fsn_vehiclecontrol:lockpick', function()
 		end
 		if math.random(1,100) < 65 then
 			if math.random(1,100) < 40 then
-				print('telling police')
 				local pos = GetEntityCoords(GetPlayerPed(-1))
 				local coords = {
 					x = pos.x,
@@ -256,8 +255,6 @@ AddEventHandler('fsn_vehiclecontrol:lockpick', function()
 				local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(GetVehiclePedIsIn(GetPlayerPed(-1), false)))
 				local plate = GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1), false))
 				TriggerServerEvent('fsn_police:dispatch', coords, 10, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
-			else
-				print('not telling police')
 			end
 			TriggerEvent('fsn_commands:me', 'failed to hotwire the vehicle...')
 			TriggerEvent('fsn_notify:displayNotification', 'You broke the lockpick.', 'centerLeft', 5000, 'error')
@@ -287,7 +284,6 @@ AddEventHandler('fsn_vehiclecontrol:lockpick', function()
 			Citizen.Wait(6000)
 			if math.random(1,100) < 65 then
 				if math.random(1,100) < 40 then
-					print('telling police')
 					local pos = GetEntityCoords(GetPlayerPed(-1))
 					local coords = {
 						x = pos.x,
