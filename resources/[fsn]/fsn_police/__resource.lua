@@ -6,6 +6,7 @@ server_script 'server.lua'
 
 client_script 'radar/client.lua'
 client_script 'pedmanagement/client.lua'
+client_script 'evidencelocker/client.lua'
 
 client_script 'MDT/mdt_client.lua'
 server_script 'MDT/mdt_server.lua'
@@ -26,6 +27,7 @@ files({
 
 -- Server scripts
 server_script '@mysql-async/lib/MySQL.lua'
+server_script 'evidencelocker/server.lua'
 
 exports({
   'fsn_PDDuty',
