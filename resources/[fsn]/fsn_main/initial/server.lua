@@ -72,14 +72,15 @@ AddEventHandler('fsn_main:getCharacter', function(char_id)
       char_fname = char[1].char_fname,
       char_lname = char[1].char_lname,
       char_dob = char[1].char_dob,
-      char_money = char[1].char_money,
-      char_bank = char[1].char_bank,
       char_phone = char[1].char_phone,
       char_contacts = char[1].char_contacts,
       char_police = char[1].char_police,
       char_ems = char[1].char_ems,
       char_twituname = char[1].char_twituname
     })
+	
+    TriggerEvent('fsn_main:money:initChar', source, char[1].char_id, char[1].char_money, char[1].char_bank)
+	
     TriggerClientEvent('fsn_main:updateCharacters', -1, current_characters)
     TriggerEvent('fsn_main:updateCharacters', current_characters)
   else
@@ -134,154 +135,6 @@ AddEventHandler('fsn_main:updateCharNumber', function(charid, number)
   end
 end)
 
-RegisterServerEvent('fsn_main:money:Set')
-AddEventHandler('fsn_main:money:Set', function(ply, amt)
-  local indexid = 0
-  for k, v in pairs(current_characters) do
-    if v.ply_id == ply then
-      indexid = k
-    end
-  end
-  if indexid ~= 0 then
-    local character = current_characters[indexid]
-    if tonumber(amt) then
-      local newamt = tonumber(amt)
-      character.char_money = newamt
-      MySQL.Sync.execute("UPDATE `fsn_characters` SET `char_money` = @money WHERE `char_id` = @id", {['@id'] = character.char_id, ['@money'] = newamt})
-      TriggerClientEvent('fsn_main:updateCharacters', -1, current_characters)
-      TriggerClientEvent('fsn_main:gui:money:changeAmount', ply, amt)
-    else
-      print(':fsn_main: Tried to set '..ply..'s money but the amount was incorrect. ('..amt..')')
-    end
-  else
-    print(':fsn_main: Tried to set '..ply..'s money but they did not exist?')
-  end
-end)
-
-RegisterServerEvent('fsn_main:bank:Set')
-AddEventHandler('fsn_main:bank:Set', function(ply, amt)
-  local indexid = 0
-  for k, v in pairs() do
-    if v.ply_id == ply then
-      indexid = k
-    end
-  end
-  if indexid ~= 0 then
-    local character = current_characters[indexid]
-    if tonumber(amt) then
-      local newamt = tonumber(amt)
-      character.char_bank = newamt
-      MySQL.Sync.execute("UPDATE `fsn_characters` SET `char_bank` = @money WHERE `char_id` = @id", {['@id'] = character.char_id, ['@money'] = newamt})
-      TriggerClientEvent('fsn_main:updateCharacters', -1, current_characters)
-      TriggerEvent('fsn_main:updateCharacters', current_characters)
-      TriggerClientEvent('fsn_main:gui:bank:changeAmount', ply, amt)
-    else
-      print(':fsn_main: Tried to set '..ply..'s bank but the amount was incorrect. ('..amt..')')
-    end
-  else
-    print(':fsn_main: Tried to set '..ply..'s bank but they did not exist?')
-  end
-end)
-
-RegisterServerEvent('fsn_main:money:Add')
-AddEventHandler('fsn_main:money:Add', function(ply, amt)
-  local indexid = 0
-  for k, v in pairs() do
-    if v.ply_id == ply then
-      indexid = k
-    end
-  end
-  if indexid ~= 0 then
-    local character = current_characters[indexid]
-    if tonumber(amt) then
-      local newamt = character.char_money + tonumber(amt)
-      character.char_money = newamt
-      MySQL.Sync.execute("UPDATE `fsn_characters` SET `char_money` = @money WHERE `char_id` = @id", {['@id'] = character.char_id, ['@money'] = newamt})
-      TriggerClientEvent('fsn_main:updateCharacters', -1, current_characters)
-      TriggerEvent('fsn_main:updateCharacters', current_characters)
-      TriggerClientEvent('fsn_main:gui:money:addMoney', ply, amt, newamt)
-    else
-      print(':fsn_main: Tried to add money to '..ply..' but the amount was incorrect. ('..amt..')')
-    end
-  else
-    print(':fsn_main: Tried to add money to '..ply..' but they did not exist?')
-  end
-end)
-
-RegisterServerEvent('fsn_main:bank:Add')
-AddEventHandler('fsn_main:bank:Add', function(ply, amt)
-  local indexid = 0
-  for k, v in pairs() do
-    if v.ply_id == ply then
-      indexid = k
-    end
-  end
-  if indexid ~= 0 then
-    local character = current_characters[indexid]
-    if tonumber(amt) then
-      local newamt = character.char_bank + tonumber(amt)
-      character.char_bank = newamt
-      MySQL.Sync.execute("UPDATE `fsn_characters` SET `char_bank` = @money WHERE `char_id` = @id", {['@id'] = character.char_id, ['@money'] = newamt})
-      TriggerClientEvent('fsn_main:updateCharacters', -1, current_characters)
-      TriggerEvent('fsn_main:updateCharacters', current_characters)
-      TriggerClientEvent('fsn_main:gui:bank:addMoney', ply, amt, newamt)
-    else
-      print(':fsn_main: Tried to add money to '..ply..' but the amount was incorrect. ('..amt..')')
-    end
-  else
-    print(':fsn_main: Tried to add money to '..ply..' but they did not exist?')
-  end
-end)
-
-RegisterServerEvent('fsn_main:money:Minus')
-AddEventHandler('fsn_main:money:Minus', function(ply, amt)
-  local indexid = 0
-  for k, v in pairs() do
-    if v.ply_id == ply then
-      indexid = k
-    end
-  end
-  if indexid ~= 0 then
-    local character = current_characters[indexid]
-    if tonumber(amt) then
-      local newamt = character.char_money - tonumber(amt)
-      character.char_money = newamt
-      MySQL.Sync.execute("UPDATE `fsn_characters` SET `char_money` = @money WHERE `char_id` = @id", {['@id'] = character.char_id, ['@money'] = newamt})
-      TriggerClientEvent('fsn_main:updateCharacters', -1, current_characters)
-      TriggerEvent('fsn_main:updateCharacters', current_characters)
-      TriggerClientEvent('fsn_main:gui:minusMoney', ply, amt, newamt)
-    else
-      print(':fsn_main: Tried to minus money from '..ply..' but the amount was incorrect. ('..amt..')')
-    end
-  else
-    print(':fsn_main: Tried to minus money from '..ply..' but they did not exist?')
-  end
-end)
-
-RegisterServerEvent('fsn_main:bank:Minus')
-AddEventHandler('fsn_main:bank:Minus', function(ply, amt)
-  local indexid = 0
-  for k, v in pairs() do
-    if v.ply_id == ply then
-      indexid = k
-    end
-  end
-  if indexid ~= 0 then
-    local character = current_characters[indexid]
-    if tonumber(amt) then
-      local newamt = character.char_bank - tonumber(amt)
-      character.char_bank = newamt
-      MySQL.Sync.execute("UPDATE `fsn_characters` SET `char_bank` = @money WHERE `char_id` = @id", {['@id'] = character.char_id, ['@money'] = newamt})
-      TriggerClientEvent('fsn_main:updateCharacters', -1, current_characters)
-      TriggerEvent('fsn_main:updateCharacters', current_characters)
-      TriggerClientEvent('fsn_main:gui:bank:minusMoney', ply, amt, newamt)
-    else
-      print(':fsn_main: Tried to add money to '..ply..' but the amount was incorrect. ('..amt..')')
-    end
-  else
-    print(':fsn_main: Tried to add money to '..ply..' but they did not exist?')
-  end
-end)
 -------------------------------------------- inventory saving
 RegisterServerEvent('fsn_inventory:database:update')
 AddEventHandler('fsn_inventory:database:update', function(inv)
@@ -345,7 +198,7 @@ print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 print(":::::::::::::::::: FSN :: fsn_main loaded ::::::::::::::::::")
 print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 print("::::::::: FSN framework by JamesSc0tt licensed to ::::::::::")
-print("::::::::::::::: Ben Weston (elitepotato.com) :::::::::::::::")
+print(":::::::::::::::  Devyn Westfield (FusionRP)  :::::::::::::::")
 print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 print(" ")
 -------------------------------------------------------------
