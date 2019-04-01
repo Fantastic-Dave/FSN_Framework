@@ -251,19 +251,8 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
           current_character_index = k
         end
     end
-    TriggerEvent('fsn_main:gui:both:display', char.char_money, char.char_bank)
     TriggerEvent('chatMessage', '', {255,255,255}, '^1^*Warning:^r This is a beta release of the :FSN: Framework. We aren\'t expecting any bugs, but those that are found should be reported via dm to JamesSc0tt on discord or the forums.')
   end)
-end)
-
-AddEventHandler('fsn_bank:request:both', function()
-  TriggerEvent('fsn_bank:update:both', current_character.char_money, current_character.char_bank)
-end)
-
-RegisterNetEvent('fsn_main:displayBankandMoney')
-AddEventHandler('fsn_main:displayBankandMoney', function()
-  local char = current_character
-  TriggerEvent('fsn_main:gui:both:display', char.char_money, char.char_bank)
 end)
 
 RegisterNetEvent('fsn_main:sendCharacters')
@@ -325,95 +314,9 @@ end)
 RegisterNUICallback('createCharacter', function(data, cb)
   TriggerServerEvent('fsn_main:createCharacter', data)
 end)
-
--------------------------------------------- LSCustoms
-AddEventHandler("fsn_lscustoms:check",function(title, data, cost, value)
-  if current_character.char_money >= cost then
-    TriggerEvent("fsn_lscustoms:receive", source, title, data, value)
-    TriggerEvent('fsn_bank:change:walletMinus', cost)
-  else
-    TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
-  end
-end)
-
-AddEventHandler("fsn_lscustoms:check2", function(title, data, cost, value, back)
-  if current_character.char_money >= cost then
-    TriggerEvent("fsn_lscustoms:receive2", source, title, data, value, back)
-    TriggerEvent('fsn_bank:change:walletMinus', cost)
-  else
-    TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
-  end
-end)
-
-AddEventHandler("fsn_lscustoms:check3",function(title, data, cost, mod, back, name, wtype)
-  if current_character.char_money >= cost then
-    TriggerEvent("fsn_lscustoms:receive3", source, title, data, mod, back, name, wtype)
-    TriggerEvent('fsn_bank:change:walletMinus', cost)
-  else
-    TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
-  end
-end)
--------------------------------------------- Money / Bank
-RegisterNetEvent('fsn_police:search:start:money')
-AddEventHandler('fsn_police:search:start:money', function(officerid)
-  TriggerServerEvent('fsn_police:search:end:money', officerid, {wallet=current_character.char_money,bank=current_character.char_bank})
-end)
-
-AddEventHandler('fsn_bank:change:bankandwallet', function(wallet, bank)
-  if wallet == false then
-    current_character.char_money = current_character.char_money
-  else
-    current_character.char_money = wallet
-  end
-  if bank == false then
-    current_character.char_bank = current_character.char_bank
-  else
-    current_character.char_bank = bank
-  end
-  TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
-  TriggerServerEvent('fsn_bank:database:update', current_character.char_id, wallet, bank)
-end)
-
-RegisterNetEvent('fsn_bank:change:walletAdd')
-RegisterNetEvent('fsn_bank:change:walletMinus')
-AddEventHandler('fsn_bank:change:walletAdd', function(amt)
-  current_character.char_money = current_character.char_money + amt
-  TriggerServerEvent('fsn_bank:database:update', current_character.char_id, current_character.char_money + amt, false)
-  --TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
-
-  TriggerEvent('fsn_main:gui:money:change', current_character.char_money, amt)
-end)
-
-AddEventHandler('fsn_bank:change:walletMinus', function(amt)
-  current_character.char_money = current_character.char_money - amt
-	TriggerServerEvent('fsn_bank:database:update', current_character.char_id, current_character.char_money - amt, false)
-  --TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
-
-  amt = tonumber('-'..amt)
-  TriggerEvent('fsn_main:gui:money:change', current_character.char_money, amt)
-end)
-
-RegisterNetEvent('fsn_bank:change:bankAdd')
-RegisterNetEvent('fsn_bank:change:bankMinus')
-AddEventHandler('fsn_bank:change:bankAdd', function(amt)
-  current_character.char_bank = current_character.char_bank + amt
-	TriggerServerEvent('fsn_bank:database:update', current_character.char_id, false, current_character.char_bank + amt)
-  --TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
-
-  TriggerEvent('fsn_main:gui:bank:change', current_character.char_bank, amt)
-end)
-
-AddEventHandler('fsn_bank:change:bankMinus', function(amt)
-  current_character.char_bank = current_character.char_bank - amt
-  TriggerServerEvent('fsn_bank:database:update', current_character.char_id, false, current_character.char_bank - amt)
-  --TriggerServerEvent('fsn_main:update:myCharacter', current_character_index, current_character)
-
-  amt = tonumber('-'..amt)
-  TriggerEvent('fsn_main:gui:bank:change', current_character.char_bank, amt)
-end)
 -------------------------------------------- Store stuffs
 AddEventHandler('fsn_inventory:buyItem', function(item, price, amount)
-  if price <= current_character.char_money then
+  if fsn_CanAfford(price) then
     TriggerEvent('fsn_inventory:item:add', item, amount)
     TriggerEvent('fsn_bank:change:walletMinus', price)
   else
@@ -674,9 +577,6 @@ Citizen.CreateThread(function()
   end
 end)
 ------------------------------------------------------------- export stuff
-function fsn_GetWallet()
-  return current_character.char_money
-end
 function fsn_CharID()
   return current_character.char_id
 end
@@ -685,6 +585,6 @@ print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 print(":::::::::::::::::: FSN :: fsn_main loaded ::::::::::::::::::")
 print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 print("::::::::: FSN framework by JamesSc0tt licensed to ::::::::::")
-print("::::::::::: *************** (elitepotato.com) :::::::::::")
+print("::::::::::: ****************** (Fusion Roleplay) :::::::::::")
 print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 print(" ")
