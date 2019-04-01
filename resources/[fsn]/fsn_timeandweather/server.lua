@@ -19,12 +19,7 @@ debugprint = false -- don't touch this unless you know what you're doing or you'
 
 -------------------- DON'T CHANGE THIS --------------------
 AvailableWeatherTypes = {
-    'EXTRASUNNY',
-    'CLEAR',
-    'NEUTRAL',
-    'FOGGY',
-    'OVERCAST',
-    'CLOUDS'
+    'EXTRASUNNY'
 }
 CurrentWeather = "EXTRASUNNY"
 local baseTime = 0
