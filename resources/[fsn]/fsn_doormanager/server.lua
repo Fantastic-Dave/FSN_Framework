@@ -41,7 +41,18 @@ local policeDoors = {
   [21] = { ["objName"] = 741314661, ["x"]= 1818.539, ["y"]= 2604.791, ["z"]= 44.607,["locked"]= true,["txtX"]= 1818.616,["txtY"]=2605.176,["txtZ"]=45.570},
   -- Prison Left gate
   [22] = { ["objName"] = -1156020871, ["x"]= 1797.760, ["y"]= 2596.564, ["z"]= 46.387,["locked"]= true,["txtX"]= 1797.760,["txtY"]=2596.564,["txtZ"]=46.387},
-
+  -- PD lower first left
+  [22] = { ["objName"] = -131296141, ["x"]= 465.595, ["y"]=-988.704, ["z"]=25.067,["locked"]= true,["txtX"]=465.454,["txtY"]=-989.748,["txtZ"]=24.914},
+  -- PD lower first right
+  [23] = { ["objName"] = -131296141, ["x"]= 465.572, ["y"]=-991.300, ["z"]=25.067,["locked"]= true,["txtX"]=465.644,["txtY"]=-990.323,["txtZ"]=24.914},
+  -- PD lower evidence room
+  [24] = { ["objName"] = -131296141, ["x"]= 478.422, ["y"]=-987.247, ["z"]=25.086,["locked"]= true,["txtX"]=477.240,["txtY"]=-987.244,["txtZ"]=24.914},
+  -- PD lower question room 1 
+  [25] = { ["objName"] = -131296141, ["x"]= 468.733, ["y"]=-992.748, ["z"]=25.086,["locked"]= true,["txtX"]=467.578,["txtY"]=-992.787,["txtZ"]=24.914},
+  -- PD lower question room 2 
+  [26] = { ["objName"] = -131296141, ["x"]= 470.339, ["y"]=-993.660, ["z"]=25.086,["locked"]= true,["txtX"]=470.345,["txtY"]=-994.923,["txtZ"]=24.914},
+  -- PD lower jailing room
+  [27] = { ["objName"] = -131296141, ["x"]= 469.465, ["y"]=-987.247, ["z"]=25.086,["locked"]= true,["txtX"]=470.668,["txtY"]=-987.193,["txtZ"]=24.914},
 }
 local propertyDoors = {}
 
