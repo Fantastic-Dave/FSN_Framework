@@ -32,6 +32,9 @@ server_script 'inventory/server.lua'
 -- CARWASH
 client_script 'carwash/client.lua'
 
+-- HOLDUP
+client_script 'holdup/client.lua'
+
 exports({
   'GetVehicleInventory'
 })
