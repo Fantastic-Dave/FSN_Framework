@@ -24,6 +24,9 @@ server_script 'taxi/server.lua'
 -- tow job
 client_script 'tow/client.lua'
 
+-- delivery job
+--client_script 'delivery/client.lua'
+
 exports({
   'fsn_GetJob',
   'fsn_SetJob'
