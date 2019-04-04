@@ -109,22 +109,13 @@ AddEventHandler('fsn_licenses:police:give', function(type)
 end)
 
 function fsn_hasLicense(type)
-  if type == 'driver' then
-    if licenses["driver"] then
-      return true
-    end
-  elseif type == 'pilot' then
-    if licenses["pilot"] then
-      return true
-    end
-  elseif type == 'weapon' then
-    if licenses["weapon"] then
-      return true
-    end
+  print('checking license type: '..tostring(type))
+  if licenses[type] then
+    return true
+  else
+    return false
   end
-  return false
 end
-
 
 ---------------------------------------------------------- BUY PLACE
 local blip = {x = 237.59239196777, y = -406.15228271484, z = 47.924365997314}

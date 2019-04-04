@@ -23,7 +23,7 @@ local crafting_stations = {
       title = 'Weed Crafting',
       id = 496
     },
-    loc = {x = 1968.2893066406, y = 3821.7421875, z = 32.396980285645},
+    loc = {x = 1273.991, y = -1711.7100, z = 54.771},
     cost = 200,
     required = {
       item = '2g_weed',
@@ -61,7 +61,7 @@ local crafting_stations = {
       title = 'Meth Crafting',
       id = 403
     },
-    loc = {x = 1391.9617919922, y = 3606.8315429688, z = 38.941932678223},
+    loc = {x = -586.707, y = -1601.208, z = 27.010},
     cost = 50,
     required = {
       item = 'acetone',

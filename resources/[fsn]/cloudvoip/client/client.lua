@@ -1,3 +1,9 @@
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+    NetworkSetVoiceActive(false)
+	end
+end)
 ---------------------------------------- SOURCE
 local playerList = {}
 local userData = {}
@@ -121,12 +127,12 @@ function init()
 							type = "setChannel",
 							channel = "lspd"
 						})
-					else 
+					else
 						TriggerServerEvent("addUserToRadioChannel", "bcso", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 						SendNUIMessage({
 							type = "setChannel",
 							channel = "lspd"
-						})					
+						})
 					end
 				elseif(IsControlPressed(0, Keys["LEFTSHIFT"]) and IsControlJustPressed(0, Keys["F9"])) then --leave radios hotkey
 					if(radioChannels["lspd"].users[tostring(localClientID)] == 1) then
@@ -283,7 +289,7 @@ Citizen.CreateThread(function()
 	for k, v in pairs(radioChannels) do
 		if v.users[tostring(localClientID)] then
 			if DecorGetInt(GetPlayerPed(-1), "radio:talking") == 1 then
-				drawTxt(UI.x + 0.517, UI.y + 1.409, 1.0,1.0,0.4, v.name, 66, 220, 244, 255)		
+				drawTxt(UI.x + 0.517, UI.y + 1.409, 1.0,1.0,0.4, v.name, 66, 220, 244, 255)
 			else
 				drawTxt(UI.x + 0.517, UI.y + 1.409, 1.0,1.0,0.4, v.name, 255, 255, 255, 255)
 			end

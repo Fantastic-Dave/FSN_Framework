@@ -1,5 +1,8 @@
 resource_manifest_version '05cfa83c-a124-4cfa-a768-c24a5811d8f9'
 
+--[[
+--All items unpacked
+
 client_scripts {
     "Utils.lua",
     "elements/UIResRectangle.lua",
@@ -20,8 +23,10 @@ client_scripts {
     "panels/UIMenuPercentagePanel.lua",
     "UIMenu.lua",
     "MenuPool.lua",
-    "fsn_admin/a_menu.lua"
+    "MenuExample.lua",
 }
 
+--All items packed
+--]]
 
---client_script "NativeUI.lua"
+client_script "NativeUI.lua"

@@ -96,8 +96,5 @@ Citizen.CreateThread(function()
         if IsControlJustPressed(1, 51) then
             mainMenu:Visible(not mainMenu:Visible())
         end
-		if IsControlJustReleased(1, 51) then
-            mainMenu:Visible(not mainMenu:Visible())
-        end
     end
 end)
