@@ -523,6 +523,7 @@ $(function() {
                 }
             }
         }
+		/*
 		if (event.data.addDispatch) {
 			var apstring = '<tr>'+
 				'<td>'+timeNow()+'</td>'+
@@ -534,6 +535,7 @@ $(function() {
 			$('#dispatch-table').append(apstring)
 			init() 
 		}
+		*/
     });
 })
 

@@ -1,7 +1,7 @@
-local inbed = false
-local mybed = 0 
+inbed = false
+mybed = 0 
 local mycharge = 0
-local beds = {
+beds = {
 	{
 		enter = {x = 333.70169067383, y = -579.32836914063, z = 43.317234039307},
 		bed = {x = 334.14465332031, y = -578.15869140625, z = 44.009075164795, h = 160.98306274414},
@@ -117,6 +117,9 @@ Citizen.CreateThread(function()
 						for k, v in pairs(beds) do
 							if not v.occupied[1] and not inbed then
 								TriggerServerEvent('fsn_ems:bed:occupy', k)
+								if fsn_IsDead() then
+									TriggerEvent('fsn_ems:reviveMe')
+								end
 								DoScreenFadeOut(1000)
 								Citizen.Wait(1010)
 								SetEntityCoords(GetPlayerPed(-1), v.bed.x, v.bed.y, v.bed.z)
@@ -179,6 +182,9 @@ Citizen.CreateThread(function()
 						fsn_drawText3D(v.enter.x, v.enter.y, v.enter.z, "[E] Enter bed", 255, 255, 255)
 						if IsControlJustPressed(0, 51) then
 							TriggerServerEvent('fsn_ems:bed:occupy', k)
+							if fsn_IsDead() then
+								TriggerEvent('fsn_ems:reviveMe')
+							end
 							DoScreenFadeOut(1000)
 							Citizen.Wait(1010)
 							SetEntityCoords(GetPlayerPed(-1), v.bed.x, v.bed.y, v.bed.z)

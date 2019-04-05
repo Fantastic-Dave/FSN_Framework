@@ -17,9 +17,7 @@ talkDistance[1] = 15
 talkDistance[2] = 2
 talkDistance[3] = 40
 local radioChannels = {
-	["lspd"] = {name = "[LSPD]", users = {}},
-	["bcso"] = {name = "[BCSO]", users = {}},
-	["shared"] = {name = "[SHARED]", users = {}},
+	["leo"] = {name = "[LEO]", users = {}},
 	["ems"] = {name = "[EMS]", users = {}},
 }
 local modeNames = {}
@@ -95,17 +93,17 @@ function init()
 					})
 				end
 			end
-			if(true)then
+			if exports["fsn_police"]:fsn_PDDuty() or exports["fsn_ems"]:fsn_EMSDuty() then
 				-- ADD PD or EMS CHECK to join radio
 				if(not IsControlPressed(0, Keys["LEFTSHIFT"]) and IsControlJustPressed(0, Keys["F9"]))then--join/switch radio hotkey
-					if(radioChannels["lspd"].users[tostring(localClientID)] == 1) then
-						TriggerServerEvent("addUserToRadioChannel", "bcso", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
-						TriggerServerEvent("removeUserFromRadioChannel", "lspd", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
+					if(radioChannels["ems"].users[tostring(localClientID)] == 1) then
+						TriggerServerEvent("addUserToRadioChannel", "leo", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
+						TriggerServerEvent("removeUserFromRadioChannel", "ems", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 						SendNUIMessage({
 							type = "setChannel",
-							channel = "bcso"
+							channel = "leo"
 						})
-						print 'im in pd'
+					--[[
 					elseif(radioChannels["bcso"].users[tostring(localClientID)] == 1) then
 						TriggerServerEvent("addUserToRadioChannel", "shared", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 						TriggerServerEvent("removeUserFromRadioChannel", "bcso", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
@@ -127,23 +125,27 @@ function init()
 							type = "setChannel",
 							channel = "lspd"
 						})
+					]]
 					else
-						TriggerServerEvent("addUserToRadioChannel", "bcso", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
+						TriggerServerEvent("addUserToRadioChannel", "ems", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
+						TriggerServerEvent("removeUserFromRadioChannel", "leo", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 						SendNUIMessage({
 							type = "setChannel",
-							channel = "lspd"
+							channel = "ems"
 						})
 					end
 				elseif(IsControlPressed(0, Keys["LEFTSHIFT"]) and IsControlJustPressed(0, Keys["F9"])) then --leave radios hotkey
-					if(radioChannels["lspd"].users[tostring(localClientID)] == 1) then
-						TriggerServerEvent("removeUserFromRadioChannel", "lspd", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
+					if(radioChannels["leo"].users[tostring(localClientID)] == 1) then
+						TriggerServerEvent("removeUserFromRadioChannel", "leo", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 					end
+					--[[
 					if(radioChannels["bcso"].users[tostring(localClientID)] == 1) then
 						TriggerServerEvent("removeUserFromRadioChannel", "bcso", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 					end
 					if(radioChannels["shared"].users[tostring(localClientID)] == 1) then
 						TriggerServerEvent("removeUserFromRadioChannel", "shared", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 					end
+					]]
 					if(radioChannels["ems"].users[tostring(localClientID)] == 1) then
 						TriggerServerEvent("removeUserFromRadioChannel", "ems", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 					end

@@ -25,7 +25,7 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
     if IsEntityDead(GetPlayerPed(-1)) then
-      SetEntityHealth(GetPlayerPed(-1), GetEntityMaxHealth(GetPlayerPed(-1)))
+      SetEntityHealth(GetPlayerPed(-1), 105)
       TriggerEvent('fsn_ems:killMe')
     end
   end
@@ -38,6 +38,17 @@ local amidead = false
 function fsn_IsDead()
   return amidead
 end
+--fsn_ems:reviveMe:force
+RegisterNetEvent('fsn_ems:reviveMe:force')
+AddEventHandler('fsn_ems:reviveMe:force', function()
+  amidead = false
+  deathtime = 0
+  NetworkResurrectLocalPlayer(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 0, false, false)
+  TriggerEvent('fsn_inventory:use:drink', 100)
+  TriggerEvent('fsn_inventory:use:food', 100)
+  ClearTimecycleModifier()
+  SetEntityHealth(GetPlayerPed(-1), GetEntityMaxHealth(GetPlayerPed(-1)))
+end)
 
 RegisterNetEvent('fsn_ems:reviveMe')
 AddEventHandler('fsn_ems:reviveMe', function()
@@ -47,6 +58,13 @@ AddEventHandler('fsn_ems:reviveMe', function()
   TriggerEvent('fsn_inventory:use:drink', 100)
   TriggerEvent('fsn_inventory:use:food', 100)
   ClearTimecycleModifier()
+  SetEntityHealth(GetPlayerPed(-1), 105)
+  if inbed then
+    SetEntityHealth(GetPlayerPed(-1), GetEntityMaxHealth(GetPlayerPed(-1)))
+	SetEntityCoords(GetPlayerPed(-1), beds[mybed].bed.x, beds[mybed].bed.y, beds[mybed].bed.z)
+	SetEntityHeading(GetPlayerPed(-1), beds[mybed].bed.h)
+	ExecuteCommand("e sleep")
+  end
 end)
 
 RegisterNetEvent('fsn_ems:killMe')

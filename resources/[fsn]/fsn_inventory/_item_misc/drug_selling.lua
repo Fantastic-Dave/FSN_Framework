@@ -53,7 +53,9 @@ Citizen.CreateThread(function()
 						  SetEntityAsMissionEntity(obj, true, true)
 						  ClearPedTasksImmediately(obj)
 						  SetEntityAsNoLongerNeeded(obj)
-						  TaskPlayAnim(obj, 'cellphone@', 'cellphone_call_listen_base', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
+						  if math.random(0,100) > 70 then
+							TaskPlayAnim(obj, 'cellphone@', 'cellphone_call_listen_base', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
+						  end
 						  Citizen.Wait(1000)
 						  if not IsEntityDead(obj) then
 							local pos = GetEntityCoords(obj)

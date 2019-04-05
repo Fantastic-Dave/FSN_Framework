@@ -245,7 +245,7 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
     TriggerEvent('fsn_police:init', char.char_police)
     TriggerEvent('fsn_jail:init', char.char_id)
     TriggerEvent('fsn_inventory:initChar', char.char_inventory)
-	TriggerEvent('fsn_ems:reviveMe')
+	TriggerEvent('fsn_ems:reviveMe:force')
     for k, v in pairs(current_characters) do
         if v.char_id == current_character_id then
           current_character_index = k

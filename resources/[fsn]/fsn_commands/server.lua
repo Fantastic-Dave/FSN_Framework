@@ -22,11 +22,13 @@ function fsn_SplitString(inputstr, sep)
     return t
 end
 local ems_cars = {
-  [1] = "firetruk",
-  [2] = "ambulance",
-  [3] = "ems2",
-  [4] = "ems3",
-  [5] = "battalion",
+  [1] = "engine",
+  [2] = "fbi3",
+  [3] = "fire1",
+  [4] = "fire3",
+  [5] = "ambulance",
+  [6] = "fire2",
+  [7] = "firetruk",
 }
 local pd_cars = {
   --------------------

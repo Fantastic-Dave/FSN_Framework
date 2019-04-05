@@ -1,3 +1,34 @@
+local huntingzones = {
+{x = -2331.1481933594, y = 1317.0661621094, z = 329.26376342773},
+{x = 1150.9182128906, y = 5711.0874023438, z = 503.03448486328},
+{x = 2260.9885253906, y = -1772.0008544922, z = 120.99961853027}
+}
+local canhunt = false
+Citizen.CreateThread(function()
+  for k, v in pairs(huntingzones) do
+	  local bleep = AddBlipForCoord(v.x, v.y, v.z)
+	  SetBlipSprite(bleep, 10)
+	  SetBlipColour(bleep, 1)
+	  SetBlipScale(bleep, 0.8)
+	  SetBlipAsShortRange(bleep, true)
+	  BeginTextCommandSetBlipName("STRING")
+		AddTextComponentString("Hunting Zone")
+	  EndTextCommandSetBlipName(bleep)
+  end
+  while true do
+	Citizen.Wait(0)
+	for k, v in pairs(huntingzones) do
+		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), false) < 200 then
+			canhunt = true
+		else
+			if canhunt then
+				canhunt = false
+			end
+		end
+	end
+  end
+end)
+
 local animal = -1
 local droppeditems = {}
 local hashes = {
@@ -119,11 +150,19 @@ Citizen.CreateThread(function()
       if GetDistanceBetweenCoords(GetEntityCoords(v[1]), GetEntityCoords(GetPlayerPed(-1)), true) < 5 then
         if v[2] == nil then
           if not harvesting then
-            fsn_drawText3D(GetEntityCoords(v[1]).x,GetEntityCoords(v[1]).y,GetEntityCoords(v[1]).z, 'Press [~g~E~w~] to harvest')
+			if canhunt then
+				fsn_drawText3D(GetEntityCoords(v[1]).x,GetEntityCoords(v[1]).y,GetEntityCoords(v[1]).z, 'Press [~g~E~w~] to harvest')
+			else
+				fsn_drawText3D(GetEntityCoords(v[1]).x,GetEntityCoords(v[1]).y,GetEntityCoords(v[1]).z, '~r~Not in hunting zone')
+			end
             if IsControlJustPressed(0,51) then
-              TaskStartScenarioInPlace(GetPlayerPed(-1), "CODE_HUMAN_MEDIC_KNEEL", 0, 1)
-              harvesting = true
-              harvestingstart = GetNetworkTime()
+			  if canhunt then
+				  TaskStartScenarioInPlace(GetPlayerPed(-1), "CODE_HUMAN_MEDIC_KNEEL", 0, 1)
+				  harvesting = true
+				  harvestingstart = GetNetworkTime()
+			  else
+				fsn_drawText3D(GetEntityCoords(v[1]).x,GetEntityCoords(v[1]).y,GetEntityCoords(v[1]).z, '~r~Not in hunting zone')
+			  end
             end
           else
             fsn_drawText3D(GetEntityCoords(v[1]).x,GetEntityCoords(v[1]).y,GetEntityCoords(v[1]).z, 'Harvesting...')

@@ -1,10 +1,12 @@
 local crafting_stations = {
   ------------ WEED
   {
+	--[[
     blip = {
       title = 'Weed Farming',
       id = 496
     },
+	]]
     loc = {x = 2219.7758789063, y = 5577.4584960938, z = 53.845291137695},
     cost = 0,
     required = {
@@ -19,10 +21,12 @@ local crafting_stations = {
     }
   },
   {
+	--[[
     blip = {
       title = 'Weed Crafting',
       id = 496
     },
+	]]
     loc = {x = 1273.991, y = -1711.7100, z = 54.771},
     cost = 200,
     required = {
@@ -39,10 +43,12 @@ local crafting_stations = {
 
   ------------ METH
   {
+	--[[
     blip = {
       title = 'Meth Farming',
       id = 403
     },
+	]]
     loc = {x = 3623.6965332031, y = 3738.8859863281, z = 28.690086364746},
     cost = 0,
     required = {
@@ -56,11 +62,13 @@ local crafting_stations = {
       amount = 2
     }
   },
-  {
+  {	
+	--[[
     blip = {
       title = 'Meth Crafting',
       id = 403
     },
+	]]
     loc = {x = -586.707, y = -1601.208, z = 27.010},
     cost = 50,
     required = {
@@ -75,10 +83,12 @@ local crafting_stations = {
     }
   },
   {
+	--[[
     blip = {
       title = 'Meth Cooking',
       id = 403
     },
+	]]
     loc = {x = 2431.5795898438, y = 4963.7548828125, z = 42.347560882568},
     cost = 200,
     required = {
@@ -94,10 +104,12 @@ local crafting_stations = {
   },
   ------------ Burgers
   {
+	--[[
     blip = {
       title = 'Burger Manufacturing',
       id = 273
     },
+	]]
     loc = {x = 974.915, y = -2120.97, z = 31.3902},
     cost = 0,
     required = {
@@ -112,10 +124,12 @@ local crafting_stations = {
     }
   },
   {
+	--[[
     blip = {
       title = 'Burger Stand',
       id = 467
     },
+	]]
     loc = {x = -1856.4829101563, y = -1224.6036376953, z = 13.017220497131},
     cost = 100,
     required = {
@@ -133,15 +147,17 @@ local crafting_stations = {
 
 Citizen.CreateThread(function()
   for k, v in pairs(crafting_stations) do
-    local bleep = AddBlipForCoord(v.loc.x, v.loc.y, v.loc.z)
-    SetBlipSprite(bleep, v.blip.id)
-    SetBlipDisplay(bleep, 4)
-    SetBlipScale(bleep, 1.0)
-    SetBlipColour(bleep, 4)
-    SetBlipAsShortRange(bleep, true)
-    BeginTextCommandSetBlipName("STRING")
-    AddTextComponentString(v.blip.title)
-    EndTextCommandSetBlipName(bleep)
+	if v.blip then
+		local bleep = AddBlipForCoord(v.loc.x, v.loc.y, v.loc.z)
+		SetBlipSprite(bleep, v.blip.id)
+		SetBlipDisplay(bleep, 4)
+		SetBlipScale(bleep, 1.0)
+		SetBlipColour(bleep, 4)
+		SetBlipAsShortRange(bleep, true)
+		BeginTextCommandSetBlipName("STRING")
+		AddTextComponentString(v.blip.title)
+		EndTextCommandSetBlipName(bleep)
+	end
   end
   while true do
     Citizen.Wait(0)
