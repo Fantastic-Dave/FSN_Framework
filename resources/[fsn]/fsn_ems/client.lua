@@ -1,13 +1,3 @@
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if GetEntityHealth(GetPlayerPed(-1)) < 103 or IsEntityDead(GetPlayerPed(-1)) then
-      SetEntityHealth(GetPlayerPed(-1), GetEntityMaxHealth(GetPlayerPed(-1)))
-      TriggerEvent('fsn_ems:killMe')
-    end
-  end
-end)
-
 onduty_ems = {}
 local bandw = false
 local pulsing = false
@@ -31,6 +21,16 @@ function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
   DrawText(x , y)
 end
 
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+    if IsEntityDead(GetPlayerPed(-1)) then
+      SetEntityHealth(GetPlayerPed(-1), 150)
+      TriggerEvent('fsn_ems:killMe')
+    end
+  end
+end)
+
 currenttime = 0
 local deathtime = currenttime
 local amidead = false
@@ -42,7 +42,6 @@ end
 RegisterNetEvent('fsn_ems:reviveMe:force')
 AddEventHandler('fsn_ems:reviveMe:force', function()
   amidead = false
-  pulsing = false
   deathtime = 0
   NetworkResurrectLocalPlayer(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 0, false, false)
   TriggerEvent('fsn_inventory:use:drink', 100)
@@ -54,7 +53,6 @@ end)
 RegisterNetEvent('fsn_ems:reviveMe')
 AddEventHandler('fsn_ems:reviveMe', function()
   amidead = false
-  pulsing = false
   deathtime = 0
   NetworkResurrectLocalPlayer(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 0, false, false)
   TriggerEvent('fsn_inventory:use:drink', 100)
