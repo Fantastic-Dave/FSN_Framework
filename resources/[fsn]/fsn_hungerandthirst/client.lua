@@ -97,7 +97,7 @@ Citizen.CreateThread(function()
 		end
       else
 		if not paused then
-			hunger = hunger - 0.02
+			hunger = hunger - 0.005
 		end
 		notifstarve = false
       end
@@ -119,7 +119,7 @@ Citizen.CreateThread(function()
 		end
       else
 		if not paused then
-			thirst = thirst - 0.05
+			thirst = thirst - 0.01
 		end
 		notifthirst = false
       end
