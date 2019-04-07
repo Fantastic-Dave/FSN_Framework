@@ -81,7 +81,7 @@ AddEventHandler('fsn_commands:clothing:hat', function()
 	else
 		hat.id = GetPedPropIndex(GetPlayerPed(-1), 0)
 		hat.txt = GetPedPropTextureIndex(GetPlayerPed(-1), 0)
-		SetPedPropIndex(GetPlayerPed(-1), 0, 8, 0, true)
+		SetPedPropIndex(GetPlayerPed(-1), 0, 11, 0, true)
 		---
 		local pos = GetEntityCoords(GetPlayerPed(-1))
 		local players = fsn_NearestPlayersS(pos.x, pos.y, pos.z, 10)
