@@ -53,6 +53,7 @@ end)
 RegisterNetEvent('fsn_ems:reviveMe')
 AddEventHandler('fsn_ems:reviveMe', function()
   amidead = false
+  pulsing = false
   deathtime = 0
   NetworkResurrectLocalPlayer(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 0, false, false)
   TriggerEvent('fsn_inventory:use:drink', 100)
