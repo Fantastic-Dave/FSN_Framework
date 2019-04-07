@@ -89,7 +89,14 @@ Citizen.CreateThread( function()
 end )
 
 local storekeepers = {
-	{x = -705.81408691406, y = -914.63317871094, z = 19.215587615967, h = 88.849708557129, ped = false}
+	{x = -705.81408691406, y = -914.63317871094, z = 19.215587615967, h = 88.849708557129, ped = false},
+	{x = -46.755832672119, y = -1758.6920166016, z = 29.421007156372, h = 50.685424804688, ped = false},
+	{x = 24.2922706604, y = -1347.4547119141, z = 29.497022628784, h = 270.94165039063, ped = false},
+	{x = -1222.3319091797, y = -908.91625976563, z = 12.326347351074, h = 26.143705368042, ped = false},
+	{x = -1486.1457519531, y = -377.66079711914, z = 40.163425445557, h = 139.18792724609, ped = false},
+	{x = 372.76062011719, y = 328.07223510742, z = 103.56637573242, h = 249.64683532715, ped = false},
+	{x = 1164.9409179688, y = -323.45886230469, z = 69.205146789551, h = 97.392929077148, ped = false},
+	{x = 1133.9039306641, y = -982.02099609375, z = 46.415802001953, h = 271.70544433594, ped = false}
 }	
 local robbing = false
 local robbingstart = 0
@@ -118,11 +125,12 @@ Citizen.CreateThread(function()
 					if IsPlayerFreeAiming(PlayerId()) and IsPlayerFreeAimingAtEntity(PlayerId(), v.ped) then
 						if robbing then
 							TaskStandStill(v.ped, 3000)
+							TaskCower(v.ped, 3000)
 							if not IsEntityPlayingAnim(v.ped, 'random@mugging3', "handsup_standing_base", 3) then
 								RequestAnimDict('random@mugging3')
 								TaskPlayAnim(v.ped, "random@mugging3", "handsup_standing_base", 4.0, -4, -1, 49, 0, 0, 0, 0)
 							end
-							local maff = robbingstart + 15
+							local maff = robbingstart + 60
 							if maff < curtime then
 								robbing = false
 								TriggerEvent('fsn_bank:change:walletAdd', math.random(50, 600))
@@ -134,6 +142,8 @@ Citizen.CreateThread(function()
 							if quickmaff < curtime or lastrob == 0 then
 								if math.random(0,100) > 20 then
 									TaskStandStill(v.ped, 3000)
+									TaskCower(v.ped, 3000)
+									SetPedSweat(v.ped, 100.0)
 									robbing = true
 									TriggerEvent('fsn_notify:displayNotification', 'Robbing...', 'centerLeft', 6000, 'info')
 									robbingstart = curtime
@@ -173,11 +183,15 @@ Citizen.CreateThread(function()
 								 z = pos.z
 								}
 								TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-90 | Attempted armed store robbery')
-								Citizen.Wait(2000)
+								Citizen.Wait(6000)
 							end 
 						end
 					else
-						robbing = false
+						if robbing then
+							TriggerEvent('fsn_notify:displayNotification', 'You failed...', 'centerLeft', 6000, 'error')
+							robbing = false
+							Citizen.Wait(6000)
+						end
 					end
 				else
 					if GetClosestObjectOfType(v.x, v.y, v.z, 1.0, 416176080, false, false, false) then
