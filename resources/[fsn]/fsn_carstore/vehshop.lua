@@ -317,6 +317,7 @@ local vehshop_blips ={}
 local inrangeofvehshop = false
 local currentlocation = nil
 local boughtcar = false
+local ibought = ''
 
 local function LocalPed()
 return GetPlayerPed(-1)
@@ -503,11 +504,7 @@ function CloseCreator()
 			end
 			local windowtint = tonumber(GetVehicleWindowTint(personalvehicle));
 			local wheeltype = tonumber(GetVehicleWheelType(personalvehicle));
-			local model = GetEntityModel(personalvehicle)
-			if GetEntityModel(personalvehicle) == 'sanchez01' then
-				model = 'sanchez'
-			end
-			TriggerServerEvent('fsn_cargarage:buyVehicle', model, classname, plate, vehicle_price)
+			TriggerServerEvent('fsn_cargarage:buyVehicle', ibought, ibought, plate, vehicle_price)
 			TriggerEvent('fsn_cargarage:makeMine', personalvehicle, classname, plate)
 		end
 		vehshop.opened = false
@@ -753,6 +750,7 @@ function ButtonSelected(button)
 		if tonumber(exports.fsn_main:fsn_GetWallet()) >= button.costs then
 			vehicle_price = button.costs
 			boughtcar = true
+			ibought = button.model
 			TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 			CloseCreator()
 		else
