@@ -386,6 +386,22 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     local action = table.concat( split, ' ', 2, #split )
     TriggerClientEvent('fsn_commands:me', source, action)
   end
+  if split[1] == '/roll' or split[1] == '/dice' then
+	if split[2] then
+		if tonumber(split[2]) then
+			if tonumber(split[2]) < 2 or tonumber(split[2]) > 12 then
+				TriggerClientEvent('fsn_notify:displayNotification', source, 'Provide a number between 2-12', 'centerRight', 4000, 'error')
+			else
+				local num = math.random(1, tonumber(split[2]))
+				TriggerClientEvent('fsn_commands:me', source, 'rolled a dice: '..num..' / '..split[2])
+			end
+		else
+			TriggerClientEvent('fsn_notify:displayNotification', source, 'Arguments need to be a number', 'centerRight', 4000, 'error')
+		end
+	else
+		TriggerClientEvent('fsn_notify:displayNotification', source, 'Provide a number between 2-12', 'centerRight', 4000, 'error')
+	end
+  end
   if split[1] == '/ooc' or split[1] == '/looc' then
     local action = table.concat( split, ' ', 2, #split )
     TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*ooc '..GetPlayerName(source)..'#'..source..' | ^r'.. action)
