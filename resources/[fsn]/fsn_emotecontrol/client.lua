@@ -870,12 +870,14 @@ end
 -----------------------
 RegisterNetEvent('fsn_emotecontrol:phone:call1')
 AddEventHandler('fsn_emotecontrol:phone:call1', function()
-	while not HasAnimDictLoaded('cellphone@') do
-		RequestAnimDict('cellphone@')
-		Citizen.Wait(5)
+	if not IsPedInAnyVehicle(GetPlayerPed(-1)) then
+		while not HasAnimDictLoaded('cellphone@') do
+			RequestAnimDict('cellphone@')
+			Citizen.Wait(5)
+		end
+		ClearPedTasksImmediately(GetPlayerPed(-1))
+		TaskPlayAnim(GetPlayerPed(-1), 'cellphone@', 'cellphone_call_listen_base', 8.0, 1.0, 3000, 49, 1.0, 0, 0, 0)
 	end
-	ClearPedTasksImmediately(GetPlayerPed(-1))
-	TaskPlayAnim(GetPlayerPed(-1), 'cellphone@', 'cellphone_call_listen_base', 8.0, 1.0, 3000, 49, 1.0, 0, 0, 0)
 end)
 RegisterNetEvent('fsn_emotecontrol:police:ticket')
 AddEventHandler('fsn_emotecontrol:police:ticket', function()
