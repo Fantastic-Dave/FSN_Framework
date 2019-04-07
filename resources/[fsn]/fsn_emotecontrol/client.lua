@@ -195,6 +195,7 @@ function NameOfMenu()
 	Menu.addButton("Scenarios Part 3","scenarios3",nil)
 	Menu.addButton("Job's Scenarios","scenarios4",nil)
 	Menu.addButton("Friendly","friendly",nil)
+	Menu.addButton("Animations","animations",nil)
 	Menu.addButton("Male Dances","maledances",nil)
 	Menu.addButton("Female Dances","femdances",nil)
 	Menu.addButton("Sit","sit",nil)
@@ -337,6 +338,53 @@ end
 
 function petsteve()
 animPlayer("creatures@rottweiler@tricks@", "petting_franklin")
+end
+
+function animations()
+	ClearMenu()
+	Menu.addTitle("Animations")
+	Menu.addButton("Crossarms","crossarms1",nil)
+	Menu.addButton("Crossarms2","crossarms2",nil)
+	Menu.addButton("Crossarms3","crossarms4",nil)
+	Menu.addButton("Crossarms4","crossarms5",nil)
+	Menu.addButton("Crossarms5","crossarms6",nil)
+	Menu.addButton("Arse Pick","arsepick",nil)
+	Menu.addButton("Middle Finger","onehandmiddlefinger",nil)
+	Menu.addButton("Facepalm","failfish",nil)
+	BackToLevel1()
+	-- ...
+end
+
+function crossarms1()
+animPlayer("amb@world_human_hang_out_street@male_c@base", "base")
+end
+
+function crossarms2()
+animPlayer("amb@world_human_hang_out_street@female_arms_crossed@base", "base")
+end
+
+function onehandmiddlefinger()
+animPlayer("anim@mp_player_intselfiethe_bird", "idle_a")
+end
+
+function crossarms4()
+animPlayer("amb@world_human_hang_out_street@female_arms_crossed@idle_a", "idle_a")
+end
+
+function crossarms5()
+animPlayer("missfbi_s4mop", "guard_idle_a")
+end
+
+function crossarms6()
+animPlayer("oddjobs@assassinate@construction@", "unarmed_fold_arms")
+end
+
+function arsepick()
+animPlayer("mp_player_int_upperarse_pick", "mp_player_int_arse_pick")
+end
+
+function failfish()
+animPlayer("anim@mp_player_intupperface_palm", "idle_a")
 end
 
 function maledances()
