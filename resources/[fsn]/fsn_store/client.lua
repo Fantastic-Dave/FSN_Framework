@@ -116,24 +116,28 @@ Citizen.CreateThread(function()
 						SetEntityHeading(v.ped, v.h)
 					end
 					if IsPlayerFreeAiming(PlayerId()) and IsPlayerFreeAimingAtEntity(PlayerId(), v.ped) then
-						local quickmaff = lastrob + 1800
-						if quickmaff < curtime then
-							if robbing then
-								TaskStandStill(v.ped, 3000)
-								if not IsEntityPlayingAnim(v.ped, 'random@mugging3', "handsup_standing_base", 3) then
-									RequestAnimDict('random@mugging3')
-									TaskPlayAnim(v.ped, "random@mugging3", "handsup_standing_base", 4.0, -4, -1, 49, 0, 0, 0, 0)
-								end
-								local maff = robbingstart + 15
-								if maff < curtime then
-									robbing = false
-								end
-							elseif not IsPedInCombat(v.ped) then
+						if robbing then
+							TaskStandStill(v.ped, 3000)
+							if not IsEntityPlayingAnim(v.ped, 'random@mugging3', "handsup_standing_base", 3) then
+								RequestAnimDict('random@mugging3')
+								TaskPlayAnim(v.ped, "random@mugging3", "handsup_standing_base", 4.0, -4, -1, 49, 0, 0, 0, 0)
+							end
+							local maff = robbingstart + 15
+							if maff < curtime then
+								robbing = false
+								TriggerEvent('fsn_bank:change:walletAdd', math.random(50, 600))
+								TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(100,1000))
+								Citizen.Wait(4000)
+							end
+						elseif not IsPedInCombat(v.ped) then
+							local quickmaff = lastrob + 1800
+							if quickmaff < curtime or lastrob == 0 then
 								if math.random(0,100) > 20 then
 									TaskStandStill(v.ped, 3000)
 									robbing = true
 									TriggerEvent('fsn_notify:displayNotification', 'Robbing...', 'centerLeft', 6000, 'info')
 									robbingstart = curtime
+									lastrob = curtime
 									if not IsEntityPlayingAnim(v.ped, 'random@mugging3', "handsup_standing_base", 3) then
 										RequestAnimDict('random@mugging3')
 										TaskPlayAnim(v.ped, "random@mugging3", "handsup_standing_base", 4.0, -4, -1, 49, 0, 0, 0, 0)
@@ -160,18 +164,18 @@ Citizen.CreateThread(function()
 									end
 									robbing = false
 								end
-							end
-						else
-							TriggerEvent('fsn_notify:displayNotification', 'You can\'t do that yet!', 'centerLeft', 6000, 'info')
-							local pos = GetEntityCoords(GetPlayerPed(-1))
-							local coords = {
-							 x = pos.x,
-							 y = pos.y,
-							 z = pos.z
-							}
-							TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-90 | Attempted armed store robbery')
-							Citizen.Wait(2000)
-						end 
+							else
+								TriggerEvent('fsn_notify:displayNotification', 'You can\'t do that yet!', 'centerLeft', 6000, 'info')
+								local pos = GetEntityCoords(GetPlayerPed(-1))
+								local coords = {
+								 x = pos.x,
+								 y = pos.y,
+								 z = pos.z
+								}
+								TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-90 | Attempted armed store robbery')
+								Citizen.Wait(2000)
+							end 
+						end
 					else
 						robbing = false
 					end
