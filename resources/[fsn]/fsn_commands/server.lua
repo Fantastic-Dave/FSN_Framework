@@ -506,6 +506,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/dev' and fsn_isDeveloper(source) then
     if split[2] then
+	  if split[2] == 'addmoney' then
+		TriggerClientEvent('fsn_bank:change:walletAdd', source, tonumber(split[3]))
+	  end
       if split[2] == 'pdduty' then
         if split[3] then
           TriggerClientEvent('fsn_police:command:duty', tonumber(split[3]))
