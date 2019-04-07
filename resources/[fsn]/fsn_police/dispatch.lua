@@ -99,15 +99,15 @@ function displayDispatch(x,y,z,id,chatPrint)
     else
       --TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:DISPATCH:^0^r This dispatch call has no details')
     end
-    SendNUIMessage({
-      addDispatch = true,
-      tencode = actions[id].tencode,
-      name = actions[id].name,
-      loc = sname,
-      x = x,
-      y = y,
-      z = z
-    })
+    --SendNUIMessage({
+    --  addDispatch = true,
+    --  tencode = actions[id].tencode,
+    --  name = actions[id].name,
+    --  loc = sname,
+    --  x = x,
+    --  y = y,
+    --  z = z
+    --})
     if disp_enable then
       disp_id = #dispatch_calls+1
       last_disp = current_time
