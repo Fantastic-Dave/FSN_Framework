@@ -35,7 +35,7 @@ local actions = {
     reward = 0,
 	blip = 461
   },
-[7] = {
+ [7] = {
     name = 'Bank Robbery',
     tencode = '10-90',
     reward = 500,
@@ -64,6 +64,12 @@ local actions = {
     tencode = '10-61',
     reward = 800,
 	blip = 304
+  },
+  [12] = {
+    name = 'Store Robbery',
+    tencode = '10-90',
+    reward = 500,
+	blip = 103
   },
 }
 local dispatch_calls = {}
