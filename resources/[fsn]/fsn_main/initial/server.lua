@@ -157,7 +157,7 @@ AddEventHandler('fsn_cargarage:buyVehicle', function(hash, classname, plate, veh
       char_id = v.char_id
     end
   end
-  MySQL.Async.execute("INSERT INTO `fsn_vehicles` (`veh_id`, `char_id`, `veh_name`, `veh_hash`, `veh_plate`, `veh_plate_style`, `veh_windows`, `veh_colours`, `veh_mods`, `veh_extras`, `veh_fuel`, `veh_health`, `veh_type`) VALUES (NULL, @char_id, @classname, @hash, @plate, '0', '0', '[]', '[]', '[]', '100', '1000', 'c')", {['@char_id'] = char_id, ['@hash'] = hash, ['@classname'] = classname, ['@plate'] = plate}, function(rowsChanged) end)
+  MySQL.Async.execute("INSERT INTO `fsn_vehicles` (`veh_id`, `char_id`, `veh_name`, `veh_hash`, `veh_plate`, `veh_plate_style`, `veh_windows`, `veh_colours`, `veh_mods`, `veh_extras`, `veh_fuel`, `veh_health`, `veh_type`, `veh_wheeltype`, `veh_inventory`) VALUES (NULL, @char_id, @classname, @hash, @plate, '0', '0', '[]', '[]', '[]', '100', '1000', 'c', 0, '{}')", {['@char_id'] = char_id, ['@hash'] = hash, ['@classname'] = classname, ['@plate'] = plate}, function(rowsChanged) end)
 end)
 -------------------------------------------- Character Saving
 Citizen.CreateThread(function()
