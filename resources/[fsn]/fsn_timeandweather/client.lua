@@ -8,24 +8,24 @@ local blackout = false
 
 RegisterNetEvent('fsn_timeandweather:updateWeather')
 AddEventHandler('fsn_timeandweather:updateWeather', function(NewWeather, newblackout)
-    CurrentWeather = NewWeather
+    CurrentWeather = 'EXTRASUNNY'
     blackout = newblackout
 end)
 
 Citizen.CreateThread(function()
     while true do
         if lastWeather ~= CurrentWeather then
-            lastWeather = CurrentWeather
-            SetWeatherTypeOverTime(CurrentWeather, 15.0)
+            lastWeather = 'EXTRASUNNY'
+            SetWeatherTypeOverTime('EXTRASUNNY', 15.0)
             Citizen.Wait(15000)
         end
         Citizen.Wait(100) -- Wait 0 seconds to prevent crashing.
         SetBlackout(blackout)
         ClearOverrideWeather()
         ClearWeatherTypePersist()
-        SetWeatherTypePersist(lastWeather)
-        SetWeatherTypeNow(lastWeather)
-        SetWeatherTypeNowPersist(lastWeather)
+        SetWeatherTypePersist('EXTRASUNNY')
+        SetWeatherTypeNow('EXTRASUNNY')
+        SetWeatherTypeNowPersist('EXTRASUNNY')
         if lastWeather == 'XMAS' then
             SetForceVehicleTrails(true)
             SetForcePedFootstepsTracks(true)
