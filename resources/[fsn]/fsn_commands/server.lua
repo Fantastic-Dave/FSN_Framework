@@ -68,14 +68,12 @@ local pd_cars = {
   [1005] = "unmarked8",
   [1006] = "fbi",
   [1007] = "fbi2",
+  [1008] = "polschafter3",
   --------------------
   -- SUPERCARS
   --------------------
   [2001] = "2015polstang",
-  [2002] = "audipd",
-  [2003] = "corvettepd",
-  [2004] = "mclarenpd",
-  [2005] = "porschepd",
+  [2002] = "ghispo2",
 }
 
 local emotes = {
