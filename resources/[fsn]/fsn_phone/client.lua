@@ -169,28 +169,38 @@ RegisterNUICallback( "addContact", function( data, cb )
 end)
 
 Citizen.CreateThread( function()
-  for k, store in pairs(stores) do
-    local blip = AddBlipForCoord(store.x, store.y, store.z)
-    SetBlipSprite(blip, 365)
-    SetBlipAsShortRange(blip, true)
-    BeginTextCommandSetBlipName("STRING")
-    AddTextComponentString("Lifeinvader")
-    EndTextCommandSetBlipName(blip)
-  end
+	for k, store in pairs(stores) do
+		local blip = AddBlipForCoord(store.x, store.y, store.z)
+		SetBlipSprite(blip, 365)
+		SetBlipAsShortRange(blip, true)
+		BeginTextCommandSetBlipName("STRING")
+		AddTextComponentString("Lifeinvader")
+		EndTextCommandSetBlipName(blip)
+	end
 	while true do
 		Citizen.Wait(0)
 		for k, v in pairs(stores) do
 			if GetDistanceBetweenCoords(v.x,v.y,v.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
-        DrawMarker(1,v.x,v.y,v.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
-        if GetDistanceBetweenCoords(v.x,v.y,v.z,GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
-          SetTextComponentFormat("STRING")
-        	AddTextComponentString("Press ~INPUT_PICKUP~ to get a ~b~simcard~w~ ($250)")
-        	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-          if IsControlJustPressed(0,38) then
-            TriggerServerEvent('fsn_phone:purchased', character.char_id)
+				DrawMarker(1,v.x,v.y,v.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+				if GetDistanceBetweenCoords(v.x,v.y,v.z,GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+					SetTextComponentFormat("STRING")
+					AddTextComponentString("Press ~INPUT_PICKUP~ to get a ~b~simcard~w~ ($250)")
+					DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+					if IsControlJustPressed(0,38) then
+						TriggerServerEvent('fsn_phone:purchased', character.char_id)
 					end
 				end
 			end
+		end
+	end
+end)
+
+Citizen.CreateThread( function()
+	while true do
+		Citizen.Wait(0)
+		DisableControlAction(0, 199, true)
+		if IsDisabledControlPressed(0,199) and not phoneEnabled then
+			TriggerEvent('fsn_phone:togglePhone')
 		end
 	end
 end)
