@@ -526,7 +526,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
         TriggerClientEvent('fsn_police:MDT:toggle', source)
       end
       if split[2] == 'revive' then
-        TriggerClientEvent('fsn_ems:reviveMe', source)
+        TriggerClientEvent('fsn_ems:reviveMe:force', source)
       end
       if split[2] == 'xyz' then
         TriggerClientEvent('fsn_commands:sendxyz', source)
