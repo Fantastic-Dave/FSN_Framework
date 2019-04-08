@@ -6,6 +6,8 @@ client_script 'playermanager/client.lua'
 client_script 'imanager/client.lua'
 client_script 'misc/exports.lua'
 client_script 'misc/blips.lua'
+client_script 'misc/weapondrop.lua'
+client_script 'misc/servername.lua'
 
 -- gui stuffs
 ui_page 'gui/index.html'
