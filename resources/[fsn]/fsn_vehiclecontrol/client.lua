@@ -20,12 +20,12 @@ Citizen.CreateThread(function()
 			if IsControlPressed(0, 21) then
 				if IsControlJustPressed(0, 33) then
 					if seatbelt then
-						SetPedConfigFlag(ped, 32, true)
+						if not exports["fsn_police"]:fsn_PDDuty() then SetPedConfigFlag(ped, 32, true) end
 						TriggerEvent('fsn_commands:me', 'takes off their seatbelt')
 						seatbelt = false
 						notified = false
 					else
-						SetPedConfigFlag(ped, 32, false)
+						if not exports["fsn_police"]:fsn_PDDuty() then SetPedConfigFlag(ped, 32, false) end
 						TriggerEvent('fsn_commands:me', 'puts on their seatbelt')
 						seatbelt = true
 					end
@@ -82,7 +82,7 @@ Citizen.CreateThread(function()
 	while true do
 		local ped = GetPlayerPed(-1)
 		local car = GetVehiclePedIsIn(ped)
-		if car ~= 0 and (wasInCar or IsCar(car)) then
+		if car ~= 0 and (wasInCar or IsCar(car)) and not exports["fsn_police"]:fsn_PDDuty() then
 			wasInCar = true
 			if seatbelt then DisableControlAction(0, 75) end
 			speedBuffer[2] = speedBuffer[1]
