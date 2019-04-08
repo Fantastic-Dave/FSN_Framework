@@ -32,7 +32,8 @@ exports {
 	"fsn_GetBank",
 	"fsn_CanAfford",
 	"fsn_CharID",
-	"fsn_FindNearbyPed"
+	"fsn_FindNearbyPed",
+	"fsn_FindPedNearbyCoords"
 }
 server_export 'fsn_GetPlayerFromCharacterId'
 server_export 'fsn_GetPlayerFromPhoneNumber'
