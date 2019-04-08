@@ -114,14 +114,14 @@ Citizen.CreateThread(function()
 		for k,v in pairs(storekeepers) do
 			if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), true) < 50 then
 				if v.ped then
-					if GetDistanceBetweenCoords(GetEntityCoords(v.ped), v.x, v.y, v.z) > 2 and not IsPedFleeing(v.ped) and not IsPedInCombat(v.ped) then
+					--[[if GetDistanceBetweenCoords(GetEntityCoords(v.ped), v.x, v.y, v.z) > 2 and not IsPedFleeing(v.ped) and not IsPedInCombat(v.ped) then
 						RequestModel(416176080)
 						while not HasModelLoaded(416176080) do
 							Wait(1)
 						end
 						v.ped = CreatePed(5, 416176080, v.x, v.y, v.z, true, true)
 						SetEntityHeading(v.ped, v.h)
-					end
+					end]]--
 					if IsPlayerFreeAiming(PlayerId()) and IsPlayerFreeAimingAtEntity(PlayerId(), v.ped) then
 						if robbing then
 							TaskStandStill(v.ped, 3000)
