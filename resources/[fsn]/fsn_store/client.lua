@@ -11,6 +11,25 @@ function fsn_SplitString(inputstr, sep)
     return t
 end
 
+function fsn_drawText3D(x,y,z, text)
+    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
+    local px,py,pz=table.unpack(GetGameplayCamCoords())
+    if onScreen then
+        SetTextScale(0.3, 0.3)
+        SetTextFont(0)
+        SetTextProportional(1)
+        SetTextColour(255, 255, 255, 255)
+        SetTextDropshadow(0, 0, 0, 0, 55)
+        SetTextEdge(2, 0, 0, 0, 150)
+        SetTextDropShadow()
+        SetTextOutline()
+        SetTextEntry("STRING")
+        SetTextCentre(1)
+        AddTextComponentString(text)
+        DrawText(_x,_y)
+    end
+end
+
 function ToggleActionMenu()
 	menuEnabled = not menuEnabled
 	if ( menuEnabled ) then
@@ -97,7 +116,7 @@ local storekeepers = {
 	{x = 372.76062011719, y = 328.07223510742, z = 103.56637573242, h = 249.64683532715, ped = false},
 	{x = 1164.9409179688, y = -323.45886230469, z = 69.205146789551, h = 97.392929077148, ped = false},
 	{x = 1133.9039306641, y = -982.02099609375, z = 46.415802001953, h = 271.70544433594, ped = false}
-}	
+}
 local robbing = false
 local robbingstart = 0
 local lastrob = 0
@@ -114,14 +133,6 @@ Citizen.CreateThread(function()
 		for k,v in pairs(storekeepers) do
 			if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), true) < 50 then
 				if v.ped then
-					if GetDistanceBetweenCoords(GetEntityCoords(v.ped), v.x, v.y, v.z) > 2 and not IsPedFleeing(v.ped) and not IsPedInCombat(v.ped) then
-						RequestModel(416176080)
-						while not HasModelLoaded(416176080) do
-							Wait(1)
-						end
-						v.ped = CreatePed(5, 416176080, v.x, v.y, v.z, true, true)
-						SetEntityHeading(v.ped, v.h)
-					end
 					if IsPlayerFreeAiming(PlayerId()) and IsPlayerFreeAimingAtEntity(PlayerId(), v.ped) then
 						if robbing then
 							TaskStandStill(v.ped, 3000)
@@ -184,7 +195,7 @@ Citizen.CreateThread(function()
 								}
 								TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-90 | Attempted armed store robbery')
 								Citizen.Wait(6000)
-							end 
+							end
 						end
 					else
 						if robbing then
@@ -193,16 +204,36 @@ Citizen.CreateThread(function()
 							Citizen.Wait(6000)
 						end
 					end
+				end
+			end
+		end
+	end
+end)
+
+Citizen.CreateThread(function()
+	while true do Citizen.Wait(0)
+		for k,v in pairs(storekeepers) do
+			if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), true) < 50 then
+				if exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5) then
+					v.ped = exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5)
+					--fsn_drawText3D(v.x, v.y, v.z, '~g~im here baby xo')
 				else
-					if GetClosestObjectOfType(v.x, v.y, v.z, 1.0, 416176080, false, false, false) then
-						v.ped = GetClosestObjectOfType(v.x, v.y, v.z, 1.0, 416176080, false, false, false)
-					else
+					if not v.ped then
 						RequestModel(416176080)
 						while not HasModelLoaded(416176080) do
 							Wait(1)
 						end
 						v.ped = CreatePed(5, 416176080, v.x, v.y, v.z, true, true)
 						SetEntityHeading(v.ped, v.h)
+					elseif GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(v.ped, true)) < 50 then
+						if not IsPedInCombat(v.ped) and not IsPedFleeing(v.ped) then
+							RequestModel(416176080)
+							while not HasModelLoaded(416176080) do
+								Wait(1)
+							end
+							v.ped = CreatePed(5, 416176080, v.x, v.y, v.z, true, true)
+							SetEntityHeading(v.ped, v.h)
+						end
 					end
 				end
 			end
