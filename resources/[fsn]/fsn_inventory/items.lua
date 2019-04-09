@@ -209,11 +209,11 @@ items_table = {
 				if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
 				if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
 				if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'packaged_cocaine', math.random(1,20)) end
+				TriggerEvent('fsn_bankrobbery:LostMC:spawn')
 			else
 				TriggerEvent('fsn_notify:displayNotification', 'You broke your lockpick...', 'centerLeft', 3500, 'error')
 				TriggerEvent('fsn_inventory:item:take', 'lockpick', 1)
 			end
-			TriggerEvent('fsn_bankrobbery:LostMC:spawn')
 			picklocking = false
 		else
 			picklocking = true
