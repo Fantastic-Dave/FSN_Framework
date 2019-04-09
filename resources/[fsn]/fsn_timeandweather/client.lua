@@ -11,7 +11,13 @@ AddEventHandler('fsn_timeandweather:updateWeather', function(NewWeather, newblac
     CurrentWeather = 'EXTRASUNNY'
     blackout = newblackout
 end)
-
+Citizen.CreateThread(function()
+    while true do
+		Citizen.Wait(0)
+		SetWeatherTypeNow('EXTRASUNNY')
+	end
+end)
+--[[
 Citizen.CreateThread(function()
     while true do
 		Citizen.Wait(0)
@@ -29,6 +35,7 @@ Citizen.CreateThread(function()
         SetWeatherTypeNowPersist('EXTRASUNNY')
     end
 end)
+]]
 
 RegisterNetEvent('fsn_timeandweather:updateTime')
 AddEventHandler('fsn_timeandweather:updateTime', function(base, offset, freeze)
