@@ -212,6 +212,7 @@ Citizen.CreateThread(function()
         AddTextComponentString("Press ~INPUT_PICKUP~ to pick up ~y~["..obj.amount.."X] "..items_table[obj.item].display_name)
         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
         if IsControlJustPressed(0, 38) then
+		  TriggerServerEvent('fsn_inventory:itempickup', obj.pickupid)
           TriggerEvent('fsn_inventory:item:add', obj.item, obj.amount)
 
           local object = GetClosestObjectOfType(obj.xyz[1], obj.xyz[2], obj.xyz[3], 5.0, obj.hash, false, false, false)
@@ -236,7 +237,7 @@ Citizen.CreateThread(function()
             SetEntityAsMissionEntity(object, true, true)
             DeleteObject(object)
           end
-          TriggerServerEvent('fsn_inventory:itempickup', obj.pickupid)
+          --TriggerServerEvent('fsn_inventory:itempickup', obj.pickupid)
           TriggerEvent('fsn_commands:me', 'picked up '..obj.amount..' '..items_table[obj.item].display_name)
           Citizen.Wait(1000)
           ClearPedTasks(GetPlayerPed(-1))
