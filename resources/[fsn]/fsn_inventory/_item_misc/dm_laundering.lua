@@ -629,16 +629,20 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(900000)
     quote[1] = math.random(10,35)
-	if inventory["dirty_money"].amount < 10000 then
-		quote[2] = math.random(1, 5)
-	elseif inventory["dirty_money"].amount < 15000 then
-		quote[2] = math.random(6, 10)
-	elseif inventory["dirty_money"].amount < 20000 then
-		quote[2] = math.random(11, 15)
-	elseif inventory["dirty_money"].amount < 25000 then
-		quote[2] = math.random(16, 25)
+	if inventory["dirty_money"] then
+		if inventory["dirty_money"].amount < 10000 then
+			quote[2] = math.random(1, 5)
+		elseif inventory["dirty_money"].amount < 15000 then
+			quote[2] = math.random(6, 10)
+		elseif inventory["dirty_money"].amount < 20000 then
+			quote[2] = math.random(11, 15)
+		elseif inventory["dirty_money"].amount < 25000 then
+			quote[2] = math.random(16, 25)
+		else
+			quote[2] = math.random(26, 30)
+		end
 	else
-		quote[2] = math.random(26, 30)
+		quote[2] = math.random(26, 30)		
 	end
     abletolaunder = true
   end
