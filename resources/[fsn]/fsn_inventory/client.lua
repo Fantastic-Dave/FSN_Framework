@@ -191,7 +191,12 @@ end)
 
 local dropped_entities = {}
 local my_entities = {}
+RegisterNetEvent('fsn_inventory:floor:update')
+AddEventHandler('fsn_inventory:floor:update', function(tbl)
+	dropped_entities = tbl
+end)
 --------------------------------------------------------------------------------------------------------
+--[[
 RegisterNetEvent('fsn_inventory:itemhasdropped')
 AddEventHandler('fsn_inventory:itemhasdropped', function(item, hash, xyz, amount, pickupid)
   --TriggerEvent('fsn_notify:displayNotification', item..' was dropped @ '..xyz[1], 'centerLeft', 3000, 'error')
@@ -203,6 +208,7 @@ AddEventHandler('fsn_inventory:itemhasdropped', function(item, hash, xyz, amount
     pickupid = pickupid
   })
 end)
+]]--
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
@@ -212,8 +218,8 @@ Citizen.CreateThread(function()
         AddTextComponentString("Press ~INPUT_PICKUP~ to pick up ~y~["..obj.amount.."X] "..items_table[obj.item].display_name)
         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
         if IsControlJustPressed(0, 38) then
-		  TriggerServerEvent('fsn_inventory:itempickup', obj.pickupid)
-          TriggerEvent('fsn_inventory:item:add', obj.item, obj.amount)
+		  --TriggerServerEvent('fsn_inventory:itempickup', obj.pickupid)
+          --TriggerEvent('fsn_inventory:item:add', obj.item, obj.amount)
 
           local object = GetClosestObjectOfType(obj.xyz[1], obj.xyz[2], obj.xyz[3], 5.0, obj.hash, false, false, false)
           local netId = NetworkGetNetworkIdFromEntity(object)
@@ -237,7 +243,7 @@ Citizen.CreateThread(function()
             SetEntityAsMissionEntity(object, true, true)
             DeleteObject(object)
           end
-          --TriggerServerEvent('fsn_inventory:itempickup', obj.pickupid)
+          TriggerServerEvent('fsn_inventory:itempickup', obj.pickupid)
           TriggerEvent('fsn_commands:me', 'picked up '..obj.amount..' '..items_table[obj.item].display_name)
           Citizen.Wait(1000)
           ClearPedTasks(GetPlayerPed(-1))
@@ -247,6 +253,7 @@ Citizen.CreateThread(function()
   end
 end)
 
+--[[
 RegisterNetEvent('fsn_inventory:removedropped')
 AddEventHandler('fsn_inventory:removedropped', function(id)
   for k, v in pairs(dropped_entities) do
@@ -255,7 +262,7 @@ AddEventHandler('fsn_inventory:removedropped', function(id)
     end
   end
 end)
-
+]]--
 RegisterNetEvent('fsn_inventory:item:drop')
 AddEventHandler('fsn_inventory:item:drop', function(item)
   if inventory[item] then
