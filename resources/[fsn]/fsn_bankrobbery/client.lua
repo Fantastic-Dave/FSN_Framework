@@ -2,10 +2,6 @@ local current_time = 0
 local cracking = false
 local start_time = 0
 local cracking_id = 0
-local onduty_police = {}
-AddEventHandler('fsn_police:update', function(cops)
-  onduty_police = cops
-end)
 
 function fsn_drawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
@@ -309,8 +305,24 @@ Citizen.CreateThread(function()
             	AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~rob~w~ the vault")
             	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
               if IsControlJustPressed(0,38) then
-                TriggerServerEvent('fsn_bankrobbery:payout', k)
-                door.vault.robbed = true
+				if exports['fsn_inventory']:fsn_HasItem('drill') then
+					if exports['fsn_inventory']:fsn_HasItem('modified_drillbit') then
+						TriggerServerEvent('fsn_bankrobbery:payout', k, exports['fsn_inventory']:fsn_HasItem('modified_drillbit'))
+					else
+						if math.random(1,100) > 50 then
+							TriggerEvent('fsn_inventory:item:take', 'drill', 1)
+							TriggerEvent('chatMessage', 'FSN', {255,0,0}, 'The vault destroyed your drillbit and broke the drill, consider getting a modified drillbit!')
+							TriggerEvent('chatMessage', 'FSN', {255,0,0}, 'You didn\'t get far enough into the vault to get any money!')
+						else
+							TriggerEvent('fsn_inventory:item:take', 'drill', 1)
+							TriggerEvent('chatMessage', 'FSN', {255,0,0}, 'The vault destroyed your drillbit and broke the drill, consider getting a modified drillbit!')
+							TriggerServerEvent('fsn_bankrobbery:payout', k, exports['fsn_inventory']:fsn_HasItem('modified_drillbit'))
+						end
+					end
+					door.vault.robbed = true
+				else
+					TriggerEvent('fsn_notify:displayNotification', 'You don\'t have anything to open the vault with...', 'centerLeft', 5000, 'error')
+				end
               end
             else
               SetTextComponentFormat("STRING")
@@ -365,7 +377,7 @@ Citizen.CreateThread(function()
           end
         else
           if GetDistanceBetweenCoords(door.keypad.x, door.keypad.y, door.keypad.z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
-            if #onduty_police >= 3 then
+            if exports['fsn_police']:fsn_getCopAmt() >= 3 then
               if not cracking then
                 SetTextComponentFormat("STRING")
                 AddTextComponentString("Press ~INPUT_PICKUP~ to input a code\nPress ~INPUT_LOOK_BEHIND~ to begin cracking")
@@ -441,7 +453,7 @@ Citizen.CreateThread(function()
               end
             else
               SetTextComponentFormat("STRING")
-              AddTextComponentString("~r~Not enough cops for a heist ("..#onduty_police.."/3)")
+              AddTextComponentString("~r~Not enough cops for a heist ("..exports['fsn_police']:fsn_getCopAmt().."/3)")
               DisplayHelpTextFromStringLabel(0, 0, 1, -1)
             end
           else
@@ -461,6 +473,219 @@ Citizen.CreateThread(function()
     end
   end
 end)
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(1000)
+    current_time = current_time + 1
+  end
+end)
+
+
+----------------------------------------------- DRILL ROBBERY
+--{x = 20.005674362183, y = -1772.4578857422, z = 29.547077178955, h = 189.60456848145}
+--{x = 2701.7890625, y = 3454.84375, z = 55.907398223877, h = 294.06103515625}
+
+
+-----------------------
+-- LostMC Robbery
+-----------------------
+local safe = {x = 977.23968505859, y = -104.10308074951, z = 74.845184326172}
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		if GetDistanceBetweenCoords(safe.x, safe.y, safe.z, GetEntityCoords(GetPlayerPed(-1))) < 2 then
+			SetTextComponentFormat("STRING")
+            AddTextComponentString("HINT: Use your lockpick")
+            DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+		end 
+	end
+end)
+
+local LostMC = {x = 968.58111572266, y = -124.5368347168, z = 74.353042602539}
+local LostMCSpawns = {
+	{x = 983.84216308594, y = -125.27745056152, z = 73.956123352051},
+	{x = 988.02655029297, y = -102.91876220703, z = 74.848731994629},
+	{x = 970.61346435547, y = -112.27017211914, z = 74.353126525879},
+	{x = 965.49530029297, y = -116.83283996582, z = 74.353126525879},
+	{x = 959.42755126953, y = -120.9056930542, z = 74.963409423828},
+	{x = 981.80786132813, y = -142.21360778809, z = 74.235298156738}
+}
+local LostMCModels = {1330042375,1032073858,850468060,-96953009}
+local start = 0
+RegisterNetEvent('fsn_bankrobbery:LostMC:spawn')
+AddEventHandler('fsn_bankrobbery:LostMC:spawn', function()
+	for k, v in pairs(LostMCSpawns) do
+		local mdl = LostMCModels[math.random(1, #LostMCModels)]
+		print('making mdl: '..mdl)
+		RequestModel(mdl)
+		while not HasModelLoaded(mdl) do
+			Wait(1)
+			RequestModel(mdl)
+		end
+		local ped = CreatePed(4, mdl, v.x, v.y, v.z+1, true, true)
+		GiveWeaponToPed(ped, "WEAPON_PISTOL", 200, false, true)
+		TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
+		SetPedCombatRange(ped, 2)
+		SetPedCombatMovement(ped, 2)
+	end
+	for k, v in pairs(LostMCSpawns) do
+		local mdl = LostMCModels[math.random(1, #LostMCModels)]
+		print('making mdl: '..mdl)
+		RequestModel(mdl)
+		while not HasModelLoaded(mdl) do
+			Wait(1)
+			RequestModel(mdl)
+		end
+		local ped = CreatePed(4, mdl, v.x, v.y, v.z+1, true, true)
+		GiveWeaponToPed(ped, "WEAPON_PISTOL", 200, false, true)
+		TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
+		SetPedCombatRange(ped, 2)
+		SetPedCombatMovement(ped, 2)
+		SetCanAttackFriendly(ped, false, false)
+		SetPedCanBeTargettedByTeam(ped, false, false)
+	end
+	start = current_time
+	while true do
+		Citizen.Wait(0)
+		local ped = exports["fsn_main"]:fsn_FindPedNearbyCoords(LostMC.x, LostMC.y, LostMC.z, 100)
+		ClearPedTasksImmediately(ped)
+		TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
+		local maff = start + 12
+		if maff < current_time then
+			break
+		end
+	end
+end)
+
+-----------------------
+-- Hardware Robbery
+-----------------------
+local function EnumerateEntities(initFunc, moveFunc, disposeFunc)
+  return coroutine.wrap(function()
+    local iter, id = initFunc()
+    if not id or id == 0 then
+      disposeFunc(iter)
+      return
+    end
+
+    local enum = {handle = iter, destructor = disposeFunc}
+    setmetatable(enum, entityEnumerator)
+
+    local next = true
+    repeat
+      coroutine.yield(id)
+      next, id = moveFunc(iter)
+    until not next
+
+    enum.destructor, enum.handle = nil, nil
+    disposeFunc(iter)
+  end)
+end
+function EnumerateVehicles()
+  return EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle)
+end
+
+local hardware_loc = {x = 2701.7890625, y = 3454.84375, z = 55.907398223877, h = 294.06103515625}
+local exploded_truck = false
+local truck = 'mule3'
+local lockpicked = false
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		if GetDistanceBetweenCoords(hardware_loc.x, hardware_loc.y, hardware_loc.z, GetEntityCoords(GetPlayerPed(-1))) < 50 then
+			for obj in EnumerateVehicles() do
+				if GetDistanceBetweenCoords(hardware_loc.x, hardware_loc.y, hardware_loc.z, GetEntityCoords(obj)) < 5 then
+					if GetEntityModel(obj) == GetHashKey(truck) then
+						exploded_truck = obj
+					end
+				end
+			end
+			if exploded_truck then
+				if DoesEntityExist(exploded_truck) then
+					if GetDistanceBetweenCoords(2698.2124023438, 3453.1557617188, 56.79305267334, GetEntityCoords(GetPlayerPed(-1))) < 0.5 then
+						if not lockpicked then
+							SetTextComponentFormat("STRING")
+							AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~lockpick~w~ the ~y~truck")
+							DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+						end
+						if IsControlJustPressed(0, 38) then
+							while ( not HasAnimDictLoaded( "mini@safe_cracking" ) ) do
+								RequestAnimDict( "mini@safe_cracking" )
+								Citizen.Wait( 5 )
+							end
+							TaskPlayAnim(GetPlayerPed(-1), "mini@safe_cracking", "idle_base", 8.0, 1.0, 12000, 2, 0, 0, 1, 1 )
+							FreezeEntityPosition(GetPlayerPed(-1), true)
+							Citizen.Wait(12000)
+							FreezeEntityPosition(GetPlayerPed(-1), false)
+							SetVehicleDoorOpen(exploded_truck, 2, false, false)
+							SetVehicleDoorOpen(exploded_truck, 3, false, false)
+							lockpicked = true
+						end
+					end
+					if GetDistanceBetweenCoords(2701.4072265625, 3454.7998046875, 56.821979522705, GetEntityCoords(GetPlayerPed(-1))) < 0.5 and lockpicked then
+						SetTextComponentFormat("STRING")
+						AddTextComponentString("Press ~INPUT_PICKUP~ to pickup the drill")
+						DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+						if IsControlJustPressed(0, 38) then
+							while not HasAnimDictLoaded('pickup_object') do
+								RequestAnimDict('pickup_object')
+								Citizen.Wait(5)
+							end
+							TaskPlayAnim(GetPlayerPed(-1), 'pickup_object', 'pickup_low', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
+							DeleteObject(obj)
+							Citizen.Wait(1000)
+							ClearPedTasks(GetPlayerPed(-1))
+							TriggerEvent('fsn_inventory:item:add', 'drill', 1)
+						end
+					end
+				else
+					exploded_truck = false
+				end
+			else
+				Citizen.Wait(500)
+				RequestModel(GetHashKey(truck))
+				while not HasModelLoaded(GetHashKey(truck)) do
+					Wait(1)
+					RequestModel(GetHashKey(truck))
+				end
+				exploded_truck = CreateVehicle(GetHashKey(truck), hardware_loc.x, hardware_loc.y, hardware_loc.z, false, true)
+				lockpicked = false
+				SetEntityHeading(exploded_truck, hardware_loc.h)
+				--SetVehicleDoorOpen(exploded_truck, 2, false, false)
+				--SetVehicleDoorOpen(exploded_truck, 3, false, false)
+				SetVehicleBodyHealth(exploded_truck, 200)
+				SetEntityMaxSpeed(exploded_truck, 0.0)
+				
+				while not HasModelLoaded(-617072343) do
+					Wait(1)
+					RequestModel(-617072343)
+				end
+				local vehc = GetEntityCoords(exploded_truck)
+				obj = CreateObject(-617072343, vehc["x"],vehc["y"],vehc["z"], 1, 0, 0)
+				--SetEntityCoords(saw, 2702.9184570313, 3454.943359375, 56.904981231689, 1, 0, 0, 1)
+				--PlaceObjectOnGroundProperly(saw)
+				
+				local vehc = GetEntityCoords(exploded_truck)
+				--local obj = CreateObject(GetHashKey("prop_cs_cardbox_01"),vehc["x"],vehc["y"],vehc["z"], 1, 0, 0)
+
+				local x = math.random(10) / 10
+				if math.random(100) > 50 then
+					x = x - x - x
+				end
+
+				local y = math.random(10) / 10
+				if math.random(100) > 50 then
+					y = y - y - y
+				end
+
+				AttachEntityToEntity(obj, exploded_truck, GetEntityBoneIndexByName(exploded_truck, 'bodyshell'), x, y, 0.2, 0, 0, 0, 1, 1, 0, 1, 0, 1)
+			end
+		end
+	end
+end)
+-----------------------
+-- Timer, I really need to confine all these to 1 in fsn_main - todo
+-----------------------
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(1000)
