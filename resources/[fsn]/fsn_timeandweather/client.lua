@@ -14,25 +14,19 @@ end)
 
 Citizen.CreateThread(function()
     while true do
+		Citizen.Wait(0)
         if lastWeather ~= CurrentWeather then
             lastWeather = 'EXTRASUNNY'
             SetWeatherTypeOverTime('EXTRASUNNY', 15.0)
             Citizen.Wait(15000)
         end
-        Citizen.Wait(100) -- Wait 0 seconds to prevent crashing.
+        Citizen.Wait(100000) -- Wait 0 seconds to prevent crashing.
         SetBlackout(blackout)
         ClearOverrideWeather()
         ClearWeatherTypePersist()
         SetWeatherTypePersist('EXTRASUNNY')
         SetWeatherTypeNow('EXTRASUNNY')
         SetWeatherTypeNowPersist('EXTRASUNNY')
-        if lastWeather == 'XMAS' then
-            SetForceVehicleTrails(true)
-            SetForcePedFootstepsTracks(true)
-        else
-            SetForceVehicleTrails(false)
-            SetForcePedFootstepsTracks(false)
-        end
     end
 end)
 
