@@ -132,10 +132,11 @@ Citizen.CreateThread(function()
 	end
 end)
 Citizen.CreateThread(function()
+	Citizen.Wait(10000)
 	while true do
 		Citizen.Wait(0)
 		for k,v in pairs(storekeepers) do
-			if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), true) < 50 then
+			if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
 				if v.ped then
 					if IsPlayerFreeAiming(PlayerId()) and IsPlayerFreeAimingAtEntity(PlayerId(), v.ped) then
 						if robbing then
@@ -215,12 +216,22 @@ Citizen.CreateThread(function()
 end)
 
 Citizen.CreateThread(function()
+	Citizen.Wait(10000)
 	while true do Citizen.Wait(0)
 		for k,v in pairs(storekeepers) do
-			if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), true) < 50 then
+			if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
 				if exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5) then
-					v.ped = exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5)
-					--fsn_drawText3D(v.x, v.y, v.z, '~g~im here baby xo')
+					if GetEntityModel(exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5)) == 416176080 then
+						v.ped = exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5)
+						fsn_drawText3D(GetEntityCoords(v.ped).x, GetEntityCoords(v.ped).y, GetEntityCoords(v.ped).z, '~g~im here baby xo')
+					else
+						if v.ped then
+							if not IsPedFleeing(v.ped) and not IsPedFleeing(v.ped) then
+								v.ped = false
+							end
+						end
+					end
+					--v.ped = exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5)
 				else
 					if not v.ped then
 						RequestModel(416176080)
