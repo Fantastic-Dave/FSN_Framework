@@ -88,7 +88,7 @@ Citizen.CreateThread(function()
             FreezeEntityPosition(closestDoor, false)
           end
           if IsControlJustPressed(1,51) then
-						if v.locked then
+			if v.locked then
               --TaskPlayAnim(GetPlayerPed(-1), 'missheistfbisetup1', 'unlock_enter_janitor', 8.0, -1, false, false, false, false)
               fsn_loadAnimDict( "gestures@f@standing@casual" )
               TaskPlayAnim(GetPlayerPed(-1), "gestures@f@standing@casual", "gesture_hand_down", 8.0, 1.0, 3, 2, 0, 0, 0, 0 )
