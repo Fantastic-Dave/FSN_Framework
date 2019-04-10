@@ -11,10 +11,11 @@ local delivery_blip = false
 local dm_amount = 0
 local quote = {
   [1] = math.random(10, 35),
-  [2] = math.random(10, 20)
+  [2] = 0,
 }
+
 local quoted = false
-local abletolaunder = true
+local abletolaunder = false
 local launder_deliveries = {
   {x = 109.69165802002, y = -1566.5838623047, z = 29.311115264893},
   {x = 332.28826904297, y = -1024.4379882813, z = 28.996091842651},
@@ -478,7 +479,7 @@ local function fsn_NextLaundering(trig)
     local new = math.random(1, #launder_deliveries)
     if new ~= current_delivery then
       RemoveBlip(delivery_blip)
-      TriggerEvent('fsn_notify:displayNotification', 'New delivery spot added to the GPS', 'centerLeft', 4000, 'info')
+      TriggerEvent('fsn_notify:displayNotification', 'New delivery spot added to the GPS ('.. done_deliveries+1 ..'/'..needed_delivery..')', 'centerLeft', 4000, 'info')
       current_delivery = new
       -- create blip
       delivery_blip = AddBlipForCoord(launder_deliveries[current_delivery].x, launder_deliveries[current_delivery].y, launder_deliveries[current_delivery].z)
@@ -629,22 +630,31 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(900000)
     quote[1] = math.random(10,35)
-	if inventory["dirty_money"] then
-		if inventory["dirty_money"].amount < 10000 then
-			quote[2] = math.random(1, 5)
-		elseif inventory["dirty_money"].amount < 15000 then
-			quote[2] = math.random(6, 10)
-		elseif inventory["dirty_money"].amount < 20000 then
-			quote[2] = math.random(11, 15)
-		elseif inventory["dirty_money"].amount < 25000 then
-			quote[2] = math.random(16, 25)
+	if fsn_HasItem('dirty_money') then
+		local amt = fsn_GetItemAmount('dirty_money')
+		if amt < 5000 then
+			quote[2] = math.random(1,5)
+		elseif amt < 20000 then
+			quote[2] = math.random(6,10)
+		elseif amt < 50000 then
+			quote[2] = math.random(11,15)
+		elseif amt < 80000 then
+			quote[2] = math.random(16,20)
+		elseif amt < 100000 then
+			quote[2] = math.random(21,25)
+		elseif amt < 150000 then
+			quote[2] = math.random(26,40)		
+		end
+		print(':fsn_inventory: new quote from dealer: '..quote[2])
+		if not laundering then
+			abletolaunder = true
 		else
-			quote[2] = math.random(26, 30)
+			print(':fsn_inventory: you are not able to launder as you are already laundering')
+			abletolaunder = false
 		end
 	else
-		quote[2] = math.random(26, 30)		
+		abletolaunder = false
 	end
-    abletolaunder = true
   end
 end)
 ----------------------------------------------------------------------------------------
