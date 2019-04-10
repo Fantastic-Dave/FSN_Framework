@@ -19,6 +19,9 @@ end)
 RegisterServerEvent('fsn_inventory:itempickup')
 AddEventHandler('fsn_inventory:itempickup', function(pickupid)
   --TriggerClientEvent('fsn_inventory:removedropped', -1, pickupid)
+	while locktable do
+		Citizen.Wait(1)
+	end
 	if not locktable then
 		locktable = true
 		local item = items[pickupid]
@@ -32,8 +35,6 @@ AddEventHandler('fsn_inventory:itempickup', function(pickupid)
 			DropPlayer(source, ':FSN: Attempted product dupe')
 		end
 		locktable = false
-	else
-		Citizen.Wait(1)
 	end
 end)
 
