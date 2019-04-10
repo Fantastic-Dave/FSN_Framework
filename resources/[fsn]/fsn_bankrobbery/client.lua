@@ -648,7 +648,7 @@ Citizen.CreateThread(function()
 					Wait(1)
 					RequestModel(GetHashKey(truck))
 				end
-				exploded_truck = CreateVehicle(GetHashKey(truck), hardware_loc.x, hardware_loc.y, hardware_loc.z, false, true)
+				exploded_truck = CreateVehicle(GetHashKey(truck), hardware_loc.x, hardware_loc.y, hardware_loc.z, true, true)
 				lockpicked = false
 				SetEntityHeading(exploded_truck, hardware_loc.h)
 				--SetVehicleDoorOpen(exploded_truck, 2, false, false)
