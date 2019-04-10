@@ -350,7 +350,7 @@ AddEventHandler('fsn_properties:menu:money:withdraw', function(id)
   end
   if _property then
     Citizen.CreateThread(function()
-      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 20)
+      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 10)
       local editOpen = true
       while UpdateOnscreenKeyboard() == 0 or editOpen do
         Wait(0)
@@ -360,7 +360,11 @@ AddEventHandler('fsn_properties:menu:money:withdraw', function(id)
           editOpen = false
           if UpdateOnscreenKeyboard() == 1 then
             amount = tonumber(GetOnscreenKeyboardResult())
-            TriggerServerEvent('fsn_properties:enterable:money:withdraw', id, amount)
+			if amount <= 100000 then
+				TriggerServerEvent('fsn_properties:enterable:money:withdraw', id, amount)
+			else
+				TriggerEvent('fsn_notify:displayNotification', 'Maximum withdraw of $100,000', 'centerLeft', 5000, 'error')
+			end
           end
         end
       end
@@ -378,7 +382,7 @@ AddEventHandler('fsn_properties:menu:money:deposit', function(id)
   end
   if _property then
     Citizen.CreateThread(function()
-      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 20)
+      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 10)
       local editOpen = true
       while UpdateOnscreenKeyboard() == 0 or editOpen do
         Wait(0)
@@ -388,10 +392,16 @@ AddEventHandler('fsn_properties:menu:money:deposit', function(id)
           editOpen = false
           if UpdateOnscreenKeyboard() == 1 then
             amount = tonumber(GetOnscreenKeyboardResult())
-            if exports.fsn_main:fsn_GetWallet() >= amount then
-              TriggerEvent('fsn_bank:change:walletMinus', amount)
-              TriggerServerEvent('fsn_properties:enterable:money:deposit', id, amount)
-            end
+			if amount <= 100000 then
+				if exports.fsn_main:fsn_GetWallet() >= amount then
+				  TriggerEvent('fsn_bank:change:walletMinus', amount)
+				  TriggerServerEvent('fsn_properties:enterable:money:deposit', id, amount)
+				else
+					TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this.', 'centerLeft', 5000, 'error')
+				end
+			else
+				TriggerEvent('fsn_notify:displayNotification', 'Maximum deposit of $100,000', 'centerLeft', 5000, 'error')
+			end
           end
         end
       end
