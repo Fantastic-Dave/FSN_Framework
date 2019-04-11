@@ -7,13 +7,13 @@ local required = false
 local lastjob = 0
 
 Citizen.CreateThread(function()
-  local blip = AddBlipForCoord(laptop.x, laptop.y, laptop.z)
-  SetBlipSprite(blip, 277)
-  SetBlipColour(blip, 1)
-  SetBlipAsShortRange(blip, true)
-  BeginTextCommandSetBlipName("STRING")
-  AddTextComponentString("Unknown")
-  EndTextCommandSetBlipName(blip)
+  --local blip = AddBlipForCoord(laptop.x, laptop.y, laptop.z)
+  --SetBlipSprite(blip, 277)
+  --SetBlipColour(blip, 1)
+  --SetBlipAsShortRange(blip, true)
+  --BeginTextCommandSetBlipName("STRING")
+  --AddTextComponentString("Unknown")
+  --EndTextCommandSetBlipName(blip)
   while true do
     Citizen.Wait(0)
     if GetDistanceBetweenCoords(dropoff.x, dropoff.y, dropoff.z, GetEntityCoords(GetPlayerPed(-1)), true) < 3 and required then
