@@ -1,6 +1,15 @@
 local clienttime = 0
 local hunger = 100
 local thirst = 100
+
+function fsn_thirst()
+	return thirst
+end
+
+function fsn_hunger()
+	return hunger
+end
+
 local UI = {
 	x =  0.000 ,	-- Base Screen Coords 	+ 	 x
 	y = -0.001 ,	-- Base Screen Coords 	+ 	-y
@@ -17,6 +26,7 @@ AddEventHandler('fsn_inventory:initChar', function()
 	thirst = 0
 end)
 
+--[[
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(1)
@@ -54,7 +64,7 @@ Citizen.CreateThread(function()
     end
   end
 end)
-
+]]--
 local paused = false
 RegisterNetEvent('fsn_hungerandthirst:pause')
 RegisterNetEvent('fsn_hungerandthirst:unpause')
