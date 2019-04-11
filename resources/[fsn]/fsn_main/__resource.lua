@@ -2,6 +2,7 @@
 client_script 'initial/client.lua'
 client_script 'money/client.lua'
 client_script 'hud/client.lua'
+client_script 'hud/playerhud.lua'
 client_script 'playermanager/client.lua'
 client_script 'imanager/client.lua'
 client_script 'misc/exports.lua'
