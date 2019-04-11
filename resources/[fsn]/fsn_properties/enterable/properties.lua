@@ -3,7 +3,7 @@ enterable_properties = {
     title = 'Darnell Bros Factory',
     price = 25000,
     expiry = 0,
-    owner = 6,
+    owner = -1,
     coowners = {},
     db_id = 1,
     blip = {x = 714.41790771484, y = -976.95068359375, z = 24.127908706665},
@@ -358,23 +358,33 @@ end)
 
 RegisterServerEvent('fsn_properties:enterable:buy')
 AddEventHandler('fsn_properties:enterable:buy', function(propid, charid)
+  local canbuy = true
   for k, v in pairs(enterable_properties) do
-    if v.db_id == propid then
-      if v.owner ~= tostring(-1) then
-        v.owner = charid
+	if v.owner == charid then
+		canbuy = false
+	end
+  end
+  if canbuy then
+	  for k, v in pairs(enterable_properties) do
+		if v.db_id == propid then
+		  if v.owner ~= tostring(-1) then
+			v.owner = charid
 
-        local expire = os.time() + 604800
-        v.expiry = expire
-        TriggerClientEvent('fsn_notify:displayNotification', source, 'You bought property #'..propid, 'centerRight', 8000, 'success')
-        TriggerClientEvent('fsn_notify:displayNotification', source, 'Rent will be due in 7 days.', 'centerRight', 9000, 'info')
+			local expire = os.time() + 604800
+			v.expiry = expire
+			TriggerClientEvent('fsn_notify:displayNotification', source, 'You bought property #'..propid, 'centerRight', 8000, 'success')
+			TriggerClientEvent('fsn_notify:displayNotification', source, 'Rent will be due in 7 days.', 'centerRight', 9000, 'info')
 
-        TriggerClientEvent('fsn_bank:change:walletMinus', source, v.price)
+			TriggerClientEvent('fsn_bank:change:walletMinus', source, v.price)
 
-        MySQL.Async.execute('UPDATE `fsn_properties` SET `property_owner` = @new, `property_expiry` = @expire WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = charid, ['@expire'] = expire}, function(rowsChanged) end)
-      else
-        TriggerClientEvent('fsn_notify:displayNotification', source, 'Somebody already bought this!!', 'centerRight', 8000, 'error')
-      end
-    end
+			MySQL.Async.execute('UPDATE `fsn_properties` SET `property_owner` = @new, `property_expiry` = @expire WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = charid, ['@expire'] = expire}, function(rowsChanged) end)
+		  else
+			TriggerClientEvent('fsn_notify:displayNotification', source, 'Somebody already bought this!!', 'centerRight', 8000, 'error')
+		  end
+		end
+	  end
+  else
+	TriggerClientEvent('fsn_notify:displayNotification', source, 'You already own a property!', 'centerRight', 8000, 'error')
   end
   TriggerClientEvent('fsn_properties:doors:update', -1, enterable_properties)
 end)
