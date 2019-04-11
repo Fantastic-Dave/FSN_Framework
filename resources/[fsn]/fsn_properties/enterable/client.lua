@@ -185,7 +185,7 @@ AddEventHandler('fsn_properties:menu:inventory:deposit', function(id)
             item = string.lower(tostring(GetOnscreenKeyboardResult()))
             item = items[item]
             if item then
-              DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 30)
+              DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 6)
               local editOpen = true
               while UpdateOnscreenKeyboard() == 0 or editOpen do
                 Wait(0)
@@ -195,14 +195,22 @@ AddEventHandler('fsn_properties:menu:inventory:deposit', function(id)
                   editOpen = false
                   if UpdateOnscreenKeyboard() == 1 then
                     amount = tonumber(GetOnscreenKeyboardResult())
-                    if exports.fsn_inventory:fsn_GetItemAmount(item) >= amount then
-                      local _item = exports.fsn_inventory:fsn_GetItemDetails(item).display_name
-                      TriggerServerEvent('fsn_properties:enterable:inventory:enter', id, item, _item, amount)
-                      --print('removing '..amount..' '..item)
-                      TriggerEvent('fsn_inventory:item:take', item, amount)
-                    else
-                      TriggerEvent('fsn_notify:displayNotification', 'You dont have enough!', 'centerLeft', 5000, 'error')
-                    end
+					if amount then
+						if amount > 500000 then
+							TriggerEvent('fsn_notify:displayNotification', 'Can only deposit up to 500,000 of an object', 'centerLeft', 5000, 'error')
+						else
+							if exports.fsn_inventory:fsn_GetItemAmount(item) >= amount then
+							  local _item = exports.fsn_inventory:fsn_GetItemDetails(item).display_name
+							  TriggerServerEvent('fsn_properties:enterable:inventory:enter', id, item, _item, amount)
+							  --print('removing '..amount..' '..item)
+							  TriggerEvent('fsn_inventory:item:take', item, amount)
+							else
+							  TriggerEvent('fsn_notify:displayNotification', 'You dont have enough!', 'centerLeft', 5000, 'error')
+							end
+						end
+					else
+						TriggerEvent('fsn_notify:displayNotification', 'Can you enter a number pls', 'centerLeft', 5000, 'error')
+					end
                   end
                 end
               end
@@ -226,7 +234,7 @@ AddEventHandler('fsn_properties:menu:inventory:take', function(item, propid)
   end
   if _property then
     Citizen.CreateThread(function()
-      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 10)
+      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 6)
       local editOpen = true
       while UpdateOnscreenKeyboard() == 0 or editOpen do
         Wait(0)
@@ -235,7 +243,11 @@ AddEventHandler('fsn_properties:menu:inventory:take', function(item, propid)
           editOpen = false
           if UpdateOnscreenKeyboard() == 1 then
             amt = tonumber(GetOnscreenKeyboardResult())
-            TriggerServerEvent('fsn_properties:enterable:inventory:take', propid, item, amt)
+			if amt and amt < 500001 then
+				TriggerServerEvent('fsn_properties:enterable:inventory:take', propid, item, amt)
+			else
+				TriggerEvent('fsn_notify:displayNotification', 'Can only withdraw up to 500,000 of an object', 'centerLeft', 5000, 'error')
+			end
           end
         end
       end
