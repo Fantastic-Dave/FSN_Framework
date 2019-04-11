@@ -32,7 +32,8 @@ AddEventHandler('fsn_inventory:itempickup', function(pickupid)
 		else
 			print(':fsn_inventory: '..GetPlayerName(source)..' tried to pick up id: '..pickupid..' but it does not exist')
 			TriggerClientEvent('fsn_inventory:floor:update', -1, items)
-			DropPlayer(source, ':FSN: Attempted product dupe')
+			--DropPlayer(source, ':FSN: Attempted product dupe')
+			TriggerClientEvent('fsn_notify:displayNotification', source, 'This item doesn\'t seem to exist!', 'centerLeft', 3000, 'error')
 		end
 		locktable = false
 	end
