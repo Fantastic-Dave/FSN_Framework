@@ -147,6 +147,16 @@ local function fsn_closeATM()
   atmDisplay = falses
 end
 RegisterNUICallback('depositMoney', function(tbl)
+  if not tonumber(tbl.deposit) or tonumber(tbl.deposit) < 1 then
+	fsn_closeATM()
+	TriggerEvent('fsn_notify:displayNotification', 'There was an issue with your input!', 'centerRight', 4000, 'error')
+	return
+  end
+  if tonumber(tbl.deposit) > 500000 then
+	fsn_closeATM()
+	TriggerEvent('fsn_notify:displayNotification', 'Maximum deposit of $500,000', 'centerRight', 4000, 'error')
+	return
+  end
   if tonumber(moneys) >= tonumber(tbl.deposit) then
     local new_wallet = moneys - tbl.deposit
     local new_bank = banks + tbl.deposit
@@ -154,12 +164,22 @@ RegisterNUICallback('depositMoney', function(tbl)
     banks = banks + tbl.deposit
     TriggerEvent('fsn_bank:change:bankandwallet', new_wallet, new_bank)
   else
-			TriggerEvent('fsn_notify:displayNotification', 'You don\'t have enough money!', 'centerRight', 4000, 'error')
+	TriggerEvent('fsn_notify:displayNotification', 'You don\'t have enough money!', 'centerRight', 4000, 'error')
   end
   fsn_closeATM()
 end)
 
 RegisterNUICallback('withdrawMoney', function(tbl)
+  if not tonumber(tbl.withdraw) or tonumber(tbl.withdraw) < 1 then
+	fsn_closeATM()
+	TriggerEvent('fsn_notify:displayNotification', 'There was an issue with your input!', 'centerRight', 4000, 'error')
+	return
+  end
+  if tonumber(tbl.withdraw) > 500000 then
+	fsn_closeATM()
+	TriggerEvent('fsn_notify:displayNotification', 'Maximum withdraw of $500,000', 'centerRight', 4000, 'error')
+	return
+  end
   if tonumber(tbl.withdraw) then
     if tonumber(banks) >= tonumber(tbl.withdraw) then
       local new_wallet = moneys + tbl.withdraw
@@ -168,7 +188,7 @@ RegisterNUICallback('withdrawMoney', function(tbl)
       banks = banks - tbl.withdraw
       TriggerEvent('fsn_bank:change:bankandwallet', new_wallet, new_bank)
     else
-  			TriggerEvent('fsn_notify:displayNotification', 'There isn\'t enough in the account!', 'centerRight', 4000, 'error')
+  		TriggerEvent('fsn_notify:displayNotification', 'There isn\'t enough in the account!', 'centerRight', 4000, 'error')
     end
   else
     TriggerEvent('fsn_notify:displayNotification', 'There\'s an issue with what you entered', 'centerRight', 4000, 'error')
