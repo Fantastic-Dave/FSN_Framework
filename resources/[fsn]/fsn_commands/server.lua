@@ -280,6 +280,17 @@ local nineoneone = 0
 AddEventHandler('chatMessage', function(source, auth, msg)
   local split = fsn_SplitString(msg, ' ')
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  -- MONEY COMMANDS
+  -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/givecash' or split[1] == '/gc' then
+	if split[2] and split[3] then
+		--AddEventHandler('fsn_main:money:wallet:Set', function(src, ply, amt)
+		TriggerEvent('fsn_main:money:wallet:GiveCash', source, split[2], split[3])
+	else
+		TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Usage: /givecash {PLAYER} {AMOUNT}')
+	end
+  end
+  -------------------------------------------------------------------------------------------------------------------------------------------------
   -- CLOTHING COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/mask' or split[1] == '/m' then
