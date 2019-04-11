@@ -24,6 +24,41 @@ AddEventHandler('fsn_main:money:initChar', function(src, cid, cash, balance)
 	TriggerClientEvent('fsn_main:money:update', src, cash, balance)
 end)
 
+RegisterServerEvent('fsn_main:money:wallet:GiveCash')
+AddEventHandler('fsn_main:money:wallet:GiveCash', function(src, ply, amt)
+	ply = tonumber(ply)
+	if not tonumber(amt) or tonumber(amt) < 1 then
+		TriggerClientEvent('fsn_notify:displayNotification', src, 'There was an issue with your input', 'centerRight', 4000, 'error')
+		return
+	end
+	if tonumber(amt) > 1000 then
+		TriggerClientEvent('fsn_notify:displayNotification', src, 'You cannot give over $1000, use an ATM', 'centerRight', 4000, 'error')
+		return
+	end
+	for k,v in pairs(moneystore) do
+		if v.ply_id == src then
+			if v.wallet >= tonumber(amt) then
+				for key, rec in pairs(moneystore) do
+					if rec.ply_id == ply then
+						rec.wallet = rec.wallet + tonumber(amt)
+						TriggerClientEvent('fsn_main:money:updateSilent', ply, rec.wallet, rec.bank)
+						
+						TriggerClientEvent('fsn_notify:displayNotification', ply, 'You got $'..amt..' from '..src, 'centerRight', 4000, 'success')
+						--Citizen.Wait(500)
+						--TriggerClientEvent('fsn_main:gui:money:addMoney', ply, amt, newamt)
+					end
+				end
+				v.wallet = v.wallet - tonumber(amt)
+				TriggerClientEvent('fsn_main:money:updateSilent', src, v.wallet, v.bank)
+				
+				TriggerClientEvent('fsn_notify:displayNotification', src, 'You gave $'..amt..' to '..ply, 'centerRight', 4000, 'info')
+				--Citizen.Wait(500)
+			else
+				TriggerClientEvent('fsn_notify:displayNotification', src, 'You don\'t have that amount!', 'centerRight', 4000, 'error')
+			end
+		end
+	end
+end)
 
 RegisterServerEvent('fsn_main:money:wallet:Set')
 AddEventHandler('fsn_main:money:wallet:Set', function(ply, amt)
