@@ -7,6 +7,11 @@ AddEventHandler('playerConnecting', function(playername, setKickReason)
   if mysql then
     identity = GetPlayerIdentifiers(source)
     print(':FSN: '..playername..' is connecting with steamid '..identity[1])
+	if not string.find(identity[1], "steam") then
+		DropPlayer(source, ':FSN: james does not like your ?steamid?, try again')
+		setKickReason(':FSN: james does not like your ?steamid?, try again')
+		CancelEvent()
+	end
     MySQL.Async.fetchAll("SELECT * FROM fsn_users WHERE steamid = '"..identity[1].."'", {}, function(user)
       if not user[1] then
         MySQL.Sync.execute("INSERT INTO `fsn_users` (`name`, `steamid`, `connections`, `banned`, `banned_r`) VALUES ('"..playername.."', '"..identity[1].."', '1', '0', '')")
