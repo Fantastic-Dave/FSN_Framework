@@ -197,6 +197,16 @@ RegisterNUICallback('withdrawMoney', function(tbl)
 end)
 
 RegisterNUICallback('transferMoney', function(tbl)
+	if not tonumber(tbl.transferAmount) or tonumber(tbl.transferAmount) < 1 then
+	fsn_closeATM()
+	TriggerEvent('fsn_notify:displayNotification', 'There was an issue with your input!', 'centerRight', 4000, 'error')
+	return
+  end
+  if tonumber(tbl.transferAmount) > 500000 then
+	fsn_closeATM()
+	TriggerEvent('fsn_notify:displayNotification', 'Maximum transfer of $500,000', 'centerRight', 4000, 'error')
+	return
+  end
   if tonumber(tbl.transferAmount) and tonumber(tbl.transferTo) then
     if tonumber(banks) >= tonumber(tbl.transferAmount) then
       TriggerServerEvent('fsn_bank:transfer', tbl.transferTo, tbl.transferAmount)
