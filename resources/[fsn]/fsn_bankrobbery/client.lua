@@ -246,7 +246,7 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
     if cracking then
-      local rem = start_time + 300
+      local rem = start_time + 750
       if rem < current_time then
         TaskPlayAnim(GetPlayerPed(-1), 'mp_heists@keypad@', 'exit', 8.0, 1.0, -1, 0, 1.0, 0, 0, 0)
         cracking = false
