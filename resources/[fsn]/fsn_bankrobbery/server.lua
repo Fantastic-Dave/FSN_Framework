@@ -5,9 +5,9 @@ local vault_doors = {
 }
 
 local banks_payout = {
-  [1] = 2158432,
-  [2] = 4589475,
-  [3] = 1589846
+  [1] = 158432,
+  [2] = 589475,
+  [3] = 589846
 }
 
 RegisterServerEvent('fsn_bankrobbery:vault:open')
