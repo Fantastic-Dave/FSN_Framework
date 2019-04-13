@@ -27,6 +27,7 @@ server_script 'initial/server.lua'
 server_script 'money/server.lua'
 server_script 'playermanager/server.lua'
 server_script 'imanager/server.lua'
+server_script 'misc/logging.lua'
 
 
 -- exports
