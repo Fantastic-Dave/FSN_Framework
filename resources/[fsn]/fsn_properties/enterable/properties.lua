@@ -185,7 +185,7 @@ AddEventHandler('fsn_properties:enterable:access:allow', function(propid, pid)
       if exports.fsn_main:fsn_GetPlayerFromCharacterId(pid) ~= 0 then
         TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromCharacterId(pid), 'You were granted access to property #'..propid, 'centerLeft', 8000, 'success')
       end
-
+	  TriggerEvent('fsn_main:logging:addLog', source, 'property', 'Character('..exports["fsn_main"]:fsn_CharID(source)..') granted access to Property('..v.title..') for Character('..pid..')')
       MySQL.Async.execute('UPDATE `fsn_properties` SET `property_coowners` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.coowners)}, function(rowsChanged) end)
     end
   end
@@ -206,7 +206,7 @@ AddEventHandler('fsn_properties:enterable:access:revoke', function(propid, pid)
       if exports.fsn_main:fsn_GetPlayerFromCharacterId(pid) ~= 0 then
         TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromCharacterId(pid), 'Your access to property #'..propid..' has been revoked!', 'centerLeft', 8000, 'error')
       end
-
+	  TriggerEvent('fsn_main:logging:addLog', source, 'property', 'Character('..exports["fsn_main"]:fsn_CharID(source)..') revoked access to Property('..v.title..') from Character('..pid..')')
       MySQL.Async.execute('UPDATE `fsn_properties` SET `property_coowners` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.coowners)}, function(rowsChanged) end)
     end
   end
@@ -224,7 +224,7 @@ AddEventHandler('fsn_properties:enterable:inventory:enter', function(propid, ite
         v.inventory[item].item_name = item_name
         v.inventory[item].amount = amt
       end
-
+	  TriggerEvent('fsn_main:logging:addLog', source, 'property', 'Character('..exports["fsn_main"]:fsn_CharID(source)..') deposited '..amt..' '..item..' into Property('..v.title..')')
       MySQL.Async.execute('UPDATE `fsn_properties` SET `property_inventory` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.inventory)}, function(rowsChanged) end)
     end
   end
@@ -249,7 +249,7 @@ AddEventHandler('fsn_properties:enterable:inventory:take', function(propid, item
       else
         TriggerClientEvent('fsn_notify:displayNotification', source, 'You dont have that many', 'centerLeft', 8000, 'error')
       end
-
+	  TriggerEvent('fsn_main:logging:addLog', source, 'property', 'Character('..exports["fsn_main"]:fsn_CharID(source)..') took '..amt..' '..item..' from Property('..v.title..')')
       MySQL.Async.execute('UPDATE `fsn_properties` SET `property_inventory` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.inventory)}, function(rowsChanged) end)
     end
   end
@@ -268,6 +268,7 @@ AddEventHandler('fsn_properties:enterable:weapon:enter', function(propid, item, 
         v.weapons[item_name].amount = 1
       end
       TriggerClientEvent('fsn_notify:displayNotification', source, 'You stored <b>'..item_name, 'centerLeft', 8000, 'success')
+	  TriggerEvent('fsn_main:logging:addLog', source, 'property', 'Character('..exports["fsn_main"]:fsn_CharID(source)..') stored '..item_name..' in Property('..v.title..')')
       MySQL.Async.execute('UPDATE `fsn_properties` SET `property_weapons` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.weapons)}, function(rowsChanged) end)
     end
   end
@@ -284,7 +285,7 @@ AddEventHandler('fsn_properties:enterable:weapon:take', function(propid, item_na
          v.weapons[item_name].amount = v.weapons[item_name].amount - 1
       end
       TriggerClientEvent('fsn_notify:displayNotification', source, 'You equipped <b>'..item_name, 'centerRight', 8000, 'success')
-
+	  TriggerEvent('fsn_main:logging:addLog', source, 'property', 'Character('..exports["fsn_main"]:fsn_CharID(source)..') took '..item_name..' from Property('..v.title..')')
       MySQL.Async.execute('UPDATE `fsn_properties` SET `property_weapons` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = json.encode(v.weapons)}, function(rowsChanged) end)
     end
   end
@@ -301,7 +302,7 @@ AddEventHandler('fsn_properties:enterable:money:withdraw', function(propid, amt)
       else
         TriggerClientEvent('fsn_notify:displayNotification', source, 'There is not enough money in the property!', 'centerRight', 8000, 'error')
       end
-
+	  TriggerEvent('fsn_main:logging:addLog', source, 'property', 'Character('..exports["fsn_main"]:fsn_CharID(source)..') withdrew $'..amt..' from Property('..v.title..')')
       MySQL.Async.execute('UPDATE `fsn_properties` SET `property_money` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = v.money}, function(rowsChanged) end)
     end
   end
@@ -313,7 +314,7 @@ AddEventHandler('fsn_properties:enterable:money:deposit', function(propid, amt)
   for k, v in pairs(enterable_properties) do
     if v.db_id == propid then
       v.money = v.money + amt
-
+	  TriggerEvent('fsn_main:logging:addLog', source, 'property', 'Character('..exports["fsn_main"]:fsn_CharID(source)..') deposited $'..amt..' into Property('..v.title..')')
       MySQL.Async.execute('UPDATE `fsn_properties` SET `property_money` = @new WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = v.money}, function(rowsChanged) end)
     end
   end
@@ -376,7 +377,7 @@ AddEventHandler('fsn_properties:enterable:buy', function(propid, charid)
 			TriggerClientEvent('fsn_notify:displayNotification', source, 'Rent will be due in 7 days.', 'centerRight', 9000, 'info')
 
 			TriggerClientEvent('fsn_bank:change:walletMinus', source, v.price)
-
+			TriggerEvent('fsn_main:logging:addLog', source, 'property', 'Character('..exports["fsn_main"]:fsn_CharID(source)..') purhcased Property('..v.title..')')
 			MySQL.Async.execute('UPDATE `fsn_properties` SET `property_owner` = @new, `property_expiry` = @expire WHERE `property_id` = @id', {['@id'] = propid, ['@new'] = charid, ['@expire'] = expire}, function(rowsChanged) end)
 		  else
 			TriggerClientEvent('fsn_notify:displayNotification', source, 'Somebody already bought this!!', 'centerRight', 8000, 'error')
@@ -416,7 +417,7 @@ AddEventHandler('fsn_properties:enterable:payRent', function(propid)
 
         TriggerClientEvent('fsn_bank:change:walletMinus', source, v.price - math.ceil(v.price / 0.3))
         TriggerClientEvent('fsn_notify:displayNotification', source, 'You paid your rent', 'centerRight', 8000, 'success')
-
+		TriggerEvent('fsn_main:logging:addLog', source, 'property', 'Character('..exports["fsn_main"]:fsn_CharID(source)..') paid the rent for Property('..v.title..')')
         MySQL.Async.execute('UPDATE `fsn_properties` SET `property_expiry` = @expire WHERE `property_id` = @id', {['@id'] = propid, ['@expire'] = expire}, function(rowsChanged) end)
       end
     end

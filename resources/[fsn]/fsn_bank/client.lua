@@ -163,6 +163,7 @@ RegisterNUICallback('depositMoney', function(tbl)
     moneys = moneys - tbl.deposit
     banks = banks + tbl.deposit
     TriggerEvent('fsn_bank:change:bankandwallet', new_wallet, new_bank)
+	TriggerServerEvent('fsn_main:logging:addLog', GetPlayerServerId(PlayerId()), 'money', 'Character('..exports["fsn_main"]:fsn_CharID(GetPlayerServerId(PlayerId()))..') deposited $'..tbl.deposit)
   else
 	TriggerEvent('fsn_notify:displayNotification', 'You don\'t have enough money!', 'centerRight', 4000, 'error')
   end
@@ -187,6 +188,7 @@ RegisterNUICallback('withdrawMoney', function(tbl)
       moneys = moneys + tbl.withdraw
       banks = banks - tbl.withdraw
       TriggerEvent('fsn_bank:change:bankandwallet', new_wallet, new_bank)
+	  TriggerServerEvent('fsn_main:logging:addLog', GetPlayerServerId(PlayerId()), 'money', 'Character('..exports["fsn_main"]:fsn_CharID(GetPlayerServerId(PlayerId()))..') withdrew $'..tbl.withdraw)
     else
   		TriggerEvent('fsn_notify:displayNotification', 'There isn\'t enough in the account!', 'centerRight', 4000, 'error')
     end

@@ -46,12 +46,15 @@ AddEventHandler('fsn_main:money:wallet:GiveCash', function(src, ply, amt)
 						TriggerClientEvent('fsn_notify:displayNotification', ply, 'You got $'..amt..' from '..src, 'centerRight', 4000, 'success')
 						--Citizen.Wait(500)
 						--TriggerClientEvent('fsn_main:gui:money:addMoney', ply, amt, newamt)
+						
 					end
 				end
 				v.wallet = v.wallet - tonumber(amt)
 				TriggerClientEvent('fsn_main:money:updateSilent', src, v.wallet, v.bank)
 				
 				TriggerClientEvent('fsn_notify:displayNotification', src, 'You gave $'..amt..' to '..ply, 'centerRight', 4000, 'info')
+				
+				TriggerEvent('fsn_main:logging:addLog', src, 'money', 'Character('..fsn_CharID(src)..') gave $'..amt..' to Character('..fsn_CharID(ply)..')')
 				--Citizen.Wait(500)
 			else
 				TriggerClientEvent('fsn_notify:displayNotification', src, 'You don\'t have that amount!', 'centerRight', 4000, 'error')
@@ -105,6 +108,7 @@ AddEventHandler('fsn_main:money:wallet:Add', function(ply, amt)
 				TriggerClientEvent('fsn_main:money:updateSilent', ply, v.wallet, v.bank)
 				Citizen.Wait(500)
 				TriggerClientEvent('fsn_main:gui:money:addMoney', ply, amt, newamt)
+				TriggerEvent('fsn_main:logging:addLog', ply, 'money', 'Character('..fsn_CharID(ply)..') added $'..amt..' to their CASH')
 			else
 				print('fsn_main:money:Add tried to add to wallet a non numerical value')
 			end
@@ -123,6 +127,7 @@ AddEventHandler('fsn_main:money:bank:Add', function(ply, amt)
 				TriggerClientEvent('fsn_main:money:updateSilent', ply, v.wallet, v.bank)
 				Citizen.Wait(500)
 				TriggerClientEvent('fsn_main:gui:bank:addMoney', ply, amt, newamt)
+				TriggerEvent('fsn_main:logging:addLog', ply, 'money', 'Character('..fsn_CharID(ply)..') added $'..amt..' to their BANK')
 			else
 				print('fsn_main:money:bank:Add tried to add to bank a non numerical value')
 			end
@@ -142,6 +147,7 @@ AddEventHandler('fsn_main:money:wallet:Minus', function(ply, amt)
 				TriggerClientEvent('fsn_main:money:updateSilent', ply, v.wallet, v.bank)
 				Citizen.Wait(500)
 				TriggerClientEvent('fsn_main:gui:minusMoney', ply, amt, newamt)
+				TriggerEvent('fsn_main:logging:addLog', ply, 'money', 'Character('..fsn_CharID(ply)..') spent $'..amt..' from their CASH')
 			else
 				print('fsn_main:money:wallet:Minus tried to minus wallet a non numerical value')
 			end
@@ -160,6 +166,7 @@ AddEventHandler('fsn_main:money:bank:Minus', function(ply, amt)
 				TriggerClientEvent('fsn_main:money:updateSilent', ply, v.wallet, v.bank)
 				Citizen.Wait(500)
 				TriggerClientEvent('fsn_main:gui:bank:minusMoney', ply, amt, newamt)
+				TriggerEvent('fsn_main:logging:addLog', ply, 'money', 'Character('..fsn_CharID(ply)..') spent $'..amt..' from their BANK')
 			else
 				print('fsn_main:money:bank:Minus tried to minus wallet a non numerical value')
 			end
