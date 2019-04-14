@@ -1,3 +1,42 @@
+local Adverts = {}
+RegisterServerEvent('fsn_phone:adverts:request')
+AddEventHandler('fsn_phone:adverts:request', function()
+	TriggerClientEvent('fsn_phone:adverts:update', source, Adverts)
+end)
+RegisterServerEvent('fsn_phone:adverts:add')
+AddEventHandler('fsn_phone:adverts:add', function(name, num, txt)
+	for k, ad in pairs(Adverts) do
+		if ad.writerid == source then
+			table.remove(Adverts, k)
+		end
+	end
+	table.insert(Adverts, #Adverts+1, {
+		writerid = source,
+		writer = name,
+		number = num,
+		text = txt
+	})
+	TriggerClientEvent('fsn_phone:adverts:update', -1, Adverts)
+end)
+RegisterServerEvent('fsn_phone:adverts:remove')
+AddEventHandler('fsn_phone:adverts:remove', function(number)
+	for k, ad in pairs(Adverts) do
+		if ad.number == number then
+			table.remove(Adverts, k)
+		end
+	end
+	TriggerClientEvent('fsn_phone:adverts:update', -1, Adverts)
+end)
+AddEventHandler('playerDropped', function (source, reason)
+	for k, ad in pairs(Adverts) do
+		if ad.writerid == source then
+			table.remove(Adverts, k)
+		end
+	end
+	TriggerClientEvent('fsn_phone:adverts:update', -1, Adverts)
+end)
+
+
 RegisterServerEvent('fsn_phone:purchased')
 AddEventHandler('fsn_phone:purchased', function(charid)
   local src = source

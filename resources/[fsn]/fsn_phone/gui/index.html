@@ -8,6 +8,10 @@
 			<img src="img/phone.png" class="phone_image"/>
 			<div class="phone_screen">
 				<div id="screen-home">
+					<div id="adverts-button" class="home_button">
+						<img src="img/icons/icon_adverts.png">
+						ADVERTS
+					</div>
 					<div id="phone-button" class="home_button">
 						<img src="img/icons/icon_phone.png">
 						PHONE
@@ -24,6 +28,30 @@
 						<img src="img/icons/icon_fleeca.png">
 						FLEECA
 					</div>
+					<div id="whitelists-button" class="home_button">
+						<img src="img/icons/icon_whitelists.png">
+						WHITELISTS
+					</div>
+				</div>
+				<div id="screen-whitelists">
+					<div class="status_bar"><div id="phone-sim-number"></div> <span>4G LTE</span></div>
+					<div id="whitelists">
+						<div id="no-whitelists" class="whitelists-error">SYS NOT LOADED</div>
+						<!-- <div id="no-whitelists" class="whitelists-whitelist"><b>PREMIUM DELUXE MOTORSPORTS</b><br><b>Owner:</b> 1<br><b>Access:</b> 1, 2<br><b>Bank: $</b>0<button>Manage Business</button></div> -->
+					</div>
+				</div>
+				<div id="screen-adverts">
+					<div class="status_bar"><div id="phone-sim-number"></div> <span>4G LTE</span></div>
+					<div id="adverts" class="adverts">
+						<!-- <div id="no-adverts" class="adverts-error">There aren't any adverts</div> -->
+						<!-- <div class="advert"><div class="advert_ad">I am currently a taxi driver ring me pls</div><div class="advert_contact">Logan Whitehead - 864325</div></div>
+						<div class="advert"><div class="advert_ad">I am currently a taxi driver ring me pls</div><div class="advert_contact">Logan Whitehead - 864325</div></div> -->
+						<!-- <div id="no-whitelists" class="whitelists-whitelist"><b>PREMIUM DELUXE MOTORSPORTS</b><br><b>Owner:</b> 1<br><b>Access:</b> 1, 2<br><b>Bank: $</b>0<button>Manage Business</button></div> -->
+					</div>
+					<div class="advert-add">
+						<textarea placeholder="Advert..." id="advert_textarea"></textarea>
+						<button onclick="postAdvert()">Post</button>
+					</div>
 				</div>
 				<div id="screen-messages">
 					<div class="status_bar"><div id="phone-sim-number"></div> <span>4G LTE</span></div>
@@ -36,7 +64,8 @@
 						</div>
 					</div>
 					<div id="messages-append" class="messages-box">
-						
+						<textarea id="textbox-message" placeholder="Message..."></textarea>
+						<button onclick="sendTextMessage()">Send</button>
 					</div>
 				</div>
 				<div id="screen-message-view">
