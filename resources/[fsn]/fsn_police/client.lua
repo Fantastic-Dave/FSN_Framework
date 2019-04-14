@@ -616,6 +616,9 @@ end)
 Citizen.CreateThread(function()
     while true do
       Citizen.Wait(0)
+	  for i = 1, 12 do
+			EnableDispatchService(i, false)
+		end
       if GetPlayerWantedLevel(PlayerId()) ~= 0 then
         SetPlayerWantedLevel(PlayerId(), 0, false)
 			  SetPoliceIgnorePlayer(PlayerId(), true)
