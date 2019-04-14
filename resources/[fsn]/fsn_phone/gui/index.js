@@ -143,6 +143,17 @@ function displayContact(jsid) {
 	}
 }
 
+function postAdvert() {
+	var message = $('#advert_textarea').val()
+	$.post('http://fsn_phone/placeAdvert', JSON.stringify({
+		ad:message
+	}));
+	
+	$('#advert_textarea').val('')
+	$.post('http://fsn_phone/disablePhone', JSON.stringify({}));
+}
+
+
 function sendTextMessage() {
 	var number = $('#textbox-number').val()
 	var message = $('#textbox-message').val()
@@ -182,6 +193,36 @@ $(function() {
 		if (event.data.updateContacts == true) {
 			contacts = event.data.contacts
 		}
+		if (event.data.updateWhitelists == true) {
+			$('#whitelists').html('')
+			whitelists = event.data.whitelists
+			if (whitelists.length > 0) {
+				for(var i = 0; i < whitelists.length; i++) {
+					var wl = whitelists[i]
+					console.log(wl)
+					$('#whitelists').append('<div id="no-whitelists" class="whitelists-whitelist">'+
+					'<b>'+wl.title+'</b><br>'+
+					'<b>Owner:</b> '+wl.owner+'<br>'+
+					'<b>Access:</b> ...<br>'+
+					'<b>Bank: $</b>'+wl.bank+
+					'<button>Manage Business</button></div>')
+				}
+			} else {
+				$('#whitelists').append('<div id="no-whitelists" class="whitelists-error">You are not currently a part of any business.</div>')
+			}
+		}
+		if (event.data.updateAdverts == true) {
+			$('#adverts').html('')
+			adverts = event.data.ads
+			if (adverts.length > 0) {
+				for(var i = 0; i < adverts.length; i++) {
+					var ad = adverts[i]
+					$('#adverts').append('<div class="advert"><div class="advert_ad">'+ad.text+'</div><div class="advert_contact">'+ad.writer+' - '+ad.number+'</div></div>')
+				}
+			} else {
+				$('#adverts').append('<div id="no-adverts" class="adverts-error">There are not any adverts</div>')
+			}
+		}
 		if (event.data.addMessage == true) {
 			var json = 	{
 				contact:event.data.contact,
@@ -200,6 +241,11 @@ $(function() {
 				$('#screen-nosim').hide()
 				$('#screen-phone').hide()
 				$('#screen-messages').hide()
+				$('#screen-contacts').hide()
+				$('#screen-whitelists').hide()
+				$('#screen-message-view').hide()
+				$('#screen-contact-view').hide()
+				$('#screen-adverts').hide()
 				$( "#phone-sim-number" ).text( '#'+event.data.number );
 				$('#screen-home').show()
 			}
@@ -226,13 +272,37 @@ document.body.onmouseup = function() {
 		$('#screen-contact-view').hide()
 		$('#screen-messages').hide()
 		$('#screen-contacts').hide()
+		$('#screen-whitelists').hide()
+		$('#screen-adverts').hide()
 		$('#screen-phone').show()
+	}
+	if ($('#adverts-button:hover').length != 0) {
+		$('#screen-home').hide()
+		$('#screen-message-view').hide()
+		$('#screen-contact-view').hide()
+		$('#screen-messages').hide()
+		$('#screen-contacts').hide()
+		$('#screen-phone').hide()
+		$('#screen-whitelists').hide()
+		$('#screen-adverts').show()
+	}
+	if ($('#whitelists-button:hover').length != 0) {
+		$('#screen-home').hide()
+		$('#screen-message-view').hide()
+		$('#screen-contact-view').hide()
+		$('#screen-messages').hide()
+		$('#screen-contacts').hide()
+		$('#screen-phone').hide()
+		$('#screen-adverts').hide()
+		$('#screen-whitelists').show()
 	}
 	if ($('#contacts-button:hover').length != 0) {
 		$('#screen-home').hide()
 		$('#screen-phone').hide()
 		$('#screen-message-view').hide()
 		$('#screen-contact-view').hide()
+		$('#screen-whitelists').hide()
+		$('#screen-adverts').hide()
 		$('#screen-messages').hide()
 		
 		// Add the contacts
@@ -266,6 +336,8 @@ document.body.onmouseup = function() {
 		$('#screen-contacts').hide()
 		$('#screen-message-view').hide()
 		$('#screen-contact-view').hide()
+		$('#screen-adverts').hide()
+		$('#screen-whitelists').hide()
 		
 		// Add the messages
 		$('#messages-append').html('')
@@ -291,6 +363,8 @@ document.body.onmouseup = function() {
 		$('#screen-message-view').hide()
 		$('#screen-contact-view').hide()
 		$('#screen-contacts').hide()
+		$('#screen-whitelists').hide()
+		$('#screen-adverts').hide()
 		$('#screen-home').show()
 	}
 	

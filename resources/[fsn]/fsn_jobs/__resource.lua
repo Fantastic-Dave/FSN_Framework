@@ -1,5 +1,10 @@
 client_script 'client.lua'
+server_script '@mysql-async/lib/MySQL.lua'
 server_script 'server.lua'
+
+-- whitelists
+client_script 'whitelists/client.lua'
+server_script 'whitelists/server.lua'
 
 -- mechanic job
 client_script 'mechanic/client.lua'
@@ -29,5 +34,8 @@ client_script 'tow/client.lua'
 
 exports({
   'fsn_GetJob',
-  'fsn_SetJob'
+  'fsn_SetJob',
+  'isWhitelisted',
+  'getWhitelistDetails',
+  'inAnyWhitelist'
 })

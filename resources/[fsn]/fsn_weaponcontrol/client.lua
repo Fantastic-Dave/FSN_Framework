@@ -239,3 +239,50 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+function loadAnimDict( dict )
+	while ( not HasAnimDictLoaded( dict ) ) do
+		RequestAnimDict( dict )
+		Citizen.Wait( 0 )
+	end
+end
+local weapons = {
+	"WEAPON_PISTOL",
+	"WEAPON_COMBATPISTOL",
+	"WEAPON_STUNGUN",
+}
+function CheckWeapon(ped)
+	for i = 1, #weapons do
+		if GetHashKey(weapons[i]) == GetSelectedPedWeapon(ped) then
+			return true
+		end
+	end
+	return false
+end
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		local ped = PlayerPedId()
+		if DoesEntityExist( ped ) and not IsEntityDead( ped ) and not IsPedInAnyVehicle(PlayerPedId(), true) then
+			loadAnimDict( "rcmjosh4" )
+			loadAnimDict( "weapons@pistol@" )
+			if CheckWeapon(ped) then
+				if holstered then
+					TaskPlayAnim(ped, "rcmjosh4", "josh_leadout_cop2", 8.0, 2.0, -1, 48, 10, 0, 0, 0 )
+					Citizen.Wait(600)
+					ClearPedTasks(ped)
+					holstered = false
+				end
+				--SetPedComponentVariation(ped, 9, 0, 0, 0)
+			elseif not CheckWeapon(ped) then
+				if not holstered then
+					TaskPlayAnim(ped, "weapons@pistol@", "aim_2_holster", 8.0, 2.0, -1, 48, 10, 0, 0, 0 )
+					Citizen.Wait(500)
+					ClearPedTasks(ped)
+					holstered = true
+				end
+				--SetPedComponentVariation(ped, 9, 1, 0, 0)
+			end
+		end
+	end
+end)

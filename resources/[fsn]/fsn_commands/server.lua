@@ -516,6 +516,12 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/dev' and fsn_isDeveloper(source) then
     if split[2] then
+	  if split[2] == 'pedrevive' then
+		TriggerClientEvent('fsn_commands:police:pedrevive', source)
+	  end
+	  if split[2] == 'pedcarry' then
+		TriggerClientEvent('fsn_commands:police:pedcarry', source)
+	  end
 	  if split[2] == 'addmoney' then
 		TriggerClientEvent('fsn_bank:change:walletAdd', source, tonumber(split[3]))
 	  end
@@ -577,6 +583,43 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/ems' then
     if fsn_emsOnDuty(source) then
+	  if split[2] == 'extra' then
+          if split[3] then
+            if split[3] == 'all' then
+              TriggerClientEvent('fsn_commands:police:extra', source, 'all', split[4])
+              return
+            end
+            if tonumber(split[3]) then
+              TriggerClientEvent('fsn_commands:police:extra', source, tonumber(split[3]))
+            else
+              TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
+            end
+          else
+            TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
+          end
+        end
+	  if split[2] == 'livery' then
+          if split[3] then
+            if tonumber(split[3]) then
+              TriggerClientEvent('fsn_commands:police:livery', source, tonumber(split[3]))
+            else
+              TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')``
+            end
+          else
+            TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
+          end
+        end
+	  if split[2] == 'impound' then
+        TriggerClientEvent('fsn_commands:police:impound', source)
+      end
+	  if split[2] == 'ped' then
+		if split[3] == 'carry' then
+			TriggerClientEvent('fsn_commands:police:pedcarry', source)
+		end
+		if split[3] == 'revive' then
+			TriggerClientEvent('fsn_commands:police:pedrevive', source)
+		end
+	end
       if split[2] == 'car' then
         if tonumber(split[3]) then
           TriggerClientEvent('fsn_commands:police:car', source, ems_cars[tonumber(split[3])])
@@ -634,6 +677,14 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/police' or split[1] == '/pd' then
     if fsn_policeOnDuty(source) then
       if split[2] then
+		if split[2] == 'ped' then
+			if split[3] == 'carry' then
+				TriggerClientEvent('fsn_commands:police:pedcarry', source)
+			end
+			if split[3] == 'revive' then
+				TriggerClientEvent('fsn_commands:police:pedrevive', source)
+			end
+		end
         if split[2] == 'radar' then
           TriggerClientEvent('fsn_police:radar:toggle', source)
         end

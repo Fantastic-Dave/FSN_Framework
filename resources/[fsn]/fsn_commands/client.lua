@@ -33,6 +33,12 @@ function fsn_NearestPlayersS(x, y, z, radius)
 	end
 	return players
 end
+function loadAnim( dict )
+    while ( not HasAnimDictLoaded( dict ) ) do
+        RequestAnimDict( dict )
+        Citizen.Wait( 5 )
+    end
+end
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- CLOTHING COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -229,6 +235,79 @@ end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- POLICE COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent('fsn_commands:police:pedcarry')
+AddEventHandler('fsn_commands:police:pedcarry', function()
+	local ped = exports['fsn_main']:fsn_FindNearbyPed(2)
+	local isPlayer=false
+	for i = 0, 31 do
+		if(ped == GetPlayerPed(i)) then
+			  isPlayer = true
+		end
+	end
+	if ped then
+		if isPlayer then
+			TriggerEvent('fsn_notify:displayNotification', 'You cannot carry a player', 'centerLeft', 4000, 'error')
+		end
+		loadAnim('anim@narcotics@trash')
+		TaskPlayAnim(GetPlayerPed(-1),'anim@narcotics@trash', 'drop_front',0.9, -8, 1500, 49, 3.0, 0, 0, 0) 
+		TaskTurnPedToFaceEntity(GetPlayerPed(-1), ped, 1.0)
+		SetBlockingOfNonTemporaryEvents(ped, true)		
+		SetPedSeeingRange(ped, 0.0)		
+		SetPedHearingRange(ped, 0.0)		
+		SetPedFleeAttributes(ped, 0, false)		
+		SetPedKeepTask(ped, true)	
+			loadAnim( "dead" ) 
+			TaskPlayAnim(ped, "dead", "dead_f", 8.0, 8.0, -1, 1, 0, 0, 0, 0)
+		DetachEntity(ped)
+		ClearPedTasks(ped)
+		loadAnim( "amb@world_human_bum_slumped@male@laying_on_left_side@base" ) 
+		TaskPlayAnim(ped, "amb@world_human_bum_slumped@male@laying_on_left_side@base", "base", 8.0, 8.0, -1, 1, 999.0, 0, 0, 0)
+			AttachEntityToEntity(ped, GetPlayerPed(-1), 1, -0.68, -0.2, 0.94, 180.0, 180.0, 60.0, 1, 1, 0, 1, 0, 1)
+			loadAnim( "missfinale_c2mcs_1" ) 
+			TaskPlayAnim(GetPlayerPed(-1), "missfinale_c2mcs_1", "fin_c2_mcs_1_camman", 1.0, 1.0, -1, 50, 0, 0, 0, 0)
+		local holdingBody = true
+		ClearPedTasksImmediately(GetPlayerPed(-1))
+		while (holdingBody) do
+			Citizen.Wait(1)
+			if not IsEntityPlayingAnim(PlayerPedId(), "missfinale_c2mcs_1", "fin_c2_mcs_1_camman", 3) then
+				loadAnim( "missfinale_c2mcs_1" ) 
+				TaskPlayAnim(GetPlayerPed(-1), "missfinale_c2mcs_1", "fin_c2_mcs_1_camman", 1.0, 1.0, -1, 50, 0, 0, 0, 0)
+			end
+			if IsControlJustPressed(0, 38) or (GetHashKey("WEAPON_UNARMED") ~= GetSelectedPedWeapon(GetPlayerPed(-1)))  then
+				holdingBody = false
+				DetachEntity(ped)
+			end
+		end
+		ClearPedTasks(GetPlayerPed(-1))	  
+		DetachEntity(ped)
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'No ped found', 'centerLeft', 4000, 'error')
+	end
+end)
+
+RegisterNetEvent('fsn_commands:police:pedrevive')
+AddEventHandler('fsn_commands:police:pedrevive', function()
+	local ped = exports['fsn_main']:fsn_FindNearbyPed(2)
+	if ped then
+		local isPlayer=false
+		for i = 0, 31 do
+			if(ped == GetPlayerPed(i)) then
+				  isPlayer = true
+			end
+		end
+		if not isPlayer then
+			SetEntityHealth(ped, 100)
+			ResurrectPed(ped)
+            ReviveInjuredPed(ped)
+            ClearPedTasksImmediately(ped)
+			TriggerEvent('fsn_notify:displayNotification', 'You revived the ped', 'centerLeft', 4000, 'success')
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'You cannot revive a player with pedrevive', 'centerLeft', 4000, 'error')
+		end
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'No ped found', 'centerLeft', 4000, 'error')
+	end
+end)
 RegisterNetEvent('fsn_commands:police:cpic:trigger')
 AddEventHandler('fsn_commands:police:cpic:trigger', function(id)
 	TriggerServerEvent('fsn_police:database:CPIC:search', id)

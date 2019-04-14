@@ -4,6 +4,7 @@ local stores = {
 local character = {}
 local phoneEnabled = false
 local contacts = {}
+local adverts = {}
 
 function fsn_NearestPlayersC(x, y, z, radius)
 	local players = {}
@@ -68,6 +69,21 @@ AddEventHandler('fsn_phone:togglePhone', function()
 			TaskStartScenarioInPlace(GetPlayerPed(-1), "WORLD_HUMAN_STAND_MOBILE", 0, true);
 		end
 		phoneEnabled = true
+		local whitelists = exports['fsn_jobs']:inAnyWhitelist()
+		local myWhitelists = {}
+		if whitelists ~= false then
+			for k,v in pairs(whitelists) do
+				table.insert(myWhitelists, #myWhitelists+1, exports['fsn_jobs']:getWhitelistDetails(v))
+			end
+		end
+		SendNUIMessage({
+			updateWhitelists = true,
+			whitelists = myWhitelists
+		})
+		SendNUIMessage({
+			updateAdverts = true,
+			ads = adverts
+		})
  	end
 end)
 
@@ -76,6 +92,11 @@ RegisterNUICallback( "disablePhone", function(data, cb)
 	SetEntityCollision(GetPlayerPed(-1), 1, 1)
 	ClearPedTasks(GetPlayerPed(-1))
 	TriggerEvent('fsn_phone:togglePhone')
+end)
+
+RegisterNUICallback('placeAdvert', function(data)
+	-- 'fsn_phone:adverts:add', function(name, num, txt)
+	TriggerServerEvent('fsn_phone:adverts:add', character.char_fname..' '..character.char_lname, character.char_phone, data.ad)
 end)
 
 RegisterNetEvent('fsn_phone:updateNumber')
@@ -201,6 +222,22 @@ Citizen.CreateThread( function()
 		DisableControlAction(0, 199, true)
 		if IsDisabledControlPressed(0,199) and not phoneEnabled then
 			TriggerEvent('fsn_phone:togglePhone')
+		end
+	end
+end)
+
+TriggerServerEvent('fsn_phone:adverts:request')
+RegisterNetEvent('fsn_phone:adverts:update')
+AddEventHandler('fsn_phone:adverts:update', function(ads)
+	adverts = ads
+end)
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(5000)
+		for k, v in pairs(Adverts) do
+			if not NetworkIsPlayerActive(GetPlayerFromServerId(source)) then
+				TriggerServerEvent('fsn_phone:adverts:remove', v.number)
+			end
 		end
 	end
 end)

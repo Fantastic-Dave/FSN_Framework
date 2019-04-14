@@ -18,6 +18,8 @@ files({
   'gui/img/icons/icon_fleeca.png',
   'gui/img/icons/icon_messages.png',
   'gui/img/icons/icon_phone.png',
+  'gui/img/icons/icon_whitelists.png',
+  'gui/img/icons/icon_adverts.png',
 })
 
 server_script '@mysql-async/lib/MySQL.lua'
