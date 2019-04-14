@@ -4,6 +4,12 @@ Citizen.CreateThread(function()
     NetworkSetVoiceActive(false)
 	end
 end)
+function loadAnimDict( dict )
+	while ( not HasAnimDictLoaded( dict ) ) do
+		RequestAnimDict( dict )
+		Citizen.Wait( 0 )
+	end
+end
 ---------------------------------------- SOURCE
 local playerList = {}
 local userData = {}
@@ -82,6 +88,8 @@ function init()
 						SendNUIMessage({
 							type = "radioTalkingOn"
 						})
+						loadAnimDict( "random@arrests" )
+						TaskPlayAnim(GetPlayerPed(-1), "random@arrests", "generic_radio_enter", 8.0, 2.0, -1, 50, 2.0, 0, 0, 0 )
 					end
 				end
 			end
@@ -91,6 +99,9 @@ function init()
 					SendNUIMessage({
 						type = "radioTalkingOff"
 					})
+					if IsEntityPlayingAnim(GetPlayerPed(-1), "random@arrests", "generic_radio_enter", 3) then
+						ClearPedTasks(GetPlayerPed(-1))
+					end
 				end
 			end
 			if exports["fsn_police"]:fsn_PDDuty() or exports["fsn_ems"]:fsn_EMSDuty() then
@@ -281,6 +292,7 @@ local UI = {
 	x =  0.000,
 	y = -0.001,
 }
+
 Citizen.CreateThread(function()
   while true do Citizen.Wait(1)
 	if DecorGetInt(GetPlayerPed(-1), "voip:talking") == 1 then
