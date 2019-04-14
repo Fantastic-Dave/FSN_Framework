@@ -13,7 +13,7 @@ end
 
 RegisterServerEvent('fsn_main:logging:addLog')
 AddEventHandler('fsn_main:logging:addLog', function(src, Category, Description)
-	print(':fsn_main: #'..src..' Adding log: '..Description)
+	--print(':fsn_main: #'..src..' Adding log: '..Description)
 	Description = string.gsub(Description, " ", "%%20")
     fsn_AddLog(src,Category, Description)
 end)
