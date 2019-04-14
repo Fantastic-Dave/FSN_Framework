@@ -17,9 +17,9 @@ AddEventHandler('playerConnecting', function(playername, setKickReason)
         MySQL.Sync.execute("INSERT INTO `fsn_users` (`name`, `steamid`, `connections`, `banned`, `banned_r`) VALUES ('"..playername.."', '"..identity[1].."', '1', '0', '')")
         table.insert(players, {id=#players+1, name=playername, steamid=identity[1], adminlvl=0, banned=false})
       else
-        if user[1].banned == 1 then
+        if user[1].banned > os.time() then
           kickplayer = true
-          table.insert(players, {id=#players+1, name=playername, steamid=identity[1], adminlvl=admin_lvl, banned=true})
+          --table.insert(players, {id=#players+1, name=playername, steamid=identity[1], adminlvl=admin_lvl, banned=true})
           print(':FSN: '..playername..' is BANNED // Refusing connection')
         else
           kickplayer = false
