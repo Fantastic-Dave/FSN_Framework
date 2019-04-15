@@ -172,7 +172,7 @@ local vehshop = {
 				{name = "Chino", costs = 225000, description = {}, model = "chino"},
 				{name = "Deviant", costs = 110000, description = {}, model = "deviant"},
 				{name = "Dominator", costs = 100000, description = {}, model = "dominator"},
-				{name = "Dominator GTX", costs = 125000, description = {}, model = "dominator3"},
+				{name = "Dominator GTX", costs = 150000, description = {}, model = "dominator3"},
 				{name = "Dukes", costs = 162000, description = {}, model = "dukes"},
 				{name = "Gauntlet", costs = 150000, description = {}, model = "gauntlet"},
 				{name = "Gauntlet 2", costs = 175000, description = {}, model = "gauntlet2"},
