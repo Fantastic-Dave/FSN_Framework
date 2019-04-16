@@ -1124,12 +1124,12 @@
       <fDriveInertia value="0.880000" />
       <fClutchChangeRateScaleUpShift value="1.500000" />
       <fClutchChangeRateScaleDownShift value="1.500000" />
-      <fInitialDriveMaxFlatVel value="177.000000" />
+      <fInitialDriveMaxFlatVel value="125.000000" />
       <fBrakeForce value="0.242000" />
       <fBrakeBiasFront value="0.479100" />
       <fHandBrakeForce value="0.800000" />
       <fSteeringLock value="32.300000" />
-      <fTractionCurveMax value="1.420000" />
+      <fTractionCurveMax value="1.220000" />
       <fTractionCurveMin value="1.210000" />
       <fTractionCurveLateral value="16.900000" />
       <fTractionSpringDeltaMax value="0.133000" />
@@ -2205,12 +2205,12 @@
       <fDriveInertia value="1.040000" />
       <fClutchChangeRateScaleUpShift value="2.300000" />
       <fClutchChangeRateScaleDownShift value="2.300000" />
-      <fInitialDriveMaxFlatVel value="188.000000" />
-      <fBrakeForce value="0.308000" />
+      <fInitialDriveMaxFlatVel value="150.000000" />
+      <fBrakeForce value="0.278000" />
       <fBrakeBiasFront value="0.457360" />
       <fHandBrakeForce value="0.800000" />
       <fSteeringLock value="33.200000" />
-      <fTractionCurveMax value="1.540000" />
+      <fTractionCurveMax value="1.340000" />
       <fTractionCurveMin value="1.253000" />
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.131000" />
@@ -2317,15 +2317,15 @@
     </Item>
     <Item type="CHandlingData">
       <handlingName>FLASHGT</handlingName>
-      <fMass value="1200.000000" />
+      <fMass value="1500.000000" />
       <fInitialDragCoeff value="1.050000" />
     <fDownforceModifier value="1.570000" />
       <fPercentSubmerged value="72.000000" />
-      <vecCentreOfMassOffset x="0.000000" y="-0.136000" z="0.020000" />
+      <vecCentreOfMassOffset x="0.000000" y="-0.136000" z="0.02000" />
       <vecInertiaMultiplier x="1.150000" y="0.990000" z="2.450000" />
       <fDriveBiasFront value="0.000000" />
       <nInitialDriveGears value="6" />
-      <fInitialDriveForce value="0.253000" />
+      <fInitialDriveForce value="0.283000" />
       <fDriveInertia value="1.010000" />
       <fClutchChangeRateScaleUpShift value="2.200000" />
       <fClutchChangeRateScaleDownShift value="2.200000" />
@@ -2334,16 +2334,16 @@
       <fBrakeBiasFront value="0.467690" />
       <fHandBrakeForce value="0.500000" />
       <fSteeringLock value="30.500000" />
-      <fTractionCurveMax value="1.540000" />
-      <fTractionCurveMin value="1.558000" />
+      <fTractionCurveMax value="1.740000" />
+      <fTractionCurveMin value="1.658000" />
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.128000" />
       <fLowSpeedTractionLossMult value="0.210000" />
       <fCamberStiffnesss value="0.00000" />
       <fTractionBiasFront value="0.484800" />
-      <fTractionLossMult value="1.310000" />
-      <fSuspensionForce value="2.990000" />
-      <fSuspensionCompDamp value="1.270000" />
+      <fTractionLossMult value="1.410000" />
+      <fSuspensionForce value="2.490000" />
+      <fSuspensionCompDamp value="1.370000" />
       <fSuspensionReboundDamp value="0.570000" />
       <fSuspensionUpperLimit value="0.078000" />
       <fSuspensionLowerLimit value="-0.129000" />
@@ -2351,7 +2351,7 @@
       <fSuspensionBiasFront value="0.491000" />
       <fAntiRollBarForce value="0.000000" />
       <fAntiRollBarBiasFront value="0.500000" />
-      <fRollCentreHeightFront value="0.173000" />
+      <fRollCentreHeightFront value="1.173000" />
       <fRollCentreHeightRear value="0.171000" />
       <fCollisionDamageMult value="0.700000" />
       <fWeaponDamageMult value="0.700000" />
@@ -2514,7 +2514,7 @@
       <fDriveInertia value="1.260000" />
       <fClutchChangeRateScaleUpShift value="30.000000" />
       <fClutchChangeRateScaleDownShift value="30.000000" />
-      <fInitialDriveMaxFlatVel value="152.000000" />
+      <fInitialDriveMaxFlatVel value="125.000000" />
       <fBrakeForce value="0.215000" />
       <fBrakeBiasFront value="0.412100" />
       <fHandBrakeForce value="0.800000" />
@@ -4797,7 +4797,7 @@
       <fDriveInertia value="1.000000" />
       <fClutchChangeRateScaleUpShift value="1.600000" />
       <fClutchChangeRateScaleDownShift value="2.100000" />
-      <fInitialDriveMaxFlatVel value="183.000000" />
+      <fInitialDriveMaxFlatVel value="135.000000" />
       <fBrakeForce value="0.240000" />
       <fBrakeBiasFront value="0.396500" />
       <fHandBrakeForce value="0.800000" />
@@ -6840,7 +6840,7 @@
       <fDriveInertia value="1.000000" />
       <fClutchChangeRateScaleUpShift value="1.500000" />
       <fClutchChangeRateScaleDownShift value="1.600000" />
-      <fInitialDriveMaxFlatVel value="175.000000" />
+      <fInitialDriveMaxFlatVel value="130.000000" />
       <fBrakeForce value="0.235000" />
       <fBrakeBiasFront value="0.463300" />
       <fHandBrakeForce value="0.800000" />
@@ -9002,11 +9002,11 @@
       <vecInertiaMultiplier x="0.990000" y="1.030000" z="1.740000" />
       <fDriveBiasFront value="0.155000" />
       <nInitialDriveGears value="6" />
-      <fInitialDriveForce value="0.263000" />
+      <fInitialDriveForce value="0.243000" />
       <fDriveInertia value="0.800000" />
       <fClutchChangeRateScaleUpShift value="1.800000" />
       <fClutchChangeRateScaleDownShift value="2.400000" />
-      <fInitialDriveMaxFlatVel value="180.000000" />
+      <fInitialDriveMaxFlatVel value="140.000000" />
       <fBrakeForce value="0.241000" />
       <fBrakeBiasFront value="0.557300" />
       <fHandBrakeForce value="0.800000" />
@@ -18446,12 +18446,12 @@
       <fDriveInertia value="1.000000" />
       <fClutchChangeRateScaleUpShift value="2.100000" />
       <fClutchChangeRateScaleDownShift value="2.000000" />
-      <fInitialDriveMaxFlatVel value="202.000000" />
+      <fInitialDriveMaxFlatVel value="170.000000" />
       <fBrakeForce value="0.285000" />
       <fBrakeBiasFront value="0.477340" />
       <fHandBrakeForce value="0.850000" />
       <fSteeringLock value="33.400000" />
-      <fTractionCurveMax value="1.430000" />
+      <fTractionCurveMax value="1.230000" />
       <fTractionCurveMin value="1.170000" />
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.131000" />
@@ -19281,7 +19281,7 @@
       <fDriveInertia value="1.000000" />
       <fClutchChangeRateScaleUpShift value="1.800000" />
       <fClutchChangeRateScaleDownShift value="1.800000" />
-      <fInitialDriveMaxFlatVel value="186.000000" />
+      <fInitialDriveMaxFlatVel value="150.000000" />
       <fBrakeForce value="0.265000" />
       <fBrakeBiasFront value="0.500360" />
       <fHandBrakeForce value="0.850000" />
@@ -19458,16 +19458,16 @@
       <vecInertiaMultiplier x="1.160000" y="0.990000" z="1.520000" />
       <fDriveBiasFront value="0.000000" />
       <nInitialDriveGears value="6" />
-      <fInitialDriveForce value="0.281000" />
+      <fInitialDriveForce value="0.291000" />
       <fDriveInertia value="1.010000" />
       <fClutchChangeRateScaleUpShift value="2.100000" />
       <fClutchChangeRateScaleDownShift value="2.000000" />
-      <fInitialDriveMaxFlatVel value="206.000000" />
+      <fInitialDriveMaxFlatVel value="160.000000" />
       <fBrakeForce value="0.309000" />
       <fBrakeBiasFront value="0.489090" />
       <fHandBrakeForce value="0.800000" />
       <fSteeringLock value="33.300000" />
-      <fTractionCurveMax value="1.394000" />
+      <fTractionCurveMax value="1.484000" />
       <fTractionCurveMin value="1.128000" />
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.132000" />
@@ -19635,7 +19635,7 @@
       <fDriveInertia value="1.000000" />
       <fClutchChangeRateScaleUpShift value="2.400000" />
       <fClutchChangeRateScaleDownShift value="2.800000" />
-      <fInitialDriveMaxFlatVel value="125.000000" />
+      <fInitialDriveMaxFlatVel value="130.000000" />
       <fBrakeForce value="0.190000" />
       <fBrakeBiasFront value="0.552100" />
       <fHandBrakeForce value="0.700000" />
@@ -21953,7 +21953,7 @@
       <fDriveInertia value="1.000000" />
       <fClutchChangeRateScaleUpShift value="1.700000" />
       <fClutchChangeRateScaleDownShift value="1.700000" />
-      <fInitialDriveMaxFlatVel value="186.000000" />
+      <fInitialDriveMaxFlatVel value="130.000000" />
       <fBrakeForce value="0.223000" />
       <fBrakeBiasFront value="0.482310" />
       <fHandBrakeForce value="0.700000" />
@@ -22014,12 +22014,12 @@
       <fDriveInertia value="1.000000" />
       <fClutchChangeRateScaleUpShift value="1.600000" />
       <fClutchChangeRateScaleDownShift value="1.600000" />
-      <fInitialDriveMaxFlatVel value="186.000000" />
+      <fInitialDriveMaxFlatVel value="135.000000" />
       <fBrakeForce value="0.218000" />
       <fBrakeBiasFront value="0.460490" />
       <fHandBrakeForce value="0.700000" />
       <fSteeringLock value="35.200000" />
-      <fTractionCurveMax value="1.340000" />
+      <fTractionCurveMax value="1.240000" />
       <fTractionCurveMin value="1.100000" />
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.134000" />
@@ -22601,16 +22601,16 @@
       <vecInertiaMultiplier x="1.150000" y="1.000000" z="1.580000" />
       <fDriveBiasFront value="0.000000" />
       <nInitialDriveGears value="4" />
-      <fInitialDriveForce value="0.227000" />
+      <fInitialDriveForce value="0.237000" />
       <fDriveInertia value="1.000000" />
       <fClutchChangeRateScaleUpShift value="1.300000" />
       <fClutchChangeRateScaleDownShift value="1.900000" />
-      <fInitialDriveMaxFlatVel value="176.000000" />
+      <fInitialDriveMaxFlatVel value="190.000000" />
       <fBrakeForce value="0.204000" />
       <fBrakeBiasFront value="0.577500" />
       <fHandBrakeForce value="0.800000" />
       <fSteeringLock value="34.200000" />
-      <fTractionCurveMax value="1.320000" />
+      <fTractionCurveMax value="1.280000" />
       <fTractionCurveMin value="1.090000" />
       <fTractionCurveLateral value="16.600000" />
       <fTractionSpringDeltaMax value="0.130000" />
@@ -23358,7 +23358,7 @@
       <fClutchChangeRateScaleUpShift value="2.000000" />
       <fClutchChangeRateScaleDownShift value="2.000000" />
       <fInitialDriveMaxFlatVel value="188.000000" />
-      <fBrakeForce value="0.307000" />
+      <fBrakeForce value="0.287000" />
       <fBrakeBiasFront value="0.506090" />
       <fHandBrakeForce value="0.700000" />
       <fSteeringLock value="34.300000" />
@@ -25213,13 +25213,13 @@
       <fDriveInertia value="1.000000" />
       <fClutchChangeRateScaleUpShift value="2.400000" />
       <fClutchChangeRateScaleDownShift value="2.100000" />
-      <fInitialDriveMaxFlatVel value="179.000000" />
+      <fInitialDriveMaxFlatVel value="150.000000" />
       <fBrakeForce value="0.297000" />
       <fBrakeBiasFront value="0.486030" />
       <fHandBrakeForce value="0.800000" />
       <fSteeringLock value="34.100000" />
       <fTractionCurveMax value="1.320000" />
-      <fTractionCurveMin value="1.073000" />
+      <fTractionCurveMin value="1.143000" />
       <fTractionCurveLateral value="16.900000" />
       <fTractionSpringDeltaMax value="0.138000" />
       <fLowSpeedTractionLossMult value="0.160000" />
@@ -25333,11 +25333,11 @@
       <vecInertiaMultiplier x="1.130000" y="0.990000" z="1.560000" />
       <fDriveBiasFront value="1.000000" />
       <nInitialDriveGears value="5" />
-      <fInitialDriveForce value="0.208000" />
+      <fInitialDriveForce value="0.188000" />
       <fDriveInertia value="1.040000" />
       <fClutchChangeRateScaleUpShift value="1.900000" />
       <fClutchChangeRateScaleDownShift value="2.100000" />
-      <fInitialDriveMaxFlatVel value="163.000000" />
+      <fInitialDriveMaxFlatVel value="125.000000" />
       <fBrakeForce value="0.291000" />
       <fBrakeBiasFront value="0.494800" />
       <fHandBrakeForce value="0.800000" />
@@ -25510,7 +25510,7 @@
       <fDriveInertia value="0.950000" />
       <fClutchChangeRateScaleUpShift value="1.900000" />
       <fClutchChangeRateScaleDownShift value="2.100000" />
-      <fInitialDriveMaxFlatVel value="233.000000" />
+      <fInitialDriveMaxFlatVel value="150.000000" />
       <fBrakeForce value="0.309800" />
       <fBrakeBiasFront value="0.472800" />
       <fHandBrakeForce value="0.800000" />
@@ -27895,16 +27895,78 @@
       <vecInertiaMultiplier x="1.160000" y="1.000000" z="1.470000" />
       <fDriveBiasFront value="0.000000" />
       <nInitialDriveGears value="5" />
-      <fInitialDriveForce value="0.267000" />
+      <fInitialDriveForce value="0.257000" />
       <fDriveInertia value="1.050000" />
       <fClutchChangeRateScaleUpShift value="1.200000" />
       <fClutchChangeRateScaleDownShift value="1.350000" />
-      <fInitialDriveMaxFlatVel value="192.000000" />
+      <fInitialDriveMaxFlatVel value="165.000000" />
       <fBrakeForce value="0.326000" />
       <fBrakeBiasFront value="0.406450" />
       <fHandBrakeForce value="0.850000" />
       <fSteeringLock value="32.700000" />
-      <fTractionCurveMax value="1.410000" />
+      <fTractionCurveMax value="1.210000" />
+      <fTractionCurveMin value="1.144000" />
+      <fTractionCurveLateral value="16.550000" />
+      <fTractionSpringDeltaMax value="0.136000" />
+      <fLowSpeedTractionLossMult value="0.245000" />
+      <fCamberStiffnesss value="0.000000" />
+      <fTractionBiasFront value="0.483450" />
+      <fTractionLossMult value="1.190000" />
+      <fSuspensionForce value="3.110000" />
+      <fSuspensionCompDamp value="1.360000" />
+      <fSuspensionReboundDamp value="0.670000" />
+      <fSuspensionUpperLimit value="0.052500" />
+      <fSuspensionLowerLimit value="-0.137000" />
+      <fSuspensionRaise value="0.016500" />
+      <fSuspensionBiasFront value="0.452000" />
+      <fAntiRollBarForce value="0.000000" />
+      <fAntiRollBarBiasFront value="0.680000" />
+      <fRollCentreHeightFront value="0.282000" />
+      <fRollCentreHeightRear value="0.266000" />
+      <fCollisionDamageMult value="0.700000" />
+      <fWeaponDamageMult value="0.700000" />
+      <fDeformationDamageMult value="0.700000" />
+      <fEngineDamageMult value="1.500000" />
+      <fPetrolTankVolume value="60.000000" />
+      <fOilVolume value="5.000000" />
+      <fSeatOffsetDistX value="0.000000" />
+      <fSeatOffsetDistY value="0.000000" />
+      <fSeatOffsetDistZ value="0.000000" />
+      <nMonetaryValue value="130000" />
+      <strModelFlags>000000</strModelFlags>
+      <strHandlingFlags>0820102</strHandlingFlags>
+      <strDamageFlags>0</strDamageFlags>
+      <AIHandling>SPORTS_CAR</AIHandling>
+      <SubHandlingData>
+        <Item type="CCarHandlingData">
+          <fBackEndPopUpCarImpulseMult value="0.080000" />
+          <fBackEndPopUpBuildingImpulseMult value="0.030000" />
+          <fBackEndPopUpMaxDeltaSpeed value="0.600000" />
+        </Item>
+        <Item type="NULL" />
+        <Item type="NULL" />
+      </SubHandlingData>
+    </Item>
+    <Item type="CHandlingData">
+      <handlingName>COMET5</handlingName>
+      <fMass value="1200.000000" />
+      <fInitialDragCoeff value="0.801000" />
+      <fDownforceModifier value="1.780000" />
+      <fPercentSubmerged value="72.000000" />
+      <vecCentreOfMassOffset x="0.000000" y="-0.130000" z="0.025000" />
+      <vecInertiaMultiplier x="1.160000" y="1.000000" z="1.470000" />
+      <fDriveBiasFront value="0.000000" />
+      <nInitialDriveGears value="5" />
+      <fInitialDriveForce value="0.277000" />
+      <fDriveInertia value="1.050000" />
+      <fClutchChangeRateScaleUpShift value="1.200000" />
+      <fClutchChangeRateScaleDownShift value="1.350000" />
+      <fInitialDriveMaxFlatVel value="180.000000" />
+      <fBrakeForce value="0.306000" />
+      <fBrakeBiasFront value="0.406450" />
+      <fHandBrakeForce value="0.650000" />
+      <fSteeringLock value="32.700000" />
+      <fTractionCurveMax value="1.210000" />
       <fTractionCurveMin value="1.144000" />
       <fTractionCurveLateral value="16.550000" />
       <fTractionSpringDeltaMax value="0.136000" />
@@ -28972,10 +29034,10 @@
       <fDriveInertia value="1.020000" />
       <fClutchChangeRateScaleUpShift value="1.600000" />
       <fClutchChangeRateScaleDownShift value="1.600000" />
-      <fInitialDriveMaxFlatVel value="202.000000" />
-      <fBrakeForce value="0.314000" />
+      <fInitialDriveMaxFlatVel value="175.000000" />
+      <fBrakeForce value="0.304000" />
       <fBrakeBiasFront value="0.454250" />
-      <fHandBrakeForce value="0.850000" />
+      <fHandBrakeForce value="0.750000" />
       <fSteeringLock value="33.000000" />
       <fTractionCurveMax value="1.430000" />
       <fTractionCurveMin value="1.161000" />
