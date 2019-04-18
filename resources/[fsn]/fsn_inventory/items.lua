@@ -38,7 +38,7 @@ items_table = {
   },
   ["uncooked_meat"] = {
     display_name = 'Uncooked Meat',
-    weight = 0.4,
+    weight = 2,
     desc = 'Use this to repair your vehicle...not.',
     use = function()
     end,
