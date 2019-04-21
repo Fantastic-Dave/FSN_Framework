@@ -33,6 +33,15 @@ AddEventHandler('fsn_main:requestCharacters', function()
   local steamid = GetPlayerIdentifiers(source)
   steamid = steamid[1]
   local characters = MySQL.Sync.fetchAll("SELECT * FROM `fsn_characters` WHERE `steamid` = '"..steamid.."'")
+  for k, v in pairs(players) do
+	if v.steamid == steamid then
+		if v.banned then
+			 print(':FSN: '..v.name..' is BANNED for: '..v.banned_r)
+			 DropPlayer(source, ':FSN: You are BANNED: '..v.banned_r)
+			 CancelEvent()
+		end
+	end
+  end
   TriggerClientEvent('fsn_main:sendCharacters', source, characters)
 end)
 
