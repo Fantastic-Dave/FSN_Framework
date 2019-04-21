@@ -583,6 +583,18 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/ems' then
     if fsn_emsOnDuty(source) then
+	  if split[2] == 'tow' then
+			if split[3] then
+				if split[3] == 'target' or split[3] == 't' then
+					TriggerClientEvent('fsn_commands:police:towMark', source)
+				else
+					TriggerEvent('fsn_jobs:tow:mark', tostring(split[3]), source)
+					TriggerClientEvent('fsn_notify:displayNotification', source, 'You marked <b>'..split[3]..'</b> for tow, remember to request tow', 'centerRight', 7000, 'info')
+				end
+			else
+				TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'Provide a plate to mark, or type "target"/"t" to mark the car you\'re looking at.')
+			end
+		end
 	  if split[2] == 'extra' then
           if split[3] then
             if split[3] == 'all' then
@@ -677,6 +689,18 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/police' or split[1] == '/pd' then
     if fsn_policeOnDuty(source) then
       if split[2] then
+		if split[2] == 'tow' then
+			if split[3] then
+				if split[3] == 'target' or split[3] == 't' then
+					TriggerClientEvent('fsn_commands:police:towMark', source)
+				else
+					TriggerEvent('fsn_jobs:tow:mark', tostring(split[3]), source)
+					TriggerClientEvent('fsn_notify:displayNotification', source, 'You marked <b>'..split[3]..'</b> for tow, remember to request tow', 'centerRight', 7000, 'info')
+				end
+			else
+				TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'Provide a plate to mark, or type "target"/"t" to mark the car you\'re looking at.')
+			end
+		end
 		if split[2] == 'ped' then
 			if split[3] == 'carry' then
 				TriggerClientEvent('fsn_commands:police:pedcarry', source)
