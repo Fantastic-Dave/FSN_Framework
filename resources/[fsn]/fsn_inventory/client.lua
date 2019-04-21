@@ -278,6 +278,10 @@ AddEventHandler('fsn_inventory:item:drop', function(item)
           else
             if tonumber(qty) then
               qty = math.floor(tonumber(qty))
+			  if qty < 1 or qty > 100 then
+				TriggerEvent('fsn_notify:displayNotification', 'issue with input', 'centerLeft', 3000, 'error')
+				return
+			  end
             else
               TriggerEvent('fsn_notify:displayNotification', 'Enter an amount or "all"', 'centerLeft', 3000, 'error')
             end
