@@ -110,7 +110,6 @@ function init(){
 		}
 	};
 	connection.onclose = function () {
-		connection.close();
 		if(count <= 5 && debug){
 			document.getElementById("console").innerHTML += "<br>connection closed- " + reason;
 			count++;
