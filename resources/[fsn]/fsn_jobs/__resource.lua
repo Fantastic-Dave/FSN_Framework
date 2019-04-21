@@ -13,6 +13,7 @@ server_script 'mechanic/server.lua'
 -- trucker job
 client_script 'trucker/client.lua'
 
+
 -- hunting job
 client_script 'hunting/client.lua'
 
@@ -26,9 +27,12 @@ client_script 'scrap/client.lua'
 client_script 'taxi/client.lua'
 server_script 'taxi/server.lua'
 
+-- garbage job
+client_script 'garbage/client.lua'
+
 -- tow job
 client_script 'tow/client.lua'
-
+server_script 'tow/server.lua'
 -- delivery job
 --client_script 'delivery/client.lua'
 
