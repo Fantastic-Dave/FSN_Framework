@@ -1,6 +1,6 @@
 local mysql = false
 
-local players = {}
+players = {}
 AddEventHandler('playerConnecting', function(playername, setKickReason)
   local admin_lvl = 0
   local identity = {}
@@ -17,16 +17,15 @@ AddEventHandler('playerConnecting', function(playername, setKickReason)
         MySQL.Sync.execute("INSERT INTO `fsn_users` (`name`, `steamid`, `connections`, `banned`, `banned_r`) VALUES ('"..playername.."', '"..identity[1].."', '1', '0', '')")
         table.insert(players, {id=#players+1, name=playername, steamid=identity[1], adminlvl=0, banned=false})
       else
-        if user[1].banned > os.time() then
-          kickplayer = true
-          --table.insert(players, {id=#players+1, name=playername, steamid=identity[1], adminlvl=admin_lvl, banned=true})
-          print(':FSN: '..playername..' is BANNED // Refusing connection')
+        if user[1].banned > os.time() or user[1].banned == -1 then
+		  kickplayer = false
+		  table.insert(players, {id=#players+1, name=playername, steamid=identity[1], adminlvl=user[1].admin_lvl, banned=true, banned_r = user[1].banned_r})
         else
           kickplayer = false
           local connections = user[1].connections + 1
           MySQL.Sync.execute("UPDATE `fsn_users` SET `connections` = '"..connections.."' WHERE `fsn_users`.`steamid` = '"..identity[1].."';")
+		  admin_lvl = user[1].admin_lvl
           table.insert(players, {id=#players+1, name=playername, steamid=identity[1], adminlvl=admin_lvl, banned=false})
-          admin_lvl = user[1].admin_lvl
         end
       end
     end)

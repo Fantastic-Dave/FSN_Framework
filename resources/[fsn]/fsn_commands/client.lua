@@ -235,6 +235,17 @@ end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- POLICE COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent('fsn_commands:police:towMark')
+AddEventHandler('fsn_commands:police:towMark', function()
+  if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
+    local car = GetVehiclePedIsIn(GetPlayerPed(-1))
+	ExecuteCommand('pd tow '..GetVehicleNumberPlateText(car))		
+  else
+    local car = fsn_lookingAt()
+	ExecuteCommand('pd tow '..GetVehicleNumberPlateText(car))
+  end
+end)
+
 RegisterNetEvent('fsn_commands:police:pedcarry')
 AddEventHandler('fsn_commands:police:pedcarry', function()
 	local ped = exports['fsn_main']:fsn_FindNearbyPed(2)

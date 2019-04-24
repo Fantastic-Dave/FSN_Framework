@@ -312,18 +312,11 @@ Citizen.CreateThread(function()
   end
 end)
 
-
-function isonduty()
-	if exports["fsn_police"]:fsn_PDDuty() or exports["fsn_ems"]:fsn_EMSDuty() then
-		return true
-	end
-	return false
-end
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(10000)
 		if(radioChannels["leo"].users[tostring(localClientID)] == 1) then
-			if not isonduty() then
+			if not exports["fsn_police"]:fsn_PDDuty() or not exports["fsn_ems"]:fsn_EMSDuty() then
 				TriggerServerEvent("removeUserFromRadioChannel", "leo", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 				TriggerEvent('chatMessage', ':FSN:', {255, 255, 255}, 'You were removed from the LEO radio as you are not on duty.')
 				SendNUIMessage({
@@ -332,7 +325,7 @@ Citizen.CreateThread(function()
 			end
 		end
 		if(radioChannels["ems"].users[tostring(localClientID)] == 1) then
-			if not isonduty() then
+			if not exports["fsn_police"]:fsn_PDDuty() or not exports["fsn_ems"]:fsn_EMSDuty() then
 				TriggerServerEvent("removeUserFromRadioChannel", "ems", tostring(DecorGetInt(GetPlayerPed(-1), "voip:clientID")))
 				TriggerEvent('chatMessage', ':FSN:', {255, 255, 255}, 'You were removed from the EMS radio as you are not on duty.')
 				SendNUIMessage({

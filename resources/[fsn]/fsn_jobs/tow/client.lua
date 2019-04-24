@@ -64,6 +64,20 @@ AddEventHandler('jTow:mark', function()
   })
 end)
 
+local availableTows = {}
+RegisterNetEvent('fsn_jobs:tow:marked')
+AddEventHandler('fsn_jobs:tow:marked', function(plate, officer)
+	availableTows[string.lower(plate)] = true
+	if inService then
+		TriggerEvent("pNotify:SendNotification", {text = "Officer "..officer.." marked plate <b>"..string.lower(plate).."</b> for tow",
+		  layout = "centerRight",
+		  timeout = 1600,
+		  progressBar = false,
+		  type = "info",
+		})
+	end
+end)
+
 RegisterNetEvent('tow:CAD:tow')
 AddEventHandler('tow:CAD:tow', function(xpos, ypos, zpos)
 		addBlip("CAD :: Tow Required", 68, xpos, ypos, zpos, 17, 110)
@@ -282,10 +296,14 @@ Citizen.CreateThread(function()
               if currentlytowing then
                 DisplayHelpText("~r~Remove the vehicle first")
               else
-                DisplayHelpText("Press ~INPUT_CONTEXT~ to impound")
-                if IsControlJustPressed(1,51) then
-                  ImpoundVehicle()
-                end
+				if availableTows[string.lower(GetVehicleNumberPlateText(vehicle))] then
+					DisplayHelpText("Press ~INPUT_CONTEXT~ to impound")
+					if IsControlJustPressed(1,51) then
+					  ImpoundVehicle()
+					end
+				else
+					DisplayHelpText("~r~"..string.lower(GetVehicleNumberPlateText(towedvehicle)).." is not marked for tow<br>The police will be able to help with this.")
+				end
               end
             end
           end
@@ -299,10 +317,14 @@ Citizen.CreateThread(function()
         if true then
           if GetDistanceBetweenCoords(GetEntityCoords(vehicle), GetEntityCoords(GetPlayerPed(-1))) < 5 then
             if GetDistanceBetweenCoords(GetEntityCoords(vehicle), GetEntityCoords(towtruck)) < 15 then
-              DisplayHelpText("Press ~INPUT_CONTEXT~ to tow!")
-              if IsControlJustPressed(1,51) then
-                attachVehicle(vehicle)
-              end
+			  --if availableTows[string.lower(GetVehicleNumberPlateText(vehicle))] then
+				  DisplayHelpText("Press ~INPUT_CONTEXT~ to tow!")
+				  if IsControlJustPressed(1,51) then
+					attachVehicle(vehicle)
+				  end
+			  --else
+				--DisplayHelpText("~r~"..string.lower(GetVehicleNumberPlateText(vehicle)).." is not marked for tow")
+			  --end
             else
               DisplayHelpText("~r~Your truck needs to be closer")
             end
