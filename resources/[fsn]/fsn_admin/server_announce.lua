@@ -1,10 +1,8 @@
 local restarts = {};
-restarts[#restarts + 1] = {05, 00};
-restarts[#restarts + 1] = {09, 00};
-restarts[#restarts + 1] = {13, 00};
-restarts[#restarts + 1] = {17, 00};
-restarts[#restarts + 1] = {21, 00};
-restarts[#restarts + 1] = {01, 00};
+restarts[#restarts + 1] = {00, 00};
+restarts[#restarts + 1] = {06, 00};
+restarts[#restarts + 1] = {12, 00};
+restarts[#restarts + 1] = {18, 00};
 
 function announceRestart()
  local hour = os.date("%H");
@@ -18,9 +16,9 @@ function announceRestart()
    if (restartInMinutes > timeInMinutes and tonumber(second) == 00 and (timeUntil == 01 or timeUntil == 05 or timeUntil == 15 or timeUntil == 30)) then
      print(":fsn_admin: Server restart in " .. (timeUntil) .. " minutes");
      if (timeUntil == 01) then
-       --TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*^1:FSN:^0^r The server will be restarting in ^4'..timeUntil..'^0 minutes!')
+       TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*^1:FSN:^0^r The server will be restarting in ^4'..timeUntil..'^0 minutes!')
      else
-       --TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*^1:FSN:^0^r The server will be restarting in ^4'..timeUntil..'^0 minutes!')
+       TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*^1:FSN:^0^r The server will be restarting in ^4'..timeUntil..'^0 minutes!')
      end
      break;
    end
