@@ -222,6 +222,7 @@ Citizen.CreateThread( function()
 		DisableControlAction(0, 199, true)
 		if IsDisabledControlPressed(0,199) and not phoneEnabled then
 			TriggerEvent('fsn_phone:togglePhone')
+			Citizen.Wait(500)
 		end
 	end
 end)
