@@ -257,7 +257,7 @@ items_table = {
       TriggerEvent('fsn_phone:togglePhone')
     end,
     modelhash = 974883178,
-    price = 2500
+    price = 1000
   },
   ["2g_weed"] = {
     display_name = '2G Weed',
