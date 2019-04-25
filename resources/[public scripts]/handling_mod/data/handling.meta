@@ -22784,23 +22784,23 @@
       <handlingName>SCHAFTER3</handlingName>
       <fMass value="1800.000000" />
       <fInitialDragCoeff value="0.530000" />
-	  <fDownforceModifier value="1.310000" />
+    <fDownforceModifier value="1.310000" />
       <fPercentSubmerged value="76.000000" />
       <vecCentreOfMassOffset x="0.000000" y="-0.100000" z="0.020000" />
       <vecInertiaMultiplier x="1.170000" y="1.000000" z="1.690000" />
-      <fDriveBiasFront value="0.000000" />
+      <fDriveBiasFront value="0.500000" />
       <nInitialDriveGears value="6" />
-      <fInitialDriveForce value="0.275000" />
+      <fInitialDriveForce value="0.245000" />
       <fDriveInertia value="0.990000" />
       <fClutchChangeRateScaleUpShift value="2.000000" />
       <fClutchChangeRateScaleDownShift value="2.100000" />
-      <fInitialDriveMaxFlatVel value="205.000000" />
-      <fBrakeForce value="0.279000" />
+      <fInitialDriveMaxFlatVel value="168.000000" />
+      <fBrakeForce value="0.265000" />
       <fBrakeBiasFront value="0.479820" />
       <fHandBrakeForce value="0.900000" />
       <fSteeringLock value="36.100000" />
-      <fTractionCurveMax value="1.710000" />
-      <fTractionCurveMin value="1.150000" />
+      <fTractionCurveMax value="1.850000" />
+      <fTractionCurveMin value="1.230000" />
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.131000" />
       <fLowSpeedTractionLossMult value="0.220000" />
