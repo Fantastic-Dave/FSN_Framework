@@ -1416,23 +1416,23 @@
       <handlingName>BUFFALO</handlingName>
       <fMass value="1900.000000" />
       <fInitialDragCoeff value="0.930000" />
-	  <fDownforceModifier value="1.380000" />
+    <fDownforceModifier value="1.380000" />
       <fPercentSubmerged value="78.000000" />
       <vecCentreOfMassOffset x="0.000000" y="-0.030000" z="0.020000" />
       <vecInertiaMultiplier x="1.160000" y="1.000000" z="1.560000" />
       <fDriveBiasFront value="0.000000" />
-      <nInitialDriveGears value="6" />
+      <nInitialDriveGears value="5" />
       <fInitialDriveForce value="0.253000" />
       <fDriveInertia value="0.990000" />
       <fClutchChangeRateScaleUpShift value="1.800000" />
       <fClutchChangeRateScaleDownShift value="1.800000" />
-      <fInitialDriveMaxFlatVel value="175.000000" />
+      <fInitialDriveMaxFlatVel value="135.000000" />
       <fBrakeForce value="0.255000" />
       <fBrakeBiasFront value="0.520880" />
-      <fHandBrakeForce value="0.800000" />
+      <fHandBrakeForce value="0.600000" />
       <fSteeringLock value="33.400000" />
-      <fTractionCurveMax value="1.401000" />
-      <fTractionCurveMin value="1.134000" />
+      <fTractionCurveMax value="1.251000" />
+      <fTractionCurveMin value="1.054000" />
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.133000" />
       <fLowSpeedTractionLossMult value="0.210000" />
