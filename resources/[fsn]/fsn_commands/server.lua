@@ -143,6 +143,11 @@ local emotes = {
     ["shakebutt"] = {"switch@trevor@mocks_lapdance", "001443_01_trvs_28_idle_stripper"},
     ["pee"] = {"misscarsteal2peeing", "peeing_loop"},
     ["poo"] = {"missfbi3ig_0", "shit_loop_trev"},
+    ["cross1"] = {"amb@world_human_hang_out_street@male_c@base", "base"},
+    ["cross2"] = {"amb@world_human_hang_out_street@female_arms_crossed@base", "base"},
+    ["cross3"] = {"amb@world_human_hang_out_street@female_arms_crossed@idle_a", "idle_a"},
+    ["cross4"] = {"missfbi_s4mop", "guard_idle_a"},
+    ["cross5"] = {"oddjobs@assassinate@construction@", "unarmed_fold_arms"},
   },
   halfanim = {
     ["wave1"] = {"random@car_thief@victimpoints_ig_3", "arms_waving"},
