@@ -80,7 +80,7 @@ local vehshop = {
 			buttons = {
 				{name = "Alpha", costs = 175000, description = {}, model = "alpha"},
 				{name = "Bestia GTS", costs = 200000, description = {}, model = "bestiagts"},
-				{name = "Buffalo", costs = 145000, description = {}, model = "buffalo"},
+				{name = "Buffalo", costs = 55000, description = {}, model = "buffalo"},
 				{name = "Buffalo S", costs = 155000, description = {}, model = "buffalo2"},
 				{name = "Carbonizzare", costs = 350000, description = {}, model = "carbonizzare"},
 				{name = "Comet", costs = 175000, description = {}, model = "comet2"},
@@ -103,7 +103,7 @@ local vehshop = {
 				{name = "NineF", costs = 175000, description = {}, model = "ninef"},
 				{name = "NineF 2 Convertible", costs = 180000, description = {}, model = "ninef2"},
 				{name = "Omnis", costs = 150000, description = {}, model = "omnis"},
-				{name = "Penumbra", costs = 120000, description = {}, model = "penumbra"},
+				{name = "Penumbra", costs = 50000, description = {}, model = "penumbra"},
 				{name = "Rapid GT", costs = 199000, description = {}, model = "rapidgt"},
 				{name = "Rapid GT Convertible", costs = 220000, description = {}, model = "rapidgt2"},
 				{name = "Retinue", costs = 25000, description = {}, model = "retinue"},
