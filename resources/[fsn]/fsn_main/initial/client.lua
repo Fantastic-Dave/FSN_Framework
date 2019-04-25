@@ -1,9 +1,8 @@
-DensityMultiplier = 0.5
 Citizen.CreateThread(function()
 	while true do
 	    Citizen.Wait(0)
-	    SetVehicleDensityMultiplierThisFrame(DensityMultiplier)
-	    SetRandomVehicleDensityMultiplierThisFrame(DensityMultiplier)
+	    SetVehicleDensityMultiplierThisFrame(0.6)
+	    SetRandomVehicleDensityMultiplierThisFrame(0.6)
 	end
 end)
 local fsn_spawned = false
