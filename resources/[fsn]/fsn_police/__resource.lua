@@ -11,6 +11,10 @@ client_script 'evidencelocker/client.lua'
 client_script 'MDT/mdt_client.lua'
 server_script 'MDT/mdt_server.lua'
 ui_page 'MDT/gui/index.html'
+
+client_script 'tackle/client.lua'
+server_script 'tackle/server.lua'
+
 files({
   'MDT/gui/index.html',
   'MDT/gui/index.css',
