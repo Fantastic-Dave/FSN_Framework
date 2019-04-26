@@ -10,8 +10,11 @@
 #actionmenu {
     position: fixed;
     left: 28%; 
-    top: 40%;
+    top: 35%;
 	width: 390;
+}
+#actionmenu div {
+	background-color: black !IMPORTANT;
 }
 
 #actionmenu button {
@@ -20,7 +23,6 @@
     color: black; 
     font-family: 'Roboto', sans-serif;
     padding: 10px 24px; 
-    /* margin: 8px 0px 8px 0px; */
 	margin-top: 5px;
     cursor: pointer; 
     width: 190px; 
@@ -44,8 +46,4 @@
 
 .melee {
 	background-color: #eff9b8 !IMPORTANT;
-}
-
-.section {
-	margin-top: 10px !IMPORTANT;
 }
