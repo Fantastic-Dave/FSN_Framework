@@ -117,6 +117,14 @@ function fsn_hasLicense(type)
   end
 end
 
+function fsn_getLicensePoints(type)
+	if licenses[type] then
+    return licenses[type].infractions
+  else
+    return 100
+  end
+end
+
 ---------------------------------------------------------- BUY PLACE
 local blip = {x = 237.59239196777, y = -406.15228271484, z = 47.924365997314}
 local license_stores = {

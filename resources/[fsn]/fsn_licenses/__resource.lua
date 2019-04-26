@@ -4,5 +4,6 @@ server_script '@mysql-async/lib/MySQL.lua'
 server_script 'server.lua'
 
 exports({
-  'fsn_hasLicense'
+  'fsn_hasLicense',
+  'fsn_getLicensePoints'
 })
