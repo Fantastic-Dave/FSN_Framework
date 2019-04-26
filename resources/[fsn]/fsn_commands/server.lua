@@ -149,6 +149,7 @@ local emotes = {
     ["cross4"] = {"missfbi_s4mop", "guard_idle_a"},
     ["cross5"] = {"oddjobs@assassinate@construction@", "unarmed_fold_arms"},
     ["mfinger"] = {"anim@mp_player_intselfiethe_bird", "idle_a"},
+    ["arse"] = {"mp_player_int_upperarse_pick", "mp_player_int_arse_pick"},
   },
   halfanim = {
     ["wave1"] = {"random@car_thief@victimpoints_ig_3", "arms_waving"},
