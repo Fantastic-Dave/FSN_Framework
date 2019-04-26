@@ -72,7 +72,11 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
             money = exports.fsn_main:fsn_GetWallet()
             price = store_items[split[2]]
 			if not exports["fsn_licenses"]:fsn_hasLicense('weapon') then
-				TriggerEvent('fsn_notify:displayNotification', 'Come back with a weapons license', 'centerLeft', 3000, 'error')
+				TriggerEvent('fsn_notify:displayNotification', 'Come back with a weapons license', 'centerLeft', 5000, 'error')
+				return
+			end
+			if exports["fsn_licenses"]:fsn_getLicensePoints('weapon') >= 15then
+				TriggerEvent('fsn_notify:displayNotification', 'You have 15 or more points on your license, you cannot purchase a weapon.', 'centerLeft', 5000, 'error')
 				return
 			end
           end
