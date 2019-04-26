@@ -1,158 +1,131 @@
-locations = {
-	{x=1322.645,y=-1651.976,z=52.275},
-	{x=-1153.676,y=-1425.68,z=4.954},
-	{x=322.139,y=180.467,z=103.587},
-	{x=-3170.071,y=1075.059,z=20.829},
-	{x=1864.633,y=3747.738,z=33.032},
-	{x=-293.713,y=6200.04,z=31.487}
-}
-tattoosList = {
-	["mpbeach_overlays"] = {
-
-		{nameHash = "MP_Bea_M_Head_000", part = "head", addedX = 0.5, addedY=0.4,addedZ=0.7, rotZ = 136.4, price = 500},
-		{nameHash = "MP_Bea_M_Head_001", part = "head", addedX = -0.1, addedY=0.4,addedZ=0.7, rotZ = 195.0, price = 500},
-		{nameHash = "MP_Bea_M_Head_002", part = "head", addedX = -0.1, addedY=-0.5,addedZ=0.7, rotZ = 334.5, price = 500},
-
-
-		{nameHash = "MP_Bea_F_Neck_000", part = "Nhead", addedX = 0.2, addedY=-0.5,addedZ=0.7, rotZ = 374.3, price = 500},
-		{nameHash = "MP_Bea_M_Neck_000", part = "Nhead", addedX = -0.1, addedY=0.7,addedZ=0.7, rotZ = 537.0, price = 500},
-		{nameHash = "MP_Bea_M_Neck_001", part = "Nhead", addedX = 0.3, addedY=-0.3,addedZ=0.6, rotZ = 410.3, price = 500},
-
-
-		{nameHash = "MP_Bea_F_Back_000", part = "torso_back", addedX = -0.1, addedY=0.4,addedZ=0.7, rotZ = 195.0, price = 500},
-		{nameHash = "MP_Bea_F_Back_001", part = "torso_back", addedX = -0.5, addedY=-0.3,addedZ=0.3, rotZ = -54.4, price = 500},
-		{nameHash = "MP_Bea_F_Back_002", part = "torso_back", addedX = -0.5, addedY=-0.3,addedZ=0.3, rotZ = -54.4, price = 500},
-		{nameHash = "MP_Bea_M_Back_000", part = "torso_back", addedX = -0.6, addedY=-0.4,addedZ=0.3, rotZ = 309.0, price = 500},
-
-
-		{nameHash = "MP_Bea_F_Chest_000", part = "torso", addedX = 0.3, addedY=0.3,addedZ=0.5, rotZ = 482.0, price = 500},
-		{nameHash = "MP_Bea_F_Chest_001", part = "torso", addedX = 0.3, addedY=0.3,addedZ=0.5, rotZ = 482.0, price = 500},
-		{nameHash = "MP_Bea_F_Chest_002", part = "torso", addedX = 0.4, addedY=0.1,addedZ=0.5, rotZ = 482.0, price = 500},
-		{nameHash = "MP_Bea_M_Chest_000", part = "torso", addedX = 0.3, addedY=0.2,addedZ=0.4, rotZ = 482.0, price = 500},
-		{nameHash = "MP_Bea_M_Chest_001", part = "torso", addedX = 0.3, addedY=0.2,addedZ=0.4, rotZ = 482.0, price = 500},
-
-
-		{nameHash = "MP_Bea_F_Stom_000", part = "torso", addedX = 0.2, addedY=0.3,addedZ=0.1, rotZ = 488.8, price = 500},
-		{nameHash = "MP_Bea_F_Stom_001", part = "torso", addedX = 0.3, addedY=0.1,addedZ=0.1, rotZ = 466.4, price = 500},
-		{nameHash = "MP_Bea_F_Stom_002", part = "torso", addedX = 0.3, addedY=0.3,addedZ=0.1, rotZ = 485.6, price = 500},
-		{nameHash = "MP_Bea_M_Stom_000", part = "torso", addedX = 0.3, addedY=0.3,addedZ=0.1, rotZ = 485.6, price = 500}, 
-		{nameHash = "MP_Bea_M_Stom_001", part = "torso", addedX = 0.6, addedY=0.3,addedZ=0.1, rotZ = 485.6, price = 500},
-
-
-		{nameHash = "MP_Bea_F_RSide_000", part = "torso_right", addedX = 0.4, addedY=-0.4,addedZ=0.1, rotZ = 421.0, price = 500},
-
-
-		{nameHash = "MP_Bea_F_Should_000", part = "torso", addedX = -0.5, addedY=-0.3,addedZ=0.5, rotZ = 654.1, price = 500},
-		{nameHash = "MP_Bea_F_Should_001", part = "torso", addedX = -0.5, addedY=-0.3,addedZ=0.5, rotZ = 654.1, price = 500},
-
-
-		{nameHash = "MP_Bea_F_RArm_001", addedX = 0.2, addedY=-0.5,addedZ=0.3, rotZ = 21.1, price = 500},
-		{nameHash = "MP_Bea_M_RArm_001", addedX = 0.2, addedY=-0.5,addedZ=0.3, rotZ = 21.1, price = 500},
-		{nameHash = "MP_Bea_M_RArm_000", addedX = 0.2, addedY=-0.5,addedZ=0.3, rotZ = 21.1, price = 500},
-
-
-		{nameHash = "MP_Bea_F_LArm_000", addedX = 0.3, addedY=0.8,addedZ=0.2, rotZ = -192.2, price = 500},
-		{nameHash = "MP_Bea_F_LArm_001", addedX = -0.5, addedY=0.7,addedZ=0.4, rotZ = -140.7, price = 500},
-		{nameHash = "MP_Bea_M_LArm_000", addedX = -0.5, addedY=0.7,addedZ=0.4, rotZ = -140.7, price = 500}, 
-
-
-		{nameHash = "MP_Bea_M_Lleg_000", addedX = -0.5, addedY=-0.2,addedZ=-0.8, rotZ = -51.7, price = 500},
-
-
-		{nameHash = "MP_Bea_F_RLeg_000",addedX = -0.5, addedY=-0.2,addedZ=-0.8, rotZ = -51.7, price = 500}
-
-	},
-
-
-	["mpbusiness_overlays"] = {
-		{nameHash = "MP_Buis_M_Neck_000", addedX = 0.3, addedY=0.2,addedZ=0.5,rotZ = 119.4, price = 500},
-		{nameHash = "MP_Buis_M_Neck_001", addedX = 0.3, addedY=-0.2,addedZ=0.7,rotZ = 56.9, price = 500},
-		{nameHash = "MP_Buis_M_Neck_002", addedX = 0.0, addedY=0.3,addedZ=0.6,rotZ = 164.8, price = 500},
-		{nameHash = "MP_Buis_M_Neck_003", addedX = -0.3, addedY=-0.2,addedZ=0.6,rotZ = -54.1, price = 500},
-
-
-		{nameHash = "MP_Buis_M_LeftArm_000", addedX = 0.3, addedY=0.2,addedZ=0.0,rotZ = 115.5, price = 500},
-		{nameHash = "MP_Buis_M_LeftArm_001", addedX = -0.7, addedY=0.1,addedZ=0.0,rotZ = -68.4, price = 500},
-
-		{nameHash = "MP_Buis_M_RightArm_000", addedX = 0.3, addedY=-0.7,addedZ=0.5,rotZ = 17.7, price = 500},
-		{nameHash = "MP_Buis_M_RightArm_001", addedX = 0.3, addedY=0.3,addedZ=0.0,rotZ = 145.4, price = 500},
-
-		{nameHash = "MP_Buis_M_Stomach_000", addedX = 0.7, addedY=0.4,addedZ=0.3,rotZ = 117.3, price = 500},
-		{nameHash = "MP_Buis_M_Chest_000", addedX = 0.7, addedY=0.4,addedZ=0.3,rotZ = 117.3, price = 500},
-		{nameHash = "MP_Buis_M_Chest_001", addedX = 0.7, addedY=0.4,addedZ=0.3,rotZ = 117.3, price = 500},
-		{nameHash = "MP_Buis_M_Back_000", addedX = -0.7, addedY=-0.3,addedZ=0.3,rotZ = -53.6, price = 500},
-		{nameHash = "MP_Buis_F_Chest_000", addedX = 0.5, addedY=0.3,addedZ=0.5,rotZ = 124.9, price = 500},
-		{nameHash = "MP_Buis_F_Chest_001", addedX = 0.7, addedY=0.4,addedZ=0.3,rotZ = 117.3, price = 500},
-		{nameHash = "MP_Buis_F_Chest_002", addedX = 0.7, addedY=0.4,addedZ=0.3,rotZ = 117.3, price = 500},
-		{nameHash = "MP_Buis_F_Stom_000", addedX = 0.7, addedY=0.4,addedZ=0.2,rotZ = 117.3, price = 500},
-		{nameHash = "MP_Buis_F_Stom_001", addedX = 0.7, addedY=0.4,addedZ=0.2,rotZ = 117.3, price = 500},
-		{nameHash = "MP_Buis_F_Stom_002", addedX = 0.7, addedY=0.4,addedZ=0.2,rotZ = 117.3, price = 500},
-		{nameHash = "MP_Buis_F_Back_000", addedX = -0.4, addedY=-0.3,addedZ=0.2,rotZ = 299.8, price = 500},
-		{nameHash = "MP_Buis_F_Back_001", addedX = -0.4, addedY=-0.3,addedZ=0.2,rotZ = 299.8, price = 500},
-		{nameHash = "MP_Buis_F_Neck_000", addedX = 0.3, addedY=-0.4,addedZ=0.6,rotZ = 382.8, price = 500},
-		{nameHash = "MP_Buis_F_Neck_001", addedX = -0.3, addedY=0.3,addedZ=0.7,rotZ = 214.2, price = 500},
-		{nameHash = "MP_Buis_F_RArm_000", addedX = 0.5, addedY=0.0,addedZ=0.0,rotZ = 457.5, price = 500},
-		{nameHash = "MP_Buis_F_LArm_000", addedX = 0.2, addedY=0.4,addedZ=0.0,rotZ = 472.0, price = 500},
-		{nameHash = "MP_Buis_F_LLeg_000", addedX = -0.3, addedY=-0.1,addedZ=-0.7,rotZ = 332.0, price = 500},
-		{nameHash = "MP_Buis_F_RLeg_000", addedX = -0.4, addedY=-0.1,addedZ=-0.7,rotZ = 278.0, price = 500}
-
-	},
-
-	["mphipster_overlays"] = {
-		{nameHash = "FM_Hip_M_Tat_000", addedX = -0.7, addedY=-0.4,addedZ=0.5,rotZ = -55.6, price = 500},
-		{nameHash = "FM_Hip_M_Tat_001", addedX = -0.4, addedY=-0.7,addedZ=0.2,rotZ = -49.7, price = 500},
-		{nameHash = "FM_Hip_M_Tat_002", addedX = 0.4, addedY=0.5,addedZ=0.4,rotZ = 129.5, price = 500},
-		{nameHash = "FM_Hip_M_Tat_003", addedX = -0.8, addedY=0.1,addedZ=0.0,rotZ = -71.9, price = 500},
-		{nameHash = "FM_Hip_M_Tat_004", addedX = 0.4, addedY=0.2,addedZ=0.0,rotZ = -182.6, price = 500},
-		{nameHash = "FM_Hip_M_Tat_005", addedX = -0.1, addedY=0.3,addedZ=0.6,rotZ = -182.6, price = 500},
-		{nameHash = "FM_Hip_M_Tat_006", addedX = 0.5, addedY=-0.3,addedZ=0.2,rotZ = 38.9, price = 500},
-		{nameHash = "FM_Hip_M_Tat_007", addedX = -0.1, addedY=0.8,addedZ=-0.2,rotZ = 156.7, price = 500},
-		{nameHash = "FM_Hip_M_Tat_008", addedX = 0.4, addedY=-0.5,addedZ=0.5,rotZ = 51.8, price = 500},
-		{nameHash = "FM_Hip_M_Tat_009", addedX = -0.7, addedY=-0.4,addedZ=-0.5,rotZ = -23.5, price = 500},
-		{nameHash = "FM_Hip_M_Tat_010", addedX = 0.5, addedY=-0.4,addedZ=-0.1,rotZ = 37.8, price = 500},
-		{nameHash = "FM_Hip_M_Tat_011", addedX = -0.3, addedY=-0.2,addedZ=0.5,rotZ = 290.7, price = 500},
-		{nameHash = "FM_Hip_M_Tat_012", addedX = -0.3, addedY=-0.2,addedZ=0.5,rotZ = 290.7, price = 500},
-		{nameHash = "FM_Hip_M_Tat_013", addedX = 0.6, addedY=0.3,addedZ=0.5,rotZ = 121.7, price = 500},
-		{nameHash = "FM_Hip_M_Tat_014", addedX = 0.5, addedY=0.1,addedZ=0.1,rotZ = 121.7, price = 500},
-		{nameHash = "FM_Hip_M_Tat_015", addedX = 0.3, addedY=0.3,addedZ=0.4,rotZ = 114.0, price = 500},
-		{nameHash = "FM_Hip_M_Tat_016", addedX = 0.3, addedY=0.3,addedZ=0.0,rotZ = 114.0, price = 500},
-		{nameHash = "FM_Hip_M_Tat_017", addedX = -0.2, addedY= -0.5,addedZ= 0.1,rotZ = -27.8, price = 500},
-		{nameHash = "FM_Hip_M_Tat_018", addedX = -0.4, addedY=-0.2,addedZ=0.1,rotZ = 247.6, price = 500},
-		{nameHash = "FM_Hip_M_Tat_019", addedX = -0.7, addedY=-0.5,addedZ=-0.7,rotZ = 296.0, price = 500},
-		{nameHash = "FM_Hip_M_Tat_020", addedX = -0.4, addedY=-0.4,addedZ=0.1,rotZ = 296.0, price = 500},
-		{nameHash = "FM_Hip_M_Tat_021", addedX = 0.3, addedY=-0.2,addedZ=0.5,rotZ = 74.3, price = 500},
-		{nameHash = "FM_Hip_M_Tat_022", addedX = 0.5, addedY=-0.4,addedZ=0.1,rotZ = 74.3, price = 500},
-		{nameHash = "FM_Hip_M_Tat_023", addedX = 0.4, addedY=-0.5,addedZ=-0.1,rotZ = 24.9, price = 500},
-		{nameHash = "FM_Hip_M_Tat_024", addedX = -0.3, addedY=-0.3,addedZ=0.5,rotZ = -53.5, price = 500},
-		{nameHash = "FM_Hip_M_Tat_025", addedX = -0.5, addedY=-0.4,addedZ=0.5,rotZ = -53.5, price = 500},
-		{nameHash = "FM_Hip_M_Tat_026", addedX = -0.7, addedY=0.9,addedZ=0.5,rotZ = -124.6, price = 500},
-		{nameHash = "FM_Hip_M_Tat_027", addedX = -0.3, addedY=-0.4,addedZ=0.2,rotZ = -343.4, price = 500},
-		{nameHash = "FM_Hip_M_Tat_028", addedX = -1.1, addedY=0.2,addedZ=0.2,rotZ = -431.1, price = 500},
-		{nameHash = "FM_Hip_M_Tat_029", addedX = 0.2, addedY=0.5,addedZ=0.0,rotZ = -200.1, price = 500},
-		{nameHash = "FM_Hip_M_Tat_030", addedX = -0.7, addedY=-0.5,addedZ=0.3,rotZ = -63.5, price = 500},
-		{nameHash = "FM_Hip_M_Tat_031", addedX = -0.7, addedY=-0.5,addedZ=0.3,rotZ = -63.5, price = 500},
-		{nameHash = "FM_Hip_M_Tat_032", addedX = -0.7, addedY=-0.5,addedZ=0.3,rotZ = -63.5, price = 500},
-		{nameHash = "FM_Hip_M_Tat_033", addedX = 0.6, addedY=0.3,addedZ=0.4,rotZ = 116.6, price = 500},
-		{nameHash = "FM_Hip_M_Tat_034", addedX = -0.1, addedY=0.7,addedZ=0.0,rotZ = 191.5, price = 500},
-		{nameHash = "FM_Hip_M_Tat_035", addedX = 0.1, addedY=0.7,addedZ=0.0,rotZ = 145.6, price = 500},
-		{nameHash = "FM_Hip_M_Tat_036", addedX = 0.4, addedY=-0.8,addedZ=0.4,rotZ = 375.2, price = 500},
-		{nameHash = "FM_Hip_M_Tat_037", addedX = -0.5, addedY=0.9,addedZ=0.4,rotZ = 551.7, price = 500},
-		{nameHash = "FM_Hip_M_Tat_038", addedX = 0.4, addedY=-0.8,addedZ=-0.6,rotZ = 400.1, price = 500},
-		{nameHash = "FM_Hip_M_Tat_039", addedX = 0.1, addedY=1.2,addedZ=0.1,rotZ = 511.9, price = 500},
-		{nameHash = "FM_Hip_M_Tat_040", addedX = -0.6, addedY=-0.1,addedZ=-0.7,rotZ = 307.0, price = 500},
-		{nameHash = "FM_Hip_M_Tat_041", addedX = -0.5, addedY=0.1,addedZ=0.2,rotZ = 258.8, price = 500},
-		{nameHash = "FM_Hip_M_Tat_042", addedX = -0.5, addedY=-0.5,addedZ=-0.7,rotZ = -25.0, price = 500},
-		{nameHash = "FM_Hip_M_Tat_043", addedX = -0.3, addedY=0.4,addedZ=0.4, rotZ = -135.4, price = 500},
-		{nameHash = "FM_Hip_M_Tat_044", addedX = 0.2, addedY=-0.5,addedZ=0.4,rotZ = 13.6, price = 500},
-		{nameHash = "FM_Hip_M_Tat_045", addedX = 0.2, addedY=-0.8,addedZ=0.3,rotZ = 13.6, price = 500},
-		{nameHash = "FM_Hip_M_Tat_046", addedX = -0.5, addedY=-0.3,addedZ=0.5,rotZ = -61.2, price = 500},
-		{nameHash = "FM_Hip_M_Tat_047", addedX = 0.4, addedY=0.2,addedZ=0.5,rotZ = 104.6, price = 500},
-		{nameHash = "FM_Hip_M_Tat_048", addedX = -0.1, addedY=0.6,addedZ=-0.1,rotZ = 181.1, price = 500},
-	},
+TattooLocations = {
+	{X = 1322.645, Y = -1651.976, Z = 52.275},
+	{X = -1153.676, Y = -1425.68, Z = 4.954},
+	{X = 322.139, Y = 180.467, Z = 103.587},
+	{X = -3170.071, Y = 1075.059, Z = 20.829},
+	{X = 1864.633, Y = 3747.738, Z = 33.032},
+	{X = -293.713, Y = 6200.04, Z = 31.487}
 }
 
-tattoosCategories = {
-	{name = "Part 1", value = "mpbeach_overlays"},
-	{name = "Part 2", value = "mpbusiness_overlays"},
-	{name = "Part 3", value = "mphipster_overlays"}
+TattooCategories = {
+	{Name = 'Beach Tattoos', Value = 'mpbeach_overlays'},
+	{Name = 'Business Tattoos', Value = 'mpbusiness_overlays'},
+	{Name = 'Hipster Tattoos', Value = 'mphipster_overlays'}
+}
+
+TattooList = {
+	['mpbeach_overlays'] = {
+		{NameHash = 'MP_Bea_M_Head_000', Part = 'head', AddedX = 0.5, AddedY = 0.4, AddedZ = 0.7, RotZ = 136.4, Price = 500},
+		{NameHash = 'MP_Bea_M_Head_001', Part = 'head', AddedX = -0.1, AddedY = 0.4, AddedZ = 0.7, RotZ = 195.0, Price = 500},
+		{NameHash = 'MP_Bea_M_Head_002', Part = 'head', AddedX = -0.1, AddedY = -0.5, AddedZ = 0.7, RotZ = 334.5, Price = 500},
+		{NameHash = 'MP_Bea_F_Neck_000', Part = 'Nhead', AddedX = 0.2, AddedY = -0.5, AddedZ = 0.7, RotZ = 374.3, Price = 500},
+		{NameHash = 'MP_Bea_M_Neck_000', Part = 'Nhead', AddedX = -0.1, AddedY = 0.7, AddedZ = 0.7, RotZ = 537.0, Price = 500},
+		{NameHash = 'MP_Bea_M_Neck_001', Part = 'Nhead', AddedX = 0.3, AddedY = -0.3, AddedZ = 0.6, RotZ = 410.3, Price = 500},
+		{NameHash = 'MP_Bea_F_Back_000', Part = 'torso_back', AddedX = -0.1, AddedY = 0.4, AddedZ = 0.7, RotZ = 195.0, Price = 500},
+		{NameHash = 'MP_Bea_F_Back_001', Part = 'torso_back', AddedX = -0.5, AddedY = -0.3, AddedZ = 0.3, RotZ = -54.4, Price = 500},
+		{NameHash = 'MP_Bea_F_Back_002', Part = 'torso_back', AddedX = -0.5, AddedY = -0.3, AddedZ = 0.3, RotZ = -54.4, Price = 500},
+		{NameHash = 'MP_Bea_M_Back_000', Part = 'torso_back', AddedX = -0.6, AddedY = -0.4, AddedZ = 0.3, RotZ = 309.0, Price = 500},
+		{NameHash = 'MP_Bea_F_Chest_000', Part = 'torso', AddedX = 0.3, AddedY = 0.3, AddedZ = 0.5, RotZ = 482.0, Price = 500},
+		{NameHash = 'MP_Bea_F_Chest_001', Part = 'torso', AddedX = 0.3, AddedY = 0.3, AddedZ = 0.5, RotZ = 482.0, Price = 500},
+		{NameHash = 'MP_Bea_F_Chest_002', Part = 'torso', AddedX = 0.4, AddedY = 0.1, AddedZ = 0.5, RotZ = 482.0, Price = 500},
+		{NameHash = 'MP_Bea_M_Chest_000', Part = 'torso', AddedX = 0.3, AddedY = 0.2, AddedZ = 0.4, RotZ = 482.0, Price = 500},
+		{NameHash = 'MP_Bea_M_Chest_001', Part = 'torso', AddedX = 0.3, AddedY = 0.2, AddedZ = 0.4, RotZ = 482.0, Price = 500},
+		{NameHash = 'MP_Bea_F_Stom_000', Part = 'torso', AddedX = 0.2, AddedY = 0.3, AddedZ = 0.1, RotZ = 488.8, Price = 500},
+		{NameHash = 'MP_Bea_F_Stom_001', Part = 'torso', AddedX = 0.3, AddedY = 0.1, AddedZ = 0.1, RotZ = 466.4, Price = 500},
+		{NameHash = 'MP_Bea_F_Stom_002', Part = 'torso', AddedX = 0.3, AddedY = 0.3, AddedZ = 0.1, RotZ = 485.6, Price = 500},
+		{NameHash = 'MP_Bea_M_Stom_000', Part = 'torso', AddedX = 0.3, AddedY = 0.3, AddedZ = 0.1, RotZ = 485.6, Price = 500}, 
+		{NameHash = 'MP_Bea_M_Stom_001', Part = 'torso', AddedX = 0.6, AddedY = 0.3, AddedZ = 0.1, RotZ = 485.6, Price = 500},
+		{NameHash = 'MP_Bea_F_RSide_000', Part = 'torso_right', AddedX = 0.4, AddedY = -0.4, AddedZ = 0.1, RotZ = 421.0, Price = 500},
+		{NameHash = 'MP_Bea_F_Should_000', Part = 'torso', AddedX = -0.5, AddedY = -0.3, AddedZ = 0.5, RotZ = 654.1, Price = 500},
+		{NameHash = 'MP_Bea_F_Should_001', Part = 'torso', AddedX = -0.5, AddedY = -0.3, AddedZ = 0.5, RotZ = 654.1, Price = 500},
+		{NameHash = 'MP_Bea_F_RArm_001', AddedX = 0.2, AddedY = -0.5, AddedZ = 0.3, RotZ = 21.1, Price = 500},
+		{NameHash = 'MP_Bea_M_RArm_001', AddedX = 0.2, AddedY = -0.5, AddedZ = 0.3, RotZ = 21.1, Price = 500},
+		{NameHash = 'MP_Bea_M_RArm_000', AddedX = 0.2, AddedY = -0.5, AddedZ = 0.3, RotZ = 21.1, Price = 500},
+		{NameHash = 'MP_Bea_F_LArm_000', AddedX = 0.3, AddedY = 0.8, AddedZ = 0.2, RotZ = -192.2, Price = 500},
+		{NameHash = 'MP_Bea_F_LArm_001', AddedX = -0.5, AddedY = 0.7, AddedZ = 0.4, RotZ = -140.7, Price = 500},
+		{NameHash = 'MP_Bea_M_LArm_000', AddedX = -0.5, AddedY = 0.7, AddedZ = 0.4, RotZ = -140.7, Price = 500}, 
+		{NameHash = 'MP_Bea_M_Lleg_000', AddedX = -0.5, AddedY = -0.2, AddedZ = -0.8, RotZ = -51.7, Price = 500},
+		{NameHash = 'MP_Bea_F_RLeg_000',AddedX = -0.5, AddedY = -0.2, AddedZ = -0.8, RotZ = -51.7, Price = 500}
+	},
+
+	['mpbusiness_overlays'] = {
+		{NameHash = 'MP_Buis_M_Neck_000', AddedX = 0.3, AddedY = 0.2, AddedZ = 0.5, RotZ = 119.4, Price = 500},
+		{NameHash = 'MP_Buis_M_Neck_001', AddedX = 0.3, AddedY = -0.2, AddedZ = 0.7, RotZ = 56.9, Price = 500},
+		{NameHash = 'MP_Buis_M_Neck_002', AddedX = 0.0, AddedY = 0.3, AddedZ = 0.6, RotZ = 164.8, Price = 500},
+		{NameHash = 'MP_Buis_M_Neck_003', AddedX = -0.3, AddedY = -0.2, AddedZ = 0.6, RotZ = -54.1, Price = 500},
+		{NameHash = 'MP_Buis_M_LeftArm_000', AddedX = 0.3, AddedY = 0.2, AddedZ = 0.0, RotZ = 115.5, Price = 500},
+		{NameHash = 'MP_Buis_M_LeftArm_001', AddedX = -0.7, AddedY = 0.1, AddedZ = 0.0, RotZ = -68.4, Price = 500},
+		{NameHash = 'MP_Buis_M_RightArm_000', AddedX = 0.3, AddedY = -0.7, AddedZ = 0.5, RotZ = 17.7, Price = 500},
+		{NameHash = 'MP_Buis_M_RightArm_001', AddedX = 0.3, AddedY = 0.3, AddedZ = 0.0, RotZ = 145.4, Price = 500},
+		{NameHash = 'MP_Buis_M_Stomach_000', AddedX = 0.7, AddedY = 0.4, AddedZ = 0.3, RotZ = 117.3, Price = 500},
+		{NameHash = 'MP_Buis_M_Chest_000', AddedX = 0.7, AddedY = 0.4, AddedZ = 0.3, RotZ = 117.3, Price = 500},
+		{NameHash = 'MP_Buis_M_Chest_001', AddedX = 0.7, AddedY = 0.4, AddedZ = 0.3, RotZ = 117.3, Price = 500},
+		{NameHash = 'MP_Buis_M_Back_000', AddedX = -0.7, AddedY = -0.3, AddedZ = 0.3, RotZ = -53.6, Price = 500},
+		{NameHash = 'MP_Buis_F_Chest_000', AddedX = 0.5, AddedY = 0.3, AddedZ = 0.5, RotZ = 124.9, Price = 500},
+		{NameHash = 'MP_Buis_F_Chest_001', AddedX = 0.7, AddedY = 0.4, AddedZ = 0.3, RotZ = 117.3, Price = 500},
+		{NameHash = 'MP_Buis_F_Chest_002', AddedX = 0.7, AddedY = 0.4, AddedZ = 0.3, RotZ = 117.3, Price = 500},
+		{NameHash = 'MP_Buis_F_Stom_000', AddedX = 0.7, AddedY = 0.4, AddedZ = 0.2, RotZ = 117.3, Price = 500},
+		{NameHash = 'MP_Buis_F_Stom_001', AddedX = 0.7, AddedY = 0.4, AddedZ = 0.2, RotZ = 117.3, Price = 500},
+		{NameHash = 'MP_Buis_F_Stom_002', AddedX = 0.7, AddedY = 0.4, AddedZ = 0.2, RotZ = 117.3, Price = 500},
+		{NameHash = 'MP_Buis_F_Back_000', AddedX = -0.4, AddedY = -0.3, AddedZ = 0.2, RotZ = 299.8, Price = 500},
+		{NameHash = 'MP_Buis_F_Back_001', AddedX = -0.4, AddedY = -0.3, AddedZ = 0.2, RotZ = 299.8, Price = 500},
+		{NameHash = 'MP_Buis_F_Neck_000', AddedX = 0.3, AddedY = -0.4, AddedZ = 0.6, RotZ = 382.8, Price = 500},
+		{NameHash = 'MP_Buis_F_Neck_001', AddedX = -0.3, AddedY = 0.3, AddedZ = 0.7, RotZ = 214.2, Price = 500},
+		{NameHash = 'MP_Buis_F_RArm_000', AddedX = 0.5, AddedY = 0.0, AddedZ = 0.0, RotZ = 457.5, Price = 500},
+		{NameHash = 'MP_Buis_F_LArm_000', AddedX = 0.2, AddedY = 0.4, AddedZ = 0.0, RotZ = 472.0, Price = 500},
+		{NameHash = 'MP_Buis_F_LLeg_000', AddedX = -0.3, AddedY = -0.1, AddedZ = -0.7, RotZ = 332.0, Price = 500},
+		{NameHash = 'MP_Buis_F_RLeg_000', AddedX = -0.4, AddedY = -0.1, AddedZ = -0.7, RotZ = 278.0, Price = 500}
+	},
+
+	['mphipster_overlays'] = {
+		{NameHash = 'FM_Hip_M_Tat_000', AddedX = -0.7, AddedY = -0.4, AddedZ = 0.5, RotZ = -55.6, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_001', AddedX = -0.4, AddedY = -0.7, AddedZ = 0.2, RotZ = -49.7, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_002', AddedX = 0.4, AddedY = 0.5, AddedZ = 0.4, RotZ = 129.5, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_003', AddedX = -0.8, AddedY = 0.1, AddedZ = 0.0, RotZ = -71.9, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_004', AddedX = 0.4, AddedY = 0.2, AddedZ = 0.0, RotZ = -182.6, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_005', AddedX = -0.1, AddedY = 0.3, AddedZ = 0.6, RotZ = -182.6, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_006', AddedX = 0.5, AddedY = -0.3, AddedZ = 0.2, RotZ = 38.9, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_007', AddedX = -0.1, AddedY = 0.8, AddedZ = -0.2, RotZ = 156.7, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_008', AddedX = 0.4, AddedY = -0.5, AddedZ = 0.5, RotZ = 51.8, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_009', AddedX = -0.7, AddedY = -0.4, AddedZ = -0.5, RotZ = -23.5, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_010', AddedX = 0.5, AddedY = -0.4, AddedZ = -0.1, RotZ = 37.8, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_011', AddedX = -0.3, AddedY = -0.2, AddedZ = 0.5, RotZ = 290.7, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_012', AddedX = -0.3, AddedY = -0.2, AddedZ = 0.5, RotZ = 290.7, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_013', AddedX = 0.6, AddedY = 0.3, AddedZ = 0.5, RotZ = 121.7, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_014', AddedX = 0.5, AddedY = 0.1, AddedZ = 0.1, RotZ = 121.7, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_015', AddedX = 0.3, AddedY = 0.3, AddedZ = 0.4, RotZ = 114.0, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_016', AddedX = 0.3, AddedY = 0.3, AddedZ = 0.0, RotZ = 114.0, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_017', AddedX = -0.2, AddedY =  -0.5, AddedZ =  0.1, RotZ = -27.8, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_018', AddedX = -0.4, AddedY = -0.2, AddedZ = 0.1, RotZ = 247.6, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_019', AddedX = -0.7, AddedY = -0.5, AddedZ = -0.7, RotZ = 296.0, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_020', AddedX = -0.4, AddedY = -0.4, AddedZ = 0.1, RotZ = 296.0, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_021', AddedX = 0.3, AddedY = -0.2, AddedZ = 0.5, RotZ = 74.3, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_022', AddedX = 0.5, AddedY = -0.4, AddedZ = 0.1, RotZ = 74.3, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_023', AddedX = 0.4, AddedY = -0.5, AddedZ = -0.1, RotZ = 24.9, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_024', AddedX = -0.3, AddedY = -0.3, AddedZ = 0.5, RotZ = -53.5, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_025', AddedX = -0.5, AddedY = -0.4, AddedZ = 0.5, RotZ = -53.5, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_026', AddedX = -0.7, AddedY = 0.9, AddedZ = 0.5, RotZ = -124.6, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_027', AddedX = -0.3, AddedY = -0.4, AddedZ = 0.2, RotZ = -343.4, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_028', AddedX = -1.1, AddedY = 0.2, AddedZ = 0.2, RotZ = -431.1, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_029', AddedX = 0.2, AddedY = 0.5, AddedZ = 0.0, RotZ = -200.1, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_030', AddedX = -0.7, AddedY = -0.5, AddedZ = 0.3, RotZ = -63.5, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_031', AddedX = -0.7, AddedY = -0.5, AddedZ = 0.3, RotZ = -63.5, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_032', AddedX = -0.7, AddedY = -0.5, AddedZ = 0.3, RotZ = -63.5, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_033', AddedX = 0.6, AddedY = 0.3, AddedZ = 0.4, RotZ = 116.6, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_034', AddedX = -0.1, AddedY = 0.7, AddedZ = 0.0, RotZ = 191.5, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_035', AddedX = 0.1, AddedY = 0.7, AddedZ = 0.0, RotZ = 145.6, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_036', AddedX = 0.4, AddedY = -0.8, AddedZ = 0.4, RotZ = 375.2, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_037', AddedX = -0.5, AddedY = 0.9, AddedZ = 0.4, RotZ = 551.7, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_038', AddedX = 0.4, AddedY = -0.8, AddedZ = -0.6, RotZ = 400.1, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_039', AddedX = 0.1, AddedY = 1.2, AddedZ = 0.1, RotZ = 511.9, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_040', AddedX = -0.6, AddedY = -0.1, AddedZ = -0.7, RotZ = 307.0, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_041', AddedX = -0.5, AddedY = 0.1, AddedZ = 0.2, RotZ = 258.8, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_042', AddedX = -0.5, AddedY = -0.5, AddedZ = -0.7, RotZ = -25.0, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_043', AddedX = -0.3, AddedY = 0.4, AddedZ = 0.4, RotZ = -135.4, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_044', AddedX = 0.2, AddedY = -0.5, AddedZ = 0.4, RotZ = 13.6, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_045', AddedX = 0.2, AddedY = -0.8, AddedZ = 0.3, RotZ = 13.6, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_046', AddedX = -0.5, AddedY = -0.3, AddedZ = 0.5, RotZ = -61.2, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_047', AddedX = 0.4, AddedY = 0.2, AddedZ = 0.5, RotZ = 104.6, Price = 500},
+		{NameHash = 'FM_Hip_M_Tat_048', AddedX = -0.1, AddedY = 0.6, AddedZ = -0.1, RotZ = 181.1, Price = 500},
+	},
 }
