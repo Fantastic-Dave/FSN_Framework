@@ -150,6 +150,7 @@ local emotes = {
     ["cross5"] = {"oddjobs@assassinate@construction@", "unarmed_fold_arms"},
     ["mfinger"] = {"anim@mp_player_intselfiethe_bird", "idle_a"},
     ["arse"] = {"mp_player_int_upperarse_pick", "mp_player_int_arse_pick"},
+    ["fpalm"] = {"anim@mp_player_intupperface_palm", "idle_a"},
   },
   halfanim = {
     ["wave1"] = {"random@car_thief@victimpoints_ig_3", "arms_waving"},
