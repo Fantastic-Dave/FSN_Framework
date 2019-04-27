@@ -164,6 +164,7 @@ Citizen.CreateThread(function()
 								local cursale = math.random(mini, maxi)
 								TriggerEvent('fsn_bank:change:walletAdd', cursale)
 								TriggerEvent('fsn_notify:displayNotification', 'You got paid: $'..cursale, 'centerLeft', 4000, 'success')
+								Citizen.Wait(500)
 								currentorder = -1
 								washedhands = false
 							end
