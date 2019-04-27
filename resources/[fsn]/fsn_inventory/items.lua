@@ -327,6 +327,65 @@ items_table = {
     modelhash = -736560690,
     price = 250
   },
+  ["frozen_fries"] = {
+    display_name = 'Frozen Fries',
+    weight = 1,
+    desc = 'you dodgy guy',
+    use = function()
+      
+    end,
+  },
+  ["fries"] = {
+    display_name = 'Fries',
+    weight = 1,
+    desc = 'you dodgy guy',
+    use = function()
+      TriggerEvent('fsn_inventory:use:food', 50)
+      TriggerEvent('fsn_inventory:item:take', 'fries', 1)
+    end,
+  },
+  ["frozen_patty"] = {
+    display_name = 'Frozen Patty',
+    weight = 1,
+    desc = 'you dodgy guy',
+    use = function()
+      
+    end,
+  },
+  ["cooked_patty"] = {
+    display_name = 'Cooked Patty',
+    weight = 1,
+    desc = 'you dodgy guy',
+    use = function()
+      
+    end,
+  },
+  ["burger_bun"] = {
+    display_name = 'Burger Bun',
+    weight = 1,
+    desc = 'you dodgy guy',
+    use = function()
+      
+    end,
+  },
+  ["burger"] = {
+    display_name = 'Burger',
+    weight = 1,
+    desc = 'you dodgy guy',
+    use = function()
+      TriggerEvent('fsn_inventory:use:food', 50)
+      TriggerEvent('fsn_inventory:item:take', 'burger', 1)
+    end,
+  },
+  ["ecola_drink"] = {
+    display_name = 'eCola',
+    weight = 1,
+    desc = 'you dodgy guy',
+    use = function()
+      TriggerEvent('fsn_inventory:use:drink', 50)
+      TriggerEvent('fsn_inventory:item:take', 'ecola_drink', 1)
+    end,
+  },
 }
 
 --sendtojs = json.encode(items_table)
