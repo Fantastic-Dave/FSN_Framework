@@ -21,3 +21,4 @@ exports({
 client_script '_item_misc/binoculars.lua'
 client_script '_item_misc/drug_selling.lua'
 client_script '_item_misc/dm_laundering.lua'
+client_script '_item_misc/burger_store.lua'
