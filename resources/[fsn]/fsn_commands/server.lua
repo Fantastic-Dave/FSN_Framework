@@ -1042,6 +1042,7 @@ RegisterServerEvent('fsn_commands:printxyz')
 AddEventHandler('fsn_commands:printxyz', function(x,y,z,h)
   print("{x = "..x..", y = "..y..", z = "..z.."}")
   print("{x = "..x..", y = "..y..", z = "..z..", h = "..h.."}")
+  print(x..", "..y..", "..z)
 end)
 
 RegisterServerEvent('fsn_commands:police:booted')
