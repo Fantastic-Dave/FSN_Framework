@@ -16,6 +16,7 @@ local stores = {
 }
 
 local store_items = {
+  WEAPON_KNIFE = 300,
   WEAPON_HAMMER = 250,
   WEAPON_BAT = 250,
   WEAPON_GOLFCLUB = 250,
