@@ -9,6 +9,8 @@ client_script 'misc/exports.lua'
 client_script 'misc/blips.lua'
 client_script 'misc/weapondrop.lua'
 client_script 'misc/servername.lua'
+client_script 'misc/shitlordjumping.lua'
+client_script 'misc/timer.lua'
 
 -- gui stuffs
 ui_page 'gui/index.html'
@@ -37,7 +39,8 @@ exports {
 	"fsn_CanAfford",
 	"fsn_CharID",
 	"fsn_FindNearbyPed",
-	"fsn_FindPedNearbyCoords"
+	"fsn_FindPedNearbyCoords",
+	"fsn_GetTime"
 }
 server_export 'fsn_GetPlayerFromCharacterId'
 server_export 'fsn_GetPlayerFromPhoneNumber'
