@@ -68,9 +68,12 @@ AddEventHandler('fsn_ems:reviveMe', function()
   end
 end)
 
+
+DecorRegister("deadPly")
 RegisterNetEvent('fsn_ems:killMe')
 AddEventHandler('fsn_ems:killMe', function()
   if not amidead then
+	DecorSetBool(GetPlayerPed(-1), "deadPly", true)
     local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
     if IsPedInAnyVehicle(GetPlayerPed(-1)) then
   		local veh = GetVehiclePedIsIn(GetPlayerPed(-1), false)
@@ -93,6 +96,8 @@ AddEventHandler('fsn_ems:killMe', function()
 	SetTimecycleModifierStrength(1.0)
 	bandw = false
 	pulsing = true
+  else
+	DecorSetBool(GetPlayerPed(-1), "deadPly", false)
   end
 end)
 
