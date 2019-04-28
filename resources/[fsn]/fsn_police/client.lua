@@ -1,6 +1,6 @@
-amicop = true
-pdonduty = true ----------------- REMEMBER TO CHANGE THESE
-policelevel = 7
+amicop = false
+pdonduty = false ----------------- REMEMBER TO CHANGE THESE
+policelevel = 0
 
 function showLoadingPrompt(showText, showTime, showType)
   Citizen.CreateThread(function()
