@@ -159,8 +159,8 @@ Citizen.CreateThread(function()
 									TriggerEvent('fsn_notify:displayNotification', 'You got a <b>$'..tip..'</b> tip!', 'centerLeft', 4000, 'success')
 									TriggerEvent('fsn_bank:change:walletAdd', tip)
 								end
-								local mini = orders[currentorder].price-5
-								local maxi = orders[currentorder].price+10
+								local mini = orders[currentorder].price - 5
+								local maxi = orders[currentorder].price + 10
 								local cursale = math.random(mini, maxi)
 								TriggerEvent('fsn_bank:change:walletAdd', cursale)
 								TriggerEvent('fsn_notify:displayNotification', 'You got paid: $'..cursale, 'centerLeft', 4000, 'success')
