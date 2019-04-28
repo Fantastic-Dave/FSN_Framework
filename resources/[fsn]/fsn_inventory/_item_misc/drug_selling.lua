@@ -34,7 +34,7 @@ Citizen.CreateThread(function()
 	while true do Citizen.Wait(0)
 		if fsn_getPlayerDrugs() ~= false and not IsPedInAnyVehicle(GetPlayerPed(-1)) then
 			local obj = exports['fsn_main']:fsn_FindNearbyPed(2)
-			if obj and IsPedHuman(obj) and not table.contains(sold_peds, obj) then
+			if obj and IsPedHuman(obj) and not table.contains(sold_peds, obj) and not IsEntityDead(obj) then
 				if not selling then
 					fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '[~g~E~w~] Sell ~b~'..drugs[fsn_getPlayerDrugs()].name)
 					if IsControlJustPressed(0, 38) then
