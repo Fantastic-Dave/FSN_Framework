@@ -15,6 +15,9 @@ ui_page 'MDT/gui/index.html'
 client_script 'tackle/client.lua'
 server_script 'tackle/server.lua'
 
+client_script 'K9/client.lua'
+server_script 'K9/server.lua'
+
 files({
   'MDT/gui/index.html',
   'MDT/gui/index.css',
@@ -34,6 +37,7 @@ server_script '@mysql-async/lib/MySQL.lua'
 server_script 'evidencelocker/server.lua'
 
 exports({
+  'fsn_getIllegalItems',
   'fsn_PDDuty',
   'fsn_getPDLevel',
   'fsn_getCopAmt'

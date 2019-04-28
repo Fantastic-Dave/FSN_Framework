@@ -1,6 +1,6 @@
-amicop = false
-pdonduty = false ----------------- REMEMBER TO CHANGE THESE
-policelevel = 0
+amicop = true
+pdonduty = true ----------------- REMEMBER TO CHANGE THESE
+policelevel = 7
 
 function showLoadingPrompt(showText, showTime, showType)
   Citizen.CreateThread(function()
@@ -628,5 +628,17 @@ Citizen.CreateThread(function()
       DisablePlayerVehicleRewards(PlayerId())
     end
 end)
+
+local IllegalItems = {
+  '2g_weed',
+  'joint',
+  'acetone',
+  'meth_rocks',
+  'packaged_cocaine'
+}
+
+function fsn_getIllegalItems()
+  return IllegalItems
+end
 
 SetNuiFocus(true,true)

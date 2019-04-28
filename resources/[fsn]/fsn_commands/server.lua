@@ -248,15 +248,23 @@ function fsn_emsCommand(id)
 end
 
 function fsn_isDeveloper(source)
-  local devid = 'steam:11000010e0828a9'
-  local steamid = GetPlayerIdentifiers(source)
-  steamid = steamid[1]
-  if steamid == devid then
-    return true
-  else
-    return false
-  end
+  local devid = {
+    'steam:11000010c5872c4',
+    'steam:11000010e0828a9'
+  }
+  local steamid = GetPlayerIdentifiers(source)[1]
+  return table.contains(devid, steamid)
 end
+
+function table.contains(table, element)
+  for _, value in pairs(table) do
+    if value == element then
+      return true
+    end
+  end
+  return false
+end
+
 RegisterServerEvent('fsn_commands:me')
 AddEventHandler('fsn_commands:me', function(action, players)
   local source_char = getCharacter(source)
@@ -784,6 +792,15 @@ AddEventHandler('chatMessage', function(source, auth, msg)
               TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[4]), 'You have been strip searched by <b>'..officername..'</b><br><i>Weapons, Inventory & cash', 'centerRight', 7000, 'info')
             else
               TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
+            end
+          end
+        end
+        if split[2] == 'k9' then
+          if split[3] == 'search' then
+            if split[4] == 'person' then
+              TriggerClientEvent('fsn_police:k9:search:person:me', tonumber(split[5]), source)
+            elseif split[4] == 'vehicle' then
+
             end
           end
         end

@@ -307,21 +307,27 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
     end
     if split[2] == 'k9' then
       if split[3] == 'toggle' then
-        TriggerEvent("K9:ToggleK9", 'a_c_husky')
+        TriggerEvent("fsn_police:ToggleK9", 'a_c_husky')
       end
-	  if split[3] == 'follow' then
-        TriggerEvent("K9:ToggleFollow")
+	    if split[3] == 'follow' then
+        TriggerEvent("fsn_police:ToggleFollow")
+      end
+      if split[3] == 'searchperson' then
+        ToggleActionMenu()
+        local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]
+        if ply and ply ~= GetPlayerServerId(PlayerId()) then
+          ExecuteCommand('pd k9 search person ' .. ply)
+        else
+          TriggerEvent('fsn_notify:displayNotification', ':FSN: Nobody detected!', 'centerLeft', 3000, 'error')
+        end
       end
       if split[3] == 'action' then
         if split[4] == 'sit' then
-          TriggerEvent('k9:anim', 'creatures@rottweiler@amb@world_dog_sitting@idle_a', 'idle_b')
-        end
-        if split[4] == 'laydown' then
-          TriggerEvent('k9:anim', 'creatures@rottweiler@amb@sleep_in_kennel@', 'sleep_in_kennel')
+          TriggerEvent('fsn_police:Sit')
         end
       end
       if split[3] == 'vehicle' then
-        TriggerServerEvent('K9:RequestVehicleToggle')
+        TriggerEvent('fsn_police:GetInVehicle')
       end
     end
     if split[2] == 'command' then
@@ -445,9 +451,6 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
       TriggerEvent('fsn_licenses:display', 'weapon')
     end
 	elseif ( split[1] == "vehicle" ) then
-	if split[2] == 'race' then
-		TriggerEvent('fsn_criminalmisc:racing:createRace')
-	end
     if split[2] == 'keys' then
       TriggerEvent('fsn_vehiclecontrol:giveKeys')
       CancelEvent()
