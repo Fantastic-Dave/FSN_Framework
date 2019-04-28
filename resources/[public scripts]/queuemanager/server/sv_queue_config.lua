@@ -8,7 +8,7 @@ MySQL.ready(function()
 	MySQL.Async.fetchAll('SELECT * FROM `fsn_users` WHERE `priority` != 0', {}, function(res)
 		for k, usr in pairs(res) do
 			Config.Priority[usr.steamid] = usr.priority
-			Queue:AddPriority(usr.steamid, usr.priority, false)
+			Queue:AddPriority(usr.steamid, usr.priority, true)
 			print(':queuemanager: Adding priority('..usr.priority..') for user '..usr.name..'('..usr.steamid..')')
 		end
 	end)
