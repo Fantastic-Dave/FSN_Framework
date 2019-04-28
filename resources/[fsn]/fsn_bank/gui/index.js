@@ -11,6 +11,8 @@ $(function() {
 				$('#group_screen').hide()
 				$('#deposit_screen').hide()
 				$('#options_screen').show()
+				$('.withdraw_input').val(0)
+				$('.deposit_input').val(0)
 			} else {
 				$('#atm_main').hide()
 			}
