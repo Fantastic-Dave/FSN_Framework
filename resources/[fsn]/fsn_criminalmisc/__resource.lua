@@ -13,4 +13,8 @@ server_script 'robbing/server.lua'
 client_script 'streetracing/client.lua'
 server_script 'streetracing/server.lua'
 
+-- remapping
+client_script 'remapping/client.lua'
+server_script 'remapping/server.lua'
+
 -- weapon info
