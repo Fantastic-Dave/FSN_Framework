@@ -445,6 +445,9 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
       TriggerEvent('fsn_licenses:display', 'weapon')
     end
 	elseif ( split[1] == "vehicle" ) then
+	if split[2] == 'race' then
+		TriggerEvent('fsn_criminalmisc:racing:createRace')
+	end
     if split[2] == 'keys' then
       TriggerEvent('fsn_vehiclecontrol:giveKeys')
       CancelEvent()

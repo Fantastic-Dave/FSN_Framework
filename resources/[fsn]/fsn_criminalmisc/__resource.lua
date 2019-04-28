@@ -9,4 +9,8 @@ server_script 'handcuffs/server.lua'
 client_script 'robbing/client.lua'
 server_script 'robbing/server.lua'
 
+-- streetracing
+client_script 'streetracing/client.lua'
+server_script 'streetracing/server.lua'
+
 -- weapon info
