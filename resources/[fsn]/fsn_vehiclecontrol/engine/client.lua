@@ -188,8 +188,8 @@ myKeys = {}
 RegisterNetEvent('fsn_vehiclecontrol:getKeys')
 RegisterNetEvent('fsn_vehiclecontrol:giveKeys')
 AddEventHandler('fsn_vehiclecontrol:getKeys', function(veh)
-	if not table.contains(myKeys, GetVehiclePedIsIn(GetPlayerPed(-1), false)) then
-		table.insert(myKeys, {GetVehiclePedIsIn(GetPlayerPed(-1), false),true})
+	if not table.contains(myKeys, GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1), false))) then
+		table.insert(myKeys, {GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1), false)),true})
 		TriggerEvent('fsn_notify:displayNotification', 'You got keys to this vehicle!', 'centerLeft', 5000, 'info')
 	else
 		TriggerEvent('fsn_notify:displayNotification', 'You already have keys to the vehicle', 'centerLeft', 5000, 'info')
@@ -273,7 +273,7 @@ AddEventHandler('fsn_vehiclecontrol:lockpick', function()
 			local plate = GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1), false))
 			TriggerServerEvent('fsn_police:dispatch', coords, 2, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
 			TriggerEvent('fsn_commands:me', 'successfully hotwired the vehicle...')
-			table.insert(myKeys, {GetVehiclePedIsIn(GetPlayerPed(-1), false),true})
+			table.insert(myKeys, {plate,true})
 			TriggerEvent('fsn_notify:displayNotification', 'You got keys to this vehicle!', 'centerRight', 3000, 'info')
 		end
 	else
@@ -316,7 +316,7 @@ AddEventHandler('fsn_vehiclecontrol:lockpick', function()
 				local plate = GetVehicleNumberPlateText(veh)
 				TriggerServerEvent('fsn_police:dispatch', coords, 2, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
 				TriggerEvent('fsn_commands:me', 'successfully lockpicked the vehicle...')
-				table.insert(myKeys, {veh,true})
+				table.insert(myKeys, {plate,true})
 				SetVehicleDoorsLockedForAllPlayers(veh, false)
 				TriggerEvent('fsn_notify:displayNotification', 'You got keys to this vehicle!', 'centerRight', 3000, 'info')
 			end
@@ -343,7 +343,7 @@ Citizen.CreateThread(function()
 			else
 				local veh = fsn_lookingAt()
 				if veh then
-					if exports.fsn_cargarage:fsn_IsVehicleOwner(veh) or table.contains(myKeys, veh) then
+					if exports.fsn_cargarage:fsn_IsVehicleOwner(veh) or table.contains(myKeys, GetVehicleNumberPlateText(veh)) then
 						if GetVehicleDoorsLockedForPlayer(veh, PlayerId()) then
 							SetVehicleDoorsLockedForAllPlayers(veh, false)
 							TriggerEvent('fsn_notify:displayNotification', 'unlocked', 'centerRight', 3000, 'info')
@@ -399,7 +399,7 @@ Citizen.CreateThread(function()
 end)
 
 local function canunlock()
-	if exports.fsn_cargarage:fsn_IsVehicleOwner(GetVehiclePedIsIn(GetPlayerPed(-1), false)) or table.contains(myKeys, GetVehiclePedIsIn(GetPlayerPed(-1), false)) then
+	if exports.fsn_cargarage:fsn_IsVehicleOwner(GetVehiclePedIsIn(GetPlayerPed(-1), false)) or table.contains(myKeys, GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1), false))) then
 		return true
 	else
 		return false
