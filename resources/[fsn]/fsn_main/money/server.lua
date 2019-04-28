@@ -31,8 +31,8 @@ AddEventHandler('fsn_main:money:wallet:GiveCash', function(src, ply, amt)
 		TriggerClientEvent('fsn_notify:displayNotification', src, 'There was an issue with your input', 'centerRight', 4000, 'error')
 		return
 	end
-	if tonumber(amt) > 1000 then
-		TriggerClientEvent('fsn_notify:displayNotification', src, 'You cannot give over $1000, use an ATM', 'centerRight', 4000, 'error')
+	if tonumber(amt) > 25000 then
+		TriggerClientEvent('fsn_notify:displayNotification', src, 'You cannot give over $25000, use an ATM', 'centerRight', 4000, 'error')
 		return
 	end
 	for k,v in pairs(moneystore) do
