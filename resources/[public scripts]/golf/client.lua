@@ -96,6 +96,8 @@ function spawnCart()
 	SetPedIntoVehicle(GetPlayerPed(-1), spawned_car, - 1)
 	SetModelAsNoLongerNeeded(vehicle)
 	plate = GetVehicleNumberPlateText(spawned_car)
+	
+	TriggerEvent('fsn_cargarage:makeMine', spawned_car, GetDisplayNameFromVehicleModel(GetEntityModel(spawned_car)), GetVehicleNumberPlateText(spawned_car))
 end
 
 function DisplayHelpText(str)
