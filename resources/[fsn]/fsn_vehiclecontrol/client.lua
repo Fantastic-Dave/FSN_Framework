@@ -99,7 +99,7 @@ Citizen.CreateThread(function()
 				SetEntityCoords(ped, co.x + fw.x, co.y + fw.y, co.z - 0.47, true, true, true)
 				SetEntityVelocity(ped, velBuffer[2].x, velBuffer[2].y, velBuffer[2].z)
 				Citizen.Wait(1)
-				SetPedToRagdoll(ped, 1000, 1000, 0, 0, 0, 0)
+				SetPedToRagdoll(GetPlayerPed(-1), 1, 1000, 0, 0, 0, 0)
 			end
 			velBuffer[2] = velBuffer[1]
 			velBuffer[1] = GetEntityVelocity(car)
