@@ -146,7 +146,7 @@ Citizen.CreateThread(function()
 								RequestAnimDict('random@mugging3')
 								TaskPlayAnim(v.ped, "random@mugging3", "handsup_standing_base", 4.0, -4, -1, 49, 0, 0, 0, 0)
 							end
-							local maff = robbingstart + 60
+							local maff = robbingstart + 30
 							if maff < curtime then
 								robbing = false
 								TriggerEvent('fsn_bank:change:walletAdd', math.random(50, 600))
@@ -162,6 +162,7 @@ Citizen.CreateThread(function()
 									SetPedSweat(v.ped, 100.0)
 									robbing = true
 									TriggerEvent('fsn_notify:displayNotification', 'Robbing...', 'centerLeft', 6000, 'info')
+									exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'ROBBING',30)
 									robbingstart = curtime
 									lastrob = curtime
 									if not IsEntityPlayingAnim(v.ped, 'random@mugging3', "handsup_standing_base", 3) then
@@ -204,6 +205,7 @@ Citizen.CreateThread(function()
 						end
 					else
 						if robbing then
+							exports["fsn_progress"]:removeBar()
 							TriggerEvent('fsn_notify:displayNotification', 'You failed...', 'centerLeft', 6000, 'error')
 							robbing = false
 							Citizen.Wait(6000)
@@ -223,7 +225,7 @@ Citizen.CreateThread(function()
 				if exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5) then
 					if GetEntityModel(exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5)) == 416176080 then
 						v.ped = exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5)
-						fsn_drawText3D(GetEntityCoords(v.ped).x, GetEntityCoords(v.ped).y, GetEntityCoords(v.ped).z, '~g~im here baby xo')
+						fsn_drawText3D(GetEntityCoords(v.ped).x, GetEntityCoords(v.ped).y, GetEntityCoords(v.ped).z, '~w~ ')
 					else
 						if v.ped then
 							if not IsPedFleeing(v.ped) and not IsPedFleeing(v.ped) then
