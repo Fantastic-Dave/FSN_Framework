@@ -25,12 +25,9 @@ files({
 
 -- Server scripts
 server_script '@mysql-async/lib/MySQL.lua'
---dependency "connectqueue"
-server_script "@connectqueue/connectqueue.lua"
 server_script 'initial/server.lua'
 server_script 'money/server.lua'
 server_script 'playermanager/server.lua'
-server_script 'playermanager/priority.lua'
 --server_script 'imanager/server.lua'
 server_script 'misc/logging.lua'
 
