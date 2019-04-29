@@ -187,17 +187,8 @@ end
 
 function Queue:AddToQueue(ids, connectTime, name, src, deferrals)
     if Queue:IsInQueue(ids) then return end
-	
-	local prio = false
-	for k,v in pairs(Config.Priority) do 
-		if k == ids[1] then
-			prio = v
-		else
-			Queue:DebugPrint(string_format(ids[1].." ~= "..k, tmp.name, ids[1], _pos, queueCount))
-		end
-	end
-	
-    local tmp = {
+
+	local tmp = {
         source = src,
         ids = ids,
         name = name,
@@ -207,6 +198,15 @@ function Queue:AddToQueue(ids, connectTime, name, src, deferrals)
         firstconnect = connectTime,
         queuetime = function() return (os_time() - connectTime) end
     }
+	
+	local prio = false
+	for k,v in pairs(Config.Priority) do 
+		if k == ids[1] then
+			prio = v
+		else
+			Queue:DebugPrint(string_format(ids[1].." ~= "..k, tmp.name, ids[1], _pos, queueCount))
+		end
+	end
 
     local _pos = false
     local queueCount = Queue:GetSize() + 1
