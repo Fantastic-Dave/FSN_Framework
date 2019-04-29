@@ -2,7 +2,7 @@
 local drugs = {
   ["packaged_cocaine"] = {
 	name = "Cocaine",
-    street_price = 800
+    street_price = 10
   },
   ["meth_rocks"] = {
 	name = "Meth Rocks",
