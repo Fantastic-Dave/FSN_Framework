@@ -188,31 +188,21 @@ end
 function Queue:AddToQueue(ids, connectTime, name, src, deferrals)
     if Queue:IsInQueue(ids) then return end
 
-	local tmp = {
+    local tmp = {
         source = src,
         ids = ids,
         name = name,
-        priority = prio,--Queue:IsPriority(ids) or (src == "debug" and math_random(0, 15)),
+        priority = Queue:IsPriority(ids) or (src == "debug" and math_random(0, 15)),
         timeout = 0,
         deferrals = deferrals,
         firstconnect = connectTime,
         queuetime = function() return (os_time() - connectTime) end
     }
-	
-	local prio = false
-	for k,v in pairs(Config.Priority) do 
-		if k == ids[1] then
-			prio = v
-		else
-			Queue:DebugPrint(string_format(ids[1].." ~= "..k, tmp.name, ids[1], _pos, queueCount))
-		end
-	end
 
     local _pos = false
     local queueCount = Queue:GetSize() + 1
     local queueList = Queue:GetQueueList()
 
-	
     for pos, data in ipairs(queueList) do
         if tmp.priority then
             if not data.priority then
@@ -229,10 +219,10 @@ function Queue:AddToQueue(ids, connectTime, name, src, deferrals)
             end
         end
     end
-	
+
     if not _pos then
         _pos = Queue:GetSize() + 1
-        Queue:DebugPrint(string_format("%s[%s] was placed %d/%d in queue (prio: "..tostring(prio)..')', tmp.name, ids[1], _pos, queueCount))
+        Queue:DebugPrint(string_format("%s[%s] was placed %d/%d in queue", tmp.name, ids[1], _pos, queueCount))
     end
 
     table_insert(queueList, _pos, tmp)

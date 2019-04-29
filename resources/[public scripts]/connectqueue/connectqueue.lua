@@ -32,7 +32,7 @@ function Queue.IsReady()
 end
 
 function Queue.LoadExports()
-    --Queue.Exports = exports.connectqueue:GetQueueExports()
+    Queue.Exports = exports.connectqueue:GetQueueExports()
     Queue.Ready = true
     Queue.ReadyCallbacks()
 end
@@ -59,4 +59,4 @@ AddEventHandler("onResourceStop", function(resource)
     end
 end)
 
---SetTimeout(1, function() Queue.LoadExports() end)
+SetTimeout(1, function() Queue.LoadExports() end)
