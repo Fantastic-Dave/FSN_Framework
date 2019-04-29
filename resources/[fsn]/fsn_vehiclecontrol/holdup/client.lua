@@ -201,6 +201,7 @@ Citizen.CreateThread(function()
 						holdingstart = curtime
 						holdingcar = GetVehiclePedIsIn(ped) 						
 						TaskLeaveVehicle(ped, GetVehiclePedIsIn(ped), 256)
+						exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'Holding up',9)
 						if not holdingnotif then 
 							TriggerEvent('fsn_notify:displayNotification', 'Holding up for keys...', 'centerRight', 3000, 'info')
 							if math.random(1,100) < 40 then
@@ -230,7 +231,7 @@ Citizen.CreateThread(function()
 						local maff = holdingstart + 9
 						if maff < curtime then
 							if math.random(0,100) > 60 then
-								table.insert(myKeys, {holdingcar,true})
+								table.insert(myKeys, {GetVehicleNumberPlateText(holdingcar),true})
 								TriggerEvent('fsn_notify:displayNotification', 'You got keys to the car...', 'centerRight', 3000, 'success')
 								holding = false
 								holdingstart = 0
@@ -250,6 +251,9 @@ Citizen.CreateThread(function()
 				end
 			end
 		else
+			if holding then
+				exports["fsn_progress"]:removeBar()
+			end
 			holding = false
 			holdingstart = 0
 			holdingped = false
