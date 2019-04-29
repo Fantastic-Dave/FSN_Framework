@@ -231,99 +231,10 @@ end)
 RegisterNetEvent('EngineToggle:Engine')
 RegisterNetEvent('EngineToggle:RPDamage')
 
-RegisterNetEvent('fsn_vehiclecontrol:lockpick')
-AddEventHandler('fsn_vehiclecontrol:lockpick', function()
-	if IsPedInAnyVehicle(GetPlayerPed(-1)) then
-		TriggerEvent('fsn_commands:me', 'attempts to hotwire the vehicle...')
-		StartVehicleAlarm(GetVehiclePedIsIn(GetPlayerPed(-1), false))
-		Citizen.Wait(6000)
-		if GetPedInVehicleSeat(GetVehiclePedIsIn(GetPlayerPed(-1), false), -1) ~= GetPlayerPed(-1) then
-			TriggerEvent('fsn_notify:displayNotification', 'You need to be in the driver seat', 'centerLeft', 5000, 'error')
-			return
-		end
-		if math.random(1,100) < 65 then
-			if math.random(1,100) < 40 then
-				local pos = GetEntityCoords(GetPlayerPed(-1))
-				local coords = {
-					x = pos.x,
-					y = pos.y,
-					z = pos.z
-				}
-				local colour = table.pack(GetVehicleColours(GetVehiclePedIsIn(GetPlayerPed(-1), false)))
-				colour = colour[1]
-				colour = vehicle_colours[colour+1]
-				local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(GetVehiclePedIsIn(GetPlayerPed(-1), false)))
-				local plate = GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1), false))
-				TriggerServerEvent('fsn_police:dispatch', coords, 10, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
-			end
-			TriggerEvent('fsn_commands:me', 'failed to hotwire the vehicle...')
-			TriggerEvent('fsn_notify:displayNotification', 'You broke the lockpick.', 'centerLeft', 5000, 'error')
-			TriggerEvent('fsn_inventory:item:take', 'lockpick', 1)
-		else
-			local pos = GetEntityCoords(GetPlayerPed(-1))
-			local coords = {
-				x = pos.x,
-				y = pos.y,
-				z = pos.z
-			}
-			local colour = table.pack(GetVehicleColours(GetVehiclePedIsIn(GetPlayerPed(-1), false)))
-			colour = colour[1]
-			colour = vehicle_colours[colour+1]
-			local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(GetVehiclePedIsIn(GetPlayerPed(-1), false)))
-			local plate = GetVehicleNumberPlateText(GetVehiclePedIsIn(GetPlayerPed(-1), false))
-			TriggerServerEvent('fsn_police:dispatch', coords, 2, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
-			TriggerEvent('fsn_commands:me', 'successfully hotwired the vehicle...')
-			table.insert(myKeys, {plate,true})
-			TriggerEvent('fsn_notify:displayNotification', 'You got keys to this vehicle!', 'centerRight', 3000, 'info')
-		end
-	else
-		local veh = fsn_lookingAt()
-		if veh then
-			TriggerEvent('fsn_commands:me', 'attempts to lockpick the vehicle...')
-			StartVehicleAlarm(veh)
-			Citizen.Wait(6000)
-			if math.random(1,100) < 65 then
-				if math.random(1,100) < 40 then
-					local pos = GetEntityCoords(GetPlayerPed(-1))
-					local coords = {
-						x = pos.x,
-						y = pos.y,
-						z = pos.z
-					}
-					local colour = table.pack(GetVehicleColours(veh))
-					colour = colour[1]
-					colour = vehicle_colours[colour+1]
-					local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(veh))
-					local plate = GetVehicleNumberPlateText(veh)
-					TriggerServerEvent('fsn_police:dispatch', coords, 10, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
-				else
-					print('not telling police')
-				end
-				TriggerEvent('fsn_commands:me', 'failed to lockpick the vehicle...')
-				TriggerEvent('fsn_notify:displayNotification', 'You broke the lockpick.', 'centerLeft', 5000, 'error')
-				TriggerEvent('fsn_inventory:item:take', 'lockpick', 1)
-			else
-				local pos = GetEntityCoords(GetPlayerPed(-1))
-				local coords = {
-					x = pos.x,
-					y = pos.y,
-					z = pos.z
-				}
-				local colour = table.pack(GetVehicleColours(veh))
-				colour = colour[1]
-				colour = vehicle_colours[colour+1]
-				local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(veh))
-				local plate = GetVehicleNumberPlateText(veh)
-				TriggerServerEvent('fsn_police:dispatch', coords, 2, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
-				TriggerEvent('fsn_commands:me', 'successfully lockpicked the vehicle...')
-				table.insert(myKeys, {plate,true})
-				SetVehicleDoorsLockedForAllPlayers(veh, false)
-				TriggerEvent('fsn_notify:displayNotification', 'You got keys to this vehicle!', 'centerRight', 3000, 'info')
-			end
-		else
-			TriggerEvent('fsn_notify:displayNotification', 'No vehicle detected', 'centerRight', 3000, 'info')
-		end
-	end
+RegisterNetEvent('fsn_vehiclecontrol:keys:carjack')
+AddEventHandler('fsn_vehiclecontrol:keys:carjack', function(plate)
+	TriggerEvent('fsn_notify:displayNotification', 'You got keys to: '..string.upper(plate), 'centerRight', 3000, 'info')
+	table.insert(myKeys, {plate,true})
 end)
 
 Citizen.CreateThread(function()
