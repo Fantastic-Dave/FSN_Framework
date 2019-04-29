@@ -394,6 +394,9 @@ function maledances()
 	Menu.addButton("Dance 2","dancem2",nil)
 	Menu.addButton("Dance 3","dancem3",nil)
 	Menu.addButton("Dance 4","dancem4","missfbi3_sniping")
+	Menu.addButton("Dance 5","dancem5",nil)
+	Menu.addButton("Dance 6","dancem6",nil)
+	Menu.addButton("Dance 7","dancem7",nil)
 	Menu.addButton("Back","NameOfMenu",nil)
 	BackToLevel1()
 	-- ...
@@ -413,6 +416,18 @@ end
 
 function dancem4()
 animPlayer("missfbi3_sniping", "dance_m_default")
+end
+
+function dancem5()
+halfanimPlayer("anim@mp_player_intcelebrationfemale@oh_snap", "oh_snap")
+end
+
+function dancem6()
+halfanimPlayer("anim@mp_player_intcelebrationfemale@raise_the_roof", "raise_the_roof")
+end
+
+function dancem7()
+halfanimPlayer("anim@mp_player_intcelebrationfemale@find_the_fish", "find_the_fish")
 end
 
 function femdances()
