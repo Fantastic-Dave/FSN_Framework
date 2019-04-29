@@ -1,4 +1,3 @@
-picklocking = false
 items_table = {
   ["bandage"] = {
     display_name = 'Bandage',
@@ -188,62 +187,7 @@ items_table = {
     weight = 1.5,
     desc = 'you dodgy guy',
     use = function()
-      if not picklocking then
-		local lost_safe = {x = 977.23968505859, y = -104.10308074951, z = 74.845184326172}
-		if GetDistanceBetweenCoords(lost_safe.x, lost_safe.y, lost_safe.z, GetEntityCoords(GetPlayerPed(-1))) < 2 then
-			print(exports['fsn_police']:fsn_getCopAmt()..' are online')
-			if exports['fsn_police']:fsn_getCopAmt() < 3 then
-				TriggerEvent('fsn_bankrobbery:LostMC:spawn')
-				TriggerEvent('fsn_notify:displayNotification', 'There are not enough police to do this heist.', 'centerLeft', 3500, 'error')
-			else
-				picklocking = true
-				while ( not HasAnimDictLoaded( "mini@safe_cracking" ) ) do
-					RequestAnimDict( "mini@safe_cracking" )
-					Citizen.Wait( 5 )
-				end
-				TaskPlayAnim(GetPlayerPed(-1), "mini@safe_cracking", "idle_base", 8.0, 1.0, 12000, 2, 0, 0, 1, 1 )
-				Citizen.Wait( 12000 )
-				if math.random(1,100) > 50 then
-					TriggerEvent('fsn_bankrobbery:LostMC:spawn')
-				end
-				if math.random(1,100) > 80 then
-					local maff = lastSafe + 900
-					if maff < exports["fsn_main"]:fsn_GetTime() then
-						lastSafe = exports["fsn_main"]:fsn_GetTime()
-						TriggerEvent('fsn_notify:displayNotification', 'You got into the LostMC safe...', 'centerLeft', 6000, 'success')
-						if math.random(1,100) > 50 then
-							TriggerEvent('fsn_inventory:item:add', 'modified_drillbit', 1)
-						end
-						TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(450,4000))
-						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'lockpick', math.random(1,5)) end
-						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'zipties', math.random(1,3)) end
-						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
-						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
-						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'packaged_cocaine', math.random(1,20)) end
-						TriggerEvent('fsn_bankrobbery:LostMC:spawn')
-					else
-						TriggerEvent('fsn_notify:displayNotification', 'You cannot do this yet', 'centerLeft', 3500, 'error')
-					end
-				else
-					TriggerEvent('fsn_notify:displayNotification', 'You broke your lockpick...', 'centerLeft', 3500, 'error')
-					TriggerEvent('fsn_inventory:item:take', 'lockpick', 1)
-				end
-			end
-			picklocking = false
-		else
-			picklocking = true
-			FreezeEntityPosition(GetPlayerPed(-1), true)
-			while ( not HasAnimDictLoaded( "mini@safe_cracking" ) ) do
-				RequestAnimDict( "mini@safe_cracking" )
-				Citizen.Wait( 5 )
-			end
-			TaskPlayAnim(GetPlayerPed(-1), "mini@safe_cracking", "idle_base", 8.0, 1.0, 6000, 2, 0, 0, 1, 1 )
-			TriggerEvent('fsn_vehiclecontrol:lockpick')
-			Citizen.Wait(6000)
-			FreezeEntityPosition(GetPlayerPed(-1), false)
-			picklocking = false
-		end
-      end
+		TriggerEvent('fsn_criminalmisc:lockpicking')
     end,
 	  price = 250,
     modelhash = 495450405
