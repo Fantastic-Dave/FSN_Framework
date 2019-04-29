@@ -191,7 +191,8 @@ items_table = {
       if not picklocking then
 		local lost_safe = {x = 977.23968505859, y = -104.10308074951, z = 74.845184326172}
 		if GetDistanceBetweenCoords(lost_safe.x, lost_safe.y, lost_safe.z, GetEntityCoords(GetPlayerPed(-1))) < 2 then
-			if exports['fsn_police']:fsn_getCopAmt() >= 3 then
+			print(exports['fsn_police']:fsn_getCopAmt()..' are online')
+			if exports['fsn_police']:fsn_getCopAmt() < 3 then
 				TriggerEvent('fsn_bankrobbery:LostMC:spawn')
 				TriggerEvent('fsn_notify:displayNotification', 'There are not enough police to do this heist.', 'centerLeft', 3500, 'error')
 			else
@@ -206,17 +207,23 @@ items_table = {
 					TriggerEvent('fsn_bankrobbery:LostMC:spawn')
 				end
 				if math.random(1,100) > 80 then
-					TriggerEvent('fsn_notify:displayNotification', 'You got into the LostMC safe...', 'centerLeft', 6000, 'success')
-					if math.random(1,100) > 50 then
-						TriggerEvent('fsn_inventory:item:add', 'modified_drillbit', 1)
+					local maff = lastSafe + 900
+					if maff < exports["fsn_main"]:fsn_GetTime() then
+						lastSafe = exports["fsn_main"]:fsn_GetTime()
+						TriggerEvent('fsn_notify:displayNotification', 'You got into the LostMC safe...', 'centerLeft', 6000, 'success')
+						if math.random(1,100) > 50 then
+							TriggerEvent('fsn_inventory:item:add', 'modified_drillbit', 1)
+						end
+						TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(450,4000))
+						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'lockpick', math.random(1,5)) end
+						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'zipties', math.random(1,3)) end
+						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
+						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
+						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'packaged_cocaine', math.random(1,20)) end
+						TriggerEvent('fsn_bankrobbery:LostMC:spawn')
+					else
+						TriggerEvent('fsn_notify:displayNotification', 'You cannot do this yet', 'centerLeft', 3500, 'error')
 					end
-					TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(450,4000))
-					if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'lockpick', math.random(1,5)) end
-					if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'zipties', math.random(1,3)) end
-					if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
-					if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
-					if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'packaged_cocaine', math.random(1,20)) end
-					TriggerEvent('fsn_bankrobbery:LostMC:spawn')
 				else
 					TriggerEvent('fsn_notify:displayNotification', 'You broke your lockpick...', 'centerLeft', 3500, 'error')
 					TriggerEvent('fsn_inventory:item:take', 'lockpick', 1)
