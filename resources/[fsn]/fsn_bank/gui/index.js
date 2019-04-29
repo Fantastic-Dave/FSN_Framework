@@ -1,9 +1,16 @@
 var wallet = 0
 var bank = 0
+
+var amiatbank = false
 $(function() {
 	window.addEventListener('message', function(event){
 		var item = event.data;
 		if (item.type == 'displayATM') {
+			if (item.bank) {
+				amiatbank = true
+			} else {
+				amiatbank = false
+			}
 			if (item.enable) {
 				$('#atm_main').show()
 				$('#withdraw_screen').hide()
@@ -92,7 +99,8 @@ document.body.onmouseup = function() {
 		if ($('#deposit_screen').is(":visible")) {
 			if ($('.deposit_input').val() && Number($('.deposit_input').val())) {
 				$.post('http://fsn_bank/depositMoney', JSON.stringify({
-					deposit: Number($('.deposit_input').val())
+					deposit: Number($('.deposit_input').val()),
+					atbank: amiatbank
 				}))
 			}			
 		}

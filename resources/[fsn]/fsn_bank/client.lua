@@ -127,6 +127,7 @@ Citizen.CreateThread(function()
             SetNuiFocus(true,true)
             SendNUIMessage({
               type = 'displayATM',
+			  bank = atm.bank,
               enable = true
             })
             atmDisplay = true
@@ -149,6 +150,11 @@ local function fsn_closeATM()
   atmDisplay = falses
 end
 RegisterNUICallback('depositMoney', function(tbl)
+  if tbl.atbank == 'false' or tbl.atbank == false then
+	fsn_closeATM()
+	TriggerEvent('fsn_notify:displayNotification', 'You cannot deposit money at an ATM!', 'centerRight', 4000, 'error')
+	return
+  end
   if not tonumber(tbl.deposit) or tonumber(tbl.deposit) < 1 then
 	fsn_closeATM()
 	TriggerEvent('fsn_notify:displayNotification', 'There was an issue with your input!', 'centerRight', 4000, 'error')
