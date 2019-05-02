@@ -34,7 +34,8 @@ end)
 
 Citizen.CreateThread(function()
 	while true do
-		Citizen.Wait(600000)
+		Citizen.Wait(0)
 		doPriority()
+		Citizen.Wait(600000)
 	end
 end)
