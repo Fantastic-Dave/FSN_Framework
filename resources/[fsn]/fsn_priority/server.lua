@@ -31,3 +31,11 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		doPriority()
+		Citizen.Wait(600000)
+	end
+end)
