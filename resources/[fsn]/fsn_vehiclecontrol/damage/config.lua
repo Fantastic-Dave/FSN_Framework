@@ -71,10 +71,10 @@ cfg = {
 				0.5,		--	14: Boats
 				1.0,		--	15: Helicopters
 				1.0,		--	16: Planes
-				1.0,		--	17: Service
+				0.75,		--	17: Service
 				0.75,		--	18: Emergency
 				0.75,		--	19: Military
-				1.0,		--	20: Commercial
+				0.75,		--	20: Commercial
 				1.0			--	21: Trains
 	}
 }
