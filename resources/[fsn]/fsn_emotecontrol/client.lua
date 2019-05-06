@@ -968,7 +968,7 @@ local lPed = GetPlayerPed(-1)
 				DecorSetBool(GetPlayerPed(-1), "player:handsup", false)
 				--drawNotification("Anim Stopped.")
 			else
-				ClearPedTasks(lPed)
+				--ClearPedTasks(lPed)
 				TaskPlayAnim(lPed, animDict, animName, 4.0, -4, -1, 49, 0, 0, 0, 0)
 				DecorSetBool(GetPlayerPed(-1), "player:handsup", true)
 				--drawNotification("Anim Started, press it again to cancel/continue it.")
