@@ -107,7 +107,7 @@ end)
 
 RegisterNetEvent('fsn_phone:recieveMessage')
 AddEventHandler('fsn_phone:recieveMessage', function(msg)
-  if tonumber(msg.to_number) == tonumber(character.char_phone) then
+  if tonumber(msg.to_number) == tonumber(character.char_phone) or tonumber(msg.to_number) == -1 then
 		if msg.sender == false then
 			for k, v in pairs(contacts) do
 				if tonumber(v.number) == tonumber(msg.from_number) then
