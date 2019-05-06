@@ -451,150 +451,155 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
       TriggerEvent('fsn_licenses:display', 'weapon')
     end
 	elseif ( split[1] == "vehicle" ) then
-    if split[2] == 'keys' then
-      TriggerEvent('fsn_vehiclecontrol:giveKeys')
-      CancelEvent()
-    end
-    if split[2] == 'window' then
-      if split[3] == '*' then
-        if not windows[1] then
-          RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0)
-          windows[1] = true
-          TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-        else
-          RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0)
-          windows[1] = false
-          TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-        end
-        if not windows[2] then
-          RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1)
-          windows[2] = true
-          TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-        else
-          RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1)
-          windows[2] = false
-          TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-        end
-        if not windows[3] then
-          RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2)
-          windows[3] = true
-          TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-        else
-          RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2)
-          windows[3] = false
-          TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-        end
-        if not windows[4] then
-          RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3)
-          windows[4] = true
-          TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-        else
-          RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3)
-          windows[4] = false
-          TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-        end
-      end
-      if split[3] == '1' then
-        if not windows[1] then
-          RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0)
-          windows[1] = true
-          TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-        else
-          RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0)
-          windows[1] = false
-          TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-        end
-      end
-      if split[3] == '2' then
-        if not windows[2] then
-          RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1)
-          windows[2] = true
-          TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-        else
-          RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1)
-          windows[2] = false
-          TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-        end
-      end
-      if split[3] == '3' then
-        if not windows[3] then
-          RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2)
-          windows[3] = true
-          TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-        else
-          RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2)
-          windows[3] = false
-          TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-        end
-      end
-      if split[3] == '4' then
-        if not windows[4] then
-          RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3)
-          windows[4] = true
-          TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
-        else
-          RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3)
-          windows[4] = false
-          TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
-        end
-      end
-    end
-    if split[2] == 'door' then
-      if GetPedInVehicleSeat(GetVehiclePedIsIn(GetPlayerPed(-1), false), -1) == GetPlayerPed(-1) then
-        if split[3] == '*' then
-          SetVehicleDoorsShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), false)
-        end
-        if split[3] == '1' then
-          if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 4) then
-            print('opened')
-            SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 4, false, false)
-          else
-            print('closed')
-            SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 4, false)
-          end
-        end
-        if split[3] == '2' then
-          if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0) then
-            SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0, false, false)
-          else
-            SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0, false)
-          end
-        end
-        if split[3] == '3' then
-          if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1) then
-            SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1, false, false)
-          else
-            SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1, false)
-          end
-        end
-        if split[3] == '4' then
-          if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2) then
-            SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2, false, false)
-          else
-            SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2, false)
-          end
-        end
-        if split[3] == '5' then
-          if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3) then
-            SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3, false, false)
-          else
-            SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3, false)
-          end
-        end
-        if split[3] == '6' then
-          if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 5) then
-            SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 5, false, false)
-          else
-            SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 5, false)
-          end
-        end
-      else
-        TriggerEvent('fsn_notify:displayNotification', 'You need to be in the driver seat!', 'centerLeft', 3000, 'error')
-      end
-    end
+		if split[2] == 'race' then
+			ToggleActionMenu()
+			TriggerEvent('fsn_criminalmisc:racing:createRace')
+			CancelEvent()
+		end
+		if split[2] == 'keys' then
+		  TriggerEvent('fsn_vehiclecontrol:giveKeys')
+		  CancelEvent()
+		end
+		if split[2] == 'window' then
+		  if split[3] == '*' then
+			if not windows[1] then
+			  RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0)
+			  windows[1] = true
+			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
+			else
+			  RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0)
+			  windows[1] = false
+			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
+			end
+			if not windows[2] then
+			  RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1)
+			  windows[2] = true
+			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
+			else
+			  RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1)
+			  windows[2] = false
+			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
+			end
+			if not windows[3] then
+			  RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2)
+			  windows[3] = true
+			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
+			else
+			  RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2)
+			  windows[3] = false
+			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
+			end
+			if not windows[4] then
+			  RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3)
+			  windows[4] = true
+			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
+			else
+			  RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3)
+			  windows[4] = false
+			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
+			end
+		  end
+		  if split[3] == '1' then
+			if not windows[1] then
+			  RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0)
+			  windows[1] = true
+			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
+			else
+			  RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0)
+			  windows[1] = false
+			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
+			end
+		  end
+		  if split[3] == '2' then
+			if not windows[2] then
+			  RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1)
+			  windows[2] = true
+			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
+			else
+			  RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1)
+			  windows[2] = false
+			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
+			end
+		  end
+		  if split[3] == '3' then
+			if not windows[3] then
+			  RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2)
+			  windows[3] = true
+			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
+			else
+			  RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2)
+			  windows[3] = false
+			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
+			end
+		  end
+		  if split[3] == '4' then
+			if not windows[4] then
+			  RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3)
+			  windows[4] = true
+			  TriggerEvent('fsn_notify:displayNotification', 'Window open', 'centerLeft', 3000, 'info')
+			else
+			  RollUpWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3)
+			  windows[4] = false
+			  TriggerEvent('fsn_notify:displayNotification', 'Window closed', 'centerLeft', 3000, 'info')
+			end
+		  end
+		end
+		if split[2] == 'door' then
+		  if GetPedInVehicleSeat(GetVehiclePedIsIn(GetPlayerPed(-1), false), -1) == GetPlayerPed(-1) then
+			if split[3] == '*' then
+			  SetVehicleDoorsShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), false)
+			end
+			if split[3] == '1' then
+			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 4) then
+				print('opened')
+				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 4, false, false)
+			  else
+				print('closed')
+				SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 4, false)
+			  end
+			end
+			if split[3] == '2' then
+			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0) then
+				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0, false, false)
+			  else
+				SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0, false)
+			  end
+			end
+			if split[3] == '3' then
+			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1) then
+				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1, false, false)
+			  else
+				SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1, false)
+			  end
+			end
+			if split[3] == '4' then
+			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2) then
+				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2, false, false)
+			  else
+				SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2, false)
+			  end
+			end
+			if split[3] == '5' then
+			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3) then
+				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3, false, false)
+			  else
+				SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3, false)
+			  end
+			end
+			if split[3] == '6' then
+			  if not IsVehicleDoorFullyOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 5) then
+				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 5, false, false)
+			  else
+				SetVehicleDoorShut(GetVehiclePedIsIn(GetPlayerPed(-1), false), 5, false)
+			  end
+			end
+		  else
+			TriggerEvent('fsn_notify:displayNotification', 'You need to be in the driver seat!', 'centerLeft', 3000, 'error')
+		  end
+		end
 		if split[2] == 'engine' then
-      TriggerEvent('EngineToggle:Engine')
-      CancelEvent()
+			TriggerEvent('EngineToggle:Engine')
+			CancelEvent()
 		end
 		if split[2] == 'seat' then
 			if split[3] == '1' then
