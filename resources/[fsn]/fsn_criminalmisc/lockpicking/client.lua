@@ -263,7 +263,7 @@ function doLockpick()
 	end
 	print('lockpicking car for: '..lockpicking_length)
 	exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'Lockpicking',lockpicking_length)
-	
+	dispatchAlert(lockpicking_vehicle)
 	Citizen.CreateThread(function()
 		while lockpicking_car do
 			Citizen.Wait(0)
