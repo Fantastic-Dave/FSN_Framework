@@ -14,6 +14,11 @@ local spots = {
     exit = {x = 254.40155029297, y = -1372.5345458984, z = 29.648010253906},
     locked = false
   },
+  ["ICU"] = {
+    enter = {x = 333.99166870117, y = -569.83361816406, z = 43.317420959473},
+    exit = {x = 276.59255981445, y = -1334.7238769531, z = 24.537803649902},
+    locked = false
+  },
   ["The Thinking Box"] = {
     enter = {x = -1062.8592529297, y = -240.67185974121, z = 44.021133422852},
     exit = {x = -1063.5947265625, y = -239.77041625977, z = 44.021133422852},
@@ -87,4 +92,4 @@ Citizen.CreateThread(function()
   end
 end)
 
-SetEntityCoords(GetPlayerPed(-1), -458.790, 284.750, 78.521)
+--SetEntityCoords(GetPlayerPed(-1), -458.790, 284.750, 78.521)
