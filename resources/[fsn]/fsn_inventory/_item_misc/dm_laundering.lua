@@ -577,6 +577,7 @@ Citizen.CreateThread(function()
                 DrawNotification(false, true);
                 quoted = true
                 needed_delivery = quote[2]
+				dm_amount = inventory["dirty_money"].amount
               end
             else
               SetTextComponentFormat("STRING")
@@ -585,7 +586,6 @@ Citizen.CreateThread(function()
               if IsControlJustPressed(0, 246) then
                 TriggerEvent('chatMessage', 'Dealer', {244, 223, 66}, 'Go get the van from my garage, it has a fake plate so the fuzz shouldn\'t bother you.')
                 fsn_StartLaundering(false)
-                dm_amount = inventory["dirty_money"].amount
               end
               if IsControlJustPressed(0, 249) then
                 abletolaunder = false
