@@ -6,7 +6,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(1)
 		if IsPedJumping(GetPlayerPed(-1)) then
 			local maff = lastJump + 5
-			if maff >= fsn_GetTime() and jumped == false then
+			if maff < fsn_GetTime() and jumped == false then
 				lastJump = fsn_GetTime()
 				SetPedToRagdoll(GetPlayerPed(-1), 1, 1000, 0, 0, 0, 0)
 				jumped = true

@@ -1,7 +1,6 @@
 local mysql = false
 
 players = {}
-local banned_words = {}
 AddEventHandler('playerConnecting', function(playername, setKickReason)
   local admin_lvl = 0
   local identity = {}
@@ -17,13 +16,6 @@ AddEventHandler('playerConnecting', function(playername, setKickReason)
 		DropPlayer(source, ':FSN: james does not like your ?steamid?, try again')
 		setKickReason(':FSN: james does not like your ?steamid?, try again')
 		CancelEvent()
-	end
-	for k,v in pairs(banned_words) do
-		if string.find(playername, v) then
-			DropPlayer(source, ':FSN: Remove weird characters from your name')
-			setKickReason(':FSN: Remove weird characters from your name')
-			CancelEvent()			
-		end
 	end
     MySQL.Async.fetchAll("SELECT * FROM fsn_users WHERE steamid = '"..identity[1].."'", {}, function(user)
       if not user[1] then
