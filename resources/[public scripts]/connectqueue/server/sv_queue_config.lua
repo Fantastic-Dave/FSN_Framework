@@ -52,6 +52,6 @@ Config.Language = {
     pos = "\xF0\x9F\x90\x8CYou are %d/%d in queue \xF0\x9F\x95\x9C%s",
     connectingerr = "\xE2\x9D\x97[Queue] Error: Error adding you to connecting list",
     timedout = "\xE2\x9D\x97[Queue] Error: Timed out?",
-    wlonly = "\xE2\x9D\x97[Queue] You must be whitelisted to join this server",
+    wlonly = "\xE2\x9D\x97 You must be whitelisted to join this server. Apply here: http://fsn.life/apply",
     steam = "\xE2\x9D\x97 [Queue] Error: Steam must be running"
 }
