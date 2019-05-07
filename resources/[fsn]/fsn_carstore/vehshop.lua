@@ -189,6 +189,7 @@ local vehshop = {
 				{name = "Tampa", costs = 375000, description = {}, model = "tampa"},
 				{name = "Virgo", costs = 195000, description = {}, model = "virgo"},
 				{name = "Vigero", costs = 121000, description = {}, model = "vigero"},
+				{name = "z190", costs = 45000, description = {}, model = "vigero"},
 			}
 		},
 		["offroad"] = {
