@@ -186,11 +186,11 @@ local vehshop = {
 				{name = "Picador", costs = 19000, description = {}, model = "picador"}, 
                 {name = "Rat Loader 2", costs = 350000, description = {}, model = "RatLoader2"},
 				{name = "Sabre GT", costs = 15000, description = {}, model = "sabregt"},
-				{name = "Tulip", costs = 45000, description = {}, model = "sabregt"},
+				{name = "Tulip", costs = 45000, description = {}, model = "tulip"},
 				{name = "Tampa", costs = 375000, description = {}, model = "tampa"},
 				{name = "Virgo", costs = 195000, description = {}, model = "virgo"},
 				{name = "Vigero", costs = 121000, description = {}, model = "vigero"},
-				{name = "z190", costs = 45000, description = {}, model = "vigero"},
+				{name = "z190", costs = 45000, description = {}, model = "z190"},
 			}
 		},
 		["offroad"] = {
@@ -258,7 +258,7 @@ local vehshop = {
 			buttons = {
 				{name = "Asea", costs = 25000, description = {}, model = "asea"},
 				{name = "Asterope", costs = 30000, description = {}, model = "asterope"},
-				{name = "Cognoscenti", costs = 1000000, description = {}, model = "cognoscenti"},
+				{name = "Cognoscenti", costs = 150000, description = {}, model = "cognoscenti"},
 				{name = "Cognoscenti 55", costs = 1000000, description = {}, model = "cog55"},
 				{name = "Fugitive", costs = 24000, description = {}, model = "fugitive"},
 				{name = "Glendale", costs = 20000, description = {}, model = "glendale"},
