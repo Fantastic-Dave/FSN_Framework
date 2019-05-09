@@ -381,7 +381,8 @@ local savingWeapons = {
   "WEAPON_FLASHLIGHT",
   "WEAPON_MACHINEPISTOL",
   "WEAPON_DBSHOTGUN",
-  "WEAPON_COMPACTRIFLE"
+  "WEAPON_COMPACTRIFLE",
+  "GADGET_PARACHUTE"
 }
 RegisterNetEvent('fsn_main:characterSaving')
 AddEventHandler('fsn_main:characterSaving', function()
