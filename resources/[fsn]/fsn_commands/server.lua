@@ -1008,7 +1008,15 @@ AddEventHandler('chatMessage', function(source, auth, msg)
         end
         if split[2] == 'car' then
           if tonumber(split[3]) then
-            TriggerClientEvent('fsn_commands:police:car', source, pd_cars[tonumber(split[3])])
+			if tonumber(split[3]) < 2000 then
+				TriggerClientEvent('fsn_commands:police:car', source, pd_cars[tonumber(split[3])])
+			else
+				if fsn_policeCommand(source) then
+					TriggerClientEvent('fsn_commands:police:car', source, pd_cars[tonumber(split[3])])
+				else
+					TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You do not have the right level to drive this vehicle.')
+				end
+			end
           else
             TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
           end
