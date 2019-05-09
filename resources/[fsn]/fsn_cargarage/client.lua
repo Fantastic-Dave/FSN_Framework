@@ -198,6 +198,7 @@ local function fsn_SpawnVehicle(vehid)
 			plate = veh.veh_plate,
 			model = veh.veh_name
 		})
+		TriggerEvent('fsn_vehiclecontrol:keys:carjack', GetVehicleNumberPlateText(personalvehicle))
 		SetEntityAsMissionEntity(personalvehicle, false, true)
 		TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', veh.veh_plate, 1)
 	end)
