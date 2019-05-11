@@ -385,7 +385,7 @@ function ChangeToSkin(skin)
 		ShowRadarMessage('New skin is: '..skin)
 		SetModelAsNoLongerNeeded(model)
 	else
-		ShowRadarMessage("Model is not founded")
+		ShowRadarMessage("Model not found")
 	end
 end
 
