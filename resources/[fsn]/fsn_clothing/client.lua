@@ -20,7 +20,8 @@ local clothing_stores = {
   {x = 124.95854949951, y = -223.33766174316, z = 54.557830810547, blip = true},
   {x = 425.11428833008, y = -806.48187255859, z = 29.491125106812, blip = true},
   {x = 76.014793395996, y = -1392.7271728516, z = 29.37614440918, blip = true},
-  {x = 457.1916809082, y = -990.73016357422, z = 30.689607620239, blip = false}
+  {x = 457.1916809082, y = -990.73016357422, z = 30.689607620239, blip = false}, --<MRPD
+  {x = 268.48431396484, y = -1363.7272949219, z = 24.537797927856, blip = false} --<EMS
 }
 
 function drawTxt(x,y ,width,height,scale, text, r,g,b,a)
@@ -416,7 +417,7 @@ Citizen.CreateThread(function()
             	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
             else
               SetTextComponentFormat("STRING")
-              AddTextComponentString("Press ~INPUT_PICKUP~ to change clothes (~b~POLICE~w~)")
+              AddTextComponentString("Press ~INPUT_PICKUP~ to change clothes (~b~EMERGENCY PERSONNEL~w~)")
               DisplayHelpTextFromStringLabel(0, 0, 1, -1)
             end
           end
