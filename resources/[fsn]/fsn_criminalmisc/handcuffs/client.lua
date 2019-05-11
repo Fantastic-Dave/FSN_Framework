@@ -199,11 +199,11 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-		if HasHandcuffs() and not exports["fsn_ems"]:fsn_IsDead() then
+		if HasHandcuffs() and not exports["fsn_ems"]:fsn_IsDead() and not IsPedInAnyVehicle(GetPlayerPed(-1)) then
 			for id = 0, 68 do
 				if NetworkIsPlayerActive(id) then
 				  local ped = GetPlayerPed(id)
-				  if GetDistanceBetweenCoords(GetEntityCoords(ped, false), GetEntityCoords(GetPlayerPed(-1),false), true) < 2 and ped ~= GetPlayerPed(-1) then
+				  if not IsPedInAnyVehicle(ped) and GetDistanceBetweenCoords(GetEntityCoords(ped, false), GetEntityCoords(GetPlayerPed(-1),false), true) < 2 and ped ~= GetPlayerPed(-1) then
 					if DecorGetBool(GetPlayerPed(id), "crim_cuff") == false then
 					  showLoadingPrompt("[SHIFT + Y] ziptie "..GetPlayerServerId(id), 6000, 3)
 					end
