@@ -321,6 +321,9 @@ AddEventHandler('EngineToggle:Engine', function()
 	if not canunlock() then
 		TriggerEvent('fsn_notify:displayNotification', 'You don\'t have the keys for this vehicle!', 'centerLeft', 3000, 'error')
 	return end
+	if IsThisModelAPlane(GetEntityModel(GetVehiclePedIsIn(GetPlayerPed(-1), false))) and not exports["fsn_licenses"]:fsn_hasLicense('pilot') then 
+		TriggerEvent('fsn_notify:displayNotification', 'You are not trained to start this engine', 'centerLeft', 3000, 'error')
+	return end
 	local veh
 	local StateIndex
 	for i, vehicle in ipairs(vehicles) do
