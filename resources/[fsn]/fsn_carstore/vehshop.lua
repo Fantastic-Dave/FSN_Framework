@@ -138,6 +138,7 @@ local vehshop = {
 				{name = "Feltzer 3", costs = 200000, description = {}, model = "feltzer3"},
 				{name = "Tornado 6", costs = 175000, description = {}, model = "tornado6"},
 				{name = "Z-Type", costs = 155000, description = {}, model = "ztype"},
+				{name = "z190", costs = 45000, description = {}, model = "z190"},
 			}
 		},
 		["super"] = {
@@ -192,7 +193,6 @@ local vehshop = {
 				{name = "Virgo", costs = 35000, description = {}, model = "virgo"},
 				{name = "Vigero", costs = 33000, description = {}, model = "vigero"},
 				{name = "Yosemite", costs = 155000, description = {}, model = "yosemite"},
-				{name = "z190", costs = 45000, description = {}, model = "z190"},
 			}
 		},
 		["offroad"] = {
