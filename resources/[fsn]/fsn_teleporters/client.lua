@@ -56,6 +56,67 @@ local spots = {
   }
 }
 
+local savingWeapons = {
+  "WEAPON_KNIFE",
+  "WEAPON_NIGHTSTICK",
+  "WEAPON_HAMMER",
+  "WEAPON_BAT",
+  "WEAPON_GOLFCLUB",
+  "WEAPON_CROWBAR",
+  "WEAPON_PISTOL",
+  "WEAPON_COMBATPISTOL",
+  "WEAPON_APPISTOL",
+  "WEAPON_PISTOL50",
+  "WEAPON_MICROSMG",
+  "WEAPON_SMG",
+  "WEAPON_ASSAULTSMG",
+  "WEAPON_ASSAULTRIFLE",
+  "WEAPON_CARBINERIFLE",
+  "WEAPON_ADVANCEDRIFLE",
+  "WEAPON_MG",
+  "WEAPON_COMBATMG",
+  "WEAPON_PUMPSHOTGUN",
+  "WEAPON_SAWNOFFSHOTGUN",
+  "WEAPON_ASSAULTSHOTGUN",
+  "WEAPON_BULLPUPSHOTGUN",
+  "WEAPON_STUNGUN",
+  "WEAPON_SNIPERRIFLE",
+  "WEAPON_SMOKEGRENADE",
+  "WEAPON_BZGAS",
+  "WEAPON_MOLOTOV",
+  "WEAPON_FIREEXTINGUISHER",
+  "WEAPON_PETROLCAN",
+  "WEAPON_SNSPISTOL",
+  "WEAPON_SPECIALCARBINE",
+  "WEAPON_HEAVYPISTOL",
+  "WEAPON_BULLPUPRIFLE",
+  "WEAPON_HOMINGLAUNCHER",
+  "WEAPON_PROXMINE",
+  "WEAPON_SNOWBALL",
+  "WEAPON_VINTAGEPISTOL",
+  "WEAPON_DAGGER",
+  "WEAPON_FIREWORK",
+  "WEAPON_MUSKET",
+  "WEAPON_MARKSMANRIFLE",
+  "WEAPON_HEAVYSHOTGUN",
+  "WEAPON_GUSENBERG",
+  "WEAPON_HATCHET",
+  "WEAPON_COMBATPDW",
+  "WEAPON_KNUCKLE",
+  "WEAPON_MARKSMANPISTOL",
+  "WEAPON_BOTTLE",
+  "WEAPON_FLAREGUN",
+  "WEAPON_FLARE",
+  "WEAPON_REVOLVER",
+  "WEAPON_SWITCHBLADE",
+  "WEAPON_MACHETE",
+  "WEAPON_FLASHLIGHT",
+  "WEAPON_MACHINEPISTOL",
+  "WEAPON_DBSHOTGUN",
+  "WEAPON_COMPACTRIFLE",
+  "GADGET_PARACHUTE"
+}
+
 function fsn_drawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
     local px,py,pz=table.unpack(GetGameplayCamCoords())
@@ -86,11 +147,24 @@ Citizen.CreateThread(function()
             fsn_drawText3D(v.enter.x, v.enter.y, v.enter.z, "~r~"..k.." is locked!")
           else
             if IsControlJustPressed(0, 51) then
-              DoScreenFadeOut(1000)
-              Citizen.Wait(1500)
-              SetEntityCoords(GetPlayerPed(-1), v.exit.x, v.exit.y, v.exit.z)
-              Citizen.Wait(1500)
-              DoScreenFadeIn(2000)
+			  local canenter = true
+			  if not exports["fsn_police"]:fsn_PDDuty() then
+				  if k == 'Courtroom' then
+					for k, v in pairs(savingWeapons) do
+						if HasPedGotWeapon(GetPlayerPed(-1), GetHashKey(v)) and canenter then
+							TriggerEvent('fsn_notify:displayNotification', 'No weapons in the courtroom.', 'centerLeft', 4000, 'error')
+							canenter = false
+						end
+					end
+				  end
+			  end
+			  if canenter then
+				  DoScreenFadeOut(1000)
+				  Citizen.Wait(1500)
+				  SetEntityCoords(GetPlayerPed(-1), v.exit.x, v.exit.y, v.exit.z)
+				  Citizen.Wait(1500)
+				  DoScreenFadeIn(2000)
+			  end
             end
           end
         end
