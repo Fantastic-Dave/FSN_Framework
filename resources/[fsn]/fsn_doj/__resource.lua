@@ -1,3 +1,5 @@
+server_script '@mysql-async/lib/MySQL.lua'
+
 -- judge
 client_script 'judges/client.lua'
 server_script 'judges/server.lua'
