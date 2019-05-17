@@ -187,9 +187,19 @@ function sendTextMessage() {
 	}
 	$('#screen-messages').show()
 }
-
+var audioElement = false
 $(function() {
     window.addEventListener('message', function(event) {
+		if (event.data.type == 'sound') {
+			if (event.data.sound == 'stop') {
+				audioElement.volume = 0.0;
+			} else {
+				audioElement = document.createElement('audio');
+				audioElement.setAttribute('src', 'sounds/'+event.data.sound+'.mp3');
+				audioElement.volume = 0.1;
+				audioElement.play();
+			}
+		}	
 		if (event.data.updateContacts == true) {
 			contacts = event.data.contacts
 		}

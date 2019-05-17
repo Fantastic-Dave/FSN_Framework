@@ -20,6 +20,11 @@ files({
   'gui/img/icons/icon_phone.png',
   'gui/img/icons/icon_whitelists.png',
   'gui/img/icons/icon_adverts.png',
+  
+  'gui/sounds/ringtone.mp3',
+  'gui/sounds/keypress.mp3',
+  'gui/sounds/busy.mp3',
+  'gui/sounds/calling.mp3',
 })
 
 server_script '@mysql-async/lib/MySQL.lua'

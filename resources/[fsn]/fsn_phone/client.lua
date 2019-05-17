@@ -99,6 +99,14 @@ RegisterNUICallback('placeAdvert', function(data)
 	TriggerServerEvent('fsn_phone:adverts:add', character.char_fname..' '..character.char_lname, character.char_phone, data.ad)
 end)
 
+RegisterNetEvent('fsn_phone:sound')
+AddEventHandler('fsn_phone:sound', function(snd)
+	SendNUIMessage({
+		type = 'sound',
+		sound = snd,
+	})
+end)
+
 RegisterNetEvent('fsn_phone:updateNumber')
 AddEventHandler('fsn_phone:updateNumber', function(number)
   character.char_phone = number
