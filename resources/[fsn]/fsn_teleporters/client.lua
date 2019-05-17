@@ -29,6 +29,26 @@ local spots = {
     exit = {x = -1047.1921386719, y = -237.75674438477, z = 44.021053314209},
     locked = false
   },
+  ["Courthouse"] = {
+    enter = {x = 269.19464111328, y = -432.84234619141, z = 45.324928283691},
+    exit = {x = 224.7947845459, y = -419.65487670898, z = -118.19955444336},
+    locked = false
+  },
+  ["Courtroom"] = {
+    enter = {x = 235.94152832031, y = -413.40606689453, z = -118.16347503662},
+    exit = {x = 238.66616821289, y = -334.35528564453, z = -118.77346801758},
+    locked = true
+  },
+  ["Court Bench"] = {
+    enter = {x = -1006.8142700195, y = -481.06991577148, z = 50.027072906494},
+    exit = {x = 241.27047729492, y = -304.19039916992, z = -118.79995727539},
+    locked = false
+  },
+  ["Judges Office"] = {
+    enter = {x = 242.90141296387, y = -416.60583496094, z = -118.1996307373},
+    exit = {x = -1002.9207763672, y = -477.94250488281, z = 50.027153015137},
+    locked = false
+  },
   ["Comedy Club"] = {
     enter = {x = -430.142, y = 261.665, z = 83.005},
     exit = {x = -458.790, y = 284.750, z = 78.521},
@@ -90,6 +110,11 @@ Citizen.CreateThread(function()
       end
     end
   end
+end)
+
+RegisterNetEvent('fsn_doj:judge:toggleLock')
+AddEventHandler('fsn_doj:judge:toggleLock', function(tf)
+	spots["Courtroom"].locked = tf
 end)
 
 --SetEntityCoords(GetPlayerPed(-1), -458.790, 284.750, 78.521)
