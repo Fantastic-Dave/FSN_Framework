@@ -44,4 +44,5 @@ exports {
 }
 server_export 'fsn_GetPlayerFromCharacterId'
 server_export 'fsn_GetPlayerFromPhoneNumber'
+server_export 'fsn_GetPlayerPhoneNumber'
 server_export 'fsn_CharID'

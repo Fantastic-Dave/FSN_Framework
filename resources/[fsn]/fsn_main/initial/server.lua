@@ -134,6 +134,16 @@ function fsn_GetPlayerFromPhoneNumber(num)
   return idee
 end
 
+function fsn_GetPlayerPhoneNumber(ply)
+  local idee = 0
+  for k, v in pairs(current_characters) do
+    if v.ply_id == tonumber(ply) then
+      idee = v.char_phone
+    end
+  end
+  return idee
+end
+
 RegisterServerEvent('fsn_main:updateCharNumber')
 AddEventHandler('fsn_main:updateCharNumber', function(charid, number)
   for k, v in pairs(current_characters) do
