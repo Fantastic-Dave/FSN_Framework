@@ -216,7 +216,7 @@ end)
 
 RegisterNetEvent('fsn_commands:dev:weapon')
 AddEventHandler('fsn_commands:dev:weapon', function(wep)
-	GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(wep), GetMaxAmmo(GetPlayerPed(-1), GetHashKey(wep), 250))
+	GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(wep), 200)
 	SetCurrentPedWeapon(GetPlayerPed(-1), GetHashKey(wep), true)
 end)
 
