@@ -52,11 +52,11 @@ RegisterNUICallback("booking-submit-now", function(data, cb)
   end
   -- JAIL TIME
   if tonumber(data.jailTime) > 0 then
-    if tonumber(data.jailTime) <= 300 then
+    if tonumber(data.jailTime) <= 100 then
       local jailtime = tonumber(data.jailTime)*60
       TriggerServerEvent('fsn_jail:sendsuspect', GetPlayerServerId(PlayerId()), data.suspectID, jailtime)
     else
-      TriggerEvent('fsn_notify:displayNotification', 'You cannot jail someone for more than 300 minutes.', 'centerLeft', 5000, 'error')
+      TriggerEvent('fsn_notify:displayNotification', 'You cannot jail someone for more than 100 minutes - speak to a judge.', 'centerLeft', 5000, 'error')
     end
   end
 end)
