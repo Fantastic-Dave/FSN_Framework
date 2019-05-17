@@ -138,6 +138,7 @@ local vehshop = {
 				{name = "Feltzer 3", costs = 200000, description = {}, model = "feltzer3"},
 				{name = "Tornado 6", costs = 175000, description = {}, model = "tornado6"},
 				{name = "Z-Type", costs = 155000, description = {}, model = "ztype"},
+				{name = "z190", costs = 45000, description = {}, model = "z190"},
 			}
 		},
 		["super"] = {
@@ -192,7 +193,6 @@ local vehshop = {
 				{name = "Virgo", costs = 35000, description = {}, model = "virgo"},
 				{name = "Vigero", costs = 33000, description = {}, model = "vigero"},
 				{name = "Yosemite", costs = 155000, description = {}, model = "yosemite"},
-				{name = "z190", costs = 45000, description = {}, model = "z190"},
 			}
 		},
 		["offroad"] = {
@@ -269,7 +269,7 @@ local vehshop = {
 				{name = "Premier", costs = 10000, description = {}, model = "premier"},
 				{name = "Primo", costs = 9000, description = {}, model = "primo"},
 				{name = "Primo Custom", costs = 9500, description = {}, model = "primo2"},
-				{name = "Regina", costs = 8000, description = {}, model = "c"},
+				{name = "Regina", costs = 8000, description = {}, model = "regina"},
 				{name = "Schafter 2", costs = 50000, description = {}, model = "schafter2"},
 				{name = "Schafter 3", costs = 100000, description = {}, model = "schafter3"},
 				{name = "Stanier", costs = 13000, description = {}, model = "stanier"},
