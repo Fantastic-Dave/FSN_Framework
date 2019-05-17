@@ -46,6 +46,15 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 			if split[2] == 'cpic' then
 				judgeCPIC(tonumber(split[3]), source)
 			end
+			if split[2] == 'pay' then
+				TriggerClientEvent('fsn_bank:change:walletAdd', tonumber(split[3]), tonumber(split[4]))
+			end
+			if split[2] == 'bill' then
+				TriggerEvent('fsn_police:ticket', tonumber(split[3]), tonumber(split[4]))
+			end
+			if split[2] == 'jail' then
+				TriggerEvent('fsn_jail:sendsuspect', source, tonumber(split[3]), tonumber(split[4]))
+			end
 			if split[3] == 'license' then
 				if split[3] == 'check' then
 				
