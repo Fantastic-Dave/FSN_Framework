@@ -23,6 +23,18 @@ function fsn_isJudge(src)
   return false
 end
 
+function judgeCPIC(id, src)
+  local res = {}
+  local idee = exports.fsn_main:fsn_CharID(id)
+  MySQL.Async.fetchAll('SELECT * FROM `fsn_tickets` WHERE `receiver_id` = @id', {['@id'] = idee}, function(results)
+    for k, v in pairs(results) do
+      local ass = os.date("*t", v.ticket_date)
+      v.ticket_date = ass.hour..':'..ass.min..' '..ass.month..'/'..ass.day..'/'..ass.year
+    end
+    TriggerClientEvent('fsn_police:database:CPIC:search:result', src, results)
+  end)
+end
+
 AddEventHandler('chatMessage', function(source, auth, msg)
 	local split = fsn_SplitString(msg, ' ')
 	if split[1] == '/judge' then
@@ -30,6 +42,31 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 			if split[2] == 'msg' then
 				local msg = table.concat(split, " ", 3, #split)
 				TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*^1JUDGE ANNOUNCEMENT |^0^r '..msg)
+			end
+			if split[2] == 'cpic' then
+				judgeCPIC(tonumber(split[3]), source)
+			end
+			if split[3] == 'license' then
+				if split[3] == 'check' then
+				
+				end
+				if split[3] == 'give' then
+				
+				end
+				if split[3] == 'revoke' then
+				
+				end
+				if split[3] == 'infractions' then
+					if split[4] == 'set' then
+					
+					end
+					if split[4] == 'add' then
+					
+					end
+					if split[4] == 'minus' then
+					
+					end
+				end
 			end
 			if split[2] == 'setlock' then
 				if split[3] == 'true' then
