@@ -60,9 +60,13 @@ AddEventHandler('fsn_apartments:stash:add', function(amt)
 	if inappt then
 		if amt > 0 and amt < 150000 then
 			if exports["fsn_main"]:fsn_CanAfford(amt) then
-				apptdetails.apt_cash = apptdetails.apt_cash + amt
-				TriggerEvent('fsn_bank:change:walletMinus', amt)
-				TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
+				if apptdetails.apt_cash + amt <= 150000 then
+					apptdetails.apt_cash = apptdetails.apt_cash + amt
+					TriggerEvent('fsn_bank:change:walletMinus', amt)
+					TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
+				else
+					TriggerEvent('fsn_notify:displayNotification', 'You cannot store this amount', 'centerRight', 4000, 'error')
+				end
 			else
 				TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this.', 'centerRight', 4000, 'error')
 			end	
@@ -109,22 +113,37 @@ AddEventHandler('fsn_apartments:outfit:add', function(key)
 end)
 RegisterNetEvent('fsn_apartments:outfit:use')
 AddEventHandler('fsn_apartments:outfit:use', function(key)
-
+	if apptdetails.apt_outfits[key] then
+		TriggerEvent("clothes:spawn", apptdetails.apt_outfits[key])
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit used')
+	else
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
+	end	
 end)
+
 RegisterNetEvent('fsn_apartments:outfit:remove')
 AddEventHandler('fsn_apartments:outfit:remove', function(key)
-
+	if apptdetails.apt_outfits[key] then
+		apptdetails.apt_outfits[key] = nil
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit removed')
+	else
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
+	end
 end)
 RegisterNetEvent('fsn_apartments:outfit:list')
 AddEventHandler('fsn_apartments:outfit:list', function()
 	print(apptdetails.apt_outfits)
-	if apptdetails.apt_outfits and #apptdetails.apt_outfits > 0 then
+	if apptdetails.apt_outfits then
 		local keys = {}
 		for k, v in pairs(apptdetails.apt_outfits) do
 			table.insert(keys, #keys+1, k)
 		end
 		local str = table.concat(keys, ", ")
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Saved outfits: '..str)
+		if #keys > 0 then
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Saved outfits: '..str)
+		else
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved')
+		end
 	else
 		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved')
 	end
