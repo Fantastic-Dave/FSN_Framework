@@ -25271,13 +25271,13 @@
       <handlingName>TROPHY</handlingName>
       <fMass value="1450.000000" />
       <fInitialDragCoeff value="1.1200000" />
-	  <fDownforceModifier value="1.160000" />
+    <fDownforceModifier value="1.160000" />
       <fPercentSubmerged value="83.000000" />
       <vecCentreOfMassOffset x="0.000000" y="-0.191000" z="0.020000" />
       <vecInertiaMultiplier x="1.130000" y="0.970000" z="1.610000" />
       <fDriveBiasFront value="0.280000" />
       <nInitialDriveGears value="5" />
-      <fInitialDriveForce value="0.219000" />
+      <fInitialDriveForce value="0.289000" />
       <fDriveInertia value="0.950000" />
       <fClutchChangeRateScaleUpShift value="1.800000" />
       <fClutchChangeRateScaleDownShift value="1.800000" />
@@ -25293,7 +25293,7 @@
       <fLowSpeedTractionLossMult value="0.110000" />
       <fCamberStiffnesss value="0.000000" />
       <fTractionBiasFront value="0.491100" />
-      <fTractionLossMult value="0.8800000" />
+      <fTractionLossMult value="0.2500000" />
       <fSuspensionForce value="2.780000" />
       <fSuspensionCompDamp value="1.340000" />
       <fSuspensionReboundDamp value="0.820000" />
