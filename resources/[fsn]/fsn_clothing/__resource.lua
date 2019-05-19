@@ -10,5 +10,6 @@ server_script 'server.lua'
 
 -- exports
 exports {
-	"isClothingOpen"
+	"isClothingOpen",
+	"GetOutfit"
 }
