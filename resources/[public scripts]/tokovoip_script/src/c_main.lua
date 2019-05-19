@@ -19,6 +19,12 @@ local targetPed;
 local useLocalPed = true;
 local isRunning = false;
 
+local muteall = false
+RegisterNetEvent('tokovoip_extras:muteall')
+AddEventHandler('tokovoip_extras:muteall', function(state)
+	muteall = state
+end)
+
 function initializeVoip()
 	voip = TokoVoip:init(TokoVoipConfig); -- Initialize TokoVoip and set default settings
 
@@ -174,11 +180,15 @@ function clientProcessing()
 					--
 
 					-- Process proximity
-					if (dist >= voip.distance[mode]) then
+					if muteall then
 						usersdata[i].muted = 1;
 					else
-						usersdata[i].volume = volume;
-						usersdata[i].muted = 0;
+						if (dist >= voip.distance[mode]) then
+							usersdata[i].muted = 1;
+						else
+							usersdata[i].volume = volume;
+							usersdata[i].muted = 0;
+						end
 					end
 					--
 
