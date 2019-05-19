@@ -87,10 +87,10 @@ AddEventHandler('fsn_apartments:createApartment', function(char_id)
 			number = mynum,
 			apptinfo = {
 				apt_id = myappt.apt_id,
-				apt_inventory = json.decode(myappt.apt_inventory),
+				apt_inventory = myappt.apt_inventory,
 				apt_cash = myappt.apt_cash,
-				apt_outfits = json.decode(myappt.apt_outfits),
-				apt_utils = json.decode(myappt.apt_utils)
+				apt_outfits = myappt.apt_outfits,
+				apt_utils = myappt.apt_utils
 			}
 		}
 		TriggerClientEvent('fsn_apartments:sendApartment', source, sendappt)
@@ -143,13 +143,20 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 	end
 	if split[1] == '/outfit' then
 		if split[2] == 'add' then
-			
+			if split[3] then
+				TriggerClientEvent('fsn_apartments:outfit:add', source, split[3])
+			end
 		end
 		if split[2] == 'use' then
-		
+			if split[3] then
+				TriggerClientEvent('fsn_apartments:outfit:use', source, split[3])
+			end
 		end 
 		if split[2] == 'remove' then 
-		
+			TriggerClientEvent('fsn_apartments:outfit:remove', source, split[3])
+		end
+		if split[2] == 'list' then 
+			TriggerClientEvent('fsn_apartments:outfit:list', source)
 		end
 	end
 end)
