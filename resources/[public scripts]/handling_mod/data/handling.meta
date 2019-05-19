@@ -19286,21 +19286,21 @@
         </Item>
       </SubHandlingData>
     </Item>
-	<Item type="CHandlingData">
+  <Item type="CHandlingData">
       <handlingName>JESTER</handlingName>
       <fMass value="1750.000000" />
       <fInitialDragCoeff value="0.970000" />
-	  <fDownforceModifier value="1.780000" />
+    <fDownforceModifier value="1.780000" />
       <fPercentSubmerged value="76.000000" />
       <vecCentreOfMassOffset x="0.000000" y="-0.202000" z="0.020000" />
       <vecInertiaMultiplier x="1.160000" y="1.000000" z="1.650000" />
       <fDriveBiasFront value="0.101000" />
       <nInitialDriveGears value="7" />
-      <fInitialDriveForce value="0.284000" />
+      <fInitialDriveForce value="0.280000" />
       <fDriveInertia value="0.980000" />
       <fClutchChangeRateScaleUpShift value="7.500000" />
       <fClutchChangeRateScaleDownShift value="6.000000" />
-      <fInitialDriveMaxFlatVel value="206.000000" />
+      <fInitialDriveMaxFlatVel value="193.000000" />
       <fBrakeForce value="0.328000" />
       <fBrakeBiasFront value="0.439120" />
       <fHandBrakeForce value="0.800000" />
