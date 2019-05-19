@@ -209,13 +209,15 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
   SetEntityCoords(GetPlayerPed(-1), mainSpawn.x, mainSpawn.y, mainSpawn.z)
   fsn_spawned = true
   Citizen.CreateThread(function()
+  SetEntityVisible(GetPlayerPed(-1), true)
+  --[[
     RequestModel(model)
-    SetEntityVisible(GetPlayerPed(-1), false)
+    
     while not HasModelLoaded(model) do
       Citizen.Wait(1)
       RequestModel(model)
     end
-
+	
     SetPlayerModel(PlayerId(), model)
     SetModelAsNoLongerNeeded(model)
     SetEntityVisible(GetPlayerPed(-1), true)
@@ -240,7 +242,14 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
         SetPedRandomComponentVariation(GetPlayerPed(-1), true)
       end
     end
-    TriggerEvent('fsn_main:character', char)
+	]]
+	
+	if char.char_model == '{}' or char.char_model == '[]' then
+		TriggerServerEvent("clothes:firstspawn")
+	else
+		TriggerEvent("clothes:spawn", json.decode(char.char_model))
+    end
+	TriggerEvent('fsn_main:character', char)
     TriggerEvent('fsn_police:init', char.char_police)
     TriggerEvent('fsn_jail:init', char.char_id)
     TriggerEvent('fsn_inventory:initChar', char.char_inventory)
@@ -397,127 +406,8 @@ AddEventHandler('fsn_main:characterSaving', function()
   end
   weapons = json.encode(weapons)
   --------------------------------------------------------------------- Clothing
-  local model = GetEntityModel(GetPlayerPed(-1))
-  local variations = {
-    {
-      type = 'drawable',
-      index = 0,
-      name = 'head',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 0),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 0),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 0),
-    },
-    {
-      type = 'drawable',
-      index = 1,
-      name = 'beard',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 1),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 1),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 1),
-    },
-    {
-      type = 'drawable',
-      index = 2,
-      name = 'hair',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 2),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 2),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 2),
-    },
-    {
-      type = 'drawable',
-      index = 3,
-      name = 'torso',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 3),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 3),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 3),
-    },
-    {
-      type = 'drawable',
-      index = 4,
-      name = 'legs',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 4),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 4),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 4),
-    },
-    {
-      type = 'drawable',
-      index = 5,
-      name = 'hands',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 5),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 5),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 5),
-    },
-    {
-      type = 'drawable',
-      index = 6,
-      name = 'feet',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 6),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 6),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 6),
-    },
-    {
-      type = 'drawable',
-      index = 7,
-      name = 'necklace',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 7),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 7),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 7),
-    },
-    {
-      type = 'drawable',
-      index = 8,
-      name = 'accessories1',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 8),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 8),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 8),
-    },
-    {
-      type = 'drawable',
-      index = 9,
-      name = 'accessories2',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 9),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 9),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 9),
-    },
-    {
-      type = 'drawable',
-      index = 10,
-      name = 'decals/mask',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 10),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 10),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 10),
-    },
-    {
-      type = 'drawable',
-      index = 11,
-      name = 'torso2',
-      drawable = GetPedDrawableVariation(GetPlayerPed(-1), 11),
-      pallette = GetPedPaletteVariation(GetPlayerPed(-1), 11),
-      texture = GetPedTextureVariation(GetPlayerPed(-1), 11),
-    },
-    {
-      type = 'prop',
-      index = 0,
-      name = 'helmet',
-      prop = GetPedPropIndex(GetPlayerPed(-1), 0),
-      texture = GetPedPropTextureIndex(GetPlayerPed(-1), 0)
-    },
-    {
-      type = 'prop',
-      index = 1,
-      name = 'glasses',
-      prop = GetPedPropIndex(GetPlayerPed(-1), 1),
-      texture = GetPedPropTextureIndex(GetPlayerPed(-1), 1)
-    },
-    {
-      type = 'prop',
-      index = 3,
-      name = 'ear accessories',
-      prop = GetPedPropIndex(GetPlayerPed(-1), 3),
-      texture = GetPedPropTextureIndex(GetPlayerPed(-1), 3)
-    }
-  }
-  local vars = json.encode(variations)
+  local model = json.encode(exports["fsn_clothing"]:GetOutfit())
+  local vars = 'unused'
   ------------------------------------------------------------------------------
   TriggerServerEvent('fsn_main:saveCharacter', current_character_id, model, vars, weapons)
 end)
