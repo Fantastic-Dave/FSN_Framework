@@ -94,8 +94,40 @@ AddEventHandler('fsn_apartments:sendApartment', function(tbl)
 	EnterRoom(tbl.number)
 	myRoomNumber = tbl.number
 	apptdetails = tbl.apptinfo
+	apptdetails["apt_outfits"] = json.decode(tbl.apptinfo.apt_outfits)
+	apptdetails["apt_inventory"] = json.decode(tbl.apptinfo.apt_inventory)
+	apptdetails["apt_utils"] = json.decode(tbl.apptinfo.apt_utils)
 	init = true
 	TriggerEvent('fsn_notify:displayNotification', 'Your apartments is number: '..tbl.number, 'centerRight', 6000, 'info')
+end)
+
+RegisterNetEvent('fsn_apartments:outfit:add')
+AddEventHandler('fsn_apartments:outfit:add', function(key)
+	apptdetails.apt_outfits[key] = exports["fsn_clothing"]:GetOutfit()
+	
+	TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
+end)
+RegisterNetEvent('fsn_apartments:outfit:use')
+AddEventHandler('fsn_apartments:outfit:use', function(key)
+
+end)
+RegisterNetEvent('fsn_apartments:outfit:remove')
+AddEventHandler('fsn_apartments:outfit:remove', function(key)
+
+end)
+RegisterNetEvent('fsn_apartments:outfit:list')
+AddEventHandler('fsn_apartments:outfit:list', function()
+	print(apptdetails.apt_outfits)
+	if apptdetails.apt_outfits and #apptdetails.apt_outfits > 0 then
+		local keys = {}
+		for k, v in pairs(apptdetails.apt_outfits) do
+			table.insert(keys, #keys+1, k)
+		end
+		local str = table.concat(keys, ", ")
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Saved outfits: '..str)
+	else
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved')
+	end
 end)
 
 apartments = {
