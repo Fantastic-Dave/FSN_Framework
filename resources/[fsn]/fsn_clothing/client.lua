@@ -300,6 +300,30 @@ function save()
     TriggerServerEvent("clothes:save", player_data)
 end
 
+function GetOutfit()
+	player_data.model = GetEntityModel(GetPlayerPed(-1))
+    player_data.new = false
+    for i = 0, 11 do
+        player_data.clothing.drawables[i+1] = GetPedDrawableVariation(GetPlayerPed(-1), i)
+        if i ~= 2 then
+            player_data.clothing.textures[i+1] = GetPedTextureVariation(GetPlayerPed(-1), i)
+        end
+        player_data.clothing.palette[i+1] = GetPedPaletteVariation(GetPlayerPed(-1), i)
+    end
+    for i = 0, 7 do
+        player_data.props.drawables[i+1] = GetPedPropIndex(GetPlayerPed(-1), i)
+        player_data.props.textures[i+1] = GetPedPropTextureIndex(GetPlayerPed(-1), i)
+    end
+    for i = 0, 12 do
+        player_data.overlays.drawables[i+1] = GetPedHeadOverlayValue(GetPlayerPed(-1), i)
+    end
+
+    if player_data.clothing.drawables[12] == 55 and GetEntityModel(GetPlayerPed(-1)) == GetHashKey("mp_m_freemode_01") then player_data.clothing.drawables[12] = 56 SetPedComponentVariation(GetPlayerPed(-1), 11, 56, 0, 2) end
+    if player_data.clothing.drawables[12] == 48 and GetEntityModel(GetPlayerPed(-1)) == GetHashKey("mp_f_freemode_01") then player_data.clothing.drawables[12] = 49 SetPedComponentVariation(GetPlayerPed(-1), 11, 49, 0, 2) end
+
+	return player_data
+end
+
 function DisplayHelpText(str)
     SetTextComponentFormat("STRING")
     AddTextComponentString(str)
