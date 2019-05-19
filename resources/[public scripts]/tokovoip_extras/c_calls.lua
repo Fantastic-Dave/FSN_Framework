@@ -35,8 +35,8 @@ Citizen.CreateThread(function()
 			end
 		end
 		if isCalling then
-			TriggerEvent('fsn_phone:sound', 'ringtone')
-			--Citizen.Wait(17000)
+			TriggerEvent('fsn_phone:sound', 'calling')
+			Citizen.Wait(30000)
 		end
 	end
 end)
