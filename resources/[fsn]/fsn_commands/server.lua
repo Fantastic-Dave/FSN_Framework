@@ -611,6 +611,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/ems' then
     if fsn_emsOnDuty(source) then
+	  if split[2] == 'frevive' then
+		TriggerClientEvent('fsn_ems:reviveMe:force', tonumber(split[3]))
+	  end
 	  if split[2] == 'tow' then
 			if split[3] then
 				if split[3] == 'target' or split[3] == 't' then
