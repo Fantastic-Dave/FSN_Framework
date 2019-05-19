@@ -95,7 +95,7 @@ local vehshop = {
 				{name = "Furore GT", costs = 167890, description = {}, model = "furoregt"},
 				{name = "Fusilade", costs = 69000, description = {}, model = "fusilade"},
 				{name = "Itali GTO", costs = 995000, description = {}, model = "italigto"},
-				{name = "Jester", costs = 400000, description = {}, model = "jester"},
+				{name = "Jester", costs = 200000, description = {}, model = "jester"},
 				{name = "Jester(Racecar)", costs = 575000, description = {}, model = "jester2"},
 				{name = "Kuruma", costs = 135000, description = {}, model = "kuruma"},
 				{name = "Lynx", costs = 175000, description = {}, model = "lynx"},
