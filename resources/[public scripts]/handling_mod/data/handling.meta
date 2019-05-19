@@ -22983,7 +22983,7 @@
       <fClutchChangeRateScaleUpShift value="2.000000" />
       <fClutchChangeRateScaleDownShift value="2.100000" />
       <fInitialDriveMaxFlatVel value="136.000000" />
-      <fBrakeForce value="0.265000" />
+      <fBrakeForce value="0.285000" />
       <fBrakeBiasFront value="0.479820" />
       <fHandBrakeForce value="0.900000" />
       <fSteeringLock value="36.100000" />
