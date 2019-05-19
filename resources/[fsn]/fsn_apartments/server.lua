@@ -85,13 +85,30 @@ AddEventHandler('fsn_apartments:createApartment', function(char_id)
 		local mynum = getAvailableAppt(source)
 		local sendappt = {
 			number = mynum,
-			apptinfo = myappt
+			apptinfo = {
+				apt_id = myappt.apt_id,
+				apt_inventory = json.decode(myappt.apt_inventory),
+				apt_cash = myappt.apt_cash,
+				apt_outfits = json.decode(myappt.apt_outfits),
+				apt_utils = json.decode(myappt.apt_utils)
+			}
 		}
 		TriggerClientEvent('fsn_apartments:sendApartment', source, sendappt)
 	end
 end)
 
 RegisterServerEvent('fsn_apartments:saveApartment')
+AddEventHandler('fsn_apartments:saveApartment', function(appt)
+--UPDATE `fsn_datastore`.`fsn_apartments` SET `apt_inventory` = '[]', `apt_cash` = '100', `apt_outfits` = '[]', `apt_utils` = '[]' WHERE `fsn_apartments`.`apt_id` = 4;
+	--local SQL = "UPDATE fsn_apartments SET `apt_inventory` = '"..json.encode(appt.apt_inventory).."', `apt_cash` = '"..appt.apt_cash.."', `apt_outfits` = '"..json.encode(appt.apt_outfits).."', apt_utils` = '"..json.encode(appt.apt_utils).."' WHERE `apt_id` = '"..appt.apt_id.."'"
+	MySQL.Sync.execute("UPDATE `fsn_apartments` SET `apt_inventory` = @inv, `apt_cash` = @cash, `apt_outfits` = @outfits, `apt_utils` = @utils WHERE `fsn_apartments`.`apt_id` = @id;", {
+		['@id'] = appt.apt_id,
+		['@inv'] = json.encode(appt.apt_inventory),
+		['@cash'] = tonumber(appt.apt_cash),
+		['@outfits'] = json.encode(appt.apt_outfits),
+		['@utils'] = json.encode(appt.apt_utils)
+	})
+end)
 
 --------------------------------------------------------- commands
 function fsn_SplitString(inputstr, sep)

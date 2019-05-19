@@ -55,10 +55,45 @@ local building = false
 local inappt = false
 local apptdetails = {}
 
+RegisterNetEvent('fsn_apartments:stash:add')
+AddEventHandler('fsn_apartments:stash:add', function(amt)
+	if inappt then
+		if amt > 0 and amt < 150000 then
+			if exports["fsn_main"]:fsn_CanAfford(amt) then
+				apptdetails.apt_cash = apptdetails.apt_cash + amt
+				TriggerEvent('fsn_bank:change:walletMinus', amt)
+				TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
+			else
+				TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this.', 'centerRight', 4000, 'error')
+			end	
+		end
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'You need to be in your appartment', 'centerRight', 4000, 'error')
+	end
+end)
+
+RegisterNetEvent('fsn_apartments:stash:take')
+AddEventHandler('fsn_apartments:stash:take', function(amt)
+	if inappt then
+		if amt > 0 and amt < 150000 then
+			if apptdetails.apt_cash >= amt then
+				apptdetails.apt_cash = apptdetails.apt_cash - amt
+				TriggerEvent('fsn_bank:change:walletAdd', amt)
+				TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
+			else
+				TriggerEvent('fsn_notify:displayNotification', 'Your stash does not have that much', 'centerRight', 4000, 'error')
+			end
+		end
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'You need to be in your appartment', 'centerRight', 4000, 'error')
+	end
+end)
+
 RegisterNetEvent('fsn_apartments:sendApartment')
 AddEventHandler('fsn_apartments:sendApartment', function(tbl)
 	EnterRoom(tbl.number)
 	myRoomNumber = tbl.number
+	apptdetails = tbl.apptinfo
 	init = true
 	TriggerEvent('fsn_notify:displayNotification', 'Your apartments is number: '..tbl.number, 'centerRight', 6000, 'info')
 end)
@@ -126,13 +161,13 @@ Citizen.CreateThread(function()
 				-- money
 				DrawMarker(25, cash.x, cash.y, cash.z - 0.95, 0, 0, 0, 0, 0, 0, 0.50, 0.50, 10.3, 255, 255, 255, 140, 0, 0, 1, 0, 0, 0, 0)
 				if GetDistanceBetweenCoords(cash.x, cash.y, cash.z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
-					fsn_drawText3D(cash.x, cash.y, cash.z, "$0 / $150,000\n\n/stash add {amt}\n/stash take {amt}")
+					fsn_drawText3D(cash.x, cash.y, cash.z, "$"..apptdetails.apt_cash.." / $150,000\n\n/stash add {amt}\n/stash take {amt}")
 				end
 				
 				-- outfits
 				DrawMarker(25, outfits.x, outfits.y, outfits.z - 0.95, 0, 0, 0, 0, 0, 0, 0.50, 0.50, 10.3, 255, 255, 255, 140, 0, 0, 1, 0, 0, 0, 0)
 				if GetDistanceBetweenCoords(outfits.x, outfits.y, outfits.z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
-					fsn_drawText3D(outfits.x, outfits.y, outfits.z, "/outfit add {name}\n/outfit use {name}\n/outfit remove {name}")
+					fsn_drawText3D(outfits.x, outfits.y, outfits.z, "/outfit add {name}\n/outfit use {name}\n/outfit remove {name}\n/outfit list")
 				end
 				
 				-- leaving
@@ -204,4 +239,15 @@ AddEventHandler('fsn_apartments:characterCreation', function()
 			end
 		end
 	end)
+end)
+
+function saveApartment()
+	TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(600000)
+		saveApartment()
+	end
 end)
