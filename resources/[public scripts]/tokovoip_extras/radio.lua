@@ -19,9 +19,11 @@ Citizen.CreateThread(function()
 		if exports["fsn_police"]:fsn_PDDuty() or exports["fsn_ems"]:fsn_EMSDuty() then
 			if(not IsControlPressed(0, Keys["LEFTSHIFT"]) and IsControlJustPressed(0, Keys["F9"]))then
 				if expt:isPlayerInChannel(1) then
+					TriggerEvent('TokoVoip:removePlayerFromRadio', 1)
 					expt:addPlayerToRadio(2, name)
 					TriggerEvent('fsn_notify:displayNotification', 'Joined channel: <b>EMS', 'centerLeft', 2000, 'info')
 				elseif expt:isPlayerInChannel(2) then
+					TriggerEvent('TokoVoip:removePlayerFromRadio', 2)
 					expt:addPlayerToRadio(1, name)
 					TriggerEvent('fsn_notify:displayNotification', 'Joined channel: <b>LEO', 'centerLeft', 2000, 'info')
 				else
