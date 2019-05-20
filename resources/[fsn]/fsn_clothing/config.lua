@@ -57,7 +57,8 @@ local clothing_shops = {
     {name="Clothing Store", id=73, x=-821.69, y=-1073.90, z=11.32},
     {name="Clothing Store", id=73, x=-1192.81, y=-768.24, z=17.31},
     {name="Clothing Store", id=73, x=4.25, y=6512.88, z=31.87},
-    {name="Clothing Store", id=73, x = 71.7163, y = -1399.1944, z = 29.3761},
+    {name="Clothing Store", id=73, x =71.7163, y =-1399.1944, z =29.3761},
+    {name="Clothing Store", id=73, x =456.7221, y =-990.9374, z =30.6896},
     {name="Clothing Store", id=73, x=425.471, y=-806.164, z=29.4911},
 }
 incircle = false
