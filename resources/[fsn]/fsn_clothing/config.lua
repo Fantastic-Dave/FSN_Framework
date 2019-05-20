@@ -78,7 +78,7 @@ Citizen.CreateThread(function()
                 DrawMarker(1, v.x, v.y, v.z - 1, 0, 0, 0, 0, 0, 0, 3.0001, 3.0001, 0.5001, 1555, 0, 0,165, 0, 0, 0,0)
                 if(Vdist(pos.x, pos.y, pos.z, v.x, v.y, v.z) < 2.0)then
                     if (incircle == false) then
-                        DisplayHelpText("Press ~INPUT_CONTEXT~ to customise your character.")
+                        DisplayHelpText("Press ~INPUT_CONTEXT~ to customize your character.")
                     end
                     incircle = true
                     if IsControlJustReleased(1, 51) then -- INPUT_CELLPHONE_DOWN
