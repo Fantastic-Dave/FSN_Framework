@@ -75,26 +75,31 @@ end)
 
 RegisterServerEvent('fsn_apartments:createApartment')
 AddEventHandler('fsn_apartments:createApartment', function(char_id)
-	print('creating new appt for '..char_id)
-	local SQL = "INSERT INTO `fsn_datastore`.`fsn_apartments` (`apt_id`, `apt_owner`, `apt_inventory`, `apt_cash`, `apt_outfits`, `apt_utils`) VALUES (NULL, '"..char_id.."', '{}', '0', '{}', '{}');"
-	MySQL.Sync.execute(SQL)
-	
-	local appt = MySQL.Sync.fetchAll("SELECT * FROM `fsn_apartments` WHERE `apt_owner` = '"..char_id.."'")
-	if #appt > 0 then
-		local myappt = appt[1]
-		local mynum = getAvailableAppt(source)
-		local sendappt = {
-			number = mynum,
-			apptinfo = {
-				apt_id = myappt.apt_id,
-				apt_inventory = myappt.apt_inventory,
-				apt_cash = myappt.apt_cash,
-				apt_outfits = myappt.apt_outfits,
-				apt_utils = myappt.apt_utils
+	local source = source
+	--Citizen.CreateThread(function()
+		print('creating new appt for '..char_id)
+		local SQL = "INSERT INTO `fsn_apartments` (`apt_id`, `apt_owner`, `apt_inventory`, `apt_cash`, `apt_outfits`, `apt_utils`) VALUES (NULL, '"..char_id.."', '{}', '0', '{}', '{}');"
+		MySQL.Sync.execute(SQL)
+		--Citizen.Wait(1000)
+		
+		local appt = MySQL.Sync.fetchAll("SELECT * FROM `fsn_apartments` WHERE `apt_owner` = '"..char_id.."'")
+		if #appt > 0 then
+			local myappt = appt[1]
+			local mynum = getAvailableAppt(source)
+			local sendappt = {
+				number = mynum,
+				apptinfo = {
+					apt_id = myappt.apt_id,
+					apt_inventory = myappt.apt_inventory,
+					apt_cash = myappt.apt_cash,
+					apt_outfits = myappt.apt_outfits,
+					apt_utils = myappt.apt_utils
+				}
 			}
-		}
-		TriggerClientEvent('fsn_apartments:sendApartment', source, sendappt)
-	end
+			TriggerClientEvent('fsn_apartments:sendApartment', source, sendappt)
+			print('sending appt '..apt_id..' to '..char_id)
+		end
+	--end)
 end)
 
 RegisterServerEvent('fsn_apartments:saveApartment')
