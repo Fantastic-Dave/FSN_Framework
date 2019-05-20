@@ -55,7 +55,7 @@ local atms = {
   {name="ATM", id=207, x=-56.1935, y=-1752.53, z=29.452,bank=false},
   {name="ATM", id=207, x=-261.692, y=-2012.64, z=30.121,bank=false},
   {name="ATM", id=207, x=-273.001, y=-2025.60, z=30.197,bank=false},
-  {name="ATM", id=207, x=314.187, y=-278.621, z=54.170,bank=false},
+  {name="BANK", id=207, x=314.187, y=-278.621, z=54.170,bank=true},
   {name="ATM", id=207, x=-351.534, y=-49.529, z=49.042,bank=false},
   {name="ATM", id=207, x=24.589, y=-946.056, z=29.357,bank=false},
   {name="ATM", id=207, x=-254.112, y=-692.483, z=33.616,bank=false},
