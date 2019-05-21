@@ -397,6 +397,7 @@ local savingWeapons = {
 RegisterNetEvent('fsn_main:characterSaving')
 AddEventHandler('fsn_main:characterSaving', function()
   ---------------------------------------------------------------------- Weapons
+  --[[
   local weapons = {}
   for i=1, #savingWeapons do
     if HasPedGotWeapon(GetPlayerPed(-1), GetHashKey(savingWeapons[i])) then
@@ -405,6 +406,8 @@ AddEventHandler('fsn_main:characterSaving', function()
     end
   end
   weapons = json.encode(weapons)
+  ]]--
+  local weapons = json.encode(exports["fsn_criminalmisc"]:GetWeapons())
   --------------------------------------------------------------------- Clothing
   local model = json.encode(exports["fsn_clothing"]:GetOutfit())
   local vars = 'unused'
