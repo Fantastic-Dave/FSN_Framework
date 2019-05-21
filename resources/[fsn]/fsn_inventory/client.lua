@@ -218,35 +218,42 @@ Citizen.CreateThread(function()
         AddTextComponentString("Press ~INPUT_PICKUP~ to pick up ~y~["..obj.amount.."X] "..items_table[obj.item].display_name)
         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
         if IsControlJustPressed(0, 38) then
+		local space = fsn_computeMaxSpace()
+		local weight = items_table[obj.item].weight * obj.amount
+		local new_weight = fsn_computeCurrentSpace() + weight
+		if new_weight > space then
+			TriggerEvent('fsn_notify:displayNotification', 'You do not have room.', 'centerLeft', 3000, 'error')				
+		else
 		  --TriggerServerEvent('fsn_inventory:itempickup', obj.pickupid)
-          --TriggerEvent('fsn_inventory:item:add', obj.item, obj.amount)
+		  --TriggerEvent('fsn_inventory:item:add', obj.item, obj.amount)
 
-          local object = GetClosestObjectOfType(obj.xyz[1], obj.xyz[2], obj.xyz[3], 5.0, obj.hash, false, false, false)
-          local netId = NetworkGetNetworkIdFromEntity(object)
-          if netId ~= 0 then
-            if not NetworkHasControlOfNetworkId(netId) then
-              NetworkRequestControlOfNetworkId(netId)
-        			while not NetworkHasControlOfNetworkId(netId) do
-        				Citizen.Wait(1)
-        			end
-            end
-          end
-          while not HasAnimDictLoaded('pickup_object') do
-            RequestAnimDict('pickup_object')
-            Citizen.Wait(5)
-          end
-          TaskPlayAnim(GetPlayerPed(-1), 'pickup_object', 'pickup_low', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
-          SetEntityAsMissionEntity(object, true, true)
-		      DeleteObject(object)
-          if DoesObjectOfTypeExistAtCoords(obj.xyz[1], obj.xyz[2], obj.xyz[3], 5.0, obj.hash, true) then
-            object = GetClosestObjectOfType(obj.xyz[1], obj.xyz[2], obj.xyz[3], 5.0, obj.hash, false, false, false)
-            SetEntityAsMissionEntity(object, true, true)
-            DeleteObject(object)
-          end
-          TriggerServerEvent('fsn_inventory:itempickup', obj.pickupid)
-          TriggerEvent('fsn_commands:me', 'picked up '..obj.amount..' '..items_table[obj.item].display_name)
-          Citizen.Wait(1000)
-          ClearPedTasks(GetPlayerPed(-1))
+		  local object = GetClosestObjectOfType(obj.xyz[1], obj.xyz[2], obj.xyz[3], 5.0, obj.hash, false, false, false)
+		  local netId = NetworkGetNetworkIdFromEntity(object)
+		  if netId ~= 0 then
+		    if not NetworkHasControlOfNetworkId(netId) then
+		      NetworkRequestControlOfNetworkId(netId)
+					while not NetworkHasControlOfNetworkId(netId) do
+						Citizen.Wait(1)
+					end
+		    end
+		  end
+		  while not HasAnimDictLoaded('pickup_object') do
+		    RequestAnimDict('pickup_object')
+		    Citizen.Wait(5)
+		  end
+		  TaskPlayAnim(GetPlayerPed(-1), 'pickup_object', 'pickup_low', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
+		  SetEntityAsMissionEntity(object, true, true)
+			      DeleteObject(object)
+		  if DoesObjectOfTypeExistAtCoords(obj.xyz[1], obj.xyz[2], obj.xyz[3], 5.0, obj.hash, true) then
+		    object = GetClosestObjectOfType(obj.xyz[1], obj.xyz[2], obj.xyz[3], 5.0, obj.hash, false, false, false)
+		    SetEntityAsMissionEntity(object, true, true)
+		    DeleteObject(object)
+		  end
+		  TriggerServerEvent('fsn_inventory:itempickup', obj.pickupid)
+		  TriggerEvent('fsn_commands:me', 'picked up '..obj.amount..' '..items_table[obj.item].display_name)
+		  Citizen.Wait(1000)
+		  ClearPedTasks(GetPlayerPed(-1))
+		end
         end
       end
     end
