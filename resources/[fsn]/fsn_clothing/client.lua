@@ -350,10 +350,81 @@ AddEventHandler("clothes:changemodel", function(skin)
     end
 end)
 
+local savingWeapons = {
+  "WEAPON_KNIFE",
+  "WEAPON_NIGHTSTICK",
+  "WEAPON_HAMMER",
+  "WEAPON_BAT",
+  "WEAPON_GOLFCLUB",
+  "WEAPON_CROWBAR",
+  "WEAPON_PISTOL",
+  "WEAPON_COMBATPISTOL",
+  "WEAPON_APPISTOL",
+  "WEAPON_PISTOL50",
+  "WEAPON_MICROSMG",
+  "WEAPON_SMG",
+  "WEAPON_ASSAULTSMG",
+  "WEAPON_ASSAULTRIFLE",
+  "WEAPON_CARBINERIFLE",
+  "WEAPON_ADVANCEDRIFLE",
+  "WEAPON_MG",
+  "WEAPON_COMBATMG",
+  "WEAPON_PUMPSHOTGUN",
+  "WEAPON_SAWNOFFSHOTGUN",
+  "WEAPON_ASSAULTSHOTGUN",
+  "WEAPON_BULLPUPSHOTGUN",
+  "WEAPON_STUNGUN",
+  "WEAPON_SNIPERRIFLE",
+  "WEAPON_SMOKEGRENADE",
+  "WEAPON_BZGAS",
+  "WEAPON_MOLOTOV",
+  "WEAPON_FIREEXTINGUISHER",
+  "WEAPON_PETROLCAN",
+  "WEAPON_SNSPISTOL",
+  "WEAPON_SPECIALCARBINE",
+  "WEAPON_HEAVYPISTOL",
+  "WEAPON_BULLPUPRIFLE",
+  "WEAPON_HOMINGLAUNCHER",
+  "WEAPON_PROXMINE",
+  "WEAPON_SNOWBALL",
+  "WEAPON_VINTAGEPISTOL",
+  "WEAPON_DAGGER",
+  "WEAPON_FIREWORK",
+  "WEAPON_MUSKET",
+  "WEAPON_MARKSMANRIFLE",
+  "WEAPON_HEAVYSHOTGUN",
+  "WEAPON_GUSENBERG",
+  "WEAPON_HATCHET",
+  "WEAPON_COMBATPDW",
+  "WEAPON_KNUCKLE",
+  "WEAPON_MARKSMANPISTOL",
+  "WEAPON_BOTTLE",
+  "WEAPON_FLAREGUN",
+  "WEAPON_FLARE",
+  "WEAPON_REVOLVER",
+  "WEAPON_SWITCHBLADE",
+  "WEAPON_MACHETE",
+  "WEAPON_FLASHLIGHT",
+  "WEAPON_MACHINEPISTOL",
+  "WEAPON_DBSHOTGUN",
+  "WEAPON_COMPACTRIFLE",
+  "GADGET_PARACHUTE"
+}
+
 RegisterNetEvent("clothes:spawn")
 AddEventHandler("clothes:spawn", function(data)
     player_data = data
     local model = player_data.model
+    -- weapon saving
+    local pre_weapons = {}
+    local pre_health = 0
+    for i=1, #savingWeapons do
+	    if HasPedGotWeapon(GetPlayerPed(-1), GetHashKey(savingWeapons[i])) then
+	      local ammo = GetAmmoInPedWeapon(GetPlayerPed(-1), GetHashKey(savingWeapons[i]))
+	      pre_weapons[#pre_weapons+1] = {weaponHash = savingWeapons[i], ammo = ammo}
+	    end
+	end
+		
     if IsModelInCdimage(model) and IsModelValid(model) then
         RequestModel(model)
         while not HasModelLoaded(model) do
