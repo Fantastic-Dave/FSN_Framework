@@ -408,8 +408,14 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     end
     TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Walk types: '..str)
   end
-  if split[1] == '/dropweapon' then
+  if split[1] == '/destroyweapon' then
     TriggerClientEvent('fsn_commands:dropweapon', source)
+  end
+  if split[1] == '/dropweapon' then
+    TriggerClientEvent('fsn_criminalmisc:weapons:drop', source)
+  end
+  if split[1] == '/weaponinfo' then
+    TriggerClientEvent('fsn_criminalmisc:weapons:info', source)
   end
   if split[1] == '/phone' or split[1] == '/p' then
     TriggerClientEvent('fsn_phone:togglePhone', source)
@@ -584,7 +590,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
       end
       if split[2] == 'weapon' then
         if split[3] then
-          TriggerClientEvent('fsn_commands:dev:weapon', source, split[3])
+          TriggerClientEvent('fsn_commands:dev:weapon', source, split[3], split[4])
         end
       end
       if split[2] == 'fix' then

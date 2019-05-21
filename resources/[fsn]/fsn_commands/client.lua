@@ -215,9 +215,13 @@ AddEventHandler('fsn_commands:dev:spawnCar', function(car)
 end)
 
 RegisterNetEvent('fsn_commands:dev:weapon')
-AddEventHandler('fsn_commands:dev:weapon', function(wep)
-	GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(wep), 200)
-	SetCurrentPedWeapon(GetPlayerPed(-1), GetHashKey(wep), true)
+AddEventHandler('fsn_commands:dev:weapon', function(wep, addtoChar)
+	if addtoChar == 'false' then
+		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(wep), 200)
+		SetCurrentPedWeapon(GetPlayerPed(-1), GetHashKey(wep), true)
+	else
+		TriggerEvent('fsn_criminalmisc:weapons:add', GetHashKey(wep), 200)
+	end
 end)
 
 RegisterNetEvent('fsn_commands:dev:fix')
