@@ -322,19 +322,21 @@ document.body.onmouseup = function() {
 		}
 		for(var i = 0; i < contacts.length; i++) {
 			var ctc = contacts[i]
-			var appendStr = '<div class="contact">'+
-				'<div class="contact_details">'+
-					'<div class="contact_title">'+
-						ctc.name+
+			if (ctc != null) {
+				var appendStr = '<div class="contact">'+
+					'<div class="contact_details">'+
+						'<div class="contact_title">'+
+							ctc.name+
+						'</div>'+
+						'<div class="contact_desc">'+
+							ctc.number+
+						'</div>'+
 					'</div>'+
-					'<div class="contact_desc">'+
-						ctc.number+
+					'<div class="contact_button">'+
+						'<button onclick="displayContact('+i+')">View</button>'+
 					'</div>'+
-				'</div>'+
-				'<div class="contact_button">'+
-					'<button onclick="displayContact('+i+')">View</button>'+
-				'</div>'+
-			'</div>'
+				'</div>'
+			}
 			
 			$('#contacts-append').append(appendStr)
 		}
