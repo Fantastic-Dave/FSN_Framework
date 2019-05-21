@@ -23,6 +23,12 @@ client_script 'lockpicking/client.lua'
 
 -- weapon info
 client_script 'weaponinfo/client.lua'
+client_script 'weaponinfo/weapon_list.lua'
+server_script 'weaponinfo/server.lua'
 
 -- drugs
 client_script 'drugs/client.lua'
+
+exports {
+	"GetWeapons"
+}
