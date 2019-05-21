@@ -22,3 +22,7 @@ server_script 'remapping/server.lua'
 client_script 'lockpicking/client.lua'
 
 -- weapon info
+client_script 'weaponinfo/client.lua'
+
+-- drugs
+client_script 'drugs/client.lua'
