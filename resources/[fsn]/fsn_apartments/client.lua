@@ -111,45 +111,52 @@ end)
 
 RegisterNetEvent('fsn_apartments:outfit:add')
 AddEventHandler('fsn_apartments:outfit:add', function(key)
-	apptdetails.apt_outfits[key] = exports["fsn_clothing"]:GetOutfit()
-	
-	TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
+	if inappt then
+		apptdetails.apt_outfits[key] = exports["fsn_clothing"]:GetOutfit()
+		
+		TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
+	end
 end)
 RegisterNetEvent('fsn_apartments:outfit:use')
 AddEventHandler('fsn_apartments:outfit:use', function(key)
-	if apptdetails.apt_outfits[key] then
-		TriggerEvent("clothes:spawn", apptdetails.apt_outfits[key])
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit used')
-	else
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
-	end	
+	if inappt then
+		if apptdetails.apt_outfits[key] then
+			TriggerEvent("clothes:spawn", apptdetails.apt_outfits[key])
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit used')
+		else
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
+		end	
+	end
 end)
 
 RegisterNetEvent('fsn_apartments:outfit:remove')
 AddEventHandler('fsn_apartments:outfit:remove', function(key)
-	if apptdetails.apt_outfits[key] then
-		apptdetails.apt_outfits[key] = nil
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit removed')
-	else
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
+	if inappt then
+		if apptdetails.apt_outfits[key] then
+			apptdetails.apt_outfits[key] = nil
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit removed')
+		else
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
+		end
 	end
 end)
 RegisterNetEvent('fsn_apartments:outfit:list')
 AddEventHandler('fsn_apartments:outfit:list', function()
-	print(apptdetails.apt_outfits)
-	if apptdetails.apt_outfits then
-		local keys = {}
-		for k, v in pairs(apptdetails.apt_outfits) do
-			table.insert(keys, #keys+1, k)
-		end
-		local str = table.concat(keys, ", ")
-		if #keys > 0 then
-			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Saved outfits: '..str)
+	if inappt then
+		if apptdetails.apt_outfits then
+			local keys = {}
+			for k, v in pairs(apptdetails.apt_outfits) do
+				table.insert(keys, #keys+1, k)
+			end
+			local str = table.concat(keys, ", ")
+			if #keys > 0 then
+				TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Saved outfits: '..str)
+			else
+				TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved')
+			end
 		else
 			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved')
 		end
-	else
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved')
 	end
 end)
 
