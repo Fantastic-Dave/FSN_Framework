@@ -144,12 +144,17 @@ end)
 
 RegisterServerEvent('fsn_police:search:end:weapons')
 AddEventHandler('fsn_police:search:end:weapons', function(wep_tbl, officerid)
-  local str = ''
-  for k, v in pairs(wep_tbl) do
-    str = str..v..', '
-  end
-  TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
-  TriggerClientEvent('chatMessage', officerid, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
+	if #wep_tbl < 1 then
+		TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*SEARCH |^0^r No weapons found.')
+		TriggerClientEvent('chatMessage', officerid, '', {255,255,255}, '^1^*SEARCH |^0^r No weapons found.')
+	else
+		for k, v in pairs(wep_tbl) do
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*SEARCH (weapon) |^0^r '..v.name..' | Registered to: '..v.owner.name..' | Serial: '..v.owner.serial)
+			TriggerClientEvent('chatMessage', officerid, '', {255,255,255}, '^1^*SEARCH (weapon) |^0^r '..v.name..' | Registered to: '..v.owner.name..' | Serial: '..v.owner.serial)
+		end
+	end
+	--TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
+	--TriggerClientEvent('chatMessage', officerid, '', {255,255,255}, '^1^*SEARCH |^0^r '..str)
 end)
 
 RegisterServerEvent('fsn_police:search:end:money')
