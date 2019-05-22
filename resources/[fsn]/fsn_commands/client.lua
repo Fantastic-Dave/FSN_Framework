@@ -220,7 +220,7 @@ AddEventHandler('fsn_commands:dev:weapon', function(wep, addtoChar)
 		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(wep), 200)
 		SetCurrentPedWeapon(GetPlayerPed(-1), GetHashKey(wep), true)
 	else
-		TriggerEvent('fsn_criminalmisc:weapons:add', GetHashKey(wep), 200)
+		TriggerEvent('fsn_criminalmisc:weapons:add:unknown', GetHashKey(wep), 200)
 	end
 end)
 
