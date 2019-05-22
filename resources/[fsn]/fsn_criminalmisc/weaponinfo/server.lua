@@ -6,6 +6,7 @@ RegisterServerEvent('fsn_criminalmisc:weapons:addDrop')
 AddEventHandler('fsn_criminalmisc:weapons:addDrop', function(droppedWeapon, xyz)
 	while locktable do
 		Citizen.Wait(1)
+		print 'table is locked, waiting'
 	end
 	if not locktable then
 		locktable = true
@@ -27,6 +28,7 @@ RegisterServerEvent('fsn_criminalmisc:weapons:pickup')
 AddEventHandler('fsn_criminalmisc:weapons:pickup', function(droppedid)
 	while locktable do
 		Citizen.Wait(1)
+		print 'table is locked, waiting'
 	end
 	if not locktable then
 		local pickup = false
