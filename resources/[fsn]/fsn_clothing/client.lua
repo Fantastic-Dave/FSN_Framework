@@ -348,6 +348,7 @@ AddEventHandler("clothes:changemodel", function(skin)
         SetModelAsNoLongerNeeded(model)
     else
     end
+	TriggerEvent('fsn_criminalmisc:weapons:equip')
 end)
 
 local savingWeapons = {
@@ -445,6 +446,7 @@ AddEventHandler("clothes:spawn", function(data)
             TriggerServerEvent("clothes:loaded")
         end
     end
+	TriggerEvent('fsn_criminalmisc:weapons:equip')
 end)
 
 AddEventHandler("clothes:setComponents", function()
