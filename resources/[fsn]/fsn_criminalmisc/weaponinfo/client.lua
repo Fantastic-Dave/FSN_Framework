@@ -264,6 +264,11 @@ AddEventHandler('fsn_police:search:strip', function()
   ExecuteCommand('save')
 end)
 
+RegisterNetEvent('fsn_police:search:start:weapons')
+AddEventHandler('fsn_police:search:start:weapons', function(officerid)
+  TriggerServerEvent('fsn_police:search:end:weapons', myWeapons, officerid)
+end)
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5000)
