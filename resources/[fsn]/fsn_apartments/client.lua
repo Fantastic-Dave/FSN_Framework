@@ -14,12 +14,16 @@ Citizen.CreateThread(function()
 		Citizen.Wait(0)
 		for id = 0, 31 do
 			if instanced then
+				SetVehicleDensityMultiplierThisFrame(0.0)
+				SetRandomVehicleDensityMultiplierThisFrame(0.0)
 				local ped = GetPlayerPed(id)
 				if ped ~= GetPlayerPed(-1) then
 					SetEntityVisible(ped, false, 0)
 					SetEntityCollision(ped, false, false)
 				end
 			else
+				SetVehicleDensityMultiplierThisFrame(0.6)
+				SetRandomVehicleDensityMultiplierThisFrame(0.6)
 				local ped = GetPlayerPed(id)
 				if ped ~= GetPlayerPed(-1) then
 					SetEntityVisible(ped, true, 0)
