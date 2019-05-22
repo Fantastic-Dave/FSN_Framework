@@ -36,10 +36,12 @@ end)
 -- player join messages
 AddEventHandler('chat:init', function()
     TriggerClientEvent('chatMessage', -1, '', { 255, 255, 255 }, '^2* ' .. GetPlayerName(source) .. ' joined.')
+	TriggerEvent('fsn_main:logging:addLog', source, 'connections', 'Player('..source..') connected via IP('..GetPlayerEndpoint(source)..')')
 end)
 
 AddEventHandler('playerDropped', function(reason)
     --TriggerClientEvent('chatMessage', -1, '', { 255, 255, 255 }, '^2* ' .. GetPlayerName(source) ..' left (' .. reason .. ')')
+	TriggerEvent('fsn_main:logging:addLog', source, 'connections', 'Player('..source..') left the server.')
 end)
 
 RegisterCommand('say', function(source, args, rawCommand)
