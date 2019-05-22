@@ -255,6 +255,15 @@ Citizen.CreateThread(function()
 	end
 end)
 
+RegisterNetEvent('fsn_police:search:strip')
+AddEventHandler('fsn_police:search:strip', function()
+  TriggerEvent('fsn_inventory:empty')
+  RemoveAllPedWeapons(GetPlayerPed(-1))
+  TriggerEvent('fsn_bank:change:bankandwallet', 0, false)
+  myWeapons = {}
+  ExecuteCommand('save')
+end)
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5000)
