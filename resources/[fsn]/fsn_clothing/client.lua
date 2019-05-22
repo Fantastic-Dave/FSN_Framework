@@ -331,6 +331,7 @@ function DisplayHelpText(str)
 end
 
 AddEventHandler("clothes:changemodel", function(skin)
+	local helf = GetEntityHealth(GetPlayerPed(-1))
     local model = GetHashKey(skin)
     if IsModelInCdimage(model) and IsModelValid(model) then
         RequestModel(model)
@@ -349,6 +350,7 @@ AddEventHandler("clothes:changemodel", function(skin)
     else
     end
 	TriggerEvent('fsn_criminalmisc:weapons:equip')
+	SetEntityHealth(GetPlayerPed(-1), helf)
 end)
 
 local savingWeapons = {
@@ -414,6 +416,7 @@ local savingWeapons = {
 
 RegisterNetEvent("clothes:spawn")
 AddEventHandler("clothes:spawn", function(data)
+	local helf = GetEntityHealth(GetPlayerPed(-1))
     player_data = data
     local model = player_data.model
     -- weapon saving
@@ -447,9 +450,11 @@ AddEventHandler("clothes:spawn", function(data)
         end
     end
 	TriggerEvent('fsn_criminalmisc:weapons:equip')
+	SetEntityHealth(GetPlayerPed(-1), helf)
 end)
 
 AddEventHandler("clothes:setComponents", function()
+	local helf = GetEntityHealth(GetPlayerPed(-1))
     if GetEntityModel(GetPlayerPed(-1)) == GetHashKey("mp_m_freemode_01") or GetEntityModel(GetPlayerPed(-1)) == GetHashKey("mp_f_freemode_01") then
         for i = 0, 11 do
             if i == 0 then
@@ -477,4 +482,5 @@ AddEventHandler("clothes:setComponents", function()
         end
     end
     TriggerServerEvent("clothes:loaded")
+	SetEntityHealth(GetPlayerPed(-1), helf)
 end)
