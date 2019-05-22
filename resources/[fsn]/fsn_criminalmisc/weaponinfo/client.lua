@@ -79,6 +79,35 @@ AddEventHandler('fsn_criminalmisc:weapons:add', function(hash, ammo)
 	end
 end)
 
+RegisterNetEvent('fsn_criminalmisc:weapons:add:unknown')
+AddEventHandler('fsn_criminalmisc:weapons:add:unknown', function(hash, ammo)
+	local info = GetWeaponInfo(hash)
+	if info then
+		for k, v in pairs(myWeapons) do
+			if v.hash == hash then
+				TriggerEvent('fsn_notify:displayNotification', 'You already have '..info.name..' so got 200 ammo', 'centerRight', 6000, 'info')
+				SetPedAmmo(GetPlayerPed(-1), v.hash, 200)
+				return
+			end
+		end
+		local srl = "LS:"..makeString(6)
+		table.insert(myWeapons, #myWeapons+1, {
+			name = info.name,
+			hash = hash,
+			model = info.model,
+			ammo = ammo,
+			owner = {
+				serial = 'illegible',
+				name = 'UNKNOWN'
+			}
+		})
+		TriggerEvent('fsn_notify:displayNotification', 'You got '..info.name, 'centerRight', 6000, 'info')
+		TriggerEvent('fsn_criminalmisc:weapons:equip')
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'Could not find weapon info, tell this to a developer ('..hash..')', 'centerRight', 10000, 'error')
+	end
+end)
+
 RegisterNetEvent('fsn_criminalmisc:weapons:pickup')
 AddEventHandler('fsn_criminalmisc:weapons:pickup', function(weapon)
 	local info = GetWeaponInfo(weapon.hash)
@@ -180,11 +209,40 @@ function fsn_drawText3D(x,y,z, text)
         DrawText(_x,_y)
     end
 end
+local stripper = {x = 605.54632568359, y = -3091.7287597656, z = 6.0692601203918}
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
+		if GetDistanceBetweenCoords(stripper.x, stripper.y, stripper.z, GetEntityCoords(GetPlayerPed(-1))) < 10 then
+			DrawMarker(1,stripper.x, stripper.y, stripper.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+			if GetDistanceBetweenCoords(stripper.x, stripper.y, stripper.z, GetEntityCoords(GetPlayerPed(-1))) < 1 then
+				SetTextComponentFormat("STRING")
+				AddTextComponentString("~INPUT_PICKUP~ modify weapon (~r~5000DM~w~)")
+				DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+				if IsControlJustPressed(0, 38) then
+					if GetSelectedPedWeapon(GetPlayerPed(-1)) == -1569615261 then
+						TriggerEvent('fsn_notify:displayNotification', 'It looks like that tool would hurt your hands...', 'centerRight', 5000, 'error')
+					else
+						if exports["fsn_inventory"]:fsn_HasItem('dirty_money') and exports["fsn_inventory"]:fsn_GetItemAmount('dirty_money') >= 5000 then
+							for k,v in pairs(myWeapons) do
+								if v.hash == GetSelectedPedWeapon(GetPlayerPed(-1)) then
+									if v.owner.name ~= 'UNKNOWN' and v.owner.serial ~= 'illegible' then
+										v.owner.name = 'UNKNOWN'
+										v.owner.serial = 'illegible'
+										TriggerEvent('fsn_inventory:item:take', 'dirty_money', 5000)
+										TriggerEvent('fsn_notify:displayNotification', 'This was successfully scratched off', 'centerRight', 5000, 'success')
+									end
+								end
+							end
+						else
+							TriggerEvent('fsn_notify:displayNotification', 'You don\'t have the required DM', 'centerRight', 10000, 'error')
+						end
+					end
+				end
+			end
+		end
 		for k,v in pairs(droppedWeapons) do
-			--if GetDistanceBetweenCoords(v.loc.x, v.loc.y, v.loc.z, GetEntityCoords(GetPlayerPed(-1))) < 10 then
+			if GetDistanceBetweenCoords(v.loc.x, v.loc.y, v.loc.z, GetEntityCoords(GetPlayerPed(-1))) < 10 then
 				DrawMarker(25, v.loc.x, v.loc.y, v.loc.z - 0.95, 0, 0, 0, 0, 0, 0, 0.50, 0.50, 10.3, 255, 255, 255, 140, 0, 0, 1, 0, 0, 0, 0)
 				if GetDistanceBetweenCoords(v.loc.x, v.loc.y, v.loc.z, GetEntityCoords(GetPlayerPed(-1))) < 1 then
 					fsn_drawText3D(v.loc.x, v.loc.y, v.loc.z, "[E] pickup "..v.weapon.name)
@@ -192,7 +250,7 @@ Citizen.CreateThread(function()
 						TriggerServerEvent('fsn_criminalmisc:weapons:pickup', v.dropid)
 					end
 				end 
-			--end
+			end
 		end
 	end
 end)
