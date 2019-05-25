@@ -7,6 +7,8 @@ local removeScroller = 0
 local opacityScroller = 0
 local colourScroller = 0
 
+player_data = {}
+
 RegisterNetEvent('fsn_clothing:menu')
 AddEventHandler('fsn_clothing:menu', function()
 	GUI.maxVisOptions = 20
@@ -418,37 +420,42 @@ RegisterNetEvent("clothes:spawn")
 AddEventHandler("clothes:spawn", function(data)
 	local helf = GetEntityHealth(GetPlayerPed(-1))
     player_data = data
-    local model = player_data.model
-    -- weapon saving
-    local pre_weapons = {}
-    local pre_health = 0
-    for i=1, #savingWeapons do
-	    if HasPedGotWeapon(GetPlayerPed(-1), GetHashKey(savingWeapons[i])) then
-	      local ammo = GetAmmoInPedWeapon(GetPlayerPed(-1), GetHashKey(savingWeapons[i]))
-	      pre_weapons[#pre_weapons+1] = {weaponHash = savingWeapons[i], ammo = ammo}
-	    end
+	if player_data.model then
+		local model = player_data.model
+		-- weapon saving
+		local pre_weapons = {}
+		local pre_health = 0
+		for i=1, #savingWeapons do
+			if HasPedGotWeapon(GetPlayerPed(-1), GetHashKey(savingWeapons[i])) then
+			  local ammo = GetAmmoInPedWeapon(GetPlayerPed(-1), GetHashKey(savingWeapons[i]))
+			  pre_weapons[#pre_weapons+1] = {weaponHash = savingWeapons[i], ammo = ammo}
+			end
+		end
+			
+		if IsModelInCdimage(model) and IsModelValid(model) then
+			RequestModel(model)
+			while not HasModelLoaded(model) do
+				Citizen.Wait(0)
+			end
+			SetPlayerModel(PlayerId(), model)
+			if skin ~= "mp_f_freemode_01" and skin ~= "mp_m_freemode_01" then 
+				SetPedRandomComponentVariation(GetPlayerPed(-1), true)
+			else
+				SetPedComponentVariation(GetPlayerPed(-1), 11, 0, 240, 0)
+				SetPedComponentVariation(GetPlayerPed(-1), 8, 0, 240, 0)
+				SetPedComponentVariation(GetPlayerPed(-1), 11, 6, 1, 0)
+			end
+			SetModelAsNoLongerNeeded(model)
+			if not player_data.new then
+				TriggerEvent("clothes:setComponents")
+			else
+				TriggerServerEvent("clothes:loaded")
+			end
+		end
+	else
+		TriggerEvent('clothes:firstspawn')
+		print('fsn_clothing: no clothing data????')
 	end
-		
-    if IsModelInCdimage(model) and IsModelValid(model) then
-        RequestModel(model)
-        while not HasModelLoaded(model) do
-            Citizen.Wait(0)
-        end
-        SetPlayerModel(PlayerId(), model)
-        if skin ~= "mp_f_freemode_01" and skin ~= "mp_m_freemode_01" then 
-            SetPedRandomComponentVariation(GetPlayerPed(-1), true)
-        else
-            SetPedComponentVariation(GetPlayerPed(-1), 11, 0, 240, 0)
-            SetPedComponentVariation(GetPlayerPed(-1), 8, 0, 240, 0)
-            SetPedComponentVariation(GetPlayerPed(-1), 11, 6, 1, 0)
-        end
-        SetModelAsNoLongerNeeded(model)
-        if not player_data.new then
-            TriggerEvent("clothes:setComponents")
-        else
-            TriggerServerEvent("clothes:loaded")
-        end
-    end
 	TriggerEvent('fsn_criminalmisc:weapons:equip')
 	SetEntityHealth(GetPlayerPed(-1), helf)
 end)
