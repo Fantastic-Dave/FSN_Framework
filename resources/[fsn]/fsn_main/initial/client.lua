@@ -236,12 +236,9 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
       end
     end
 	]]
-	TriggerServerEvent("clothes:firstspawn")
-	if char.char_model == '{}' or char.char_model == '[]' then
-		print 'i have no clothes'
-	else
-		TriggerEvent("clothes:spawn", json.decode(char.char_model))
-    end
+	
+	TriggerEvent("clothes:spawn", json.decode(char.char_model))
+    
 	TriggerEvent('fsn_main:character', char)
     TriggerEvent('fsn_police:init', char.char_police)
     TriggerEvent('fsn_jail:init', char.char_id)
