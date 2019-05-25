@@ -236,8 +236,8 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
       end
     end
 	]]
-	
-	TriggerEvent("clothes:spawn", json.decode(char.char_model))
+	local mdl = json.decode(char.char_model)
+	TriggerEvent("clothes:spawn", mdl)
     
 	TriggerEvent('fsn_main:character', char)
     TriggerEvent('fsn_police:init', char.char_police)
