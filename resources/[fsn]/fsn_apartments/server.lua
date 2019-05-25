@@ -97,7 +97,7 @@ AddEventHandler('fsn_apartments:createApartment', function(char_id)
 				}
 			}
 			TriggerClientEvent('fsn_apartments:sendApartment', source, sendappt)
-			print('sending appt '..apt_id..' to '..char_id)
+			print('sending appt '..myappt.apt_id..' to '..char_id)
 		end
 	--end)
 end)
