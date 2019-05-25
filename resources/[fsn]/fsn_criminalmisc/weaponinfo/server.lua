@@ -10,7 +10,8 @@ AddEventHandler('fsn_criminalmisc:weapons:addDrop', function(droppedWeapon, xyz)
 	end
 	if not locktable then
 		locktable = true
-		local droppedid = dropid+1
+		dropid = dropid + 1
+		local droppedid = dropid
 		table.insert(droppedWeapons, #droppedWeapons+1, {
 			dropid = droppedid,
 			loc = xyz,
