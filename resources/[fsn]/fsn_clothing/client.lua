@@ -420,7 +420,7 @@ RegisterNetEvent("clothes:spawn")
 AddEventHandler("clothes:spawn", function(data)
 	local helf = GetEntityHealth(GetPlayerPed(-1))
     player_data = data
-	if player_data.model then
+	if #data > 0 then
 		local model = player_data.model
 		-- weapon saving
 		local pre_weapons = {}
