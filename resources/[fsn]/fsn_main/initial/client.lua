@@ -236,7 +236,7 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
       end
     end
 	]]
-	
+	TriggerServerEvent("clothes:firstspawn")
 	if char.char_model == '{}' or char.char_model == '[]' then
 		TriggerServerEvent("clothes:firstspawn")
 	else
