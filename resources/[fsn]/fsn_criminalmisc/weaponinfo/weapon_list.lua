@@ -1,254 +1,169 @@
-weaponsList = {
-	{
-		hash = '-1716189206',
-		name = 'Knife',
-	},
-	{
-		hash = '1737195953',
-		name = 'Nightstick',
-	},
-	{
-		hash = '1317494643',
-		name = 'Hammer',
-	},
-	{
-		hash = '-1786099057',
-		name = 'Bat',
-	},
-	{
-		hash = '-2067956739',
-		name = 'Crowbar',
-	},
-	{
-		hash = '1141786504',
-		name = 'Golfclub',
-	},
-	{
-		hash = '-102323637',
-		name = 'Bottle',
-	},
-	{
-		hash = '-1834847097',
-		name = 'Dagger',
-	},
-	{
-		hash = '-102973651',
-		name = 'Hatchet',
-	},
-	{
-		hash = '-656458692',
-		name = 'Knuckle Duster',
-	},
-	{
-		hash = '-581044007',
-		name = 'Machete',
-	},
-	{
-		hash = '-1951375401',
-		name = 'Flashlight',
-	},
-	{
-		hash = '-538741184',
-		name = 'Switch Blade',
-	},
-	{
-		hash = '-1810795771',
-		name = 'Pool Queue',
-	},
-	{
-		hash = '419712736',
-		name = 'Wrench',
-	},
-	{
-		hash = '-853065399',
-		name = 'Battleaxe',
-	},
-	{
-		hash = '453432689',
-		name = 'Pistol',
-	},
-	{
-		hash = '3219281620',
-		name = 'Pistol Mk2',
-	},
-	{
-		hash = '1593441988',
-		name = 'Combat Pistol',
-	},
-	{
-		hash = '-1716589765',
-		name = 'Pistol .50',
-	},
-	{
-		hash = '-1076751822',
-		name = 'SNS Pistol',
-	},
-	{
-		hash = '-771403250',
-		name = 'Heavy Pistol',
-	},
-	{
-		hash = '137902532',
-		name = 'Vintage Pistol',
-	},
-	{
-		hash = '-598887786',
-		name = 'Marksman Pistol',
-	},
-	{
-		hash = '-1045183535',
-		name = 'Revolver',
-	},
-	{
-		hash = '584646201',
-		name = 'AP Pistol',
-	},
-	{
-		hash = '911657153',
-		name = 'Stun Gun',
-	},
-	{
-		hash = '1198879012',
-		name = 'Flare Gun',
-	},
-	{
-		hash = '324215364',
-		name = 'Micro SMG',
-	},
-	{
-		hash = '-619010992',
-		name = 'Machine Pistol',
-	},
-	{
-		hash = '736523883',
-		name = 'SMG',
-	},
-	{
-		hash = '2024373456',
-		name = 'SMG Mk2',
-	},
-	{
-		hash = '-270015777',
-		name = 'Assault SMG',
-	},
-	{
-		hash = '171789620',
-		name = 'Combat PDW',
-	},
-	{
-		hash = '-1660422300',
-		name = 'MG',
-	},
-	{
-		hash = '2144741730',
-		name = 'Combat MG',
-	},
-	{
-		hash = '3686625920',
-		name = 'Combat MG Mk2',
-	},
-	{
-		hash = '1627465347',
-		name = 'Gusenberg',
-	},
-	{
-		hash = '-1121678507',
-		name = 'Mini SMG',
-	},
-	{
-		hash = '-1074790547',
-		name = 'Assault Rifle',
-	},
-	{
-		hash = '961495388',
-		name = 'Assault Rifle Mk2',
-	},
-	{
-		hash = '-2084633992',
-		name = 'Carbine Rifle',
-	},
-	{
-		hash = '4208062921',
-		name = 'Carbine Rifle Mk2',
-	},
-	{
-		hash = '-1357824103',
-		name = 'Advanced Rifle',
-	},
-	{
-		hash = '-1063057011',
-		name = 'Special Carbine',
-	},
-	{
-		hash = '2132975508',
-		name = 'Bullpup Rifle',
-	},
-	{
-		hash = '1649403952',
-		name = 'Compact Rifle',
-	},
-	{
-		hash = '100416529',
-		name = 'Sniper Rifle',
-	},
-	{
-		hash = '205991906',
-		name = 'Heavy Sniper',
-	},
-	{
-		hash = '177293209',
-		name = 'Heavy Sniper Mk2',
-	},
-	{
-		hash = '-952879014',
-		name = 'Marksman Rifle',
-	},
-	{
-		hash = '487013001',
-		name = 'Pump Shotgun',
-	},
-	{
-		hash = '2017895192',
-		name = 'Sawnoff Shotgun',
-	},
-	{
-		hash = '-1654528753',
-		name = 'Bullpup Shotgun',
-	},
-	{
-		hash = '-494615257',
-		name = 'Assault Shotgun',
-	},
-	{
-		hash = '-1466123874',
-		name = 'Musket',
-	},
-	{
-		hash = '984333226',
-		name = 'Heavy Shotgun',
-	},
-	{
-		hash = '-275439685',
-		name = 'Double Barrel Shotgun',
-	},
-	{
-		hash = '317205821',
-		name = 'Auto Shotgun',
-	},
-	{
-		hash = '883325847',
-		name = 'Petrol Can',
-	},
-	{
-		hash = '1233104067',
-		name = 'Flare',
-	},
-	{
-		hash = '600439132',
-		name = 'Ball',
-	},
-	{
-		hash = '-72657034',
-		name = 'Parachute',
-	},
+
+hashGunToText = {
+['-102973651'] = "Hatchet",
+['-1834847097'] = "Dagger",
+['-102323637'] = "Glass Bottle",
+['-2067956739'] = "Crowbar",
+['-656458692'] = "Knuckle Dusters",
+['-1786099057'] = "Baseball Bat",
+
+['-102973651'] = "Hatchet",
+['-1834847097'] = "Dagger",
+['-102323637'] = "Glass Bottle",
+['-2067956739'] = "Crowbar",
+['-656458692'] = "Knuckle Dusters",
+['-1786099057'] = "Baseball Bat",
+['-1716189206'] = "Combat Knife",
+['-2066285827'] = "Assault SMG",
+['-270015777'] = "Bullpup Rifle",
+['-1654528753'] = "Bullpup Shotgun",
+['-494615257'] = "Auto Shotgun",
+['-619010992'] = "Tec 9",
+['-2009644972'] = "SNS Pistol",
+['-1121678507'] = "Mini SMG",
+['2725352035'] = "Unarmed",
+['4194021054'] = "Animal",
+['148160082'] = "Cougar",
+['2578778090'] = "Knife",
+['1737195953'] = "Nightstick",
+['1317494643'] = "Hammer",
+['2508868239'] = "Bat",
+['1141786504'] = "Golfclub",
+['2227010557'] = "Crowbar",
+['453432689'] = "Pistol",
+['1593441988'] = "Combat Pistol",
+['584646201'] = "AP Pistol",
+['2578377531'] = "Deagle",
+['324215364'] = "Micro SMG",
+['736523883'] = "SMG",
+['4024951519'] = "Assault SMG",
+['3220176749'] = "Assault Rifle",
+['2210333304'] = "Carbine",
+['2937143193'] = "Adv Rifle",
+['2634544996'] = "MG",
+['2144741730'] = "Combat MG",
+['487013001'] = "Pump Action",
+['2017895192'] = "Sawnoff",
+['3800352039'] = "Assault Shotgun",
+['2640438543'] = "Bullpup Shotgun",
+['911657153'] = "Stun Gun",
+['100416529'] = "Sniper",
+['205991906'] = "Heavy Sniper",
+['856002082'] = "Remote Sniper",
+['2726580491'] = "GND Launcher",
+['1305664598'] = "GND Launcher SMK",
+['2982836145'] = "RPG",
+['375527679'] = "Passenger Rocket",
+['324506233'] = "Air Rocket",
+['1752584910'] = "Stinger",
+['1119849093'] = "Minigun",
+['2481070269'] = "Grenade",
+['741814745'] = "Stick Bomb",
+['4256991824'] = "Smoke Grenade",
+['2694266206'] = "Bz Gas",
+['615608432'] = "Molotov",
+['101631238'] = "Fire Ext",
+['883325847'] = "Petrol Can",
+['4256881901'] = "Digi Scanner",
+['2294779575'] = "Briefcase",
+['28811031'] = "Briefcase",
+['600439132'] = "Ball",
+['1233104067'] = "Flare",
+['3204302209'] = "Veh Rocket",
+['1223143800'] = "Barbed Wire",
+['4284007675'] = "Drown",
+['1936677264'] = "Drown Vehicle",
+['2339582971'] = "Bleeding",
+['2461879995'] = "Electric Fence",
+['539292904'] = "Explosion",
+['3452007600'] = "Fall",
+['910830060'] = "Exhaustion",
+['3425972830'] = "Water Cannon",
+['133987706'] = "Rammed",
+['2741846334'] = "Run Over",
+['341774354'] = "Heli Crash",
+['3750660587'] = "Fire",
+
+----------------DLC Weapons----------------
+
+------------------------------------
+['3218215474'] = "SNS Pistol",
+['4192643659'] = "Bottle",
+
+------------------------------------
+['1627465347'] = "Gusenberg",
+
+------------------------------------
+['3231910285'] = "Special Carbine",
+['3523564046'] = "Heavy Pistol",
+
+------------------------------------
+['2132975508'] = "Bullpup",
+
+
+------------------------------------
+['2460120199'] = "Dagger",
+['137902532'] = "Vintage Pistol",
+
+
+------------------------------------
+['2138347493'] = "Firework",
+['2828843422'] = "Musket",
+
+
+------------------------------------
+['984333226'] = "Heavy Shotgun",
+['3342088282'] = "Mark Rifle",
+
+
+------------------------------------
+['1672152130'] = "Homing Launcher",
+['2874559379'] = "Proxi Mine",
+['126349499'] = "Snowball",
+
+------------------------------------
+['1198879012'] = "Flaregun",
+['3794977420'] = "Garbage Bag",
+['3494679629'] = "Handcuffs",
+
+
+------------------------------------
+['171789620'] = "Combat PDW",
+
+
+------------------------------------
+['3696079510'] = "Mrk Pistol",
+['3638508604'] = "Knuckle",
+
+
+------------------------------------
+['4191993645'] = "Hatchet",
+['1834241177'] = "Railgun",
+
+
+------------------------------------
+['3713923289'] = "Machete",
+['3675956304'] = "Mac Pistol",
+
+
+------------------------------------
+['738733437'] = "Air Defence",
+['3756226112'] = "Switchblade",
+['3249783761'] = "Revolver",
+
+
+------------------------------------
+['4019527611'] = "DB Shotgun",
+['1649403952'] = "Cmp Rifle",
+
+
+------------------------------------
+['317205821'] = "Auto Shotgun",
+['3441901897'] = "Battle Axe",
+['125959754'] = "Cmp Launcher",
+['3173288789'] = "SMG Mini",
+['3125143736'] = "Pipebomb",
+['2484171525'] = "Cue",
+['419712736'] = "Wrench",
+["-581044007"] = "Machete",
 }

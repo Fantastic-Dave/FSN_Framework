@@ -1,10 +1,5 @@
 function GetWeaponInfo(hash)
-	for k, v in pairs(weaponsList) do
-		if v.hash == tostring(hash) then
-			return v
-		end
-	end
-	return false
+	return {name = hashGunToText[tostring(hash)], hash = hash}
 end
 local name = ''
 local myWeapons = {}
