@@ -34,30 +34,13 @@ local pd_cars = {
   --------------------
   -- LSPD
   --------------------
-  [101] = "police",
-  [102] = "police2",
-  [103] = "police3",
-  [104] = "police4",
-  [105] = "police5",
-  [106] = "police6",
-  [107] = "police7",
-  [108] = "police8",
-  [109] = "policeb",
-  --------------------
-  -- SHERIFF
-  --------------------
-  [201] = "sheriff",
-  [202] = "sheriff2",
-  [203] = "sheriff3",
-  [204] = "sheriff4",
-  [205] = "sheriff5",
-  [206] = "sheriff6",
-  [207] = "sheriff7",
-  [208] = "sheriff8",
-  [209] = "sheriff9",
-  [210] = "sheriff10",
-  [211] = "sheriff11",
-  [212] = "sheriff12",
+  [101] = "pd1",
+  [102] = "pd3",
+  [103] = "pd5",
+  [104] = "pd6",
+  [105] = "pd7",
+  [106] = "leosilv",
+  [107] = "pdbike",
   --------------------
   -- UNMARKED
   --------------------
@@ -74,6 +57,7 @@ local pd_cars = {
   --------------------
   [2001] = "2015polstang",
   [2002] = "ghispo2",
+  [2002] = "plimo",
 }
 
 local emotes = {
