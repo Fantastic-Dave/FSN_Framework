@@ -263,6 +263,9 @@ function overlays(title)
         Menu.addOption("clothing_overlays", function()
             if(Menu.ScrollBarInt("Opacity", opacityScroller, 10, function(cb)  opacityScroller = cb end)) then
                 SetPedHeadOverlay(GetPlayerPed(-1), componentScroller, subComponentScroller, tonumber(opacityScroller/10))
+				if not player_data.overlays then
+					player_data.overlays = {}
+				end
                 player_data.overlays.opacity[componentScroller+1] = tonumber(opacityScroller/10)
             end
         end)
@@ -271,6 +274,9 @@ function overlays(title)
                 local colourType = 0
                 if componentScroller == 1 or componentScroller == 2 or componentScroller == 10 then colourType = 1 elseif componentScroller == 5 or componentScroller == 8 then colourType = 2 else colourType = 0 end
                 SetPedHeadOverlayColor(GetPlayerPed(-1), componentScroller, colourType, colourScroller, colourScroller)
+				if not player_data.overlays then
+					player_data.overlays = {}
+				end
                 player_data.overlays.colours[componentScroller+1] = {colourType = colourType, colour = colourScroller}
             end
         end)
