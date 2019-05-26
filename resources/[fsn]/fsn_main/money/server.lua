@@ -137,7 +137,6 @@ end)
 
 RegisterServerEvent('fsn_main:money:wallet:Minus')
 AddEventHandler('fsn_main:money:wallet:Minus', function(ply, amt)
-	print('starting ')
 	for k, v in pairs(moneystore) do
 		if v.ply_id == ply then
 			if tonumber(amt) then

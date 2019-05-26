@@ -1,10 +1,3 @@
-Citizen.CreateThread(function()
-	while true do
-	    Citizen.Wait(0)
-	    SetVehicleDensityMultiplierThisFrame(0.6)
-	    SetRandomVehicleDensityMultiplierThisFrame(0.6)
-	end
-end)
 local fsn_spawned = false
 local current_character_id = 0
 local current_character = {}
@@ -243,12 +236,9 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
       end
     end
 	]]
-	
-	if char.char_model == '{}' or char.char_model == '[]' then
-		TriggerServerEvent("clothes:firstspawn")
-	else
-		TriggerEvent("clothes:spawn", json.decode(char.char_model))
-    end
+	local mdl = json.decode(char.char_model)
+	TriggerEvent("clothes:spawn", mdl)
+    
 	TriggerEvent('fsn_main:character', char)
     TriggerEvent('fsn_police:init', char.char_police)
     TriggerEvent('fsn_jail:init', char.char_id)

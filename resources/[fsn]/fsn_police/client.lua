@@ -165,14 +165,26 @@ function fsn_getCopAmt()
   return #onduty_police
 end
 
+policeWeapons = {
+    "WEAPON_STUNGUN",
+    "WEAPON_FLARE",
+    "WEAPON_NIGHTSTICK",
+    --"WEAPON_CARBINERIFLE",
+    --"WEAPON_PUMPSHOTGUN",
+    "WEAPON_FIREEXTINGUISHER",
+    "WEAPON_COMBATPISTOL",
+    "WEAPON_FLASHLIGHT",
+    "WEAPON_KNIFE"
+}
+
 local function fsn_policeEquipped()
   -- maybe add other loadouts later?
   policeWeapons = {
     "WEAPON_STUNGUN",
     "WEAPON_FLARE",
     "WEAPON_NIGHTSTICK",
-    "WEAPON_CARBINERIFLE",
-    "WEAPON_PUMPSHOTGUN",
+    --"WEAPON_CARBINERIFLE",
+    --"WEAPON_PUMPSHOTGUN",
     "WEAPON_FIREEXTINGUISHER",
     "WEAPON_COMBATPISTOL",
     "WEAPON_FLASHLIGHT",
@@ -284,24 +296,13 @@ Citizen.CreateThread(function()
       if GetDistanceBetweenCoords(stn.x,stn.y,stn.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 and pdonduty then
         DrawMarker(1,stn.x,stn.y,stn.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
         if GetDistanceBetweenCoords(stn.x,stn.y,stn.z,GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
-          if fsn_policeEquipped() == false then
             SetTextComponentFormat("STRING")
           	AddTextComponentString("Press ~INPUT_PICKUP~ to ~g~collect~w~ your weapons")
           	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-          else
-            SetTextComponentFormat("STRING")
-            AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~return~w~ your weapons")
-          	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-          end
           if IsControlJustPressed(0,38) then
-            if fsn_policeEquipped() then
               for k, v in pairs(policeWeapons) do
-                RemoveWeaponFromPed(GetPlayerPed(-1), GetHashKey(v))
-              end
-              TriggerEvent('fsn_notify:displayNotification', 'You have <span style="color:#41f456">returned</span> <span style="color:#f4a442;font-weight:bold">STANDARD LOADOUT</span> to '..stn.name, 'centerLeft', 2000, 'info')
-            else
-              for k, v in pairs(policeWeapons) do
-                GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(v), 1000)
+                --GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(v), 1000)
+				TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey(v), 250)
               end
               AddArmourToPed(GetPlayerPed(-1), 100)
               TriggerEvent('fsn_notify:displayNotification', 'You have <span style="color:red">checked out</span> <span style="color:#f4a442;font-weight:bold">STANDARD LOADOUT</span> from '..stn.name, 'centerLeft', 2000, 'info')
@@ -310,7 +311,6 @@ Citizen.CreateThread(function()
         end
       end
     end
-  end
 end)
 RegisterNetEvent('fsn_police:command:duty')
 AddEventHandler('fsn_police:command:duty', function()
@@ -508,83 +508,6 @@ AddEventHandler('fsn_police:handcuffs:soft', function(pl)
 
     cuffed[pl] = handCuffed
   end
-end)
-
-RegisterNetEvent('fsn_police:search:strip')
-AddEventHandler('fsn_police:search:strip', function()
-  TriggerEvent('fsn_inventory:empty')
-  RemoveAllPedWeapons(GetPlayerPed(-1))
-  TriggerEvent('fsn_bank:change:bankandwallet', 0, false)
-end)
-
-RegisterNetEvent('fsn_police:search:start:weapons')
-AddEventHandler('fsn_police:search:start:weapons', function(officerid)
-  local savingWeapons = {
-    "WEAPON_KNIFE",
-    "WEAPON_NIGHTSTICK",
-    "WEAPON_HAMMER",
-    "WEAPON_BAT",
-    "WEAPON_GOLFCLUB",
-    "WEAPON_CROWBAR",
-    "WEAPON_PISTOL",
-    "WEAPON_COMBATPISTOL",
-    "WEAPON_APPISTOL",
-    "WEAPON_PISTOL50",
-    "WEAPON_MICROSMG",
-    "WEAPON_SMG",
-    "WEAPON_ASSAULTSMG",
-    "WEAPON_ASSAULTRIFLE",
-    "WEAPON_CARBINERIFLE",
-    "WEAPON_ADVANCEDRIFLE",
-    "WEAPON_MG",
-    "WEAPON_COMBATMG",
-    "WEAPON_PUMPSHOTGUN",
-    "WEAPON_SAWNOFFSHOTGUN",
-    "WEAPON_ASSAULTSHOTGUN",
-    "WEAPON_BULLPUPSHOTGUN",
-    "WEAPON_STUNGUN",
-    "WEAPON_SNIPERRIFLE",
-    "WEAPON_SMOKEGRENADE",
-    "WEAPON_BZGAS",
-    "WEAPON_MOLOTOV",
-    "WEAPON_FIREEXTINGUISHER",
-    "WEAPON_PETROLCAN",
-    "WEAPON_SNSPISTOL",
-    "WEAPON_SPECIALCARBINE",
-    "WEAPON_HEAVYPISTOL",
-    "WEAPON_BULLPUPRIFLE",
-    "WEAPON_HOMINGLAUNCHER",
-    "WEAPON_PROXMINE",
-    "WEAPON_SNOWBALL",
-    "WEAPON_VINTAGEPISTOL",
-    "WEAPON_DAGGER",
-    "WEAPON_FIREWORK",
-    "WEAPON_MUSKET",
-    "WEAPON_MARKSMANRIFLE",
-    "WEAPON_HEAVYSHOTGUN",
-    "WEAPON_GUSENBERG",
-    "WEAPON_HATCHET",
-    "WEAPON_COMBATPDW",
-    "WEAPON_KNUCKLE",
-    "WEAPON_MARKSMANPISTOL",
-    "WEAPON_BOTTLE",
-    "WEAPON_FLAREGUN",
-    "WEAPON_FLARE",
-    "WEAPON_REVOLVER",
-    "WEAPON_SWITCHBLADE",
-    "WEAPON_MACHETE",
-    "WEAPON_FLASHLIGHT",
-    "WEAPON_MACHINEPISTOL",
-    "WEAPON_DBSHOTGUN",
-    "WEAPON_COMPACTRIFLE"
-  }
-  local my_weps = {}
-  for _gun, gun in pairs(savingWeapons) do
-    if HasPedGotWeapon(GetPlayerPed(-1), GetHashKey(gun)) then
-      table.insert(my_weps,#my_weps+1,gun)
-    end
-  end
-  TriggerServerEvent('fsn_police:search:end:weapons', my_weps, officerid)
 end)
 
 --------------------------------------------- DRAG xx

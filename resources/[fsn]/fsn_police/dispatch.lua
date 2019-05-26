@@ -146,10 +146,34 @@ Citizen.CreateThread(function()
   end
 end)
 
+local myGSR = false
+local lastGSR = 0
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		if IsPedShooting(GetPlayerPed(-1)) then
+			print 'adding gsr'
+			lastGSR = current_time
+			myGSR = true
+		end
+		if lastGSR + 600 < current_time then
+			if myGSR then
+				lastGSR = 0 	
+				myGSR = false
+				print 'removing gsr'
+			end
+		end
+	end
+end)
+RegisterNetEvent('fsn_commands:police:gsrMe')
+AddEventHandler('fsn_commands:police:gsrMe', function(pd)
+	TriggerServerEvent('fsn_commands:police:gsrResult', pd, myGSR)
+end)
+
 Citizen.CreateThread(function()
    while true do
      Citizen.Wait(0)
-     if IsPedShooting(GetPlayerPed(-1)) and not pdonduty then
+	 if IsPedShooting(GetPlayerPed(-1)) and not pdonduty then
        local pos = GetEntityCoords(GetPlayerPed(-1))
        local coords = {
          x = pos.x,
@@ -158,8 +182,6 @@ Citizen.CreateThread(function()
        }
        TriggerServerEvent('fsn_police:dispatch', coords, 1)
      end
-
-
      ----- PD SIDE
      if disp_id ~= 0 then
        if last_disp + 10 > current_time then

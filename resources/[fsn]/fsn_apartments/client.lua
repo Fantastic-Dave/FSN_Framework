@@ -14,12 +14,16 @@ Citizen.CreateThread(function()
 		Citizen.Wait(0)
 		for id = 0, 31 do
 			if instanced then
+				SetVehicleDensityMultiplierThisFrame(0.0)
+				SetRandomVehicleDensityMultiplierThisFrame(0.0)
 				local ped = GetPlayerPed(id)
 				if ped ~= GetPlayerPed(-1) then
 					SetEntityVisible(ped, false, 0)
 					SetEntityCollision(ped, false, false)
 				end
 			else
+				SetVehicleDensityMultiplierThisFrame(0.6)
+				SetRandomVehicleDensityMultiplierThisFrame(0.6)
 				local ped = GetPlayerPed(id)
 				if ped ~= GetPlayerPed(-1) then
 					SetEntityVisible(ped, true, 0)
@@ -53,6 +57,7 @@ end
 local myRoomNumber = 32
 local building = false
 local inappt = false
+local inWardrobe = false
 local apptdetails = {}
 
 RegisterNetEvent('fsn_apartments:stash:add')
@@ -95,57 +100,85 @@ end)
 
 RegisterNetEvent('fsn_apartments:sendApartment')
 AddEventHandler('fsn_apartments:sendApartment', function(tbl)
-	EnterRoom(tbl.number)
-	myRoomNumber = tbl.number
-	apptdetails = tbl.apptinfo
-	apptdetails["apt_outfits"] = json.decode(tbl.apptinfo.apt_outfits)
-	apptdetails["apt_inventory"] = json.decode(tbl.apptinfo.apt_inventory)
-	apptdetails["apt_utils"] = json.decode(tbl.apptinfo.apt_utils)
-	init = true
-	TriggerEvent('fsn_notify:displayNotification', 'Your apartments is number: '..tbl.number, 'centerRight', 6000, 'info')
+	if tbl.number then
+		EnterRoom(tbl.number)
+		myRoomNumber = tbl.number
+		apptdetails = tbl.apptinfo
+		apptdetails["apt_outfits"] = json.decode(tbl.apptinfo.apt_outfits)
+		apptdetails["apt_inventory"] = json.decode(tbl.apptinfo.apt_inventory)
+		apptdetails["apt_utils"] = json.decode(tbl.apptinfo.apt_utils)
+		init = true
+		TriggerEvent('fsn_notify:displayNotification', 'Your apartments is number: '..tbl.number, 'centerRight', 6000, 'info')
+	else
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r IT LOOKS LIKE YOU ARE BROKE I DO NOT HAVE AN APPT NUMBER FOR YOU')
+		EnterRoom(1)
+		myRoomNumber = 1
+		apptdetails = {}
+		apptdetails["apt_outfits"] = {}
+		apptdetails["apt_inventory"] = {}
+		apptdetails["apt_utils"] = {}
+		init = true
+		TriggerEvent('fsn_notify:displayNotification', 'Your apartments is number: 1', 'centerRight', 6000, 'info')
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You can still play, but this apartment will not save.')
+	end
 end)
 
 RegisterNetEvent('fsn_apartments:outfit:add')
 AddEventHandler('fsn_apartments:outfit:add', function(key)
-	apptdetails.apt_outfits[key] = exports["fsn_clothing"]:GetOutfit()
-	
-	TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
+	if inWardrobe then
+		apptdetails.apt_outfits[key] = exports["fsn_clothing"]:GetOutfit()
+		
+		TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
+	else
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You need to be at your wardrobe to use this command.')
+	end
 end)
 RegisterNetEvent('fsn_apartments:outfit:use')
 AddEventHandler('fsn_apartments:outfit:use', function(key)
-	if apptdetails.apt_outfits[key] then
-		TriggerEvent("clothes:spawn", apptdetails.apt_outfits[key])
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit used')
+	if inWardrobe then
+		if apptdetails.apt_outfits[key] then
+			TriggerEvent("clothes:spawn", apptdetails.apt_outfits[key])
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit used')
+		else
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
+		end	
 	else
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
-	end	
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You need to be at your wardrobe to use this command.')
+	end
 end)
 
 RegisterNetEvent('fsn_apartments:outfit:remove')
 AddEventHandler('fsn_apartments:outfit:remove', function(key)
-	if apptdetails.apt_outfits[key] then
-		apptdetails.apt_outfits[key] = nil
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit removed')
+	if inWardrobe then
+		if apptdetails.apt_outfits[key] then
+			apptdetails.apt_outfits[key] = nil
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit removed')
+		else
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
+		end
 	else
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You need to be at your wardrobe to use this command.')
 	end
 end)
 RegisterNetEvent('fsn_apartments:outfit:list')
 AddEventHandler('fsn_apartments:outfit:list', function()
-	print(apptdetails.apt_outfits)
-	if apptdetails.apt_outfits then
-		local keys = {}
-		for k, v in pairs(apptdetails.apt_outfits) do
-			table.insert(keys, #keys+1, k)
-		end
-		local str = table.concat(keys, ", ")
-		if #keys > 0 then
-			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Saved outfits: '..str)
+	if inWardrobe then
+		if apptdetails.apt_outfits then
+			local keys = {}
+			for k, v in pairs(apptdetails.apt_outfits) do
+				table.insert(keys, #keys+1, k)
+			end
+			local str = table.concat(keys, ", ")
+			if #keys > 0 then
+				TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Saved outfits: '..str)
+			else
+				TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved')
+			end
 		else
 			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved')
 		end
 	else
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved')
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You need to be at your wardrobe to use this command.')
 	end
 end)
 
@@ -219,6 +252,9 @@ Citizen.CreateThread(function()
 				DrawMarker(25, outfits.x, outfits.y, outfits.z - 0.95, 0, 0, 0, 0, 0, 0, 0.50, 0.50, 10.3, 255, 255, 255, 140, 0, 0, 1, 0, 0, 0, 0)
 				if GetDistanceBetweenCoords(outfits.x, outfits.y, outfits.z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
 					fsn_drawText3D(outfits.x, outfits.y, outfits.z, "/outfit add {name}\n/outfit use {name}\n/outfit remove {name}\n/outfit list")
+					inWardrobe = true
+				else
+					inWardrobe = false
 				end
 				
 				-- leaving

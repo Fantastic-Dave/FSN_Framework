@@ -25,11 +25,11 @@ items_table = {
     weight = 0.2,
     desc = 'Use this to repair your vehicle.',
     use = function()
-      while ( not HasAnimDictLoaded( "mini@safe_cracking" ) ) do
-          RequestAnimDict( "mini@safe_cracking" )
-          Citizen.Wait( 5 )
-      end
-      TaskPlayAnim(GetPlayerPed(-1), "mini@safe_cracking", "idle_base", 8.0, 1.0, 2500, 2, 0, 0, 0, 0 )
+      --while ( not HasAnimDictLoaded( "mini@safe_cracking" ) ) do
+      --    RequestAnimDict( "mini@safe_cracking" )
+      --    Citizen.Wait( 5 )
+     -- end
+      --TaskPlayAnim(GetPlayerPed(-1), "mini@safe_cracking", "idle_base", 8.0, 1.0, 2500, 2, 0, 0, 0, 0 )
       TriggerEvent('fsn_vehiclecontrol:damage:repairkit')
     end,
     modelhash = -1674314660,

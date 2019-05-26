@@ -170,8 +170,66 @@ AddEventHandler('fsn_vehiclecontrol:damage:repair', function()
 	end
 end)
 
+
+function getVehicleInDirection(coordFrom, coordTo)
+	local rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, GetPlayerPed(-1), 0)
+	local a, b, c, d, vehicle = GetRaycastResult(rayHandle)
+	return vehicle
+end
+function fsn_lookingAt()
+	local targetVehicle = false
+
+	local coordA = GetEntityCoords(GetPlayerPed(-1), 1)
+	local coordB = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0.0, 20.0, -1.0)
+	targetVehicle = getVehicleInDirection(coordA, coordB)
+
+	return targetVehicle
+end
 RegisterNetEvent('fsn_vehiclecontrol:damage:repairkit')
 AddEventHandler('fsn_vehiclecontrol:damage:repairkit', function()
+	if IsPedInAnyVehicle(GetPlayerPed(-1)) then
+		TriggerEvent('fsn_notify:displayNotification', 'You need to be outside of the vehicle to use this.', 'centerLeft', 4000, 'error')
+	else
+		if fsn_lookingAt() then
+			local vehicle = fsn_lookingAt()
+			local d1,d2 = GetModelDimensions(GetEntityModel(vehicle))
+			local moveto = GetOffsetFromEntityInWorldCoords(vehicle, 0.0,d2["y"]+0.5,0.0)
+
+			if GetDistanceBetweenCoords(moveto, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+				FreezeEntityPosition(GetPlayerPed(-1), true)
+				SetVehicleDoorOpen(vehicle, 4, false, false)
+				exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'repairing',10)
+				
+				RequestAnimDict("mini@repair")
+				while not HasAnimDictLoaded("mini@repair") do
+					Citizen.Wait(0)
+				end
+				TaskPlayAnim(GetPlayerPed(-1), "mini@repair", "fixing_a_player", 8.0, -8, -1, 16, 0, 0, 0, 0)
+				Citizen.Wait(10000)
+				ClearPedTasks(GetPlayerPed(-1))
+				FreezeEntityPosition(GetPlayerPed(-1), false)
+				SetVehicleDoorShut(vehicle, 4, false)
+				if GetDistanceBetweenCoords(moveto, GetEntityCoords(GetPlayerPed(-1)), true) < 2 and not IsPedInAnyVehicle(GetPlayerPed(-1)) then
+					SetVehicleUndriveable(vehicle,false)
+					SetVehicleEngineHealth(vehicle, cfg.cascadingFailureThreshold + 5)
+					SetVehiclePetrolTankHealth(vehicle, 750.0)
+					healthEngineLast=cfg.cascadingFailureThreshold +5
+					healthPetrolTankLast=750.0
+					SetVehicleEngineOn(vehicle, true, false )
+					SetVehicleOilLevel(vehicle,(GetVehicleOilLevel(vehicle)/3)-0.5)
+					TriggerEvent('fsn_notify:displayNotification', 'You repaired this vehicle.', 'centerLeft', 4000, 'success')
+					TriggerEvent('fsn_inventory:item:take', 'repair_kit', 1)
+				else
+					TriggerEvent('fsn_notify:displayNotification', 'You moved away from the vehicle!', 'centerLeft', 4000, 'error')
+				end
+			else
+				TriggerEvent('fsn_notify:displayNotification', 'Move to the front of the vehicle', 'centerLeft', 4000, 'error')
+			end
+		else	
+			TriggerEvent('fsn_notify:displayNotification', 'No vehicle detected', 'centerLeft', 4000, 'error')
+		end
+	end
+	--[[
 	if isPedDrivingAVehicle() then
 		local ped = GetPlayerPed(-1)
 		vehicle = GetVehiclePedIsIn(ped, false)
@@ -195,6 +253,7 @@ AddEventHandler('fsn_vehiclecontrol:damage:repairkit', function()
 	else
 		notification("~y~You must be in a vehicle to be able to repair it")
 	end
+	]]--
 end)
 
 if cfg.torqueMultiplierEnabled or cfg.preventVehicleFlip or cfg.limpMode then

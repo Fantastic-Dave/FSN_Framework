@@ -220,7 +220,7 @@ AddEventHandler('fsn_commands:dev:weapon', function(wep, addtoChar)
 		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(wep), 200)
 		SetCurrentPedWeapon(GetPlayerPed(-1), GetHashKey(wep), true)
 	else
-		TriggerEvent('fsn_criminalmisc:weapons:add', GetHashKey(wep), 200)
+		TriggerEvent('fsn_criminalmisc:weapons:add:unknown', GetHashKey(wep), 200)
 	end
 end)
 
@@ -239,6 +239,101 @@ end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- POLICE COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
+function IsPDCar(veh)
+	if GetVehicleClass(veh) == 18 then
+		return true
+	else
+		return false
+	end
+end
+RegisterNetEvent('fsn_commands:police:shotgun')
+AddEventHandler('fsn_commands:police:shotgun', function()
+	if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
+		--[[
+		local car = GetVehiclePedIsIn(GetPlayerPed(-1))
+		local d1,d2 = GetModelDimensions(GetEntityModel(car))
+        local moveto = GetOffsetFromEntityInWorldCoords(car, 0.0,d1["y"]-0.5,0.0)
+		if GetDistanceBetweenCoords(moveto, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+			exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'UNHOLSTERING',6)
+			--TaskOpenVehicleDoor(GetPlayerPed(-1), car, 6000, 5, 8.0)
+			SetVehicleDoorOpen(car, 5, false, false)
+			FreezeEntityPosition(GetPlayerPed(-1), true)
+			Citizen.Wait(6000)
+			FreezeEntityPosition(GetPlayerPed(-1), false)
+			SetVehicleDoorShut(car, 5, false)
+			TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_PUMPSHOTGUN'), 250)
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'Go to the back of the car', 'centerLeft', 4000, 'error')
+		end
+		]]--
+		TriggerEvent('fsn_notify:displayNotification', 'Go to the back of the car', 'centerLeft', 4000, 'error')
+	elseif fsn_lookingAt() then
+		local car = fsn_lookingAt()
+		local d1,d2 = GetModelDimensions(GetEntityModel(car))
+        local moveto = GetOffsetFromEntityInWorldCoords(car, 0.0,d1["y"]-0.5,0.0)
+		if GetDistanceBetweenCoords(moveto, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+			exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'UNHOLSTERING',6)
+			--TaskOpenVehicleDoor(GetPlayerPed(-1), car, 6000, 5, 8.0)
+			SetVehicleDoorOpen(car, 5, false, false)
+			FreezeEntityPosition(GetPlayerPed(-1), true)
+			Citizen.Wait(6000)
+			FreezeEntityPosition(GetPlayerPed(-1), false)
+			SetVehicleDoorShut(car, 5, false)
+			TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_PUMPSHOTGUN'), 250)
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'Go to the back of the car', 'centerLeft', 4000, 'error')
+		end
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'You need to be looking at a police car!', 'centerLeft', 4000, 'error')
+	end
+end)
+
+RegisterNetEvent('fsn_commands:police:rifle')
+AddEventHandler('fsn_commands:police:rifle', function()
+	if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
+		--[[
+		local car = GetVehiclePedIsIn(GetPlayerPed(-1))
+		local d1,d2 = GetModelDimensions(GetEntityModel(car))
+        local moveto = GetOffsetFromEntityInWorldCoords(car, 0.0,d1["y"]-0.5,0.0)
+		if GetDistanceBetweenCoords(moveto, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+			exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'UNHOLSTERING',6)
+			--TaskOpenVehicleDoor(GetPlayerPed(-1), car, 6000, 5, 8.0)
+			SetVehicleDoorOpen(car, 5, false, false)
+			FreezeEntityPosition(GetPlayerPed(-1), true)
+			Citizen.Wait(6000)
+			FreezeEntityPosition(GetPlayerPed(-1), false)
+			SetVehicleDoorShut(car, 5, false)
+			TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_CARBINERIFLE'), 250)
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'Go to the back of the car', 'centerLeft', 4000, 'error')
+		end
+		]]--
+		TriggerEvent('fsn_notify:displayNotification', 'Go to the back of the car', 'centerLeft', 4000, 'error')
+	elseif fsn_lookingAt() then
+		local car = fsn_lookingAt()
+		if IsPDCar(car) then
+			local d1,d2 = GetModelDimensions(GetEntityModel(car))
+			local moveto = GetOffsetFromEntityInWorldCoords(car, 0.0,d1["y"]-0.5,0.0)
+			if GetDistanceBetweenCoords(moveto, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+				exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'UNHOLSTERING',6)
+				--TaskOpenVehicleDoor(GetPlayerPed(-1), car, 6000, 5, 8.0)
+				SetVehicleDoorOpen(car, 5, false, false)
+				FreezeEntityPosition(GetPlayerPed(-1), true)
+				Citizen.Wait(6000)
+				FreezeEntityPosition(GetPlayerPed(-1), false)
+				SetVehicleDoorShut(car, 5, false)
+				TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_CARBINERIFLE'), 250)
+			else
+				TriggerEvent('fsn_notify:displayNotification', 'Go to the back of the car', 'centerLeft', 4000, 'error')
+			end
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'The car needs to be a PD car.', 'centerLeft', 4000, 'error')
+		end
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'You need to be looking at a police car!', 'centerLeft', 4000, 'error')
+	end
+end)
+
 RegisterNetEvent('fsn_commands:police:towMark')
 AddEventHandler('fsn_commands:police:towMark', function()
   if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
