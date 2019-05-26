@@ -736,6 +736,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/police' or split[1] == '/pd' then
     if fsn_policeOnDuty(source) then
       if split[2] then
+		if split[2] == 'gsr' then
+			TriggerClientEvent('fsn_commands:police:gsrMe', tonumber(split[3]), source)
+		end
 		if split[2] == 'tow' then
 			if split[3] then
 				if split[3] == 'target' or split[3] == 't' then
@@ -1109,4 +1112,20 @@ end)
 RegisterServerEvent('fsn_commands:police:unbooted')
 AddEventHandler('fsn_commands:police:unbooted', function(plate, model)
   TriggerClientEvent('fsn_commands:police:updateBoot', -1, plate, model, false)
+end)
+
+RegisterServerEvent('fsn_commands:police:gsrResult')
+AddEventHandler('fsn_commands:police:gsrResult', function(officer, result)
+	if result == true then
+		if math.random(1,100) > 5 then
+			TriggerClientEvent('chatMessage', officer, '', {255,255,255}, '^1^*GSR |^0^r The test begins to turn blue.')
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*GSR |^0^r The test begins to turn blue.')
+		else
+			TriggerClientEvent('chatMessage', officer, '', {255,255,255}, '^1^*GSR |^0^r The test is inconclusive.')
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*GSR |^0^r The test is inconclusive.')
+		end
+	else
+		TriggerClientEvent('chatMessage', officer, '', {255,255,255}, '^1^*GSR |^0^r The test does nothing.')
+		TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*GSR |^0^r The test does nothing.')
+	end
 end)
