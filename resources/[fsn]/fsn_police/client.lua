@@ -171,8 +171,8 @@ local function fsn_policeEquipped()
     "WEAPON_STUNGUN",
     "WEAPON_FLARE",
     "WEAPON_NIGHTSTICK",
-    "WEAPON_CARBINERIFLE",
-    "WEAPON_PUMPSHOTGUN",
+    --"WEAPON_CARBINERIFLE",
+    --"WEAPON_PUMPSHOTGUN",
     "WEAPON_FIREEXTINGUISHER",
     "WEAPON_COMBATPISTOL",
     "WEAPON_FLASHLIGHT",
@@ -288,21 +288,21 @@ Citizen.CreateThread(function()
             SetTextComponentFormat("STRING")
           	AddTextComponentString("Press ~INPUT_PICKUP~ to ~g~collect~w~ your weapons")
           	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-          else
-            SetTextComponentFormat("STRING")
-            AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~return~w~ your weapons")
-          	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+          --else
+          --  SetTextComponentFormat("STRING")
+         --   AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~return~w~ your weapons")
+         -- 	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
           end
           if IsControlJustPressed(0,38) then
-            if fsn_policeEquipped() then
-              for k, v in pairs(policeWeapons) do
-                RemoveWeaponFromPed(GetPlayerPed(-1), GetHashKey(v))
-              end
-              TriggerEvent('fsn_notify:displayNotification', 'You have <span style="color:#41f456">returned</span> <span style="color:#f4a442;font-weight:bold">STANDARD LOADOUT</span> to '..stn.name, 'centerLeft', 2000, 'info')
-            else
+            --if fsn_policeEquipped() then
+           --   for k, v in pairs(policeWeapons) do
+           --     RemoveWeaponFromPed(GetPlayerPed(-1), GetHashKey(v))
+           --   end
+           --   TriggerEvent('fsn_notify:displayNotification', 'You have <span style="color:#41f456">returned</span> <span style="color:#f4a442;font-weight:bold">STANDARD LOADOUT</span> to '..stn.name, 'centerLeft', 2000, 'info')
+           -- else
               for k, v in pairs(policeWeapons) do
                 --GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(v), 1000)
-		TriggerEvent('fsn_criminalmisc:weapons:add', GetHashKey(v), 250)
+				TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey(v), 250)
               end
               AddArmourToPed(GetPlayerPed(-1), 100)
               TriggerEvent('fsn_notify:displayNotification', 'You have <span style="color:red">checked out</span> <span style="color:#f4a442;font-weight:bold">STANDARD LOADOUT</span> from '..stn.name, 'centerLeft', 2000, 'info')
