@@ -5,10 +5,24 @@ local vault_doors = {
 }
 
 local banks_payout = {
-  [1] = 158432,
-  [2] = 589475,
-  [3] = 589846
+  [1] = 1500000,
+  [2] = 2000000,
+  [3] = 800000
 }
+
+AddEventHandler('fsn_main:money:bank:Add', function(ply, amt)
+	local randomizer = amt / math.random(1,5)
+	banks_payout[1] = banks_payout[1] + randomizer
+	banks_payout[2] = banks_payout[2] + randomizer
+	banks_payout[3] = banks_payout[3] + randomizer
+end)
+
+AddEventHandler('fsn_main:money:bank:Minus', function(ply, amt)
+	local randomizer = amt / math.random(1,5)
+	banks_payout[1] = banks_payout[1] - randomizer
+	banks_payout[2] = banks_payout[2] - randomizer
+	banks_payout[3] = banks_payout[3] - randomizer
+end)
 
 RegisterServerEvent('fsn_bankrobbery:vault:open')
 AddEventHandler('fsn_bankrobbery:vault:open', function(id)
