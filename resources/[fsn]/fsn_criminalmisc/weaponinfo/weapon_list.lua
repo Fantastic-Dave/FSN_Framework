@@ -6,6 +6,8 @@ hashGunToText = {
 ['-2067956739'] = "Crowbar",
 ['-656458692'] = "Knuckle Dusters",
 ['-1786099057'] = "Baseball Bat",
+['-1951375401'] = "Flashlight",
+['-2084633992'] = 'Carbine',
 
 ['-102973651'] = "Hatchet",
 ['-1834847097'] = "Dagger",
@@ -39,6 +41,7 @@ hashGunToText = {
 ['4024951519'] = "Assault SMG",
 ['3220176749'] = "Assault Rifle",
 ['2210333304'] = "Carbine",
+
 ['2937143193'] = "Adv Rifle",
 ['2634544996'] = "MG",
 ['2144741730'] = "Combat MG",
