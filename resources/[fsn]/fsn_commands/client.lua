@@ -239,6 +239,55 @@ end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- POLICE COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
+function IsPDCar(veh)
+	if GetVehicleClass(veh) == 18 then
+		return true
+	else
+		return false
+	end
+end
+RegisterNetEvent('fsn_commands:police:shotgun')
+AddEventHandler('fsn_commands:police:shotgun', function()
+	if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
+		local car = GetVehiclePedIsIn(GetPlayerPed(-1))
+		if IsPDCar(car) then
+			TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_PUMPSHOTGUN'), 250)
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'The car needs to be a PD car.', 'centerLeft', 4000, 'error')
+		end
+	elseif fsn_lookingAt() then
+		local car = fsn_lookingAt()
+		if IsPDCar(car) then
+			TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_PUMPSHOTGUN'), 250)
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'The car needs to be a PD car.', 'centerLeft', 4000, 'error')
+		end
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'You need to be looking at a police car!', 'centerLeft', 4000, 'error')
+	end
+end)
+
+RegisterNetEvent('fsn_commands:police:rifle')
+AddEventHandler('fsn_commands:police:rifle', function()
+	if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
+		local car = GetVehiclePedIsIn(GetPlayerPed(-1))
+		if IsPDCar(car) then
+			TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_CARBINERIFLE'), 250)
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'The car needs to be a PD car.', 'centerLeft', 4000, 'error')
+		end
+	elseif fsn_lookingAt() then
+		local car = fsn_lookingAt()
+		if IsPDCar(car) then
+			TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey('WEAPON_CARBINERIFLE'), 250)
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'The car needs to be a PD car.', 'centerLeft', 4000, 'error')
+		end
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'You need to be looking at a police car!', 'centerLeft', 4000, 'error')
+	end
+end)
+
 RegisterNetEvent('fsn_commands:police:towMark')
 AddEventHandler('fsn_commands:police:towMark', function()
   if IsPedInAnyVehicle(GetPlayerPed(-1), false) then

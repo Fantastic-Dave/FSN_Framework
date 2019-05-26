@@ -723,6 +723,16 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- POLICE COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/ar' or split[1] == '/rifle' then
+	if fsn_policeOnDuty(source) then
+		TriggerClientEvent('fsn_commands:police:rifle', source)
+	end
+  end
+  if split[1] == '/sg' or split[1] == '/shotgun' then
+	if fsn_policeOnDuty(source) then
+		TriggerClientEvent('fsn_commands:police:shotgun', source)
+	end
+  end
   if split[1] == '/police' or split[1] == '/pd' then
     if fsn_policeOnDuty(source) then
       if split[2] then
