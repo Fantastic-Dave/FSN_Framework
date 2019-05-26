@@ -284,22 +284,10 @@ Citizen.CreateThread(function()
       if GetDistanceBetweenCoords(stn.x,stn.y,stn.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 and pdonduty then
         DrawMarker(1,stn.x,stn.y,stn.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
         if GetDistanceBetweenCoords(stn.x,stn.y,stn.z,GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
-          if fsn_policeEquipped() == false then
             SetTextComponentFormat("STRING")
           	AddTextComponentString("Press ~INPUT_PICKUP~ to ~g~collect~w~ your weapons")
           	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-          --else
-          --  SetTextComponentFormat("STRING")
-         --   AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~return~w~ your weapons")
-         -- 	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-          end
           if IsControlJustPressed(0,38) then
-            --if fsn_policeEquipped() then
-           --   for k, v in pairs(policeWeapons) do
-           --     RemoveWeaponFromPed(GetPlayerPed(-1), GetHashKey(v))
-           --   end
-           --   TriggerEvent('fsn_notify:displayNotification', 'You have <span style="color:#41f456">returned</span> <span style="color:#f4a442;font-weight:bold">STANDARD LOADOUT</span> to '..stn.name, 'centerLeft', 2000, 'info')
-           -- else
               for k, v in pairs(policeWeapons) do
                 --GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(v), 1000)
 				TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey(v), 250)
@@ -311,7 +299,6 @@ Citizen.CreateThread(function()
         end
       end
     end
-  end
 end)
 RegisterNetEvent('fsn_police:command:duty')
 AddEventHandler('fsn_police:command:duty', function()
