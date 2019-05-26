@@ -267,6 +267,9 @@ function overlays(title)
 					player_data.overlays = {}
 					player_data.overlays.opacity = {}
 				end
+				if not player_data.overlays.opacity then
+					player_data.overlays.opacity = {}
+				end
                 player_data.overlays.opacity[componentScroller+1] = tonumber(opacityScroller/10)
             end
         end)
@@ -289,6 +292,12 @@ end
 function save()
     player_data.model = GetEntityModel(GetPlayerPed(-1))
     player_data.new = false
+	if not player_data.clothing then
+		player_data.clothing = {}
+		player_data.clothing.drawables = {}
+		player_data.clothing.textures = {}
+		player_data.clothing.palette = {}
+	end
     for i = 0, 11 do
         player_data.clothing.drawables[i+1] = GetPedDrawableVariation(GetPlayerPed(-1), i)
         if i ~= 2 then
@@ -296,10 +305,21 @@ function save()
         end
         player_data.clothing.palette[i+1] = GetPedPaletteVariation(GetPlayerPed(-1), i)
     end
+	
+	if not player_data.props then
+		player_data.props = {}
+		player_data.props.drawables = {}
+		player_data.props.textures = {}
+	end
     for i = 0, 7 do
         player_data.props.drawables[i+1] = GetPedPropIndex(GetPlayerPed(-1), i)
         player_data.props.textures[i+1] = GetPedPropTextureIndex(GetPlayerPed(-1), i)
     end
+	
+	if not player_data.overlays then
+		player_data.overlays = {}
+		player_data.props.drawables = {}
+	end
     for i = 0, 12 do
         player_data.overlays.drawables[i+1] = GetPedHeadOverlayValue(GetPlayerPed(-1), i)
     end
@@ -311,8 +331,14 @@ function save()
 end
 
 function GetOutfit()
-	player_data.model = GetEntityModel(GetPlayerPed(-1))
+    player_data.model = GetEntityModel(GetPlayerPed(-1))
     player_data.new = false
+	if not player_data.clothing then
+		player_data.clothing = {}
+		player_data.clothing.drawables = {}
+		player_data.clothing.textures = {}
+		player_data.clothing.palette = {}
+	end
     for i = 0, 11 do
         player_data.clothing.drawables[i+1] = GetPedDrawableVariation(GetPlayerPed(-1), i)
         if i ~= 2 then
@@ -320,10 +346,21 @@ function GetOutfit()
         end
         player_data.clothing.palette[i+1] = GetPedPaletteVariation(GetPlayerPed(-1), i)
     end
+	
+	if not player_data.props then
+		player_data.props = {}
+		player_data.props.drawables = {}
+		player_data.props.textures = {}
+	end
     for i = 0, 7 do
         player_data.props.drawables[i+1] = GetPedPropIndex(GetPlayerPed(-1), i)
         player_data.props.textures[i+1] = GetPedPropTextureIndex(GetPlayerPed(-1), i)
     end
+	
+	if not player_data.overlays then
+		player_data.overlays = {}
+		player_data.overlays.drawables = {}
+	end
     for i = 0, 12 do
         player_data.overlays.drawables[i+1] = GetPedHeadOverlayValue(GetPlayerPed(-1), i)
     end
@@ -331,7 +368,7 @@ function GetOutfit()
     if player_data.clothing.drawables[12] == 55 and GetEntityModel(GetPlayerPed(-1)) == GetHashKey("mp_m_freemode_01") then player_data.clothing.drawables[12] = 56 SetPedComponentVariation(GetPlayerPed(-1), 11, 56, 0, 2) end
     if player_data.clothing.drawables[12] == 48 and GetEntityModel(GetPlayerPed(-1)) == GetHashKey("mp_f_freemode_01") then player_data.clothing.drawables[12] = 49 SetPedComponentVariation(GetPlayerPed(-1), 11, 49, 0, 2) end
 
-	return player_data
+    return player_data
 end
 
 function DisplayHelpText(str)
