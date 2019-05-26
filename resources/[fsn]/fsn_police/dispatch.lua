@@ -157,9 +157,11 @@ Citizen.CreateThread(function()
 			myGSR = true
 		end
 		if lastGSR + 600 < current_time then
-			lastGSR = 0 
-			myGSR = false
-			print 'removing gsr'
+			if myGSR then
+				lastGSR = 0 	
+				myGSR = false
+				print 'removing gsr'
+			end
 		end
 	end
 end)

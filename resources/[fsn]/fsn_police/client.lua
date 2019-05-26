@@ -165,6 +165,18 @@ function fsn_getCopAmt()
   return #onduty_police
 end
 
+policeWeapons = {
+    "WEAPON_STUNGUN",
+    "WEAPON_FLARE",
+    "WEAPON_NIGHTSTICK",
+    --"WEAPON_CARBINERIFLE",
+    --"WEAPON_PUMPSHOTGUN",
+    "WEAPON_FIREEXTINGUISHER",
+    "WEAPON_COMBATPISTOL",
+    "WEAPON_FLASHLIGHT",
+    "WEAPON_KNIFE"
+}
+
 local function fsn_policeEquipped()
   -- maybe add other loadouts later?
   policeWeapons = {
