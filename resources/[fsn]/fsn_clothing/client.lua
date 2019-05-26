@@ -265,6 +265,7 @@ function overlays(title)
                 SetPedHeadOverlay(GetPlayerPed(-1), componentScroller, subComponentScroller, tonumber(opacityScroller/10))
 				if not player_data.overlays then
 					player_data.overlays = {}
+					player_data.overlays.opacity = {}
 				end
                 player_data.overlays.opacity[componentScroller+1] = tonumber(opacityScroller/10)
             end
@@ -276,6 +277,7 @@ function overlays(title)
                 SetPedHeadOverlayColor(GetPlayerPed(-1), componentScroller, colourType, colourScroller, colourScroller)
 				if not player_data.overlays then
 					player_data.overlays = {}
+					player_data.overlays.colours = {}
 				end
                 player_data.overlays.colours[componentScroller+1] = {colourType = colourType, colour = colourScroller}
             end
