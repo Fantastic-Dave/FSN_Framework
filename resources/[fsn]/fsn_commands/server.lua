@@ -409,7 +409,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Walk types: '..str)
   end
   if split[1] == '/destroyweapon' then
-    TriggerClientEvent('fsn_commands:dropweapon', source)
+    TriggerClientEvent('fsn_criminalmisc:weapons:destroy', source)
   end
   if split[1] == '/dropweapon' then
     TriggerClientEvent('fsn_criminalmisc:weapons:drop', source)
