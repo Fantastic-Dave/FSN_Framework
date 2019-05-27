@@ -20,6 +20,16 @@ items_table = {
     modelhash = -2140074399,
     price = 500
   },
+  ["radio_receiver"] = {
+    display_name = 'Radio Receiver',
+    weight = 0.4,
+    desc = 'Use this to repair yourself.',
+    use = function()
+		--TriggerEvent('fsn_criminalmisc:drugs:streetselling:area')
+    end,
+    modelhash = -982919519,
+    price = 500
+  },
   ["repair_kit"] = {
     display_name = 'Repair Kit',
     weight = 0.2,
