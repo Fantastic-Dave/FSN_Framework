@@ -6,7 +6,7 @@
 	<Item>
       <modelName>pd1</modelName>
       <txdName>pd1</txdName>
-      <handlingId>PD1</handlingId>
+      <handlingId>POLICE</handlingId>
       <gameName>pd1</gameName>
       <vehicleMakeName />
       <expressionDictName>null</expressionDictName>
@@ -15,7 +15,7 @@
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>fq2</audioNameHash>
+      <audioNameHash>police</audioNameHash>
       <layout>LAYOUT_STANDARD</layout>
       <coverBoundOffsets>POLICE3_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
@@ -136,7 +136,7 @@
 	<Item>
       <modelName>pd2</modelName>
       <txdName>pd2</txdName>
-      <handlingId>PD2</handlingId>
+      <handlingId>SCHAFTER3</handlingId>
       <gameName>pd2</gameName>
       <vehicleMakeName />
       <expressionDictName>null</expressionDictName>
@@ -266,7 +266,7 @@
 	<Item>
       <modelName>pd3</modelName>
       <txdName>pd3</txdName>
-      <handlingId>PD3</handlingId>
+      <handlingId>SCHAFTER3</handlingId>
       <gameName>pd3</gameName>
       <vehicleMakeName />
       <expressionDictName>null</expressionDictName>
@@ -275,7 +275,7 @@
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>fugitive</audioNameHash>
+      <audioNameHash>police2</audioNameHash>
       <layout>LAYOUT_STANDARD</layout>
       <coverBoundOffsets>BUFFALO_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
@@ -396,7 +396,7 @@
 	<Item>
       <modelName>pd4</modelName>
       <txdName>pd4</txdName>
-      <handlingId>PD4</handlingId>
+      <handlingId>police3</handlingId>
       <gameName>pd4</gameName>
       <vehicleMakeName>BRAVADO</vehicleMakeName>
       <expressionDictName>null</expressionDictName>
@@ -526,7 +526,7 @@
 	<Item>
       <modelName>pd5</modelName>
       <txdName>pd5</txdName>
-      <handlingId>PD5</handlingId>
+      <handlingId>BALLER3</handlingId>
       <gameName>pd5</gameName>
       <vehicleMakeName>VAPID</vehicleMakeName>
       <expressionDictName>null</expressionDictName>
@@ -535,7 +535,7 @@
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>baller2</audioNameHash>
+      <audioNameHash>POLICE3</audioNameHash>
       <layout>LAYOUT_STD_HIGHWINDOW</layout>
       <coverBoundOffsets>GRESLEY_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
@@ -656,7 +656,7 @@
 	<Item>
       <modelName>pd6</modelName>
       <txdName>pd6</txdName>
-      <handlingId>PD6</handlingId>
+      <handlingId>FBI2</handlingId>
       <gameName>pd6</gameName>
       <vehicleMakeName />
       <expressionDictName>null</expressionDictName>
@@ -665,7 +665,7 @@
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>baller2</audioNameHash>
+      <audioNameHash>SHERIFF2</audioNameHash>
       <layout>LAYOUT_RANGER</layout>
       <coverBoundOffsets>SHERIFF2_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
@@ -779,7 +779,7 @@
 	<Item>
       <modelName>pd7</modelName>
       <txdName>pd7</txdName>
-      <handlingId>PD7</handlingId>
+      <handlingId>POLICE3</handlingId>
       <gameName>pd7</gameName>
       <vehicleMakeName />
       <expressionDictName>null</expressionDictName>
@@ -788,7 +788,7 @@
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>baller3</audioNameHash>
+      <audioNameHash>police3</audioNameHash>
       <layout>LAYOUT_STANDARD</layout>
       <coverBoundOffsets>POLICE3_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
@@ -918,7 +918,7 @@
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>fq2</audioNameHash>
+      <audioNameHash>police</audioNameHash>
       <layout>LAYOUT_STANDARD</layout>
       <coverBoundOffsets>POLICE3_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
