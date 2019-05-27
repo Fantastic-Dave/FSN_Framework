@@ -1,0 +1,228 @@
+local sellables = {"joint"}
+local init = false
+local areas = {}
+RegisterNetEvent('fsn_criminalmisc:drugs:streetselling:send')
+AddEventHandler('fsn_criminalmisc:drugs:streetselling:send', function(tbl)
+	init = true
+	areas = tbl
+	for k, v in pairs(tbl) do
+		if v.premium then
+			if exports["fsn_inventory"]:fsn_HasItem('radio_receiver') then
+				TriggerEvent('fsn_phone:recieveMessage', {
+				  sender = 'DarkWeb',
+				  from_number = 666,
+				  to_number = -1,
+				  message = 'We just got word drugs are selling better in: '..v.name
+				})
+				print('new premium is '..v.name..' ('..k..') and incity is '..tostring(v.incity))
+			end
+		end
+	end
+end)
+
+Citizen.CreateThread(function()
+	TriggerServerEvent('fsn_criminalmisc:drugs:streetselling:request')
+end)
+
+----------------------------------------------- system xx
+function hasDrugs()
+	for k, v in pairs(sellables) do
+		if exports["fsn_inventory"]:fsn_HasItem(v) then
+			return true
+		end
+	end
+	return false
+end
+
+function getMyDrug()
+	for k, v in pairs(sellables) do
+		if exports["fsn_inventory"]:fsn_HasItem(v) then
+			return v
+		end
+	end
+	return false
+end
+
+function fsn_FindNearbyPed(Distance)
+    local TargetPed
+    local Handle, Ped = FindFirstPed()
+    repeat
+        local DistanceBetween = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), GetEntityCoords(Ped), true)
+        if DoesEntityExist(Ped) and not IsPedAPlayer(Ped) and DistanceBetween <= Distance then
+            TargetPed = Ped
+        end
+
+    Success, Ped = FindNextPed(Handle)
+    until not Success
+
+    EndFindPed(Handle)
+    return TargetPed
+end
+
+function table.contains(table, element)
+  for _, value in pairs(table) do
+    if value[1] == element then
+      return true
+    end
+  end
+  return false
+end
+
+function fsn_drawText3D(x,y,z, text)
+    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
+    local px,py,pz=table.unpack(GetGameplayCamCoords())
+    if onScreen then
+        SetTextScale(0.3, 0.3)
+        SetTextFont(0)
+        SetTextProportional(1)
+        SetTextColour(255, 255, 255, 255)
+        SetTextDropshadow(0, 0, 0, 0, 55)
+        SetTextEdge(2, 0, 0, 0, 150)
+        SetTextDropShadow()
+        SetTextOutline()
+        SetTextEntry("STRING")
+        SetTextCentre(1)
+        AddTextComponentString(text)
+        DrawText(_x,_y)
+    end
+end
+
+local selling = false
+local startsale = 0
+local curtime = 0
+local sold_peds = {}
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		local radioxyz = {x = 567.08984375, y = -3127.2580566406, z = 18.768598556519}
+		if GetDistanceBetweenCoords(radioxyz.x, radioxyz.y, radioxyz.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
+			DrawMarker(1,radioxyz.x, radioxyz.y, radioxyz.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+			if GetDistanceBetweenCoords(radioxyz.x, radioxyz.y, radioxyz.z, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+				SetTextComponentFormat("STRING")
+				AddTextComponentString("~INPUT_PICKUP~ attempt to steal radio component")
+				DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+				if IsControlJustPressed(0, 38) then
+					TriggerServerEvent('fsn_criminalmisc:drugs:streetselling:radio')
+				end
+			end
+		end
+		if init and hasDrugs() and not IsPedInAnyVehicle(GetPlayerPed(-1)) then
+			local drug = getMyDrug()
+			local myarea = string.upper(GetNameOfZone(GetEntityCoords(GetPlayerPed(-1))))
+			if areas[myarea] and areas[myarea].enabled and areas[myarea].drugs[drug] then
+				local obj = fsn_FindNearbyPed(1)
+				if obj and IsPedHuman(obj) and not table.contains(sold_peds, obj) and not IsEntityDead(obj) then
+					if not selling then
+						fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '[~g~E~w~] Sell ~b~'..drug)
+						if IsControlJustPressed(0, 38) then
+							if math.random(0,100) > 58 then
+								selling = true
+								TaskLookAtEntity(obj, GetPlayerPed(-1), 9000, 2084, 3)
+								TaskStandStill(obj, 9000)
+								startsale = curtime
+								selling_item = drug
+							else
+							  if math.random(0,100) > 50 then
+								  while not HasAnimDictLoaded('cellphone@') do
+									RequestAnimDict('cellphone@')
+									Citizen.Wait(5)
+								  end
+								  TriggerEvent('fsn_notify:displayNotification', 'They are not interested', 'centerLeft', 3000, 'error')
+								  SetEntityAsMissionEntity(obj, true, true)
+								  ClearPedTasksImmediately(obj)
+								  SetEntityAsNoLongerNeeded(obj)
+								  if math.random(0,100) > 70 then
+									TaskPlayAnim(obj, 'cellphone@', 'cellphone_call_listen_base', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
+								  end
+								  Citizen.Wait(1000)
+								  if not IsEntityDead(obj) then
+									local pos = GetEntityCoords(obj)
+									local coords = {
+									  x = pos.x,
+									  y = pos.y,
+									  z = pos.z
+									}
+									TriggerServerEvent('fsn_police:dispatch', coords, 3)
+								else
+								  TriggerEvent('fsn_notify:displayNotification', 'They are not interested', 'centerLeft', 3000, 'error')
+								  SetEntityAsMissionEntity(obj, true, true)
+								  ClearPedTasksImmediately(obj)
+								  SetEntityAsNoLongerNeeded(obj)
+								end
+							  end
+							  table.insert(sold_peds, #sold_peds+1, {obj, true})
+							end
+						end
+					else
+						local selltime = startsale + 9
+						if selltime > curtime then
+							fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, 'Selling')
+						else
+							fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, 'Sold')
+							local finishtime = selltime + 3
+							while not HasAnimDictLoaded('mp_safehouselost@') do
+								RequestAnimDict('mp_safehouselost@')
+								Citizen.Wait(5)
+							end
+							TaskPlayAnim(GetPlayerPed(-1), 'mp_safehouselost@', 'package_dropoff', 8.0, 1.0, -1, 16, 0, 0, 0, 0)
+							TaskPlayAnim(obj, 'mp_safehouselost@', 'package_dropoff', 8.0, 1.0, -1, 16, 0, 0, 0, 0)
+							if finishtime < curtime then
+								selling = false
+								
+								-- work out amount
+								if exports["fsn_inventory"]:fsn_GetItemAmount(selling_item) < areas[myarea].drugs[drug].avg then
+								  sold_amount = fsn_GetItemAmount(selling_item)
+								else
+									local mini = areas[myarea].drugs[drug].avg - math.floor(areas[myarea].drugs[drug].avg / 2)
+									local maxi = areas[myarea].drugs[drug].avg + math.ceil(areas[myarea].drugs[drug].avg / 2)
+									sold_amount = math.random(mini, maxi).
+									if areas[myarea].premium then
+										local extra = math.random(1,5)
+										sold_amount = sold_amount + extra
+										TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 This is a premium area, so you sold an extra '..extra..' items')
+									end
+								end
+								
+								-- work out pricing
+								local mini = areas[myarea].drugs[drug].value - math.floor(areas[myarea].drugs[drug].value / 2)
+								local maxi = areas[myarea].drugs[drug].value + math.ceil(areas[myarea].drugs[drug].value / 2)
+								local price = 0
+								if exports["fsn_police"]:fsn_getCopAmt() > 2 then
+									price = math.random(mini, maxi)
+								else
+									price = math.random(mini, maxi) / 2
+									TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 There aren\'t many cops online, so your earnings are halved.')									
+								end
+								if areas[myarea].premium then
+									local extra = math.random(10,50)
+									price = math.random(mini, maxi) + extra
+									TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 This is a premium area, so you earned an extra $'..extra..' per item.')
+								end
+								price = price * sold_amount
+								TriggerEvent('fsn_notify:displayNotification', 'They bought '..sold_amount..' '..exports["fsn_inventory"]:fsn_GetItemDetails(drug).name..' for '..price..'DM', 'centerLeft', 3000, 'info')
+								TriggerEvent('fsn_inventory:item:add', 'dirty_money', price)
+								TriggerEvent('fsn_inventory:item:take', selling_item, sold_amount)
+
+								table.insert(sold_peds, #sold_peds+1, {obj, true})
+								Citizen.Wait(3000)
+							end
+						end
+					end
+				else
+					if selling then
+						TriggerEvent('fsn_notify:displayNotification', 'The transaction was cancelled...', 'centerLeft', 3000, 'error')
+						selling = not selling
+					end
+				end
+			else
+				print('area '..myarea..' does not exist/is disabled so you cannot sell here')
+			end
+		end
+	end
+end)
+
+Citizen.CreateThread(function()
+	while true do Citizen.Wait(1000)
+		curtime = curtime + 1
+	end
+end)
