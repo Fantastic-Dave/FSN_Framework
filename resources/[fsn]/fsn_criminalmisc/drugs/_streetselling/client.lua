@@ -110,7 +110,7 @@ Citizen.CreateThread(function()
 			local drug = getMyDrug()
 			local myarea = string.upper(GetNameOfZone(GetEntityCoords(GetPlayerPed(-1))))
 			if areas[myarea] and areas[myarea].enabled and areas[myarea].drugs[drug] then
-				local obj = fsn_FindNearbyPed(1)
+				local obj = fsn_FindNearbyPed(1.5)
 				if obj and IsPedHuman(obj) and not table.contains(sold_peds, obj) and not IsEntityDead(obj) then
 					if not selling then
 						fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '[~g~E~w~] Sell ~b~'..drug)
@@ -149,6 +149,7 @@ Citizen.CreateThread(function()
 						local selltime = startsale + 9
 						if selltime > curtime then
 							fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, 'Selling')
+							TaskStandStill(obj, 9000)
 						else
 							fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, 'Sold')
 							local finishtime = selltime + 3
@@ -216,7 +217,7 @@ Citizen.CreateThread(function()
 					end
 				end
 			else
-				print('area '..myarea..' does not exist/is disabled so you cannot sell here')
+				--print('area '..myarea..' does not exist/is disabled so you cannot sell here')
 			end
 		end
 	end
