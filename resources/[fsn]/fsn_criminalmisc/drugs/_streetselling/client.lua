@@ -1,4 +1,4 @@
-local sellables = {"joint"}
+local sellables = {"joint", "meth_rocks"}
 local init = false
 local areas = {}
 RegisterNetEvent('fsn_criminalmisc:drugs:streetselling:send')
@@ -115,41 +115,33 @@ Citizen.CreateThread(function()
 					if not selling then
 						fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '[~g~E~w~] Sell ~b~'..drug)
 						if IsControlJustPressed(0, 38) then
-							if math.random(0,100) > 58 then
+							if math.random(1,100) < areas[myarea].callpercentage then
+								local pos = GetEntityCoords(obj)
+								local coords = {
+								  x = pos.x,
+								  y = pos.y,
+								  z = pos.z
+								}
+								TriggerServerEvent('fsn_police:dispatch', coords, 3)
+								if math.random(0,100) < 5 then
+									if exports["fsn_inventory"]:fsn_HasItem('radio_receiver') then
+										TriggerEvent('fsn_phone:recieveMessage', {
+										  sender = 'DarkWeb',
+										  from_number = 666,
+										  to_number = -1,
+										  message = 'PD radio just muttered something about someone selling in '..areas[myarea].name..' if that\'s you, bounce!'
+										})
+									end
+								end
+							end
+							if math.random(0,100) > areas[myarea].sellpercentage then
 								selling = true
 								TaskLookAtEntity(obj, GetPlayerPed(-1), 9000, 2084, 3)
 								TaskStandStill(obj, 9000)
 								startsale = curtime
 								selling_item = drug
 							else
-							  if math.random(0,100) > 50 then
-								  while not HasAnimDictLoaded('cellphone@') do
-									RequestAnimDict('cellphone@')
-									Citizen.Wait(5)
-								  end
-								  TriggerEvent('fsn_notify:displayNotification', 'They are not interested', 'centerLeft', 3000, 'error')
-								  SetEntityAsMissionEntity(obj, true, true)
-								  ClearPedTasksImmediately(obj)
-								  SetEntityAsNoLongerNeeded(obj)
-								  if math.random(0,100) > 70 then
-									TaskPlayAnim(obj, 'cellphone@', 'cellphone_call_listen_base', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
-								  end
-								  Citizen.Wait(1000)
-								  if not IsEntityDead(obj) then
-									local pos = GetEntityCoords(obj)
-									local coords = {
-									  x = pos.x,
-									  y = pos.y,
-									  z = pos.z
-									}
-									TriggerServerEvent('fsn_police:dispatch', coords, 3)
-								else
-								  TriggerEvent('fsn_notify:displayNotification', 'They are not interested', 'centerLeft', 3000, 'error')
-								  SetEntityAsMissionEntity(obj, true, true)
-								  ClearPedTasksImmediately(obj)
-								  SetEntityAsNoLongerNeeded(obj)
-								end
-							  end
+							  TriggerEvent('fsn_notify:displayNotification', 'They are not interested...', 'centerLeft', 3000, 'error')
 							  table.insert(sold_peds, #sold_peds+1, {obj, true})
 							end
 						end
@@ -175,7 +167,7 @@ Citizen.CreateThread(function()
 								else
 									local mini = areas[myarea].drugs[drug].avg - math.floor(areas[myarea].drugs[drug].avg / 2)
 									local maxi = areas[myarea].drugs[drug].avg + math.ceil(areas[myarea].drugs[drug].avg / 2)
-									sold_amount = math.random(mini, maxi).
+									sold_amount = math.random(mini, maxi)
 									if areas[myarea].premium then
 										local extra = math.random(1,5)
 										sold_amount = sold_amount + extra
@@ -197,9 +189,18 @@ Citizen.CreateThread(function()
 									local extra = math.random(10,50)
 									price = math.random(mini, maxi) + extra
 									TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 This is a premium area, so you earned an extra $'..extra..' per item.')
+								else
+									TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 This is not a premium area.')
+								end
+								if areas[myarea].incity == false then
+									TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 This area is not in the city, so you may earn less.')
+									TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 If you think this is an error report "'..myarea..'" to a developer.')
+									if math.random(1,100) > 50 then
+										price = price / 2
+									end
 								end
 								price = price * sold_amount
-								TriggerEvent('fsn_notify:displayNotification', 'They bought '..sold_amount..' '..exports["fsn_inventory"]:fsn_GetItemDetails(drug).name..' for '..price..'DM', 'centerLeft', 3000, 'info')
+								TriggerEvent('fsn_notify:displayNotification', 'They bought '..sold_amount..' '..exports["fsn_inventory"]:fsn_GetItemDetails(drug).display_name..' for '..price..'DM', 'centerLeft', 3000, 'info')
 								TriggerEvent('fsn_inventory:item:add', 'dirty_money', price)
 								TriggerEvent('fsn_inventory:item:take', selling_item, sold_amount)
 
