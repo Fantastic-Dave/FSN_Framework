@@ -90,7 +90,7 @@ local vehshop = {
 				{name = "Drift Tampa", costs = 995000, description = {}, model = "tampa2"},
 				{name = "Elegy", costs = 130000, description = {}, model = "elegy2"},
 				{name = "Elegy Sport", costs = 175000, description = {}, model = "elegy"},
-				{name = "Feltzer 2", costs = 195000, description = {}, model = "feltzer2"},
+				{name = "Feltzer", costs = 185000, description = {}, model = "feltzer2"},
 				{name = "Flash GT", costs = 235000, description = {}, model = "flashgt"},
 				{name = "Furore GT", costs = 167890, description = {}, model = "furoregt"},
 				{name = "Fusilade", costs = 69000, description = {}, model = "fusilade"},
