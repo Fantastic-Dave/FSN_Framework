@@ -9,6 +9,9 @@ function instanceMe(state)
 	instanced = state
 	TriggerEvent('tokovoip_extras:muteall', state)
 end
+function inInstance()
+	return instanced	
+end
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
@@ -270,6 +273,20 @@ Citizen.CreateThread(function()
 						DoScreenFadeIn(3000)
 						FreezeEntityPosition(GetPlayerPed(-1), false)
 						instanceMe(false)
+					end
+				end
+					
+				-- spawn outside of appt
+				if GetDistanceBetweenCoords(leave.x, leave.y, leave.z, GetEntityCoords(GetPlayerPed(-1)), true) < 20 then
+					if inInstance() then
+						SetEntityCoords(GetPlayerPed(-1), apartments[myRoomNumber].x, apartments[myRoomNumber].y, apartments[myRoomNumber].z)
+						FreezeEntityPosition(GetPlayerPed(-1), true)
+						DoScreenFadeOut(0)
+						Citizen.Wait(3000)
+						inappt = false
+						DoScreenFadeIn(3000)
+						FreezeEntityPosition(GetPlayerPed(-1), false)
+						instanceMe(false)		
 					end
 				end
 			else
