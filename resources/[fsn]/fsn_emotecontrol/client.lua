@@ -221,6 +221,7 @@ function scenarios1()
 	Menu.addButton("Record","scenarioPlayer","WORLD_HUMAN_MOBILE_FILM_SHOCKING")
 	Menu.addButton("Call","scenarioPlayer","WORLD_HUMAN_STAND_MOBILE")
 	Menu.addButton("Text","scenarioPlayer","WORLD_HUMAN_STAND_MOBILE_UPRIGHT")
+	Menu.addButton("Phone Call","pc",nil)
 	Menu.addButton("Guard Idles","scenarioPlayer","WORLD_HUMAN_GUARD_STAND")
 	Menu.addButton("Hang Out","scenarioPlayer","WORLD_HUMAN_HANG_OUT_STREET")
 	Menu.addButton("Smoking","scenarioPlayer","WORLD_HUMAN_SMOKING")
@@ -257,6 +258,8 @@ function scenarios4()
 	Menu.addTitle("Scenarios")
 	Menu.addButton("Cop Idles","scenarioPlayer","WORLD_HUMAN_COP_IDLES")
 	Menu.addButton("Write on Notepad","scenarioPlayer","CODE_HUMAN_MEDIC_TIME_OF_DEATH")
+	Menu.addButton("CPR","cpr",nil)
+	Menu.addButton("CPR2","cpr2",nil)
 	--Menu.addButton("Drilling","scenarioPlayer","WORLD_HUMAN_CONST_DRILL")
 	--Menu.addButton("Hammering","scenarioPlayer","WORLD_HUMAN_HAMMERING")
 	--Menu.addButton("Welding","scenarioPlayer","WORLD_HUMAN_WELDING")
@@ -437,7 +440,7 @@ function femdances()
 	Menu.addButton("Dance 2","dancef2",nil)
 	Menu.addButton("Dance 3","dancef3",nil)
 	Menu.addButton("Dance 4","dancef4",nil)
-	if GetPlayerName(PlayerId()) == "Cyan" or GetPlayerName(PlayerId()) == "floppypancakes4u" then
+	if GetPlayerName(PlayerId()) == "Cyan" or GetPlayerName(PlayerId()) == "Liquid" then
 		Menu.addButton("Pole Dance","pole",nil)
 	end
 	Menu.addButton("Back","NameOfMenu",nil)
@@ -558,6 +561,22 @@ end
 
 function yogac()
 animPlayer("amb@world_human_yoga@female@base", "base_c")
+end
+
+---------------------------
+----Liquid Custom Shit-----
+---------------------------
+
+function cpr()
+halfanimPlayer("missheistfbi3b_ig8_2", "cpr_loop_paramedic")
+end
+
+function cpr2()
+animPlayer("missheistfbi3b_ig8_2", "cpr_loop_paramedic")
+end
+
+function pc()
+animPlayer("cellphone@", "cellphone_call_listen_base")
 end
 
 function scared()
