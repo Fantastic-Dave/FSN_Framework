@@ -1478,7 +1478,7 @@
       <handlingName>BUFFALO2</handlingName>
       <fMass value="2000.000000" />
       <fInitialDragCoeff value="0.880000" />
-	  <fDownforceModifier value="1.410000" />
+    <fDownforceModifier value="1.410000" />
       <fPercentSubmerged value="76.000000" />
       <vecCentreOfMassOffset x="0.000000" y="-0.030000" z="0.010000" />
       <vecInertiaMultiplier x="1.170000" y="1.000000" z="1.550000" />
@@ -1488,12 +1488,12 @@
       <fDriveInertia value="1.000000" />
       <fClutchChangeRateScaleUpShift value="1.900000" />
       <fClutchChangeRateScaleDownShift value="1.900000" />
-      <fInitialDriveMaxFlatVel value="185.000000" />
+      <fInitialDriveMaxFlatVel value="155.000000" />
       <fBrakeForce value="0.265000" />
       <fBrakeBiasFront value="0.519350" />
       <fHandBrakeForce value="0.800000" />
       <fSteeringLock value="33.400000" />
-      <fTractionCurveMax value="1.420000" />
+      <fTractionCurveMax value="1.480000" />
       <fTractionCurveMin value="1.154000" />
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.137000" />
