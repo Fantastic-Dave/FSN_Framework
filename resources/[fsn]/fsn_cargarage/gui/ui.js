@@ -47,7 +47,7 @@ $( function() {
 					} else if(val.veh_status == 2) {
 						var color = 'red'
 						var stat = 'IMPOUNDED'
-						var price = 8000
+						var price = 2500
 					} else if (val.veh_status == 3) {
 						var color = 'black'
 						var stat = 'REPO/SEIZE'

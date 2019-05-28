@@ -141,7 +141,7 @@ local function fsn_SpawnVehicle(vehid)
 		if veh.veh_status == 0 then
 			TriggerEvent('fsn_bank:change:walletMinus', 50)
 		elseif veh.veh_status == 2 then
-			TriggerEvent('fsn_bank:change:walletMinus', 8000)
+			TriggerEvent('fsn_bank:change:walletMinus', 2500)
 		end
 
 		local model = GetHashKey(veh.veh_name)
