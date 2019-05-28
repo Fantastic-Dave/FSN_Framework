@@ -19986,7 +19986,7 @@
         <Item type="" />
       </SubHandlingData>
     </Item>
-	<Item type="CHandlingData">
+  <Item type="CHandlingData">
       <handlingName>RLOADER2</handlingName>
       <fMass value="2600.000000" />
       <fInitialDragCoeff value="2.450000" />
@@ -19994,12 +19994,12 @@
       <vecCentreOfMassOffset x="0.000000" y="0.405000" z="0.144000" />
       <vecInertiaMultiplier x="0.830000" y="0.830000" z="1.010000" />
       <fDriveBiasFront value="0.000000" />
-      <nInitialDriveGears value="4" />
-      <fInitialDriveForce value="0.210100" />
+      <nInitialDriveGears value="5" />
+      <fInitialDriveForce value="0.250100" />
       <fDriveInertia value="0.900000" />
-      <fClutchChangeRateScaleUpShift value="1.200000" />
+      <fClutchChangeRateScaleUpShift value="1.300000" />
       <fClutchChangeRateScaleDownShift value="1.700000" />
-      <fInitialDriveMaxFlatVel value="133.000000" />
+      <fInitialDriveMaxFlatVel value="163.000000" />
       <fBrakeForce value="0.171000" />
       <fBrakeBiasFront value="0.614200" />
       <fHandBrakeForce value="0.600000" />
