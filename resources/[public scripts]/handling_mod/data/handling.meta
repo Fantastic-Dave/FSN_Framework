@@ -2987,26 +2987,26 @@
       <handlingName>ELEGY2</handlingName>
       <fMass value="1700.000000" />
       <fInitialDragCoeff value="0.390000" />
-	  <fDownforceModifier value="1.390000" />
+    <fDownforceModifier value="1.390000" />
       <fPercentSubmerged value="76.000000" />
       <vecCentreOfMassOffset x="0.000000" y="-0.132000" z="0.017000" />
       <vecInertiaMultiplier x="1.150000" y="1.000000" z="1.680000" />
       <fDriveBiasFront value="0.155000" />
       <nInitialDriveGears value="6" />
-      <fInitialDriveForce value="0.257000" />
+      <fInitialDriveForce value="0.247000" />
       <fDriveInertia value="1.020000" />
       <fClutchChangeRateScaleUpShift value="4.700000" />
       <fClutchChangeRateScaleDownShift value="4.600000" />
-      <fInitialDriveMaxFlatVel value="200.000000" />
+      <fInitialDriveMaxFlatVel value="170.000000" />
       <fBrakeForce value="0.295000" />
       <fBrakeBiasFront value="0.461250" />
       <fHandBrakeForce value="0.800000" />
       <fSteeringLock value="32.400000" />
-      <fTractionCurveMax value="1.440000" />
-      <fTractionCurveMin value="1.173000" />
+      <fTractionCurveMax value="1.540000" />
+      <fTractionCurveMin value="1.273000" />
       <fTractionCurveLateral value="16.400000" />
       <fTractionSpringDeltaMax value="0.133000" />
-      <fLowSpeedTractionLossMult value="0.190000" />
+      <fLowSpeedTractionLossMult value="0.490000" />
       <fCamberStiffnesss value="0.000000" />
       <fTractionBiasFront value="0.483900" />
       <fTractionLossMult value="1.330000" />

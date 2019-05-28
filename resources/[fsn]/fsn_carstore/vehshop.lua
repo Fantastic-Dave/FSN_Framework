@@ -88,7 +88,7 @@ local vehshop = {
 				{name = "Comet Retro", costs = 200000, description = {}, model = "comet3"},
 				{name = "Coquette", costs = 200000, description = {}, model = "coquette"},
 				{name = "Drift Tampa", costs = 995000, description = {}, model = "tampa2"},
-				{name = "Elegy", costs = 150000, description = {}, model = "elegy2"},
+				{name = "Elegy", costs = 130000, description = {}, model = "elegy2"},
 				{name = "Elegy Sport", costs = 175000, description = {}, model = "elegy"},
 				{name = "Feltzer 2", costs = 195000, description = {}, model = "feltzer2"},
 				{name = "Flash GT", costs = 235000, description = {}, model = "flashgt"},
