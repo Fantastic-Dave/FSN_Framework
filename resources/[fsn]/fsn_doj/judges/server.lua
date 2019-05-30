@@ -53,7 +53,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 				TriggerEvent('fsn_police:ticket', tonumber(split[3]), tonumber(split[4]))
 			end
 			if split[2] == 'jail' then
-				TriggerEvent('fsn_jail:sendsuspect', source, tonumber(split[3]), tonumber(split[4]))
+				TriggerEvent('fsn_jail:sendsuspect', source, tonumber(split[3]), tonumber(split[4])*60)
 			end
 			if split[3] == 'license' then
 				if split[3] == 'check' then
