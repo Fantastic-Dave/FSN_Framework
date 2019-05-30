@@ -145,7 +145,7 @@
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>police2</audioNameHash>
+      <audioNameHash>FUGITIVE</audioNameHash>
       <layout>LAYOUT_STANDARD</layout>
       <coverBoundOffsets>BUFFALO_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
@@ -275,7 +275,7 @@
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>POLICE3</audioNameHash>
+      <audioNameHash>BALLER2</audioNameHash>
       <layout>LAYOUT_STD_HIGHWINDOW</layout>
       <coverBoundOffsets>GRESLEY_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
@@ -405,7 +405,7 @@
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>SHERIFF2</audioNameHash>
+      <audioNameHash>BALLER2</audioNameHash>
       <layout>LAYOUT_RANGER</layout>
       <coverBoundOffsets>SHERIFF2_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
@@ -528,7 +528,7 @@
       <animConvRoofName>null</animConvRoofName>
       <animConvRoofWindowsAffected />
       <ptfxAssetName>null</ptfxAssetName>
-      <audioNameHash>police3</audioNameHash>
+      <audioNameHash>BALLER3</audioNameHash>
       <layout>LAYOUT_STANDARD</layout>
       <coverBoundOffsets>POLICE3_COVER_OFFSET_INFO</coverBoundOffsets>
       <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
