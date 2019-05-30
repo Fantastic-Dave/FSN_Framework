@@ -57,7 +57,7 @@ local pd_cars = {
   --------------------
   [2001] = "2015polstang",
   [2002] = "ghispo2",
-  [2002] = "plimo",
+  [2003] = "plimo",
 }
 
 local emotes = {
