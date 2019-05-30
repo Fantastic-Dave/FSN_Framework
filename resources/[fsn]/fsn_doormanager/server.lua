@@ -53,6 +53,10 @@ local policeDoors = {
   [26] = { ["objName"] = -131296141, ["x"]= 470.339, ["y"]=-993.660, ["z"]=25.086,["locked"]= true,["txtX"]=470.345,["txtY"]=-994.923,["txtZ"]=24.914},
   -- PD lower jailing room
   [27] = { ["objName"] = -131296141, ["x"]= 469.465, ["y"]=-987.247, ["z"]=25.086,["locked"]= true,["txtX"]=470.668,["txtY"]=-987.193,["txtZ"]=24.914},
+  --Paleto Bay YMAP Cell Door
+  [28] = { ["objName"] = 631614199, ["x"]= -434.835, ["y"]= 6003.869,["z"]= 31.8661,["locked"]= true,["txtX"]=461.806,["txtY"]=-993.308,["txtZ"]=25.064},
+  --Paleto Bay YMAP MDT room
+  [29] = { ["objName"] = -1765048490, ["x"]= -440.675, ["y"]= 6008.023,["z"]= 32.052,["locked"]= true,["txtX"]=461.806,["txtY"]=-993.308,["txtZ"]=25.064},
 }
 local propertyDoors = {}
 
