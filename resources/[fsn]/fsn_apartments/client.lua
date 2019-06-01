@@ -277,7 +277,7 @@ Citizen.CreateThread(function()
 				end
 					
 				-- spawn outside of appt
-				if GetDistanceBetweenCoords(leave.x, leave.y, leave.z, GetEntityCoords(GetPlayerPed(-1)), true) < 20 then
+				if GetDistanceBetweenCoords(leave.x, leave.y, leave.z, GetEntityCoords(GetPlayerPed(-1)), true) > 30 then
 					if inInstance() then
 						SetEntityCoords(GetPlayerPed(-1), apartments[myRoomNumber].x, apartments[myRoomNumber].y, apartments[myRoomNumber].z)
 						FreezeEntityPosition(GetPlayerPed(-1), true)
@@ -309,8 +309,9 @@ function EnterRoom(id)
 	SetEntityCoords(GetPlayerPed(-1), 152.09986877441 , -1004.7946166992, -98.999984741211)
 	DoScreenFadeIn(3000)
 	instanceMe(true)
-	inappt = true
 	FreezeEntityPosition(GetPlayerPed(-1), false)
+	Citizen.Wait(1000)
+	inappt = true
 end
 
 ----------------------------------------------- character creation
