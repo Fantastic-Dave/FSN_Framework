@@ -53,10 +53,22 @@ local policeDoors = {
   [26] = { ["objName"] = -131296141, ["x"]= 470.339, ["y"]=-993.660, ["z"]=25.086,["locked"]= true,["txtX"]=470.345,["txtY"]=-994.923,["txtZ"]=24.914},
   -- PD lower jailing room
   [27] = { ["objName"] = -131296141, ["x"]= 469.465, ["y"]=-987.247, ["z"]=25.086,["locked"]= true,["txtX"]=470.668,["txtY"]=-987.193,["txtZ"]=24.914},
-  --Paleto Bay YMAP Cell Door
-  [28] = { ["objName"] = 631614199, ["x"]= -434.835, ["y"]= 6003.869,["z"]= 31.8661,["locked"]= true,["txtX"]=461.806,["txtY"]=-993.308,["txtZ"]=25.064},
-  --Paleto Bay YMAP MDT room
-  [29] = { ["objName"] = -1765048490, ["x"]= -440.675, ["y"]= 6008.023,["z"]= 32.052,["locked"]= true,["txtX"]=461.806,["txtY"]=-993.308,["txtZ"]=25.064},
+  -- Paleto Bay YMAP Cell Door
+  [28] = { ["objName"] = 631614199, ["x"]= -433.910, ["y"]= 6004.791,["z"]= 31.866,["locked"]= true,["txtX"]=-434.835,["txtY"]=6003.869,["txtZ"]=31.8661},
+  -- Paleto Bay YMAP MDT room
+  [29] = { ["objName"] = -1765048490, ["x"]= -440.675, ["y"]= 6008.023,["z"]= 32.052,["locked"]= true,["txtX"]=-440.675,["txtY"]=6008.023,["txtZ"]=32.052},
+  -- Prison Gate Right
+  [30] = { ["objName"] = 741314661, ["x"]= 1799.610, ["y"]= 2616.975, ["z"]= 44.599,["locked"]= true,["txtX"]= 1799.610,["txtY"]=2616.975,["txtZ"]=46.599},
+  --Prison Tower Left
+  [31] = { ["objName"] = 741314661, ["x"]= 1830.133, ["y"]= 2703.500, ["z"]= 44.443,["locked"]= true,["txtX"]= 1830.133,["txtY"]=2703.500,["txtZ"]=44.443},
+  -- Prison Tower Right
+  [32] = { ["objName"] = 741314661, ["x"]= 1835.287, ["y"]= 2689.103, ["z"]= 44.443,["locked"]= true,["txtX"]= 1835.287,["txtY"]=2689.103,["txtZ"]=44.443},
+  -- Prison Tower
+  [33] = { ["objName"] = -1033001619, ["x"]= 1845.789, ["y"]= 2698.620,["z"]= 45.955,["locked"]= true,["txtX"]=1845.789,["txtY"]=2698.620,["txtZ"]=45.955},
+  -- Paleto SO Right Door (If Looking From The Inside)
+  [34] = { ["objName"] = -2023754432 , ["x"]= -440.987, ["y"]= 6012.764, ["z"]= 31.866,["locked"]= true,["txtX"]= -441.730,["txtY"]=6011.900,["txtZ"]=32.066},
+  -- Paleto SO Left Door (If Looking From The Inside)
+  [35] = { ["objName"] = -2023754432 , ["x"]= -442.826, ["y"]= 6010.925, ["z"]= 31.866,["locked"]= true,["txtX"]= -442.100,["txtY"]=6011.570,["txtZ"]=32.066},
 }
 local propertyDoors = {}
 
