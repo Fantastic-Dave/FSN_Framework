@@ -199,7 +199,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-		if HasHandcuffs() and not exports["fsn_ems"]:fsn_IsDead() and not IsPedInAnyVehicle(GetPlayerPed(-1)) then
+		if HasHandcuffs() and not exports["fsn_ems"]:fsn_IsDead() and not IsPedInAnyVehicle(GetPlayerPed(-1)) and not exports["fsn_apartments"]:inInstance() then
 			for id = 0, 68 do
 				if NetworkIsPlayerActive(id) then
 				  local ped = GetPlayerPed(id)
