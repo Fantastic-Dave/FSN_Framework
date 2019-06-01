@@ -42,6 +42,7 @@ local pd_cars = {
   [106] = "leosilv",
   [107] = "pdbike",
   [108] = "pbus",
+  [109] = "Predator",	
   --------------------
   -- UNMARKED
   --------------------
