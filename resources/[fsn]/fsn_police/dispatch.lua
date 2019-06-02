@@ -71,6 +71,12 @@ local actions = {
     reward = 500,
 	blip = 103
   },
+  [13] = {
+    name = 'Suspicious Vehicle',
+    tencode = '10-94',
+    reward = 500,
+	blip = 147
+  },
 }
 local dispatch_calls = {}
 local disp_enable = false
