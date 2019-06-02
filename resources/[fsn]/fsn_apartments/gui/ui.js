@@ -5,10 +5,10 @@
     Additional help from lowheartrate, TheStonedTurtle, and Briglair.  
 
 --------------------------------------------------------------------------*/
-var items = false
+var weapons = false
 $( function() {
     // Adds all of the correct button actions 
-    //init();
+    init();
 
     // Gets the actionmenu div container 
     var actionContainer = $( "#actionmenu" );
@@ -16,63 +16,12 @@ $( function() {
     // Listens for NUI messages from Lua 
     window.addEventListener( 'message', function( event ) {
         var item = event.data;
-        if (item.type == 'init') {
-			items = item.items
-		}
-		if (item.type == 'inventory') {
-			updateInventory(item.inventory);
-		}
+        
         // Show the menu 
         if ( item.showmenu ) {
             ResetMenu()
+			weapons = item.weapons
             actionContainer.show();
-			if (item.vehicle) {
-				$('#vehiclebutton').show()
-			} else {
-				$('#vehiclebutton').hide()
-			}
-			if (item.lookingatvehicle) {
-				$('#vehicleinvbutton').show()
-			} else {
-				$('#vehicleinvbutton').hide()
-			}
-			if (item.police) {
-				$('#policebutton').show()
-				if (item.pdcommand) {
-					$('#pdcommandbutton').show()					
-				} else {
-					$('#pdcommandbutton').hide()
-				}
-			} else {
-				$('#policebutton').hide()
-				$('#pdcommandbutton').hide()
-			}
-			if (item.ems) {
-				$('#emsbutton').show()
-				if (item.emscommand) {
-					$('#emscommandbutton').show()					
-				} else {
-					$('#emscommandbutton').hide()
-				}
-			} else {
-				$('#emsbutton').hide()
-				$('#emscommandbutton').hide()
-			}
-			
-			if (item.dead) {
-				$('#phonebutton').hide()
-				$('#licensebutton').hide()
-				$('#inventorybutton').hide()
-				$('#vehiclebutton').hide()
-				$('#policebutton').hide()
-				$('#pdcommandbutton').hide()
-				$('#emsbutton').hide()
-				$('#emscommandbutton').hide()
-			} else {
-				$('#phonebutton').show()
-				$('#licensebutton').show()
-				$('#inventorybutton').show()
-			}
         }
 
         // Hide the menu 
@@ -81,32 +30,6 @@ $( function() {
         }
     } );
 } )
-
-function updateInventory(inv) {
-	$('#inventorysubmenu').html('');
-	$('#invsubmenus').html('')
-	var shit = document.querySelectorAll('[data-spawn="inventory"]')
-	for (var i = 0; i < shit.length; i++) {
-	  var item = shit[i]; 
-	  item.remove();
-	}
-	inv = JSON.parse(inv)
-	$('#exitbutton').remove()
-	jQuery.each(inv, function(i, val) {
-		if (i == 'dirty_money') {
-			$('#inventorysubmenu').append('<button class="menuoption" data-sub="'+i+'">'+val.display_name+' ($'+val.amount+') </button>')
-			$('#actionmenu').append('<div id="'+i+'" data-spawn="inventory" data-parent="inventorysubmenu" style="display: none;"><button class="menuoption" data-action="item_give" data-item="'+i+'">GIVE</button><button class="menuoption" data-action="item_drop" data-item="'+i+'">DROP</button></div>')
-		} else if (i == 'handcuffs') {
-			$('#inventorysubmenu').append('<button class="menuoption" data-sub="'+i+'">['+val.amount+'x] '+val.display_name+'</button>')
-			$('#actionmenu').append('<div id="'+i+'" data-spawn="inventory" data-parent="inventorysubmenu" style="display: none;"><button class="menuoption" data-sub="handcuffs-menu" data-item="'+i+'">USE</button><button class="menuoption" data-action="item_give" data-item="'+i+'">GIVE</button><button class="menuoption" data-action="item_drop" data-item="'+i+'">DROP</button></div>')
-		} else {
-			$('#inventorysubmenu').append('<button class="menuoption" data-sub="'+i+'">['+val.amount+'x] '+val.display_name+'</button>')
-			$('#actionmenu').append('<div id="'+i+'" data-spawn="inventory" data-parent="inventorysubmenu" style="display: none;"><button class="menuoption" data-action="item_use" data-item="'+i+'">USE</button><button class="menuoption" data-action="item_give" data-item="'+i+'">GIVE</button><button class="menuoption" data-action="item_drop" data-item="'+i+'">DROP</button></div>')
-		}
-	});
-	$('#actionmenu').append('<button id="exitbutton" class="menuoption" data-action="exit">Exit</button>')
-	init()
-}
 
 // Hides all div elements that contain a data-parent, in
 // other words, hide all buttons in submenus. 
@@ -122,33 +45,53 @@ function ResetMenu() {
     } );
 }
 
+function parseWeapons(weapons) {
+	$('#weapons').html('');
+	$('#invsubmenus').html('')
+	var shit = document.querySelectorAll('[data-spawn="weapon"]')
+	for (var i = 0; i < shit.length; i++) {
+	  var item = shit[i]; 
+	  item.remove();
+	}
+	$('#exitbutton').remove()
+	weps = JSON.parse(weapons)
+	$('#weapons').append('<button class="menuoption" data-action="weapon-putaway"><b>Store Weapon</b></button>')
+	jQuery.each(weps, function(i, val) {
+		$('#weapons').append('<button class="menuoption" data-sub="'+i+'">'+val.name+'</button>')
+		$('#actionmenu').append('<div id="'+i+'" data-parent="mainmenu" style="display: none;">'+
+			'<button class="menuoption" data-action="wepmenu-info-'+i+'">View Info</button>'+
+			'<button class="menuoption" data-action="wepmenu-info">Equip</button>'+
+		'</div>')
+	});
+	
+	$('#actionmenu').append('<button id="exitbutton" class="menuoption" data-action="exit">Exit</button>')
+	init()
+}
+
+function parseItems(items) {
+	items = JSON.parse(items)
+}
+
 // Configures every button click to use its data-action, or data-sub
 // to open a submenu. 
 function init() {
     // Loops through every button that has the class of "menuoption"
     $( ".menuoption" ).each( function( i, obj ) {
-		
-		// Here I am making modifications for using inventory stuffs n shit
-		if ($(this).attr("data-action") && $(this).attr("data-item")) {
-			$( this ).click( function() { 
-                var data = $( this ).data( "action" );
-				var item = $( this ).data( "item" ); 				
-				
-				$.post('http://fsn_menu/inventoryAction', JSON.stringify({
-					action: data,
-					item: item})
-				);
-				return
-            } )
-		}
-		
+
         // If the button has a data-action, then we set it up so when it is 
         // pressed, we send the data to the lua side. 
         if ( $( this ).attr( "data-action" ) ) {
             $( this ).click( function() { 
                 var data = $( this ).data( "action" ); 
-
-                sendData( "ButtonClick", data ); 
+				console.log(data)
+				spleet = data.split("-")
+				if (spleet[1] == 'info') {
+					weps = JSON.parse(weapons)
+					//console.log(weps[parseInt(spleet[2], 0)])
+					sendData( "weaponInfo", weps[parseInt(spleet[2], 0)]); 
+				} else {
+					sendData( "ButtonClick", data ); 
+				}
             } )
         }
 
@@ -160,6 +103,9 @@ function init() {
                 var element = $( "#" + menu ); 
                 element.show();
                 $( this ).parent().hide();  
+				if (menu == 'weapons') {
+					parseWeapons(weapons);
+				}
             } )
         }
     } );
@@ -167,7 +113,7 @@ function init() {
 
 // Send data to lua for processing.
 function sendData( name, data ) {
-    $.post( "http://fsn_menu/" + name, JSON.stringify( data ), function( datab ) {
+    $.post( "http://fsn_apartments/" + name, JSON.stringify( data ), function( datab ) {
         if ( datab != "ok" ) {
             console.log( datab );
         }            

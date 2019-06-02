@@ -51,6 +51,25 @@ function makeString(l)
 	end
 	return s
 end
+
+function weaponInfo(hash)
+	local weapon = {}
+	local remov = 0
+	for k,v in pairs(myWeapons) do
+		if v.hash == GetSelectedPedWeapon(GetPlayerPed(-1)) then
+			remov = k
+			weapon = v
+			print('getting weapon info for: '..weapon.name)
+		end
+	end
+	if weapon == {} then
+		TriggerEvent('fsn_notify:displayNotification', 'There is no weaponinfo regarding '..GetSelectedPedWeapon(GetPlayerPed(-1))..' contact a developer', 'centerRight', 10000, 'error')
+		RemoveWeaponFromPed(GetPlayerPed(-1), GetSelectedPedWeapon(GetPlayerPed(-1)))
+	else
+		return weapon
+	end
+end
+
 RegisterNetEvent('fsn_criminalmisc:weapons:add')
 AddEventHandler('fsn_criminalmisc:weapons:add', function(hash, ammo)
 	local info = GetWeaponInfo(hash)

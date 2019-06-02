@@ -1,3 +1,11 @@
+<!-- 
+
+	ActionMenu 
+	Created by WolfKnight
+	Additional help from lowheartrate, TheStonedTurtle, and Briglair. 
+
+ -->
+
 <html>
     <head>
         <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
@@ -16,24 +24,21 @@
         		is the same id as the div below. All submenus must also have a data-parent attribute. 
         	 -->
         	<div id="mainmenu">
-				<button id="" class="menuoption" data-sub="weapons">WEAPONS</button>
-				<button id="" class="menuoption" data-sub="inventory">INVENTORY</button>
-				<button id="" class="menuoption" data-sub="other">OTHER</button>
-	
+	            <button class="menuoption" data-sub="weapons">WEAPONS</button>
+	            <button class="menuoption" data-sub="inventory">INVENTORY</button>
+	            <button class="menuoption" data-sub="other">OTHER</button>
 			</div>
-			
+
 			<div id="weapons" data-parent="mainmenu" style="display: none;">
-				<button class="menuoption" data-action="exit">FOR SOME REASON IT BROKE IM SORRY</button> 
+				<button class="menuoption" data-action="button3">LOOKS LIKE I BROKE SOMETHING IM SORRY</button>
 			</div>
-			
 			<div id="inventory" data-parent="mainmenu" style="display: none;">
-				<button class="menuoption" data-action="exit">FOR SOME REASON IT BROKE IM SORRY</button> 
+				<button class="menuoption" data-action="button3">LOOKS LIKE I BROKE SOMETHING IM SORRY</button>
 			</div>
-			
 			<div id="other" data-parent="mainmenu" style="display: none;">
-				<button class="menuoption" data-action="exit">idk what to put here</button> 
+				<button class="menuoption" data-action="button3">idk what to put here</button>
 			</div>
-			
+
 			<!-- Do not remove this or you will not be able to exit the menu --> 
 			<button id="exitbutton" class="menuoption" data-action="exit">Exit</button>
         </div>

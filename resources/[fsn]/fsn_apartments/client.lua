@@ -38,6 +38,7 @@ Citizen.CreateThread(function()
 end)
 
 ------------------------------------------------------------------------------------ actual system
+local menuEnabled = false
 local init = true
 function fsn_drawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
@@ -231,6 +232,52 @@ local cash = {x = 154.14666748047, y = -1006.1190185547, z = -99.0}
 local outfits = {x = 151.8991394043, y = -1001.5586547852, z = -99.0}
 local leave = {x = 151.31465148926, y = -1007.9354858398, z = -98.999969482422}
 
+function ToggleActionMenu()
+	menuEnabled = not menuEnabled
+	if not apptdetails["apt_utils"]["weapons"] then
+		apptdetails["apt_utils"]["weapons"] = {}
+	end
+	if ( menuEnabled ) then
+		SetNuiFocus( true, true )
+		SendNUIMessage({
+			showmenu = true,
+			weapons = json.encode(apptdetails["apt_utils"]["weapons"])
+		})
+	else
+		SetNuiFocus( false )
+		SendNUIMessage({
+			hidemenu = true
+		})
+	end
+end
+
+local last_click = 0
+
+RegisterNUICallback( "weaponInfo", function( data, cb )
+
+	v = data
+	TriggerEvent('chatMessage', '', {255,255,255}, '^1^*WeaponInfo |^0^r '..v.name..' | Registered to: '..v.owner.name..' | Serial: '..v.owner.serial)
+end)
+RegisterNUICallback( "ButtonClick", function( data, cb )
+	if last_click + 1000 > GetNetworkTime() then print('toosoon') return end
+	last_click = GetNetworkTime()
+	if data == 'weapon-putaway' then
+		print 'attempting to put away weapon'
+		ToggleActionMenu()
+		if GetSelectedPedWeapon(GetPlayerPed(-1)) == -1569615261 then
+			TriggerEvent('fsn_notify:displayNotification', 'You cannot store fists...', 'centerRight', 10000, 'error')
+			return
+		end
+		local weapon = exports["fsn_criminalmisc"]:weaponInfo(GetSelectedPedWeapon(GetPlayerPed(-1)))
+		print(json.encode(weapon))
+		table.insert(apptdetails["apt_utils"]["weapons"],#apptdetails["apt_utils"]["weapons"]+1, weapon)
+		TriggerEvent('fsn_criminalmisc:weapons:destroy')
+	elseif( data == "exit" ) then
+		ToggleActionMenu()
+		return
+	end
+end)
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
@@ -239,9 +286,9 @@ Citizen.CreateThread(function()
 				-- storage
 				DrawMarker(25, storage.x, storage.y, storage.z - 0.95, 0, 0, 0, 0, 0, 0, 0.50, 0.50, 10.3, 255, 255, 255, 140, 0, 0, 1, 0, 0, 0, 0)
 				if GetDistanceBetweenCoords(storage.x, storage.y, storage.z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
-					fsn_drawText3D(storage.x, storage.y, storage.z, "[E] access storage\n~r~Not available yet")
+					fsn_drawText3D(storage.x, storage.y, storage.z, "[E] access storage")--\n~r~Not available yet")
 					if IsControlJustPressed(0,38) then
-						print 'accessing storage'
+						ToggleActionMenu()
 					end
 				end
 				
