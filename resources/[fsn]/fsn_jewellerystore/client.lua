@@ -367,7 +367,7 @@ Citizen.CreateThread(function()
 						fsn_drawText3D(case[1],case[2],case[3], 'Looting...')
 						FreezeEntityPosition(GetPlayerPed(-1), true)
 					elseif case.robbed == false then 
-						if true then --exports["fsn_police"]:fsn_getCopAmt() > 2 then
+						if exports["fsn_police"]:fsn_getCopAmt() > 2 then
 							fsn_drawText3D(case[1],case[2],case[3], '[E] Loot Case')
 							if IsControlJustPressed(0,38) then
 								-- e is pressed
