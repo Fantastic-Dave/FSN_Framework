@@ -10,6 +10,22 @@ local banks_payout = {
   [3] = 800000
 }
 
+local canrob = true
+local lastrob = 0
+local currenttime = 0
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(1000)
+		if lastrob == 0 or lastrob+1800 < currenttime then
+			canrob = true
+			TriggerClientEvent('fsn_bankrobbery:timer', -1, canrob)
+		else
+			canrob = false
+			TriggerClientEvent('fsn_bankrobbery:timer', -1, canrob)
+		end
+	end 
+end)
+
 AddEventHandler('fsn_main:money:bank:Add', function(ply, amt)
 	local randomizer = amt / math.random(1,5)
 	banks_payout[1] = banks_payout[1] + randomizer
@@ -31,6 +47,11 @@ AddEventHandler('fsn_bankrobbery:vault:open', function(id)
   TriggerClientEvent('fsn_bankrobbery:openDoor', -1, id)
 end)
 
+RegisterServerEvent('fsn_bankrobbery:start')
+AddEventHandler('fsn_bankrobbery:start', function()
+	
+end)
+
 RegisterServerEvent('fsn_bankrobbery:vault:close')
 AddEventHandler('fsn_bankrobbery:vault:close', function(id)
   print('attempting to close door '..id)
@@ -41,6 +62,7 @@ end)
 RegisterServerEvent('fsn_bankrobbery:init')
 AddEventHandler('fsn_bankrobbery:init', function()
   TriggerClientEvent('fsn_bankrobbery:init', source, vault_doors)
+  TriggerClientEvent('fsn_bankrobbery:timer', source, canrob)
 end)
 
 RegisterServerEvent('fsn_bankrobbery:payout')

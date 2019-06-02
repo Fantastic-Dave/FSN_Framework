@@ -3,6 +3,12 @@ local cracking = false
 local start_time = 0
 local cracking_id = 0
 
+local canrob = false
+RegisterNetEvent('fsn_bankrobbery:timer')
+AddEventHandler('fsn_bankrobbery:timer', function(state)
+	canrob = state
+end)
+
 function fsn_drawText3D(x,y,z, text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
     local px,py,pz=table.unpack(GetGameplayCamCoords())
@@ -377,7 +383,12 @@ Citizen.CreateThread(function()
           end
         else
           if GetDistanceBetweenCoords(door.keypad.x, door.keypad.y, door.keypad.z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
-            if exports['fsn_police']:fsn_getCopAmt() >= 3 then
+            if true then--exports['fsn_police']:fsn_getCopAmt() >= 3 then
+				if not canrob then
+					SetTextComponentFormat("STRING")
+				  AddTextComponentString("~r~A bank has been robbed too recently")
+				  DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+				else
               if not cracking then
                 SetTextComponentFormat("STRING")
                 AddTextComponentString("Press ~INPUT_PICKUP~ to input a code\nPress ~INPUT_LOOK_BEHIND~ to begin cracking")
@@ -450,7 +461,9 @@ Citizen.CreateThread(function()
                 start_time = current_time
                 cracking_id = k
                 cracking = true
+				TriggerServerEvent('fsn_bankrobbery:start')
               end
+			  end
             else
               SetTextComponentFormat("STRING")
               AddTextComponentString("~r~Not enough cops for a heist ("..exports['fsn_police']:fsn_getCopAmt().."/3)")
