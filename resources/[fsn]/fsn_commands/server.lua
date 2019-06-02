@@ -266,9 +266,9 @@ end
 RegisterServerEvent('fsn_commands:me')
 AddEventHandler('fsn_commands:me', function(action, players)
   local source_char = getCharacter(source)
-  local msg = source_char.char_fname..' '..source_char.char_lname..' '..action
+  local msg = action
   for _, ply in pairs(players) do
-    TriggerClientEvent('chatMessage', ply, '', {255,255,255}, msg)
+    TriggerClientEvent('fsn_commands:me:3d', ply, source, msg)
   end
 end)
 

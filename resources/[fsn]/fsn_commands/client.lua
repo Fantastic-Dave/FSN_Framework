@@ -185,6 +185,42 @@ AddEventHandler('fsn_commands:me', function(action)
 	TriggerServerEvent('fsn_commands:me', action, players)
 end)
 
+
+function fsn_drawTextMe3D(x,y,z, text)
+    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
+    local px,py,pz=table.unpack(GetGameplayCamCoords())
+    if onScreen then
+        SetTextScale(0.3, 0.3)
+        SetTextFont(0)
+        SetTextProportional(1)
+        SetTextColour(255, 255, 255, 140)
+        SetTextDropshadow(0, 0, 0, 0, 55)
+        SetTextEdge(2, 0, 0, 0, 150)
+        SetTextDropShadow()
+        SetTextOutline()
+        SetTextEntry("STRING")
+        SetTextCentre(1)
+        AddTextComponentString(text)
+        DrawText(_x,_y)
+    end
+end
+RegisterNetEvent('fsn_commands:me:3d')
+AddEventHandler('fsn_commands:me:3d', function(player, action)
+	Citizen.CreateThread(function()
+		local mestarttime = exports["fsn_main"]:fsn_GetTime()
+		while true do
+			Citizen.Wait(0)
+			local ped = GetPlayerPed(GetPlayerFromServerId())
+			local pos = GetEntityCoords(ped)
+			if mestarttime+8 > exports["fsn_main"]:fsn_GetTime() then
+				fsn_drawTextMe3D(pos.x,pos.y,pos.z, action)
+			else
+				break
+			end
+		end
+	end)
+end)
+
 RegisterNetEvent('fsn_commands:sendxyz')
 AddEventHandler('fsn_commands:sendxyz', function()
   local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
