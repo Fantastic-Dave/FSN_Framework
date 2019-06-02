@@ -6,6 +6,7 @@
 
 --------------------------------------------------------------------------*/
 var items = false
+var atstorage = false
 $( function() {
     // Adds all of the correct button actions 
     //init();
@@ -26,6 +27,11 @@ $( function() {
         if ( item.showmenu ) {
             ResetMenu()
             actionContainer.show();
+			if (item.atstorage) {
+				atstorage = true
+			} else {
+				atstorage = false
+			}
 			if (item.vehicle) {
 				$('#vehiclebutton').show()
 			} else {
@@ -95,13 +101,21 @@ function updateInventory(inv) {
 	jQuery.each(inv, function(i, val) {
 		if (i == 'dirty_money') {
 			$('#inventorysubmenu').append('<button class="menuoption" data-sub="'+i+'">'+val.display_name+' ($'+val.amount+') </button>')
-			$('#actionmenu').append('<div id="'+i+'" data-spawn="inventory" data-parent="inventorysubmenu" style="display: none;"><button class="menuoption" data-action="item_give" data-item="'+i+'">GIVE</button><button class="menuoption" data-action="item_drop" data-item="'+i+'">DROP</button></div>')
+			if (atstorage) {
+				$('#actionmenu').append('<div id="'+i+'" data-spawn="inventory" data-parent="inventorysubmenu" style="display: none;"><button class="menuoption" data-action="item_give" data-item="'+i+'">GIVE</button><button class="menuoption" data-action="item_drop" data-item="'+i+'">DROP</button></div>')
+			} else {
+				$('#actionmenu').append('<div id="'+i+'" data-spawn="inventory" data-parent="inventorysubmenu" style="display: none;"><button class="menuoption" data-action="item_store" data-item="'+i+'">STORE</button><button class="menuoption" data-action="item_give" data-item="'+i+'">GIVE</button><button class="menuoption" data-action="item_drop" data-item="'+i+'">DROP</button></div>')
+			}
 		} else if (i == 'handcuffs') {
 			$('#inventorysubmenu').append('<button class="menuoption" data-sub="'+i+'">['+val.amount+'x] '+val.display_name+'</button>')
 			$('#actionmenu').append('<div id="'+i+'" data-spawn="inventory" data-parent="inventorysubmenu" style="display: none;"><button class="menuoption" data-sub="handcuffs-menu" data-item="'+i+'">USE</button><button class="menuoption" data-action="item_give" data-item="'+i+'">GIVE</button><button class="menuoption" data-action="item_drop" data-item="'+i+'">DROP</button></div>')
 		} else {
 			$('#inventorysubmenu').append('<button class="menuoption" data-sub="'+i+'">['+val.amount+'x] '+val.display_name+'</button>')
-			$('#actionmenu').append('<div id="'+i+'" data-spawn="inventory" data-parent="inventorysubmenu" style="display: none;"><button class="menuoption" data-action="item_use" data-item="'+i+'">USE</button><button class="menuoption" data-action="item_give" data-item="'+i+'">GIVE</button><button class="menuoption" data-action="item_drop" data-item="'+i+'">DROP</button></div>')
+			if (atstorage) {
+				$('#actionmenu').append('<div id="'+i+'" data-spawn="inventory" data-parent="inventorysubmenu" style="display: none;"><button class="menuoption" data-action="item_use" data-item="'+i+'">USE</button><button class="menuoption" data-action="item_give" data-item="'+i+'">GIVE</button><button class="menuoption" data-action="item_drop" data-item="'+i+'">DROP</button></div>')
+			} else {
+				$('#actionmenu').append('<div id="'+i+'" data-spawn="inventory" data-parent="inventorysubmenu" style="display: none;"><button class="menuoption" data-action="item_use" data-item="'+i+'">USE</button><button class="menuoption" data-action="item_store" data-item="'+i+'">STORE</button><button class="menuoption" data-action="item_give" data-item="'+i+'">GIVE</button><button class="menuoption" data-action="item_drop" data-item="'+i+'">DROP</button></div>')
+			}
 		}
 	});
 	$('#actionmenu').append('<button id="exitbutton" class="menuoption" data-action="exit">Exit</button>')
