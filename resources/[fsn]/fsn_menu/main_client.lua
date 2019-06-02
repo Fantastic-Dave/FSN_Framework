@@ -46,59 +46,65 @@ end
 function ToggleActionMenu()
 	menuEnabled = not menuEnabled
 	if ( menuEnabled ) then
-    if not IsPedInAnyVehicle(GetPlayerPed(-1)) then
-      if not IsPedGettingIntoAVehicle(GetPlayerPed(-1)) then
-        FreezeEntityPosition(GetPlayerPed(-1), 0)
-        SetEntityCollision(GetPlayerPed(-1), 1, 1)
-        ClearPedTasks(GetPlayerPed(-1))
-      end
-    end
+		if not IsPedInAnyVehicle(GetPlayerPed(-1)) then
+			if not IsPedGettingIntoAVehicle(GetPlayerPed(-1)) then
+				FreezeEntityPosition(GetPlayerPed(-1), 0)
+				SetEntityCollision(GetPlayerPed(-1), 1, 1)
+				ClearPedTasks(GetPlayerPed(-1))
+			end
+		end
 
 		SetNuiFocus( true, true )
-    if exports.fsn_police:fsn_PDDuty() then
-      if exports.fsn_police:fsn_getPDLevel() > 6 then
-        pdcommand = true
-      else
-        pdcommand = false
-      end
-      police = true
-    else
-      police = false
-      pdcommand = false
-    end
-    if exports.fsn_ems:fsn_EMSDuty() then
-      if exports.fsn_ems:fsn_getEMSLevel() > 6 then
-        emscommand = true
-      else
-        emscommand = false
-      end
-      ems = true
-    else
-      ems = false
-      emscommand = false
-    end
-    if IsPedInAnyVehicle(GetPlayerPed(-1)) then
-      vehicle = true
-      lookingatvehicle = false
-    else
-      vehicle = false
-      local veh = fsn_lookingAt()
-      if DoesEntityExist(veh) then
-  			lookingatvehicle = true
-        vehicleinv = json.encode(exports.fsn_vehiclecontrol:GetVehicleInventory(GetVehicleNumberPlateText(veh)))
-      else
-        lookingatvehicle = false
-      end
-    end
+		if GetDistanceBetweenCoords(151.31591796875, -1003.1566772461, -99.000007629395, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+			atstorage = true
+		else
+			atstorage = false
+		end
+		if exports.fsn_police:fsn_PDDuty() then
+			if exports.fsn_police:fsn_getPDLevel() > 6 then
+				pdcommand = true
+			else
+				pdcommand = false
+			end
+			police = true
+		else
+			police = false
+			pdcommand = false
+		end
+		if exports.fsn_ems:fsn_EMSDuty() then
+			if exports.fsn_ems:fsn_getEMSLevel() > 6 then
+				emscommand = true
+			else
+				emscommand = false
+			end
+			ems = true
+		else
+			ems = false
+			emscommand = false
+		end
+		if IsPedInAnyVehicle(GetPlayerPed(-1)) then
+			vehicle = true
+			lookingatvehicle = false
+		else
+			vehicle = false
+			local veh = fsn_lookingAt()
+			if DoesEntityExist(veh) then
+				lookingatvehicle = true
+				vehicleinv = json.encode(exports.fsn_vehiclecontrol:GetVehicleInventory(GetVehicleNumberPlateText(veh)))
+			else
+				lookingatvehicle = false
+			end
+		end
 		SendNUIMessage({
 			showmenu = true,
-      dead = exports.fsn_ems:fsn_IsDead(),
+			dead = exports.fsn_ems:fsn_IsDead(),
 			vehicle = vehicle,
-      lookingatvehicle = lookingatvehicle,
-      police = police,
-      pdcommand = pdcommand,
-      ems = ems,
-      emscommand = emscommand
+			lookingatvehicle = lookingatvehicle,
+			police = police,
+			pdcommand = pdcommand,
+			ems = ems,
+			emscommand = emscommand,
+			atstorage = atstorage,
 		})
 	else
 		SetNuiFocus( false )
