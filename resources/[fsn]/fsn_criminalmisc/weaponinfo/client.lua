@@ -159,6 +159,13 @@ AddEventHandler('fsn_criminalmisc:weapons:add:unknown', function(hash, ammo)
 	end
 end)
 
+RegisterNetEvent('fsn_criminalmisc:weapons:add:tbl')
+AddEventHandler('fsn_criminalmisc:weapons:add:tbl', function(tbl)
+	table.insert(myWeapons, #myWeapons+1, tbl)
+	TriggerEvent('fsn_notify:displayNotification', 'You got '..tbl.name, 'centerRight', 6000, 'info')
+	TriggerEvent('fsn_criminalmisc:weapons:equip')
+end)
+
 RegisterNetEvent('fsn_criminalmisc:weapons:pickup')
 AddEventHandler('fsn_criminalmisc:weapons:pickup', function(weapon)
 	local info = GetWeaponInfo(weapon.hash)

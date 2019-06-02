@@ -254,9 +254,25 @@ end
 local last_click = 0
 
 RegisterNUICallback( "weaponInfo", function( data, cb )
-
+	if last_click + 5000 > GetNetworkTime() then print('toosoon') return end
 	v = data
 	TriggerEvent('chatMessage', '', {255,255,255}, '^1^*WeaponInfo |^0^r '..v.name..' | Registered to: '..v.owner.name..' | Serial: '..v.owner.serial)
+end)
+
+RegisterNUICallback( "weaponEquip", function( data, cb )
+	if last_click + 5000 > GetNetworkTime() then print('toosoon') return end
+	
+	for key, wep in pairs(apptdetails["apt_utils"]["weapons"]) do
+		if wep.name == data.name then
+			TriggerEvent('fsn_criminalmisc:weapons:add:tbl', apptdetails["apt_utils"]["weapons"][key])
+			TriggerEvent('fsn_notify:displayNotification', 'You equipped '..wep.name, 'centerRight', 6000, 'success')
+			table.remove(apptdetails["apt_utils"]["weapons"], key)
+			ToggleActionMenu()
+			ExecuteCommand('save')
+			saveApartment()
+			break
+		end
+	end
 end)
 RegisterNUICallback( "ButtonClick", function( data, cb )
 	if last_click + 1000 > GetNetworkTime() then print('toosoon') return end
@@ -272,6 +288,8 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
 		print(json.encode(weapon))
 		table.insert(apptdetails["apt_utils"]["weapons"],#apptdetails["apt_utils"]["weapons"]+1, weapon)
 		TriggerEvent('fsn_criminalmisc:weapons:destroy')
+		saveApartment()
+		ExecuteCommand('save')
 	elseif( data == "exit" ) then
 		ToggleActionMenu()
 		return

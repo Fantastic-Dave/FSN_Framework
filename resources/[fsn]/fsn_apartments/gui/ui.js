@@ -31,6 +31,12 @@ $( function() {
     } );
 } )
 
+var filterInt = function(value) {
+  if (/^(-|\+)?(\d+|Infinity)$/.test(value))
+    return Number(value);
+  return NaN;
+}
+
 // Hides all div elements that contain a data-parent, in
 // other words, hide all buttons in submenus. 
 function ResetMenu() {
@@ -60,7 +66,7 @@ function parseWeapons(weapons) {
 		$('#weapons').append('<button class="menuoption" data-sub="'+i+'">'+val.name+'</button>')
 		$('#actionmenu').append('<div id="'+i+'" data-parent="mainmenu" style="display: none;">'+
 			'<button class="menuoption" data-action="wepmenu-info-'+i+'">View Info</button>'+
-			'<button class="menuoption" data-action="wepmenu-info">Equip</button>'+
+			'<button class="menuoption" data-action="wepmenu-equip-'+i+'">Equip</button>'+
 		'</div>')
 	});
 	
@@ -85,10 +91,13 @@ function init() {
                 var data = $( this ).data( "action" ); 
 				console.log(data)
 				spleet = data.split("-")
-				if (spleet[1] == 'info') {
+				if (spleet[0] == 'wepmenu' && spleet[1] == 'info') {
 					weps = JSON.parse(weapons)
 					//console.log(weps[parseInt(spleet[2], 0)])
-					sendData( "weaponInfo", weps[parseInt(spleet[2], 0)]); 
+					sendData( "weaponInfo", weps[filterInt(spleet[2])]); 
+				} else if (spleet[0] == 'wepmenu' && spleet[1] == 'equip') {
+					weps = JSON.parse(weapons)
+					sendData( "weaponEquip", weps[filterInt(spleet[2])]); 
 				} else {
 					sendData( "ButtonClick", data ); 
 				}
