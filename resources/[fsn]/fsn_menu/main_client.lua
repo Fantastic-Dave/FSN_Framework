@@ -55,11 +55,6 @@ function ToggleActionMenu()
 		end
 
 		SetNuiFocus( true, true )
-		if GetDistanceBetweenCoords(151.31591796875, -1003.1566772461, -99.000007629395, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
-			atstorage = true
-		else
-			atstorage = false
-		end
 		if exports.fsn_police:fsn_PDDuty() then
 			if exports.fsn_police:fsn_getPDLevel() > 6 then
 				pdcommand = true
@@ -104,7 +99,7 @@ function ToggleActionMenu()
 			pdcommand = pdcommand,
 			ems = ems,
 			emscommand = emscommand,
-			atstorage = atstorage,
+			atstorage = exports["fsn_apartments"]:isNearStorage(),
 		})
 	else
 		SetNuiFocus( false )
@@ -645,9 +640,64 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
 
 end )
 
+function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
+  SetTextFont(font)
+  SetTextProportional(0)
+  SetTextScale(scale, scale)
+  SetTextColour(r, g, b, a)
+  SetTextDropShadow(0, 0, 0, 0,255)
+  SetTextEdge(1, 0, 0, 0, 255)
+  SetTextDropShadow()
+  SetTextOutline()
+  SetTextCentre(centre)
+  SetTextEntry("STRING")
+  AddTextComponentString(text)
+  DrawText(x , y)
+end
+
 RegisterNUICallback( "inventoryAction", function(data, cb)
 	if data.action == 'item_use' then
 		TriggerEvent('fsn_inventory:item:use', data.item)
+	elseif data.action == 'item_store' then
+		ToggleActionMenu()
+		Citizen.CreateThread(function()
+			DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 10)
+			local editOpen = true
+			while UpdateOnscreenKeyboard() == 0 or editOpen do
+				Wait(0)
+				drawTxt('How many '..data.item..' would you like to store?',4,1,0.5,0.35,0.6,255,255,255,255)
+				drawTxt('~r~Enter a number value or "all"',4,1,0.5,0.49,0.4,255,255,255,255)
+				if UpdateOnscreenKeyboard() ~= 0 then
+					editOpen = false
+					if UpdateOnscreenKeyboard() == 1 then
+						res = GetOnscreenKeyboardResult()
+						if res == 'all' then
+							TriggerEvent('fsn_apartments:store:item', data.item, exports["fsn_inventory"]:fsn_GetItemAmount(data.item))
+							TriggerEvent('fsn_inventory:item:take', data.item, exports["fsn_inventory"]:fsn_GetItemAmount(data.item))
+						else
+							if tonumber(res) then
+								res = tonumber(res)
+								if res > 0 and res < 500 then
+									if res >= exports["fsn_inventory"]:fsn_GetItemAmount(data.item) then
+										TriggerEvent('fsn_apartments:store:item', data.item, res)
+										TriggerEvent('fsn_inventory:item:take', data.item, res)
+										print('trying to store '..res..' x '..data.item)
+										TriggerEvent('fsn_notify:displayNotification', 'You stored '..res..' '..data.item, 'centerLeft', 5000, 'success')
+									else
+										TriggerEvent('fsn_notify:displayNotification', 'You do not have enough', 'centerLeft', 3000, 'error')
+									end
+								else
+									TriggerEvent('fsn_notify:displayNotification', 'Looks to be an issue with the number you entered', 'centerLeft', 3000, 'error')
+								end
+							else
+								TriggerEvent('fsn_notify:displayNotification', 'You didn\'t enter \'all\' or a number.', 'centerLeft', 3000, 'error')
+							end
+						end
+						break
+					end
+				end
+			end
+		end)
 	elseif data.action == 'item_give' then
 		print('you are attempting to GIVE '..data.item)
 	elseif data.action == 'item_drop' then

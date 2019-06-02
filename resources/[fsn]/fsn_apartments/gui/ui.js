@@ -6,6 +6,7 @@
 
 --------------------------------------------------------------------------*/
 var weapons = false
+var inventory = false
 $( function() {
     // Adds all of the correct button actions 
     init();
@@ -21,6 +22,7 @@ $( function() {
         if ( item.showmenu ) {
             ResetMenu()
 			weapons = item.weapons
+			inventory = item.inventory
             actionContainer.show();
         }
 
@@ -53,7 +55,6 @@ function ResetMenu() {
 
 function parseWeapons(weapons) {
 	$('#weapons').html('');
-	$('#invsubmenus').html('')
 	var shit = document.querySelectorAll('[data-spawn="weapon"]')
 	for (var i = 0; i < shit.length; i++) {
 	  var item = shit[i]; 
@@ -61,12 +62,12 @@ function parseWeapons(weapons) {
 	}
 	$('#exitbutton').remove()
 	weps = JSON.parse(weapons)
-	$('#weapons').append('<button class="menuoption" data-action="weapon-putaway"><b>Store Weapon</b></button>')
+	$('#weapons').append('<button class="menuoption" data-action="weapon-putaway" data-spawn="weapon"><b>Store Weapon</b></button>')
 	jQuery.each(weps, function(i, val) {
-		$('#weapons').append('<button class="menuoption" data-sub="'+i+'">'+val.name+'</button>')
-		$('#actionmenu').append('<div id="'+i+'" data-parent="mainmenu" style="display: none;">'+
-			'<button class="menuoption" data-action="wepmenu-info-'+i+'">View Info</button>'+
-			'<button class="menuoption" data-action="wepmenu-equip-'+i+'">Equip</button>'+
+		$('#weapons').append('<button class="menuoption" data-sub="'+i+'" data-spawn="weapon">'+val.name+'</button>')
+		$('#actionmenu').append('<div id="'+i+'" data-parent="mainmenu" style="display: none;" data-spawn="weapon">'+
+			'<button class="menuoption" data-action="wepmenu-info-'+i+'" data-spawn="weapon">View Info</button>'+
+			'<button class="menuoption" data-action="wepmenu-equip-'+i+'" data-spawn="weapon">Equip</button>'+
 		'</div>')
 	});
 	
@@ -75,7 +76,21 @@ function parseWeapons(weapons) {
 }
 
 function parseItems(items) {
-	items = JSON.parse(items)
+	$('#inventory').html('');
+	var shit = document.querySelectorAll('[data-spawn="inventory"]')
+	for (var i = 0; i < shit.length; i++) {
+	  var item = shit[i]; 
+	  item.remove();
+	}
+	$('#exitbutton').remove()
+	weps = JSON.parse(inventory)
+	//$('#inventory').append('<button class="menuoption" data-action="weapon-putaway" data-spawn="inventory"><b>Store Weapon</b></button>')
+	jQuery.each(weps, function(i, val) {
+		$('#inventory').append('<button class="menuoption" data-action="takeItem" data-item="'+i+'" data-spawn="inventory">['+val+'X] '+i+'</button>')
+	});
+	
+	$('#actionmenu').append('<button id="exitbutton" class="menuoption" data-action="exit">Exit</button>')
+	init()
 }
 
 // Configures every button click to use its data-action, or data-sub
@@ -99,7 +114,11 @@ function init() {
 					weps = JSON.parse(weapons)
 					sendData( "weaponEquip", weps[filterInt(spleet[2])]); 
 				} else {
-					sendData( "ButtonClick", data ); 
+					if ($( this ).attr( "data-action" ) == 'takeItem') {
+						sendData( "inventoryTake", $( this ).attr( "data-item" ) ); 
+					} else {
+						sendData( "ButtonClick", data ); 
+					}
 				}
             } )
         }
@@ -114,6 +133,9 @@ function init() {
                 $( this ).parent().hide();  
 				if (menu == 'weapons') {
 					parseWeapons(weapons);
+				}
+				if (menu == 'inventory') {
+					parseItems(inventory);
 				}
             } )
         }

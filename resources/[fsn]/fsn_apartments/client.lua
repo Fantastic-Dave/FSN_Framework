@@ -237,11 +237,15 @@ function ToggleActionMenu()
 	if not apptdetails["apt_utils"]["weapons"] then
 		apptdetails["apt_utils"]["weapons"] = {}
 	end
+	if not apptdetails["apt_utils"]["inventory"] then
+		apptdetails["apt_utils"]["inventory"] = {}
+	end
 	if ( menuEnabled ) then
 		SetNuiFocus( true, true )
 		SendNUIMessage({
 			showmenu = true,
-			weapons = json.encode(apptdetails["apt_utils"]["weapons"])
+			weapons = json.encode(apptdetails["apt_utils"]["weapons"]),
+			inventory = json.encode(apptdetails["apt_utils"]["inventory"])
 		})
 	else
 		SetNuiFocus( false )
@@ -252,6 +256,83 @@ function ToggleActionMenu()
 end
 
 local last_click = 0
+
+RegisterNetEvent('fsn_apartments:store:item')
+AddEventHandler('fsn_apartments:store:item', function(item, amt)
+	if not apptdetails["apt_utils"]["inventory"] then
+		apptdetails["apt_utils"]["inventory"] = {}
+	end
+	apptdetails["apt_utils"]["inventory"][item] = amt
+	saveApartment()
+	ExecuteCommand('save')
+end)
+
+function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
+  SetTextFont(font)
+  SetTextProportional(0)
+  SetTextScale(scale, scale)
+  SetTextColour(r, g, b, a)
+  SetTextDropShadow(0, 0, 0, 0,255)
+  SetTextEdge(1, 0, 0, 0, 255)
+  SetTextDropShadow()
+  SetTextOutline()
+  SetTextCentre(centre)
+  SetTextEntry("STRING")
+  AddTextComponentString(text)
+  DrawText(x , y)
+end
+RegisterNUICallback( "inventoryTake", function( data, cb )
+	if last_click + 5000 > GetNetworkTime() then print('toosoon') return end
+	ToggleActionMenu()
+	Citizen.CreateThread(function()
+		DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 10)
+		local editOpen = true
+		while UpdateOnscreenKeyboard() == 0 or editOpen do
+			Wait(0)
+			drawTxt('How many '..data..' would you like to take?',4,1,0.5,0.35,0.6,255,255,255,255)
+			drawTxt('~r~Enter a number value or "all"',4,1,0.5,0.49,0.4,255,255,255,255)
+			if UpdateOnscreenKeyboard() ~= 0 then
+				editOpen = false
+				if UpdateOnscreenKeyboard() == 1 then
+					res = GetOnscreenKeyboardResult()
+					if res == 'all' then
+						--TriggerEvent('fsn_apartments:store:item', data.item, exports["fsn_inventory"]:fsn_GetItemAmount())
+						TriggerEvent('fsn_inventory:item:add', data, apptdetails["apt_utils"]["inventory"][data])
+						--table.remove(apptdetails["apt_utils"]["inventory"], data)
+						apptdetails["apt_utils"]["inventory"][data] = nil
+					else
+						if tonumber(res) then
+							res = tonumber(res)
+							if res > 0 and res < 500 then
+								--TriggerEvent('fsn_apartments:store:item', data.item, res)
+								--print('trying to store '..res..' x '..data.item)
+								if res <= apptdetails["apt_utils"]["inventory"][data] then
+									if apptdetails["apt_utils"]["inventory"][data] == res then
+										TriggerEvent('fsn_inventory:item:add', data, res)
+										--table.remove(apptdetails["apt_utils"]["inventory"], data)
+										apptdetails["apt_utils"]["inventory"][data] = nil
+									else
+										TriggerEvent('fsn_inventory:item:add', data, res)
+										apptdetails["apt_utils"]["inventory"][data] = apptdetails["apt_utils"]["inventory"][data] - res
+									end
+								else
+									TriggerEvent('fsn_notify:displayNotification', 'There is not this many stored', 'centerLeft', 3000, 'error')
+								end
+							else
+								TriggerEvent('fsn_notify:displayNotification', 'Looks to be an issue with the number you entered', 'centerLeft', 3000, 'error')
+							end
+						else
+							TriggerEvent('fsn_notify:displayNotification', 'You didn\'t enter \'all\' or a number.', 'centerLeft', 3000, 'error')
+						end
+					end
+					saveApartment()
+					ExecuteCommand('save')
+					break
+				end
+			end
+		end
+	end)
+end)
 
 RegisterNUICallback( "weaponInfo", function( data, cb )
 	if last_click + 5000 > GetNetworkTime() then print('toosoon') return end
@@ -295,6 +376,10 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
 		return
 	end
 end)
+local instorage = false 
+function isNearStorage()
+	return instorage 
+end
 
 Citizen.CreateThread(function()
 	while true do
@@ -308,6 +393,9 @@ Citizen.CreateThread(function()
 					if IsControlJustPressed(0,38) then
 						ToggleActionMenu()
 					end
+					instorage = true
+				else
+					instorage = false
 				end
 				
 				-- money

@@ -16,4 +16,5 @@ server_script 'server.lua'
 -- exports
 exports {
 	"inInstance",
+	"isNearStorage"
 }
