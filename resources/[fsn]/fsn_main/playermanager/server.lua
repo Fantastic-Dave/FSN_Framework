@@ -8,13 +8,13 @@ AddEventHandler('playerConnecting', function(playername, setKickReason)
     identity = GetPlayerIdentifiers(source)
     print(':FSN: '..playername..' is connecting with steamid '..identity[1])
 	if not string.find(identity[1], "steam") then
-		DropPlayer(source, ':FSN: james does not like your ?steamid?, try again')
-		setKickReason(':FSN: james does not like your ?steamid?, try again')
+		DropPlayer(source, 'Restart FiveM with Steam running to join.')
+		setKickReason('Restart FiveM with Steam running to join.')
 		CancelEvent()
 	end
 	if string.find(identity[1], "license") then
-		DropPlayer(source, ':FSN: james does not like your ?steamid?, try again')
-		setKickReason(':FSN: james does not like your ?steamid?, try again')
+		DropPlayer(source, 'Restart FiveM with Steam running to join.')
+		setKickReason('Restart FiveM with Steam running to join.')
 		CancelEvent()
 	end
     MySQL.Async.fetchAll("SELECT * FROM fsn_users WHERE steamid = '"..identity[1].."'", {}, function(user)
