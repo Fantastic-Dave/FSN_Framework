@@ -130,6 +130,11 @@ end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- MISC COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent('fsn_commands:window')
+AddEventHandler('fsn_commands:window', function()
+	RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0)
+end)
+
 RegisterNetEvent('fsn_commands:hc:takephone')
 AddEventHandler('fsn_commands:hc:takephone', function()
 	TriggerEvent('fsn_notify:displayNotification', 'Your phone has been taken!', 'centerRight', 8000, 'success')

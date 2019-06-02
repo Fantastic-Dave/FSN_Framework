@@ -450,6 +450,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- MISC COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/window' or split[1] == '/win' then
+	TriggerClientEvent('fsn_commands:window', source)
+  end
   if split[1] == '/clear' or split[1] == '/104' then
 	TriggerClientEvent('fsn_main:blip:clear', source)
   end
