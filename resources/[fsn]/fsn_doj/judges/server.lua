@@ -67,7 +67,8 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 				end
 				if split[3] == 'infractions' then
 					if split[4] == 'set' then
-					
+						TriggerClientEvent('fsn_licenses:setinfractions', split[5], split[6], tonumber(split[7]))
+						TriggerClientEvent('fsn_notify:displayNotification', split[5], ':FSN: A judge ('..source..') set your '..split[6]..' license infractions to '..split[7], 'centerLeft', 8000, 'info')
 					end
 					if split[4] == 'add' then
 					
