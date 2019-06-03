@@ -30,8 +30,8 @@ AddEventHandler('fsn_jobs:paycheck', function()
     TriggerEvent('fsn_bank:change:bankAdd', 350)
     TriggerEvent('fsn_notify:displayNotification', 'Salary: $350', 'centerLeft', 5000, 'info')
   elseif curjob == 'Mechanic' then
-    TriggerEvent('fsn_bank:change:bankAdd', 250)
-    TriggerEvent('fsn_notify:displayNotification', 'Salary: $250', 'centerLeft', 5000, 'info')
+    TriggerEvent('fsn_bank:change:bankAdd', 200)
+    TriggerEvent('fsn_notify:displayNotification', 'Salary: $200', 'centerLeft', 5000, 'info')
   elseif curjob == 'Taxi Driver' then
     TriggerEvent('fsn_bank:change:bankAdd', 150)
     TriggerEvent('fsn_notify:displayNotification', 'Salary: $100', 'centerLeft', 5000, 'info')
