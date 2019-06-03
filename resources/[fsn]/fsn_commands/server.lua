@@ -130,6 +130,7 @@ local emotes = {
     ["pee"] = {"misscarsteal2peeing", "peeing_loop"},
     ["poo"] = {"missfbi3ig_0", "shit_loop_trev"},
     ["fish"] = {"anim@mp_player_intcelebrationfemale@find_the_fish", "find_the_fish"},
+    ["cpr2"] = {"missheistfbi3b_ig8_2", "cpr_loop_paramedic"},
   },
   halfanim = {
     ["wave1"] = {"random@car_thief@victimpoints_ig_3", "arms_waving"},
@@ -160,6 +161,7 @@ local emotes = {
     ["gang1"] = {"mp_player_int_uppergang_sign_a", "mp_player_int_gang_sign_a"},
     ["gang2"] = {"mp_player_int_uppergang_sign_b", "mp_player_int_gang_sign_b"},
     ["thumbsdown"] = {"anim@arena@celeb@flat@solo@no_props@", "thumbs_down_a_player_a"},
+    ["cpr1"] = {"missheistfbi3b_ig8_2", "cpr_loop_paramedic"},
     --["fapping"] = {"switch@trevor@jerking_off", "trev_jerking_off_loop"},
     ["shakefist"] = {"amb@code_human_in_car_mp_actions@dance@bodhi@ds@base", "idle_a_fp"},
   }
