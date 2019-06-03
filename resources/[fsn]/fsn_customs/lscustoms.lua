@@ -926,9 +926,9 @@ local lsc = {
 			name = "transmission",
 			buttons = {
 				{name = "Stock Transmission",mod = -1,modtype =13, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Street Transmission",mod = false,modtype =13, costs = 300, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Sports Transmission",mod = 1,modtype =13, costs = 1000, description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Race Transmission",mod = 2,modtype =13, costs = 2000, description = "", centre = 0, font = 0, scale = 0.4}
+				{name = "Street Transmission",mod = false,modtype =13, costs = 500, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Sports Transmission",mod = 1,modtype =13, costs = 1500, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Race Transmission",mod = 2,modtype =13, costs = 3000, description = "", centre = 0, font = 0, scale = 0.4}
 			}
 		}
 		,
@@ -1253,9 +1253,9 @@ local lsc = {
 		name = "brakes",
 		buttons = {
 			{name = "Stock Brakes",modtype = 12, mod = -1, costs = 150, description = "", centre = 0, font = 0, scale = 0.4},
-			{name = "Street Brakes",modtype = 12, mod = false, costs = 400, description = "", centre = 0, font = 0, scale = 0.4},
-			{name = "Sport Brakes",modtype = 12, mod = 1, costs = 800, description = "", centre = 0, font = 0, scale = 0.4},
-			{name = "Race Brakes",modtype = 12, mod = 2, costs = 1200, description = "", centre = 0, font = 0, scale = 0.4}
+			{name = "Street Brakes",modtype = 12, mod = false, costs = 500, description = "", centre = 0, font = 0, scale = 0.4},
+			{name = "Sport Brakes",modtype = 12, mod = 1, costs = 1000, description = "", centre = 0, font = 0, scale = 0.4},
+			{name = "Race Brakes",modtype = 12, mod = 2, costs = 2500, description = "", centre = 0, font = 0, scale = 0.4}
 
 		}
 	},
