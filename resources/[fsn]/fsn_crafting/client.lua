@@ -90,7 +90,7 @@ local crafting_stations = {
     },
 	]]
     loc = {x = 2431.5795898438, y = 4963.7548828125, z = 42.347560882568},
-    cost = 200,
+    cost = 150,
     required = {
       item = 'phosphorus',
       itemtitle = 'Phosphorus',
