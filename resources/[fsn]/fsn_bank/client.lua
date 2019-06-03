@@ -3,7 +3,7 @@ local atms = {
   {name="ATM", id=207, x=-284.037, y=6224.385, z=31.187,bank=false},
   {name="ATM", id=207, x=-284.037, y=6224.385, z=31.187,bank=false},
   {name="ATM", id=207, x=-135.165, y=6365.738, z=31.101,bank=false},
-  {name="BANK", id=207,x = -113.68147277832, y = 6469.4243164063, z = 31.626728057861,bank=true},
+  {name="BANK", id=207,x=-113.681, y=6469.424, z=31.626,bank=true},
   {name="ATM", id=207, x=-94.9690, y=6455.301, z=31.784,bank=false},
   {name="ATM", id=207, x=155.4300, y=6641.991, z=31.784,bank=false},
   {name="ATM", id=207, x=174.6720, y=6637.218, z=31.784,bank=false},
@@ -68,13 +68,13 @@ local atms = {
   {name="ATM", id=207, x=289.012, y=-1256.545, z=29.440,bank=false},
   {name="ATM", id=207, x=295.839, y=-895.640, z=29.217,bank=false},
   {name="ATM", id=207, x=1686.753, y=4815.809, z=42.008,bank=false},
-  {name="ATM", id=207, x=2682.9645996094, y=3286.6494140625, z=55.241138458252,bank=false},
+  {name="ATM", id=207, x=2682.964, y=3286.649, z=55.241,bank=false},
   {name="ATM", id=207, x=-302.408, y=-829.945, z=32.417,bank=false},
   {name="ATM", id=207, x=5.134, y=-919.949, z=29.557,bank=false},
   {name="ATM", id=207, x=300.6111, y=-578.7202, z=43.2608,bank=false},
-  {name="BANK",id=207, x = 150.61962890625, y = -1039.2352294922, z = 29.377359390259,bank=true},
-  {name="BANK",id=207, x = -350.63800048828, y = -48.618774414063, z = 49.036590576172,bank=true},
-  {name="BANK",id=207, x = -1213.2886962891, y = -329.92028808594, z = 37.786296844482,bank=true}
+  {name="BANK",id=207, x=150.619, y =-1039.235, z =29.377,bank=true},
+  {name="BANK",id=207, x=-350.638, y=-48.618, z=49.036,bank=true},
+  {name="BANK",id=207, x=-1213.288, y=-329.920, z=37.786,bank=true}
 }
 
 local moneys = 0
