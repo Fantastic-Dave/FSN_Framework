@@ -224,16 +224,16 @@ Citizen.CreateThread( function()
 	end
 end)
 
-Citizen.CreateThread( function()
-	while true do
-		Citizen.Wait(0)
-		DisableControlAction(0, 199, true)
-		if IsDisabledControlPressed(0,199) and not phoneEnabled then
-			TriggerEvent('fsn_phone:togglePhone')
-			Citizen.Wait(500)
-		end
-	end
-end)
+--Citizen.CreateThread( function()
+	--while true do
+		--Citizen.Wait(0)
+		--DisableControlAction(0, 199, true)
+		--if IsDisabledControlPressed(0,199) and not phoneEnabled then
+			--TriggerEvent('fsn_phone:togglePhone')
+			--Citizen.Wait(500)
+		--end
+	--end
+--end)
 
 TriggerServerEvent('fsn_phone:adverts:request')
 RegisterNetEvent('fsn_phone:adverts:update')
