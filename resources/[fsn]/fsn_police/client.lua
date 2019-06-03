@@ -158,7 +158,7 @@ local armoryStations = {
 local onduty_police = {}
 RegisterNetEvent('fsn_police:update')
 AddEventHandler('fsn_police:update', function(cops)
-  print(':fsn_police: There are '..#cops..' on duty!')
+  --print(':fsn_police: There are '..#cops..' on duty!')
   onduty_police = cops
 end)
 function fsn_getCopAmt()
