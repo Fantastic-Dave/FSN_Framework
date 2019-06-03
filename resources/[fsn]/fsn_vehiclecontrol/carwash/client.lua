@@ -24,9 +24,9 @@ Citizen.CreateThread(function()
         AddTextComponentString("Press ~INPUT_PICKUP~ to wash your car!")
         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
         if IsControlJustPressed(0,38) then
-          if exports.fsn_main:fsn_GetWallet() >= 250 then
+          if exports.fsn_main:fsn_GetWallet() >= 150 then
             SetVehicleDirtLevel(GetVehiclePedIsIn(GetPlayerPed(-1), 0.0))
-            TriggerEvent('fsn_bank:change:walletMinus', 250)
+            TriggerEvent('fsn_bank:change:walletMinus', 150)
           else
             TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this', 'centerLeft', 5000, 'error')
           end
