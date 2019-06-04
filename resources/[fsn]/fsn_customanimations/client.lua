@@ -174,7 +174,7 @@ Citizen.CreateThread( function()
 end)]]
 
 
-RegisterCommand("anim",function(source, args)
+RegisterCommand("ce",function(source, args)
 	local player = PlayerPedId()
 	if tostring(args[1]) == nil then
 		print("Invalid syntax, correct syntax is: /e <animation> ")
@@ -183,7 +183,7 @@ RegisterCommand("anim",function(source, args)
 		if tostring(args[1]) ~= nil then
             local argh = tostring(args[1])
 
-			if argh == 'surrender' then
+			if argh == 'busted' then
 				local surrendered = false
 				if ( DoesEntityExist( player ) and not IsEntityDead( player )) then 
 					loadAnimDict( "random@arrests" )
@@ -391,7 +391,7 @@ RegisterCommand("anim",function(source, args)
 						TaskPlayAnim( player, ad, "gesture_damn", 8.0, 1.0, -1, 120, 0, 0, 0, 0 )
 					end     
 				end
-			elseif argh == 'fail' then
+			--[[elseif argh == 'fail' then
 				local ad = "random@car_thief@agitated@idle_a"
 				
 				
@@ -426,7 +426,7 @@ RegisterCommand("anim",function(source, args)
 					else
 						TaskPlayAnim( player, ad, "mp_player_int_gang_sign_b", 8.0, 1.0, -1, 49, 0, 0, 0, 0 )
 					end     
-				end
+				end --]]
 			elseif argh == 'no' then
 				local ad = "mp_player_int_upper_nod"
 				
@@ -860,7 +860,7 @@ RegisterCommand("anim",function(source, args)
 					end     
 				end
 				
-			elseif argh == 'arrest' then
+		    --[[elseif argh == 'arrest' then
 				local ad = "random@arrests@busted"
 			
 				if ( DoesEntityExist( player ) and not IsEntityDead( player )) then 
@@ -872,7 +872,7 @@ RegisterCommand("anim",function(source, args)
 					else
 						TaskPlayAnim( player, ad, "idle_a", 8.0, 1.0, -1, 49, 0, 0, 0, 0 )
 					end     
-				end
+				end 
 				
 			elseif argh == 'tied' then
 				local ad = "mp_arresting"
@@ -886,7 +886,7 @@ RegisterCommand("anim",function(source, args)
 					else
 						TaskPlayAnim( player, ad, "idle", 8.0, 1.0, -1, 49, 0, 0, 0, 0 )
 					end     
-				end
+				end --]]
 				
 			elseif argh == 'shower' then
 				local ad = "mp_safehouseshower@male@" --- insert the animation dic here
@@ -1074,7 +1074,7 @@ RegisterCommand("anim",function(source, args)
 			
 			--New Animations
 			
-			elseif argh == 'tst' then
+			--[[elseif argh == 'tst' then
 				local ad = "missmic3"
 				
 				local prop_name = prop_name or 'prop_cs_newspaper'
@@ -1094,7 +1094,7 @@ RegisterCommand("anim",function(source, args)
 						AttachEntityToEntity(prop, player, GetPedBoneIndex(player, 6286), 0.11, 0.248, -0.351, 14.0, 100.0, 15.0, true, true, false, true, 1, true)
 						TaskPlayAnim( player, ad, "newspaper_dialogue_idle_dave", 3.0, -8, -1, 63, 0, 0, 0, 0 )
 					end 
-				end
+				end --]]
 			
 			elseif argh == 'dice' then
 				local ad = "mp_player_intwank"
@@ -1739,7 +1739,7 @@ RegisterCommand("anim",function(source, args)
 					end     
 				end
 			
-			elseif argh == 'drill' then
+			--[[elseif argh == 'drill' then
 				local ad = "anim@heists@fleeca_bank@drilling"
 				
 				local object_name = object_name or 'hei_prop_heist_drill'
@@ -1759,7 +1759,7 @@ RegisterCommand("anim",function(source, args)
 						AttachEntityToEntity(object, player, GetPedBoneIndex(player, 57005), 0.13, 0.02, -0.04, 110.0, -90.0, 160.0, true, true, false, true, 1, true)
 						TaskPlayAnim( player, ad, "drill_straight_start", 8.0, 1.0, -1, 1, 0, 0, 0, 0 )
 					end 
-				end
+				end--]]
 			
 			elseif argh == 'talk4' then
 				local ad = "rcmepsilonism8"
@@ -2194,7 +2194,7 @@ RegisterCommand("anim",function(source, args)
 					end     
 				end
 			
-			elseif argh == 'squat' then
+			--[[elseif argh == 'squat' then
 				local ad = "missfbi3ig_0"
 				
 				
@@ -2205,7 +2205,7 @@ RegisterCommand("anim",function(source, args)
 					else
 						TaskPlayAnim( player, ad, "shit_loop_trev", 8.0, 1.0, -1, 1, 0, 0, 0, 0 )
 					end     
-				end
+				end--]]
 			
 			elseif argh == 'car' then
 				local ad = "missarmenian1driving_taunts@franklin"
@@ -3292,7 +3292,7 @@ end, false)
 
 ----Use /testanimation command, you can use this to easily test new animations---
 
-RegisterCommand("testanimation",function(source, args)
+--[[RegisterCommand("testanimation",function(source, args)
 
 	local ad = "amb@code_human_police_crowd_control@idle_b" --- insert the animation dic here
 	local anim = "idle_d" --- insert the animation name here
@@ -3310,7 +3310,7 @@ RegisterCommand("testanimation",function(source, args)
 		end       
 	end
 end, false)
-
+--]]
 	
 ----------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------ functions -----------------------------------------------------------------
@@ -3339,7 +3339,7 @@ function loadAnimDict(dict)
 end
 
 Citizen.CreateThread(function()
-    TriggerEvent('chat:addSuggestion', '/n', 'Plays an animation', { { name = 'animation', help = 'The animation name' } } )
+    TriggerEvent('chat:addSuggestion', '/ce', 'Plays a custom animation', { { name = 'animation', help = 'The animation name' } } )
 end)
 
 AddEventHandler('onResourceStop', function(resource)
