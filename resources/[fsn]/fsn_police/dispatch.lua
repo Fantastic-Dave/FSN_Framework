@@ -97,7 +97,7 @@ AddEventHandler('fsn_police:dispatch:toggle', function()
 end)
 
 function displayDispatch(x,y,z,id,chatPrint)
-  if pdonduty then
+  if pdonduty or exports["fsn_jobs"]:fsn_GetJob() == 'News Employee' then
     local var1, var2 = GetStreetNameAtCoord(x, y, z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
     local sname = GetStreetNameFromHashKey(var1)
     if chatPrint then
