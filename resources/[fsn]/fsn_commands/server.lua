@@ -297,6 +297,17 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   local split = fsn_SplitString(msg, ' ')
   TriggerEvent('fsn_main:logging:addLog', source, 'chat', 'Player('..source..') ran command: '..msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  -- NEWS COMMANDS
+  -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/news' then
+	if split[2] == 'role' then
+		TriggerClientEvent('fsn_jobs:news:role:Set', source, split[3])
+	end
+	if split[2] == 'toggle' then
+		TriggerClientEvent('fsn_jobs:news:role:Toggle', source)
+	end
+  end
+  -------------------------------------------------------------------------------------------------------------------------------------------------
   -- MONEY COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/givecash' or split[1] == '/gc' then
