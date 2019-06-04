@@ -6,23 +6,23 @@ local mission_index = 0
 local trailer_blip = false
 local mission_blip = false
 local jobs = {
-  {trailer="trailerlogs",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=1202.677,y=-1315.115,z=37.086},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2582.918,y=291.401,z=110.334},payout=4500},
-  {trailer="tanker",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2553.624,y=419.674,z=110.695},payout=4500},
-  {trailer="trailers2",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=149.510,y=6420.317,z=33.162},payout=4500},
-  {trailer="trailerlogs",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=-573.645,y=5373.040,z=72.091},payout=4500},
-  {trailer="trailerlogs",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=-802.937,y=5408.595,z=35.785},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=1740.179,y=-1537.763,z=112.6675},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2771.391,y=1708.718,z=24.03442},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2945.976,y=2799.294,z=40.91628},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=1701.656,y=3270.308,z=40.68462},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2910.136,y=4379.666,z=49.87375},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2296.635,y=4960.685,z=41.09084},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=285.5617,y=2827.475,z=43.29112},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=-2325.3,y=3440.267,z=30.78492},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=-2170.515,y=4274.922,z=48.8249},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=-511.9664,y=5261.947,z=80.468},payout=4500},
-  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=204.4641,y=6388.259,z=31.26069},payout=4500},
+  {trailer="trailerlogs",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=1202.677,y=-1315.115,z=37.086},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2582.918,y=291.401,z=110.334},payout=3500},
+  {trailer="tanker",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2553.624,y=419.674,z=110.695},payout=3500},
+  {trailer="trailers2",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=149.510,y=6420.317,z=33.162},payout=3500},
+  {trailer="trailerlogs",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=-573.645,y=5373.040,z=72.091},payout=3500},
+  {trailer="trailerlogs",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=-802.937,y=5408.595,z=35.785},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=1740.179,y=-1537.763,z=112.6675},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2771.391,y=1708.718,z=24.03442},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2945.976,y=2799.294,z=40.91628},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=1701.656,y=3270.308,z=40.68462},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2910.136,y=4379.666,z=49.87375},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=2296.635,y=4960.685,z=41.09084},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=285.5617,y=2827.475,z=43.29112},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=-2325.3,y=3440.267,z=30.78492},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=-2170.515,y=4274.922,z=48.8249},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=-511.9664,y=5261.947,z=80.468},payout=3500},
+  {trailer="trailers",pickup={x=937.078,y=-3209.439,z=7.778,h=182.203},dropoff={x=204.4641,y=6388.259,z=31.26069},payout=3500},
 }
 
 function spawnTruck(cost)
@@ -101,7 +101,7 @@ Citizen.CreateThread(function()
     if mission_index ~= 0 then
       if GetDistanceBetweenCoords(GetEntityCoords(cur_trailer), jobs[mission_index].dropoff.x, jobs[mission_index].dropoff.y, jobs[mission_index].dropoff.z) < 10 then
         DetachVehicleFromTrailer(cur_truck)
-        local pay = math.random(jobs[mission_index].payout - 1000, jobs[mission_index].payout + 1000)
+        local pay = math.random(jobs[mission_index].payout - 500, jobs[mission_index].payout + 750)
         TriggerEvent('fsn_bank:change:walletAdd', pay)
         TriggerEvent('fsn_notify:displayNotification', 'You delivered the trailer for: <b style="color:limegreen">$'..pay, 'centerLeft', 8000, 'success')
         Wait(1000)
