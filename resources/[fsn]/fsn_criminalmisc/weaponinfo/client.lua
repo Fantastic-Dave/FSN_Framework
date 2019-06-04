@@ -7,6 +7,17 @@ function GetWeaponInfo(hash)
 		return false
 	end
 end
+
+function HoldingWeapon()
+	for k, v in pairs(hashGunToText) do
+		if tostring(GetSelectedPedWeapon(GetPlayerPed(-1))) == k then
+			if v.isweapon then
+				return true
+			end
+		end
+	end
+	return false
+end
 local name = ''
 local myWeapons = {}
 function GetWeapons()
