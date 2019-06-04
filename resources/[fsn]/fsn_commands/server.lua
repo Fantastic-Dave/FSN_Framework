@@ -493,6 +493,15 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if msg == '/save' then
     TriggerClientEvent('fsn_main:characterSaving', source)
   end
+  if split[1] == '/animations' or split[1] == '/anims' then
+    TriggerClientEvent('chatMessage', source, ':FSN Animations (1/3)', {255,0,0}, 'holster, aim1-3, copcrowd, copcrowd2, rally, freeze, come, go, yes, fwd, busted, tiedfloor, hostage, collect, kick, kick2,')
+    TriggerClientEvent('chatMessage', source, ':FSN Animations (2/3)', {255,0,0}, 'guard, earpiece, leanwall, leanwall2, sit-3, shower-3, swing-4, meditate, squat-2, help, taxi, wipe, hunchback, car, key, id, lockpick, check, sniff, sassy-2, tired, kneel, lean')
+    TriggerClientEvent('chatMessage', source, ':FSN Animations (3/3)', {255,0,0}, 'salute, finger-2, palm, damn, gang, no, grabcrotch, peace, slowclap, cheer, nod, nod2, talk-4, wave-2, impatient-3, preach-2, crazy-3, sad, think, lapdance, dance2 - dance39, salsa, salsa2')
+  end
+  if msg == '/props' then
+    TriggerClientEvent('chatMessage', source, ':FSN Props (1/2)', {255,0,0}, 'notes, callphone-2, umbrella, brief-2, cigar-2, joint, cig, holdcigar, holdcig, holdjoint, box, pizza, drug-3, wine, beer, shopping, soda, burger-2, burgershot-5,')
+       TriggerClientEvent('chatMessage', source, ':FSN Props (1/2)', {255,0,0}, 'shot, boxing, drill, pot, smoke, coffee, bong, rose, cane, protext, backpack, hiking, dead-4, bum hurt-3, layfront, layback')
+  end
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- INVENTORY COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
