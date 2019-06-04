@@ -674,6 +674,7 @@ RegisterNUICallback( "inventoryAction", function(data, cb)
 						if res == 'all' then
 							TriggerEvent('fsn_apartments:store:item', data.item, exports["fsn_inventory"]:fsn_GetItemAmount(data.item))
 							TriggerEvent('fsn_inventory:item:take', data.item, exports["fsn_inventory"]:fsn_GetItemAmount(data.item))
+							TriggerEvent('fsn_notify:displayNotification', 'You stored '..exports["fsn_inventory"]:fsn_GetItemAmount(data.item)..' '..data.item, 'centerLeft', 5000, 'success')
 						else
 							if tonumber(res) then
 								res = tonumber(res)
