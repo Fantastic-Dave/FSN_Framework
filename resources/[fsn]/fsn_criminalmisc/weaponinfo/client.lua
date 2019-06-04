@@ -1,11 +1,22 @@
 function GetWeaponInfo(hash)	
 	if hashGunToText[tostring(hash)] then
-		tbl = {name = hashGunToText[tostring(hash)], hash = hash} 
+		tbl = {name = hashGunToText[tostring(hash)].name, hash = hash, isweapon = hashGunToText[tostring(hash)].isweapon} 
 		return tbl
 	else
 		print('cannot find weaponinfo for '..hash)
 		return false
 	end
+end
+
+function HoldingWeapon()
+	for k, v in pairs(hashGunToText) do
+		if tostring(GetSelectedPedWeapon(GetPlayerPed(-1))) == k then
+			if v.isweapon then
+				return true
+			end
+		end
+	end
+	return false
 end
 local name = ''
 local myWeapons = {}
