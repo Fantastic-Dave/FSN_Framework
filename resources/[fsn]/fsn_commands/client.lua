@@ -215,7 +215,7 @@ AddEventHandler('fsn_commands:me:3d', function(player, action)
 		local mestarttime = exports["fsn_main"]:fsn_GetTime()
 		while true do
 			Citizen.Wait(0)
-			local ped = GetPlayerPed(GetPlayerFromServerId())
+			local ped = GetPlayerPed(GetPlayerFromServerId(player))
 			local pos = GetEntityCoords(ped)
 			if mestarttime+8 > exports["fsn_main"]:fsn_GetTime() then
 				fsn_drawTextMe3D(pos.x,pos.y,pos.z, action)
