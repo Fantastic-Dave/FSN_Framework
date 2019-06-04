@@ -1,6 +1,6 @@
 function GetWeaponInfo(hash)	
 	if hashGunToText[tostring(hash)] then
-		tbl = {name = hashGunToText[tostring(hash)], hash = hash} 
+		tbl = {name = hashGunToText[tostring(hash)].name, hash = hash, isweapon = hashGunToText[tostring(hash)].isweapon} 
 		return tbl
 	else
 		print('cannot find weaponinfo for '..hash)
