@@ -186,10 +186,26 @@ local holdingcar = false
 local holdingnotif = false
 local curtime = 0
 
+function fsn_FindNearbyPed(Distance)
+    local TargetPed
+    local Handle, Ped = FindFirstPed()
+    repeat
+        local DistanceBetween = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), GetEntityCoords(Ped), true)
+        if DoesEntityExist(Ped) and not IsPedAPlayer(Ped) and DistanceBetween <= Distance then
+            TargetPed = Ped
+        end
+
+    Success, Ped = FindNextPed(Handle)
+    until not Success
+
+    EndFindPed(Handle)
+    return TargetPed
+end
+
 Citizen.CreateThread(function()
 	while true do Citizen.Wait(0)
 		if IsPlayerFreeAiming(PlayerId()) then
-			local ped =  exports["fsn_main"]:fsn_FindNearbyPed(10)
+			local ped = fsn_FindNearbyPed(10)
 			if ped and IsPlayerFreeAimingAtEntity(PlayerId(), ped) then
 				if IsPedInAnyVehicle(ped) then
 					local speed = GetEntitySpeed(GetVehiclePedIsIn(ped, false)) * 3.6
