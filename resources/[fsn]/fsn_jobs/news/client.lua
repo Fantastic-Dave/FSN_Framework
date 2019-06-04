@@ -1,3 +1,116 @@
+local currentrole = ''
+local aminews = true
+local inRoom = false
+
+function fsn_drawText3D(x,y,z, text)
+    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
+    local px,py,pz=table.unpack(GetGameplayCamCoords())
+    if onScreen then
+        SetTextScale(0.3, 0.3)
+        SetTextFont(0)
+        SetTextProportional(1)
+        SetTextColour(255, 255, 255, 140)
+        SetTextDropshadow(0, 0, 0, 0, 55)
+        SetTextEdge(2, 0, 0, 0, 150)
+        SetTextDropShadow()
+        SetTextOutline()
+        SetTextEntry("STRING")
+        SetTextCentre(1)
+        AddTextComponentString(text)
+        DrawText(_x,_y)
+    end
+end
+
+local equipmentRoom = {x = -585.39538574219, y = -918.275390625, z = 23.869050979614}
+local clockIn = {x = -595.93664550781, y = -927.12915039063, z = 23.869050979614}
+
+RegisterNetEvent('fsn_jobs:news:role:Set')
+AddEventHandler('fsn_jobs:news:role:Set', function(role)
+	if not aminews then
+		TriggerEvent('fsn_notify:displayNotification', 'You are not a newsperson', 'centerLeft', 4000, 'error')
+		return
+	end
+	if not inRoom then
+		TriggerEvent('fsn_notify:displayNotification', 'This can only be used from inside the equipment room', 'centerLeft', 4000, 'error')
+		return
+	end
+	local roles = {'camera', 'mic'}
+	local rolet = false
+	for k, v in pairs(roles) do
+		if v == role then
+			rolet = true
+		end
+	end
+	if rolet then
+		currentrole = role
+		TriggerEvent('fsn_notify:displayNotification', 'You set your role to: '..role, 'centerLeft', 4000, 'info')
+		TriggerEvent('fsn_notify:displayNotification', 'Use key [E] to toggle your equipment.', 'centerLeft', 9000, 'info')
+	else
+		TriggerEvent('fsn_notify:displayNotification', 'This role '..role..' does not exist', 'centerLeft', 4000, 'error')
+	end
+end)
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		if aminews then
+			if IsControlJustPressed(1, 303) then
+				if currentrole == 'camera' then
+					print 'toggling cam'
+					TriggerEvent('Cam:ToggleCam')
+				elseif currentrole == 'boom' then
+					print 'not yet implemented'
+				elseif currentrole == 'mic' then
+					print 'toggling mic'
+					TriggerEvent("Mic:ToggleMic")
+				else
+					TriggerEvent('fsn_notify:displayNotification', 'You have not selected a role from the equipment room.', 'centerLeft', 4000, 'error')
+				end
+			end
+		end
+		if GetDistanceBetweenCoords(clockIn.x, clockIn.y, clockIn.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
+			DrawMarker(1,clockIn.x,clockIn.y,clockIn.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+			if GetDistanceBetweenCoords(clockIn.x, clockIn.y, clockIn.z, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+				if aminews then
+					SetTextComponentFormat("STRING")
+					AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~clock out")
+					DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+					if IsControlJustPressed(0, 38) then
+						aminews = false
+						TriggerEvent('fsn_notify:displayNotification', 'You have clocked <b>OUT</b> from: news', 'centerLeft', 4000, 'error')
+						fsn_SetJob('Unemployed')
+						currentrole = ''
+					end	
+				else
+					SetTextComponentFormat("STRING")
+					AddTextComponentString("Press ~INPUT_PICKUP~ to ~g~clock in~w~ as ~p~NEWS")
+					DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+					if IsControlJustPressed(0, 38) then
+						aminews = true
+						TriggerEvent('fsn_notify:displayNotification', 'You have clocked <b>IN</b> as: news', 'centerLeft', 4000, 'success')
+						TriggerEvent('fsn_notify:displayNotification', 'Head to the equipment room to choose your role.', 'centerLeft', 10000, 'info')
+						fsn_SetJob('News Employee')
+					end	
+				end
+			end
+		end
+		
+		if GetDistanceBetweenCoords(equipmentRoom.x, equipmentRoom.y, equipmentRoom.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
+			DrawMarker(25,equipmentRoom.x, equipmentRoom.y, equipmentRoom.z - 0.95, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 10.3, 255, 255, 255, 140, 0, 0, 2, 0, 0, 0, 0)
+			if GetDistanceBetweenCoords(equipmentRoom.x, equipmentRoom.y, equipmentRoom.z, GetEntityCoords(GetPlayerPed(-1)), true) < 5 then
+				fsn_drawText3D(equipmentRoom.x, equipmentRoom.y, equipmentRoom.z, '/news role camera\n\n/news role mic')
+				inRoom = true
+			else
+				inRoom = false
+			end
+		end
+	end
+end)
+
+---------------------------------------------------------------------------
+-- V NOT FUSION STUFF V --
+---------------------------------------------------------------------------
+
 local holdingCam = false
 local usingCam = false
 local holdingMic = false

@@ -1,3 +1,5 @@
+resource_manifest_version "44febabe-d386-4d18-afbe-5e627f4af937"
+
 client_script 'client.lua'
 server_script '@mysql-async/lib/MySQL.lua'
 server_script 'server.lua'
@@ -29,6 +31,9 @@ server_script 'taxi/server.lua'
 
 -- garbage job
 client_script 'garbage/client.lua'
+
+-- news job
+client_script 'news/client.lua'
 
 -- tow job
 client_script 'tow/client.lua'
