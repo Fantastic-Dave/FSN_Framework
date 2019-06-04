@@ -159,11 +159,11 @@ Citizen.CreateThread(function()
           end
         else
           SetTextComponentFormat("STRING")
-          AddTextComponentString("Press ~INPUT_PICKUP~ to get a truck & job (~g~$3000~w~)")
+          AddTextComponentString("Press ~INPUT_PICKUP~ to get a truck & job (~g~$1000~w~)")
           DisplayHelpTextFromStringLabel(0, 0, 1, -1)
           if IsControlJustPressed(0,38) then
-            if exports.fsn_main:fsn_GetWallet() >= 3000 then
-              spawnTruck(3000)
+            if exports.fsn_main:fsn_GetWallet() >= 100 then
+              spawnTruck(1000)
             else
               TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
             end
@@ -171,16 +171,16 @@ Citizen.CreateThread(function()
         end
       else
         SetTextComponentFormat("STRING")
-        AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~return~w~ your truck\nPress ~INPUT_VEH_DUCK~ to ~g~get~w~ a new job ($1000)")
+        AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~return~w~ your truck\nPress ~INPUT_VEH_DUCK~ to ~g~get~w~ a new job ($0)")
         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
         if IsControlJustPressed(0,73) then
-          if exports.fsn_main:fsn_GetWallet() >= 1000 then
+          if exports.fsn_main:fsn_GetWallet() >= 0 then
             if trailer_blip then
               RemoveBlip(trailer_blip)
               trailer_blip = false
             end
             print('just pressed x')
-            getNewJob(1000)
+            getNewJob(0)
           else
             TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
           end
