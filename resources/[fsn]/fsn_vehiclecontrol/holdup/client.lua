@@ -204,7 +204,7 @@ end
 
 Citizen.CreateThread(function()
 	while true do Citizen.Wait(0)
-		if IsPlayerFreeAiming(PlayerId()) then
+		if IsPlayerFreeAiming(PlayerId()) and not exports['fsn_police']:fsn_PDDuty() and exports["fsn_criminalmisc"]:HoldingWeapon() then
 			local ped = fsn_FindNearbyPed(10)
 			if ped and IsPlayerFreeAimingAtEntity(PlayerId(), ped) then
 				if IsPedInAnyVehicle(ped) then

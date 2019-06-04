@@ -34,5 +34,6 @@ client_script 'drugs/_weedprocess/client.lua'
 
 exports {
 	"GetWeapons",
-	"weaponInfo"
+	"weaponInfo",
+	"HoldingWeapon"
 }
