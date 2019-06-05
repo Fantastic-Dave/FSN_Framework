@@ -196,12 +196,12 @@ Citizen.CreateThread(function()
           end
           mission_index = 0
           if DoesEntityExist(cur_truck) then
-            TriggerEvent('fsn_bank:change:walletAdd', 2400)
+            TriggerEvent('fsn_bank:change:walletAdd', 400)
             SetEntityAsMissionEntity( cur_truck, true, true )
             Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( cur_truck ) )
           else
-            TriggerEvent('fsn_notify:displayNotification', 'You destroyed/lost your truck! Fined $2500!', 'centerRight', 4000, 'error')
-            TriggerEvent('fsn_bank:change:bankMinus', 2500)
+            TriggerEvent('fsn_notify:displayNotification', 'You destroyed/lost your truck! Fined $500!', 'centerRight', 4000, 'error')
+            TriggerEvent('fsn_bank:change:bankMinus', 500)
           end
           if DoesEntityExist(cur_trailer) then
             SetEntityAsMissionEntity( cur_trailer, true, true )
