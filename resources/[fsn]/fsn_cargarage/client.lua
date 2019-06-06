@@ -278,9 +278,10 @@ function fsn_IsVehicleHere(x,y,z,radius)
 end
 
 function fsn_IsVehicleOwner(veh1)
+	local plate = GetVehicleNumberPlateText(veh1)
 	for k, v in pairs(myVehicles) do
-		local veh2 = v.ent
-		if veh1 == veh2 then
+		local veh2 = v.plate
+		if plate == veh2 then
 			return true
 		end
 	end
