@@ -12,11 +12,15 @@ AddEventHandler('fsn_criminalmisc:robbing:startRob', function(srv_id)
 			if not beingRobbed then
 				TriggerServerEvent('fsn_criminalmisc:robbing:startRobbing', srv_id)
 				local dm = 0
-				if exports['fsn_inventory']:fsn_HasItem('dirty_money') then
+				if exports['fsn_inventory']:fsn_HasItem('dirty_money') > 0 then
 					dm = exports['fsn_inventory']:fsn_GetItemAmount('dirty_money')
 				end
+				local money = 0
+				if exports["fsn_main"]:fsn_GetWallet() > 0 then
+					money = exports["fsn_main"]:fsn_GetWallet()		
+				end
 				Citizen.Wait(8000)
-				TriggerServerEvent('fsn_criminalmisc:robbing:finishRob', srv_id, dm, exports["fsn_main"]:fsn_GetWallet())
+				TriggerServerEvent('fsn_criminalmisc:robbing:finishRob', srv_id, dm, money)
 				beingRobbed = false
 				lastRob = myTime
 			else
