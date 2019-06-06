@@ -1,3 +1,5 @@
+local currentRobberies = {}
+
 RegisterServerEvent('fsn_criminalmisc:robbing:finishRob')
 AddEventHandler('fsn_criminalmisc:robbing:finishRob', function(robber, dm, cash)
 	TriggerClientEvent('fsn_bank:change:walletMinus', source, cash)
@@ -20,5 +22,17 @@ end)
 
 RegisterServerEvent('fsn_criminalmisc:robbing:requesRob')
 AddEventHandler('fsn_criminalmisc:robbing:requesRob', function(robbee)
+	for k, v in pairs(currentRobberies) do
+		if v.victim == robbee then
+			TriggerClientEvent('fsn_notify:displayNotification', source, 'You cannot rob this person yet', 'centerLeft', 4000, 'error')		
+			return
+		end
+	end
+	table.insert(currentRobberies, #currentRobberies+1, {
+		victim = robbee,
+		robber = source,
+		time = os.time(),
+		status = 'robbing',
+	})
 	TriggerClientEvent('fsn_criminalmisc:robbing:startRob', robbee, source)
 end)
