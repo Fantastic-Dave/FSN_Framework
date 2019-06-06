@@ -2,6 +2,12 @@ local currentRobberies = {}
 
 RegisterServerEvent('fsn_criminalmisc:robbing:finishRob')
 AddEventHandler('fsn_criminalmisc:robbing:finishRob', function(robber, dm, cash)
+	for k, v in pairs(currentRobberies) do
+		if v.victim == source then
+			table.remove(currentRobberies, k)
+			currentRobberies[k] = nil
+		end 
+	end
 	TriggerClientEvent('fsn_bank:change:walletMinus', source, cash)
 	TriggerClientEvent('fsn_notify:displayNotification', source, 'You were robbed for: $'..cash, 'centerLeft', 4000, 'error')
 	
