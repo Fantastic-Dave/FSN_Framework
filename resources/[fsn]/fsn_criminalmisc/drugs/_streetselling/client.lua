@@ -106,7 +106,7 @@ Citizen.CreateThread(function()
 				end
 			end
 		end
-		if init and hasDrugs() and not IsPedInAnyVehicle(GetPlayerPed(-1)) and not exports["fsn_jobs"]:fsn_GetJob() == 'News Employee' then
+		if init and hasDrugs() and not IsPedInAnyVehicle(GetPlayerPed(-1)) then
 			local drug = getMyDrug()
 			local myarea = string.upper(GetNameOfZone(GetEntityCoords(GetPlayerPed(-1))))
 			if areas[myarea] and areas[myarea].enabled and areas[myarea].drugs[drug] then
