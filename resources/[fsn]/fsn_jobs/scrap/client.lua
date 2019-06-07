@@ -1,7 +1,7 @@
 local laptop = {x = 1208.73046875, y = -3114.8859863281, z = 5.5622911453247}
 local dropoff = {x = 1204.7564697266, y = -3116.3649902344, z = 5.1010489463806}
 local cars = {
-  "Blista","Dilettante","Prairie","Rhapsody","Panto","F620","Oracle2","Dominator","Buccaneer","Ruiner","Rebel2","Sandking","BJXL","Seminole","Emperor2","Surge","Bison","Journey","Taco"
+  "Blista","Dilettante","Prairie","Rhapsody","Panto","F620","Oracle2","Dominator","Buccaneer","Ruiner","Rebel2","Sandking","BJXL","Seminole","Emperor2","Surge","Bison","Journey","Taco","Zentorno","RapidGT","Exemplar","Washington","Patriot","Jackal"
 }
 local required = false
 local lastjob = 0
@@ -73,11 +73,11 @@ Citizen.CreateThread(function()
 
             required = false
             lastjob = 0
-            TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(1000,3000))
+            TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(1000,5000))
           end
         else
           SetTextComponentFormat("STRING")
-          AddTextComponentString("~r~This isn't the right vehicle")
+          AddTextComponentString("~r~This isn't the right vehicle..")
           DisplayHelpTextFromStringLabel(0, 0, 1, -1)
         end
       end
@@ -87,7 +87,7 @@ Citizen.CreateThread(function()
       if GetDistanceBetweenCoords(laptop.x, laptop.y, laptop.z, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
         if required == false then
           SetTextComponentFormat("STRING")
-          AddTextComponentString("Press ~INPUT_PICKUP~ to request a job")
+          AddTextComponentString("Press ~INPUT_PICKUP~ to request a job.")
           DisplayHelpTextFromStringLabel(0, 0, 1, -1)
           if IsControlJustPressed(0,38) then
             required = cars[math.random(1, #cars)]
@@ -97,7 +97,7 @@ Citizen.CreateThread(function()
         else
           if lastjob + 20 > GetNetworkTime() then
             SetTextComponentFormat("STRING")
-            AddTextComponentString("Press ~INPUT_PICKUP~ to request a new job")
+            AddTextComponentString("Press ~INPUT_PICKUP~ to request a new job.")
             DisplayHelpTextFromStringLabel(0, 0, 1, -1)
             if IsControlJustPressed(0,38) then
               required = cars[math.random(1, #cars)]

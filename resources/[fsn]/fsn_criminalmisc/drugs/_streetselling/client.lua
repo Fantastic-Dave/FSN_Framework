@@ -106,7 +106,7 @@ Citizen.CreateThread(function()
 				end
 			end
 		end
-		if init and hasDrugs() and not IsPedInAnyVehicle(GetPlayerPed(-1)) and not exports["fsn_jobs"]:fsn_GetJob() == 'News Employee' then
+		if init and hasDrugs() and not IsPedInAnyVehicle(GetPlayerPed(-1)) then
 			local drug = getMyDrug()
 			local myarea = string.upper(GetNameOfZone(GetEntityCoords(GetPlayerPed(-1))))
 			if areas[myarea] and areas[myarea].enabled and areas[myarea].drugs[drug] then
@@ -181,10 +181,14 @@ Citizen.CreateThread(function()
 								local maxi = areas[myarea].drugs[drug].value + math.ceil(areas[myarea].drugs[drug].value / 2)
 								local price = 0
 								if exports["fsn_police"]:fsn_getCopAmt() > 2 then
-									price = math.random(mini, maxi)
+									local buff = math.random(10,20)
+									local ploos = areas[myarea].drugs[drug].value / 100 * buff
+									price = math.random(mini, maxi) + ploos
+									TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 Risk is increased so you earned an extra '..buff..'%!')
 								else
-									price = math.random(mini, maxi) / 2
-									TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 There aren\'t many cops online, so your earnings are halved.')									
+									price = math.random(mini, maxi)
+									--price = math.random(mini, maxi) / 2
+									--TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 There aren\'t many cops online, so your earnings are halved.')									
 								end
 								if areas[myarea].premium then
 									local extra = math.random(10,50)

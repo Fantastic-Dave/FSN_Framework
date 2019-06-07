@@ -383,7 +383,7 @@ Citizen.CreateThread(function()
           end
         else
           if GetDistanceBetweenCoords(door.keypad.x, door.keypad.y, door.keypad.z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
-            if true then--exports['fsn_police']:fsn_getCopAmt() >= 3 then
+            if exports['fsn_police']:fsn_getCopAmt() >= 3 then
 				if not canrob then
 					SetTextComponentFormat("STRING")
 				  AddTextComponentString("~r~A bank has been robbed too recently")
@@ -527,6 +527,7 @@ local LostMCModels = {1330042375,1032073858,850468060,-96953009}
 local start = 0
 RegisterNetEvent('fsn_bankrobbery:LostMC:spawn')
 AddEventHandler('fsn_bankrobbery:LostMC:spawn', function()
+	local mypeds = {}
 	for k, v in pairs(LostMCSpawns) do
 		local mdl = LostMCModels[math.random(1, #LostMCModels)]
 		print('making mdl: '..mdl)
@@ -536,6 +537,7 @@ AddEventHandler('fsn_bankrobbery:LostMC:spawn', function()
 			RequestModel(mdl)
 		end
 		local ped = CreatePed(4, mdl, v.x, v.y, v.z+1, true, true)
+		table.insert(mypeds, #mypeds+1, ped)
 		GiveWeaponToPed(ped, "WEAPON_PISTOL", 200, false, true)
 		TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
 		SetPedCombatRange(ped, 2)
@@ -549,7 +551,8 @@ AddEventHandler('fsn_bankrobbery:LostMC:spawn', function()
 			Wait(1)
 			RequestModel(mdl)
 		end
-		local ped = CreatePed(4, mdl, v.x, v.y, v.z+1, true, true)
+		local ped = CreatePed(4, mdl, v.x, v.y, v.z+1, true, true)	
+		table.insert(mypeds, #mypeds+1, ped)
 		GiveWeaponToPed(ped, "WEAPON_PISTOL", 200, false, true)
 		TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
 		SetPedCombatRange(ped, 2)
@@ -563,8 +566,11 @@ AddEventHandler('fsn_bankrobbery:LostMC:spawn', function()
 		local ped = exports["fsn_main"]:fsn_FindPedNearbyCoords(LostMC.x, LostMC.y, LostMC.z, 100)
 		ClearPedTasksImmediately(ped)
 		TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
-		local maff = start + 12
+		local maff = start + 30
 		if maff < current_time then
+			for k, v in pairs(mypeds) do
+				DeleteEntity(v)		
+			end
 			break
 		end
 	end

@@ -224,6 +224,14 @@ end)
 
 RegisterNetEvent('fsn_jewellerystore:case:startrob')
 AddEventHandler('fsn_jewellerystore:case:startrob', function(caseid)
+	local pos = GetEntityCoords(GetPlayerPed(-1))
+	local coords = {
+		x = pos.x,
+		y = pos.y,
+		z = pos.z
+	}
+	TriggerServerEvent('fsn_police:dispatch', coords, 7)
+		
 	local anims = {'smash_case', 'smash_case_b', 'smash_case_c', 'smash_case_d'}
 	RequestAnimDict('missheist_jewel')
 	while not HasAnimDictLoaded('missheist_jewel') do
@@ -310,7 +318,7 @@ Citizen.CreateThread(function()
 						print('cannot load '..mdl)
 						Wait(1)
 					end
-					guard.ped = CreatePed(2, mdl, guard.x, guard.y, guard.z, guard.h, false, true)
+					guard.ped = CreatePed(2, mdl, guard.x, guard.y, guard.z, guard.h, true, true)
 					guard.tenthirteen = false
 					--SetBlockingOfNonTemporaryEvents(guard.ped, true)
 					--SetPedCombatAttributes(guard.ped, 46, true)
