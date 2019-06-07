@@ -45,13 +45,13 @@ local vehshop = {
 			title = "compacts",
 			name = "compacts",
 			buttons = {
-				{name = "Blista", costs = 15000, description = {}, model = "blista"},
-				{name = "Brioso R/A", costs = 10000, description = {}, model = "brioso"},
-				{name = "Dilettante", costs = 9000, description = {}, model = "Dilettante"},
-				{name = "Issi 2 Convertible", costs = 20000, description = {}, model = "issi2"},
-				{name = "Panto", costs = 9000, description = {}, model = "panto"},
-				{name = "Prairie", costs = 25000, description = {}, model = "prairie"},
-				{name = "Rhapsody", costs = 5000, description = {}, model = "rhapsody"},
+				{name = "Blista", costs = 9000, description = {}, model = "blista"},
+				{name = "Brioso R/A", costs = 8000, description = {}, model = "brioso"},
+				{name = "Dilettante", costs = 5000, description = {}, model = "Dilettante"},
+				{name = "Issi 2 Convertible", costs = 10000, description = {}, model = "issi2"},
+				{name = "Panto", costs = 8000, description = {}, model = "panto"},
+				{name = "Prairie", costs = 20000, description = {}, model = "prairie"},
+				{name = "Rhapsody", costs = 4000, description = {}, model = "rhapsody"},
 			}
 		},
 		["coupes"] = {
