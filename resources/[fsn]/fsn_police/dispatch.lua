@@ -131,6 +131,7 @@ function displayDispatch(x,y,z,id,chatPrint)
       DrawNotification(false, true);
     end
 	if actions[id].blip ~= false then
+		print 'triggering addblip'
 		TriggerEvent("fsn_main:blip:add", "police", "ALERT: "..actions[id].tencode, actions[id].blip, x, y, z)
 	end
   end
