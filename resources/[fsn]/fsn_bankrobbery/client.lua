@@ -383,7 +383,7 @@ Citizen.CreateThread(function()
           end
         else
           if GetDistanceBetweenCoords(door.keypad.x, door.keypad.y, door.keypad.z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
-            if true then--exports['fsn_police']:fsn_getCopAmt() >= 3 then
+            if exports['fsn_police']:fsn_getCopAmt() >= 3 then
 				if not canrob then
 					SetTextComponentFormat("STRING")
 				  AddTextComponentString("~r~A bank has been robbed too recently")
