@@ -186,11 +186,11 @@ Citizen.CreateThread(function()
   						if IsControlJustPressed(1,51) then
                 TriggerEvent('pNotify:SendNotification', {text = "Planting seeds...",
                   layout = "centerRight",
-                  timeout = 120000,
+                  timeout = 33000,
                   progressBar = true,
                   type = "info"
                 })
-                Citizen.Wait(120000)
+                Citizen.Wait(33000)
                 TriggerEvent('pNotify:SendNotification', {text = "Collected [20X] <span style='color:orange;font-weight:bold;'>Seeds",
                   layout = "centerRight",
                   timeout = 600,
