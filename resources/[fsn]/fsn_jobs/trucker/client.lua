@@ -40,7 +40,7 @@ function spawnTruck(cost)
     TaskWarpPedIntoVehicle(GetPlayerPed(-1),cur_truck,-1)
     getNewJob(0)
 	else
-    TriggerEvent('chatMessage', '', {255,255,255}, '^*^1:FSN:^0^r There cannot be anything in the spawn area!')
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^1:FSN:^0^r There cannot be anything in the truck pickup area!')
   end
 end
 
@@ -80,7 +80,7 @@ function getNewJob(cost)
     SetBlipAsShortRange(trailer_blip, false)
     TriggerEvent('fsn_notify:displayNotification', 'Delivery #'..mission_index..' marked on the GPS', 'centerLeft', 8000, 'info')
   else
-    TriggerEvent('chatMessage', '', {255,255,255}, '^*^1:FSN:^0^r Something is blocking your trailer spawning')
+    TriggerEvent('chatMessage', '', {255,255,255}, '^*^1:FSN:^0^r Something is blocking the trailer pickup spot.')
     TriggerEvent('chatMessage', '', {255,255,255}, '^*^1:FSN:^0^r Get out of the truck and get a new job, you\'ve not been charged')
   end
   fsn_SetJob('Trucker')
