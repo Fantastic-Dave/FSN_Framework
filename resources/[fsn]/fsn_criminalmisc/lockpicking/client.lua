@@ -181,7 +181,7 @@ end
 
 RegisterNetEvent('fsn_criminalmisc:lockpicking')
 AddEventHandler('fsn_criminalmisc:lockpicking', function()
-	if not picklocking and not exports["fsn_jobs"]:fsn_GetJob() == 'News Employee' then
+	if not picklocking then
 		local lost_safe = {x = 977.23968505859, y = -104.10308074951, z = 74.845184326172}
 		if GetDistanceBetweenCoords(lost_safe.x, lost_safe.y, lost_safe.z, GetEntityCoords(GetPlayerPed(-1))) < 2 then
 			print(exports['fsn_police']:fsn_getCopAmt()..' are online')
