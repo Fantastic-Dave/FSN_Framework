@@ -45,7 +45,7 @@ local vehshop = {
 			title = "compacts",
 			name = "compacts",
 			buttons = {
-				{name = "Blista", costs = 9000, description = {}, model = "blista"},
+				{name = "Blista", costs = 5200, description = {}, model = "blista"},
 				{name = "Brioso R/A", costs = 8000, description = {}, model = "brioso"},
 				{name = "Dilettante", costs = 5000, description = {}, model = "Dilettante"},
 				{name = "Issi 2 Convertible", costs = 10000, description = {}, model = "issi2"},
