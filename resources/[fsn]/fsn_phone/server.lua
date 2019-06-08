@@ -76,7 +76,7 @@ AddEventHandler('fsn_phone:sendMessage', function(tonum, fromnum, msg)
       to_number = tonum,
       message = msg
     })
-    TriggerClientEvent('fsn_notify:displayNotification', source, 'Messaged delivered', 'centerRight', 8000, 'success')
+    TriggerClientEvent('fsn_notify:displayNotification', source, 'Message delivered', 'centerRight', 8000, 'success')
     --MySQL.Async.execute('INSERT INTO `fsn_textmessages` (`txt_id`, `txt_sender`, `txt_reciever`, `txt_message`, `txt_date`) VALUES (NULL, @sender, @reciever, @message, CURRENT_TIMESTAMP)', {['@sender'] = fromid,['@reciever'] = clientid,['@message'] = msg,}, function(rowsChanged) end)
   else
     TriggerClientEvent('fsn_notify:displayNotification', source, 'No player found with number <b>'..tonumber(tonum), 'centerRight', 8000, 'error')
