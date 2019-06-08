@@ -8458,7 +8458,7 @@
       <handlingName>SENTINEL</handlingName>
       <fMass value="1900.000000" />
       <fInitialDragCoeff value="0.630000" />
-	  <fDownforceModifier value="1.450000" />
+    <fDownforceModifier value="1.450000" />
       <fPercentSubmerged value="76.000000" />
       <vecCentreOfMassOffset x="0.000000" y="-0.080000" z="0.020000" />
       <vecInertiaMultiplier x="1.170000" y="1.000000" z="2.120000" />
@@ -8468,12 +8468,12 @@
       <fDriveInertia value="1.020000" />
       <fClutchChangeRateScaleUpShift value="1.800000" />
       <fClutchChangeRateScaleDownShift value="1.800000" />
-      <fInitialDriveMaxFlatVel value="138.000000" />
-      <fBrakeForce value="0.281000" />
+      <fInitialDriveMaxFlatVel value="158.000000" />
+      <fBrakeForce value="0.261000" />
       <fBrakeBiasFront value="0.472830" />
       <fHandBrakeForce value="0.800000" />
       <fSteeringLock value="33.200000" />
-      <fTractionCurveMax value="1.420000" />
+      <fTractionCurveMax value="1.520000" />
       <fTractionCurveMin value="1.153000" />
       <fTractionCurveLateral value="16.500000" />
       <fTractionSpringDeltaMax value="0.129000" />
