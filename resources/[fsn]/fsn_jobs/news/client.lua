@@ -1,5 +1,5 @@
 local currentrole = ''
-local aminews = true
+local aminews = false
 local inRoom = false
 
 function fsn_drawText3D(x,y,z, text)
@@ -44,7 +44,7 @@ AddEventHandler('fsn_jobs:news:role:Set', function(role)
 	if rolet then
 		currentrole = role
 		TriggerEvent('fsn_notify:displayNotification', 'You set your role to: '..role, 'centerLeft', 4000, 'info')
-		TriggerEvent('fsn_notify:displayNotification', 'Use key [U] to toggle your equipment.', 'centerLeft', 9000, 'info')
+		TriggerEvent('fsn_notify:displayNotification', 'Use key [H] to toggle your equipment.', 'centerLeft', 9000, 'info')
 	else
 		TriggerEvent('fsn_notify:displayNotification', 'This role '..role..' does not exist', 'centerLeft', 4000, 'error')
 	end
@@ -54,7 +54,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		if aminews then
-			if IsControlJustPressed(1, 303) then
+			if IsControlJustPressed(1, 304) then
 				if currentrole == 'camera' then
 					print 'toggling cam'
 					TriggerEvent('Cam:ToggleCam')

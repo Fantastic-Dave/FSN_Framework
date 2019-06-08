@@ -261,8 +261,10 @@ RegisterNetEvent('fsn_apartments:store:item')
 AddEventHandler('fsn_apartments:store:item', function(item, amt)
 	if not apptdetails["apt_utils"]["inventory"] then
 		apptdetails["apt_utils"]["inventory"] = {}
-	end
-	apptdetails["apt_utils"]["inventory"][item] = amt
+		apptdetails["apt_utils"]["inventory"][item] = amt
+	else
+		apptdetails["apt_utils"]["inventory"][item] = apptdetails["apt_utils"]["inventory"][item] + amt	
+	end	
 	saveApartment()
 	ExecuteCommand('save')
 end)
