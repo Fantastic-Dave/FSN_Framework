@@ -3173,23 +3173,23 @@
       <handlingName>EXEMPLAR</handlingName>
       <fMass value="2000.000000" />
       <fInitialDragCoeff value="0.360000" />
-	  <fDownforceModifier value="1.420000" />
+    <fDownforceModifier value="1.420000" />
       <fPercentSubmerged value="78.000000" />
       <vecCentreOfMassOffset x="0.000000" y="-0.340000" z="0.020000" />
       <vecInertiaMultiplier x="1.180000" y="1.000000" z="1.620000" />
       <fDriveBiasFront value="0.000000" />
       <nInitialDriveGears value="6" />
-      <fInitialDriveForce value="0.231000" />
+      <fInitialDriveForce value="0.241000" />
       <fDriveInertia value="0.990000" />
       <fClutchChangeRateScaleUpShift value="1.900000" />
       <fClutchChangeRateScaleDownShift value="2.000000" />
-      <fInitialDriveMaxFlatVel value="156.000000" />
+      <fInitialDriveMaxFlatVel value="146.000000" />
       <fBrakeForce value="0.261000" />
       <fBrakeBiasFront value="0.456910" />
-      <fHandBrakeForce value="0.850000" />
+      <fHandBrakeForce value="0.800000" />
       <fSteeringLock value="34.800000" />
-      <fTractionCurveMax value="1.410000" />
-      <fTractionCurveMin value="1.145000" />
+      <fTractionCurveMax value="1.550000" />
+      <fTractionCurveMin value="1.345000" />
       <fTractionCurveLateral value="16.800000" />
       <fTractionSpringDeltaMax value="0.134000" />
       <fLowSpeedTractionLossMult value="0.230000" />
