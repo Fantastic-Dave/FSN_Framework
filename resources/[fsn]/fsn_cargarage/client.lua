@@ -240,7 +240,7 @@ Citizen.CreateThread(function()
 			if GetDistanceBetweenCoords(grg.pos.x,grg.pos.y,grg.pos.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
         DrawMarker(1,grg.pos.x,grg.pos.y,grg.pos.z-1,0,0,0,0,0,0,5.8, 5.8, 0.5,0,155,255,175,0,0,0,0)
         if GetDistanceBetweenCoords(grg.pos.x,grg.pos.y,grg.pos.z,GetEntityCoords(GetPlayerPed(-1)), true) < 5.8 then
-					local vehicle false
+					local vehicle = false
 					if IsPedInAnyVehicle(GetPlayerPed(-1)) then
 						if GetVehiclePedIsUsing(GetPlayerPed(-1)) then
 							vehicle = GetVehiclePedIsUsing(GetPlayerPed(-1))		
