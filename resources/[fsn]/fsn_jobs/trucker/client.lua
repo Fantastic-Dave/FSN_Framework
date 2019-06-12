@@ -101,7 +101,7 @@ Citizen.CreateThread(function()
     if mission_index ~= 0 then
       if GetDistanceBetweenCoords(GetEntityCoords(cur_trailer), jobs[mission_index].dropoff.x, jobs[mission_index].dropoff.y, jobs[mission_index].dropoff.z) < 10 then
         DetachVehicleFromTrailer(cur_truck)
-        local pay = math.random(jobs[mission_index].payout - 500, jobs[mission_index].payout + 750)
+        local pay = math.random(jobs[mission_index].payout - 800, jobs[mission_index].payout + 300)
         TriggerEvent('fsn_bank:change:walletAdd', pay)
         TriggerEvent('fsn_notify:displayNotification', 'You delivered the trailer for: <b style="color:limegreen">$'..pay, 'centerLeft', 8000, 'success')
         Wait(1000)
@@ -148,11 +148,11 @@ Citizen.CreateThread(function()
       if mission_index == 0 then
         if cur_truck then
           SetTextComponentFormat("STRING")
-          AddTextComponentString("Press ~INPUT_PICKUP~ to get a new job (~g~$1000~w~)")
+          AddTextComponentString("Press ~INPUT_PICKUP~ to get a new job (~g~$2000~w~)")
           DisplayHelpTextFromStringLabel(0, 0, 1, -1)
           if IsControlJustPressed(0,38) then
             if exports.fsn_main:fsn_GetWallet() >= 1000 then
-              getNewJob(1000)
+              getNewJob(2000)
             else
               TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
             end
@@ -171,7 +171,7 @@ Citizen.CreateThread(function()
         end
       else
         SetTextComponentFormat("STRING")
-        AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~return~w~ your truck\nPress ~INPUT_VEH_DUCK~ to ~g~get~w~ a new job ($0)")
+        AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~return~w~ your truck\nPress ~INPUT_VEH_DUCK~ to ~g~get~w~ a new job ($500)")
         DisplayHelpTextFromStringLabel(0, 0, 1, -1)
         if IsControlJustPressed(0,73) then
           if exports.fsn_main:fsn_GetWallet() >= 0 then
@@ -180,7 +180,7 @@ Citizen.CreateThread(function()
               trailer_blip = false
             end
             print('just pressed x')
-            getNewJob(0)
+            getNewJob(500)
           else
             TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
           end
