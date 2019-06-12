@@ -239,10 +239,10 @@ AddEventHandler('fsn_jewellerystore:case:startrob', function(caseid)
 	end
 	TaskPlayAnim(GetPlayerPed(-1), "missheist_jewel", anims[math.random(1,#anims)], 4.0, -4, -1, 1, 0, 0, 0, 0)
 	robbing = true
-	Citizen.Wait(2000)
+	Citizen.Wait(5000)
 	ClearPedTasks(GetPlayerPed(-1))
 	robbing = false
-	TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(4000,6000))
+	TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(1000,1500))
 	FreezeEntityPosition(GetPlayerPed(-1), false)
 end)
 
