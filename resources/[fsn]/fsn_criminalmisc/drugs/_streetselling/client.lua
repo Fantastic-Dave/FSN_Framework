@@ -177,8 +177,9 @@ Citizen.CreateThread(function()
 								end
 								
 								-- work out pricing
-								local mini = areas[myarea].drugs[drug].value - math.floor(areas[myarea].drugs[drug].value / 2)
-								local maxi = areas[myarea].drugs[drug].value + math.ceil(areas[myarea].drugs[drug].value / 2)
+								local preece = areas[myarea].drugs[drug].value * 2
+								local mini = preece - math.floor(preece / 2)
+								local maxi = preece + math.ceil(preece / 2)
 								local price = 0
 								if exports["fsn_police"]:fsn_getCopAmt() > 2 then
 									local buff = math.random(10,20)
