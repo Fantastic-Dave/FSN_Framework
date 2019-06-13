@@ -235,11 +235,11 @@ AddEventHandler('fsn_jewellerystore:case:startrob', function(caseid)
 	local anims = {'smash_case', 'smash_case_b', 'smash_case_c', 'smash_case_d'}
 	RequestAnimDict('missheist_jewel')
 	while not HasAnimDictLoaded('missheist_jewel') do
-		Citizen.Wait(1)
+		Citizen.Wait(7500)
 	end
 	TaskPlayAnim(GetPlayerPed(-1), "missheist_jewel", anims[math.random(1,#anims)], 4.0, -4, -1, 1, 0, 0, 0, 0)
 	robbing = true
-	Citizen.Wait(5000)
+	Citizen.Wait(7500)
 	ClearPedTasks(GetPlayerPed(-1))
 	robbing = false
 	TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(1000,1500))
