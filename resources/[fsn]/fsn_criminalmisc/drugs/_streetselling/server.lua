@@ -26,7 +26,7 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["meth_rocks"]={value=math.random(70,95),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["BANHAMC"] = {
@@ -37,8 +37,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(60,80),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,100),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["BANNING"] = {
@@ -49,8 +49,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(50,80),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,105),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["BEACH"] = {
@@ -61,8 +61,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(50,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(40,60),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["BURTON"] = {
@@ -73,8 +73,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(60,80),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,100),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["CHAMH"] = {
@@ -85,7 +85,7 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(85,1100),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
             ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
@@ -97,8 +97,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,110),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(110,180),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["CHU"] = {
@@ -109,8 +109,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(70,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,90),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["CYPRE"] = {
@@ -121,8 +121,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(70,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["DAVIS"] = {
@@ -133,8 +133,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(70,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["DELBE"] = {
@@ -145,8 +145,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,115),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["DELPE"] = {
@@ -157,11 +157,11 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
-	["DELSOL"] = {
+	["DELSOL"] = {85,110
         name = "La Puerta",
         enabled = true,
         callpercentage = 70,
@@ -169,8 +169,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(70,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["DESRT"] = {
@@ -181,8 +181,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(50,80),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["DOWNT"] = {
@@ -193,8 +193,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(50,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["DTVINE"] = {
@@ -205,8 +205,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(70,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,115),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["EAST_V"] = {
@@ -217,8 +217,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(70,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,115),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["EBURO"] = {
@@ -229,8 +229,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(70,80),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["ELYSIAN"] = {
@@ -241,8 +241,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(50,70),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,90),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["GOLF"] = {
@@ -253,8 +253,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(60,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["GRAPES"] = {
@@ -265,8 +265,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(50,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["HARMO"] = {
@@ -277,8 +277,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["HAWICK"] = {
@@ -289,8 +289,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(70,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,100),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["KOREAT"] = {
@@ -301,8 +301,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["LAGO"] = {
@@ -313,8 +313,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(70,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["LDAM"] = {
@@ -325,8 +325,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(70,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["LEGSQU"] = {
@@ -337,7 +337,7 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(90,100),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
             ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
@@ -349,8 +349,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(10,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["LOSPUER"] = {
@@ -361,8 +361,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,130),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["MIRR"] = {
@@ -373,8 +373,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(90,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,140),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["MORN"] = {
@@ -385,8 +385,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["MOVIE"] = {
@@ -397,8 +397,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["MURRI"] = {
@@ -409,8 +409,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["NCHU"] = {
@@ -421,8 +421,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(70,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,100),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["PALETO"] = {
@@ -433,8 +433,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(80,110),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["PALHIGH"] = {
@@ -445,8 +445,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(90,110),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["PALMPOW"] = {
@@ -457,8 +457,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(70,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["PBLUFF"] = {
@@ -469,8 +469,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(70,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["PBOX"] = {
@@ -481,8 +481,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(90,110),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,130),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["PROCOB"] = {
@@ -493,8 +493,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(90,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["RANCHO"] = {
@@ -505,8 +505,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["RGLEN"] = {
@@ -517,8 +517,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(90,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["RICHM"] = {
@@ -529,8 +529,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["ROCKF"] = {
@@ -541,8 +541,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,110),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,125),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["SANAND"] = {
@@ -553,8 +553,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,105),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["SANDY"] = {
@@ -565,8 +565,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(50,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,140),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["SKID"] = {
@@ -578,7 +578,7 @@ area_table = {
         incity = true,
         drugs = {
             ["joint"]={value=math.random(110,130),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(120,160),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(120,180),avg=math.random(1,5)},
         },
     },
 	["SLAB"] = {
@@ -589,8 +589,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(70,105),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["STAD"] = {
@@ -601,8 +601,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["STRAW"] = {
@@ -613,8 +613,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["TEXTI"] = {
@@ -625,8 +625,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(90,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,125),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["TONGVAH"] = {
@@ -637,8 +637,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["TONGVAV"] = {
@@ -649,8 +649,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["VCANA"] = {
@@ -661,8 +661,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(100,120),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["VESP"] = {
@@ -673,8 +673,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["VINE"] = {
@@ -685,8 +685,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,120),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["WVINE"] = {
@@ -697,8 +697,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(90,120),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,100),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["ZP_ORT"] = {
@@ -709,8 +709,8 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,110),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,120),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
 	["ZQ_UAR"] = {
@@ -721,8 +721,8 @@ area_table = {
         premium = false,
         incity = false,
         drugs = {
-            ["joint"]={value=math.random(90,120),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,130),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(100,150)avg=math.random(1,5)},
         },
     },
 }
