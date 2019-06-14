@@ -162,7 +162,7 @@ AddEventHandler('fsn_police:update', function(cops)
   onduty_police = cops
 end)
 function fsn_getCopAmt()
-  return 3
+  return #onduty_police
 end
 
 policeWeapons = {

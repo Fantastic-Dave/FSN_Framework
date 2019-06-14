@@ -70,7 +70,7 @@ local crafting_stations = {
     },
 	]]
     loc = {x = -586.707, y = -1601.208, z = 27.010},
-    cost = 75,
+    cost = 50,
     required = {
       item = 'acetone',
       itemtitle = 'Acetone',
