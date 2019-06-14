@@ -131,7 +131,7 @@ local license_stores = {
   {
     loc = {x = 233.22550964355, y = -410.34426879883, z = 48.11198425293},
     store = 'driver',
-    cost = 2500,
+    cost = 500,
     text = 'Press ~INPUT_PICKUP~ to buy a drivers license (~g~$2500~w~)'
   },
   {
@@ -149,8 +149,8 @@ local function buyLicense(index)
         if licenses['driver'].status ~= 'EXPIRED' then
           TriggerEvent('fsn_notify:displayNotification', 'Your current license cannot be replaced', 'centerLeft', 4000, 'error')
         else
-          TriggerEvent('fsn_bank:change:walletMinus', 1500)
-          TriggerEvent('fsn_notify:displayNotification', 'You updated your current license for <span style="color:limegreen">$1500', 'centerLeft', 6000, 'success')
+          TriggerEvent('fsn_bank:change:walletMinus', 250)
+          TriggerEvent('fsn_notify:displayNotification', 'You updated your current license for <span style="color:limegreen">$250', 'centerLeft', 6000, 'success')
 
           licenses['driver'].date = GetNetworkTime()
           licenses['driver'].infractions = 0
@@ -163,8 +163,8 @@ local function buyLicense(index)
         licenses['driver'].infractions = 0
         licenses['driver'].status = 'ACTIVE'
 
-        TriggerEvent('fsn_bank:change:walletMinus', 2500)
-        TriggerEvent('fsn_notify:displayNotification', 'You bought a new license for <span style="color:limegreen">$2500', 'centerLeft', 6000, 'success')
+        TriggerEvent('fsn_bank:change:walletMinus', 500)
+        TriggerEvent('fsn_notify:displayNotification', 'You bought a new license for <span style="color:limegreen">$500', 'centerLeft', 6000, 'success')
 
         TriggerServerEvent('fsn_licenses:update', charid, json.encode(licenses))
       end
