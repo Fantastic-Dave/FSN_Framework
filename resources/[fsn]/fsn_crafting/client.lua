@@ -8,7 +8,7 @@ local crafting_stations = {
     },
 	]]
     loc = {x = 2219.7758789063, y = 5577.4584960938, z = 53.845291137695},
-    cost = 0,
+    cost = 5,
     required = {
       item = 'none',
       itemtitle = 'none',
@@ -28,7 +28,7 @@ local crafting_stations = {
     },
 	]]
     loc = {x = 1273.991, y = -1711.7100, z = 54.771},
-    cost = 200,
+    cost = 175,
     required = {
       item = '2g_weed',
       itemtitle = '2G Weed',
@@ -50,7 +50,7 @@ local crafting_stations = {
     },
 	]]
     loc = {x = 3623.6965332031, y = 3738.8859863281, z = 28.690086364746},
-    cost = 0,
+    cost = 15,
     required = {
       item = 'none',
       itemtitle = 'none',
