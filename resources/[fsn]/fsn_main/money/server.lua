@@ -13,12 +13,12 @@ AddEventHandler('fsn_main:money:initChar', function(src, cid, cash, balance)
 		end
 	end
 	if not exists then
-		table.insert(moneystore, #moneystore+1, {
+		moneystore[#moneystore+1] = {
 			char_id = cid,
 			ply_id = src,
 			wallet = cash,
 			bank = balance
-		})
+		}
 	end
 	Citizen.Wait(500)
 	TriggerClientEvent('fsn_main:money:update', src, cash, balance)
@@ -26,6 +26,7 @@ end)
 
 RegisterServerEvent('fsn_main:money:wallet:GiveCash')
 AddEventHandler('fsn_main:money:wallet:GiveCash', function(src, ply, amt)
+	-- TODO: Investigate if all the tonumbers are needed
 	ply = tonumber(ply)
 	if not tonumber(amt) or tonumber(amt) < 1 then
 		TriggerClientEvent('fsn_notify:displayNotification', src, 'There was an issue with your input', 'centerRight', 4000, 'error')

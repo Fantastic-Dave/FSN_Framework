@@ -1,9 +1,7 @@
 local function countPlayer() -- count all players
-	local counter = 0
-	for _ in pairs(GetPlayers()) do
-		counter = counter + 1
-	end
-	return counter
+	-- https://github.com/citizenfx/fivem/blob/master/data/shared/citizen/scripting/lua/scheduler.lua#L304
+	-- It uses table.insert so it's garuanteed to be "array like"
+	return #GetPlayers()
 end
 
 local warnings = {}
@@ -14,16 +12,16 @@ AddEventHandler('sendSession:PlayerNumber', function(clientPlayerNumber)
 		serverPlayerNumber = countPlayer()
 		if serverPlayerNumber-clientPlayerNumber > 2 then
 			if warnings[source] then
-        if warnings[source] < 5 then
-          TriggerClientEvent('chatMessage', -1, '', {255,255,255},  '^*'..GetPlayerName(source)..'#'..source..'^r you are ^1instanced^0 please reconnect to avoid being kicked.')
-          warnings[source] = warnings[source] + 1
-        else
-          TriggerClientEvent('chatMessage', -1, '', {255,255,255},  '^*'..GetPlayerName(source)..'#'..source..'^r has been kicked due to instancing.')
-          DropPlayer(source, ':FSN: You have been kicked from the server due to instancing, please rejoin.')
-        end
-      else
-        warnings[source] = 1
-      end
+				if warnings[source] < 5 then
+					TriggerClientEvent('chatMessage', -1, '', {255,255,255},  '^*'..GetPlayerName(source)..'#'..source..'^r you are ^1instanced^0 please reconnect to avoid being kicked.')
+					warnings[source] = warnings[source] + 1
+				else
+					TriggerClientEvent('chatMessage', -1, '', {255,255,255},  '^*'..GetPlayerName(source)..'#'..source..'^r has been kicked due to instancing.')
+					DropPlayer(source, ':FSN: You have been kicked from the server due to instancing, please rejoin.')
+				end
+			else
+				warnings[source] = 1
+			end
 		end
 	end
 end)

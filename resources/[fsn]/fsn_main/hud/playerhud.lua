@@ -16,23 +16,18 @@ function getHunger()
 	return exports["fsn_hungerandthirst"]:fsn_hunger()
 end
 
+-- TODO: Cleanup this code
 Citizen.CreateThread(function()
 	while true do --Citizen.Wait(0)
 		if HudStage == 4 then
-			if opacityBars < 255 then
-				opacityBars = opacityBars + 1
-			else
-				opacityBars = 255
-			end
+			opacityBars = math.min(opacityBars + 1, 255)
 			if Addition < 0.2 then
 				Addition = Addition + 0.001
 			end
 
 			DrawRect(0,-0.2 + Addition, 2.0, 0.2, 1, 1, 1, opacityBars)
 			DrawRect(0,1.20 - Addition, 2.0, 0.2, 1, 1, 1, opacityBars)
-		end
-
-		if HudStage ~= 4 then
+		else
 			if opacityBars > 0 then
 				opacityBars = opacityBars - 1
 				Addition = Addition + 0.001
@@ -70,7 +65,6 @@ Citizen.CreateThread(function()
 	    end
 		SetPedMinGroundTimeForStungun(GetPlayerPed(-1), 16000)
 		if HudStage < 3 then
-
 		    if opacity > 0 and not fadein then
 		    	opacity = opacity - 10
 		    end

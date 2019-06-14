@@ -5,16 +5,14 @@ function SetWeaponDrops()
     local finished = false
     repeat 
         if not IsEntityDead(ped) then
-                pedindex[ped] = {}
+            pedindex[ped] = {}
         end
         finished, ped = FindNextPed(handle)
     until not finished
     EndFindPed(handle)
 
-    for peds,_ in pairs(pedindex) do
-        if peds ~= nil then
-            SetPedDropsWeaponsWhenDead(peds, false) 
-        end
+    for ped,_ in pairs(pedindex) do
+        SetPedDropsWeaponsWhenDead(ped, false)
     end
 end
 

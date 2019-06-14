@@ -2,7 +2,7 @@ AddEventHandler('fsn_main:validatePlayer', function()
 
 end)
 ---------------------------- Character Shit
-current_characters = {}
+cur_chars = {}
 RegisterServerEvent('fsn_main:updateCharacters')
 RegisterServerEvent('fsn_main:createCharacter')
 AddEventHandler('fsn_main:createCharacter', function(data)
@@ -18,14 +18,14 @@ AddEventHandler('fsn_main:createCharacter', function(data)
 end)
 --[[
 AddEventHandler('playerDropped', function()
-  for k, v in pairs(current_characters) do
+  for k, v in pairs(cur_chars) do
     if v.ply_id == source then
       print('REMOVING '..v.char_fname..v.char_lname..' FROM CHARACTERS TABLE')
-      table.remove(current_characters, k)
-      table.concat(current_characters,", ",1,#current_characters)
+      table.remove(cur_chars, k)
+      table.concat(cur_chars,", ",1,#cur_chars)
     end
   end
-  TriggerEvent('fsn_main:updateCharacters', current_characters)
+  TriggerEvent('fsn_main:updateCharacters', cur_chars)
 end)
 ]]
 RegisterServerEvent('fsn_main:requestCharacters')
@@ -47,51 +47,52 @@ end)
 
 RegisterServerEvent('fsn_main:update:myCharacter')
 AddEventHandler('fsn_main:update:myCharacter', function(index, char)
-  for k, v in pairs(current_characters) do
+  for k, v in pairs(cur_chars) do
     if v.ply_id == source then
       v = char
     end
   end
-  --current_characters[index] = char
+  --cur_chars[index] = char
 end)
 
 RegisterServerEvent('fsn_main:getCharacter')
 AddEventHandler('fsn_main:getCharacter', function(char_id)
   local steamid = GetPlayerIdentifiers(source)
   steamid = steamid[1]
+  -- TODO: Investigate if the steamid check can be put into the MySQL query
   local char = MySQL.Sync.fetchAll("SELECT * FROM `fsn_characters` WHERE `char_id` = '"..char_id.."'")
   if char[1].steamid == steamid then
     TriggerClientEvent('fsn_main:initiateCharacter', source, char)
     --[[
-    for k, v in pairs(current_characters) do
+    for k, v in pairs(cur_chars) do
       if v.ply_id == source then
-        table.remove(current_characters, k)
+        table.remove(cur_chars, k)
       end
     end
-    for k, v in pairs(current_characters) do
+    for k, v in pairs(cur_chars) do
       if v.ply_id == source then
-        table.remove(current_characters,k)
+        table.remove(cur_chars,k)
       end
     end
     ]]
-    table.insert(current_characters, #current_characters+1, {
-      char_id = char[1].char_id,
-      ply_id = source,
-      ply_name = GetPlayerName(source),
-      char_fname = char[1].char_fname,
-      char_lname = char[1].char_lname,
-      char_dob = char[1].char_dob,
-      char_phone = char[1].char_phone,
-      char_contacts = char[1].char_contacts,
-      char_police = char[1].char_police,
-      char_ems = char[1].char_ems,
+    cur_chars[#cur_chars+1] = {
+      ply_id         = source,
+      ply_name       = GetPlayerName(source),
+      char_id        = char[1].char_id,
+      char_fname     = char[1].char_fname,
+      char_lname     = char[1].char_lname,
+      char_dob       = char[1].char_dob,
+      char_phone     = char[1].char_phone,
+      char_contacts  = char[1].char_contacts,
+      char_police    = char[1].char_police,
+      char_ems       = char[1].char_ems,
       char_twituname = char[1].char_twituname
-    })
+    }
 	
     TriggerEvent('fsn_main:money:initChar', source, char[1].char_id, char[1].char_money, char[1].char_bank)
 	
-    TriggerClientEvent('fsn_main:updateCharacters', -1, current_characters)
-    TriggerEvent('fsn_main:updateCharacters', current_characters)
+    TriggerClientEvent('fsn_main:updateCharacters', -1, cur_chars)
+    TriggerEvent('fsn_main:updateCharacters', cur_chars)
   else
     DropPlayer(source, ':FSN: You tried to load a character you do not own.')
   end
@@ -106,7 +107,7 @@ end)
 
 function fsn_GetPlayerFromCharacterId(id)
   local idee = 0
-  for k, v in pairs(current_characters) do
+  for k, v in pairs(cur_chars) do
     if v.char_id == tonumber(id) then
       idee = v.ply_id
     end
@@ -116,7 +117,7 @@ end
 
 function fsn_CharID(src)
   local charid = 0
-  for k, v in pairs(current_characters) do
+  for k, v in pairs(cur_chars) do
     if v.ply_id == tonumber(src) then
       charid = v.char_id
     end
@@ -126,7 +127,7 @@ end
 
 function fsn_GetPlayerFromPhoneNumber(num)
   local idee = 0
-  for k, v in pairs(current_characters) do
+  for k, v in pairs(cur_chars) do
     if v.char_phone == tonumber(num) then
       idee = v.ply_id
     end
@@ -136,7 +137,7 @@ end
 
 function fsn_GetPlayerPhoneNumber(ply)
   local idee = 0
-  for k, v in pairs(current_characters) do
+  for k, v in pairs(cur_chars) do
     if v.ply_id == tonumber(ply) then
       idee = v.char_phone
     end
@@ -146,7 +147,7 @@ end
 
 RegisterServerEvent('fsn_main:updateCharNumber')
 AddEventHandler('fsn_main:updateCharNumber', function(charid, number)
-  for k, v in pairs(current_characters) do
+  for k, v in pairs(cur_chars) do
     if v.char_id == tonumber(charid) then
       v.char_phone = tonumber(number)
       print(v.char_id..' updated phone number to: '..v.char_phone)
@@ -158,7 +159,7 @@ end)
 RegisterServerEvent('fsn_inventory:database:update')
 AddEventHandler('fsn_inventory:database:update', function(inv)
   local charid = 0
-  for k, v in pairs(current_characters) do
+  for k, v in pairs(cur_chars) do
     if v.ply_id == source then
       charid = v.char_id
     end
@@ -171,7 +172,7 @@ RegisterServerEvent('fsn_cargarage:buyVehicle')
 AddEventHandler('fsn_cargarage:buyVehicle', function(hash, classname, plate, vehicle_price)
   print(source..' is attempting to buy '..classname)
   local char_id = 0
-  for k, v in pairs(current_characters) do
+  for k, v in pairs(cur_chars) do
     if v.ply_id == source then
       char_id = v.char_id
     end
@@ -197,7 +198,7 @@ end)
 ------------------------------------------------------ POLICE
 RegisterServerEvent('fsn_police:chat:ticket')
 AddEventHandler('fsn_police:chat:ticket', function(suspectID, jailFine, jailTime, charges)
-  for k, v in pairs(current_characters) do
+  for k, v in pairs(cur_chars) do
     if v.ply_id then
       --print(v.ply_id..' != '..suspectID)
       if v.ply_id == tonumber(suspectID) then
