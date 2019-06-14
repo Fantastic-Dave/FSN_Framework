@@ -18,7 +18,7 @@ items_table = {
 	  end
     end,
     modelhash = -2140074399,
-    price = 500
+    price = 250
   },
   ["radio_receiver"] = {
     display_name = 'Radio Receiver',
@@ -81,7 +81,7 @@ items_table = {
     weight = 3.0,
     desc = 'This lets you hold more',
     use = 'unavailable',
-	  price = 1000,
+	  price = 750,
     modelhash = 332394125
   },
   ["beef_jerky"] = {
@@ -199,7 +199,7 @@ items_table = {
     use = function()
 		TriggerEvent('fsn_criminalmisc:lockpicking')
     end,
-	  price = 250,
+	  price = 200,
     modelhash = 495450405
   },
   ["modified_drillbit"] = {
@@ -215,7 +215,7 @@ items_table = {
     weight = 3,
     desc = 'you dodgy guy',
     use = 'unavailable',
-	price = 1500,
+	price = 1000,
     modelhash = 1070220657
   },
   ["handcuffs"] = {
@@ -235,7 +235,7 @@ items_table = {
       TriggerEvent('fsn_phone:togglePhone')
     end,
     modelhash = 974883178,
-    price = 1000
+    price = 250
   },
   ["2g_weed"] = {
     display_name = '2G Weed',
