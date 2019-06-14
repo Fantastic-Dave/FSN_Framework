@@ -1,3 +1,4 @@
+-- TODO: x^2+y^2+z^2 < distance^2 instead of (x^2+y^2+z^2)^.5 < distance
 function fsn_FindNearbyPed(Distance)
     local TargetPed
     local Handle, Ped = FindFirstPed()
@@ -7,7 +8,7 @@ function fsn_FindNearbyPed(Distance)
             TargetPed = Ped
         end
 
-    Success, Ped = FindNextPed(Handle)
+        Success, Ped = FindNextPed(Handle)
     until not Success
 
     EndFindPed(Handle)
@@ -23,7 +24,7 @@ function fsn_FindPedNearbyCoords(x,y,z,Distance)
             TargetPed = Ped
         end
 
-    Success, Ped = FindNextPed(Handle)
+        Success, Ped = FindNextPed(Handle)
     until not Success
 
     EndFindPed(Handle)

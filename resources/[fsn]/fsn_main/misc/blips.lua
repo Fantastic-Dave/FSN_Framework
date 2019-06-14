@@ -50,24 +50,24 @@ AddEventHandler('fsn_main:blip:clear', function()
       if v.whofor == "police" and exports["fsn_police"]:fsn_PDDuty() then
         if GetDistanceBetweenCoords(v.location[1], v.location[2], v.location[3], GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
           RemoveBlip(v.blipObject)
-  				v.active = false
-					TriggerEvent('fsn_notify:displayNotification', 'POLICE: Blip cleared.', 'centerLeft', 6000, 'info')
+          v.active = false
+          TriggerEvent('fsn_notify:displayNotification', 'POLICE: Blip cleared.', 'centerLeft', 6000, 'info')
         end
       end
-    	if v.whofor == "ems" and exports["fsn_ems"]:fsn_EMSDuty() then
+      if v.whofor == "ems" and exports["fsn_ems"]:fsn_EMSDuty() then
         if GetDistanceBetweenCoords(v.location[1], v.location[2], v.location[3], GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
           RemoveBlip(v.blipObject)
-  				v.active = false
-					TriggerEvent('fsn_notify:displayNotification', 'EMS: Blip cleared.', 'centerLeft', 6000, 'info')
+          v.active = false
+          TriggerEvent('fsn_notify:displayNotification', 'EMS: Blip cleared.', 'centerLeft', 6000, 'info')
         end
-    	end
-    	if v.whofor == "tow" and exports["fsn_jobs"]:fsn_GetJob() == 'Mechanic' then
+      end
+      if v.whofor == "tow" and exports["fsn_jobs"]:fsn_GetJob() == 'Mechanic' then
         if GetDistanceBetweenCoords(v.location[1], v.location[2], v.location[3], GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
           RemoveBlip(v.blipObject)
-  				v.active = false
-					TriggerEvent('fsn_notify:displayNotification', 'TOW: Blip cleared.', 'centerLeft', 6000, 'info')
+          v.active = false
+          TriggerEvent('fsn_notify:displayNotification', 'TOW: Blip cleared.', 'centerLeft', 6000, 'info')
         end
-    	end
+      end
     end
   end
 end)

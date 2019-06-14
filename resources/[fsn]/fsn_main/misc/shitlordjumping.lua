@@ -1,3 +1,4 @@
+-- TODO: Merge "threads"
 local canJump = true
 
 Citizen.CreateThread(function()

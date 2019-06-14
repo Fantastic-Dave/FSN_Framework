@@ -1,11 +1,11 @@
 function showLoadingPrompt(showText, showTime, showType)
   Citizen.CreateThread(function()
     Citizen.Wait(0)
-    N_0xaba17d7ce615adbf("STRING") -- set type
+    BeginTextCommandBusyString("STRING") -- set type
     AddTextComponentString(showText) -- sets the text
-    N_0xbd12f8228410d9b4(showType) -- show promt (types = 3)
+    EndTextCommandBusyString(showType) -- show promt (types = 3)
     Citizen.Wait(showTime) -- show time
-    N_0x10d373323e5b9c0d() -- remove promt
+    RemoveLoadingPrompt() -- remove promt
   end)
 end
 

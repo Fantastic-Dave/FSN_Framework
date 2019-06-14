@@ -1,10 +1,12 @@
 local fsn_spawned = false
 local current_character_id = 0
 local current_character = {}
+
 RegisterNetEvent('spawnme')
 AddEventHandler('spawnme', function()
   fsn_spawned = true
 end)
+
 local function freezePlayer(id, freeze)
     local player = id
     SetPlayerControl(player, not freeze, false)
@@ -36,6 +38,7 @@ local function freezePlayer(id, freeze)
         end
     end
 end
+
 function fsn_IPLManager()
   LoadMpDlcMaps()
   EnableMpDlcMaps(true)
@@ -125,6 +128,7 @@ function fsn_IPLManager()
   RequestIpl("canyonriver01")
   RequestIpl("canyonrvrdeep")
 end
+
 function fsn_mainSpawn()
   fsn_spawned = false
   local spawncoords = {x = -931.23278808594, y= 5587.6728515625, z= 91.584693908691}
@@ -134,41 +138,24 @@ function fsn_mainSpawn()
   SetEntityCoords(GetPlayerPed(-1), spawncoords.x, spawncoords.y, spawncoords.z)
   freezePlayer(-1, true)
   Citizen.CreateThread(function()
-	Citizen.Wait(2000)
-	DoScreenFadeIn(3500)
-    while true do
-      Citizen.Wait(0)
-      if fsn_spawned then
-        DisableControlAction(0, 1, false)
-        DisableControlAction(0, 2, false)
-        DisableControlAction(0, 142, false)
-        DisableControlAction(0, 106, false)
-        DisableControlAction(0, 24, false)
-        DisableControlAction(0, 140, false)
-        DisableControlAction(0, 141, false)
-        DisableControlAction(0, 257, false)
-        DisableControlAction(0, 263, false)
-        DisableControlAction(0, 264, false)
-        DisableControlAction(0, 25, false)
-        DisableControlAction(0, 50, false)
-        freezePlayer(-1, false)
-        break
-      else
-        HideHudAndRadarThisFrame()
-        --ShowCursorThisFrame()
-        DisableControlAction(0, 1, true)
-  			DisableControlAction(0, 2, true)
-  			DisableControlAction(0, 142, true)
-  			DisableControlAction(0, 106, true)
-  			DisableControlAction(0, 24, true)
-  			DisableControlAction(0, 140, true)
-  			DisableControlAction(0, 141, true)
-  			DisableControlAction(0, 257, true)
-  			DisableControlAction(0, 263, true)
-  			DisableControlAction(0, 264, true)
-  			DisableControlAction(0, 25, true)
-  			DisableControlAction(0, 50, true)
+    Citizen.Wait(2000)
+    DoScreenFadeIn(3500)
+
+    -- TODO: Investigate if DisableInputGroup can be used instead
+    -- TODO: DisableControlAction(0, x, true) might not need to be in a loop
+    local controls = {1,2,142,106,24,140,141,257,263,264,25,50}
+    while not fsn_spawned do
+      HideHudAndRadarThisFrame()
+      --ShowCursorThisFrame()
+      for _, control in pairs(controls) do
+        DisableControlAction(0, control, true)
       end
+      Citizen.Wait(0)
+    end
+
+    freezePlayer(-1, false)
+    for _, control in pairs(controls) do
+      DisableControlAction(0, control, false)
     end
   end)
 end
@@ -202,109 +189,71 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
   SetEntityCoords(GetPlayerPed(-1), mainSpawn.x, mainSpawn.y, mainSpawn.z)
   fsn_spawned = true
   Citizen.CreateThread(function()
-  SetEntityVisible(GetPlayerPed(-1), true)
-  --[[
-    RequestModel(model)
-    
-    while not HasModelLoaded(model) do
-      Citizen.Wait(1)
-      RequestModel(model)
-    end
-	
-    SetPlayerModel(PlayerId(), model)
-    SetModelAsNoLongerNeeded(model)
     SetEntityVisible(GetPlayerPed(-1), true)
+    --[[
+      RequestModel(model)
+      
+      while not HasModelLoaded(model) do
+        Citizen.Wait(1)
+        RequestModel(model)
+      end
+  	
+      SetPlayerModel(PlayerId(), model)
+      SetModelAsNoLongerNeeded(model)
+      SetEntityVisible(GetPlayerPed(-1), true)
 
-    local weapons = json.decode(char.char_weapons)
-    for k, v in pairs(weapons) do
-      local hash = v.weaponHash
-      local ammo = v.ammo
-      GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(hash), ammo, false, false)
-    end
-    if char.mdl_extras ~= '[]' then
-      local variations = json.decode(char.mdl_extras)
-      for _, tbl in pairs(variations) do
-        if tbl.type == 'drawable' then
-          SetPedComponentVariation(GetPlayerPed(-1), tbl.index, tbl.drawable, tbl.texture, tbl.texture)
-        elseif tbl.type == 'prop' then
-          SetPedPropIndex(GetPlayerPed(-1), tbl.index, tbl.prop, tbl.texture, true)
+      local weapons = json.decode(char.char_weapons)
+      for k, v in pairs(weapons) do
+        local hash = v.weaponHash
+        local ammo = v.ammo
+        GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(hash), ammo, false, false)
+      end
+      if char.mdl_extras ~= '[]' then
+        local variations = json.decode(char.mdl_extras)
+        for _, tbl in pairs(variations) do
+          if tbl.type == 'drawable' then
+            SetPedComponentVariation(GetPlayerPed(-1), tbl.index, tbl.drawable, tbl.texture, tbl.texture)
+          elseif tbl.type == 'prop' then
+            SetPedPropIndex(GetPlayerPed(-1), tbl.index, tbl.prop, tbl.texture, true)
+          end
+        end
+      else
+        for i=1,10 do
+          SetPedRandomComponentVariation(GetPlayerPed(-1), true)
         end
       end
-    else
-      for i=1,10 do
-        SetPedRandomComponentVariation(GetPlayerPed(-1), true)
-      end
-    end
-	]]
-	local mdl = json.decode(char.char_model)
-	TriggerEvent("clothes:spawn", mdl)
-    
-	TriggerEvent('fsn_main:character', char)
+    ]]
+    local mdl = json.decode(char.char_model)
+    TriggerEvent("clothes:spawn", mdl)
+      
+    TriggerEvent('fsn_main:character', char)
     TriggerEvent('fsn_police:init', char.char_police)
     TriggerEvent('fsn_jail:init', char.char_id)
     TriggerEvent('fsn_inventory:initChar', char.char_inventory)
     TriggerEvent('fsn_bank:change:bankAdd', 0)
     TriggerEvent('fsn_ems:reviveMe:force')
     for k, v in pairs(current_characters) do
-        if v.char_id == current_character_id then
-          current_character_index = k
-        end
+      if v.char_id == current_character_id then
+        current_character_index = k
+      end
     end
     TriggerEvent('chatMessage', '', {255,255,255}, '^1^*Warning:^r This is a beta release of the :FSN: Framework. We aren\'t expecting any bugs, but those that are found should be reported via dm to JamesSc0tt on discord or the forums.')
-	TriggerServerEvent('fsn_apartments:getApartment', char.char_id)
+    TriggerServerEvent('fsn_apartments:getApartment', char.char_id)
   end)
 end)
 
 RegisterNetEvent('fsn_main:sendCharacters')
-AddEventHandler('fsn_main:sendCharacters', function(characters)
-  if characters[1] then
-    char1_id = characters[1].char_id
-    char1_fname = characters[1].char_fname
-    char1_lname = characters[1].char_lname
-    char1_dob = characters[1].char_dob
-  else
-    char1_id = 'nothing'
-    char1_fname = 'nothing'
-    char1_lname = 'nothing'
-    char1_dob = 'nothing'
+AddEventHandler('fsn_main:sendCharacters', function(chars)
+  local msg = {type = "characterInfo"}
+  for i=1,3 do
+    local prefix = "char"..i
+    local exists = chars[i]
+    msg[prefix.."_id"]    = exists and chars[i].char_id    or "nothing"
+    msg[prefix.."_fname"] = exists and chars[i].char_fname or "nothing"
+    msg[prefix.."_lname"] = exists and chars[i].char_lname or "nothing"
+    msg[prefix.."_dob"]   = exists and chars[i].char_dob   or "nothing"
   end
-  if characters[2] then
-    char2_id = characters[2].char_id
-    char2_fname = characters[2].char_fname
-    char2_lname = characters[2].char_lname
-    char2_dob = characters[2].char_dob
-  else
-    char2_id = 'nothing'
-    char2_fname = 'nothing'
-    char2_lname = 'nothing'
-    char2_dob = 'nothing'
-  end
-  if characters[3] then
-    char3_id = characters[3].char_id
-    char3_fname = characters[3].char_fname
-    char3_lname = characters[3].char_lname
-    char3_dob = characters[3].char_dob
-  else
-    char3_id = 'nothing'
-    char3_fname = 'nothing'
-    char3_lname = 'nothing'
-    char3_dob = 'nothing'
-  end
-  SendNUIMessage({
-    type='characterInfo',
-    char1_id = char1_id,
-    char1_fname = char1_fname,
-    char1_lname = char1_lname,
-    char1_dob = char1_dob,
-    char2_id = char2_id,
-    char2_fname = char2_fname,
-    char2_lname = char2_lname,
-    char2_dob = char2_dob,
-    char3_id = char3_id,
-    char3_fname = char3_fname,
-    char3_lname = char3_lname,
-    char3_dob = char3_dob
-  })
+  SendNUIMessage(msg)
 end)
 
 RegisterNUICallback('spawnCharacter', function(data, cb)
@@ -409,7 +358,7 @@ end)
 NetworkSetFriendlyFireOption(true)
 SetCanAttackFriendly(GetPlayerPed(-1), true, true)
 ------------------------------------------------------------- character changer
-local char_changer = {x = -219.72131347656, y = -1054.1688232422, z = 30.14019203186}
+local char_changer = vector3(-219.72131347656, -1054.1688232422, 30.14019203186)
 function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
   SetTextFont(font)
   SetTextProportional(0)
@@ -429,9 +378,11 @@ local swapstart = 0
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
-    if GetDistanceBetweenCoords(char_changer.x,char_changer.y,char_changer.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
-      DrawMarker(1,char_changer.x,char_changer.y,char_changer.z-1,0,0,0,0,0,0,3.001,3.0001,0.4001,0,155,255,175,0,0,0,0)
-      if GetDistanceBetweenCoords(char_changer.x,char_changer.y,char_changer.z,GetEntityCoords(GetPlayerPed(-1)), true) < 3 then
+
+    local dist = #(char_changer-GetEntityCoords(GetPlayerPed(-1)))
+    if dist < 10 then
+      DrawMarker(1,char_changer-vector3(0,0,1),0,0,0,0,0,0,3.001,3.0001,0.4001,0,155,255,175,0,0,0,0)
+      if dist < 3 then
         if midswap then
           local rem = swapstart + 30000
           if rem < GetNetworkTime() then

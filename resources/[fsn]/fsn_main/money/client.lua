@@ -66,6 +66,7 @@ end)
 AddEventHandler('fsn_bank:change:walletMinus', function(amt)
   TriggerServerEvent('fsn_main:money:wallet:Minus', GetPlayerServerId(PlayerId()), amt)
   Citizen.Wait(500)
+  -- TODO: Investigate if -1 * amt can be used (check if amt is ever a string)
   amt = tonumber('-'..amt)
   TriggerEvent('fsn_main:gui:money:change', wallet, amt)
 end)
@@ -81,11 +82,13 @@ end)
 AddEventHandler('fsn_bank:change:bankMinus', function(amt)
 	TriggerServerEvent('fsn_main:money:bank:Minus', GetPlayerServerId(PlayerId()), amt)
 	Citizen.Wait(500)
+  -- TODO: Investigate if -1 * amt can be used (check if amt is ever a string)
 	amt = tonumber('-'..amt)
 	TriggerEvent('fsn_main:gui:bank:change', current_character.char_bank, amt)
 end)
 
 -------------------------------------------- LSCustoms
+-- TODO: Move to LSCutsoms?
 AddEventHandler("fsn_lscustoms:check",function(title, data, cost, value)
   if wallet >= cost then
     TriggerEvent("fsn_lscustoms:receive", source, title, data, value)
