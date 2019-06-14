@@ -29,13 +29,6 @@ area_table = {
             ["meth_rocks"]={value=math.random(70,95),avg=math.random(1,5)},
         },
     },
-	["ARMYB"] = {
-        name = "Fort Zancudo",
-        enabled = false,
-        premium = false,
-        incity = false,
-        drugs = {},
-    },
 	["BANHAMC"] = {
         name = "Banham Canyon Dr",
         enabled = true,
@@ -72,41 +65,6 @@ area_table = {
             ["meth_rocks"]={value=math.random(40,60),avg=math.random(1,5)},
         },
     },
-	["BHAMCA"] = {
-        name = "Banham Canyon",
-        enabled = true,
-        callpercentage = 40,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(50,85),avg=math.random(1,5)},
-        },
-    },
-	["BRADP"] = {
-        name = "Braddock Pass",
-        enabled = true,
-        callpercentage = 45,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(50,80),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,100),avg=math.random(1,5)},
-        },
-    },
-	["BRADT"] = {
-        name = "Braddock Tunnel",
-        enabled = true,
-        callpercentage = 35,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(50,70),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,90),avg=math.random(1,5)},
-        },
-    },
 	["BURTON"] = {
         name = "Burton",
         enabled = true,
@@ -119,42 +77,6 @@ area_table = {
             ["meth_rocks"]={value=math.random(80,100),avg=math.random(1,5)},
         },
     },
-	["CALAFB"] = {
-        name = "Calafia Bridge",
-        enabled = true,
-        callpercentage = 10,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(50,70),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,90),avg=math.random(1,5)},
-        },
-    },
-	["CANNY"] = {
-        name = "Raton Canyon",
-        enabled = true,
-        callpercentage = 40,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(50,70),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,90),avg=math.random(1,5)},
-        },
-    },
-	["CCREAK"] = {
-        name = "Cassidy Creek",
-        enabled = true,
-        callpercentage = 30,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(50,70),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,90),avg=math.random(1,5)},
-        },
-    },
 	["CHAMH"] = {
         name = "Chamberlain Hills",
         enabled = true,
@@ -163,7 +85,7 @@ area_table = {
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(70,100),avg=math.random(1,5)},
+            ["joint"]={value=math.random(85,1100),avg=math.random(1,5)},
             ["meth_rocks"]={value=math.random(100,150),avg=math.random(1,5)},
         },
     },
@@ -189,18 +111,6 @@ area_table = {
         drugs = {
             ["joint"]={value=math.random(70,100),avg=math.random(1,5)},
             ["meth_rocks"]={value=math.random(70,90),avg=math.random(1,5)},
-        },
-    },
-	["CMSW"] = {
-        name = "Chiliad Mountain State Wilderness",
-        enabled = true,
-        callpercentage = 40,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(70,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
         },
     },
 	["CYPRE"] = {
@@ -323,34 +233,10 @@ area_table = {
             ["meth_rocks"]={value=math.random(80,110),avg=math.random(1,5)},
         },
     },
-	["ELGORL"] = {
-        name = "El Gordo Lighthouse",
-        enabled = true,
-        callpercentage = 40,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(70,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,110),avg=math.random(1,5)},
-        },
-    },
 	["ELYSIAN"] = {
         name = "Elysian Island",
         enabled = true,
         callpercentage = 40,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(50,70),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,90),avg=math.random(1,5)},
-        },
-    },
-	["GALFISH"] = {
-        name = "Galilee",
-        enabled = true,
-        callpercentage = 20,
         sellpercentage = 50,
         premium = false,
         incity = false,
@@ -383,18 +269,6 @@ area_table = {
             ["meth_rocks"]={value=math.random(70,110),avg=math.random(1,5)},
         },
     },
-	["GREATC"] = {
-        name = "Great Chaparral",
-        enabled = true,
-        callpercentage = 45,
-        sellpercentage = 50,
-        premium = false,
-        incity = true,
-        drugs = {
-            ["joint"]={value=math.random(70,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,100),avg=math.random(1,5)},
-        },
-    },
 	["HARMO"] = {
         name = "Harmony",
         enabled = true,
@@ -419,37 +293,6 @@ area_table = {
             ["meth_rocks"]={value=math.random(70,100),avg=math.random(1,5)},
         },
     },
-	["HORS"] = {
-        name = "Vinewood Racetrack",
-        enabled = true,
-        callpercentage = 20,
-        sellpercentage = 50,
-        premium = false,
-        incity = true,
-        drugs = {
-            ["joint"]={value=math.random(50,70),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,90),avg=math.random(1,5)},
-        },
-    },
-	["HUMLAB"] = {
-        name = "Humane Labs and Research",
-        enabled = true,
-        callpercentage = 20,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(50,70),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(70,90),avg=math.random(1,5)},
-        },
-    },
-	["JAIL"] = {
-        name = "Bolingbroke Penitentiary",
-        enabled = false,
-        premium = false,
-        incity = false,
-        drugs = {},
-    },
 	["KOREAT"] = {
         name = "Little Seoul",
         enabled = true,
@@ -460,18 +303,6 @@ area_table = {
         drugs = {
             ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
             ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
-        },
-    },
-	["LACT"] = {
-        name = "Land Act Reservoir",
-        enabled = true,
-        callpercentage = 50,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(80,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(80,100),avg=math.random(1,5)},
         },
     },
 	["LAGO"] = {
@@ -570,41 +401,6 @@ area_table = {
             ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
         },
     },
-	["MTCHIL"] = {
-        name = "Mount Chiliad",
-        enabled = true,
-        callpercentage = 50,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
-        },
-    },
-	["MTGORDO"] = {
-        name = "Mount Gordo",
-        enabled = true,
-        callpercentage = 50,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(50,120),avg=math.random(1,5)},
-        },
-    },
-	["MTJOSE"] = {
-        name = "Mount Josiah",
-        enabled = true,
-        callpercentage = 50,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,2)},
-            ["meth_rocks"]={value=math.random(100,115),avg=math.random(1,2)},
-        },
-    },
 	["MURRI"] = {
         name = "Murrieta Heights",
         enabled = true,
@@ -629,32 +425,6 @@ area_table = {
             ["meth_rocks"]={value=math.random(90,100),avg=math.random(1,5)},
         },
     },
-	["NOOSE"] = {
-        name = "N.O.O.S.E",
-        enabled = false,
-        premium = false,
-        incity = false,
-        drugs = {},
-    },
-	["OCEANA"] = {
-        name = "Pacific Ocean",
-        enabled = false,
-        premium = false,
-        incity = false,
-        drugs = {},
-    },
-	["PALCOV"] = {
-        name = "Paleto Cove",
-        enabled = true,
-        callpercentage = 50,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,105),avg=math.random(1,5)},
-        },
-    },
 	["PALETO"] = {
         name = "Paleto Bay",
         enabled = true,
@@ -665,18 +435,6 @@ area_table = {
         drugs = {
             ["joint"]={value=math.random(80,110),avg=math.random(1,5)},
             ["meth_rocks"]={value=math.random(100,110),avg=math.random(1,5)},
-        },
-    },
-	["PALFOR"] = {
-        name = "Paleto Forest",
-        enabled = true,
-        callpercentage = 60,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(70,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(95,110),avg=math.random(1,5)},
         },
     },
 	["PALHIGH"] = {
@@ -787,18 +545,6 @@ area_table = {
             ["meth_rocks"]={value=math.random(90,125),avg=math.random(1,5)},
         },
     },
-	["RTRAK"] = {
-        name = "Redwood Lights Track",
-        enabled = true,
-        callpercentage = 40,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(60,90),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,100),avg=math.random(1,5)},
-        },
-    },
 	["SANAND"] = {
         name = "San Andreas",
         enabled = true,
@@ -809,18 +555,6 @@ area_table = {
         drugs = {
             ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
             ["meth_rocks"]={value=math.random(100,105),avg=math.random(1,5)},
-        },
-    },
-	["SANCHIA"] = {
-        name = "San Chianski Mountain Range",
-        enabled = true,
-        callpercentage = 50,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,120),avg=math.random(1,5)},
         },
     },
 	["SANDY"] = {
@@ -880,30 +614,6 @@ area_table = {
         incity = true,
         drugs = {
             ["joint"]={value=math.random(80,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
-        },
-    },
-	["TATAMO"] = {
-        name = "Tataviam Mountains",
-        enabled = true,
-        callpercentage = 50,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(70,100),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(100,110),avg=math.random(1,5)},
-        },
-    },
-	["TERMINA"] = {
-        name = "Terminal",
-        enabled = true,
-        callpercentage = 50,
-        sellpercentage = 50,
-        premium = false,
-        incity = true,
-        drugs = {
-            ["joint"]={value=math.random(90,110),avg=math.random(1,5)},
             ["meth_rocks"]={value=math.random(100,120),avg=math.random(1,5)},
         },
     },
@@ -979,18 +689,6 @@ area_table = {
             ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
         },
     },
-	["WINDF"] = {
-        name = "Ron Alternates Wind Farm",
-        enabled = true,
-        callpercentage = 50,
-        sellpercentage = 50,
-        premium = false,
-        incity = false,
-        drugs = {
-            ["joint"]={value=math.random(70,110),avg=math.random(1,5)},
-            ["meth_rocks"]={value=math.random(90,120),avg=math.random(1,5)},
-        },
-    },
 	["WVINE"] = {
         name = "West Vinewood",
         enabled = true,
@@ -1002,13 +700,6 @@ area_table = {
             ["joint"]={value=math.random(90,120),avg=math.random(1,5)},
             ["meth_rocks"]={value=math.random(80,100),avg=math.random(1,5)},
         },
-    },
-	["ZANCUDO"] = {
-        name = "Zancudo River",
-        enabled = false,
-        premium = false,
-        incity = false,
-        drugs = {},
     },
 	["ZP_ORT"] = {
         name = "Port of South Los Santos",
