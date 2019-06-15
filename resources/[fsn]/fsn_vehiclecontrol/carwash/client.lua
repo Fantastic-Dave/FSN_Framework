@@ -26,7 +26,7 @@ Citizen.CreateThread(function()
         if IsControlJustPressed(0,38) then
           if exports.fsn_main:fsn_GetWallet() >= 150 then
             SetVehicleDirtLevel(GetVehiclePedIsIn(GetPlayerPed(-1), 0.0))
-            TriggerEvent('fsn_bank:change:walletMinus', 150)
+            TriggerEvent('fsn_bank:change:walletMinus', 50)
           else
             TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this', 'centerLeft', 5000, 'error')
           end
