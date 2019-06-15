@@ -132,7 +132,7 @@ local license_stores = {
     loc = {x = 233.22550964355, y = -410.34426879883, z = 48.11198425293},
     store = 'driver',
     cost = 500,
-    text = 'Press ~INPUT_PICKUP~ to buy a drivers license (~g~$2500~w~)'
+    text = 'Press ~INPUT_PICKUP~ to buy a drivers license (~g~$500~w~)'
   },
   {
     loc = {x = 238.16859436035, y = -412.05615234375, z = 48.11194229126},
