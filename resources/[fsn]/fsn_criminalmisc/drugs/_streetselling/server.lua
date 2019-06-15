@@ -120,7 +120,7 @@ area_table = {
         enabled = false,
         premium = false,
         incity = false,
-        drugs = {],
+        drugs = {},
     },
 	["CHAMH"] = {
         name = "Chamberlain Hills",
