@@ -344,7 +344,7 @@ area_table = {
         name = "Great Chaparral",
         enabled = false,
         premium = false,
-        incity = true,
+        incity = false,
         drugs = {},
     },
 	["HARMO"] = {
@@ -375,7 +375,7 @@ area_table = {
         name = "Vinewood Racetrack",
         enabled = false,
         premium = false,
-        incity = true,
+        incity = false,
         drugs = {},
     },
 	["HUMLAB"] = {
