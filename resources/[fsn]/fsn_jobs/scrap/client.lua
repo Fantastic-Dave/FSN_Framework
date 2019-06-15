@@ -73,7 +73,7 @@ Citizen.CreateThread(function()
 
             required = false
             lastjob = 0
-            TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(1000,5000))
+            TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(5000,12000))
           end
         else
           SetTextComponentFormat("STRING")

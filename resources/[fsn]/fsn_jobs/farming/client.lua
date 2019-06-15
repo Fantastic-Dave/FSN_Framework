@@ -133,7 +133,7 @@ Citizen.CreateThread(function()
                 finished = false
                 hasseeds = false
                 --TriggerServerEvent('jFarm:payme', v.payrate)
-                TriggerEvent('fsn_bank:change:walletAdd', math.random(v.payrate-300, v.payrate+300))
+                TriggerEvent('fsn_bank:change:walletAdd', math.random(v.payrate-300, v.payrate+250))
                 DeleteTractor()
   						end
             end
