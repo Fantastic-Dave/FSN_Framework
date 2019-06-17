@@ -39,39 +39,28 @@ Citizen.CreateThread(function()
 		last_health = GetVehicleBodyHealth(GetVehiclePedIsIn(GetPlayerPed(-1),false))
 		Citizen.Wait(1)
 
-    	if not IsAimCamActive() or not IsFirstPersonAimCamActive() then
-	        HideHudComponentThisFrame(14)
-	    end
+		if not IsAimCamActive() or not IsFirstPersonAimCamActive() then
+			HideHudComponentThisFrame(14)
+		end
 
+		for _, hud_comp in pairs({1,6,7,9}) do
+			if IsHudComponentActive(hud_comp) then 
+				HideHudComponentThisFrame(hud_comp)
+			end
+		end
 
-	    if IsHudComponentActive(1) then 
-	        HideHudComponentThisFrame(1)
-	    end
-
-	    if IsHudComponentActive(6) then 
-	        HideHudComponentThisFrame(6)
-	    end
-
-	    if IsHudComponentActive(7) then 
-	        HideHudComponentThisFrame(7)
-	    end
-
-	    if IsHudComponentActive(9) then 
-	        HideHudComponentThisFrame(9)
-	    end
-
-	    if IsHudComponentActive(0) and not IsPedInAnyVehicle(GetPlayerPed( -1 ), true) then 
-	        HideHudComponentThisFrame(0)
-	    end
+		if IsHudComponentActive(0) and not IsPedInAnyVehicle(GetPlayerPed( -1 ), true) then 
+			HideHudComponentThisFrame(0)
+		end
 		SetPedMinGroundTimeForStungun(GetPlayerPed(-1), 16000)
 		if HudStage < 3 then
-		    if opacity > 0 and not fadein then
-		    	opacity = opacity - 10
-		    end
+			if opacity > 0 and not fadein then
+				opacity = opacity - 10
+			end
 
-		    if opacity < 250 and fadein then
-		    	opacity = opacity + 10
-		    end
+			if opacity < 250 and fadein then
+				opacity = opacity + 10
+			end
 			
 			drawRct(0.015, 0.9677, 0.1418,0.028,81,81,84,165)
 	
