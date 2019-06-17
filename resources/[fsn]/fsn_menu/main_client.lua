@@ -671,6 +671,37 @@ RegisterNUICallback( "inventoryAction", function(data, cb)
 					editOpen = false
 					if UpdateOnscreenKeyboard() == 1 then
 						res = GetOnscreenKeyboardResult()
+						if not exports["fsn_inventory"]:fsn_HasItem(data.item) then
+							TriggerEvent('fsn_notify:displayNotification', 'How do you not have any '..data.item..'????', 'centerLeft', 3000, 'error')
+							break
+						end
+						local myAMT = exports["fsn_inventory"]:fsn_GetItemAmount(data.item)
+						if res == 'all' then
+							print('(all) you are trying to store '..myAMT..' '..data.item)
+							TriggerEvent('fsn_apartments:store:item', data.item, myAMT)
+							TriggerEvent('fsn_inventory:item:take', data.item, myAMT)
+							TriggerEvent('fsn_notify:displayNotification', 'You stored '..myAMT..' '..data.item, 'centerLeft', 5000, 'success')
+						else
+							if tonumber(res) then
+								local myNUM = tonumber(res)
+								if myNUM > 0 and myNUM < 500 then
+									if myAMT >= myNUM then
+										print('(amt) you are trying to store '..myNUM..' '..data.item)
+										TriggerEvent('fsn_apartments:store:item', data.item, myNUM)
+										TriggerEvent('fsn_inventory:item:take', data.item, myNUM)
+										TriggerEvent('fsn_notify:displayNotification', 'You stored '..myNUM..' '..data.item, 'centerLeft', 5000, 'success')
+									else
+										TriggerEvent('fsn_notify:displayNotification', 'You do not have '..myNUM..' '..data.item..', you have '..myAMT, 'centerLeft', 3000, 'error')
+									end
+								else
+									TriggerEvent('fsn_notify:displayNotification', 'Enter a number between 1-500.', 'centerLeft', 3000, 'error')
+								end
+							else
+								TriggerEvent('fsn_notify:displayNotification', 'You need to enter \'all\' or a number between 1-500.', 'centerLeft', 3000, 'error')
+							end 
+						end
+						break
+						--[[
 						if res == 'all' then
 							TriggerEvent('fsn_apartments:store:item', data.item, exports["fsn_inventory"]:fsn_GetItemAmount(data.item))
 							TriggerEvent('fsn_inventory:item:take', data.item, exports["fsn_inventory"]:fsn_GetItemAmount(data.item))
@@ -695,6 +726,7 @@ RegisterNUICallback( "inventoryAction", function(data, cb)
 							end
 						end
 						break
+						]]
 					end
 				end
 			end
