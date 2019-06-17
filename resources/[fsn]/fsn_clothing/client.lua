@@ -282,6 +282,9 @@ function overlays(title)
 					player_data.overlays = {}
 					player_data.overlays.colours = {}
 				end
+				if not player_data.overlays.colours then
+					player_data.overlays.colours = {}
+				end
                 player_data.overlays.colours[componentScroller+1] = {colourType = colourType, colour = colourScroller}
             end
         end)
