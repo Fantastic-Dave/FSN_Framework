@@ -86,7 +86,7 @@ Citizen.CreateThread(function()
                 DrawMarker(1, v.x, v.y, v.z - 1, 0, 0, 0, 0, 0, 0, 3.0001, 3.0001, 0.5001, 1555, 0, 0,165, 0, 0, 0,0)
                 if(Vdist(pos.x, pos.y, pos.z, v.x, v.y, v.z) < 2.0)then
                     if (incircle == false) then
-                        DisplayHelpText("Press ~INPUT_CONTEXT~ to customize your character.")
+                        DisplayHelpText("Press ~INPUT_CONTEXT~ to customize your character. (~g~$100~w~)")
                     end
                     incircle = true
                     if IsControlJustReleased(1, 51) then -- INPUT_CELLPHONE_DOWN
@@ -103,6 +103,7 @@ Citizen.CreateThread(function()
                         menuYOptionAdd = 0.21 ------------------ Default: 0.142  ------ Move buttons up and down
                         clothing_menu = not clothing_menu
                         OpenClothes()
+                        TriggerEvent('fsn_bank:change:walletMinus', 100)
                     end
                 elseif(Vdist(pos.x, pos.y, pos.z, v.x, v.y, v.z) > 3.0)then
                     incircle = false
