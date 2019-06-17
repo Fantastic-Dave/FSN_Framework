@@ -112,7 +112,7 @@ AddEventHandler('fsn_apartments:sendApartment', function(tbl)
 		apptdetails["apt_inventory"] = json.decode(tbl.apptinfo.apt_inventory)
 		apptdetails["apt_utils"] = json.decode(tbl.apptinfo.apt_utils)
 		init = true
-		TriggerEvent('fsn_notify:displayNotification', 'Your apartments is number: '..tbl.number, 'centerRight', 6000, 'info')
+		TriggerEvent('fsn_notify:displayNotification', 'Your apartment number is: '..tbl.number, 'centerRight', 6000, 'info')
 	else
 		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r IT LOOKS LIKE YOU ARE BROKE I DO NOT HAVE AN APPT NUMBER FOR YOU')
 		EnterRoom(1)

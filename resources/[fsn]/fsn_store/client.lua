@@ -149,8 +149,8 @@ Citizen.CreateThread(function()
 							local maff = robbingstart + 30
 							if maff < curtime then
 								robbing = false
-								TriggerEvent('fsn_bank:change:walletAdd', math.random(50, 600))
-								TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(100,1000))
+								TriggerEvent('fsn_bank:change:walletAdd', math.random(100, 600))
+								TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(500,1000))
 								Citizen.Wait(4000)
 							end
 						elseif not IsPedInCombat(v.ped) then
