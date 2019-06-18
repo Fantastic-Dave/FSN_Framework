@@ -188,7 +188,7 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
   SendNUIMessage({type='charMenu', enable=false})
   SetEntityCoords(GetPlayerPed(-1), mainSpawn.x, mainSpawn.y, mainSpawn.z)
   fsn_spawned = true
-  Citizen.CreateThread(function()
+  --Citizen.CreateThread(function()
     SetEntityVisible(GetPlayerPed(-1), true)
     --[[
       RequestModel(model)
@@ -239,7 +239,7 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
     end
     TriggerEvent('chatMessage', '', {255,255,255}, '^1^*Warning:^r This is a beta release of the :FSN: Framework. We aren\'t expecting any bugs, but those that are found should be reported via dm to JamesSc0tt on discord or the forums.')
     TriggerServerEvent('fsn_apartments:getApartment', char.char_id)
-  end)
+  --end)
 end)
 
 RegisterNetEvent('fsn_main:sendCharacters')
