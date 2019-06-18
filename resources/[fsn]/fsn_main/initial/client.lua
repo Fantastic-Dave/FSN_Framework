@@ -137,7 +137,7 @@ function fsn_mainSpawn()
   --TriggerEvent('PlayerSpawned')
   SetEntityCoords(GetPlayerPed(-1), spawncoords.x, spawncoords.y, spawncoords.z)
   freezePlayer(-1, true)
-  Citizen.CreateThread(function()
+  --Citizen.CreateThread(function()
     Citizen.Wait(2000)
     DoScreenFadeIn(3500)
 
@@ -157,7 +157,7 @@ function fsn_mainSpawn()
     for _, control in pairs(controls) do
       DisableControlAction(0, control, false)
     end
-  end)
+  --end)
 end
 ----------------------- Character Shit
 current_characters = {}
