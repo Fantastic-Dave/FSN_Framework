@@ -39,7 +39,7 @@ Citizen.CreateThread(function()
 		drawRct(0.015, 0.9677, 0.1418,0.028,81,81,84,165)
 
 		local health = GetEntityHealth(GetPlayerPed(-1)) - 100
-		if health < 1 then health = 100 end
+		--if health < 1 then health = 100 end
 		local varSet = 0.06938 * (health / 100)
 		
 		drawRct(0.016, 0.97, 0.06938,0.01,188,188,188,80)
