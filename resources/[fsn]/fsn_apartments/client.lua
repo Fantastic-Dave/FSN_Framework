@@ -74,14 +74,14 @@ AddEventHandler('fsn_apartments:stash:add', function(amt)
 					TriggerEvent('fsn_bank:change:walletMinus', amt)
 					TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
 				else
-					TriggerEvent('fsn_notify:displayNotification', 'You cannot store this amount', 'centerRight', 4000, 'error')
+					TriggerEvent('fsn_notify:displayNotification', 'You cannot store this amount.', 'centerRight', 4000, 'error')
 				end
 			else
 				TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this.', 'centerRight', 4000, 'error')
 			end	
 		end
 	else
-		TriggerEvent('fsn_notify:displayNotification', 'You need to be in your appartment', 'centerRight', 4000, 'error')
+		TriggerEvent('fsn_notify:displayNotification', 'You need to be in your appartment.', 'centerRight', 4000, 'error')
 	end
 end)
 
@@ -94,11 +94,11 @@ AddEventHandler('fsn_apartments:stash:take', function(amt)
 				TriggerEvent('fsn_bank:change:walletAdd', amt)
 				TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
 			else
-				TriggerEvent('fsn_notify:displayNotification', 'Your stash does not have that much', 'centerRight', 4000, 'error')
+				TriggerEvent('fsn_notify:displayNotification', 'Your stash does not have that much.', 'centerRight', 4000, 'error')
 			end
 		end
 	else
-		TriggerEvent('fsn_notify:displayNotification', 'You need to be in your appartment', 'centerRight', 4000, 'error')
+		TriggerEvent('fsn_notify:displayNotification', 'You need to be in your appartment.', 'centerRight', 4000, 'error')
 	end
 end)
 
@@ -134,7 +134,7 @@ AddEventHandler('fsn_apartments:outfit:add', function(key)
 		
 		TriggerServerEvent('fsn_apartments:saveApartment', apptdetails)
 	else
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You need to be at your wardrobe to use this command.')
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You need to be at your wardrobe to add an outfit.')
 	end
 end)
 RegisterNetEvent('fsn_apartments:outfit:use')
@@ -142,12 +142,12 @@ AddEventHandler('fsn_apartments:outfit:use', function(key)
 	if inWardrobe then
 		if apptdetails.apt_outfits[key] then
 			TriggerEvent("clothes:spawn", apptdetails.apt_outfits[key])
-			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit used')
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit used.')
 		else
 			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
 		end	
 	else
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You need to be at your wardrobe to use this command.')
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You need to be at your wardrobe to change outfits.')
 	end
 end)
 
@@ -156,12 +156,12 @@ AddEventHandler('fsn_apartments:outfit:remove', function(key)
 	if inWardrobe then
 		if apptdetails.apt_outfits[key] then
 			apptdetails.apt_outfits[key] = nil
-			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit removed')
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Outfit removed.')
 		else
 			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r There does not look to be an outfit with the name: '..key)
 		end
 	else
-		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You need to be at your wardrobe to use this command.')
+		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You need to be at your wardrobe to remove an outfit.')
 	end
 end)
 RegisterNetEvent('fsn_apartments:outfit:list')
@@ -176,10 +176,10 @@ AddEventHandler('fsn_apartments:outfit:list', function()
 			if #keys > 0 then
 				TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r Saved outfits: '..str)
 			else
-				TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved')
+				TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved.')
 			end
 		else
-			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved')
+			TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You do not have any outfits saved.')
 		end
 	else
 		TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r You need to be at your wardrobe to use this command.')
@@ -329,10 +329,10 @@ RegisterNUICallback( "inventoryTake", function( data, cb )
 										apptdetails["apt_utils"]["inventory"][data] = apptdetails["apt_utils"]["inventory"][data] - res
 									end
 								else
-									TriggerEvent('fsn_notify:displayNotification', 'There is not this many stored', 'centerLeft', 3000, 'error')
+									TriggerEvent('fsn_notify:displayNotification', 'There is not this many stored.', 'centerLeft', 3000, 'error')
 								end
 							else
-								TriggerEvent('fsn_notify:displayNotification', 'Looks to be an issue with the number you entered', 'centerLeft', 3000, 'error')
+								TriggerEvent('fsn_notify:displayNotification', 'Looks to be an issue with the number you entered.', 'centerLeft', 3000, 'error')
 							end
 						else
 							TriggerEvent('fsn_notify:displayNotification', 'You didn\'t enter \'all\' or a number.', 'centerLeft', 3000, 'error')
@@ -375,7 +375,7 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
 		print 'attempting to put away weapon'
 		ToggleActionMenu()
 		if GetSelectedPedWeapon(GetPlayerPed(-1)) == -1569615261 then
-			TriggerEvent('fsn_notify:displayNotification', 'You cannot store fists...', 'centerRight', 10000, 'error')
+			TriggerEvent('fsn_notify:displayNotification', 'You cannot store your fists.', 'centerRight', 10000, 'error')
 			return
 		end
 		local weapon = exports["fsn_criminalmisc"]:weaponInfo(GetSelectedPedWeapon(GetPlayerPed(-1)))
@@ -429,7 +429,7 @@ Citizen.CreateThread(function()
 				-- leaving
 				DrawMarker(25, leave.x, leave.y, leave.z - 0.95, 0, 0, 0, 0, 0, 0, 0.50, 0.50, 10.3, 255, 255, 255, 140, 0, 0, 1, 0, 0, 0, 0)
 				if GetDistanceBetweenCoords(leave.x, leave.y, leave.z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
-					fsn_drawText3D(leave.x, leave.y, leave.z, "[E] leave apartment")
+					fsn_drawText3D(leave.x, leave.y, leave.z, "[E] Leave Apartment")
 					if IsControlJustPressed(0,38) then
 						SetEntityCoords(GetPlayerPed(-1), apartments[myRoomNumber].x, apartments[myRoomNumber].y, apartments[myRoomNumber].z)
 						FreezeEntityPosition(GetPlayerPed(-1), true)
@@ -460,7 +460,7 @@ Citizen.CreateThread(function()
 					DrawMarker(25, apartments[myRoomNumber].x, apartments[myRoomNumber].y, apartments[myRoomNumber].z - 0.95, 0, 0, 0, 0, 0, 0, 0.50, 0.50, 10.3, 255, 255, 255, 140, 0, 0, 1, 0, 0, 0, 0)
 					DrawMarker(0, apartments[myRoomNumber].x, apartments[myRoomNumber].y, apartments[myRoomNumber].z, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 0.5, 255, 255, 255, 140, 0, 0, 1, 0, 0, 0, 0)
 					if GetDistanceBetweenCoords(apartments[myRoomNumber].x, apartments[myRoomNumber].y, apartments[myRoomNumber].z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
-						fsn_drawText3D(apartments[myRoomNumber].x, apartments[myRoomNumber].y, apartments[myRoomNumber].z+1, "[E] enter apartment")
+						fsn_drawText3D(apartments[myRoomNumber].x, apartments[myRoomNumber].y, apartments[myRoomNumber].z+1, "[E] Enter Apartment")
 						if IsControlJustPressed(0,38) then
 							EnterRoom(myRoomNumber)
 						end
