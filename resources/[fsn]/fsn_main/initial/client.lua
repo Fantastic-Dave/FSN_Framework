@@ -137,7 +137,7 @@ function fsn_mainSpawn()
   --TriggerEvent('PlayerSpawned')
   SetEntityCoords(GetPlayerPed(-1), spawncoords.x, spawncoords.y, spawncoords.z)
   freezePlayer(-1, true)
-  Citizen.CreateThread(function()
+  --Citizen.CreateThread(function()
     Citizen.Wait(2000)
     DoScreenFadeIn(3500)
 
@@ -157,7 +157,7 @@ function fsn_mainSpawn()
     for _, control in pairs(controls) do
       DisableControlAction(0, control, false)
     end
-  end)
+  --end)
 end
 ----------------------- Character Shit
 current_characters = {}
@@ -170,8 +170,8 @@ RegisterNetEvent('fsn_main:charMenu')
 AddEventHandler('fsn_main:charMenu', function()
   SetNuiFocus(true,true)
   SendNUIMessage({type='charMenu', enable=true})
-  fsn_mainSpawn()
   TriggerServerEvent('fsn_main:requestCharacters')
+  fsn_mainSpawn()
 end)
 
 RegisterNetEvent('fsn_main:character')
@@ -188,7 +188,7 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
   SendNUIMessage({type='charMenu', enable=false})
   SetEntityCoords(GetPlayerPed(-1), mainSpawn.x, mainSpawn.y, mainSpawn.z)
   fsn_spawned = true
-  Citizen.CreateThread(function()
+  --Citizen.CreateThread(function()
     SetEntityVisible(GetPlayerPed(-1), true)
     --[[
       RequestModel(model)
@@ -239,7 +239,7 @@ AddEventHandler('fsn_main:initiateCharacter', function(character)
     end
     TriggerEvent('chatMessage', '', {255,255,255}, '^1^*Warning:^r This is a beta release of the :FSN: Framework. We aren\'t expecting any bugs, but those that are found should be reported via dm to JamesSc0tt on discord or the forums.')
     TriggerServerEvent('fsn_apartments:getApartment', char.char_id)
-  end)
+  --end)
 end)
 
 RegisterNetEvent('fsn_main:sendCharacters')

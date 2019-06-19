@@ -259,12 +259,23 @@ local last_click = 0
 
 RegisterNetEvent('fsn_apartments:store:item')
 AddEventHandler('fsn_apartments:store:item', function(item, amt)
-	if not apptdetails["apt_utils"]["inventory"] then
-		apptdetails["apt_utils"]["inventory"] = {}
+	if not apptdetails["apt_utils"]["inventory"] then apptdetails["apt_utils"]["inventory"] = {} end
+	
+	if not apptdetails["apt_utils"]["inventory"][item] then
 		apptdetails["apt_utils"]["inventory"][item] = amt
+		print('stored '..apptdetails["apt_utils"]["inventory"][item]..' '..item)
 	else
-		apptdetails["apt_utils"]["inventory"][item] = apptdetails["apt_utils"]["inventory"][item] + amt	
-	end	
+		local newAMT = apptdetails["apt_utils"]["inventory"][item] + amt
+		print('you already have '..apptdetails["apt_utils"]["inventory"][item]..' stored, changing to '..newAMT)
+		apptdetails["apt_utils"]["inventory"][item] = newAMT
+	end
+	--if not apptdetails["apt_utils"]["inventory"] then
+	--	if not apptdetails["apt_utils"]["inventory"][item] then
+	--		apptdetails["apt_utils"]["inventory"][item] = amt
+	--	else
+	--		apptdetails["apt_utils"]["inventory"][item] = apptdetails["apt_utils"]["inventory"][item] + amt	
+	--	end
+	--end	
 	saveApartment()
 	ExecuteCommand('save')
 end)
