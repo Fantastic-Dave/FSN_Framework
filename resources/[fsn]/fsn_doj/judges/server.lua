@@ -1,4 +1,4 @@
-local judges = {'steam:11000010e0828a9', 'steam:1100001001d3258'}
+local judges = {'steam:11000010e0828a9', 'steam:1100001001d3258', 'steam:11000010a4237a9'}
 
 function fsn_SplitString(inputstr, sep)
   if sep == nil then
