@@ -77,6 +77,12 @@ local actions = {
     reward = 500,
 	blip = 147
   },
+  [14] = {
+    name = 'Person with a Gun',
+    tencode = '10-32',
+    reward = 500,
+	blip = 110
+  },
 }
 local dispatch_calls = {}
 local disp_enable = false
