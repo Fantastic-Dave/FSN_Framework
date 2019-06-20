@@ -329,6 +329,7 @@ Citizen.CreateThread(function()
 				else
 					for key, guard in pairs(guardlocs) do
 						if guard.ped and IsEntityDead(guard.ped) then
+							--[[
 							if not guard.tenthirteen then
 								local pos = GetEntityCoords(guard.ped)
 								local coords = {
@@ -336,9 +337,10 @@ Citizen.CreateThread(function()
 									y = pos.y,
 									z = pos.z
 								}
-								TriggerServerEvent('fsn_police:dispatch', coords, 4, '10-13 | IMMEDIATE BACKUP REQUESTED AT JEWELRY STORE')
+								--TriggerServerEvent('fsn_police:dispatch', coords, 4, '10-13 | IMMEDIATE BACKUP REQUESTED AT JEWELRY STORE')
 								guard.tenthirteen = true
 							end
+							]]
 						end
 						if IsPedInMeleeCombat(GetPlayerPed(-1)) or IsPlayerFreeAiming(PlayerId()) then
 							TriggerGuardAttack()
