@@ -364,6 +364,14 @@ items_table = {
       TriggerEvent('fsn_inventory:item:take', 'ecola_drink', 1)
     end,
   },
+  ["keycard"] = {
+    display_name = 'Key Card',
+    weight = 0.5,
+    desc = 'you dodgy guy',
+    use = function()
+	
+    end,
+  },
 }
 
 --sendtojs = json.encode(items_table)
