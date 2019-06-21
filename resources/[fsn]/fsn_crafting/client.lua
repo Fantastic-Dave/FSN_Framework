@@ -164,7 +164,7 @@ Citizen.CreateThread(function()
     for k, v in pairs(crafting_stations) do
       if GetDistanceBetweenCoords(v.loc.x,v.loc.y,v.loc.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
         DrawMarker(1,v.loc.x,v.loc.y,v.loc.z-1,0,0,0,0,0,0,5.001,5.0001,0.4001,0,155,255,175,0,0,0,0)
-        if GetDistanceBetweenCoords(v.loc.x,v.loc.y,v.loc.z,GetEntityCoords(GetPlayerPed(-1)), true) < 5 then
+        if GetDistanceBetweenCoords(v.loc.x,v.loc.y,v.loc.z,GetEntityCoords(GetPlayerPed(-1)), true) < 4 then
           SetTextComponentFormat("STRING")
           AddTextComponentString("Press ~INPUT_PICKUP~ to get ~g~"..v.gives.itemtitle)
           DisplayHelpTextFromStringLabel(0, 0, 1, -1)
