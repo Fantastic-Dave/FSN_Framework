@@ -520,7 +520,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/use' then
     if split[2] then
-      if split[2] == 'repair_kit' then
+      if split[2] == 'repair_kit' or split[2] == 'repair' then
         TriggerClientEvent('fsn_vehiclecontrol:damage:repair', source)
       end
     end
