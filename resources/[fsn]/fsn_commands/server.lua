@@ -29,6 +29,7 @@ local ems_cars = {
   [5] = "ambulance",
   [6] = "fire2",
   [7] = "firetruk",
+  [8] = "polmav",
 }
 local pd_cars = {
   --------------------
@@ -54,12 +55,12 @@ local pd_cars = {
   [1006] = "fbi",
   [1007] = "fbi2",
   [1008] = "polschafter3",
+  [1009] = "plimo",
   --------------------
   -- SUPERCARS
   --------------------
   [2001] = "2015polstang",
   [2002] = "ghispo2",
-  [2003] = "plimo",
 }
 
 local emotes = {
