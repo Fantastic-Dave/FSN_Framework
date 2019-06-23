@@ -67,7 +67,7 @@ function fsn_loadAnimDict( dict )
 end
 Citizen.CreateThread(function()
   while true do
-    Citizen.Wait(0)
+    Citizen.Wait(10)
     for k, v in pairs(policeDoors) do
       local closestDoor = GetClosestObjectOfType(v.x, v.y, v.z, 1.0, v.objName, false, false, false)
       local doorCoords = GetEntityCoords(closestDoor)
