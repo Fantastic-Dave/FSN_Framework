@@ -166,11 +166,16 @@ local backroom = {x = -630.63171386719, y = -229.15394592285, z = 38.05705261230
 local till = {x = -622.32482910156, y = -229.89263916016, z = 38.057052612305}
 local centre = {x = -622.00439453125, y = -230.77331542969, z = 38.057022094727}
 
+local isgasdoorLocked = true
+local gasdoor = {mdl= 161378502, loc = {x=3557.660, y=3669.192, z=27.118}, txt={x = 3557.6176757813, y = 3669.7663574219, z = 28.121891021729}}
+RegisterNetEvent('fsn_jewellerystore:gasDoor:toggle')
+AddEventHandler('fsn_jewellerystore:gasDoor:toggle', function()
+	isgasdoorLocked = not isgasdoorLocked
+end)
 local gasuse = {x = -628.78393554688, y = -226.52185058594, z = 55.901119232178}
 
 local guardmdls = {'s_m_m_armoured_01', 's_m_m_armoured_02', 's_m_m_chemsec_01'}
 local guardWeapon = 'WEAPON_CARBINERIFLE'
-
 local guardlocs = {
 	[1] = {x = -631.37310791016, y = -235.05155944824, z = 38.05704498291, h = 308.68231201172, ped=false, tenthirteen=false},
 	[2] = {x = -629.10021972656, y = -238.28601074219, z = 38.05704498291, h = 315.65130615234, ped=false, tenthirteen=false},
@@ -300,14 +305,38 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-		-- 161378502
-		-- {x=3557.660, y=3669.192, z=27.118}
+		if GetDistanceBetweenCoords(gasdoor.loc.x,gasdoor.loc.y,gasdoor.loc.z, GetEntityCoords(GetPlayerPed(-1)), true) < 5 then
+			if isgasdoorLocked then
+				fsn_drawText3D(gasdoor.txt.x,gasdoor.txt.y,gasdoor.txt.z, '~r~LOCKED\n~w~[E] Scan Card')
+				local door = GetClosestObjectOfType(gasdoor.loc.x,gasdoor.loc.y,gasdoor.loc.z, 1.0, gasdoor.mdl, false, false, false)
+				FreezeEntityPosition(door, true)
+				if IsControlJustPressed(0,38) then
+					if exports["fsn_inventory"]:fsn_HasItem('keycard') then
+						TriggerServerEvent('fsn_inventory:gasDoorunlock')
+					end
+				end
+			else
+				local door = GetClosestObjectOfType(gasdoor.loc.x,gasdoor.loc.y,gasdoor.loc.z, 1.0, gasdoor.mdl, false, false, false)
+				FreezeEntityPosition(door, false)
+			end
+		end
 		if GetDistanceBetweenCoords(3563.146484375, 3673.47265625, 28.121885299683, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
 			DrawMarker(1,3563.146484375, 3673.47265625, 28.121885299683-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
 			if GetDistanceBetweenCoords(3563.146484375, 3673.47265625, 28.121885299683, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
 				SetTextComponentFormat("STRING")
 				AddTextComponentString("HINT: Use 'Empty Canister'")
 				DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+			end
+		end
+		if GetDistanceBetweenCoords(1660.0181884766, 6.2703385353088, 166.11819458008, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
+			DrawMarker(1,1660.0181884766, 6.2703385353088, 166.11819458008-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+			if GetDistanceBetweenCoords(1660.0181884766, 6.2703385353088, 166.11819458008, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+				SetTextComponentFormat("STRING")
+				AddTextComponentString("~INPUT_PICKUP~ grab canister")
+				DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+				if IsControlJustPressed(0,38) then
+					TriggerEvent('fsn_inventory:item:add', 'empty_canister', 1)
+				end
 			end
 		end
 		if GetDistanceBetweenCoords(gasuse.x, gasuse.y, gasuse.z, GetEntityCoords(GetPlayerPed(-1)), true) < 30 then

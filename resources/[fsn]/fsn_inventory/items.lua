@@ -372,6 +372,32 @@ items_table = {
 	
     end,
   },
+  ["empty_canister"] = {
+    display_name = 'Empty Canister',
+    weight = 5,
+    desc = 'you dodgy guy',
+    use = function()
+		if GetDistanceBetweenCoords(3563.146484375, 3673.47265625, 28.121885299683, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+			TriggerEvent('fsn_inventory:item:take', 'empty_canister', 1)
+			TriggerEvent('fsn_inventory:item:add', 'gas_canister', 1)
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'Nothing to do with that here', 'centerLeft', 3000, 'error')
+		end
+    end,
+  },
+  ["gas_canister"] = {
+    display_name = 'Gas Canister',
+    weight = 5,
+    desc = 'you dodgy guy',
+    use = function()
+		local gasuse = {x = -628.78393554688, y = -226.52185058594, z = 55.901119232178}
+		if GetDistanceBetweenCoords(gasuse.x, gasuse.y, gasuse.z, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+			TriggerEvent('fsn_notify:displayNotification', 'It looks like the vent is locked, you\'ll need to find another way to do this', 'centerLeft', 3000, 'info')
+		else
+			TriggerEvent('fsn_notify:displayNotification', 'Nothing to do with that here', 'centerLeft', 3000, 'error')
+		end
+    end,
+  },
 }
 
 --sendtojs = json.encode(items_table)

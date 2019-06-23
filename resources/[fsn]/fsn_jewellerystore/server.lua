@@ -25,6 +25,14 @@ local cases = {
 	{-623.6746, -227.0025, 38.05, blip=false, robbed=false, lastrob=0},
 }
 
+RegisterServerEvent('fsn_inventory:gasDoorunlock')
+AddEventHandler('fsn_inventory:gasDoorunlock', function()
+	TriggerClientEvent('fsn_jewellerystore:gasDoor:toggle', -1)
+	TriggerClientEvent('fsn_police:911', -1, 69, 'AutoMSG', 'HUMANE LABS ALARM SYSTEM: Stolen ID card used to unlock door #3557')
+	Citizen.Wait(5000)
+	TriggerClientEvent('fsn_jewellerystore:gasDoor:toggle', -1)
+end)
+
 RegisterServerEvent('fsn_jewellerystore:case:rob')
 AddEventHandler('fsn_jewellerystore:case:rob', function(case)
 	local case = cases[case]
