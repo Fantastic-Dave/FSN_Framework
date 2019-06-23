@@ -177,9 +177,9 @@ Citizen.CreateThread(function()
 								end
 								
 								-- work out pricing
-								local preece = areas[myarea].drugs[drug].value * 2
-								local mini = preece - math.floor(preece / 2)
-								local maxi = preece + math.ceil(preece / 2)
+								local preece = areas[myarea].drugs[drug].value 
+								local mini = preece - math.floor(preece / 3)
+								local maxi = preece + math.ceil(preece / 3)
 								local price = 0
 								if exports["fsn_police"]:fsn_getCopAmt() > 2 then
 									local buff = math.random(10,20)
@@ -187,12 +187,12 @@ Citizen.CreateThread(function()
 									price = math.random(mini, maxi) + ploos
 									TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 Risk is increased so you earned an extra '..buff..'%!')
 								else
-									price = math.random(mini, maxi)
-									--price = math.random(mini, maxi) / 2
-									--TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 There aren\'t many cops online, so your earnings are halved.')									
+									--price = math.random(mini, maxi)
+									price = math.random(mini, maxi) / 3
+									TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 There aren\'t many cops online, so your earnings are significantly decreased.')									
 								end
 								if areas[myarea].premium then
-									local extra = math.random(10,50)
+									local extra = math.random(10,15)
 									price = math.random(mini, maxi) + extra
 									TriggerEvent('chatMessage', '', {255,255,255}, '^1^*:FSN:^0^r ^2 This is a premium area, so you earned an extra $'..extra..' per item.')
 								else
@@ -206,7 +206,7 @@ Citizen.CreateThread(function()
 									end
 								end
 								price = price * sold_amount
-								TriggerEvent('fsn_notify:displayNotification', 'They bought '..sold_amount..' '..exports["fsn_inventory"]:fsn_GetItemDetails(drug).display_name..' for '..price..'DM', 'centerLeft', 3000, 'info')
+								TriggerEvent('fsn_notify:displayNotification', 'They bought '..sold_amount..' '..exports["fsn_inventory"]:fsn_GetItemDetails(drug).display_name..' for '..price..'DM', 'centerLeft', 5000, 'info')
 								TriggerEvent('fsn_inventory:item:add', 'dirty_money', price)
 								TriggerEvent('fsn_inventory:item:take', selling_item, sold_amount)
 
