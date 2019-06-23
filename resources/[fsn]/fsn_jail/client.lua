@@ -88,7 +88,7 @@ end)
 RegisterNetEvent('fsn_jail:releaseme')
 AddEventHandler('fsn_jail:releaseme', function()
 	jailtime = 0
-  isinjail = true
+  isinjail = false
   SetEntityCoords(GetPlayerPed(-1), 1852.42, 2603.44,45.672)
   TriggerServerEvent('fsn_jail:update:database', jailtime)
   TriggerEvent('pNotify:SendNotification', {text = "You've been released from jail",
