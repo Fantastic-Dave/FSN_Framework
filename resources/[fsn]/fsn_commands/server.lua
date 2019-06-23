@@ -751,6 +751,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/police' or split[1] == '/pd' then
     if fsn_policeOnDuty(source) then
       if split[2] then
+		if split[2] == 'mdt' then
+			TriggerClientEvent('fsn_police:MDT:toggle', source)
+		  end
 		if split[2] == 'gsr' then
 			TriggerClientEvent('fsn_commands:police:gsrMe', tonumber(split[3]), source)
 		end
