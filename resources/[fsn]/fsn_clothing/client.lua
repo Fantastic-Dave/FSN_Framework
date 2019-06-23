@@ -293,6 +293,7 @@ function overlays(title)
 end
 
 function save()
+    if not player_data then player_data = {} end
     player_data.model = GetEntityModel(GetPlayerPed(-1))
     player_data.new = false
 	if not player_data.clothing then
@@ -468,7 +469,7 @@ RegisterNetEvent("clothes:spawn")
 AddEventHandler("clothes:spawn", function(data)
 	local helf = GetEntityHealth(GetPlayerPed(-1))
     player_data = data
-	if data.model then
+	if data and type(data) == "table" and data.model then
 		local model = player_data.model
 		-- weapon saving
 		local pre_weapons = {}

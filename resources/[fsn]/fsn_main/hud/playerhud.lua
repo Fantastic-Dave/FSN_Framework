@@ -34,7 +34,7 @@ Citizen.CreateThread(function()
 		if not IsPedInAnyVehicle(GetPlayerPed( -1 ), true) then 
 			HideHudComponentThisFrame(0)
 		end
-		SetPedMinGroundTimeForStungun(GetPlayerPed(-1), 16000)
+		SetPedMinGroundTimeForStungun(GetPlayerPed(-1), 8000)
 					
 		drawRct(0.015, 0.9677, 0.1418,0.028,81,81,84,165)
 
