@@ -126,10 +126,17 @@ Citizen.CreateThread(function()
 			local job = jobs[myjob]
 			DrawMarker(1,job.x, job.y, job.z-1,0,0,0,0,0,0,1.0,1.0,90.4001,0,155,255,175,0,0,0,0)
 			if GetDistanceBetweenCoords(job.x, job.y, job.z, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+				--amb@world_human_welding@male@idle_a
+				--idle_a
+				RequestAnimDict('amb@world_human_welding@male@idle_a')
+				while not HasAnimDictLoaded('amb@world_human_welding@male@idle_a') do
+					Citizen.Wait(1)
+				end
+				TaskPlayAnim(GetPlayerPed(-1), "amb@world_human_welding@male@idle_a", 'idle_a', 4.0, -4, -1, 1, 0, 0, 0, 0)
 				SetTextComponentFormat("STRING")
 				AddTextComponentString("~g~working...")
 				DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-				local sex = math.random(1,180)
+				local sex = math.random(60,180)
 				jailtime = jailtime - sex
 				lastjob = timetick
 				myjob = 0
