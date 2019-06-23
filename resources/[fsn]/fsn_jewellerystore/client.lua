@@ -300,11 +300,21 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
+		-- 161378502
+		-- {x=3557.660, y=3669.192, z=27.118}
+		if GetDistanceBetweenCoords(3563.146484375, 3673.47265625, 28.121885299683, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
+			DrawMarker(1,3563.146484375, 3673.47265625, 28.121885299683-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+			if GetDistanceBetweenCoords(3563.146484375, 3673.47265625, 28.121885299683, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+				SetTextComponentFormat("STRING")
+				AddTextComponentString("HINT: Use 'Empty Canister'")
+				DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+			end
+		end
 		if GetDistanceBetweenCoords(gasuse.x, gasuse.y, gasuse.z, GetEntityCoords(GetPlayerPed(-1)), true) < 30 then
 			DrawMarker(1,gasuse.x,gasuse.y,gasuse.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
 			if GetDistanceBetweenCoords(gasuse.x, gasuse.y, gasuse.z, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
 				SetTextComponentFormat("STRING")
-				AddTextComponentString("HINT: Use 'gas_canister'")
+				AddTextComponentString("HINT: Use 'Gas Canister'")
 				DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 			end
 		end
