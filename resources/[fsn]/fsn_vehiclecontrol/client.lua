@@ -110,15 +110,3 @@ Citizen.CreateThread(function()
 		Citizen.Wait(0)
 	end
 end)
-
-
-local playerPed = GetPlayerPed(-1)
-Citizen.CreateThread(function()
-	while true do
-		Wait(1)
-		car = GetVehiclePedIsIn(playerPed, false)
-		if car then
-			SetPlayerCanDoDriveBy(PlayerId(), false)
-		end
-	end
-end)
