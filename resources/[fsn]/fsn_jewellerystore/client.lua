@@ -172,12 +172,12 @@ local guardmdls = {'s_m_m_armoured_01', 's_m_m_armoured_02', 's_m_m_chemsec_01'}
 local guardWeapon = 'WEAPON_CARBINERIFLE'
 
 local guardlocs = {
-	--[1] = {x = -631.37310791016, y = -235.05155944824, z = 38.05704498291, h = 308.68231201172, ped=false, tenthirteen=false},
-	--[2] = {x = -629.10021972656, y = -238.28601074219, z = 38.05704498291, h = 315.65130615234, ped=false, tenthirteen=false},
-	--[3] = {x = -615.44744873047, y = -230.43145751953, z = 38.057022094727, h = 127.00442504883, ped=false, tenthirteen=false},
-	--[4] = {x = -619.76403808594, y = -224.42778015137, z = 38.056983947754, h = 128.99319458008, ped=false, tenthirteen=false},
-	--[5] = {x = -626.38409423828, y = -228.23585510254, z = 38.057060241699, h = 267.1194152832, ped=false, tenthirteen=false},
-	--[6] = {x = -621.15222167969, y = -235.51699829102, z = 38.057048797607, h = 339.47375488281, ped=false, tenthirteen=false},
+	[1] = {x = -631.37310791016, y = -235.05155944824, z = 38.05704498291, h = 308.68231201172, ped=false, tenthirteen=false},
+	[2] = {x = -629.10021972656, y = -238.28601074219, z = 38.05704498291, h = 315.65130615234, ped=false, tenthirteen=false},
+	[3] = {x = -615.44744873047, y = -230.43145751953, z = 38.057022094727, h = 127.00442504883, ped=false, tenthirteen=false},
+	[4] = {x = -619.76403808594, y = -224.42778015137, z = 38.056983947754, h = 128.99319458008, ped=false, tenthirteen=false},
+	[5] = {x = -626.38409423828, y = -228.23585510254, z = 38.057060241699, h = 267.1194152832, ped=false, tenthirteen=false},
+	[6] = {x = -621.15222167969, y = -235.51699829102, z = 38.057048797607, h = 339.47375488281, ped=false, tenthirteen=false},
 }
 local guards = false
 function TriggerGuardAttack()
@@ -309,38 +309,42 @@ Citizen.CreateThread(function()
 			end
 		end
 		if GetDistanceBetweenCoords(centre.x, centre.y, centre.z, GetEntityCoords(GetPlayerPed(-1)), true) < 30 then
-			if not guards then 
-				for key, guard in pairs(guardlocs) do
-					local mdl = GetHashKey(guardmdls[math.random(1,#guardmdls)])
-					RequestModel(mdl)
-					print('attempting to spawn mdl '..mdl)
-					while not HasModelLoaded(mdl) do
-						print('cannot load '..mdl)
-						Wait(1)
-					end
-					guard.ped = CreatePed(2, mdl, guard.x, guard.y, guard.z, guard.h, true, true)
-					guard.tenthirteen = false
-					--SetBlockingOfNonTemporaryEvents(guard.ped, true)
-					--SetPedCombatAttributes(guard.ped, 46, true)
-					SetPedFleeAttributes(guard.ped, 0, 0)
-				end
-				guards = true
-			else
-				for key, guard in pairs(guardlocs) do
-					if guard.ped and IsEntityDead(guard.ped) then
-						if not guard.tenthirteen then
-							local pos = GetEntityCoords(guard.ped)
-							local coords = {
-								x = pos.x,
-								y = pos.y,
-								z = pos.z
-							}
-							TriggerServerEvent('fsn_police:dispatch', coords, 4, '10-13 | IMMEDIATE BACKUP REQUESTED AT JEWELRY STORE')
-							guard.tenthirteen = true
+			if NetworkIsHost() then
+				if not guards then 
+					for key, guard in pairs(guardlocs) do
+						local mdl = GetHashKey(guardmdls[math.random(1,#guardmdls)])
+						RequestModel(mdl)
+						print('attempting to spawn mdl '..mdl)
+						while not HasModelLoaded(mdl) do
+							print('cannot load '..mdl)
+							Wait(1)
 						end
+						guard.ped = CreatePed(2, mdl, guard.x, guard.y, guard.z, guard.h, true, true)
+						guard.tenthirteen = false
+						--SetBlockingOfNonTemporaryEvents(guard.ped, true)
+						--SetPedCombatAttributes(guard.ped, 46, true)
+						SetPedFleeAttributes(guard.ped, 0, 0)
 					end
-					if IsPedInMeleeCombat(GetPlayerPed(-1)) or IsPlayerFreeAiming(PlayerId()) then
-						TriggerGuardAttack()
+					guards = true
+				else
+					for key, guard in pairs(guardlocs) do
+						if guard.ped and IsEntityDead(guard.ped) then
+							--[[
+							if not guard.tenthirteen then
+								local pos = GetEntityCoords(guard.ped)
+								local coords = {
+									x = pos.x,
+									y = pos.y,
+									z = pos.z
+								}
+								--TriggerServerEvent('fsn_police:dispatch', coords, 4, '10-13 | IMMEDIATE BACKUP REQUESTED AT JEWELRY STORE')
+								guard.tenthirteen = true
+							end
+							]]
+						end
+						if IsPedInMeleeCombat(GetPlayerPed(-1)) or IsPlayerFreeAiming(PlayerId()) then
+							TriggerGuardAttack()
+						end
 					end
 				end
 			end

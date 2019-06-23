@@ -1,6 +1,5 @@
 local fsn_spawned = false
-local current_character_id = 0
-local current_character = {}
+local cur_char = {}
 
 RegisterNetEvent('spawnme')
 AddEventHandler('spawnme', function()
@@ -160,12 +159,6 @@ function fsn_mainSpawn()
   --end)
 end
 ----------------------- Character Shit
-current_characters = {}
-RegisterNetEvent('fsn_main:updateCharacters')
-AddEventHandler('fsn_main:updateCharacters', function(tbl)
-  current_characters = tbl
-end)
-current_character_index = 0
 RegisterNetEvent('fsn_main:charMenu')
 AddEventHandler('fsn_main:charMenu', function()
   SetNuiFocus(true,true)
@@ -176,70 +169,29 @@ end)
 
 RegisterNetEvent('fsn_main:character')
 RegisterNetEvent('fsn_main:initiateCharacter')
-AddEventHandler('fsn_main:initiateCharacter', function(character)
+AddEventHandler('fsn_main:initiateCharacter', function(char)
+  char = char[1] -- lol MySQL shit
+  cur_char = char
+
   fsn_IPLManager()
-  local mainSpawn = {x = -216.92286682129, y = -1038.2293701172, z = 31.140268325806}
-  local policeSpawn = {x = 458.97357177734, y = -991.02905273438, z = 31.689582824707}
-  local char = character[1]
-  local model = tonumber(char.char_model)
-  current_character_id = char.char_id
-  current_character = char
+
   SetNuiFocus(false,false)
   SendNUIMessage({type='charMenu', enable=false})
-  SetEntityCoords(GetPlayerPed(-1), mainSpawn.x, mainSpawn.y, mainSpawn.z)
-  fsn_spawned = true
-  --Citizen.CreateThread(function()
-    SetEntityVisible(GetPlayerPed(-1), true)
-    --[[
-      RequestModel(model)
-      
-      while not HasModelLoaded(model) do
-        Citizen.Wait(1)
-        RequestModel(model)
-      end
-  	
-      SetPlayerModel(PlayerId(), model)
-      SetModelAsNoLongerNeeded(model)
-      SetEntityVisible(GetPlayerPed(-1), true)
 
-      local weapons = json.decode(char.char_weapons)
-      for k, v in pairs(weapons) do
-        local hash = v.weaponHash
-        local ammo = v.ammo
-        GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(hash), ammo, false, false)
-      end
-      if char.mdl_extras ~= '[]' then
-        local variations = json.decode(char.mdl_extras)
-        for _, tbl in pairs(variations) do
-          if tbl.type == 'drawable' then
-            SetPedComponentVariation(GetPlayerPed(-1), tbl.index, tbl.drawable, tbl.texture, tbl.texture)
-          elseif tbl.type == 'prop' then
-            SetPedPropIndex(GetPlayerPed(-1), tbl.index, tbl.prop, tbl.texture, true)
-          end
-        end
-      else
-        for i=1,10 do
-          SetPedRandomComponentVariation(GetPlayerPed(-1), true)
-        end
-      end
-    ]]
-    local mdl = json.decode(char.char_model)
-    TriggerEvent("clothes:spawn", mdl)
-      
-    TriggerEvent('fsn_main:character', char)
-    TriggerEvent('fsn_police:init', char.char_police)
-    TriggerEvent('fsn_jail:init', char.char_id)
-    TriggerEvent('fsn_inventory:initChar', char.char_inventory)
-    TriggerEvent('fsn_bank:change:bankAdd', 0)
-    TriggerEvent('fsn_ems:reviveMe:force')
-    for k, v in pairs(current_characters) do
-      if v.char_id == current_character_id then
-        current_character_index = k
-      end
-    end
-    TriggerEvent('chatMessage', '', {255,255,255}, '^1^*Warning:^r This is a beta release of the :FSN: Framework. We aren\'t expecting any bugs, but those that are found should be reported via dm to JamesSc0tt on discord or the forums.')
-    TriggerServerEvent('fsn_apartments:getApartment', char.char_id)
-  --end)
+  SetEntityCoords(GetPlayerPed(-1), vector3(-216.92286682129, -1038.2293701172, 31.140268325806))
+  fsn_spawned = true
+  SetEntityVisible(GetPlayerPed(-1), true)
+  TriggerEvent("clothes:spawn", json.decode(char.char_model))
+    
+  TriggerEvent('fsn_main:character', char)
+  TriggerEvent('fsn_police:init', char.char_police)
+  TriggerEvent('fsn_jail:init', char.char_id)
+  TriggerEvent('fsn_inventory:initChar', char.char_inventory)
+  TriggerEvent('fsn_bank:change:bankAdd', 0)
+  TriggerEvent('fsn_ems:reviveMe:force')
+
+  TriggerEvent('chatMessage', '', {255,255,255}, '^1^*Warning:^r This is a beta release of the :FSN: Framework. We aren\'t expecting any bugs, but those that are found should be reported via dm to JamesSc0tt on discord or the forums.')
+  TriggerServerEvent('fsn_apartments:getApartment', char.char_id)
 end)
 
 RegisterNetEvent('fsn_main:sendCharacters')
@@ -273,106 +225,63 @@ AddEventHandler('fsn_inventory:buyItem', function(item, price, amount)
   end
 end)
 -------------------------------------------- Character Saving
-local savingWeapons = {
-  "WEAPON_KNIFE",
-  "WEAPON_NIGHTSTICK",
-  "WEAPON_HAMMER",
-  "WEAPON_BAT",
-  "WEAPON_GOLFCLUB",
-  "WEAPON_CROWBAR",
-  "WEAPON_PISTOL",
-  "WEAPON_COMBATPISTOL",
-  "WEAPON_APPISTOL",
-  "WEAPON_PISTOL50",
-  "WEAPON_MICROSMG",
-  "WEAPON_SMG",
-  "WEAPON_ASSAULTSMG",
-  "WEAPON_ASSAULTRIFLE",
-  "WEAPON_CARBINERIFLE",
-  "WEAPON_ADVANCEDRIFLE",
-  "WEAPON_MG",
-  "WEAPON_COMBATMG",
-  "WEAPON_PUMPSHOTGUN",
-  "WEAPON_SAWNOFFSHOTGUN",
-  "WEAPON_ASSAULTSHOTGUN",
-  "WEAPON_BULLPUPSHOTGUN",
-  "WEAPON_STUNGUN",
-  "WEAPON_SNIPERRIFLE",
-  "WEAPON_SMOKEGRENADE",
-  "WEAPON_BZGAS",
-  "WEAPON_MOLOTOV",
-  "WEAPON_FIREEXTINGUISHER",
-  "WEAPON_PETROLCAN",
-  "WEAPON_SNSPISTOL",
-  "WEAPON_SPECIALCARBINE",
-  "WEAPON_HEAVYPISTOL",
-  "WEAPON_BULLPUPRIFLE",
-  "WEAPON_HOMINGLAUNCHER",
-  "WEAPON_PROXMINE",
-  "WEAPON_SNOWBALL",
-  "WEAPON_VINTAGEPISTOL",
-  "WEAPON_DAGGER",
-  "WEAPON_FIREWORK",
-  "WEAPON_MUSKET",
-  "WEAPON_MARKSMANRIFLE",
-  "WEAPON_HEAVYSHOTGUN",
-  "WEAPON_GUSENBERG",
-  "WEAPON_HATCHET",
-  "WEAPON_COMBATPDW",
-  "WEAPON_KNUCKLE",
-  "WEAPON_MARKSMANPISTOL",
-  "WEAPON_BOTTLE",
-  "WEAPON_FLAREGUN",
-  "WEAPON_FLARE",
-  "WEAPON_REVOLVER",
-  "WEAPON_SWITCHBLADE",
-  "WEAPON_MACHETE",
-  "WEAPON_FLASHLIGHT",
-  "WEAPON_MACHINEPISTOL",
-  "WEAPON_DBSHOTGUN",
-  "WEAPON_COMPACTRIFLE",
-  "GADGET_PARACHUTE"
-}
 RegisterNetEvent('fsn_main:characterSaving')
 AddEventHandler('fsn_main:characterSaving', function()
-  ---------------------------------------------------------------------- Weapons
-  --[[
-  local weapons = {}
-  for i=1, #savingWeapons do
-    if HasPedGotWeapon(GetPlayerPed(-1), GetHashKey(savingWeapons[i])) then
-      local ammo = GetAmmoInPedWeapon(GetPlayerPed(-1), GetHashKey(savingWeapons[i]))
-      weapons[#weapons+1] = {weaponHash = savingWeapons[i], ammo = ammo}
-    end
-  end
-  weapons = json.encode(weapons)
-  ]]--
+  --  Weapons
   local weapons = json.encode(exports["fsn_criminalmisc"]:GetWeapons())
-  --------------------------------------------------------------------- Clothing
+  --  Clothing
   local model = json.encode(exports["fsn_clothing"]:GetOutfit())
   local vars = 'unused'
-  ------------------------------------------------------------------------------
-  TriggerServerEvent('fsn_main:saveCharacter', current_character_id, model, vars, weapons)
+  TriggerServerEvent('fsn_main:saveCharacter', fsn_CharID(), model, vars, weapons)
 end)
 -------------------------------------------------------------
 
 NetworkSetFriendlyFireOption(true)
 SetCanAttackFriendly(GetPlayerPed(-1), true, true)
 ------------------------------------------------------------- character changer
-local char_changer = vector3(-219.72131347656, -1054.1688232422, 30.14019203186)
-function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
-  SetTextFont(font)
-  SetTextProportional(0)
-  SetTextScale(scale, scale)
-  SetTextColour(r, g, b, a)
-  SetTextDropShadow(0, 0, 0, 0,255)
-  SetTextEdge(1, 0, 0, 0, 255)
-  SetTextDropShadow()
-  SetTextOutline()
-  SetTextCentre(centre)
-  SetTextEntry("STRING")
-  AddTextComponentString(text)
-  DrawText(x , y)
+local function char_change_timeout()
+	local when = GetGameTimer() + 30*1000
+	while not IsControlJustPressed(0,177) do
+		local left = when-GetGameTimer()
+
+		-- Some fancy message
+		local text = '~r~DO NOT SWAP CHARACTER IN A ROLEPLAY SITUATION'
+		Util.DrawText(text, 4, 1, 0.5,0.25, 0.6, Color.White)
+
+		text = ("Changing character in ~b~%d~w~ seconds...")
+			:format(math.ceil(left/1000))
+		Util.DrawText(text, 4, 1, 0.5,0.35, 0.6, Color.White)
+
+		text = "PRESS ~g~BACKSPACE~w~ TO CANCEL CHARACTER SWAPPING"
+		Util.DrawText(text, 4, 1, 0.5,0.45, 0.6, Color.White)
+
+		if left <= 0 then
+			TriggerEvent('fsn_main:charMenu')
+			return
+		end
+		Citizen.Wait(0)
+	end
 end
+
+local char_changer = vector3(-219.72131347656, -1054.1688232422, 30.14019203186)
+Util.Tick(function()
+	local dist = #(char_changer-GetEntityCoords(GetPlayerPed(-1)))
+
+	if dist < 10 then
+		DrawMarker(1,pos-vector3(0,0,1),0,0,0,0,0,0,3.001,3.0001,0.4001,0,155,255,175,0,0,0,0)
+
+		if dist < 3 then
+			SetTextComponentFormat("STRING")
+			AddTextComponentString("Press ~INPUT_PICKUP~ to ~r~change character")
+			DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+			if IsControlJustPressed(0,38) then
+				char_change_timeout()
+			end
+		end
+	end
+end)
+
+--[[local char_changer = vector3(-219.72131347656, -1054.1688232422, 30.14019203186)
 local midswap = false
 local swapstart = 0
 Citizen.CreateThread(function()
@@ -390,9 +299,15 @@ Citizen.CreateThread(function()
             midswap = false
             swapstart = 0
           else
-            drawTxt('PRESS ~g~BACKSPACE~w~ TO CANCEL CHARACTER SWAPPING',4,1,0.5,0.45,0.6,255,255,255,255)
-            drawTxt('Changing character in ~b~'..string.sub(tostring(math.ceil(rem-GetNetworkTime())), 1, 2)..'~w~ seconds...',4,1,0.5,0.35,0.6,255,255,255,255)
-            drawTxt('~r~DO NOT SWAP CHARACTER IN A ROLEPLAY SITUATION',4,1,0.5,0.25,0.6,255,255,255,255)
+            local text = "PRESS ~g~BACKSPACE~w~ TO CANCEL CHARACTER SWAPPING"
+            Util.DrawText(text, 4, 1, 0.5,0.45, 0.6, Color.White)
+
+            text = ("Changing character in ~b~%d~w~ seconds...")
+              :format((rem-GetNetworkTime())/1000)
+            Util.DrawText(text, 4, 1, 0.5,0.35, 0.6, Color.White)
+
+            text = '~r~DO NOT SWAP CHARACTER IN A ROLEPLAY SITUATION'
+            Util.DrawText(text, 4, 1, 0.5,0.25, 0.6, Color.White)
             if IsControlJustPressed(0,177) then
               midswap = false
               swapstart = 0
@@ -411,10 +326,10 @@ Citizen.CreateThread(function()
       end
     end
   end
-end)
+end)]]
 ------------------------------------------------------------- export stuff
 function fsn_CharID()
-  return current_character.char_id
+  return cur_char.char_id
 end
 print(" ")
 print("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")

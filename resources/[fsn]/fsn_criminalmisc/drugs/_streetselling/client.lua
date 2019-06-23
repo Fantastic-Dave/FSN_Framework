@@ -115,7 +115,7 @@ Citizen.CreateThread(function()
 					if not selling then
 						fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '[~g~E~w~] Sell ~b~'..drug)
 						if IsControlJustPressed(0, 38) then
-							if math.random(1,100) < areas[myarea].callpercentage then
+							if math.random(1,100) > areas[myarea].callpercentage then
 								local pos = GetEntityCoords(obj)
 								local coords = {
 								  x = pos.x,

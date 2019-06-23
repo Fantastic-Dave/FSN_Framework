@@ -179,6 +179,8 @@ function fsn_drawText3D(x,y,z, text)
     end
 end
 
+local heldpeds = {}
+
 local holding = false
 local holdingstart = 0
 local holdingped = false
@@ -238,30 +240,82 @@ Citizen.CreateThread(function()
 						end
 					end
 				else
-					if ped == holdingped then
-						TaskStandStill(ped, 3000)
-						if not IsEntityPlayingAnim(ped, 'random@mugging3', "handsup_standing_base", 3) then
-							RequestAnimDict('random@mugging3')
-							TaskPlayAnim(holdingped, "random@mugging3", "handsup_standing_base", 4.0, -4, -1, 49, 0, 0, 0, 0)
-						end
-						local maff = holdingstart + 9
-						if maff < curtime then
-							if math.random(0,100) > 60 then
-								table.insert(myKeys, {GetVehicleNumberPlateText(holdingcar),true})
-								TriggerEvent('fsn_notify:displayNotification', 'You got keys to the car...', 'centerRight', 3000, 'success')
-								holding = false
-								holdingstart = 0
-								holdingped = false
-								holdingcar = false
-								holdingnotif = false
-							else
-								TriggerEvent('fsn_notify:displayNotification', 'No keys for you sucka', 'centerRight', 3000, 'error')
-								holding = false
-								holdingstart = 0
-								holdingped = false
-								holdingcar = false
-								holdingnotif = false
+					if holdingped then
+						if ped == holdingped then
+							TaskStandStill(ped, 3000)
+							if not IsEntityPlayingAnim(ped, 'random@mugging3', "handsup_standing_base", 3) then
+								RequestAnimDict('random@mugging3')
+								TaskPlayAnim(holdingped, "random@mugging3", "handsup_standing_base", 4.0, -4, -1, 49, 0, 0, 0, 0)
 							end
+							local maff = holdingstart + 9
+							if maff < curtime then
+								table.insert(heldpeds, #heldpeds+1, {holdingped, true})
+								if holdingcar then
+									if math.random(0,100) > 60 then
+										table.insert(myKeys, {GetVehicleNumberPlateText(holdingcar),true})
+										TriggerEvent('fsn_notify:displayNotification', 'You got keys to the car...', 'centerRight', 3000, 'success')
+										holding = false
+										holdingstart = 0
+										holdingped = false
+										holdingcar = false
+										holdingnotif = false
+									else
+										TriggerEvent('fsn_notify:displayNotification', 'No keys for you sucka', 'centerRight', 3000, 'error')
+										holding = false
+										holdingstart = 0
+										holdingped = false
+										holdingcar = false
+										holdingnotif = false
+									end
+								else
+									TriggerEvent('fsn_notify:displayNotification', 'You just robbed some poor local for...', 'centerLeft', 3000, 'info')
+									if math.random(1,100) < 50 then
+										TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(50,1000))
+									else
+										local amt = math.random(25,500)
+										TriggerEvent('fsn_notify:displayNotification', '$'..amt, 'centerLeft', 3000, 'info')
+										TriggerEvent('fsn_bank:change:walletAdd', amt)
+										if math.random(1,100) < 50 then
+											if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'lockpick', 1) end
+											if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'zipties', 1) end
+											if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,3)) end
+											if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'packaged_cocaine', math.random(1,2)) end
+										end
+									end	
+									
+									if math.random(1,100) < 10 then
+										TriggerEvent('fsn_inventory:item:add', 'keycard', 1)
+									end
+									holding = false
+									holdingstart = 0
+									holdingped = false
+									holdingcar = false
+									holdingnotif = false
+									print 'held up a person without keys'
+								end 
+							end
+						end
+					else
+						if not table.contains(heldpeds, ped) and not IsEntityDead(ped) then
+							holding = true
+							holdingped = ped
+							holdingstart = curtime					
+							exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'Robbing',9)
+							if not holdingnotif then 
+								TriggerEvent('fsn_notify:displayNotification', 'Robbing...', 'centerRight', 3000, 'info')
+								if math.random(1,100) < 40 then
+									local pos = GetEntityCoords(GetPlayerPed(-1))
+									local coords = {
+										x = pos.x,
+										y = pos.y,
+										z = pos.z
+									}
+									TriggerServerEvent('fsn_police:dispatch', coords, 14, '10-32 | Reported ARMED holdup')
+								end
+								holdingnotif = true
+							end
+						else
+							fsn_drawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~r~Not available')
 						end
 					end
 				end
@@ -274,6 +328,8 @@ Citizen.CreateThread(function()
 			holdingstart = 0
 			holdingped = false
 			holdingcar = false
+			
+			
 		end
 	end
 end)
@@ -284,3 +340,13 @@ Citizen.CreateThread(function()
 		curtime = curtime+1
 	end
 end)
+
+
+function table.contains(table, element)
+  for _, value in pairs(table) do
+    if value[1] == element then
+      return true
+    end
+  end
+  return false
+end

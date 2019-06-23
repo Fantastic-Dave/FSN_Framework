@@ -6,6 +6,7 @@ client_script "debug/cl_subframetime.js"
 client_script "debug/sh_debug.lua"
 server_script "debug/sh_debug.lua"
 -- Client scripts
+client_script "cl_utils.lua"
 client_script 'initial/client.lua'
 client_script 'money/client.lua'
 client_script 'hud/client.lua'
