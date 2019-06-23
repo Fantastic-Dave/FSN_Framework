@@ -29,7 +29,7 @@ local ems_cars = {
   [5] = "ambulance",
   [6] = "fire2",
   [7] = "firetruk",
-  [8] = "polmav",
+  [8] = "supervolito",
 }
 local pd_cars = {
   --------------------
