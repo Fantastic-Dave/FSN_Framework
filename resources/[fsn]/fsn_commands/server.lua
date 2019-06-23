@@ -751,6 +751,24 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/police' or split[1] == '/pd' then
     if fsn_policeOnDuty(source) then
       if split[2] then
+		if split[2] == 'fine' then
+			if tonumber(split[3]) then
+				if tonumber(split[4]) then
+					local char = getCharacter(source)
+					local officername = char.char_fname..' '..char.char_lname
+					
+					local char = getCharacter(tonumber(split[3]))
+					local perpname = char.char_fname..' '..char.char_lname
+					
+					TriggerClientEvent('chatMessage', -1, '', {255,255,255}, perpname..' was fined ^4$'..split[4]..'^0 by: '..officername)
+					TriggerEvent('fsn_police:ticket', tonumber(split[3]), tonumber(split[4]))
+				else
+					TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'Provide a fine')
+				end
+			else
+				TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'Provide a fine')
+			end
+		end
 		if split[2] == 'mdt' then
 			TriggerClientEvent('fsn_police:MDT:toggle', source)
 		  end
@@ -1081,6 +1099,14 @@ AddEventHandler('chatMessage', function(source, auth, msg)
             if split[4] then
               if tonumber(split[3]) and tonumber(split[4]) then
                 local jailtime = tonumber(split[4])*60
+				
+				local char = getCharacter(source)
+				local officername = char.char_fname..' '..char.char_lname
+				
+				local char = getCharacter(tonumber(split[3]))
+				local perpname = char.char_fname..' '..char.char_lname
+				
+				TriggerClientEvent('chatMessage', -1, '', {255,255,255}, perpname..' was jailed for ^4'..split[4]..'^0 by: '..officername)
                 TriggerEvent('fsn_jail:sendsuspect', source, split[3], jailtime)
               else
                 TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
