@@ -252,7 +252,9 @@ items_table = {
     weight = 0.6,
     desc = 'Lets sell this Joint!?',
     use = function()
-      TriggerEvent('fsn_notify:displayNotification', 'Sell this joint to locals<br>We\'re working on making these smokable', 'centerLeft', 3500, 'error')
+		TriggerEvent('fsn_criminalmisc:drugs:effects:weed')
+		TriggerEvent('fsn_inventory:item:take', 'joint', 1)
+	  --TriggerEvent('fsn_notify:displayNotification', 'Sell this joint to locals<br>We\'re working on making these smokable', 'centerLeft', 3500, 'error')
     end,
     modelhash = -1199910959,
     price = 0
@@ -282,7 +284,9 @@ items_table = {
     weight = 0.6,
     desc = 'This Meth Rocks - Sell Sell!',
     use = function()
-      TriggerEvent('fsn_notify:displayNotification', 'Sell this meth to locals<br>We\'re working on making these takeable', 'centerLeft', 3500, 'error')
+		TriggerEvent('fsn_criminalmisc:drugs:effects:meth')
+		TriggerEvent('fsn_inventory:item:take', 'meth_rocks', 1)
+	  --TriggerEvent('fsn_notify:displayNotification', 'Sell this meth to locals<br>We\'re working on making these takeable', 'centerLeft', 3500, 'error')
     end,
     price = 0,
     hashmodel = 285917444
@@ -292,7 +296,8 @@ items_table = {
     weight = 0.3,
     desc = 'sell this to locals',
     use = function()
-
+		TriggerEvent('fsn_criminalmisc:drugs:effects:cocaine')
+		TriggerEvent('fsn_inventory:item:take', 'packaged_cocaine', 1)
     end,
   },
   ["binoculars"] = {

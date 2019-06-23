@@ -31,6 +31,7 @@ client_script 'drugs/client.lua'
 client_script 'drugs/_streetselling/client.lua'
 server_script 'drugs/_streetselling/server.lua'
 client_script 'drugs/_weedprocess/client.lua'
+client_script 'drugs/_effects/client.lua'
 
 exports {
 	"GetWeapons",
