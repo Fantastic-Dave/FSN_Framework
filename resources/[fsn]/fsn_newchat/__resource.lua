@@ -1,3 +1,7 @@
+-- GLOBAL UTILS
+client_script '@fsn_main/cl_utils.lua'
+server_script '@fsn_main/sv_utils.lua'
+
 description 'chat management stuff'
 
 ui_page 'html/index.html'

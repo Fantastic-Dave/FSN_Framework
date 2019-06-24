@@ -1,3 +1,7 @@
+-- GLOBAL UTILS
+client_script '@fsn_main/cl_utils.lua'
+server_script '@fsn_main/sv_utils.lua'
+
 client_script 'gui_manager.lua'
 
 client_script 'facial/client.lua'

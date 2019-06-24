@@ -1,3 +1,7 @@
+-- GLOBAL UTILS
+client_script '@fsn_main/cl_utils.lua'
+server_script '@fsn_main/sv_utils.lua'
+
 -- Tell FiveM's NUI system what the main html file is for this resource
 ui_page "nui/ui.html"
 
