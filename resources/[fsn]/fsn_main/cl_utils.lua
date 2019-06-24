@@ -38,6 +38,28 @@ function Util.DrawText(text, font, center, x,y, scale, col)
 end
 
 --[[
+	Util.DrawText3D(x: number, y: number, z: number, text: string, col: Color, scale: number)
+]]
+function Util.DrawText3D(x, y, z, text, col, scale)
+    local onScreen,_x,_y=World3dToScreen2d(x,y,z)
+    local px,py,pz=table.unpack(GetGameplayCamCoords())
+    if onScreen then
+        SetTextScale(scale,scale)--(0.3, 0.3)
+        SetTextFont(0)
+        SetTextProportional(1)
+        SetTextColour(col[1],col[2],col[3],col[4])--(255, 255, 255, 140)
+        SetTextDropshadow(0, 0, 0, 0, 55)
+        SetTextEdge(2, 0, 0, 0, 150)
+        SetTextDropShadow()
+        SetTextOutline()
+        SetTextEntry("STRING")
+        SetTextCentre(1)
+        AddTextComponentString(text)
+        DrawText(_x,_y)
+    end
+end
+
+--[[
 	Iterators
 		Util.FindObjects()
 		Util.FindVehicles()
