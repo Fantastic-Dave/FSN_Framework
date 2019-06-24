@@ -3,10 +3,13 @@ local cracking = false
 local start_time = 0
 local cracking_id = 0
 
-local canrob = false
+canrob = true
 RegisterNetEvent('fsn_bankrobbery:timer')
 AddEventHandler('fsn_bankrobbery:timer', function(state)
-	canrob = state
+	if canrob ~= state then
+		canrob = state
+		print('fsn_bankrobbery: canrob = '..tostring(state))
+	end
 end)
 
 function fsn_drawText3D(x,y,z, text)
@@ -383,7 +386,7 @@ Citizen.CreateThread(function()
           end
         else
           if GetDistanceBetweenCoords(door.keypad.x, door.keypad.y, door.keypad.z, GetEntityCoords(GetPlayerPed(-1)), true) < 0.5 then
-            if exports['fsn_police']:fsn_getCopAmt() >= 3 then
+            if true then --exports['fsn_police']:fsn_getCopAmt() >= 3 then
 				if not canrob then
 					SetTextComponentFormat("STRING")
 				  AddTextComponentString("~r~A bank has been robbed too recently")
@@ -445,6 +448,7 @@ Citizen.CreateThread(function()
           				z = pos.z
           			}
           			TriggerServerEvent('fsn_police:dispatch', coords, 7)
+					TriggerServerEvent('fsn_bankrobbery:start')
                 while not HasAnimDictLoaded('mp_heists@keypad@') do
                   RequestAnimDict('mp_heists@keypad@')
                   Citizen.Wait(5)

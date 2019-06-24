@@ -16,12 +16,12 @@ local currenttime = 0
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1000)
-		if lastrob == 0 or lastrob+1800 < currenttime then
+		if lastrob+1800 < currenttime then
 			canrob = true
-			TriggerClientEvent('fsn_bankrobbery:timer', -1, canrob)
+			TriggerClientEvent('fsn_bankrobbery:timer', -1, true)
 		else
 			canrob = false
-			TriggerClientEvent('fsn_bankrobbery:timer', -1, canrob)
+			TriggerClientEvent('fsn_bankrobbery:timer', -1, false)
 		end
 	end 
 end)
@@ -49,7 +49,7 @@ end)
 
 RegisterServerEvent('fsn_bankrobbery:start')
 AddEventHandler('fsn_bankrobbery:start', function()
-	
+	lastrob = currenttime
 end)
 
 RegisterServerEvent('fsn_bankrobbery:vault:close')
