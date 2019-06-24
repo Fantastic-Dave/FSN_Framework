@@ -164,7 +164,7 @@ local lastGSR = 0
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-		if IsPedShooting(GetPlayerPed(-1)) then
+		if IsPedShooting(GetPlayerPed(-1)) and exports["fsn_criminalmisc"]:HoldingWeapon() then
 			print 'adding gsr'
 			lastGSR = current_time
 			myGSR = true
@@ -187,13 +187,18 @@ Citizen.CreateThread(function()
    while true do
      Citizen.Wait(0)
 	 if IsPedShooting(GetPlayerPed(-1)) and not pdonduty then
-       local pos = GetEntityCoords(GetPlayerPed(-1))
-       local coords = {
-         x = pos.x,
-         y = pos.y,
-         z = pos.z
-       }
-       TriggerServerEvent('fsn_police:dispatch', coords, 1)
+		if exports["fsn_criminalmisc"]:HoldingWeapon() then
+		   local pos = GetEntityCoords(GetPlayerPed(-1))
+		   local coords = {
+			 x = pos.x,
+			 y = pos.y,
+			 z = pos.z
+		   }
+		   TriggerServerEvent('fsn_police:dispatch', coords, 1)
+			print 'you hold weapon - dispatch'
+		else
+			print 'you no hold weapon - no dispatch'
+		end
      end
      ----- PD SIDE
      if disp_id ~= 0 then
