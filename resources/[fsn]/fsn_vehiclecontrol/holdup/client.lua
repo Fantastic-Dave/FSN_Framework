@@ -247,7 +247,12 @@ Citizen.CreateThread(function()
 								RequestAnimDict('random@mugging3')
 								TaskPlayAnim(holdingped, "random@mugging3", "handsup_standing_base", 4.0, -4, -1, 49, 0, 0, 0, 0)
 							end
-							local maff = holdingstart + 12
+							local maff = 0
+							if holdingcar then
+								maff = holdingstart + 12
+							else
+								maff = holdingstart + 20
+							end
 							if maff < curtime then
 								table.insert(heldpeds, #heldpeds+1, {holdingped, true})
 								if holdingcar then
