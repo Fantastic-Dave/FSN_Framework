@@ -1,7 +1,3 @@
--- GLOBAL UTILS
-client_script '@fsn_main/cl_utils.lua'
-server_script '@fsn_main/sv_utils.lua'
-
 client_script 'client.lua'
 
 -- FUEL
@@ -35,9 +31,6 @@ server_script 'inventory/server.lua'
 
 -- CARWASH
 client_script 'carwash/client.lua'
-
--- TRUNK
-client_script 'trunk/client.lua'
 
 -- HOLDUP
 client_script 'holdup/client.lua'
