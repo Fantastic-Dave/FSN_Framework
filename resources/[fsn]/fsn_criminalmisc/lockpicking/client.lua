@@ -212,7 +212,7 @@ AddEventHandler('fsn_criminalmisc:lockpicking', function()
 						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'zipties', math.random(1,3)) end
 						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
 						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
-						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'packaged_cocaine', math.random(1,20)) end
+						if math.random(1, 100) > 70 then TriggerEvent('fsn_inventory:item:add', 'packaged_cocaine', math.random(1,5)) end
 						TriggerEvent('fsn_bankrobbery:LostMC:spawn')
 					else
 						TriggerEvent('fsn_notify:displayNotification', 'You cannot do this yet', 'centerLeft', 3500, 'error')
