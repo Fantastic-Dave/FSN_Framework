@@ -37,7 +37,7 @@ beds = {
 RegisterNetEvent('fsn_ems:bed:update')
 AddEventHandler('fsn_ems:bed:update', function(bedid, bed)
 	beds[bedid] = bed
-	print('fsn_ems:bed Bed update for ('..bedid..') ['..tostring(bed)..']')
+	--print('fsn_ems:bed Bed update for ('..bedid..') ['..tostring(bed)..']')
 end)
 
 function fsn_drawText3D(x,y,z, text,r,g,b)
