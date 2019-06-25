@@ -24,7 +24,7 @@ TokoVoipConfig = {
 		TSChannelWait = "Waiting to Join",
 		
 		-- Blocking screen informations
-		TSServer = "185.249.196.154:9030", -- TeamSpeak server address to be displayed on blocking screen
+		TSServer = "fsn.tserverhq.com", -- TeamSpeak server address to be displayed on blocking screen
 		TSChannelSupport = "Waiting for Support", -- TeamSpeak support channel name displayed on blocking screen
 		TSDownload = "https://discord.gg/HpJ6vV3", -- Download link displayed on blocking screen
 
