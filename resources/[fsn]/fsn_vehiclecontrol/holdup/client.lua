@@ -258,7 +258,7 @@ Citizen.CreateThread(function()
 								if holdingcar then
 									if math.random(0,100) > 60 then
 										table.insert(myKeys, {GetVehicleNumberPlateText(holdingcar),true})
-										TriggerEvent('fsn_notify:displayNotification', 'You got keys to the car...', 'centerRight', 3000, 'success')
+										TriggerEvent('fsn_notify:displayNotification', 'You got keys to the car!', 'centerRight', 3000, 'success')
 										holding = false
 										holdingstart = 0
 										holdingped = false
@@ -297,7 +297,7 @@ Citizen.CreateThread(function()
 									holdingped = false
 									holdingcar = false
 									holdingnotif = false
-									print 'held up a person without keys'
+									--print 'held up a person without keys'
 								end 
 							end
 						end
@@ -306,7 +306,7 @@ Citizen.CreateThread(function()
 							holding = true
 							holdingped = ped
 							holdingstart = curtime					
-							exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'Robbing',12)
+							exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'Robbing',21)
 							if not holdingnotif then 
 								--TriggerEvent('fsn_notify:displayNotification', 'Robbing...', 'centerRight', 3000, 'info')
 								if math.random(1,100) < 40 then
