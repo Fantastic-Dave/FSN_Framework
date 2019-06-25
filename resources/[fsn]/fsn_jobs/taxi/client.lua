@@ -92,7 +92,7 @@ Citizen.CreateThread(function()
         if GetDistanceBetweenCoords(v.x,v.y,v.z,GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
           if istaxi == false then
             SetTextComponentFormat("STRING")
-            AddTextComponentString("Press ~INPUT_PICKUP~ to get a Taxi (~g~$250~w~)")
+            AddTextComponentString("Press ~INPUT_PICKUP~ to get a Taxi (~g~$150~w~)")
           	DisplayHelpTextFromStringLabel(0, 0, 1, -1)
             if IsControlJustPressed(0,38) then
               local spawn = {x = 920.74658203125, y = -163.43037414551, z = 74.439865112305, h = 100.0173034668}
@@ -114,7 +114,7 @@ Citizen.CreateThread(function()
             	TriggerEvent('fsn_cargarage:makeMine', mytaxi, GetDisplayNameFromVehicleModel(GetEntityModel(mytaxi)), GetVehicleNumberPlateText(mytaxi))
               istaxi = true
               fsn_SetJob('Taxi Driver')
-              TriggerEvent('fsn_bank:change:walletMinus', 250)
+              TriggerEvent('fsn_bank:change:walletMinus', 150)
             end
           else
             SetTextComponentFormat("STRING")
