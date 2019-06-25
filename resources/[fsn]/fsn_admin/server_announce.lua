@@ -1,4 +1,4 @@
-local restarts = {};
+--[[ local restarts = {};
 restarts[#restarts + 1] = {23, 00};
 restarts[#restarts + 1] = {05, 00};
 restarts[#restarts + 1] = {11, 00};
@@ -25,4 +25,4 @@ function announceRestart()
  end
  SetTimeout(1000, announceRestart)
 end
-SetTimeout(1000, announceRestart)
+SetTimeout(1000, announceRestart) --]]
