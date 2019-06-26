@@ -281,7 +281,7 @@ AddEventHandler('fsn_inventory:item:drop', function(item)
   				editOpen = false
   				qty = GetOnscreenKeyboardResult()
           if qty == 'all' then
-            qty = fsn_GetItemAmount(item)
+            qty = math.floor(fsn_GetItemAmount(item))
           else
             if tonumber(qty) then
               qty = math.floor(tonumber(qty))
@@ -348,6 +348,7 @@ end)
 
 RegisterNetEvent('fsn_inventory:item:add')
 AddEventHandler('fsn_inventory:item:add', function(item, amount)
+  amount = math.floor(amount)
   local space = fsn_computeMaxSpace()
   local weight = items_table[item].weight * amount
   local new_weight = fsn_computeCurrentSpace() + weight
@@ -369,6 +370,7 @@ end)
 
 RegisterNetEvent('fsn_inventory:item:take')
 AddEventHandler('fsn_inventory:item:take', function(item, amount)
+  amount = math.floor(amount)
   if inventory[item] then
     if inventory[item].amount > amount then
       inventory[item].amount = inventory[item].amount - amount
