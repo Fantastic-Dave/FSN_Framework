@@ -157,7 +157,7 @@ end
 
 function fsn_computeMaxSpace()
   if inventory["backpack"] then
-    return spacewithbag
+    return maxspace --spacewithbag
   else
     return maxspace
   end
