@@ -6,6 +6,18 @@ local datastore = {
   pickups = {}
 }
 
+function getVehicles()
+  return datastore.peds
+end
+function getPeds()
+  return datastore.vehicles
+end
+function getPickups()
+  return datastore.pickups
+end
+function getObjects()
+  return datastore.objects
+end
 ------------------------------------------------------- system
 local entityEnumerator = {
   __gc = function(enum)
