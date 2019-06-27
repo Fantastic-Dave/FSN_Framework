@@ -1,23 +1,4 @@
-------------------------------------------------------- datastore
-local datastore = {
-  peds = {},
-  objects = {},
-  vehicles = {},
-  pickups = {}
-}
 
-function getVehicles()
-  return datastore.peds
-end
-function getPeds()
-  return datastore.vehicles
-end
-function getPickups()
-  return datastore.pickups
-end
-function getObjects()
-  return datastore.objects
-end
 ------------------------------------------------------- system
 local entityEnumerator = {
   __gc = function(enum)
@@ -51,18 +32,32 @@ local function EnumerateEntities(initFunc, moveFunc, disposeFunc)
   end)
 end
 
-function EnumerateObjects()
-  return EnumerateEntities(FindFirstObject, FindNextObject, EndFindObject)
+------------------------------------------------------- datastore
+local datastore = {
+  peds = {},
+  objects = {},
+  vehicles = {},
+  pickups = {}
+}
+
+function getVehicles()
+  return datastore.peds
+end
+function getPeds()
+  return datastore.vehicles
+end
+function getPickups()
+  return datastore.pickups
+end
+function getObjects()
+  return datastore.objects
 end
 
-function EnumeratePeds()
-  return EnumerateEntities(FindFirstPed, FindNextPed, EndFindPed)
-end
-
-function EnumerateVehicles()
-  return EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle)
-end
-
-function EnumeratePickups()
-  return EnumerateEntities(FindFirstPickup, FindNextPickup, EndFindPickup)
-end
+Citizen.CreateThread(function()
+    while true do Citizen.Wait(0)
+       datastore.objects = EnumerateEntities(FindFirstObject, FindNextObject, EndFindObject)
+       datastore.peds = EnumerateEntities(FindFirstPed, FindNextPed, EndFindPed)
+       datastore.vehicles = EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle)
+       datastore.pickups = EnumerateEntities(FindFirstPickup, FindNextPickup, EndFindPickup)
+    end
+end)
