@@ -1,3 +1,12 @@
+------------------------------------------------------- datastore
+local datastore = {
+  peds = {},
+  objects = {},
+  vehicles = {},
+  pickups = {}
+}
+
+------------------------------------------------------- system
 local entityEnumerator = {
   __gc = function(enum)
     if enum.destructor and enum.handle then
