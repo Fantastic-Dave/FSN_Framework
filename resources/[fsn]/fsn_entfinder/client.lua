@@ -36,7 +36,13 @@ local datastore = {
   peds = {},
   objects = false,
   vehicles = false,
-  pickups = false
+  pickups = false,
+  nearby = {
+    peds = {},
+    objects = {},
+    vehicles = {},
+    pickups = {}  
+  }
 }
 
 function getVehicles(nearby)
