@@ -39,17 +39,17 @@ local datastore = {
   pickups = false
 }
 
-function getVehicles()
-  return datastore.peds
+function getVehicles(nearby)
+  if nearby then return datastore.nearby.vehicles else return datastore.vehicles end
 end
-function getPeds()
-  return datastore.vehicles
+function getPeds(nearby)
+  if nearby then return datastore.nearby.peds else return datastore.peds end
 end
-function getPickups()
-  return datastore.pickups
+function getPickups(nearby)
+  if nearby then return datastore.nearby.pickups else return datastore.pickups end
 end
-function getObjects()
-  return datastore.objects
+function getObjects(nearby)
+  if nearby then return datastore.nearby.objects else return datastore.objects end
 end
 
 Citizen.CreateThread(function()
