@@ -64,5 +64,8 @@ Citizen.CreateThread(function()
        if datastore.peds then datastore.peds = EnumerateEntities(FindFirstPed, FindNextPed, EndFindPed) end
        if datastore.vehicles then datastore.vehicles = EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle) end
        if datastore.pickups then datastore.pickups = EnumerateEntities(FindFirstPickup, FindNextPickup, EndFindPickup) end
+       if datastore.objects ~= {} or datastore.peds ~= {} or datastore.vehicles ~= {} or datastore.pickups ~= {} then
+         Citizen.Wait(500) 
+       end
     end
 end)
