@@ -1,4 +1,3 @@
-
 ------------------------------------------------------- system
 local entityEnumerator = {
   __gc = function(enum)
@@ -35,9 +34,9 @@ end
 ------------------------------------------------------- datastore
 local datastore = {
   peds = {},
-  objects = {},
-  vehicles = {},
-  pickups = {}
+  objects = false,
+  vehicles = false,
+  pickups = false
 }
 
 function getVehicles()
@@ -55,9 +54,9 @@ end
 
 Citizen.CreateThread(function()
     while true do Citizen.Wait(0)
-       datastore.objects = EnumerateEntities(FindFirstObject, FindNextObject, EndFindObject)
-       datastore.peds = EnumerateEntities(FindFirstPed, FindNextPed, EndFindPed)
-       datastore.vehicles = EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle)
-       datastore.pickups = EnumerateEntities(FindFirstPickup, FindNextPickup, EndFindPickup)
+       if datastore.objects then datastore.objects = EnumerateEntities(FindFirstObject, FindNextObject, EndFindObject) end
+       if datastore.peds then datastore.peds = EnumerateEntities(FindFirstPed, FindNextPed, EndFindPed) end
+       if datastore.vehicles then datastore.vehicles = EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle) end
+       if datastore.pickups then datastore.pickups = EnumerateEntities(FindFirstPickup, FindNextPickup, EndFindPickup) end
     end
 end)
