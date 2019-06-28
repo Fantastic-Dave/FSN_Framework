@@ -14,6 +14,25 @@ function Util.Tick(f, ms)
 end
 
 --[[
+	Util.Repeat(f: function, s=0: number)
+		Easy way to repeat something for x amount of seconds, good for locking animations
+]]
+function Util.Repeat(f, s)
+	Citizen.CreateThread(function()
+		local start = GetGameTimer()
+		local ms = s x 1000
+		while true do
+			Citizen.Wait(0)
+			if start+ms =< GetGameTimer() then
+				f()
+			else
+				break;		
+			end
+		end
+	end)
+end
+
+--[[
 	struct Color
 		{r: number, g: number, b: number, a: number}
 ]]
