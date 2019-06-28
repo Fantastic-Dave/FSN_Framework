@@ -79,6 +79,48 @@ function Util.DrawText3D(x, y, z, text, col, scale)
 end
 
 --[[
+	Util.GetPlayers()
+		Stolen from Frazzle in #scripting-gated, returns a table of players
+]]
+function Util.GetPlayers()
+    local Players = {}
+    for Index = 0, 256 do
+        if NetworkIsPlayerActive(Index) then
+            table.insert(Players, Index)
+        end
+    end
+
+    return Players
+end
+	
+--[[
+	Util.GetClosestPlayer()
+		Stolen from Frazzle in #scripting-gated, returns the closest player + how far away they are 
+]]
+function Util.GetClosestPlayer()
+    local Players = self:GetPlayers()
+    local ClosestDistance = -1
+    local ClosestPlayer = -1
+    local PlayerPed = PlayerPedId()
+    local PlayerPosition = GetEntityCoords(PlayerPed, false)
+    
+    for Index = 1, #Players do
+        local TargetPed = GetPlayerPed(Players[Index])
+        if PlayerPed ~= TargetPed then
+            local TargetCoords = GetEntityCoords(TargetPed, false)
+            local Distance = #(PlayerPosition - TargetCoords)
+
+            if ClosestDistance == -1 or ClosestDistance > Distance then
+                ClosestPlayer = Players[Index]
+                ClosestDistance = Distance
+            end
+        end
+    end
+    
+    return ClosestPlayer, ClosestDistance
+end
+
+--[[
 	Iterators
 		Util.FindObjects()
 		Util.FindVehicles()
