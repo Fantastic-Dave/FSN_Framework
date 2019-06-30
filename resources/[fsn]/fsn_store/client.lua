@@ -222,9 +222,9 @@ Citizen.CreateThread(function()
 	while true do Citizen.Wait(0)
 		for k,v in pairs(storekeepers) do
 			if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
-				if exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5) then
-					if GetEntityModel(exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5)) == 416176080 then
-						v.ped = exports['fsn_main']:fsn_FindPedNearbyCoords(v.x, v.y, v.z,5)
+				if exports["fsn_entfinder"]:getPedNearCoords(v.x, v.y, v.z,5) then
+					if GetEntityModel(exports["fsn_entfinder"]:getPedNearCoords(v.x, v.y, v.z,5)) == 416176080 then
+						v.ped = exports["fsn_entfinder"]:getPedNearCoords(v.x, v.y, v.z,5)
 						fsn_drawText3D(GetEntityCoords(v.ped).x, GetEntityCoords(v.ped).y, GetEntityCoords(v.ped).z, '~w~ ')
 					else
 						if v.ped then

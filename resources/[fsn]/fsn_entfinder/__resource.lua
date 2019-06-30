@@ -4,5 +4,6 @@ exports({
   'getVehicles',
   'getPeds',
   'getPickups',
-  'getObjects'
+  'getObjects',
+  'getPedNearCoords'
 })

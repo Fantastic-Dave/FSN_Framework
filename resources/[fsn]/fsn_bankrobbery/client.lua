@@ -567,7 +567,7 @@ AddEventHandler('fsn_bankrobbery:LostMC:spawn', function()
 	start = current_time
 	while true do
 		Citizen.Wait(0)
-		local ped = exports["fsn_main"]:fsn_FindPedNearbyCoords(LostMC.x, LostMC.y, LostMC.z, 100)
+		local ped = exports["fsn_entfinder"]:getPedNearCoords(LostMC.x, LostMC.y, LostMC.z, 100)
 		ClearPedTasksImmediately(ped)
 		TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
 		local maff = start + 30
