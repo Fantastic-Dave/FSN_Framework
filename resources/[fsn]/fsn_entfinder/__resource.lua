@@ -1,4 +1,4 @@
-client_script client.lua
+client_script 'client.lua'
 
 exports({
   'getVehicles',
