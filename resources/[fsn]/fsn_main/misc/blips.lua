@@ -33,10 +33,9 @@ end
 Citizen.CreateThread(function()
 	while true do
 		Wait(5000)
-		for i,v in ipairs(blips) do
-			if blips[i].timeToDelete < GetNetworkTime() and blips[i].active then
+		for i, _ in pairs(blips) do
+			if blips[i].timeToDelete < GetNetworkTime() or not blips[i].active then
 				RemoveBlip(blips[i].blipObject)
-				blips[i].active = false
 				blips[i] = nil
 			end
 		end
