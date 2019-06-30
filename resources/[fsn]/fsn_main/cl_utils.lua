@@ -23,7 +23,7 @@ function Util.Repeat(f, s)
 		local ms = s * 1000
 		while true do
 			Citizen.Wait(0)
-			if start+ms =< GetGameTimer() then
+			if start+ms <= GetGameTimer() then
 				f()
 			else
 				break;		
