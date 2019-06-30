@@ -91,6 +91,19 @@ local selling = false
 local startsale = 0
 local curtime = 0
 local sold_peds = {}
+
+function getPed()
+	local peds = exports.fsn_entfinder:getPeds(true)
+	if peds then
+		for key, ped in pairs(peds) do
+			if GetDistanceBetweenCoords(GetEntityCoords(ped), GetEntityCoords(GetPlayerPed(-1)), true) < 3 and ped ~= GetPlayerPed(-1) then 
+				return ped
+			end
+		end
+	end
+	return false
+end
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
@@ -110,7 +123,7 @@ Citizen.CreateThread(function()
 			local drug = getMyDrug()
 			local myarea = string.upper(GetNameOfZone(GetEntityCoords(GetPlayerPed(-1))))
 			if areas[myarea] and areas[myarea].enabled and areas[myarea].drugs[drug] then
-				local obj = fsn_FindNearbyPed(1.5)
+				local obj = getPed()--fsn_FindNearbyPed(1.5)
 				if obj and IsPedHuman(obj) and not table.contains(sold_peds, obj) and not IsEntityDead(obj) then
 					if not selling then
 						fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '[~g~E~w~] Sell ~b~'..drug)
