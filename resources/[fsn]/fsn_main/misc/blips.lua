@@ -37,6 +37,7 @@ Citizen.CreateThread(function()
 			if blips[i].timeToDelete < GetNetworkTime() and blips[i].active then
 				RemoveBlip(blips[i].blipObject)
 				blips[i].active = false
+				blips[i] = nil
 			end
 		end
 	end
