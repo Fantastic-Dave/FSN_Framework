@@ -45,6 +45,8 @@ local datastore = {
   }
 }
 
+local myPed = GetPlayerPed(-1)
+
 function getVehicles(nearby)
   if nearby then return datastore.nearby.vehicles else return datastore.vehicles end
 end
@@ -58,14 +60,60 @@ function getObjects(nearby)
   if nearby then return datastore.nearby.objects else return datastore.objects end
 end
 
+
+function get_objects()
+	return EnumerateEntities(FindFirstObject, FindNextObject, EndFindObject)
+end
+
+function get_pickups()
+	return EnumerateEntities(FindFirstPickup, FindNextPickup, EndFindPickup)
+end
+
+function get_vehicles()
+	return EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle)
+end
+
+function get_peds()
+	return EnumerateEntities(FindFirstPed, FindNextPed, EndFindPed)
+end
 Citizen.CreateThread(function()
-    while true do Citizen.Wait(0)
-       if datastore.objects then datastore.objects = EnumerateEntities(FindFirstObject, FindNextObject, EndFindObject) end
-       if datastore.peds then datastore.peds = EnumerateEntities(FindFirstPed, FindNextPed, EndFindPed) end
-       if datastore.vehicles then datastore.vehicles = EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle) end
-       if datastore.pickups then datastore.pickups = EnumerateEntities(FindFirstPickup, FindNextPickup, EndFindPickup) end
-       if datastore.nearby.objects ~= {} or datastore.nearby.peds ~= {} or datastore.nearby.vehicles ~= {} or datastore.nearby.pickups ~= {} then
-         Citizen.Wait(500) 
-       end
-    end
+	while true do Citizen.Wait(0)
+		if datastore.objects then
+			datastore.objects = get_objects()
+			datastore.nearby.objects = {}
+			for v in datastore.objects do
+				if GetDistanceBetweenCoords(GetEntityCoords(v), GetEntityCoords(myPed), true) < 5 then
+					table.insert(datastore.nearby.objects, #datastore.nearby.objects+1, v)
+				end
+			end
+		end
+		if datastore.peds then
+			datastore.peds = get_peds()
+			datastore.nearby.peds = {}
+			for v in datastore.peds do
+				if GetDistanceBetweenCoords(GetEntityCoords(v), GetEntityCoords(myPed), true) < 5 then
+					table.insert(datastore.nearby.peds, #datastore.nearby.peds+1, v)
+				end
+			end
+		end
+		if datastore.vehicles then
+			datastore.vehicles = get_vehicles()
+			datastore.nearby.vehicles = {}
+			for v in datastore.vehicles do
+				if GetDistanceBetweenCoords(GetEntityCoords(v), GetEntityCoords(myPed), true) < 5 then
+					table.insert(datastore.nearby.vehicles, #datastore.nearby.vehicles+1, v)
+				end
+			end
+		end
+		if datastore.pickups then
+			datastore.pickups = get_pickups()
+			datastore.nearby.pickups = {}
+			for v in datastore.pickups do
+				if GetDistanceBetweenCoords(GetEntityCoords(v), GetEntityCoords(myPed), true) < 5 then
+					table.insert(datastore.nearby.pickups, #datastore.nearby.pickups+1, v)
+				end
+			end
+		end
+		Citizen.Wait(500) 
+	end
 end)
