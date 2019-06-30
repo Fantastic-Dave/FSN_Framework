@@ -20,7 +20,7 @@ end
 function Util.Repeat(f, s)
 	Citizen.CreateThread(function()
 		local start = GetGameTimer()
-		local ms = s x 1000
+		local ms = s * 1000
 		while true do
 			Citizen.Wait(0)
 			if start+ms =< GetGameTimer() then
