@@ -25,6 +25,17 @@ local cases = {
 	{-623.6746, -227.0025, 38.05, blip=false, robbed=false, lastrob=0},
 }
 
+
+local amilocked = false
+RegisterServerEvent('fsn_jewellerystore:doors:Lock')
+AddEventHandler('fsn_jewellerystore:doors:Lock', function()
+	amilocked = true
+	TriggerClientEvent('fsn_jewellerystore:doors:State', -1, true)
+	Citizen.Wait(1200000)
+	amilocked = false
+	TriggerClientEvent('fsn_jewellerystore:doors:State', -1, false)
+end)
+
 RegisterServerEvent('fsn_inventory:gasDoorunlock')
 AddEventHandler('fsn_inventory:gasDoorunlock', function()
 	TriggerClientEvent('fsn_jewellerystore:gasDoor:toggle', -1)

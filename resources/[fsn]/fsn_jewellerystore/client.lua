@@ -166,7 +166,34 @@ local backroom = {x = -630.63171386719, y = -229.15394592285, z = 38.05705261230
 local till = {x = -622.32482910156, y = -229.89263916016, z = 38.057052612305}
 local centre = {x = -622.00439453125, y = -230.77331542969, z = 38.057022094727}
 
-local isgasdoorLocked = true
+local amilocked = true
+local doors = {
+	[1] = { -- left
+		mdl = 1425919976,
+		x = -631.955,
+		y = -236.333,
+		z = 38.206,
+	},
+	[2] = { -- right
+		mdl = 9467943,
+		x = -630.426,
+		y = -238.437,
+		z = 38.206
+	}
+}
+RegisterNetEvent('fsn_commands:police:lock')
+AddEventHandler('fsn_commands:police:lock', function()
+	if GetDistanceBetweenCoords(doors[1].x, doors[1].y, doors[1].z, GetEntityCoords(GetPlayerPed(-1)), true) < 3 or GetDistanceBetweenCoords(doors[2].x, doors[2].y, doors[2].z, GetEntityCoords(GetPlayerPed(-1)), true) < 3 then
+		print 'you can lock/unlock the door at jewellerystore'
+		TriggerServerEvent('fsn_jewellerystore:doors:toggle')
+	end
+end)
+RegisterNetEvent('fsn_jewellerystore:doors:State')
+AddEventHandler('fsn_jewellerystore:doors:State', function(state)
+	amilocked = state
+end)
+
+local isgasdoorLocked = false
 local gasdoor = {mdl= 161378502, loc = {x=3557.660, y=3669.192, z=27.118}, txt={x = 3557.6176757813, y = 3669.7663574219, z = 28.121891021729}}
 RegisterNetEvent('fsn_jewellerystore:gasDoor:toggle')
 AddEventHandler('fsn_jewellerystore:gasDoor:toggle', function()
@@ -305,6 +332,20 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
+		if GetDistanceBetweenCoords(doors[1].x, doors[1].y, doors[1].z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 or GetDistanceBetweenCoords(doors[2].x, doors[2].y, doors[2].z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
+			if amilocked then
+				for k, v in pairs(doors) do
+					local door = GetClosestObjectOfType(v.x,v.y,v.z, 1.0, v.mdl, false, false, false)
+					fsn_drawText3D(v.x,v.y,v.z, '~r~LOCKED')
+					FreezeEntityPosition(door, true)
+				end
+			else
+				for k, v in pairs(doors) do
+					local door = GetClosestObjectOfType(v.x,v.y,v.z, 1.0, v.mdl, false, false, false)
+					FreezeEntityPosition(door, false)
+				end
+			end
+		end
 		if GetDistanceBetweenCoords(gasdoor.loc.x,gasdoor.loc.y,gasdoor.loc.z, GetEntityCoords(GetPlayerPed(-1)), true) < 5 then
 			if isgasdoorLocked then
 				fsn_drawText3D(gasdoor.txt.x,gasdoor.txt.y,gasdoor.txt.z, '~r~LOCKED\n~w~[E] Scan Card')
