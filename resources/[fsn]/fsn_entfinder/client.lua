@@ -62,7 +62,7 @@ function getObjects(nearby)
 end
 
 function getPedNearCoords(x,y,z,Distance)
-	for k, v in pairs(datastore.nearby.peds) do
+	for k, v in pairs(datastore.peds) do
 		if GetDistanceBetweenCoords(GetEntityCoords(v), x, y, z, true) < Distance then
 			return v
 		end
@@ -89,38 +89,42 @@ end
 Citizen.CreateThread(function()
 	while true do Citizen.Wait(0)
 		if datastore.objects then
-			datastore.objects = get_objects()
+			datastore.objects = {}
 			datastore.nearby.objects = {}
-			for v in datastore.objects do
-				if GetDistanceBetweenCoords(GetEntityCoords(v), GetEntityCoords(myPed), true) < 50 then
-					table.insert(datastore.nearby.objects, #datastore.nearby.objects+1, v)
+			for obj in get_objects() do
+				table.insert(datastore.objects, #datastore.objects+1, obj)
+				if GetDistanceBetweenCoords(GetEntityCoords(obj), GetEntityCoords(myPed), true) < 50 then
+					table.insert(datastore.nearby.objects, #datastore.nearby.objects+1, obj)
 				end
 			end
 		end
 		if datastore.peds then
-			datastore.peds = get_peds()
+			datastore.peds = {}
 			datastore.nearby.peds = {}
-			for v in datastore.peds do
-				if GetDistanceBetweenCoords(GetEntityCoords(v), GetEntityCoords(myPed), true) < 50 then
-					table.insert(datastore.nearby.peds, #datastore.nearby.peds+1, v)
+			for ped in get_peds() do
+				table.insert(datastore.peds, #datastore.peds+1, ped)
+				if GetDistanceBetweenCoords(GetEntityCoords(ped), GetEntityCoords(myPed), true) < 50 then
+					table.insert(datastore.nearby.peds, #datastore.nearby.peds+1, ped)
 				end
 			end
 		end
 		if datastore.vehicles then
-			datastore.vehicles = get_vehicles()
+			datastore.vehicles = {}
 			datastore.nearby.vehicles = {}
-			for v in datastore.vehicles do
-				if GetDistanceBetweenCoords(GetEntityCoords(v), GetEntityCoords(myPed), true) < 50 then
-					table.insert(datastore.nearby.vehicles, #datastore.nearby.vehicles+1, v)
+			for veh in get_vehicles() do
+				table.insert(datastore.vehicles, #datastore.vehicles+1, veh)
+				if GetDistanceBetweenCoords(GetEntityCoords(veh), GetEntityCoords(myPed), true) < 50 then
+					table.insert(datastore.nearby.vehicles, #datastore.nearby.vehicles+1, veh)
 				end
 			end
 		end
 		if datastore.pickups then
-			datastore.pickups = get_pickups()
+			datastore.pickups = {}
 			datastore.nearby.pickups = {}
-			for v in datastore.pickups do
-				if GetDistanceBetweenCoords(GetEntityCoords(v), GetEntityCoords(myPed), true) < 50 then
-					table.insert(datastore.nearby.pickups, #datastore.nearby.pickups+1, v)
+			for pickup in get_pickups() do
+				table.insert(datastore.pickups, #datastore.pickups+1, pickup)
+				if GetDistanceBetweenCoords(GetEntityCoords(pickup), GetEntityCoords(myPed), true) < 50 then
+					table.insert(datastore.nearby.pickups, #datastore.nearby.pickups+1, pickup)
 				end
 			end
 		end

@@ -93,7 +93,7 @@ local curtime = 0
 local sold_peds = {}
 
 function getPed()
-	local peds = exports.fsn_entfinder:getPeds(true)
+	local peds = exports.fsn_entfinder:getPeds(false)
 	if peds then
 		for key, ped in pairs(peds) do
 			if GetDistanceBetweenCoords(GetEntityCoords(ped), GetEntityCoords(GetPlayerPed(-1)), true) < 3 and ped ~= GetPlayerPed(-1) then 
