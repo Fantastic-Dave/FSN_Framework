@@ -1,4 +1,3 @@
---client_script "hud.lua"
 client_script "src/c_utils.lua"
 client_script "c_config.lua"
 client_script "src/c_main.lua"
