@@ -11,25 +11,25 @@ TokoVoipConfig = {
 	},
 	headingType = 0, -- headingType 0 uses GetGameplayCamRot, basing heading on the camera's heading, to match how other GTA sounds work. headingType 1 uses GetEntityHeading which is based on the character's direction
 	radioKey = Keys["CAPS"], -- Keybind used to talk on the radio
-	keySwitchChannels = Keys["Z"], -- Keybind used to switch the radio channels
+	keySwitchChannels = Keys["G"], -- Keybind used to switch the radio channels
 	keySwitchChannelsSecondary = Keys["LEFTSHIFT"], -- If set, both the keySwitchChannels and keySwitchChannelsSecondary keybinds must be pressed to switch the radio channels
-	keyProximity = Keys["Z"], -- Keybind used to switch the proximity mode
+	keyProximity = Keys["G"], -- Keybind used to switch the proximity mode
 
 	plugin_data = {
 		-- TeamSpeak channel name used by the voip
 		-- If the TSChannelWait is enabled, players who are currently in TSChannelWait will be automatically moved
 		-- to the TSChannel once everything is running
-		TSChannel = "SERVER_1",
-		TSPassword = "Toko_pass", -- TeamSpeak channel password (can be empty)
+		TSChannel = "SERVER_TOKOVOIP",
+		TSPassword = "M9l3IMVt31RlQm7NtF1Km31ESe5vcN", -- TeamSpeak channel password (can be empty)
 
 		-- Optional: TeamSpeak waiting channel name, players wait in this channel and will be moved to the TSChannel automatically
 		-- If the TSChannel is public and people can join directly, you can leave this empty and not use the auto-move
-		TSChannelWait = "TokoVOIP Server Waiting Room IPS DESC",
+		TSChannelWait = "Waiting to Join",
 		
 		-- Blocking screen informations
-		TSServer = "ts.rmog.us", -- TeamSpeak server address to be displayed on blocking screen
-		TSChannelSupport = "S1: Waiting For Support", -- TeamSpeak support channel name displayed on blocking screen
-		TSDownload = "http://forums.rmog.us", -- Download link displayed on blocking screen
+		TSServer = "fsn.tserverhq.com", -- TeamSpeak server address to be displayed on blocking screen
+		TSChannelSupport = "Waiting for Support", -- TeamSpeak support channel name displayed on blocking screen
+		TSDownload = "https://discord.gg/HpJ6vV3", -- Download link displayed on blocking screen
 		TSChannelWhitelist = { -- Black screen will not be displayed when users are in those TS channels
 			"Support 1",
 			"Support 2",
