@@ -17,7 +17,7 @@
 local targetPed;
 local useLocalPed = true;
 local isRunning = false;
-local scriptVersion = "1.3.1";
+local scriptVersion = "1.3.0";
 
 local muteall = false
 RegisterNetEvent('tokovoip_extras:muteall')
