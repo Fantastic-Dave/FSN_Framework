@@ -166,7 +166,7 @@ local backroom = {x = -630.63171386719, y = -229.15394592285, z = 38.05705261230
 local till = {x = -622.32482910156, y = -229.89263916016, z = 38.057052612305}
 local centre = {x = -622.00439453125, y = -230.77331542969, z = 38.057022094727}
 
-local amilocked = true
+local amilocked = false
 local doors = {
 	[1] = { -- left
 		mdl = 1425919976,
