@@ -36,7 +36,8 @@ end)
 -- player join messages
 AddEventHandler('chat:init', function()
     TriggerClientEvent('chatMessage', -1, '', { 255, 255, 255 }, '^2* ' .. GetPlayerName(source) .. ' joined.')
-	TriggerEvent('fsn_main:logging:addLog', source, 'connections', 'Player('..source..') connected via IP('..GetPlayerEndpoint(source)..')')
+	local ident = table.concat(GetPlayerIdentifiers(source), ', ')
+	TriggerEvent('fsn_main:logging:addLog', source, 'connections', 'Player('..source..') connected via IP('..GetPlayerEndpoint(source)..') and Identifiers('..ident..')')
 end)
 
 AddEventHandler('playerDropped', function(reason)
