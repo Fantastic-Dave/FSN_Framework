@@ -1,6 +1,18 @@
 AddEventHandler('fsn_main:validatePlayer', function()
 
 end)
+
+local function checkBan(src)
+	for k, v in pairs(GetPlayerIdentifiers(src)) do
+		local check = MySQL.Sync.fetchAll("SELECT * FROM `fsn_bans` WHERE `ban_identifier` = '"..v.."'")
+		if check[1] then
+			if check[1].ban_unbandate <= os.time() then
+				DropPlayer(source, ':FSN: Identifier('..v..') has been banned for: '..check[1].ban_reason)
+				CancelEvent()
+			end
+		end
+	end
+end
 ---------------------------- Character Shit
 cur_chars = {}
 RegisterServerEvent('fsn_main:updateCharacters')
