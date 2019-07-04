@@ -12,3 +12,5 @@ server_script "main/sv_conn.lua"
 
 client_script "misc/cl_antijumpspam.lua"
 shared_script "misc/sh_branding.lua"
+
+client_script "main/cl_player.lua"
