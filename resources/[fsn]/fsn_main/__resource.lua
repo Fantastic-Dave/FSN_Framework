@@ -36,6 +36,7 @@ server_script 'initial/server.lua'
 server_script 'money/server.lua'
 server_script 'playermanager/server.lua'
 server_script 'misc/logging.lua'
+server_script 'banmanager/sv_bans.lua'
 
 
 -- exports
