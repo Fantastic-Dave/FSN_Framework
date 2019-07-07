@@ -177,7 +177,7 @@ Citizen.CreateThread(function()
 								
 								-- work out amount
 								if exports["fsn_inventory"]:fsn_GetItemAmount(selling_item) < areas[myarea].drugs[drug].avg then
-								  sold_amount = fsn_GetItemAmount(selling_item)
+								  sold_amount = exports["fsn_inventory"]:fsn_GetItemAmount(selling_item)
 								else
 									local mini = areas[myarea].drugs[drug].avg - math.floor(areas[myarea].drugs[drug].avg / 2)
 									local maxi = areas[myarea].drugs[drug].avg + math.ceil(areas[myarea].drugs[drug].avg / 2)
