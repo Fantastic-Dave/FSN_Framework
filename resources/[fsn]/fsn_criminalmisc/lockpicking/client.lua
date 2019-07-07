@@ -179,9 +179,30 @@ function fsn_lookingAt()
 	return targetVehicle
 end
 
+local desks = {}
+RegisterNetEvent('fsn_bankrobbery:desks:receive')
+AddEventHandler('fsn_bankrobbery:desks:receive', function(tbl)
+	desks = tbl
+end)
+
 RegisterNetEvent('fsn_criminalmisc:lockpicking')
 AddEventHandler('fsn_criminalmisc:lockpicking', function()
 	if not picklocking then
+		for k, v in pairs(desks) do
+			if GetDistanceBetweenCoords(v.door.x, v.door.y, v.door.z, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+				picklocking = true
+				TriggerEvent('fsn_commands:me', 'Begins smashing at the bank door lock...')
+				while ( not HasAnimDictLoaded( "mini@safe_cracking" ) ) do
+					RequestAnimDict( "mini@safe_cracking" )
+					Citizen.Wait( 5 )
+				end
+				TaskPlayAnim(GetPlayerPed(-1), "mini@safe_cracking", "idle_base", 8.0, 1.0, 12000, 2, 0, 0, 1, 1 )
+				Citizen.Wait( 12000 )
+				TriggerServerEvent('fsn_bankrobbery:desks:doorUnlock', k)
+				picklocking = false
+				CancelEvent()
+			end
+		end
 		local lost_safe = {x = 977.23968505859, y = -104.10308074951, z = 74.845184326172}
 		if GetDistanceBetweenCoords(lost_safe.x, lost_safe.y, lost_safe.z, GetEntityCoords(GetPlayerPed(-1))) < 2 then
 			print(exports['fsn_police']:fsn_getCopAmt()..' are online')
