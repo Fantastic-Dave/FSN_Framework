@@ -1,15 +1,14 @@
 local desks = {
-	--[[
 	["Hawick Ave"] = {
 		door = {
-			mdl = -131754413,
-			x = 145.418,
-			y = -1041.8125,
-			z = 29.642,
+			mdl = -1184592117,
+			x = 309.730,
+			y = -280.239,
+			z = 54.438,
 			locked = true
 		},
 		keyboards = {
-			mdl = -954257764,
+			--mdl = -954257764,
 			[1] = {
 				payout = math.random(500,1000),
 				robspot = {x = 311.05963134766, y = -279.4684753418, z = 54.16463470459, h = 341.77679443359},
@@ -44,7 +43,6 @@ local desks = {
 			},
 		}
 	},
-	]]
 	["Legion Sq"] = {
 		door = {
 			mdl = -1184592117,
@@ -54,14 +52,14 @@ local desks = {
 			locked = true
 		},
 		keyboards = {
-			mdl = -954257764,
+			--mdl = -954257764,
 			[1] = {
 				payout = math.random(500,1000),
 				robspot = {x = 146.72927856445, y = -1041.1540527344, z = 29.367919921875, h = 340.09686279297},
 				x = 146.966,
 				y = -1040.550,
 				z = 29.584,
-				robbed = false,
+				robbed = 'hacked',
 			},
 			[2] = {
 				payout = math.random(500,1000),
@@ -69,7 +67,7 @@ local desks = {
 				x = 148.349,
 				y = -1041.051,
 				z = 29.584,
-				robbed = false,
+				robbed = 'nothacked',
 			},
 			[3] = {
 				payout = math.random(500,1000),
@@ -77,7 +75,7 @@ local desks = {
 				x = 149.788,
 				y = -1041.79,
 				z = 29.584,
-				robbed = false,
+				robbed = 'nothacked',
 			},
 			[4] = {
 				payout = math.random(500,1000),
@@ -85,13 +83,42 @@ local desks = {
 				x = 151.093,
 				y = -1042.072,
 				z = 29.584,
-				robbed = false,
+				robbed = 'nothacked',
 			},
 		}
 	},
 }
 
-RegisterNetEvent('fsn_bankrobbery:desks:request')
+RegisterServerEvent('fsn_bankrobbery:desks:request')
 AddEventHandler('fsn_bankrobbery:desks:request', function()
 	TriggerClientEvent('fsn_bankrobbery:desks:receive', source, desks)
+end)
+
+RegisterServerEvent('fsn_bankrobbery:desks:startHack')
+AddEventHandler('fsn_bankrobbery:desks:startHack', function(bank, board)
+	print('bank('..bank..'), keyboard('..board..') is being robbed')
+	local computer = desks[bank]['keyboards'][board]
+	computer['robbed'] = 'hacking'
+	TriggerClientEvent('fsn_bankrobbery:desks:receive', -1, desks)
+end)
+
+RegisterServerEvent('fsn_bankrobbery:desks:endHack')
+AddEventHandler('fsn_bankrobbery:desks:endHack', function(bank, board, state)
+	local computer = desks[bank]['keyboards'][board]
+	if state then
+		-- hacking was successful
+		computer['robbed'] = 'hacked'
+		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You hacked the device and wired $'..computer['payout']..' to your account.' })
+	else
+		-- hacking was failed, allow retry with hacking kit
+		if computer['robbed'] == 'hackfailed' then
+			computer['robbed'] = 'hacked'
+			TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'You failed to hack the device!' })
+			TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'inform', text = 'You can retry the hacking if you have the right device.' })
+		else
+			computer['robbed'] = 'hackfailed'
+			TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'You failed the retry of the computer hacking.' })
+		end
+	end
+	TriggerClientEvent('fsn_bankrobbery:desks:receive', -1, desks)
 end)
