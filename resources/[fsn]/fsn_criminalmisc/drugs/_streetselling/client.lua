@@ -124,7 +124,7 @@ Citizen.CreateThread(function()
 			local myarea = string.upper(GetNameOfZone(GetEntityCoords(GetPlayerPed(-1))))
 			if areas[myarea] and areas[myarea].enabled and areas[myarea].drugs[drug] then
 				local obj = getPed()--fsn_FindNearbyPed(1.5)
-				if obj and IsPedHuman(obj) and not table.contains(sold_peds, obj) and not IsEntityDead(obj) then
+				if obj and IsPedHuman(obj) and not table.contains(sold_peds, obj) and not IsEntityDead(obj) and not IsPedAPlayer(obj) then
 					if not selling then
 						fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '[~g~E~w~] Sell ~b~'..drug)
 						if IsControlJustPressed(0, 38) then
