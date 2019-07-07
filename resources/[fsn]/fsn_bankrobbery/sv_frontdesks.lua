@@ -220,6 +220,7 @@ Citizen.CreateThread(function()
 						robbed = 'nothacked',
 					},
 				}
-			},
+			}
+		}
 	end
 end)
