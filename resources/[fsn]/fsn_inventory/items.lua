@@ -5,6 +5,7 @@ items_table = {
     desc = 'Use this to repair yourself.',
     use = function()
 		TriggerEvent('mythic_hospital:client:UsePainKiller', 2)
+		TriggerEvent('fsn_inventory:item:take', 'painkillers', 1)
     end,
     modelhash = -2140074399,
     price = 250
@@ -15,6 +16,7 @@ items_table = {
     desc = 'Use this to repair yourself.',
     use = function()
 		TriggerEvent('mythic_hospital:client:UsePainKiller', 6)
+		TriggerEvent('fsn_inventory:item:take', 'morphine', 1)
     end,
     modelhash = -2140074399,
     price = 250
@@ -88,7 +90,6 @@ items_table = {
     weight = 0.3,
     desc = 'Time to make something meaty.',
     use = function()
-		TriggerEvent('mythic_hospital:client:UseAdrenaline')
 	end,
     modelhash = 1302435108
   },
@@ -309,6 +310,7 @@ items_table = {
     use = function()
 		TriggerEvent('fsn_criminalmisc:drugs:effects:meth')
 		TriggerEvent('fsn_inventory:item:take', 'meth_rocks', 1)
+		TriggerEvent('mythic_hospital:client:UseAdrenaline')
 	  --TriggerEvent('fsn_notify:displayNotification', 'Sell this meth to locals<br>We\'re working on making these takeable', 'centerLeft', 3500, 'error')
     end,
     price = 0,

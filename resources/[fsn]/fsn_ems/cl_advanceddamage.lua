@@ -71,6 +71,11 @@ local BodyParts = {
     ['RFOOT'] = { label = 'Right Foot', causeLimp = true, isDamaged = false, severity = 0 },
 }
 
+RegisterNetEvent('fsn_ems:adamage:request')
+AddEventHandler('fsn_ems:adamage:request', function(docid)
+	TriggerServerEvent('fsn_commands:ems:adamage:inspect', BodyParts, isBleeding, BleedingStates, WoundStates, docid)
+end)
+
 local parts = {
     [0]     = 'NONE',
     [31085] = 'HEAD',

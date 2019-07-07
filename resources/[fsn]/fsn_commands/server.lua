@@ -636,6 +636,24 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/ems' then
     if fsn_emsOnDuty(source) then
+	  if split[2] == 'inspect' then 
+		if tonumber(split[3]) then
+		  TriggerClientEvent('fsn_ems:adamage:request', tonumber(split[3]), source)
+		else
+		  TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
+		end
+	  end
+	  if split[2] == 'item' then
+		if split[3] == 'bandage' or split[3] == 'b' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'bandage', 1)
+		end
+		if split[3] == 'morphine' or split[3] == 'm' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'morphine', 1)
+		end
+		if split[3] == 'painkillers' or split[3] == 'pk' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'painkillers', 1)
+		end
+	  end
 	  if split[2] == 'frevive' then
 		TriggerClientEvent('fsn_ems:reviveMe:force', tonumber(split[3]))
 	  end
@@ -755,6 +773,24 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/police' or split[1] == '/pd' then
     if fsn_policeOnDuty(source) then
       if split[2] then
+		if split[2] == 'inspect' then 
+			if tonumber(split[3]) then
+			  TriggerClientEvent('fsn_ems:adamage:request', tonumber(split[3]), source)
+			else
+			  TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
+			end
+		  end
+	  if split[2] == 'item' then
+		if split[3] == 'bandage' or split[3] == 'b' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'bandage', 1)
+		end
+		if split[3] == 'morphine' or split[3] == 'm' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'morphine', 1)
+		end
+		if split[3] == 'painkillers' or split[3] == 'pk' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'painkillers', 1)
+		end
+	  end
 		if split[2] == 'fine' then
 			if tonumber(split[3]) then
 				if tonumber(split[4]) then
@@ -1175,5 +1211,26 @@ AddEventHandler('fsn_commands:police:gsrResult', function(officer, result)
 	else
 		TriggerClientEvent('chatMessage', officer, '', {255,255,255}, '^1^*GSR |^0^r The test does nothing.')
 		TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*GSR |^0^r The test does nothing.')
+	end
+end)
+RegisterServerEvent('fsn_commands:ems:adamage:inspect')
+AddEventHandler('fsn_commands:ems:adamage:inspect', function(parts, bleeding, bldtbl, dmgtbl, doctor)
+	local limping = false
+	for k, v in pairs(parts) do
+		if v.isDamaged then
+			TriggerClientEvent('chatMessage', doctor, '', {255,255,255}, '^1^*EMS |^0^r '..v.label..' is damaged: '..dmgtbl[v.severity])
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*EMS |^0^r '..v.label..' is damaged: '..dmgtbl[v.severity])
+		end
+		if v.causeLimp then
+			limping = true
+		end
+	end
+	if limping then
+		TriggerClientEvent('chatMessage', doctor, '', {255,255,255}, '^1^*EMS |^0^r The individual is limping')
+		TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*EMS |^0^r The individual is limping')
+	end
+	if bleeding > 0 then
+		TriggerClientEvent('chatMessage', doctor, '', {255,255,255}, '^1^*EMS |^0^r The individual is bleeding! Severity: '..bldtbl[bleeding])
+		TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*EMS |^0^r The individual is bleeding! Severity: '..bldtbl[bleeding])
 	end
 end)
