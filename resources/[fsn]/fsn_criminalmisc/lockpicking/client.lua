@@ -199,6 +199,13 @@ AddEventHandler('fsn_criminalmisc:lockpicking', function()
 				TaskPlayAnim(GetPlayerPed(-1), "mini@safe_cracking", "idle_base", 8.0, 1.0, 12000, 2, 0, 0, 1, 1 )
 				Citizen.Wait( 12000 )
 				TriggerServerEvent('fsn_bankrobbery:desks:doorUnlock', k)
+				local pos = GetEntityCoords(GetPlayerPed(-1))
+				local coords = {
+				 x = pos.x,
+				 y = pos.y,
+				 z = pos.z
+				}
+				TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-90 | BANK HOLDUP IN PROGRESS')
 				picklocking = false
 				CancelEvent()
 			end
