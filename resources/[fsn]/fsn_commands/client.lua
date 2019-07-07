@@ -122,6 +122,11 @@ end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- SERVICE COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent('fsn_commands:service:pingAccept')
+AddEventHandler('fsn_commands:service:pingAccept', function(ping)
+	SetNewWaypoint(ping.loc.x, ping.loc.y)
+	exports['mythic_notify']:DoCustomHudText('success', 'Ping accepted. Waypoint updated.', 5000)
+end)
 RegisterNetEvent('fsn_commands:service:pingStart')
 AddEventHandler('fsn_commands:service:pingStart', function(to)
 	TriggerServerEvent('fsn_commands:service:addPing', {x=GetEntityCoords(GetPlayerPed(-1)).x, y=GetEntityCoords(GetPlayerPed(-1)).y, z=GetEntityCoords(GetPlayerPed(-1)).z}, to)

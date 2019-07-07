@@ -353,7 +353,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 	if split[2] == 'accept' then 
 		local ping = pings[tonumber(split[3])]
 		if ping then
-			if ping.handled and ping.for == source then
+			if ping.handled == false and ping.isfor == source then
 				TriggerClientEvent('fsn_commands:service:pingAccept', source, ping)
 				TriggerClientEvent('mythic_notify:client:SendAlert', ping.from, { type = 'success', text = 'Ping Accepted' })
 				ping.handled = true
@@ -366,7 +366,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 	elseif split[2] == 'decline' then
 		local ping = pings[tonumber(split[3])]
 		if ping then
-			if ping.handled and ping.for == source then
+			if ping.handled == false and ping.isfor == source then
 				TriggerClientEvent('mythic_notify:client:SendAlert', ping.from, { type = 'error', text = 'Ping Declined' })
 				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Ping Declined' })
 				ping.handled = true
@@ -377,8 +377,8 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Unknown ping')
 		end	
 	else
-		if tonumber(split[3]) then
-			TriggerClientEvent('fsn_commands:service:pingStart', source, tonumber(split[3]))
+		if tonumber(split[2]) then
+			TriggerClientEvent('fsn_commands:service:pingStart', source, tonumber(split[2]))
 		else
 			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Provide a target!')
 		end
