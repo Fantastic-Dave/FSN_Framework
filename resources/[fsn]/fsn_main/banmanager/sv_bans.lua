@@ -132,18 +132,14 @@ function updateIdentifiers(src)
 			myIdentifiers = json.decode(myIdentifiers)
 		else
 			myIdentifiers = {}
-			myIdentifiers['steam'] = {}
-			myIdentifiers['ip'] = {}
-			myIdentifiers['xbl'] = {}
-			myIdentifiers['live'] = {}
-			myIdentifiers['license'] = {}
-			myIdentifiers['discord'] = {}
 		end
 		for k, v in pairs(GetPlayerIdentifiers(src)) do
 			--print('checking identifier: '..v)
 			local split = SplitString(v, ':')
 			local iType = split[1]
-			
+			if not myIdentifiers[iType] then
+				myIdentifiers[iType] = {}
+			end
 			local exists = false
 			for key, value in pairs(myIdentifiers[iType]) do
 				if value == v then
