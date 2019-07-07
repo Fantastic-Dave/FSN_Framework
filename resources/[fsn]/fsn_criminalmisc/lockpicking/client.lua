@@ -198,16 +198,22 @@ AddEventHandler('fsn_criminalmisc:lockpicking', function()
 				end
 				TaskPlayAnim(GetPlayerPed(-1), "mini@safe_cracking", "idle_base", 8.0, 1.0, 12000, 2, 0, 0, 1, 1 )
 				Citizen.Wait( 12000 )
-				TriggerServerEvent('fsn_bankrobbery:desks:doorUnlock', k)
-				local pos = GetEntityCoords(GetPlayerPed(-1))
-				local coords = {
-				 x = pos.x,
-				 y = pos.y,
-				 z = pos.z
-				}
-				TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-90 | BANK HOLDUP IN PROGRESS')
-				picklocking = false
-				CancelEvent()
+				if exports["fsn_police"]:fsn_getCopAmt() > 0 then
+					TriggerServerEvent('fsn_bankrobbery:desks:doorUnlock', k)
+					local pos = GetEntityCoords(GetPlayerPed(-1))
+					local coords = {
+					 x = pos.x,
+					 y = pos.y,
+					 z = pos.z
+					}
+					TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-90 | BANK HOLDUP IN PROGRESS')
+					picklocking = false
+					CancelEvent()
+				else
+					TriggerEvent('fsn_commands:me', 'looks like the lock is stronger without the cops around...')
+					picklocking = false
+					CancelEvent()
+				end
 			end
 		end
 		local lost_safe = {x = 977.23968505859, y = -104.10308074951, z = 74.845184326172}
