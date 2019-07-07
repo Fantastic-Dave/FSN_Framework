@@ -293,6 +293,20 @@ AddEventHandler('fsn_commands:requestHDC', function()
   TriggerClientEvent('fsn_commands:getHDC', source, hdc)
 end)
 
+local pings = {}
+RegisterServerEvent('fsn_commands:service:addPing')
+AddEventHandler('fsn_commands:service:addPing', function(xyz, to)
+	local idee = #pings+1
+	table.insert(pings, idee, {
+		loc = xyz,
+		from = source,
+		isfor = to,
+		handled = false,
+	})
+	TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'Your ping was sent to '..to })
+	TriggerClientEvent('mythic_notify:client:SendAlert', to, { type = 'inform', text = 'You received a new ping from ['..source..'], use "/ping accept '..idee..'" or "/ping decline '..idee})
+end)
+
 local nineoneones = {}
 local nineoneone = 0
 AddEventHandler('chatMessage', function(source, auth, msg)
@@ -335,6 +349,41 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- SERVICE COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/ping' then
+	if split[2] == 'accept' then 
+		local ping = pings[tonumber(split[3])]
+		if ping then
+			if ping.handled and ping.for == source then
+				TriggerClientEvent('fsn_commands:service:pingAccept', source, ping)
+				TriggerClientEvent('mythic_notify:client:SendAlert', ping.from, { type = 'success', text = 'Ping Accepted' })
+				ping.handled = true
+			else
+				TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r This ping has expired, request a new one.')
+			end
+		else
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Unknown ping')
+		end		
+	elseif split[2] == 'decline' then
+		local ping = pings[tonumber(split[3])]
+		if ping then
+			if ping.handled and ping.for == source then
+				TriggerClientEvent('mythic_notify:client:SendAlert', ping.from, { type = 'error', text = 'Ping Declined' })
+				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Ping Declined' })
+				ping.handled = true
+			else
+				TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r This ping has expired, request a new one.')
+			end
+		else
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Unknown ping')
+		end	
+	else
+		if tonumber(split[3]) then
+			TriggerClientEvent('fsn_commands:service:pingStart', source, tonumber(split[3]))
+		else
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Provide a target!')
+		end
+	end
+  end
   if split[1] == '/service' then
     if split[2] == 'request' then
       if split[3] == 'taxi' then
