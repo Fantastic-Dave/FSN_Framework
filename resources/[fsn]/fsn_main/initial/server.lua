@@ -195,6 +195,7 @@ RegisterServerEvent('fsn_main:saveCharacter')
 AddEventHandler('fsn_main:saveCharacter', function(charid, model, vars, weapons)
   MySQL.Sync.execute("UPDATE `fsn_characters` SET `char_model` = @model, `mdl_extras` = '"..vars.."', `char_weapons` = @weapons WHERE `fsn_characters`.`char_id` = @id", {['@id'] = charid, ['@model'] = model, ['@weapons'] = weapons})
   print(':FSN: Character information for '..GetPlayerName(source)..' updated!')
+  checkBan(source, false)
 end)
 ------------------------------------------------------ POLICE
 RegisterServerEvent('fsn_police:chat:ticket')
