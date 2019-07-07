@@ -35,7 +35,7 @@ items_table = {
 			  TaskPlayAnim(GetPlayerPed(-1), "oddjobs@assassinate@guard", "unarmed_fold_arms", 8.0, 1.0, 2500, 2, 0, 0, 0, 0 )  
 			  Citizen.Wait(1500)
 			  SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))+15)
-			  TriggerEvent('mythic_hospital:client:FieldTreatBleed')
+			  TriggerEvent('mythic_hospital:client:RemoveBleed')
 
 	  else
 		TriggerEvent('fsn_notify:displayNotification', 'You don\'t need to use a bandage!<br>Visit an EMS personnel or a hospital to heal more.', 'centerLeft', 3500, 'error')
