@@ -1,4 +1,5 @@
 local desks = {
+	--[[
 	["Hawick Ave"] = {
 		door = {
 			mdl = -131754413,
@@ -43,13 +44,14 @@ local desks = {
 			},
 		}
 	},
+	]]
 	["Legion Sq"] = {
 		door = {
-			mdl = -131754413,
-			x = 309.749,
-			y = -280.179,
-			z = 54.439,
-			locked = false
+			mdl = -1184592117,
+			x = 145.399,
+			y = -1041.872,
+			z = 29.641,
+			locked = true
 		},
 		keyboards = {
 			mdl = -954257764,
