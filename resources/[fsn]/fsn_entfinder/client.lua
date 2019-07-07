@@ -60,7 +60,7 @@ end
 function getObjects(nearby)
   if nearby then return datastore.nearby.objects else return datastore.objects end
 end
-
+--[[
 function getPedNearCoords(x,y,z,Distance)
 	for k, v in pairs(datastore.peds) do
 		if GetDistanceBetweenCoords(GetEntityCoords(v), x, y, z, true) < Distance then
@@ -69,6 +69,22 @@ function getPedNearCoords(x,y,z,Distance)
 	end
 	return false
 end
+]]--
+function getPedNearCoords(x,y,z,Distance)
+    local TargetPed
+    local Handle, Ped = FindFirstPed()
+    repeat
+        local DistanceBetween = GetDistanceBetweenCoords(x,y,z, GetEntityCoords(Ped), true)
+        if DoesEntityExist(Ped) and not IsPedAPlayer(Ped) and DistanceBetween <= Distance then
+            TargetPed = Ped
+        end
+
+    Success, Ped = FindNextPed(Handle)
+    until not Success
+
+    EndFindPed(Handle)
+    return TargetPed
+end 
 
 ------------------------------------------------------- internals
 function get_objects()
