@@ -171,7 +171,7 @@ Citizen.CreateThread(function()
           if IsControlJustPressed(0,38) then
             if exports.fsn_main:fsn_GetWallet() >= v.cost then
               if exports.fsn_inventory:fsn_GetItemAmount(v.required.item) >= v.required.amount then
-                local waittime = math.random(3000,6000)
+                local waittime = math.random(26000,30000)
                 TriggerEvent('fsn_notify:displayNotification', 'Gathering ['..v.gives.amount..'X] '..v.gives.itemtitle, 'centerLeft', waittime, 'info')
                 Citizen.Wait(waittime)
                 if v.required.item ~= 'none' then
