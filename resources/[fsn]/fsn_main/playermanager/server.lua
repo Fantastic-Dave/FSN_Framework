@@ -37,11 +37,7 @@ AddEventHandler('playerConnecting', function(playername, setKickReason)
   else
     kickplayer = true
   end
-  if kickplayer then
-    DropPlayer(source, ':FSN: Something went wrong joining the server')
-    setKickReason(':FSN: Something went wrong joining the server')
-    CancelEvent()
-  end
+  checkBan(source, setKickReason)
 end)
 
 AddEventHandler('playerDropped', function()

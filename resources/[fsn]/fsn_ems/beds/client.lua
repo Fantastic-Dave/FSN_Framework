@@ -67,6 +67,8 @@ Citizen.CreateThread(function()
 			if newhealth >= 200 then
 				SetEntityHealth(GetPlayerPed(-1), GetEntityMaxHealth(GetPlayerPed(-1)))
 				TriggerEvent('fsn_notify:displayNotification', 'You are fully healed', 'centerLeft', 2000, 'error')
+				TriggerEvent('mythic_hospital:client:ResetLimbs')
+				TriggerEvent('mythic_hospital:client:RemoveBleed')
 			else
 				SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))+10)
 				TriggerEvent('fsn_notify:displayNotification', 'Healing...', 'centerLeft', 2000, 'error')

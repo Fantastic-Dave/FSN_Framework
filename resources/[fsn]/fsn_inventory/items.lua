@@ -1,4 +1,26 @@
 items_table = {
+  ["painkillers"] = {
+    display_name = 'Pain Killers',
+    weight = 0.4,
+    desc = 'Use this to repair yourself.',
+    use = function()
+		TriggerEvent('mythic_hospital:client:UsePainKiller', 2)
+		TriggerEvent('fsn_inventory:item:take', 'painkillers', 1)
+    end,
+    modelhash = -2140074399,
+    price = 250
+  },
+  ["morphine"] = {
+    display_name = 'Morphine',
+    weight = 0.4,
+    desc = 'Use this to repair yourself.',
+    use = function()
+		TriggerEvent('mythic_hospital:client:UsePainKiller', 6)
+		TriggerEvent('fsn_inventory:item:take', 'morphine', 1)
+    end,
+    modelhash = -2140074399,
+    price = 250
+  },
   ["bandage"] = {
     display_name = 'Bandage',
     weight = 0.4,
@@ -13,6 +35,8 @@ items_table = {
 			  TaskPlayAnim(GetPlayerPed(-1), "oddjobs@assassinate@guard", "unarmed_fold_arms", 8.0, 1.0, 2500, 2, 0, 0, 0, 0 )  
 			  Citizen.Wait(1500)
 			  SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))+15)
+			  TriggerEvent('mythic_hospital:client:RemoveBleed')
+
 	  else
 		TriggerEvent('fsn_notify:displayNotification', 'You don\'t need to use a bandage!<br>Visit an EMS personnel or a hospital to heal more.', 'centerLeft', 3500, 'error')
 	  end
@@ -66,7 +90,7 @@ items_table = {
     weight = 0.3,
     desc = 'Time to make something meaty.',
     use = function()
-    end,
+	end,
     modelhash = 1302435108
   },
   ["dirty_money"] = {
@@ -286,6 +310,7 @@ items_table = {
     use = function()
 		TriggerEvent('fsn_criminalmisc:drugs:effects:meth')
 		TriggerEvent('fsn_inventory:item:take', 'meth_rocks', 1)
+		TriggerEvent('mythic_hospital:client:UseAdrenaline')
 	  --TriggerEvent('fsn_notify:displayNotification', 'Sell this meth to locals<br>We\'re working on making these takeable', 'centerLeft', 3500, 'error')
     end,
     price = 0,

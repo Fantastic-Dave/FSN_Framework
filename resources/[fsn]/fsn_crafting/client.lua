@@ -146,6 +146,7 @@ local crafting_stations = {
  }
 
 Citizen.CreateThread(function()
+	--SetNuiFocus( true, true )
   for k, v in pairs(crafting_stations) do
 	if v.blip then
 		local bleep = AddBlipForCoord(v.loc.x, v.loc.y, v.loc.z)

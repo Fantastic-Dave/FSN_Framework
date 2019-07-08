@@ -124,7 +124,7 @@ Citizen.CreateThread(function()
 			local myarea = string.upper(GetNameOfZone(GetEntityCoords(GetPlayerPed(-1))))
 			if areas[myarea] and areas[myarea].enabled and areas[myarea].drugs[drug] then
 				local obj = getPed()--fsn_FindNearbyPed(1.5)
-				if obj and IsPedHuman(obj) and not table.contains(sold_peds, obj) and not IsEntityDead(obj) then
+				if obj and IsPedHuman(obj) and not table.contains(sold_peds, obj) and not IsEntityDead(obj) and not IsPedAPlayer(obj) then
 					if not selling then
 						fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '[~g~E~w~] Sell ~b~'..drug)
 						if IsControlJustPressed(0, 38) then
@@ -177,7 +177,7 @@ Citizen.CreateThread(function()
 								
 								-- work out amount
 								if exports["fsn_inventory"]:fsn_GetItemAmount(selling_item) < areas[myarea].drugs[drug].avg then
-								  sold_amount = fsn_GetItemAmount(selling_item)
+								  sold_amount = exports["fsn_inventory"]:fsn_GetItemAmount(selling_item)
 								else
 									local mini = areas[myarea].drugs[drug].avg - math.floor(areas[myarea].drugs[drug].avg / 2)
 									local maxi = areas[myarea].drugs[drug].avg + math.ceil(areas[myarea].drugs[drug].avg / 2)

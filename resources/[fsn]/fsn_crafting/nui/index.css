@@ -60,7 +60,6 @@ h2 {
 	margin: 5px;
 	margin-top: 5px;
 	float: left;
-	background-color: rgba(255,255,255,0.6);
 }
 
 .boxicon {
@@ -137,4 +136,8 @@ h2 {
 	height: 40px;
 	font-size: 40px;
 	border: 1px solid white;
+}
+
+#boxcontents {
+	background-color: rgba(255,255,255,0.6);
 }

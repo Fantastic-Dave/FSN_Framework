@@ -293,6 +293,20 @@ AddEventHandler('fsn_commands:requestHDC', function()
   TriggerClientEvent('fsn_commands:getHDC', source, hdc)
 end)
 
+local pings = {}
+RegisterServerEvent('fsn_commands:service:addPing')
+AddEventHandler('fsn_commands:service:addPing', function(xyz, to)
+	local idee = #pings+1
+	table.insert(pings, idee, {
+		loc = xyz,
+		from = source,
+		isfor = to,
+		handled = false,
+	})
+	TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'Your ping was sent to '..to })
+	TriggerClientEvent('mythic_notify:client:SendAlert', to, { type = 'inform', text = 'You received a new ping from ['..source..'], use "/ping accept '..idee..'" or "/ping decline '..idee})
+end)
+
 local nineoneones = {}
 local nineoneone = 0
 AddEventHandler('chatMessage', function(source, auth, msg)
@@ -335,6 +349,41 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- SERVICE COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/ping' then
+	if split[2] == 'accept' then 
+		local ping = pings[tonumber(split[3])]
+		if ping then
+			if ping.handled == false and ping.isfor == source then
+				TriggerClientEvent('fsn_commands:service:pingAccept', source, ping)
+				TriggerClientEvent('mythic_notify:client:SendAlert', ping.from, { type = 'success', text = 'Ping Accepted' })
+				ping.handled = true
+			else
+				TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r This ping has expired, request a new one.')
+			end
+		else
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Unknown ping')
+		end		
+	elseif split[2] == 'decline' then
+		local ping = pings[tonumber(split[3])]
+		if ping then
+			if ping.handled == false and ping.isfor == source then
+				TriggerClientEvent('mythic_notify:client:SendAlert', ping.from, { type = 'error', text = 'Ping Declined' })
+				TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = 'Ping Declined' })
+				ping.handled = true
+			else
+				TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r This ping has expired, request a new one.')
+			end
+		else
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Unknown ping')
+		end	
+	else
+		if tonumber(split[2]) then
+			TriggerClientEvent('fsn_commands:service:pingStart', source, tonumber(split[2]))
+		else
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Provide a target!')
+		end
+	end
+  end
   if split[1] == '/service' then
     if split[2] == 'request' then
       if split[3] == 'taxi' then
@@ -636,6 +685,24 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/ems' then
     if fsn_emsOnDuty(source) then
+	  if split[2] == 'inspect' then 
+		if tonumber(split[3]) then
+		  TriggerClientEvent('fsn_ems:adamage:request', tonumber(split[3]), source)
+		else
+		  TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
+		end
+	  end
+	  if split[2] == 'item' then
+		if split[3] == 'bandage' or split[3] == 'b' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'bandage', 1)
+		end
+		if split[3] == 'morphine' or split[3] == 'm' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'morphine', 1)
+		end
+		if split[3] == 'painkillers' or split[3] == 'pk' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'painkillers', 1)
+		end
+	  end
 	  if split[2] == 'frevive' then
 		TriggerClientEvent('fsn_ems:reviveMe:force', tonumber(split[3]))
 	  end
@@ -755,6 +822,24 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/police' or split[1] == '/pd' then
     if fsn_policeOnDuty(source) then
       if split[2] then
+		if split[2] == 'inspect' then 
+			if tonumber(split[3]) then
+			  TriggerClientEvent('fsn_ems:adamage:request', tonumber(split[3]), source)
+			else
+			  TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
+			end
+		  end
+	  if split[2] == 'item' then
+		if split[3] == 'bandage' or split[3] == 'b' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'bandage', 1)
+		end
+		if split[3] == 'morphine' or split[3] == 'm' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'morphine', 1)
+		end
+		if split[3] == 'painkillers' or split[3] == 'pk' then
+			TriggerClientEvent('fsn_inventory:item:add', source, 'painkillers', 1)
+		end
+	  end
 		if split[2] == 'fine' then
 			if tonumber(split[3]) then
 				if tonumber(split[4]) then
@@ -1175,5 +1260,26 @@ AddEventHandler('fsn_commands:police:gsrResult', function(officer, result)
 	else
 		TriggerClientEvent('chatMessage', officer, '', {255,255,255}, '^1^*GSR |^0^r The test does nothing.')
 		TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*GSR |^0^r The test does nothing.')
+	end
+end)
+RegisterServerEvent('fsn_commands:ems:adamage:inspect')
+AddEventHandler('fsn_commands:ems:adamage:inspect', function(parts, bleeding, bldtbl, dmgtbl, doctor)
+	local limping = false
+	for k, v in pairs(parts) do
+		if v.isDamaged then
+			TriggerClientEvent('chatMessage', doctor, '', {255,255,255}, '^1^*EMS |^0^r '..v.label..' is damaged: '..dmgtbl[v.severity])
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*EMS |^0^r '..v.label..' is damaged: '..dmgtbl[v.severity])
+		end
+		if v.causeLimp then
+			limping = true
+		end
+	end
+	if limping then
+		TriggerClientEvent('chatMessage', doctor, '', {255,255,255}, '^1^*EMS |^0^r The individual is limping')
+		TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*EMS |^0^r The individual is limping')
+	end
+	if bleeding > 0 then
+		TriggerClientEvent('chatMessage', doctor, '', {255,255,255}, '^1^*EMS |^0^r The individual is bleeding! Severity: '..bldtbl[bleeding])
+		TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*EMS |^0^r The individual is bleeding! Severity: '..bldtbl[bleeding])
 	end
 end)

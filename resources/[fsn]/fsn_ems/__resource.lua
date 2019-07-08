@@ -1,6 +1,7 @@
 --client_script 'debug_kng.lua'
 
 client_script 'client.lua'
+client_script 'cl_advanceddamage.lua'
 client_script 'beds/client.lua'
 
 server_script 'server.lua'
