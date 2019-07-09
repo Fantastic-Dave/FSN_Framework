@@ -17,7 +17,7 @@ function DoHudText(type, text)
 		action = 'notif',
 		type = type,
 		text = text,
-		length = 2500
+		length = 6500
 	})
 end
 
