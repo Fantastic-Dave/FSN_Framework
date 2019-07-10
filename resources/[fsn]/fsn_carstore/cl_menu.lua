@@ -333,9 +333,7 @@ local vehshop = {
 	}
 }
 local fakecar = {model = '', car = nil}
-local vehshop_locations = {
-{entering = {-33.803,-1102.322,25.422}, inside = {-46.56327,-1097.382,25.99875, 120.1953}, outside = {-48.000431060791, -1077.3870849609, 26.595888137817, 70.580307006836}},
-}
+local vehshop_locations = {}
 
 local vehshop_blips ={}
 local inrangeofvehshop = false
@@ -367,44 +365,6 @@ return inrangeofvehshop
 end
 
 function ShowVehshopBlips(bool)
-	if bool and #vehshop_blips == 0 then
-		for station,pos in pairs(vehshop_locations) do
-			local loc = pos
-			pos = pos.entering
-			local blip = AddBlipForCoord(pos[1],pos[2],pos[3])
-			-- 60 58 137
-			SetBlipSprite(blip,326)
-			BeginTextCommandSetBlipName("STRING")
-			AddTextComponentString('Vehicle Shop')
-			EndTextCommandSetBlipName(blip)
-			SetBlipAsShortRange(blip,true)
-			SetBlipAsMissionCreatorBlip(blip,true)
-			table.insert(vehshop_blips, {blip = blip, pos = loc})
-		end
-		Citizen.CreateThread(function()
-			while #vehshop_blips > 0 do
-				Citizen.Wait(0)
-				local inrange = false
-				for i,b in ipairs(vehshop_blips) do
-					if IsPlayerWantedLevelGreater(GetPlayerIndex(),0) == false and vehshop.opened == false and IsPedInAnyVehicle(LocalPed(), true) == false and  GetDistanceBetweenCoords(b.pos.entering[1],b.pos.entering[2],b.pos.entering[3],GetEntityCoords(LocalPed())) < 5 then
-						DrawMarker(1,b.pos.entering[1],b.pos.entering[2],b.pos.entering[3],0,0,0,0,0,0,2.001,2.0001,0.5001,0,155,255,200,0,0,0,0)
-						drawTxt('Press ~g~ENTER~s~ to buy ~b~vehicle',0,1,0.5,0.8,0.6,255,255,255,255)
-						currentlocation = b
-						inrange = true
-					end
-				end
-				inrangeofvehshop = inrange
-			end
-		end)
-	elseif bool == false and #vehshop_blips > 0 then
-		for i,b in ipairs(vehshop_blips) do
-			if DoesBlipExist(b.blip) then
-				SetBlipAsMissionCreatorBlip(b.blip,false)
-				Citizen.InvokeNative(0x86A652570E5F25DD, Citizen.PointerValueIntInitialized(b.blip))
-			end
-		end
-		vehshop_blips = {}
-	end
 end
 
 function f(n)
@@ -425,10 +385,12 @@ function firstToUpper(str)
     return (str:gsub("^%l", string.upper))
 end
 --local veh = nil
-function OpenCreator()
+local carIamChanging = 0
+function OpenCreator(changingCar)
+	carIamChanging = changingCar
 	boughtcar = false
 	local ped = LocalPed()
-	local pos = currentlocation.pos.inside
+	local pos = {-37.41089630127,-1088.1712646484,25.990238189697,251.69311523438}
 	FreezeEntityPosition(ped,true)
 	SetEntityVisible(ped,false)
 	local g = Citizen.InvokeNative(0xC906A7DAB05C8D2B,pos[1],pos[2],pos[3],Citizen.PointerValueFloat(),0)
@@ -437,99 +399,26 @@ function OpenCreator()
 	vehshop.currentmenu = "main"
 	vehshop.opened = true
 	vehshop.selectedbutton = 0
-	--[[Citizen.CreateThread(function()
-		RequestModel(GetHashKey('t20'))
-		while not HasModelLoaded(GetHashKey('t20')) do
-			Citizen.Wait(0)
-		end
-		veh = CreateVehicle(GetHashKey('t20'),GetOffsetFromEntityInWorldCoords(ped,2.001,0,0),false,true)
-		SetModelAsNoLongerNeeded(GetHashKey('t20'))
-		SetEntityHeading(veh,pos[4])
-		FreezeEntityPosition(veh,true)
-		SetEntityCollision(veh,false,false)
-		SetEntityInvincible(veh,true)
-	end)]]
 end
+
 local vehicle_price = 0
 function CloseCreator()
 	Citizen.CreateThread(function()
 		local ped = LocalPed()
 		if not boughtcar then
-			local pos = currentlocation.pos.entering
+			local pos = {-34.02855682373, -1089.1179199219, 26.422239303589, 0.0}
 			SetEntityCoords(ped,pos[1],pos[2],pos[3])
 			FreezeEntityPosition(ped,false)
 			SetEntityVisible(ped,true)
 		else
 			local veh = GetVehiclePedIsUsing(ped)
-			local model = GetEntityModel(veh)
-			local colors = table.pack(GetVehicleColours(veh))
-			local extra_colors = table.pack(GetVehicleExtraColours(veh))
-
-			local mods = {}
-			for i = 0,24 do
-				mods[i] = GetVehicleMod(veh,i)
-			end
 			Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
-			local pos = currentlocation.pos.outside
-
+			local pos = {-34.02855682373, -1089.1179199219, 26.422239303589, 0.0}--currentlocation.pos.outside
+			SetEntityCoords(ped,pos[1],pos[2],pos[3])
 			FreezeEntityPosition(ped,false)
-			RequestModel(model)
-			while not HasModelLoaded(model) do
-				Citizen.Wait(0)
-			end
-			personalvehicle = CreateVehicle(model,pos[1],pos[2],pos[3],pos[4],true,false)
-			SetModelAsNoLongerNeeded(model)
-			for i,mod in pairs(mods) do
-				SetVehicleModKit(personalvehicle,0)
-				SetVehicleMod(personalvehicle,i,mod)
-			end
-			SetVehicleOnGroundProperly(personalvehicle)
-			SetVehicleHasBeenOwnedByPlayer(personalvehicle,true)
-			local id = NetworkGetNetworkIdFromEntity(personalvehicle)
-			SetNetworkIdCanMigrate(id, true)
-			--Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalvehicle))
-			SetEntityAsMissionEntity(personalvehicle, true, true)
-			SetVehicleColours(personalvehicle,colors[1],colors[2])
-			SetVehicleExtraColours(personalvehicle,extra_colors[1],extra_colors[2])
-			TaskWarpPedIntoVehicle(GetPlayerPed(-1),personalvehicle,-1)
 			SetEntityVisible(ped,true)
-
-			-------------------------------------- VEHICLE BUYING STUFFS
-			local classname = GetDisplayNameFromVehicleModel(GetEntityModel(personalvehicle))
-			local plate = GetVehicleNumberPlateText(personalvehicle)
-			local colors = table.pack(GetVehicleColours(personalvehicle));
-			local extracolors = table.pack(GetVehicleExtraColours(personalvehicle));
-			local platestyle = tonumber(GetVehicleNumberPlateTextIndex(personalvehicle));
-			local modsTable = {
-				[0] = { mod = nil },
-				[1] = { mod = nil },
-				[2] = { mod = nil },
-				[3] = { mod = nil },
-				[4] = { mod = nil },
-				[5] = { mod = nil },
-				[6] = { mod = nil },
-				[7] = { mod = nil },
-				[8] = { mod = nil },
-				[9] = { mod = nil },
-				[10] = { mod = nil },
-				[11] = { mod = nil },
-				[12] = { mod = nil },
-				[13] = { mod = nil },
-				[14] = { mod = nil },
-				[15] = { mod = nil },
-				[16] = { mod = nil },
-				[20] = { mod = nil },
-				[23] = { mod = nil },
-				[24] = { mod = nil },
-				[25] = { mod = nil },
-			}
-			for i, t in pairs(modsTable) do
-				t.mod = GetVehicleMod(personalvehicle, i);
-			end
-			local windowtint = tonumber(GetVehicleWindowTint(personalvehicle));
-			local wheeltype = tonumber(GetVehicleWheelType(personalvehicle));
-			TriggerServerEvent('fsn_cargarage:buyVehicle', ibought, ibought, plate, vehicle_price)
-			TriggerEvent('fsn_cargarage:makeMine', personalvehicle, classname, plate)
+			
+			TriggerServerEvent('fsn_carstore:floor:ChangeCar', carIamChanging, ibought)
 		end
 		vehshop.opened = false
 		vehshop.menu.from = 1
@@ -664,7 +553,7 @@ Citizen.CreateThread(function()
 								if DoesEntityExist(fakecar.car) then
 									Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(fakecar.car))
 								end
-								local pos = currentlocation.pos.inside
+								local pos = {-37.41089630127,-1088.1712646484,25.990238189697,251.69311523438}
 								local hash = GetHashKey(button.model)
 								RequestModel(hash)
 								while not HasModelLoaded(hash) do
@@ -771,15 +660,15 @@ function ButtonSelected(button)
 			OpenMenu('bicycles')
 			end
 	elseif this == "compacts" or this == "coupes" or this == "sedans" or this == "sports" or this == "sportsclassics" or this == "super" or this == "muscle" or this == "offroad" or this == "suvs" or this == "vans" or this == "industrial" or this == "motorcycles" or this == "bicycles" then
-		if tonumber(exports.fsn_main:fsn_GetWallet()) >= button.costs then
+		--if tonumber(exports.fsn_main:fsn_GetWallet()) >= button.costs then
 			vehicle_price = button.costs
 			boughtcar = true
 			ibought = button.model
-			TriggerEvent('fsn_bank:change:walletMinus', button.costs)
+			--TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 			CloseCreator()
-		else
- 	  	TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
-		end
+		--else
+ 	  	--TriggerEvent('fsn_notify:displayNotification', 'You cannot afford this!', 'centerLeft', 3000, 'error')
+		--end
 	end
 end
 
