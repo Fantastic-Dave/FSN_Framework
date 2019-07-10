@@ -31,6 +31,36 @@ function inAnyWhitelist()
 	end
 end
 
+----------------------------------------------
+-- CLOCKIN SHIT
+----------------------------------------------
+local current_clockid = 0
+function toggleWhitelistClock(id)
+	if current_clockid == 0 then
+		-- not clocked in
+		TriggerServerEvent('fsn_jobs:whitelist:clock:in', exports["fsn_main"]:fsn_CharID(), id)
+	else
+		-- is clocked in 
+		TriggerServerEvent('fsn_jobs:whitelist:clock:out', exports["fsn_main"]:fsn_CharID(), id)
+	end
+end
+function isWhitelistClockedIn(id)
+	if current_clockid == id then
+		return true
+	else
+		return false
+	end
+end
+
+RegisterNetEvent('fsn_jobs:whitelist:clock:in')
+AddEventHandler('fsn_jobs:whitelist:clock:in', function(id)
+	current_clockid = id
+end)
+RegisterNetEvent('fsn_jobs:whitelist:clock:out')
+AddEventHandler('fsn_jobs:whitelist:clock:out', function()
+	current_clockid = 0
+end)
+
 RegisterNetEvent('fsn_jobs:whitelist:update')
 AddEventHandler('fsn_jobs:whitelist:update', function(tbl)
 	Whitelists = tbl

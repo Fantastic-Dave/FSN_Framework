@@ -4,18 +4,77 @@ local Whitelists = {
 		owner = 0,
 		access = {},
 		bank = 0,
+		onduty = {},
 	},
 	[2] = {
 		title = 'Mechanics',
 		owner = 0,
 		access = {},
 		bank = 0,
+		onduty = {},
 	},
 }
+
+function isPlayerClockedInWhitelist(ply, id)
+	if Whitelists[id] then
+		for k, v in pairs(Whitelists[id].onduty) do
+			if v.ply_id == ply then
+				return true
+			end
+		end
+	end
+	return false
+end
 
 RegisterServerEvent('fsn_jobs:whitelist:request')
 AddEventHandler('fsn_jobs:whitelist:request', function()
 	TriggerClientEvent('fsn_jobs:whitelist:update', source, Whitelists)
+end)
+
+RegisterServerEvent('fsn_jobs:whitelist:clock:in')
+AddEventHandler('fsn_jobs:whitelist:clock:in', function(charid, whitelist)
+	if Whitelists[whitelist] then
+		local clocked = false
+		if Whitelists[whitelist].owner == charid then
+			clocked = true
+		else
+			for k, v in pairs(Whitelists[whitelist].access) do
+				if v.char_id == charid and v.level > 1 then
+					clocked = true
+				end
+			end
+		end
+		if clocked then
+			TriggerClientEvent('fsn_jobs:whitelist:clock:in', source, whitelist)
+			table.insert(Whitelists[whitelist].onduty, #Whitelists[whitelist].onduty+1, {
+				ply_id = source,
+				char_id = charid
+			})
+			TriggerClientEvent('fsn_notify:displayNotification', source, 'ONDUTY: '..Whitelists[whitelist].title, 'centerLeft', 5000, 'success')
+		else
+			TriggerClientEvent('fsn_notify:displayNotification', source, 'You cannot clock in to this whitelist.', 'centerLeft', 5000, 'error')
+		end
+	else
+		TriggerClientEvent('fsn_notify:displayNotification', source, 'This whitelist does not exist', 'centerLeft', 5000, 'error')
+	end
+	TriggerClientEvent('fsn_jobs:whitelist:update', -1, Whitelists)
+end)
+
+RegisterServerEvent('fsn_jobs:whitelist:clock:out')
+AddEventHandler('fsn_jobs:whitelist:clock:out', function(charid, whitelist)
+	if Whitelists[whitelist] then
+		for k, v in pairs(Whitelists[whitelist].onduty) do
+			if v.char_id == charid and v.ply_id == source then
+				-- is player, clockout
+				TriggerClientEvent('fsn_notify:displayNotification', source, 'OFFUTY: '..Whitelists[whitelist].title, 'centerLeft', 5000, 'error')
+				TriggerClientEvent('fsn_jobs:whitelist:clock:out', source, whitelist)
+				Whitelists[whitelist]['onduty'][k] = nil
+			end
+		end
+	else
+		TriggerClientEvent('fsn_notify:displayNotification', source, 'This whitelist does not exist', 'centerLeft', 5000, 'error')
+	end
+	TriggerClientEvent('fsn_jobs:whitelist:update', -1, Whitelists)
 end)
 
 RegisterServerEvent('fsn_jobs:whitelist:access:add')

@@ -46,5 +46,8 @@ exports({
   'fsn_SetJob',
   'isWhitelisted',
   'getWhitelistDetails',
-  'inAnyWhitelist'
+  'inAnyWhitelist',
+  'toggleWhitelistClock',
+  'isWhitelistClockedIn'
 })
+server_export 'isPlayerClockedInWhitelist'
