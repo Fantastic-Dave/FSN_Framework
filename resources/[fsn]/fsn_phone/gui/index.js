@@ -152,7 +152,12 @@ function postAdvert() {
 	$('#advert_textarea').val('')
 	$.post('http://fsn_phone/disablePhone', JSON.stringify({}));
 }
-
+function whitelist_toggle(id) {
+	id = id+1
+	$.post('http://fsn_phone/toggleWhitelist', JSON.stringify({
+		id:id
+	}));
+}
 
 function sendTextMessage() {
 	var number = $('#textbox-number').val()
@@ -215,7 +220,7 @@ $(function() {
 					'<b>Owner:</b> '+wl.owner+'<br>'+
 					'<b>Access:</b> ...<br>'+
 					'<b>Bank: $</b>'+wl.bank+
-					'<button>Manage Business</button></div>')
+					'<button>Manage Business</button><button onclick="whitelist_toggle('+i+')">Clock In/Out</button></div>')
 				}
 			} else {
 				$('#whitelists').append('<div id="no-whitelists" class="whitelists-error">You are not currently a part of any business.</div>')

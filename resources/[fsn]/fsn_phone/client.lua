@@ -87,6 +87,11 @@ AddEventHandler('fsn_phone:togglePhone', function()
  	end
 end)
 
+RegisterNUICallback( "toggleWhitelist", function(data, cb)
+	exports["fsn_jobs"]:toggleWhitelistClock(data['id'])
+	TriggerEvent('fsn_phone:togglePhone')
+end)
+
 RegisterNUICallback( "disablePhone", function(data, cb)
 	FreezeEntityPosition(GetPlayerPed(-1), 0)
 	SetEntityCollision(GetPlayerPed(-1), 1, 1)
@@ -243,7 +248,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(5000)
-		for k, v in pairs(Adverts) do
+		for k, v in pairs(adverts) do
 			if not NetworkIsPlayerActive(GetPlayerFromServerId(source)) then
 				TriggerServerEvent('fsn_phone:adverts:remove', v.number)
 			end
