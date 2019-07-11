@@ -101,7 +101,7 @@ end
 function checkBan(source, setKickReason)
 	local src = source
 	updateIdentifiers(src)
-	
+	print(':fsn_main: (sv_bans.lua) Checking bans for Player('..src..')')
 	for k, v in pairs(GetPlayerIdentifiers(src)) do
 		local check = MySQL.Sync.fetchAll("SELECT * FROM `fsn_bans` WHERE `ban_identifier` = '"..v.."'")
 		if check[1] then
@@ -127,7 +127,7 @@ end
 function updateIdentifiers(src)
 	
 	local steamid = GetPlayerIdentifiers(src)[1]
-	if not steamid then print('trying to update identifiers for player('..src..') failed') return end
+	if not steamid then print('trying to update identifiers for player('..src..') failed') return else print(':fsn_main: (sv_bans.lua) Updating identifiers for Player('..src..') with SteamID('..steamid..')') end
 	local sql = MySQL.Sync.fetchAll("SELECT * FROM `fsn_users` WHERE `steamid` = '"..steamid.."'")
 	local myIdentifiers = sql[1]['identifiers']
 	if sql[1] then
