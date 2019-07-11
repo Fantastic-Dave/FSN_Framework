@@ -127,7 +127,7 @@ end
 function updateIdentifiers(src)
 	
 	local steamid = GetPlayerIdentifiers(src)[1]
-	if not steamid then return end
+	if not steamid then print('trying to update identifiers for player('..src..') failed') return end
 	local sql = MySQL.Sync.fetchAll("SELECT * FROM `fsn_users` WHERE `steamid` = '"..steamid.."'")
 	local myIdentifiers = sql[1]['identifiers']
 	if sql[1] then
