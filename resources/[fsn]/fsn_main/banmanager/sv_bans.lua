@@ -101,11 +101,14 @@ end
 function checkBan(source, setKickReason)
 	local src = source
 	updateIdentifiers(src)
-	print(':fsn_main: (sv_bans.lua) Checking bans for Player('..src..')')
+	
 	for k, v in pairs(GetPlayerIdentifiers(src)) do
-		local check = MySQL.Sync.fetchAll("SELECT * FROM `fsn_bans` WHERE `ban_identifier` = '"..v.."'")
+		--print('>>>    :fsn_main: (sv_bans.lua) Checking bans for Player('..src..'), Identifier('..v..')')
+		sql = "SELECT * FROM `fsn_bans` WHERE `ban_identifier` = '"..v.."'"
+		--print('>>>>>>>>>>> '..sql)
+		local check = MySQL.Sync.fetchAll(sql)
 		if check[1] then
-			if check[1].ban_expire <= os.time() or check[1].ban_expire == -1 then
+			if check[1].ban_expire >= os.time() or check[1].ban_expire == -1 then
 				local reason = 'your ban is weirdly formatted, ask jamessc0tt'
 				if check[1]['ban_expire'] == -1 then
 					print(':fsn_main: (sv_bans.lua) - Player('..src..') is PERM banned, Identifier('..v..') - dropping player.')
