@@ -1,4 +1,4 @@
-local admins = {'steam:11000010e0828a9', 'steam:11000011098d978', 'steam:110000106f35cce'}
+local admins = {'steam:11000010e0828a9', 'steam:110000106f35cce'}
 local modertators = {}
 function fsn_SplitString(inputstr, sep)
   if sep == nil then
