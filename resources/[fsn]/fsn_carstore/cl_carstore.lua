@@ -7,13 +7,9 @@ function BuyCar(key)
 	local colors = table.pack(GetVehicleColours(veh))
 	local extra_colors = table.pack(GetVehicleExtraColours(veh))
 
-	local mods = {}
-	for i = 0,24 do
-		mods[i] = GetVehicleMod(veh,i)
-	end
 	Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
-	local pos = {-61.230403900146, -1105.9610595703, 25.955364227295,74.102165222168}--currentlocation.pos.outside
-
+	local pos = {-61.230403900146, -1105.9610595703, 25.955364227295,74.102165222168}
+	
 	FreezeEntityPosition(ped,false)
 	RequestModel(model)
 	while not HasModelLoaded(model) do
@@ -21,10 +17,7 @@ function BuyCar(key)
 	end
 	personalvehicle = CreateVehicle(model,pos[1],pos[2],pos[3],pos[4],true,false)
 	SetModelAsNoLongerNeeded(model)
-	for i,mod in pairs(mods) do
-		SetVehicleModKit(personalvehicle,0)
-		SetVehicleMod(personalvehicle,i,mod)
-	end
+
 	SetVehicleOnGroundProperly(personalvehicle)
 	SetVehicleHasBeenOwnedByPlayer(personalvehicle,true)
 	local id = NetworkGetNetworkIdFromEntity(personalvehicle)
@@ -35,45 +28,57 @@ function BuyCar(key)
 	SetVehicleExtraColours(personalvehicle,extra_colors[1],extra_colors[2])
 	TaskWarpPedIntoVehicle(GetPlayerPed(-1),personalvehicle,-1)
 	SetEntityVisible(ped,true)
-
-	-------------------------------------- VEHICLE BUYING STUFFS
-	local classname = GetDisplayNameFromVehicleModel(GetEntityModel(personalvehicle))
-	local plate = GetVehicleNumberPlateText(personalvehicle)
-	local colors = table.pack(GetVehicleColours(personalvehicle));
-	local extracolors = table.pack(GetVehicleExtraColours(personalvehicle));
-	local platestyle = tonumber(GetVehicleNumberPlateTextIndex(personalvehicle));
-	local modsTable = {
-		[0] = { mod = nil },
-		[1] = { mod = nil },
-		[2] = { mod = nil },
-		[3] = { mod = nil },
-		[4] = { mod = nil },
-		[5] = { mod = nil },
-		[6] = { mod = nil },
-		[7] = { mod = nil },
-		[8] = { mod = nil },
-		[9] = { mod = nil },
-		[10] = { mod = nil },
-		[11] = { mod = nil },
-		[12] = { mod = nil },
-		[13] = { mod = nil },
-		[14] = { mod = nil },
-		[15] = { mod = nil },
-		[16] = { mod = nil },
-		[20] = { mod = nil },
-		[23] = { mod = nil },
-		[24] = { mod = nil },
-		[25] = { mod = nil },
+	
+	local details = {
+		plate = GetVehicleNumberPlateText(personalvehicle),
+		livery = 0,
+		fuel = 100,
+		damage = {
+			engine = 1000,
+			body = 1000,
+			advanced = {
+				electronics = 100,
+				clutch = 100,
+				gearbox = 100,
+				brakes = 100,
+				transmission = 100,
+				axle = 100,
+				fuel_injectors = 100,
+				fuel_tank = 100,
+				tires = 100,
+			},
+		},
+		modkit = 0,
+		customisations = {
+			plate = 0,
+			windows = 0,
+			colours = {
+				main = {0,0},
+				extras = {0,0},
+			},
+			neons = {
+				enabled = {false, false, false},
+				colours = {0,0,0},
+			},
+			wheels = {
+				type = 0,
+				smoke = {0,0,0},
+			},
+			mods = {},
+		}
 	}
-	for i, t in pairs(modsTable) do
-		t.mod = GetVehicleMod(personalvehicle, i);
-	end
-	local windowtint = tonumber(GetVehicleWindowTint(personalvehicle));
-	local wheeltype = tonumber(GetVehicleWheelType(personalvehicle));
-	TriggerServerEvent('fsn_cargarage:buyVehicle', car_spots[key].car.model, car_spots[key].car.model, plate, car_spots[key].car.buyprice)
+	
+	local finance = {
+		outright = true,
+		buyprice = car_spots[key].car.buyprice+car_spots[key].car.commission,
+		base = car_spots[key].car.buyprice,
+		commission = car_spots[key].car.commission
+	}
+	
+	TriggerServerEvent('fsn_cargarage:buyVehicle', exports["fsn_main"]:fsn_CharID(), car_spots[key].car.name, car_spots[key].car.model, GetVehicleNumberPlateText(personalvehicle), details, finance, 'c', 0)
 	exports['mythic_notify']:DoCustomHudText('success', 'You bought '..car_spots[key].car.name..' for $'..car_spots[key].car.buyprice+car_spots[key].car.commission, 3000)
 	TriggerEvent('fsn_bank:change:walletMinus', car_spots[key].car.buyprice+car_spots[key].car.commission)
-	TriggerEvent('fsn_cargarage:makeMine', personalvehicle, classname, plate)
+	TriggerEvent('fsn_cargarage:makeMine', personalvehicle, car_spots[key].car.model, GetVehicleNumberPlateText(personalvehicle))
 end
 
 Util.Tick(function()
