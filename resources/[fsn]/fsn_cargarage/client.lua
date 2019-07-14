@@ -49,6 +49,99 @@ myGarage.boats = {}
 local myVehicles = {}
 local menuEnabled = false
 
+function getCarDetails(veh)
+	local details = {
+		plate = 'undefined',
+		livery = 0,
+		fuel = 100,
+		damage = {
+			engine = 1000,
+			body = 1000,
+			advanced = {
+				electronics = 100,
+				clutch = 100,
+				gearbox = 100,
+				brakes = 100,
+				transmission = 100,
+				axle = 100,
+				fuel_injectors = 100,
+				fuel_tank = 100,
+				tires = 100,
+			},
+		},
+		modkit = 0,
+		customisations = {
+			plate = 0,
+			windows = 0,
+			colours = {
+				main = {0,0},
+				extras = {0,0},
+			},
+			neons = {
+				enabled = {false, false, false},
+				colours = {0,0,0},
+			},
+			wheels = {
+				type = 0,
+				smoke = {0,0,0},
+			},
+			mods = {},
+		}
+	}
+	-- damage
+	details.damage.engine = GetVehicleEngineHealth(veh)
+	details.damage.body = GetVehicleBodyHealth(veh)
+	for k, dmg in pairs(details.damage.advanced) do
+		if DecorGetInt(veh, 'vehDMG:'..k) then
+			details.damage.advanced[k] = DecorGetInt(veh, 'vehDMG:'..k)
+		end
+	end
+	
+	-- fuel
+	if DecorGetInt(veh, 'fuelLevel') then
+		details.fuel = DecorGetInt(veh, 'fuelLevel')
+	end
+	
+	-- livery
+	details.livery = GetVehicleLivery(veh)
+	
+	-- window tint
+	details.customisations.window = GetVehicleWindowTint(veh)
+	
+	-- plate
+	details.plate = GetVehicleNumberPlateText(veh)
+	details.customisations.plate = GetVehicleNumberPlateTextIndex(veh)
+	
+	-- neons
+	for i = 0, 3 do
+		details.customisations.neons.enabled[i] = IsVehicleNeonLightEnabled(veh, i)
+	end	
+	details.customisations.neons.colours[1],details.customisations.neons.colours[2],details.customisations.neons.colours[3] = GetVehicleNeonLightsColour(veh)
+
+	-- colours 
+	details.customisations.colours.main[1],details.customisations.colours.main[2] = GetVehicleColours(veh)
+	details.customisations.colours.extras[1],details.customisations.colours.extras[2] = GetVehicleExtraColours(veh)
+	
+	-- wheels
+	details.customisations.wheels.type = GetVehicleWheelType(veh)
+	details.customisations.wheels.smoke[1],details.customisations.wheels.smoke[2],details.customisations.wheels.smoke[3] = GetVehicleTyreSmokeColor(veh)
+	
+	-- other mods
+	details.modkit = GetVehicleModKit(veh)
+	for i = 0, 16 do
+		details.customisations.mods[i] = GetVehicleMod(veh,i)
+	end
+	for i = 17, 22 do
+		details.customisations.mods[i] = IsToggleModOn(veh,i)
+	end
+	for i = 23, 48 do
+		details.customisations.mods[i] = GetVehicleMod(veh,i)
+	end
+	
+	--
+	return details
+end
+
 AddEventHandler('fsn_main:character', function()
 	TriggerServerEvent('fsn_cargarage:reset', exports.fsn_main:fsn_CharID())
 end)
@@ -63,14 +156,14 @@ AddEventHandler('fsn_cargarage:makeMine', function(ent, classname, plate)
 end)
 
 RegisterNetEvent('fsn_cargarage:vehicleStatus')
-AddEventHandler('fsn_cargarage:vehicleStatus', function(plate, status)
+AddEventHandler('fsn_cargarage:vehicleStatus', function(plate, status, grg)
 	local statuses = {
 		[0] = 'INGARAGE',
 		[1] = 'OUTGARAGE',
 		[2] = 'IMPOUNDED',
 		[3] = 'SEIZED'
 	}
-	TriggerEvent('fsn_notify:displayNotification', 'INFO: <b>'..plate..'</b> set to <b>'..statuses[status], 'centerLeft', 3000, 'info')
+	TriggerEvent('fsn_notify:displayNotification', 'INFO: <b>'..plate..'</b> set to <b>'..statuses[status]..'</b> at <b><i>'..grg, 'centerLeft', 3000, 'info')
 end)
 
 RegisterNetEvent('fsn_cargarage:receiveVehicles')
@@ -129,8 +222,76 @@ function fsn_SplitString(inputstr, sep)
     return t
 end
 
+-- vehicle decors
+DecorRegister('fuelLevel', 3)
+DecorRegister('vehDMG:electronics', 3)
+DecorRegister('vehDMG:clutch', 3)
+DecorRegister('vehDMG:gearbox', 3)
+DecorRegister('vehDMG:breaks', 3)
+DecorRegister('vehDMG:transmission', 3)
+DecorRegister('vehDMG:axle', 3)
+DecorRegister('vehDMG:fuel_injectors', 3)
+DecorRegister('vehDMG:fuel_tank', 3)
+DecorRegister('vehDMG:tyre_depth', 3)
+
+function doCarDamages(eh, bh, veh)
+	
+	smash = false
+	damageOutside = false
+	damageOutside2 = false 
+	local engine = eh + 0.0
+	local body = bh + 0.0
+	if engine < 200.0 then
+		engine = 200.0
+	end
+
+	if body < 150.0 then
+		body = 150.0
+	end
+	if body < 950.0 then
+		smash = true
+	end
+
+	if body < 920.0 then
+		damageOutside = true
+	end
+
+	if body < 920.0 then
+		damageOutside2 = true
+	end
+	
+	print('fsn_cargarage: details eh('..eh..') bh('..bh..') smash('..tostring(smash)..') damageOutside('..tostring(damageOutside)..') damageOutside2('..tostring(damageOutside2)..')')
+	
+	local currentVehicle = (veh and IsEntityAVehicle(veh)) and veh or GetVehiclePedIsIn(GetPlayerPed(-1), false)
+
+	Citizen.Wait(100)
+	SetVehicleEngineHealth(currentVehicle, engine)
+	if smash then
+		SmashVehicleWindow(currentVehicle, 0)
+		SmashVehicleWindow(currentVehicle, 1)
+		SmashVehicleWindow(currentVehicle, 2)
+		SmashVehicleWindow(currentVehicle, 3)
+		SmashVehicleWindow(currentVehicle, 4)
+	end
+	if damageOutside then
+		SetVehicleDoorBroken(currentVehicle, 1, true)
+		SetVehicleDoorBroken(currentVehicle, 6, true)
+		SetVehicleDoorBroken(currentVehicle, 4, true)
+	end
+	if damageOutside2 then
+		SetVehicleTyreBurst(currentVehicle, 1, false, 990.0)
+		SetVehicleTyreBurst(currentVehicle, 2, false, 990.0)
+		SetVehicleTyreBurst(currentVehicle, 3, false, 990.0)
+		SetVehicleTyreBurst(currentVehicle, 4, false, 990.0)
+	end
+	if body < 1000 then
+		SetVehicleBodyHealth(currentVehicle, 985.0)
+	end
+end
+
 local function fsn_SpawnVehicle(vehid)
 	Citizen.CreateThread(function()
+		-- spawn vehicle and get details
 		local veh = fsn_GetVehicleDetails(vehid)
 
 		if veh.veh_status == 1 or veh.veh_status == 3 then
@@ -144,55 +305,79 @@ local function fsn_SpawnVehicle(vehid)
 			TriggerEvent('fsn_bank:change:walletMinus', 2500)
 		end
 
-		local model = GetHashKey(veh.veh_name)
-
-		local colours = {}
-		if veh.veh_colours ~= '[]' then
-			colours = json.decode(veh.veh_colours)
-		else
-			colours = {
-				primary = 0,
-				secondary = 0,
-				pearlone = 0,
-				pearltwo = 0
-			}
-		end
-
+		local model = GetHashKey(veh.veh_spawnname)
 		local pos = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0, 5.0, 0)
 
 		RequestModel(model)
-	  while not HasModelLoaded(model) do
-	    Wait(1)
-	  end
+		while not HasModelLoaded(model) do
+			Wait(1)
+		end
 		local personalvehicle = CreateVehicle(model, pos.x, pos.y, pos.z, GetEntityHeading(GetPlayerPed(-1)), true, false)
 		SetModelAsNoLongerNeeded(model)
 		SetVehicleOnGroundProperly(personalvehicle)
 		SetVehicleHasBeenOwnedByPlayer(personalvehicle, true)
 		local id = NetworkGetNetworkIdFromEntity(personalvehicle)
 		SetNetworkIdCanMigrate(id, true)
-		--Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalvehicle))
-		-- shit to make it look right
-		SetVehicleModKit(personalvehicle, 0)
-		SetVehicleWheelType(personalvehicle, tonumber(veh.veh_wheeltype));
-		local mods = json.decode(veh.veh_mods)
-		for k, v in pairs(mods) do
-			--if (k == 18 or k == 22) then
-				ToggleVehicleMod(personalvehicle, tonumber(k), tonumber(v.mod));
-			--else
-			--	if (v ~= "customtire") then
-					SetVehicleMod(personalvehicle, tonumber(k), tonumber(v.mod));
-			--	end
-			--end
+		
+		------------------------------
+		-- make the vehicle look and function right
+		------------------------------
+		if veh.veh_details then
+			local details = json.decode(veh.veh_details)
+			SetVehicleNumberPlateText(personalvehicle, veh.veh_plate)
+			SetVehicleNumberPlateTextIndex(personalvehicle, details.customisations.plate)
+			
+			-- damage
+			SetVehicleBodyHealth(personalvehicle, details.damage.body-0.01)
+			SetVehicleEngineHealth(personalvehicle, details.damage.engine-0.01)
+			for k, v in pairs(details.damage.advanced) do
+				DecorSetInt(personalvehicle, 'vehDMG:'..k, v)
+			end
+			
+			-- colours
+			SetVehicleColours(personalvehicle, details.customisations.colours.main[1], details.customisations.colours.main[2])
+			SetVehicleExtraColours(personalvehicle, details.customisations.colours.extras[1], details.customisations.colours.extras[2])
+			
+			-- windows
+			SetVehicleWindowTint(personalvehicle, details.customisations.windows)
+			
+			-- livery
+			SetVehicleLivery(personalvehicle, details.livery)
+			
+			-- neons
+			for i = 0, 3 do
+				SetVehicleNeonLightEnabled(personalvehicle, i, details.customisations.neons.enabled[i])
+			end
+			
+			-- wheels
+			SetVehicleWheelType(personalvehicle, details.customisations.wheels.type)
+			SetVehicleTyreSmokeColor(personalvehicle, details.customisations.wheels.smoke[1], details.customisations.wheels.smoke[2], details.customisations.wheels.smoke[3])
+			
+			-- mods
+			SetVehicleModKit(personalvehicle, 0)
+			for i = 0, 16 do
+				SetVehicleMod(personalvehicle, i, details.customisations.mods[tostring(i)])
+			end
+
+			for i = 17, 22 do
+				ToggleVehicleMod(personalvehicle, i, details.customisations.mods[tostring(i)])
+			end
+
+			for i = 23, 24 do
+				SetVehicleMod(personalvehicle, i, details.customisations.mods[tostring(i)])
+			end
+
+			for i = 23, 48 do
+				SetVehicleMod(personalvehicle, i, details.customisations.mods[tostring(i)])
+			end
+			
+			-- damage
+			doCarDamages(details.damage.engine-0.01, details.damage.body-0.01, personalvehicle)
 		end
-		SetVehicleColours(personalvehicle, colours.primary, colours.secondary)
-		SetVehicleExtraColours(personalvehicle, colours.pearlone, colours.pearltwo)
-		SetVehicleNumberPlateText(personalvehicle, veh.veh_plate)
-		SetVehicleNumberPlateTextIndex(personalvehicle, veh.veh_plate_style)
-		SetVehicleWindowTint(personalvehicle, veh.veh_windows)
-
+		------------------------------
+		-- finish spawning
+		------------------------------
 		TaskWarpPedIntoVehicle(GetPlayerPed(-1), personalvehicle, -1)
-		SetVehicleWindowTint(personalvehicle, veh.veh_windows)
-
 		table.insert(myVehicles, #myVehicles+1, {
 			ent = personalvehicle,
 			plate = veh.veh_plate,
@@ -200,7 +385,7 @@ local function fsn_SpawnVehicle(vehid)
 		})
 		TriggerEvent('fsn_vehiclecontrol:keys:carjack', GetVehicleNumberPlateText(personalvehicle))
 		SetEntityAsMissionEntity(personalvehicle, false, true)
-		TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', veh.veh_plate, 1)
+		TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', veh.veh_plate, 1, '0')
 	end)
 end
 
@@ -236,7 +421,7 @@ Citizen.CreateThread(function()
 	end
 	while true do
 		Citizen.Wait(0)
-		for _, grg in pairs(garages) do
+		for key, grg in pairs(garages) do
 			if GetDistanceBetweenCoords(grg.pos.x,grg.pos.y,grg.pos.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
         DrawMarker(1,grg.pos.x,grg.pos.y,grg.pos.z-1,0,0,0,0,0,0,5.8, 5.8, 0.5,0,155,255,175,0,0,0,0)
         if GetDistanceBetweenCoords(grg.pos.x,grg.pos.y,grg.pos.z,GetEntityCoords(GetPlayerPed(-1)), true) < 5.8 then
@@ -253,19 +438,21 @@ Citizen.CreateThread(function()
 						AddTextComponentString("Press ~INPUT_CELLPHONE_SELECT~ to ~r~return~w~ your vehicle")
 						DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 						if IsControlJustPressed(1, 18) then
-					    SetEntityAsMissionEntity( vehicle, false, true )
-							TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', GetVehicleNumberPlateText(vehicle), 0)
-					    Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( vehicle ) )
-
-	          end
+							local deets = getCarDetails(vehicle)
+							TriggerServerEvent('fsn_garages:vehicle:update', deets)
+							SetEntityAsMissionEntity( vehicle, false, true )
+							TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', GetVehicleNumberPlateText(vehicle), 0, key)
+							Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( vehicle ) )
+							
+						end
 					else
 						SetTextComponentFormat("STRING")
 						AddTextComponentString("Press ~INPUT_PICKUP~ to view your garage")
 						DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 						if IsControlJustPressed(1, 38) then
-							TriggerServerEvent('fsn_cargarage:requestVehicles', grg.type, exports.fsn_main:fsn_CharID())
+							TriggerServerEvent('fsn_cargarage:requestVehicles', grg.type, exports.fsn_main:fsn_CharID(), key)
 							fsn_ToggleGarageMenu()
-	          end
+						end
 					end
 				end
 			end
@@ -303,3 +490,13 @@ function fsn_HasVehicleKeys(plate, model)
 	end
 	return false
 end
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(300000)
+		if IsPedInAnyVehicle(GetPlayerPed(-1)) then
+			local deets = getCarDetails(GetVehiclePedIsIn(GetPlayerPed(-1), false))
+			TriggerServerEvent('fsn_garages:vehicle:update', deets)
+		end
+	end
+end)

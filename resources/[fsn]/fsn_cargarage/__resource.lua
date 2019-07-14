@@ -10,7 +10,8 @@ files({
 })
 
 exports({
-  'fsn_IsVehicleOwner'
+  'fsn_IsVehicleOwner',
+  'getCarDetails'
 })
 
 -- Server scripts

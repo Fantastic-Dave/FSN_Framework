@@ -53,7 +53,7 @@ $( function() {
 						var stat = 'REPO/SEIZE'
 						var price = 'UNAVAILABLE'
 					}
-					$('.section').append('<button class="menuoption '+color+'" data-sub="'+val.veh_id+'">['+stat+'] '+val.veh_name+'</button>')
+					$('.section').append('<button class="menuoption '+color+'" data-sub="'+val.veh_id+'">['+stat+'] '+val.veh_displayname+'</button>')
 					$('#actionmenu').append('<div id="'+val.veh_id+'" data-spawn="garage" data-parent="mainmenu" style="display: none;"><button class="menuoption" data-action="spawn-'+val.veh_id+'">SPAWN (<b>'+displayCash(price)+'</b>)</button><button class="menuoption" data-action="sell-'+val.veh_id+'">SELL</button></div>')
 				});
 				$('#actionmenu').append('<button class="menuoption exit" data-action="exit">Exit</button>')
