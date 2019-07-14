@@ -170,15 +170,20 @@ AddEventHandler('fsn_inventory:database:update', function(inv)
 end)
 -------------------------------------------- vehicle shit
 RegisterServerEvent('fsn_cargarage:buyVehicle')
-AddEventHandler('fsn_cargarage:buyVehicle', function(hash, classname, plate, vehicle_price)
-  print(source..' is attempting to buy '..classname)
-  local char_id = 0
-  for k, v in pairs(cur_chars) do
-    if v.ply_id == source then
-      char_id = v.char_id
-    end
-  end
-  MySQL.Async.execute("INSERT INTO `fsn_vehicles` (`veh_id`, `char_id`, `veh_name`, `veh_hash`, `veh_plate`, `veh_plate_style`, `veh_windows`, `veh_colours`, `veh_mods`, `veh_extras`, `veh_fuel`, `veh_health`, `veh_type`, `veh_wheeltype`, `veh_inventory`) VALUES (NULL, @char_id, @classname, @hash, @plate, '0', '0', '[]', '[]', '[]', '100', '1000', 'c', 0, '{}')", {['@char_id'] = char_id, ['@hash'] = hash, ['@classname'] = classname, ['@plate'] = plate}, function(rowsChanged) end)
+AddEventHandler('fsn_cargarage:buyVehicle', function(charid, displayname, spawnname, plate, details, finance, vehtype, status)
+  details = json.encode(details)
+  finance = json.encode(finance)
+  MySQL.Async.execute("INSERT INTO `fsn_vehicles` (`veh_id`, `char_id`, `veh_displayname`, `veh_spawnname`, `veh_plate`, `veh_details`, `veh_finance`, `veh_type`, `veh_status`, `veh_garage`) VALUES (NULL, @charid, @displayname, @spawnname, @plate, @details, @finance, @vehtype, @status, 0);", {
+	--@charid, @displayname, @spawnname, @plate, @details, @finance, @status
+	['@charid'] = charid,
+	['@displayname'] = displayname,
+	['@spawnname'] = spawnname,
+	['@plate'] = plate,
+	['@details'] = details,
+	['@finance'] = finance,
+	['@vehtype'] = vehtype,
+	['@status'] = status,
+  }, function(rowsChanged) end)
 end)
 -------------------------------------------- Character Saving
 Citizen.CreateThread(function()
