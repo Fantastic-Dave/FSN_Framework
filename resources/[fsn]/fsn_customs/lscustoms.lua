@@ -1706,7 +1706,7 @@ function DriveOutOfGarage()
 	-- WHEELTYPE
 	savetable.wheeltype = GetVehicleWheelType(veh)
 
-	TriggerServerEvent('fsn_cargarage:updateVehicle', savetable)
+	TriggerServerEvent('fsn_cargarage:updateVehicle', exports["fsn_cargarage"]:getCarDetails(veh))
 end
 
 function fsn_SplitString(inputstr, sep)
