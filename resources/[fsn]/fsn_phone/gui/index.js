@@ -214,13 +214,38 @@ $(function() {
 			if (whitelists.length > 0) {
 				for(var i = 0; i < whitelists.length; i++) {
 					var wl = whitelists[i]
-					console.log(wl)
+					var staffdiv = ''
+					for(var l = 0; l < wl.access; l++) {
+						var staff = wl.access[l]
+						staffdiv = staffdiv+'<tr><td>'+staff.charid+'</td><td>'+staff.level+'</td><td><button>X</button></td></tr>'
+					}
 					$('#whitelists').append('<div id="no-whitelists" class="whitelists-whitelist">'+
-					'<b>'+wl.title+'</b><br>'+
-					'<b>Owner:</b> '+wl.owner+'<br>'+
-					'<b>Access:</b> ...<br>'+
-					'<b>Bank: $</b>'+wl.bank+
-					'<button>Manage Business</button><button onclick="whitelist_toggle('+i+')">Clock In/Out</button></div>')
+						'<b>'+wl.title+'</b><br>'+
+						'<b>Owner:</b> '+wl.owner+'<br>'+
+						'<button onclick="$(\'#view-staff-'+i+'\').toggle()">View Staff</button>'+
+						'<div id="view-staff-'+i+'" style="display:none;padding:3px;">'+
+							'<table style="width:100%;font-size:13px;">'+
+								'<tr>'+
+									'<td>CharID</td>'+
+									'<td>LVL</td>'+
+									'<td></td>'+
+								'</tr>'+
+								staffdiv+
+							'</table>'+
+						'</div>'+
+						'<b>Bank: $</b>'+wl.bank+
+						'<button onclick="$(\'#manage-business-'+i+'\').toggle()">Manage Business</button>'+
+						'<div id="manage-business-'+i+'" style="display:none;padding:3px;">'+
+							'<input type="text" style="margin-top:3px;width:100%;" placeholder="5000"></input>'+
+							'<button>Deposit $</button>'+
+							'<input type="text" style="margin-top:3px;width:100%;" placeholder="5000"></input>'+
+							'<button>Withdraw $</button>'+
+							'<input type="text" style="margin-top:3px;width:59%;float:left;" placeholder="PlayerID"></input>'+
+							'<input type="text" style="margin-top:3px;width:39%;float:right;" placeholder="Lvl"></input>'+
+							'<button>WL/Update User</button>'+
+						'</div>'+
+						'<button onclick="whitelist_toggle('+i+')" style="margin-top:3px;">Clock In/Out</button>'+
+					'</div>')
 				}
 			} else {
 				$('#whitelists').append('<div id="no-whitelists" class="whitelists-error">You are not currently a part of any business.</div>')
