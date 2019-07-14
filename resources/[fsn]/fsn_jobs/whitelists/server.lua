@@ -1,8 +1,8 @@
 local Whitelists = {
 	[1] = {
 		title = 'Premium Deluxe Motorsports',
-		owner = 0,
-		access = {},
+		owner = 1,
+		access = {{charid = 1299, level = 5}},
 		bank = 0,
 		onduty = {},
 	},
