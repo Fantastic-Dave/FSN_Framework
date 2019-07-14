@@ -1,15 +1,12 @@
 --TriggerServerEvent("fsn_cargarage:updateVehicle", plate, table.tostring(vehiclecol), table.tostring(extracol), table.tostring(neoncolor), plateindex, table.tostring(mods), GetVehicleNumberPlateTextIndex(veh), wheeltype);
 RegisterServerEvent('fsn_cargarage:updateVehicle')
-AddEventHandler('fsn_cargarage:updateVehicle', function(savetable)
-  local colours = json.encode(savetable.colours)
-  local mods = json.encode(savetable.mods)
-  MySQL.Sync.execute("UPDATE `fsn_vehicles` SET `veh_plate_style` = @veh_plate_style, `veh_windows` = @veh_windows, `veh_wheeltype` = @veh_wheeltype, `veh_mods` = @veh_mods, `veh_colours` = @veh_colours WHERE `veh_plate` = @plate", {
-    ['@plate'] = savetable.plate,
-    ['@veh_plate_style'] = savetable.plateindex,
-    ['@veh_windows'] = savetable.windows,
-    ['@veh_wheeltype'] = savetable.wheeltype,
-    ['@veh_mods'] = mods,
-    ['@veh_colours'] = colours
+AddEventHandler('fsn_cargarage:updateVehicle', function(tbl)
+  
+  local details = json.encode(tbl)
+  print('updating Vehicle('..tbl.plate..') to Details('..details..')')
+  MySQL.Sync.execute("UPDATE `fsn_vehicles` SET `veh_details` = @details WHERE `veh_plate` = @plate", {
+    ['@plate'] = tbl.plate,
+    ['@details'] = details,
   })
 end)
 
@@ -20,13 +17,18 @@ end)
 
 --------------------------------------------------------------------------------
 RegisterServerEvent('fsn_cargarage:requestVehicles')
-AddEventHandler('fsn_cargarage:requestVehicles', function(type, charid)
+AddEventHandler('fsn_cargarage:requestVehicles', function(type, charid, grg)
   local player = source
   if type == 'cars' then
     MySQL.Async.fetchAll('SELECT * FROM `fsn_vehicles` WHERE `char_id` = @char_id AND `veh_type` = "c"', {['@char_id'] = charid}, function(vehicles)
       local vehtbl = {}
         for k, v in pairs(vehicles) do
-          table.insert(vehtbl,#vehtbl+1,v)
+			if v.veh_garage == grg or v.veh_garage == '0' then
+				print(v.veh_garage..' is '..grg)
+				table.insert(vehtbl,#vehtbl+1,v)
+			else
+				print(v.veh_garage..' is not '..grg)
+			end
         end
 
         TriggerClientEvent('fsn_cargarage:receiveVehicles', player, 'cars', vehtbl)
@@ -52,7 +54,12 @@ AddEventHandler('fsn_cargarage:impound', function(plate)
 end)
 
 RegisterServerEvent('fsn_cargarage:vehicle:toggleStatus')
-AddEventHandler('fsn_cargarage:vehicle:toggleStatus', function(plate, status)
-  TriggerClientEvent('fsn_cargarage:vehicleStatus', source, plate, status)
-  MySQL.Async.execute('UPDATE `fsn_vehicles` SET `veh_status` = @status WHERE `veh_plate` = @plate', {['@plate'] = plate, ['@status'] = status}, function() end)
+AddEventHandler('fsn_cargarage:vehicle:toggleStatus', function(plate, status, grg)
+  TriggerClientEvent('fsn_cargarage:vehicleStatus', source, plate, status, grg)
+  MySQL.Async.execute('UPDATE `fsn_vehicles` SET `veh_status` = @status, `veh_garage` = @garage WHERE `veh_plate` = @plate', {['@plate'] = plate, ['@status'] = status, ['@garage'] = grg}, function() end)
+end)
+
+RegisterServerEvent('fsn_garages:vehicle:update')
+AddEventHandler('fsn_garages:vehicle:update', function(details)
+	TriggerEvent('fsn_cargarage:updateVehicle', details)
 end)
