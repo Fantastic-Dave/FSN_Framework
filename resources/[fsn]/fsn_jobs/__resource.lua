@@ -44,6 +44,8 @@ server_script 'tow/server.lua'
 exports({
   'fsn_GetJob',
   'fsn_SetJob',
+  
+  -- [WHITELIST THINGS]
   'isWhitelisted',
   'getWhitelistDetails',
   'inAnyWhitelist',
