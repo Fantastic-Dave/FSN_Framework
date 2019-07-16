@@ -161,7 +161,8 @@ local emotes = {
     ["fistl"] = {"anim@mp_player_intcelebrationpaired@f_f_fist_bump", "fist_bump_left"},
     ["gang1"] = {"mp_player_int_uppergang_sign_a", "mp_player_int_gang_sign_a"},
     ["gang2"] = {"mp_player_int_uppergang_sign_b", "mp_player_int_gang_sign_b"},
-    ["thumbsdown"] = {"anim@arena@celeb@flat@solo@no_props@", "thumbs_down_a_player_a"},
+    ["thumbsdown"] = {"anim@arena@celeb@flat@solo@no_
+			@", "thumbs_down_a_player_a"},
     ["cpr1"] = {"missheistfbi3b_ig8_2", "cpr_loop_paramedic"},
     --["fapping"] = {"switch@trevor@jerking_off", "trev_jerking_off_loop"},
     ["shakefist"] = {"amb@code_human_in_car_mp_actions@dance@bodhi@ds@base", "idle_a_fp"},
@@ -565,7 +566,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   end
   if msg == '/props' then
     TriggerClientEvent('chatMessage', source, ':FSN Props (1/2)', {255,0,0}, 'notes, callphone-2, umbrella, brief-2, cigar-2, joint, cig, holdcigar, holdcig, holdjoint, box, pizza, drug-3, wine, beer, shopping, soda, burger-2, burgershot-5,')
-    TriggerClientEvent('chatMessage', source, ':FSN Props (1/2)', {255,0,0}, 'shot, boxing, drill, pot, smoke, coffee, bong, rose, cane, protext, backpack, hiking, dead-4, bum hurt-3, layfront, layback')
+    TriggerClientEvent('chatMessage', source, ':FSN Props (1/2)', {255,0,0}, 'shot, boxing, drill, pot, smoke, coffee, bong, rose, cane, protext, backpack, hiking, dead-4, bum hurt-3, layfront, layback, bumper-2, tire-3, toolbox-3')
   end
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- INVENTORY COMMANDS
