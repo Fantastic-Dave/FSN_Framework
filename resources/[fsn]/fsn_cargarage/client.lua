@@ -319,12 +319,13 @@ local function fsn_SpawnVehicle(vehid)
 		local id = NetworkGetNetworkIdFromEntity(personalvehicle)
 		SetNetworkIdCanMigrate(id, true)
 		
+		SetVehicleNumberPlateText(personalvehicle, veh.veh_plate)
+		
 		------------------------------
 		-- make the vehicle look and function right
 		------------------------------
 		if veh.veh_details then
 			local details = json.decode(veh.veh_details)
-			SetVehicleNumberPlateText(personalvehicle, veh.veh_plate)
 			SetVehicleNumberPlateTextIndex(personalvehicle, details.customisations.plate)
 			
 			-- damage
