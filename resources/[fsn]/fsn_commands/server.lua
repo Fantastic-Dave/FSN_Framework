@@ -309,7 +309,7 @@ end)
 local nineoneones = {}
 local nineoneone = 0
 AddEventHandler('chatMessage', function(source, auth, msg)
-  local split = fsn_SplitString(msg, ' ')
+  local split = fsn_SplitString(string.lower(msg), ' ')
   TriggerEvent('fsn_main:logging:addLog', source, 'chat', 'Player('..source..') ran command: '..msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- NEWS COMMANDS
