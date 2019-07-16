@@ -173,7 +173,8 @@ RegisterServerEvent('fsn_cargarage:buyVehicle')
 AddEventHandler('fsn_cargarage:buyVehicle', function(charid, displayname, spawnname, plate, details, finance, vehtype, status)
   details = json.encode(details)
   finance = json.encode(finance)
-  MySQL.Async.execute("INSERT INTO `fsn_vehicles` (`veh_id`, `char_id`, `veh_displayname`, `veh_spawnname`, `veh_plate`, `veh_details`, `veh_finance`, `veh_type`, `veh_status`, `veh_garage`) VALUES (NULL, @charid, @displayname, @spawnname, @plate, @details, @finance, @vehtype, @status, 0);", {
+  plate = string.upper(plate)
+  MySQL.Async.execute("INSERT INTO `fsn_vehicles` (`veh_id`, `char_id`, `veh_displayname`, `veh_spawnname`, `veh_plate`, `veh_inventory`, `veh_details`, `veh_finance`, `veh_type`, `veh_status`, `veh_garage`) VALUES (NULL, @charid, @displayname, @spawnname, @plate, '{}', @details, @finance, @vehtype, @status, 0);", {
 	--@charid, @displayname, @spawnname, @plate, @details, @finance, @status
 	['@charid'] = charid,
 	['@displayname'] = displayname,
