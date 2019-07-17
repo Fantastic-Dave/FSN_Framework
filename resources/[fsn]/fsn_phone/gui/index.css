@@ -15,6 +15,16 @@ table {
     -o-user-select: none;
     user-select: none;
 }
+
+button {
+	background-color: #2e2e2e;
+	border: 0px;
+	border-radius: 2px;
+	color: white;
+	font-weight:bold;
+	padding: 3px;
+}
+
 ::-webkit-scrollbar { 
     display: none; 
 }
@@ -451,6 +461,57 @@ table {
 }
 
 /*
+	Garage Screen
+*/
+#screen-garage {
+	display: none;
+	background-color: white;
+	width: 100%;
+	height: 93%;
+	font-family: Arial;
+	overflow-y:scroll;
+}
+
+#garage-vehicles {
+	overflow: scroll;
+}
+
+.garage-vehicle {
+	padding:2px;
+	margin: 4px;
+	border-radius: 2px;
+	background-color: rgba(0,0,0,0.1);
+}
+
+.garage-vehicle button {
+	width:97%;
+	margin-top:5px;
+	margin: 3px;
+}
+
+.garage-vehicle-title {
+	margin:0px;
+	padding:0px;
+	font-size: 14px;
+	font-weight:bold;
+	width: 100%;
+	padding: 2px;
+	padding-left: 5px;
+}
+
+.garage-vehicle-info {
+	margin:0px;
+	padding:0px;
+	font-size: 12px;
+	width: 100%;
+	padding: 2px;
+	padding-left: 20px;
+}
+
+.garage-vehicle-info span {
+	font-weight: bold;
+}
+/*
 	Whitelists Screen
 */
 #screen-whitelists {
@@ -492,6 +553,7 @@ table {
 	width: 100%;
 	height: 93%;
 	font-family: Arial;
+	overflow-y:scroll;
 }
 .adverts-error {
 	margin: 10px;

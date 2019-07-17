@@ -202,6 +202,23 @@ RegisterNUICallback( "addContact", function( data, cb )
 	TriggerServerEvent('fsn_phone:db:updateContacts', character.char_id, json.encode(contacts))
 end)
 
+RegisterNUICallback('requestGarage', function( data, cb )
+	TriggerServerEvent('fsn_garage:phone:requestAll')
+end)
+
+RegisterNUICallback('storeVehicle', function( data, cb )
+	TriggerEvent('fsn_cargarage:checkStatus', data.plate)
+end)
+
+RegisterNetEvent('fsn_garage:phone:recieveAll')
+AddEventHandler('fsn_garage:phone:recieveAll', function(tbl)
+	print('you got '..#tbl..' cars')
+	SendNUIMessage({
+		updateGarage = true,
+		vehicles = tbl
+	})
+end)
+
 Citizen.CreateThread( function()
 	for k, store in pairs(stores) do
 		local blip = AddBlipForCoord(store.x, store.y, store.z)

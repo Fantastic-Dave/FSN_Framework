@@ -159,6 +159,13 @@ function whitelist_toggle(id) {
 	}));
 }
 
+function storeVehicle(plate) {
+	console.log('attempting to re-store: '+plate)
+	$.post('http://fsn_phone/storeVehicle', JSON.stringify({
+		plate:plate
+	}));
+}
+
 function sendTextMessage() {
 	var number = $('#textbox-number').val()
 	var message = $('#textbox-message').val()
@@ -271,6 +278,36 @@ $(function() {
 			}
 			texts.unshift(json)
 		}
+		if (event.data.updateGarage == true) {
+			var vehicles = event.data.vehicles
+			if (vehicles.length > 0) {
+				var html = ''
+				for(var i = 0; i < vehicles.length; i++) {
+					var car = vehicles[i]
+					var statuses = []
+					statuses[0] = 'IN-GARAGE'
+					statuses[1] = 'OUT'
+					statuses[2] = 'IMPOUNDED'
+					statuses[3] = 'SEIZED'
+					
+					var storeButton = '<button onclick="storeVehicle(\''+car.veh_plate+'\')">Store Vehicle</button>'
+					if (statuses[car.veh_status] == 'IMPOUNDED' || statuses[car.veh_status] == 'SEIZED') {
+						storeButton = ''
+					}
+					html = html+'<div class="garage-vehicle">'+
+						'<p class="garage-vehicle-title">'+car.veh_displayname+'</p>'+
+						'<p class="garage-vehicle-info"><span>Plate:</span> '+car.veh_plate+'</p>'+
+						'<p class="garage-vehicle-info"><span>Garage:</span> '+car.veh_garage+'</p>'+
+						'<p class="garage-vehicle-info"><span>Status:</span> '+statuses[car.veh_status]+'</p>'+
+						'<button>View Payments</button>'+
+						storeButton+
+					'</div>'
+				}
+				$('#garage-vehicles').html(html)
+			} else {
+				$('#garage-vehicles').html('<div id="no-adverts" class="adverts-error">You have no vehicles</div>')
+			}
+		}
 		if (event.data.displayPhone == true) {
 			$('#phone').show()
 			if (event.data.simcard == false) {
@@ -286,7 +323,11 @@ $(function() {
 				$('#screen-message-view').hide()
 				$('#screen-contact-view').hide()
 				$('#screen-adverts').hide()
+				$('#screen-garage').hide()
 				$( "#phone-sim-number" ).text( '#'+event.data.number );
+				
+				// remove shit about vehicles
+				$('#garage-vehicles').html('<div id="no-adverts" class="adverts-error">Please wait...</div>')
 				$('#screen-home').show()
 			}
 		} else if (event.data.displayPhone == false) {
@@ -315,6 +356,7 @@ document.body.onmouseup = function() {
 		$('#screen-whitelists').hide()
 		$('#screen-adverts').hide()
 		$('#screen-phone').show()
+		$('#screen-garage').hide()
 	}
 	if ($('#adverts-button:hover').length != 0) {
 		$('#screen-home').hide()
@@ -324,6 +366,7 @@ document.body.onmouseup = function() {
 		$('#screen-contacts').hide()
 		$('#screen-phone').hide()
 		$('#screen-whitelists').hide()
+		$('#screen-garage').hide()
 		$('#screen-adverts').show()
 	}
 	if ($('#whitelists-button:hover').length != 0) {
@@ -334,7 +377,23 @@ document.body.onmouseup = function() {
 		$('#screen-contacts').hide()
 		$('#screen-phone').hide()
 		$('#screen-adverts').hide()
+		$('#screen-garage').hide()
 		$('#screen-whitelists').show()
+	}
+	if ($('#garage-button:hover').length != 0) {
+		$('#screen-home').hide()
+		$('#screen-message-view').hide()
+		$('#screen-contact-view').hide()
+		$('#screen-messages').hide()
+		$('#screen-contacts').hide()
+		$('#screen-phone').hide()
+		$('#screen-adverts').hide()
+		$('#screen-whitelists').hide()
+		
+		// request garage info from game
+		$.post('http://fsn_phone/requestGarage', JSON.stringify({}));
+		
+		$('#screen-garage').show()
 	}
 	if ($('#contacts-button:hover').length != 0) {
 		$('#screen-home').hide()
@@ -344,6 +403,7 @@ document.body.onmouseup = function() {
 		$('#screen-whitelists').hide()
 		$('#screen-adverts').hide()
 		$('#screen-messages').hide()
+		$('#screen-garage').hide()
 		
 		// Add the contacts
 		$('#contacts-append').html('')
@@ -380,6 +440,7 @@ document.body.onmouseup = function() {
 		$('#screen-contact-view').hide()
 		$('#screen-adverts').hide()
 		$('#screen-whitelists').hide()
+		$('#screen-garage').hide()
 		
 		// Add the messages
 		$('#messages-append').html('')
@@ -407,6 +468,7 @@ document.body.onmouseup = function() {
 		$('#screen-contacts').hide()
 		$('#screen-whitelists').hide()
 		$('#screen-adverts').hide()
+		$('#screen-garage').hide()
 		$('#screen-home').show()
 	}
 	
