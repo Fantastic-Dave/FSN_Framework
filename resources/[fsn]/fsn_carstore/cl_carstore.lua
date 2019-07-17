@@ -99,10 +99,16 @@ Util.Tick(function()
 					SetVehicleColours(car.car.object, car.car.color[1], car.car.color[2])
 					SetVehicleExtraColours(car.car.object, -1, -1)
 				else
+					if IsEntityAttachedToAnyVehicle(car.car.object) then
+						-- someone is trying to tow this shit
+						DetachEntity(car.car.object)
+					end
+					if GetDistanceBetweenCoords(car.x,car.y,car.z, GetEntityCoords(car.car.object), true) > 2 then
+						-- car is not where it's supposed to be :/
+						SetEntityCoords(car.car.object, car.x, car.y, car.z-1, 1, 0, 0, 1)
+						SetVehicleOnGroundProperly(car.car.object)
+					end
 					FreezeEntityPosition(car.car.object, true)
-					DetachEntity(car.car.object)
-					SetEntityPosition(car.car.object, car.x, car.y, car.z-1, 1, 0, 0, 1)
-					SetVehicleOnGroundProperly(car.car.object)
 					SetEntityInvincible(car.car.object,true)
 					SetEntityAsMissionEntity( car.car.object, true, true )
 					
