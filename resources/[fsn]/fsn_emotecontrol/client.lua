@@ -440,9 +440,6 @@ function femdances()
 	Menu.addButton("Dance 2","dancef2",nil)
 	Menu.addButton("Dance 3","dancef3",nil)
 	Menu.addButton("Dance 4","dancef4",nil)
-	if GetPlayerName(PlayerId()) == "Cyan" or GetPlayerName(PlayerId()) == "Liquid" then
-		Menu.addButton("Pole Dance","pole",nil)
-	end
 	Menu.addButton("Back","NameOfMenu",nil)
 	BackToLevel1()
 	-- ...
@@ -960,6 +957,17 @@ AddEventHandler('fsn_emotecontrol:phone:call1', function()
 		ClearPedTasksImmediately(GetPlayerPed(-1))
 		TaskPlayAnim(GetPlayerPed(-1), 'cellphone@', 'cellphone_call_listen_base', 8.0, 1.0, 3000, 49, 1.0, 0, 0, 0)
 	end
+end)
+RegisterNetEvent('fsn_emotecontrol:dice:roll')
+AddEventHandler('fsn_emotecontrol:dice:roll', function()
+    if not IsPedInAnyVehicle(GetPlayerPed(-1)) then
+        while not HasAnimDictLoaded('mp_player_intwank') do
+            RequestAnimDict('mp_player_intwank')
+            Citizen.Wait(5)
+        end
+        ClearPedTasksImmediately(GetPlayerPed(-1))
+        TaskPlayAnim(GetPlayerPed(-1), 'mp_player_intwank', "mp_player_int_wank", 8.0, 1.0, -1, 120, 0, 0, 0, 0 )
+    end
 end)
 RegisterNetEvent('fsn_emotecontrol:police:ticket')
 AddEventHandler('fsn_emotecontrol:police:ticket', function()
