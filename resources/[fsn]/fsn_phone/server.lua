@@ -89,3 +89,12 @@ AddEventHandler('fsn_phone:chat', function(str, players)
     TriggerClientEvent('chatMessage', v, '', {255,255,255}, str)
   end
 end)
+
+RegisterServerEvent('fsn_garage:phone:requestAll')
+AddEventHandler('fsn_garage:phone:requestAll', function()
+	local char_id = exports["fsn_main"]:fsn_CharID(source)
+	local src = source
+	MySQL.Async.fetchAll("SELECT * FROM fsn_vehicles where char_id = @charid", {['@charid'] = char_id }, function(tbl)
+		TriggerClientEvent('fsn_garage:phone:recieveAll', src, tbl)
+    end)
+end)
