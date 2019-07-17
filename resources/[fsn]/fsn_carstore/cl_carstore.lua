@@ -100,6 +100,9 @@ Util.Tick(function()
 					SetVehicleExtraColours(car.car.object, -1, -1)
 				else
 					FreezeEntityPosition(car.car.object, true)
+					DetachEntity(car.car.object)
+					SetEntityPosition(car.car.object, car.x, car.y, car.z-1, 1, 0, 0, 1)
+					SetVehicleOnGroundProperly(car.car.object)
 					SetEntityInvincible(car.car.object,true)
 					SetEntityAsMissionEntity( car.car.object, true, true )
 					
