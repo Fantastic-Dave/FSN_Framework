@@ -155,6 +155,22 @@ AddEventHandler('fsn_cargarage:makeMine', function(ent, classname, plate)
 	})
 end)
 
+RegisterNetEvent('fsn_cargarage:checkStatus')
+AddEventHandler('fsn_cargarage:checkStatus', function(plate)
+	for k, v in pairs(myVehicles) do
+		if v.plate == plate then
+			if DoesEntityExist(v.ent) then
+				TriggerEvent('fsn_notify:displayNotification', 'This exists somewhere in the world!!', 'centerLeft', 3000, 'error')
+			else
+				TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', plate, 0, '0')
+				TriggerEvent('fsn_notify:displayNotification', 'Vehicle returned to any garage.', 'centerLeft', 3000, 'success')
+			end
+			return
+		end
+	end
+	TriggerEvent('fsn_notify:displayNotification', 'You have not spawned this vehicle', 'centerLeft', 3000, 'error')
+end)
+
 RegisterNetEvent('fsn_cargarage:vehicleStatus')
 AddEventHandler('fsn_cargarage:vehicleStatus', function(plate, status, grg)
 	local statuses = {
