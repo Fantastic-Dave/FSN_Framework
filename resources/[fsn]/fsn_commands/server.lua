@@ -489,6 +489,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 			else
 				local num = math.random(1, tonumber(split[2]))
 				TriggerClientEvent('fsn_commands:me', source, 'rolled a dice: '..num..' / '..split[2])
+				TriggerClientEvent('fsn_emotecontrol:dice:roll', source)
 			end
 		else
 			TriggerClientEvent('fsn_notify:displayNotification', source, 'Arguments need to be a number', 'centerRight', 4000, 'error')
