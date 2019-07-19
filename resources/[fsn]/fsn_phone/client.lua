@@ -161,7 +161,7 @@ end)
 RegisterNUICallback( "deleteContact", function( data, cb )
 	if data.luaid then
 		contacts[data.luaid] = nil
-		TriggerEvent('fsn_notify:displayNotification', 'Contacted deleted', 'centerRight', 5000, 'success')
+		TriggerEvent('fsn_notify:displayNotification', 'Contact deleted', 'centerRight', 5000, 'success')
 	else
 		TriggerEvent('fsn_notify:displayNotification', 'Error occured deleting contact', 'centerRight', 5000, 'error')
 	end
@@ -177,7 +177,7 @@ RegisterNUICallback( "updateContact", function( data, cb )
 	if data.luaid and data.name and data.number and contacts[data.luaid] then
 		contacts[data.luaid].name = data.name
 		contacts[data.luaid].number = data.number
-		TriggerEvent('fsn_notify:displayNotification', 'Contacted updated', 'centerRight', 5000, 'success')
+		TriggerEvent('fsn_notify:displayNotification', 'Contact updated', 'centerRight', 5000, 'success')
 	else
 		TriggerEvent('fsn_notify:displayNotification', 'Error occured updating contact', 'centerRight', 5000, 'error')
 	end
@@ -191,7 +191,7 @@ end)
 RegisterNUICallback( "addContact", function( data, cb )
 	if data.name and data.number then
 		table.insert(contacts,#contacts+1,{luaid=#contacts+1,name=data.name,number=data.number})
-		TriggerEvent('fsn_notify:displayNotification', 'Contacted added', 'centerRight', 5000, 'success')
+		TriggerEvent('fsn_notify:displayNotification', 'Contact added', 'centerRight', 5000, 'success')
 	else
 		TriggerEvent('fsn_notify:displayNotification', 'Error occured adding contact', 'centerRight', 5000, 'error')
 	end
