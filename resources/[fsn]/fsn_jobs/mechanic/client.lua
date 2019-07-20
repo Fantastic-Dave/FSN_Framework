@@ -127,3 +127,116 @@ Citizen.CreateThread(function()
     end
   end
 end)
+
+  vehicleDecors = {
+    ["Fuel Level"] = {damage = 'fuelLevel', name ="FuelLevel"},
+    ["Electronics"] = {damage = 'vehDMG:electronics', name ="Electronics"},
+    ["Clutch"] = {damage = 'vehDMG:clutch', name ="Clutch"},
+    ["Gearbox"] = {damage = 'vehDMG:gearbox', name ="Gearbox"},
+    ["Brakes"] = {damage = 'vehDMG:brakes', name ="Brakes"},
+    ["Transmission"] = {damage = 'vehDMG:transmission', name ="Transmission"},
+    ["Axle"] = {damage = 'vehDMG:axle', name ="Axle"},
+    ["Fuel Injectors"] = {damage = 'vehDMG:fuel_injectors', name ="FuelInjectors"},
+    ["Fuel Tank"] = {damage = 'vehDMG:fuel_tank', name ="FuelTank"},
+    ["Tire Depth"] = {damage = 'vehDMG:tyre_depth', name ="TireDepth"}
+  }
+
+
+ 
+ -- Inspection and Repair for Mechanics Chat Commands \\ Debug
+ RegisterCommand('vehinspect', function(source, args)
+    if ismech == true then
+   if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
+   local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+     for item_name in pairs(vehicleDecors) do
+       local decorInt = DecorGetInt(GetVehiclePedIsIn(GetPlayerPed(-1), false), vehicleDecors[item_name].damage)
+       TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, item_name..' is '..decorInt.."%")
+       end
+     end
+    end
+ end, false)
+ 
+ RegisterCommand('vehrepair', function(source, args)
+    if ismech == true then
+   local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+   local decorArgs = args[1]
+   for item_name in pairs(vehicleDecors) do
+   if args[1] == vehicleDecors[item_name].name then decorArgs = vehicleDecors[item_name].damage
+     mechanicRepair(decorArgs)
+         end
+       end
+      end
+ end, false)
+
+function mechanicRepair(part)
+    local playerPed = GetPlayerPed(-1)
+    local playerPos = GetEntityCoords(playerPed, 1)
+    local coordA = GetEntityCoords(GetPlayerPed(-1), 1)
+    local coordB = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0.0, 1.0, 0.0)
+    local vehiclePos = getVehicleInDirection(coordA, coordB)
+    if vehiclePos ~= nil then
+      if DoesEntityExist(vehiclePos) and IsEntityAVehicle(vehiclePos) then
+        if GetDistanceBetweenCoords(coordB, playerPos, 1) <= 4 then
+  
+          local currentValue = DecorGetInt(vehiclePos, part)
+  
+          if part == "vehDMG:electronics" and currentValue ~= 100 then
+            print("Repairing Electronics")
+            TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, "Taken 9 Electronics and 7 Plastic; blablablaa")
+            -- Take items from inventory
+          elseif part == "vehDMG:clutch" and currentValue ~= 100 then
+            print("Repairing Clutch")
+            TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, "Taken 6 Metal and 4 Plastic; blablablaa")
+            -- Take items from inventory
+          elseif part == "vehDMG:gearbox" and currentValue ~= 100 then
+            print("Repairing Gearbox")
+            TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, "Taken 6 Metal and 4 Plastic; blablablaa")
+            -- Take items from inventory
+          elseif part == "vehDMG:brakes" and currentValue ~= 100 then
+            print("Repairing Brakes")
+            TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, "Taken 6 Metal and 4 Plastic; blablablaa")
+            -- Take items from inventory
+          elseif part == "vehDMG:transmission" and currentValue ~= 100 then
+            print("Repairing Transmission")
+            TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, "Taken 6 Metal and 4 Plastic; blablablaa")
+            -- Take items from inventory
+          elseif part == "vehDMG:axle" and currentValue ~= 100 then
+            print("Repairing Axle")
+            TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, "Taken 6 Metal and 4 Plastic; blablablaa")
+            -- Take items from inventory
+          elseif part == "vehDMG:fuel_injectors" and currentValue ~= 100 then
+            print("Repairing Fuel Injectors")
+            TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, "Taken 6 Metal and 4 Plastic; blablablaa")
+            -- Take items from inventory
+          elseif part == "vehDMG:fuel_tank" and currentValue ~= 100 then
+            print("Repairing Fuel Tank")
+            TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, "Taken 6 Metal and 4 Plastic; blablablaa")
+            -- Take items from inventory
+          elseif part == "vehDMG:tyre_depth" and currentValue ~= 100 then
+            print("Repairing 'Tyre Depth'")
+            TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, "Taken 6 Metal and 4 Plastic; blablablaa")
+            -- Take items from inventory
+          end
+    if currentValue >= 100 then  -- if DecorInt is 100 or greater do nothing. Sets Int to 100 just incase of exploit.
+      TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, part.." is/are already fully repaired.")
+      DecorSetInt(vehiclePos, part, 100)
+      -- No progress bar
+    elseif currentValue >= 88 then  -- else if DecorInt is 88 or higher automatically repair to 100%.
+      TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, part.." repaired from "..currentValue.."% to 100%")
+      DecorSetInt(vehiclePos, part, 100)
+      -- Add progress bar
+    else -- else add +12 int to the current value of the part.
+    DecorSetInt(vehiclePos, part, currentValue + 12)
+    TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, "Repairing "..part) -- DEBUG \\ Remove me later
+    -- Add progress bar
+          end
+        end
+      end
+    end
+  end
+  
+  function getVehicleInDirection(coordFrom, coordTo)
+      local rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, GetPlayerPed(-1), 0)
+      local _, _, _, _, vehicle = GetRaycastResult(rayHandle)
+      return vehicle
+  end

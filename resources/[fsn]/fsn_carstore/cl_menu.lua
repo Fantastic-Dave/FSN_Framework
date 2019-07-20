@@ -295,7 +295,7 @@ local vehshop = {
 				{name = "Bati 801RR", costs = 28000, description = {}, model = "bati2"},
 				{name = "BF400", costs = 70000, description = {}, model = "bf400"},
 				{name = "Carbon RS", costs = 21000, description = {}, model = "carbonrs"},
-				{name = "Cliffhanger", costs = 15000, description = {}, model = "cliffhanger"},
+				{name = "Cliffhanger", costs = 70000, description = {}, model = "cliffhanger"},
 				{name = "Daemon", costs = 20500, description = {}, model = "daemon"},
 				{name = "Double T", costs = 26000, description = {}, model = "double"},
 				{name = "Enduro", costs = 30000, description = {}, model = "enduro"},
@@ -322,7 +322,6 @@ local vehshop = {
 				{name = "Zombie Bobber", costs = 36000, description = {}, model = "zombiea"},
 				{name = "Rat Bike", costs = 19000, description = {}, model = "ratbike"},
 				{name = "Sanctus", costs = 60000, description = {}, model = "sanctus"},
-				{name = "Cliffhanger", costs = 70000, description = {}, model = "cliffhanger"},
 			}
 		},
 		["bicycles"] = {
