@@ -520,6 +520,7 @@ button {
 	width: 100%;
 	height: 93%;
 	font-family: Arial;
+	overflow-y: auto;
 }
 
 .whitelists-error {

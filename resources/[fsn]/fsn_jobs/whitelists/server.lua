@@ -1,14 +1,24 @@
 local Whitelists = {
 	[1] = {
 		title = 'Premium Deluxe Motorsports',
-		owner = 1,
-		access = {{charid = 1299, level = 5}},
+		id = 1,
+		owner = 1299,
+		access = {{charid = 1, level = 5}},
 		bank = 0,
 		onduty = {},
 	},
 	[2] = {
 		title = 'Mechanics',
-		owner = 0,
+		id = 2,
+		owner = 1,
+		access = {},
+		bank = 0,
+		onduty = {},
+	},
+	[3] = {
+		title = 'La Fuente Blanca',
+		id = 3,
+		owner = 1,
 		access = {},
 		bank = 0,
 		onduty = {},
@@ -33,13 +43,14 @@ end)
 
 RegisterServerEvent('fsn_jobs:whitelist:clock:in')
 AddEventHandler('fsn_jobs:whitelist:clock:in', function(charid, whitelist)
+	print(source..' is trying to clock into whitelist '..whitelist..' with charid '..charid)
 	if Whitelists[whitelist] then
 		local clocked = false
 		if Whitelists[whitelist].owner == charid then
 			clocked = true
 		else
-			for k, v in pairs(Whitelists[whitelist].access) do
-				if v.char_id == charid and v.level > 1 then
+			for k,v in pairs(Whitelists[whitelist].access) do
+				if v.charid == charid then
 					clocked = true
 				end
 			end

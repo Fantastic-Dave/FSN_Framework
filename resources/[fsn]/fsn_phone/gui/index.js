@@ -153,7 +153,6 @@ function postAdvert() {
 	$.post('http://fsn_phone/disablePhone', JSON.stringify({}));
 }
 function whitelist_toggle(id) {
-	id = id+1
 	$.post('http://fsn_phone/toggleWhitelist', JSON.stringify({
 		id:id
 	}));
@@ -251,7 +250,7 @@ $(function() {
 							'<input type="text" style="margin-top:3px;width:39%;float:right;" placeholder="Lvl"></input>'+
 							'<button>WL/Update User</button>'+
 						'</div>'+
-						'<button onclick="whitelist_toggle('+i+')" style="margin-top:3px;">Clock In/Out</button>'+
+						'<button onclick="whitelist_toggle('+wl.id+')" style="margin-top:3px;">Clock In/Out</button>'+
 					'</div>')
 				}
 			} else {
