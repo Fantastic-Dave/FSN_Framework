@@ -979,6 +979,34 @@ AddEventHandler('fsn_emotecontrol:police:ticket', function()
 	--TaskPlayAnim(GetPlayerPed(-1), 'amb@medic@timeofdeath', 'idle_b_timeofdeath', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
 	TaskStartScenarioInPlace(GetPlayerPed(-1), "CODE_HUMAN_MEDIC_TIME_OF_DEATH", 0, false)
 end)
+RegisterNetEvent('fsn_emotecontrol:police:tablet')
+AddEventHandler('fsn_emotecontrol:police:tablet', function(status)
+	local prop_name = prop_name or 'hei_prop_dlc_tablet'
+
+		if status == "open" then
+		if not IsPedInAnyVehicle(GetPlayerPed(-1)) then
+			while not HasAnimDictLoaded('amb@code_human_in_bus_passenger_idles@female@tablet@idle_a') do
+				RequestAnimDict('amb@code_human_in_bus_passenger_idles@female@tablet@idle_a')
+				Citizen.Wait(5)
+			end
+			ClearPedTasksImmediately(GetPlayerPed(-1))
+			local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1)))
+			prop = CreateObject(GetHashKey(prop_name), x, y, z+0.2,  true,  true, true)
+			AttachEntityToEntity(prop, GetPlayerPed(-1), GetPedBoneIndex(GetPlayerPed(-1), 60309), 0.0, -0.01, -0.04, 0.0, 0.0, 0.0, true, true, false, true, 1, true)
+			TaskPlayAnim(GetPlayerPed(-1), 'amb@code_human_in_bus_passenger_idles@female@tablet@idle_a', 'idle_b', 3.0, -8, -1, 63, 0, 0, 0, 0 )
+			tabletOpen = true
+		end
+			else
+				TaskPlayAnim(GetPlayerPed(-1), 'amb@code_human_in_bus_passenger_idles@female@tablet@idle_a', 'exit', 3.0, 1.0, -1, 49, 0, 0, 0, 0 )
+				DetachEntity(prop, 1, 1)
+				DeleteObject(prop)
+				Wait(1000)
+				ClearPedSecondaryTask(GetPlayerPed(-1))
+				tabletOpen = false
+
+				GetIsTaskActive(ped, taskNumber)
+		end
+end)
 -----------------------
 DecorRegister("player:handsup", 2)
 function halfanimPlayer(animDict, animName)
