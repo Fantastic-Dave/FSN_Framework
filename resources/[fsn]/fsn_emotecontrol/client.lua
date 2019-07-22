@@ -984,7 +984,9 @@ AddEventHandler('fsn_emotecontrol:police:tablet', function(status)
 	local prop_name = prop_name or 'hei_prop_dlc_tablet'
 
 		if status == "open" then
-		if not IsPedInAnyVehicle(GetPlayerPed(-1)) then
+		if IsPedInAnyVehicle(GetPlayerPed(-1)) then
+			TriggerEvent('fsn_commands:me', 'uses the onboard computer...')
+		else
 			while not HasAnimDictLoaded('amb@code_human_in_bus_passenger_idles@female@tablet@idle_a') do
 				RequestAnimDict('amb@code_human_in_bus_passenger_idles@female@tablet@idle_a')
 				Citizen.Wait(5)
