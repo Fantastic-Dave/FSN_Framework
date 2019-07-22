@@ -101,12 +101,12 @@ end)
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
-    if IsPedInAnyVehicle(GetPlayerPed(-1)) and amicop then
-      if IsControlJustPressed(0,244) and GetVehicleClass(GetVehiclePedIsIn(GetPlayerPed(-1))) == 18 and IsVehicleEngineOn(GetVehiclePedIsIn(GetPlayerPed(-1))) then
-        TriggerEvent('fsn_police:MDT:toggle')
-        TriggerEvent('fsn_commands:me', 'uses the onboard computer...')
-      end
-    end
+  --  if IsPedInAnyVehicle(GetPlayerPed(-1)) and amicop then
+   --   if IsControlJustPressed(0,244) and GetVehicleClass(GetVehiclePedIsIn(GetPlayerPed(-1))) == 18 and IsVehicleEngineOn(GetVehiclePedIsIn(GetPlayerPed(-1))) then
+   --     TriggerEvent('fsn_police:MDT:toggle')
+    --    TriggerEvent('fsn_commands:me', 'uses the onboard computer...')
+  --    end
+ --   end
     for k, stn in pairs(MDTStations) do
       if GetDistanceBetweenCoords(stn.x,stn.y,stn.z,GetEntityCoords(GetPlayerPed(-1)), true) < 10 and amicop then
         DrawMarker(1,stn.x,stn.y,stn.z-1,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
