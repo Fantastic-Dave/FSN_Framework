@@ -309,6 +309,7 @@ Citizen.CreateThread(function()
                 --GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(v), 1000)
 				TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey(v), 250)
               end
+	      GiveWeaponComponentToPed(GetPlayerPed(-1), 0x5EF9FEC4, 0x359B7AAE)-- Combat Pistol Flashlight
               AddArmourToPed(GetPlayerPed(-1), 100)
               TriggerEvent('fsn_notify:displayNotification', 'You have <span style="color:red">checked out</span> <span style="color:#f4a442;font-weight:bold">STANDARD LOADOUT</span> from '..stn.name, 'centerLeft', 2000, 'info')
             end
