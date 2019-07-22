@@ -90,6 +90,7 @@ end)
 
 RegisterNUICallback("closeMDT", function(data, cb)
 	TriggerEvent('fsn_police:MDT:toggle')
+	TriggerEvent('fsn_emotecontrol:police:tablet', source, "close")
 end)
 
 RegisterNUICallback("setWaypoint", function(data, cb)
