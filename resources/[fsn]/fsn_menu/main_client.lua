@@ -775,3 +775,7 @@ AddEventHandler('fsn_inventory:init', function(sendtojs)
     items = sendtojs
   })
 end)
+
+RegisterNUICallback('escape', function(data, cb) -- NUI to close menu on ESCAPE key pressed.
+  ToggleActionMenu()
+end)
