@@ -119,6 +119,8 @@ Citizen.CreateThread(function()
 			datastore.nearby.peds = {}
 			for ped in get_peds() do
 				table.insert(datastore.peds, #datastore.peds+1, ped)
+				-- move this here to remove a thread
+				SetPedDropsWeaponsWhenDead(ped, false)
 				if GetDistanceBetweenCoords(GetEntityCoords(ped), GetEntityCoords(myPed), true) < 50 then
 					table.insert(datastore.nearby.peds, #datastore.nearby.peds+1, ped)
 				end
