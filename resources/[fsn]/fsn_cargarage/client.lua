@@ -455,6 +455,9 @@ Citizen.CreateThread(function()
 						AddTextComponentString("Press ~INPUT_CELLPHONE_SELECT~ to ~r~return~w~ your vehicle")
 						DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 						if IsControlJustPressed(1, 18) then
+							if not fsn_IsVehicleOwner(vehicle) then
+								TriggerEvent('fsn_notify:displayNotification', 'You do not own this vehicle.', 'centerLeft', 4000, 'error')
+						else
 							local deets = getCarDetails(vehicle)
 							TriggerServerEvent('fsn_garages:vehicle:update', deets)
 							SetEntityAsMissionEntity( vehicle, false, true )
