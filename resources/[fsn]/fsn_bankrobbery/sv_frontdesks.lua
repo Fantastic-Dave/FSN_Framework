@@ -114,6 +114,7 @@ AddEventHandler('fsn_bankrobbery:desks:endHack', function(bank, board, state)
 	if state then
 		-- hacking was successful
 		computer['robbed'] = 'hacked'
+		TriggerClientEvent('fsn_bank:change:bankAdd', source, computer['payout'])
 		TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'success', text = 'You hacked the device and wired $'..computer['payout']..' to your account.' })
 	else
 		-- hacking was failed, allow retry with hacking kit
