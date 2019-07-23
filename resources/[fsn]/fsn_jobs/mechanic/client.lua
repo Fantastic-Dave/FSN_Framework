@@ -144,29 +144,29 @@ end)
 
  
  -- Inspection and Repair for Mechanics Chat Commands \\ Debug
- RegisterCommand('vehinspect', function(source, args)
-    if ismech == true then
+RegisterCommand('vehinspect', function(source, args)
+  if ismech == true then
    if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
-   local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
-     for item_name in pairs(vehicleDecors) do
-       local decorInt = DecorGetInt(GetVehiclePedIsIn(GetPlayerPed(-1), false), vehicleDecors[item_name].damage)
-       TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, item_name..' is '..decorInt.."%")
-       end
-     end
+      local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+      for item_name in pairs(vehicleDecors) do
+      local decorInt = DecorGetInt(GetVehiclePedIsIn(GetPlayerPed(-1), false), vehicleDecors[item_name].damage)
+      TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, item_name..' is '..decorInt.."%")
+      end
     end
- end, false)
+  end
+end, false)
  
- RegisterCommand('vehrepair', function(source, args)
-    if ismech == true then
+RegisterCommand('vehrepair', function(source, args)
+  if ismech == true then
    local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
    local decorArgs = args[1]
    for item_name in pairs(vehicleDecors) do
    if args[1] == vehicleDecors[item_name].name then decorArgs = vehicleDecors[item_name].damage
-     mechanicRepair(decorArgs)
-         end
-       end
-      end
- end, false)
+    mechanicRepair(decorArgs)
+   end
+   end
+  end
+end, false)
 
 function mechanicRepair(part)
     local playerPed = GetPlayerPed(-1)

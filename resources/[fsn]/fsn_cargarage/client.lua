@@ -457,19 +457,18 @@ Citizen.CreateThread(function()
 						if IsControlJustPressed(1, 18) then
 							if not fsn_IsVehicleOwner(vehicle) then
 								TriggerEvent('fsn_notify:displayNotification', 'You do not own this vehicle.', 'centerLeft', 4000, 'error')
-						else
+							else
 							if grg.type == 'aircrafts' then	
-								if GetVehicleClass(vehicle) == 15 then -- or GetVehicleClass(vehicle) == 16 then
+								if GetVehicleClass(vehicle) == 15 then or GetVehicleClass(vehicle) == 16 then
 									despawn = true
-									TriggerEvent('fsn_notify:displayNotification', 'testing', 'centerLeft', 4000, 'error')
 								else
-								TriggerEvent('fsn_notify:displayNotification', 'INVALID: Aircraft Garage', 'centerLeft', 4000, 'error')
+									TriggerEvent('fsn_notify:displayNotification', 'INVALID: Aircraft Garage', 'centerLeft', 4000, 'error')
 								end
 							elseif grg.type == 'boats' then
 								if GetVehicleClass(vehicle) == 14 then
 									despawn = true
 								else
-								TriggerEvent('fsn_notify:displayNotification', 'INVALID: Boats Garage', 'centerLeft', 4000, 'error')
+									TriggerEvent('fsn_notify:displayNotification', 'INVALID: Boats Garage', 'centerLeft', 4000, 'error')
 								end
 							elseif grg.type == 'cars' then
 								if GetVehicleClass(vehicle) == 14 or GetVehicleClass(vehicle) == 15 or GetVehicleClass(vehicle) == 16 then
@@ -480,12 +479,12 @@ Citizen.CreateThread(function()
 						end		
 							
 							if despawn == true then
-							local deets = getCarDetails(vehicle)
-							TriggerServerEvent('fsn_garages:vehicle:update', deets)
-							SetEntityAsMissionEntity( vehicle, false, true )
-							TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', GetVehicleNumberPlateText(vehicle), 0, key)
-							Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( vehicle ) )
-							despawn = false
+								local deets = getCarDetails(vehicle)
+								TriggerServerEvent('fsn_garages:vehicle:update', deets)
+								SetEntityAsMissionEntity( vehicle, false, true )
+								TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', GetVehicleNumberPlateText(vehicle), 0, key)
+								Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( vehicle ) )
+								despawn = false
 							end
 
 					end
