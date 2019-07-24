@@ -464,7 +464,7 @@ Citizen.CreateThread(function()
 								TriggerEvent('fsn_notify:displayNotification', 'You do not own this vehicle.', 'centerLeft', 4000, 'error')
 							else
 							if grg.type == 'aircrafts' then	
-								if GetVehicleClass(vehicle) == 15 then or GetVehicleClass(vehicle) == 16 then
+								if GetVehicleClass(vehicle) == 15 or GetVehicleClass(vehicle) == 16 then
 									despawn = true
 								else
 									TriggerEvent('fsn_notify:displayNotification', 'INVALID: Aircraft Garage', 'centerLeft', 4000, 'error')
