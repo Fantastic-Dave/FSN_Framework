@@ -522,3 +522,7 @@ Citizen.CreateThread(function()
 		saveApartment()
 	end
 end)
+
+RegisterNUICallback('escape', function(data, cb) -- NUI to close menu on ESCAPE key pressed.
+	ToggleActionMenu()
+end)

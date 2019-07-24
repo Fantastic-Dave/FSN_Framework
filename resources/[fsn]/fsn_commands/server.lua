@@ -42,6 +42,9 @@ local pd_cars = {
   [105] = "state10",
   [106] = "state14",
   [107] = "1raptor",
+  [108] = "pdbike",
+  [109] = "pbus",
+  [110] = "Predator",	
   --------------------
   -- UNMARKED
   --------------------
@@ -308,6 +311,7 @@ local nineoneones = {}
 local nineoneone = 0
 AddEventHandler('chatMessage', function(source, auth, msg)
   local split = fsn_SplitString(string.lower(msg), ' ')
+  local origSplit = fsn_SplitString(msg, ' ')
   TriggerEvent('fsn_main:logging:addLog', source, 'chat', 'Player('..source..') ran command: '..msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- NEWS COMMANDS
@@ -416,7 +420,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/911' then
     local char = getCharacter(source)
     local at = char.char_fname..' '..string.sub(char.char_lname, 1, 1)
-    local msg = table.concat(split, " ", 2, #split)
+    local msg = table.concat(origSplit, " ", 2, #origSplit)
     nineoneone = nineoneone + 1
     table.insert(nineoneones, nineoneone, source)
     TriggerClientEvent('fsn_emotecontrol:phone:call1', source)
@@ -429,7 +433,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
       local char = getCharacter(source)
       local at = char.char_fname..' '..string.sub(char.char_lname, 1, 1)
       local src = nineoneones[tonumber(split[2])]
-      local msg = table.concat(split, " ", 3, #split)
+      local msg = table.concat(origSplit, " ", 3, #origSplit)
       if src then
         TriggerClientEvent('chatMessage', src, '', {255,255,255}, '^*^1 911 Responder |^r^0 '..msg)
         TriggerClientEvent('fsn_police:911r', -1, split[2], at, msg)
@@ -497,7 +501,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 	end
   end
   if split[1] == '/ooc' or split[1] == '/looc' then
-    local action = table.concat( split, ' ', 2, #split )
+    local action = table.concat( origSplit, ' ', 2, #origSplit )
     TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*ooc '..GetPlayerName(source)..'#'..source..' | ^r'.. action)
   end
   if split[1] == '/tweet' or split[1] == '/twt' then
@@ -510,7 +514,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
       at = char.char_twituname
       --at = 'removed' --char.char_twituname
 	end
-    local tweet = table.concat( split, ' ', 2, #split )
+    local tweet = table.concat( origSplit, ' ', 2, #origSplit )
     TriggerClientEvent('chatMessage', -1, ':tweet: @'..at, {6, 213, 224}, tweet)
   end
   -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -857,7 +861,8 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 			end
 		end
 		if split[2] == 'mdt' then
-			TriggerClientEvent('fsn_police:MDT:toggle', source)
+			TriggerClientEvent('fsn_police:MDT:toggle', source
+			TriggerClientEvent('fsn_emotecontrol:police:tablet', source, "open")
 		  end
 		if split[2] == 'gsr' then
 			TriggerClientEvent('fsn_commands:police:gsrMe', tonumber(split[3]), source)

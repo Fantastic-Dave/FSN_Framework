@@ -128,7 +128,9 @@ Citizen.CreateThread(function()
   end
 end)
 
-  vehicleDecors = {
+
+-- Volagn Mechanic Decor inspect/repair. Commented out for now.
+--[[  vehicleDecors = {
     ["Fuel Level"] = {damage = 'fuelLevel', name ="FuelLevel"},
     ["Electronics"] = {damage = 'vehDMG:electronics', name ="Electronics"},
     ["Clutch"] = {damage = 'vehDMG:clutch', name ="Clutch"},
@@ -144,36 +146,36 @@ end)
 
  
  -- Inspection and Repair for Mechanics Chat Commands \\ Debug
- RegisterCommand('vehinspect', function(source, args)
-    if ismech == true then
+RegisterCommand('vehinspect', function(source, args)
+  if ismech == true then
    if IsPedInAnyVehicle(GetPlayerPed(-1), false) then
-   local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
-     for item_name in pairs(vehicleDecors) do
-       local decorInt = DecorGetInt(GetVehiclePedIsIn(GetPlayerPed(-1), false), vehicleDecors[item_name].damage)
-       TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, item_name..' is '..decorInt.."%")
-       end
-     end
-    end
- end, false)
- 
- RegisterCommand('vehrepair', function(source, args)
-    if ismech == true then
-   local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
-   local decorArgs = args[1]
-   for item_name in pairs(vehicleDecors) do
-   if args[1] == vehicleDecors[item_name].name then decorArgs = vehicleDecors[item_name].damage
-     mechanicRepair(decorArgs)
-         end
-       end
+      local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+      for item_name in pairs(vehicleDecors) do
+      local decorInt = DecorGetInt(GetVehiclePedIsIn(GetPlayerPed(-1), false), vehicleDecors[item_name].damage)
+      TriggerEvent('chatMessage', '^1DEBUG', {255, 255, 255}, item_name..' is '..decorInt.."%")
       end
- end, false)
+    end
+  end
+end, false)
+ 
+RegisterCommand('vehrepair', function(source, args)
+  if ismech == true then
+    local vehicle = GetVehiclePedIsIn(GetPlayerPed(-1), false)
+    local decorArgs = args[1]
+    for item_name in pairs(vehicleDecors) do
+  if args[1] == vehicleDecors[item_name].name then decorArgs = vehicleDecors[item_name].damage
+     mechanicRepair(decorArgs)
+    end
+  end
+  end
+end, false)
 
 function mechanicRepair(part)
-    local playerPed = GetPlayerPed(-1)
-    local playerPos = GetEntityCoords(playerPed, 1)
-    local coordA = GetEntityCoords(GetPlayerPed(-1), 1)
-    local coordB = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0.0, 1.0, 0.0)
-    local vehiclePos = getVehicleInDirection(coordA, coordB)
+  local playerPed = GetPlayerPed(-1)
+  local playerPos = GetEntityCoords(playerPed, 1)
+  local coordA = GetEntityCoords(GetPlayerPed(-1), 1)
+  local coordB = GetOffsetFromEntityInWorldCoords(GetPlayerPed(-1), 0.0, 1.0, 0.0)
+  local vehiclePos = getVehicleInDirection(coordA, coordB)
     if vehiclePos ~= nil then
       if DoesEntityExist(vehiclePos) and IsEntityAVehicle(vehiclePos) then
         if GetDistanceBetweenCoords(coordB, playerPos, 1) <= 4 then
@@ -239,4 +241,4 @@ function mechanicRepair(part)
       local rayHandle = CastRayPointToPoint(coordFrom.x, coordFrom.y, coordFrom.z, coordTo.x, coordTo.y, coordTo.z, 10, GetPlayerPed(-1), 0)
       local _, _, _, _, vehicle = GetRaycastResult(rayHandle)
       return vehicle
-  end
+  end --]]

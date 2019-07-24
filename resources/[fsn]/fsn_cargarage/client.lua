@@ -19,6 +19,10 @@ local garages = {
 		type = 'cars',
 		blip = 50,
 	},
+	["Power St"] = {
+		pos = {x = 281.83306884766, y = -191.12803649902, z = 61.570701599121, h = 251.31350708008},
+		type = 'cars',
+		blip = 50,
 	["East Galelio"] = {
 		pos = {x = -404.83190917969, y = 1229.9833984375, z = 325.20980834961, h = 295.19909667969},
 		type = 'cars',
@@ -455,13 +459,40 @@ Citizen.CreateThread(function()
 						AddTextComponentString("Press ~INPUT_CELLPHONE_SELECT~ to ~r~return~w~ your vehicle")
 						DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 						if IsControlJustPressed(1, 18) then
-							local deets = getCarDetails(vehicle)
-							TriggerServerEvent('fsn_garages:vehicle:update', deets)
-							SetEntityAsMissionEntity( vehicle, false, true )
-							TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', GetVehicleNumberPlateText(vehicle), 0, key)
-							Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( vehicle ) )
+							if not fsn_IsVehicleOwner(vehicle) then
+								TriggerEvent('fsn_notify:displayNotification', 'You do not own this vehicle.', 'centerLeft', 4000, 'error')
+							else
+							if grg.type == 'aircrafts' then	
+								if GetVehicleClass(vehicle) == 15 then or GetVehicleClass(vehicle) == 16 then
+									despawn = true
+								else
+									TriggerEvent('fsn_notify:displayNotification', 'INVALID: Aircraft Garage', 'centerLeft', 4000, 'error')
+								end
+							elseif grg.type == 'boats' then
+								if GetVehicleClass(vehicle) == 14 then
+									despawn = true
+								else
+									TriggerEvent('fsn_notify:displayNotification', 'INVALID: Boats Garage', 'centerLeft', 4000, 'error')
+								end
+							elseif grg.type == 'cars' then
+								if GetVehicleClass(vehicle) == 14 or GetVehicleClass(vehicle) == 15 or GetVehicleClass(vehicle) == 16 then
+									TriggerEvent('fsn_notify:displayNotification', 'INVALID: Car Garage', 'centerLeft', 4000, 'error')	
+							else
+								despawn = true
+							end	
+						end		
 							
-						end
+							if despawn == true then
+								local deets = getCarDetails(vehicle)
+								TriggerServerEvent('fsn_garages:vehicle:update', deets)
+								SetEntityAsMissionEntity( vehicle, false, true )
+								TriggerServerEvent('fsn_cargarage:vehicle:toggleStatus', GetVehicleNumberPlateText(vehicle), 0, key)
+								Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( vehicle ) )
+								despawn = false
+							end
+
+					end
+				end
 					else
 						SetTextComponentFormat("STRING")
 						AddTextComponentString("Press ~INPUT_PICKUP~ to view your garage")

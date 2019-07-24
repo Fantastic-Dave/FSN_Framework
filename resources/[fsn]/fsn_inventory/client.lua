@@ -275,21 +275,25 @@ AddEventHandler('fsn_inventory:item:drop', function(item)
   if inventory[item] then
     Citizen.CreateThread(function()
   		local editOpen = true
-  		DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8S", "", "", "", "", "", 64)
-  		while UpdateOnscreenKeyboard() == 0 or editOpen do
-  			if UpdateOnscreenKeyboard() == 1 then
-  				editOpen = false
-  				qty = GetOnscreenKeyboardResult()
+      DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8S", "", "", "", "", "", 64)
+      while UpdateOnscreenKeyboard() == 0 or editOpen do
+        if UpdateOnscreenKeyboard() == 2 then
+          qty = 0
+          editOpen = false
+          inventory[item] = inventory[item]
+        elseif UpdateOnscreenKeyboard() == 1 then
+          editOpen = false
+          qty = GetOnscreenKeyboardResult()
           if qty == 'all' then
             qty = math.floor(fsn_GetItemAmount(item))
           else
             if tonumber(qty) then
               qty = math.floor(tonumber(qty))
-			  if qty < 1 or qty > 100 then
-				TriggerEvent('fsn_notify:displayNotification', 'issue with input', 'centerLeft', 3000, 'error')
-				return
-			  end
-            else
+			      if qty < 1 or qty > 100 then
+				      TriggerEvent('fsn_notify:displayNotification', 'issue with input', 'centerLeft', 3000, 'error')
+				    return
+            end
+          else
               TriggerEvent('fsn_notify:displayNotification', 'Enter an amount or "all"', 'centerLeft', 3000, 'error')
             end
           end

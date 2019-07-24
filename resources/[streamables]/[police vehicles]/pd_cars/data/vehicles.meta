@@ -517,7 +517,7 @@
         <Item>
             <modelName>state5</modelName>
             <txdName>state5</txdName>
-            <handlingId>SCHAFTER3</handlingId>
+            <handlingId>POLICE</handlingId>
             <gameName>state5</gameName>
             <vehicleMakeName />
             <expressionDictName>null</expressionDictName>
@@ -526,7 +526,7 @@
             <animConvRoofName>null</animConvRoofName>
             <animConvRoofWindowsAffected />
             <ptfxAssetName>null</ptfxAssetName>
-            <audioNameHash>WINDSOR</audioNameHash>
+            <audioNameHash>BUFFALO</audioNameHash>
             <layout>LAYOUT_STANDARD</layout>
             <coverBoundOffsets>BUFFALO_COVER_OFFSET_INFO</coverBoundOffsets>
             <explosionInfo>EXPLOSION_INFO_DEFAULT</explosionInfo>
@@ -647,7 +647,7 @@
         <Item>
             <modelName>state6</modelName>
             <txdName>state6</txdName>
-            <handlingId>POLICE3</handlingId>
+            <handlingId>POLICET</handlingId>
             <gameName>state6</gameName>
             <vehicleMakeName />
             <expressionDictName>null</expressionDictName>
@@ -777,7 +777,7 @@
         <Item>
             <modelName>state7</modelName>
             <txdName>state7</txdName>
-            <handlingId>fbi2</handlingId>
+            <handlingId>POLICE3</handlingId>
             <gameName>state7</gameName>
             <vehicleMakeName />
             <expressionDictName>null</expressionDictName>
@@ -900,7 +900,7 @@
         <Item>
             <modelName>state9</modelName>
             <txdName>state9</txdName>
-            <handlingId>PRANGER</handlingId>
+            <handlingId>POLICE3</handlingId>
             <gameName>POLICE</gameName>
             <vehicleMakeName />
             <expressionDictName>null</expressionDictName>
@@ -1033,7 +1033,7 @@
         <Item>
             <modelName>state10</modelName>
             <txdName>state10</txdName>
-            <handlingId>PRANGER</handlingId>
+            <handlingId>POLICE3</handlingId>
             <gameName>state10</gameName>
             <vehicleMakeName />
             <expressionDictName>null</expressionDictName>
@@ -1545,7 +1545,7 @@
 	<Item>
       <modelName>state14</modelName>
       <txdName>state14</txdName>
-      <handlingId>BALLER2</handlingId>
+      <handlingId>POLICE2</handlingId>
       <gameName>state14</gameName>
       <vehicleMakeName />
       <expressionDictName>null</expressionDictName>

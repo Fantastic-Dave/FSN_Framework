@@ -150,3 +150,10 @@ function sendData( name, data ) {
         }            
     } );
 }
+
+// Close menu on ESCAPE key pressed
+document.onkeyup = function (data) {
+	if (data.which == 27) { // Escape key
+		$.post('http://fsn_apartments/escape', JSON.stringify({}));
+	}
+};

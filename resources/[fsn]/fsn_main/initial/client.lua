@@ -239,7 +239,7 @@ end)
 NetworkSetFriendlyFireOption(true)
 SetCanAttackFriendly(GetPlayerPed(-1), true, true)
 ------------------------------------------------------------- character changer
-local function char_change_timeout()
+--[[llocal function char_change_timeout()
 	local when = GetGameTimer() + 30*1000
 	while not IsControlJustPressed(0,177) do
 		local left = when-GetGameTimer()
@@ -281,7 +281,7 @@ Util.Tick(function()
 	end
 end)
 
---[[local char_changer = vector3(-219.72131347656, -1054.1688232422, 30.14019203186)
+ocal char_changer = vector3(-219.72131347656, -1054.1688232422, 30.14019203186)
 local midswap = false
 local swapstart = 0
 Citizen.CreateThread(function()
