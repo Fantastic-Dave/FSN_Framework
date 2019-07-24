@@ -1,0 +1,81 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.top-bar {
+    position: absolute;
+    height: 6%;
+    width: 14%;
+    bottom: 51.5%;
+    right: 4.7%;
+    /* size: 50%; */
+    border-radius: 6%;
+    border-radius: 7.5% 7.5% 6% 6%;
+    background-size: 100%;
+    background-image: url('../../img/Apple/log-inBackground.png');
+    box-shadow: 0 0 5px 0 #00000088;
+    z-index: -1;
+}
+
+.feed-bg {
+    position: absolute;
+    height: 50%;
+    width: 14%;
+    bottom: 4.7%;
+    right: 4.7%;
+    /* size: 50%; */
+    border-radius: 6%;
+    border-radius: 7.5% 7.5% 7.5% 7.5%;
+    background-size: 100%;
+    background-image: url('../../img/Apple/feedgrey.png');
+    z-index: -2;
+	overflow-y: auto;
+}
+
+.t-logo {
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    margin-bottom: 0;
+    margin-left: 44%;
+    margin-top: 13%;
+    background-size: 55%;
+    background-repeat: no-repeat;
+    background-image: url('../../img/Apple/twitterlogo.png');
+}
+
+.postBase {
+    width: 14%;
+    height: 14%;
+    position: fixed;
+    bottom: 36.9%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url('../../img/Apple/tweetrectangle.png');
+    z-index: -1;
+}
+
+.tweetBase {
+	width:100%;
+	background-color:white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 5px;
+}
+
+.tweetBase:first-child, :not(.tweetBase) + .tweetBase {
+	margin-top: 40px;
+}
+
+.tweetIcon {
+	height: 100%;
+	float:left;
+	width: 25%;
+}
+
+.tweetTextArea {
+	height: 100%;
+	float:left;
+	width: 75%;
+}
