@@ -207,3 +207,14 @@ AddEventHandler('fsn_carstore:floor:color:Two', function(col)
 		end
 	end
 end)
+
+Citizen.CreateThread(function()
+	local blip = AddBlipForCoord(-45.805393218994, -1098.3745117188, 26.422348022461) -- Chapman Motors
+	SetBlipSprite(blip, 225)
+	SetBlipAsShortRange(blip, true)
+	SetBlipScale(blip, 0.9)
+	BeginTextCommandSetBlipName("STRING")
+	AddTextComponentString("Chapman Motors")
+	EndTextCommandSetBlipName(blip)
+	Citizen.Wait(0)
+end)
