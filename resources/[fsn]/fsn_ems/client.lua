@@ -34,6 +34,7 @@ end)
 currenttime = 0
 local deathtime = currenttime
 local amidead = false
+local canRespawn = false
 
 function fsn_IsDead()
   return amidead
@@ -109,54 +110,23 @@ Citizen.CreateThread(function()
       SetPedToRagdoll(GetPlayerPed(-1), 1, 1000, 0, 0, 0, 0)
       local def = deathtime + 300
       if def > currenttime then
-        drawTxt('Wait '..tostring(def - currenttime)..' seconds to respawn ~b~||~w~ Wait for EMS',4,1,0.5,0.35,0.6,255,255,255,255)
-        drawTxt('~r~DO NOT USE ANY MECHANICS WHILST DOWN, YOU CAN TALK',4,1,0.5,0.25,0.6,255,255,255,255)
+       -- (text,font,centre,x,y,scale,r,g,b,a)
+        drawTxt('Wait '..tostring(def - currenttime)..' seconds to airlift ~b~||~w~ Wait for EMS',4,1,0.5,0.90,0.6,255,255,255,255)
+        drawTxt('~r~DO NOT USE ANY MECHANICS WHILST DOWN, YOU CAN TALK',4,1,0.5,0.20,0.6,255,255,255,255)
       else
         if #onduty_ems > 0 then
-          drawTxt('Press [E] to respawn ($5000)',4,1,0.5,0.35,0.6,255,255,255,255)
+          drawTxt('Type /airlift to airlift out ($5000)',4,1,0.5,0.90,0.6,255,255,255,255)
+          canRespawn = true
         else
-          drawTxt('Press [E] to respawn (~b~FREE~w~)',4,1,0.5,0.35,0.6,255,255,255,255)
+          drawTxt('Type /airlift to airlift out (~b~FREE~w~)',4,1,0.5,0.90,0.6,255,255,255,255)
+          canRespawn = true
         end
-        drawTxt('~r~DO NOT RESPAWN IN A ROLEPLAY SITUATION',4,1,0.5,0.25,0.6,255,255,255,255)
-        if IsControlJustPressed(1, 38) then -- E
-          DoScreenFadeOut(200)
-          TriggerEvent('fsn_bank:change:bankandwallet', 0, false)
-          TriggerEvent('fsn_inventory:empty')
-          local hospital = {
-            {x = 337.21597290039, y = -1396.1442871094, z = 32.5090675354},
-            {x = 355.52011108398, y = -598.32464599609, z = 28.774812698364},
-            {x = 1839.5141601563, y = 3672.0124511719, z = 34.276752471924},
-            {x = -246.84455871582, y = 6331.107421875, z = 32.426181793213}
-          }
-          hospital = hospital[math.random(1, #hospital)]
-          amidead = false
-          deathtime = 0
-          NetworkResurrectLocalPlayer(hospital.x, hospital.y, hospital.z, 0, false, false)
-          TriggerEvent('fsn_inventory:use:drink', 100)
-          TriggerEvent('fsn_inventory:use:food', 100)
-          Citizen.Wait(2000)
-          DoScreenFadeIn(1500)
-          if #onduty_ems > 0 then
-            TriggerEvent('fsn_bank:change:bankMinus', 5000)
-            TriggerEvent("pNotify:SendNotification", {text = "You have been charged $5000 for medical bills.",
-                layout = "centerRight",
-                timeout = 5000,
-                progressBar = true,
-                type = "info",
-            })
-          else
-            TriggerEvent("pNotify:SendNotification", {text = "The Government will pay for your medical bills.",
-                layout = "centerRight",
-                timeout = 5000,
-                progressBar = true,
-                type = "info",
-            })
-          end
-        end
+        drawTxt('~r~DO NOT AIRLIFT IN AN ACTIVE SCENARIO',4,1,0.5,0.20,0.6,255,255,255,255)
       end
     end
   end
 end)
+
 -- thread to check if im dead
 Citizen.CreateThread(function()
   while true do
@@ -164,6 +134,48 @@ Citizen.CreateThread(function()
     currenttime = currenttime + 1
   end
 end)
+
+function fsn_Airlift()
+  if amidead and canRespawn == true then
+    canRespawn = false
+    DoScreenFadeOut(200)
+    TriggerEvent('fsn_bank:change:bankandwallet', 0, false)
+    TriggerEvent('fsn_inventory:empty')
+    local hospital = {
+      {x = 337.21597290039, y = -1396.1442871094, z = 32.5090675354},
+      {x = 355.52011108398, y = -598.32464599609, z = 28.774812698364},
+      {x = 1839.5141601563, y = 3672.0124511719, z = 34.276752471924},
+      {x = -246.84455871582, y = 6331.107421875, z = 32.426181793213}
+    }
+    hospital = hospital[math.random(1, #hospital)]
+    amidead = false
+    deathtime = 0
+    NetworkResurrectLocalPlayer(hospital.x, hospital.y, hospital.z, 0, false, false)
+    TriggerEvent('fsn_inventory:use:drink', 100)
+    TriggerEvent('fsn_inventory:use:food', 100)
+    TriggerEvent('mythic_hospital:client:ResetLimbs') -- reset limbs/limp
+    TriggerEvent('mythic_hospital:client:RemoveBleed') -- remove bleed
+    Citizen.Wait(2000)
+    DoScreenFadeIn(1500)
+    ClearPedBloodDamage(GetPlayerPed(-1))
+    if #onduty_ems > 0 then
+      TriggerEvent('fsn_bank:change:bankMinus', 5000)
+      TriggerEvent("pNotify:SendNotification", {text = "You have been charged $5000 for medical bills.",
+        layout = "centerRight",
+        timeout = 5000,
+        progressBar = true,
+        type = "info",
+      })
+    else
+      TriggerEvent("pNotify:SendNotification", {text = "The Government will pay for your medical bills.",
+        layout = "centerRight",
+        timeout = 5000,
+        progressBar = true,
+        type = "info",
+      })
+    end
+  end
+end
 
 ------------------------------------------------- EMS system
 amiems = false

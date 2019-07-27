@@ -11,4 +11,5 @@ exports({
   'fsn_IsDead',
   'fsn_EMSDuty',
   'fsn_getEMSLevel',
+  'fsn_Airlift',
 })
