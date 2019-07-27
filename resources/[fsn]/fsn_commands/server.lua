@@ -864,9 +864,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 			end
 		end
 		if split[2] == 'mdt' then
-			TriggerClientEvent('fsn_police:MDT:toggle', source
+			TriggerClientEvent('fsn_police:MDT:toggle', source)
 			TriggerClientEvent('fsn_emotecontrol:police:tablet', source, "open")
-		  end
+		end
 		if split[2] == 'gsr' then
 			TriggerClientEvent('fsn_commands:police:gsrMe', tonumber(split[3]), source)
 		end
