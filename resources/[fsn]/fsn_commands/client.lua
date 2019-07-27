@@ -241,6 +241,11 @@ AddEventHandler('fsn_commands:sendxyz', function()
   TriggerServerEvent('fsn_commands:printxyz', x, y, z, GetEntityHeading(GetPlayerPed(-1)))
 end)
 
+
+RegisterNetEvent('fsn_commands:airlift')
+AddEventHandler('fsn_commands:airlift', function()
+	exports.fsn_ems:fsn_Airlift()
+end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- DEV COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------

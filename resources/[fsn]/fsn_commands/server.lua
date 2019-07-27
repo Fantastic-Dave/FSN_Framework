@@ -517,6 +517,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     local tweet = table.concat( origSplit, ' ', 2, #origSplit )
     TriggerClientEvent('chatMessage', -1, ':tweet: @'..at, {6, 213, 224}, tweet)
   end
+  if split[1] == '/airlift' then
+    TriggerClientEvent('fsn_commands:airlift', source)
+  end
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- MISC COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
