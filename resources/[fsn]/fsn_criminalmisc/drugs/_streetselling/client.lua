@@ -126,7 +126,8 @@ Citizen.CreateThread(function()
 				local obj = getPed()--fsn_FindNearbyPed(1.5)
 				if obj and IsPedHuman(obj) and not table.contains(sold_peds, obj) and not IsEntityDead(obj) and not IsPedAPlayer(obj) then
 					if not selling then
-						fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '[~g~E~w~] Sell ~b~'..drug)
+						if IsControlPressed(0, 19) then
+							fsn_drawText3D(GetEntityCoords(obj).x, GetEntityCoords(obj).y, GetEntityCoords(obj).z, '[~g~E~w~] Sell ~b~'..drug)
 						if IsControlJustPressed(0, 38) then
 							if math.random(1,100) > areas[myarea].callpercentage then
 								local pos = GetEntityCoords(obj)
@@ -158,6 +159,7 @@ Citizen.CreateThread(function()
 							  table.insert(sold_peds, #sold_peds+1, {obj, true})
 							end
 						end
+					end
 					else
 						local selltime = startsale + 9
 						if selltime > curtime then
