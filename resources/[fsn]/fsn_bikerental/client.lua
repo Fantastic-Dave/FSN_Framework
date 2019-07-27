@@ -12,9 +12,6 @@ DecorRegister("bikeRental:rented", 3)
 
 
 Citizen.CreateThread(function()
-        local playerPed = GetPlayerPed(-1)
-        local playerPos = GetEntityCoords(playerPed, 1)
-
         for _, v in pairs(bikeRentalCoords) do
             v.blip = AddBlipForCoord(v.x, v.y, v.z)
             SetBlipSprite(v.blip, 226)
@@ -28,6 +25,8 @@ Citizen.CreateThread(function()
             while true do
                 Citizen.Wait(0)
                 for k, v in pairs(bikeRentalCoords) do
+                    local playerPed = GetPlayerPed(-1)
+                    local playerPos = GetEntityCoords(playerPed, 1)
 
             if GetDistanceBetweenCoords(v.x, v.y, v.z, playerPos, 1) <= 2 then
                 if not IsPedInAnyVehicle(playerPed, false) then
