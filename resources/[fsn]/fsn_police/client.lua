@@ -129,9 +129,9 @@ local clockInStations = {
   },
   {
     name = "Blaine County Sheriff's Office",
-    x = -450.69024658203,
-    y = 6011.1479492188,
-    z = 31.716394424438
+    x = -437.44024658203,
+    y = 6003.3479492188,
+    z = 31.720394424438
   }
 }
 local armoryStations = {
@@ -149,9 +149,9 @@ local armoryStations = {
   },
   {
     name = "Blaine County Armory",
-    x = -447.37493896484,
-    y = 6007.7734375,
-    z = 31.716390609741
+    x = -438.38093896484,
+    y = 6001.0734375,
+    z = 31.720390609741
   }
 }
 
