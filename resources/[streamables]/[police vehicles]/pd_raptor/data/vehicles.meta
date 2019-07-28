@@ -6,8 +6,8 @@
   	<Item>
       <modelName>1raptor</modelName>
       <txdName>1raptor</txdName>
-      <handlingId>POLICE2</handlingId>
-      <gameName>1raptor</gameName>
+      <handlingId>RAPTOR</handlingId>
+      <gameName>Ford Raptor</gameName>
       <vehicleMakeName />
       <expressionDictName>null</expressionDictName>
       <expressionName>null</expressionName>
