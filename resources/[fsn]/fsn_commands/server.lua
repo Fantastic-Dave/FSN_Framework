@@ -46,7 +46,7 @@ local pd_cars = {
   [109] = "cvpi",
   [110] = "pdbike",
   [111] = "pbus",
-  [112] = "PoliceT"
+  [112] = "PoliceT",
   [113] = "Predator",	
   --------------------
   -- UNMARKED
