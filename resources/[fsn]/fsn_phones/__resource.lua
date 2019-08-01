@@ -3,7 +3,7 @@ resource_manifest_version "05cfa83c-a124-4cfa-a768-c24a5811d8f9"
 -- gui stuffs
 ui_page 'html/index.html'
 
-files({ -- nice big table of files required for the interface
+files({
 	-- main stuff
 	'html/index.html', 
 	'html/index.css', -- ALl this has in it is the Div class for the Phone Frame along with the Wifi,Battery, and Time.
@@ -30,11 +30,11 @@ files({ -- nice big table of files required for the interface
 	'html/pages_css/iphone/contacts.css',
 	'html/pages_css/iphone/email.css',
 	'html/pages_css/iphone/fleeca.css',
-	'html/pages_css/iphone/home.css', --Complete 
+	'html/pages_css/iphone/home.css', 
 	'html/pages_css/iphone/messages.css',
 	'html/pages_css/iphone/pay.css',
 	'html/pages_css/iphone/phone.css',
-	'html/pages_css/iphone/twitter.css', -- Work In-Progess
+	'html/pages_css/iphone/twitter.css', 
 	'html/pages_css/iphone/whitelists.css',
 	
 	--Home Icons
@@ -48,6 +48,7 @@ files({ -- nice big table of files required for the interface
 	'html/img/Apple/Ads.png',
 	'html/img/Apple/Mail.png',
 	'html/img/Apple/Whitelist.png',
+	'html/img/Apple/Noti.png',
 	'html/img/Apple/Fleeca.png',
 	
 	--Phone Info
@@ -55,13 +56,19 @@ files({ -- nice big table of files required for the interface
 	'html/img/Apple/battery.png',
 	'html/img/Apple/signal.png',
 	
-	--Twitter Assets
-	'html/img/Apple/twitterlogo.png',
-	'html/img/Apple/feedgrey.png',
-	'html/img/Apple/tweetrectangle.png',
-	'html/img/Apple/log-inBackground.png',
+	--Banner Assets
+	'html/img/Apple/banner_icons/adverts.png',
+	'html/img/Apple/banner_icons/call.png',
+	'html/img/Apple/banner_icons/contacts.png',
+	'html/img/Apple/banner_icons/fleeca.png',
+	'html/img/Apple/banner_icons/mail.png',
+	'html/img/Apple/banner_icons/messages.png',
+	'html/img/Apple/banner_icons/twitter.png',
+	'html/img/Apple/banner_icons/wallet.png',
+	'html/img/Apple/banner_icons/wl.png',
 
 })
 
 client_script 'cl_phone.lua'
+server_script '@mysql-async/lib/MySQL.lua'
 server_script 'sv_phone.lua'

@@ -20,7 +20,7 @@ ui_page('client/html/index.html')
 -- DON'T FORGET TO ADD THE SOUND FILES TO THIS!
 files({
     'client/html/index.html',
-    'client/html/sounds/demo.ogg',
-    'client/html/sounds/fsn_phonecall.ogg',
-    'client/html/sounds/fsn_textmessage.ogg',
+    -- Begin Sound Files Here...
+    -- client/html/sounds/ ... .ogg
+    'client/html/sounds/demo.ogg'
 })

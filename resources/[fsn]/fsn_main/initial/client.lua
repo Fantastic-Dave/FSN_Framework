@@ -190,7 +190,7 @@ AddEventHandler('fsn_main:initiateCharacter', function(char)
   TriggerEvent('fsn_bank:change:bankAdd', 0)
   TriggerEvent('fsn_ems:reviveMe:force')
 
-  TriggerEvent('chatMessage', '', {255,255,255}, '^1^*Warning:^r This is a beta release of the :FSN: Framework. We aren\'t expecting any bugs, but those that are found should be reported via dm to JamesSc0tt on discord or the forums.')
+  --TriggerEvent('chatMessage', '', {255,255,255}, '^1^*Warning:^r This is a beta release of the :FSN: Framework. We aren\'t expecting any bugs, but those that are found should be reported via dm to JamesSc0tt on discord or the forums.')
   TriggerServerEvent('fsn_apartments:getApartment', char.char_id)
 end)
 
