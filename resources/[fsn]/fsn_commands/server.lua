@@ -475,9 +475,11 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   end
   if split[1] == '/phone' or split[1] == '/p' then
     TriggerClientEvent('fsn_phone:togglePhone', source)
+    TriggerClientEvent('fsn_phones:USE:Phone', source)
   end
   if split[1] == '/phonenumber' or split[1] == '/pn' then
     TriggerClientEvent('fsn_phone:displayNumber', source)
+    TriggerClientEvent('fsn_phones:UTIL:displayNumber', source)
   end
   if split[1] == '/sit' or split[1] == '/s' then
     TriggerClientEvent('fsn_emotecontrol:sit', source)
