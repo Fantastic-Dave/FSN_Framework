@@ -129,7 +129,7 @@ end
 function fsn_GetPlayerFromPhoneNumber(num)
   local idee = 0
   for k, v in pairs(cur_chars) do
-    if v.char_phone == tonumber(num) then
+    if v.char_phone == num then
       idee = v.ply_id
     end
   end
@@ -150,7 +150,7 @@ RegisterServerEvent('fsn_main:updateCharNumber')
 AddEventHandler('fsn_main:updateCharNumber', function(charid, number)
   for k, v in pairs(cur_chars) do
     if v.char_id == tonumber(charid) then
-      v.char_phone = tonumber(number)
+      v.char_phone = number
       print(v.char_id..' updated phone number to: '..v.char_phone)
     end
   end
