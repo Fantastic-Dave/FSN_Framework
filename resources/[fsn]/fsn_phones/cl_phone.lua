@@ -1,5 +1,5 @@
 -- datastores
-local dbug = true -- set to false to remove all default data from the datastore
+local dbug = false -- set to false to remove all default data from the datastore
 local myUsername = 'unset'
 local myNumber = '000-000-000'
 local myName = 'nothing nothing'
@@ -33,10 +33,10 @@ end)
 function init() -- function to check if the character has init'd
 	if myNumber == '000-000-000' then
 		exports['mythic_notify']:DoCustomHudText('error', 'init() == false - head to life invader to get a phone number', 4000)
-		return true -- change to false before live
+		return false -- change to false before live
 	elseif myUsername == 'unset'  then
 		exports['mythic_notify']:DoCustomHudText('error', 'init() == false - your character has not been loaded properly, rejoin the server', 4000)
-		return true -- change to false before live
+		return false -- change to false before live
 	else
 		return true
 	end
@@ -152,13 +152,11 @@ function togglePhone()
 			display = false,
 		})
 	else
-		
-		--[[ 		DISABLED DURING TESTING
+
 		if not exports.fsn_inventory:fsn_HasPhone() then -- if does not have phone return jack shit
 			TriggerEvent('fsn_notify:displayNotification', 'You do not have a phone!<br>Visit a general store to get one.', 'centerLeft', 5000, 'error')
 		return end
-		]]
-		
+
 		SetNuiFocus( true, true )
 		SendNUIMessage({
 			type = 'status',
