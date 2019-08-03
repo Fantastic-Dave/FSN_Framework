@@ -30,13 +30,14 @@ Citizen.CreateThread(function()
 				ExecuteCommand('/decline')
 				TriggerEvent('fsn_notify:displayNotification', 'Call rejected', 'centerLeft', 3000, 'error')
 			else
-				TriggerEvent('fsn_phone:sound', 'ringtone')
-				Citizen.Wait(17000)
+				TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2, 'ringtone-iphone', 0.3)
+				Citizen.Wait(7000)
 			end
 		end
 		if isCalling then
-			TriggerEvent('fsn_phone:sound', 'calling')
-			Citizen.Wait(30000)
+			--TriggerEvent('fsn_phone:sound', 'calling')
+			TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2, 'dialtone', 0.4)
+			Citizen.Wait(6000)
 		end
 	end
 end)

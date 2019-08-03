@@ -1,4 +1,4 @@
-local channelid = 100
+local channelid = 1000
 local calls = {}
 --[[
 	{
@@ -40,14 +40,14 @@ AddEventHandler('fsn_phone:call:startCalling', function(src, toNumber)
 	if isBusy(src) then
 		TriggerClientEvent('fsn_notify:displayNotification', src, 'You are currently on a phonecall', 'centerRight', 3000, 'error')
 	end
-	local ply = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(toNumber))
+	local ply = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(toNumber)
 	if ply ~= 0 then
 		if ply == src then
 			TriggerClientEvent('fsn_notify:displayNotification', src, 'You cannot call yourself..', 'centerRight', 3000, 'error')
 			return
 		end
 		if not isBusy(ply) then
-			TriggerClientEvent('fsn_notify:displayNotification', src, 'Calling <b>'..tonumber(toNumber)..'</b>...', 'centerRight', 3000, 'info')
+			TriggerClientEvent('fsn_notify:displayNotification', src, 'Calling <b>'..toNumber..'</b>...', 'centerRight', 3000, 'info')
 			TriggerClientEvent('fsn_phone:call:effects:calling', src)
 			TriggerClientEvent('fsn_phone:call:effects:called', ply)
 			
@@ -59,18 +59,18 @@ AddEventHandler('fsn_phone:call:startCalling', function(src, toNumber)
 			channelid = channelid +1
 			local tbl = {
 				channel = channelid,
-				caller = exports.fsn_main:fsn_GetPlayerPhoneNumber(tonumber(src)),
-				calling = tonumber(toNumber),
+				caller = exports.fsn_main:fsn_GetPlayerPhoneNumber(src),
+				calling = toNumber,
 				time = os.time(),
 				members = {src, ply},
 				status = 'calling'
 			}
 			table.insert(calls, #calls+1, tbl)
 		else
-			TriggerClientEvent('fsn_notify:displayNotification', src, '<b>'..tonumber(toNumber)..'</b> is busy, try again later!', 'centerRight', 3000, 'error')
+			TriggerClientEvent('fsn_notify:displayNotification', src, '<b>'..toNumber..'</b> is busy, try again later!', 'centerRight', 3000, 'error')
 		end
 	else
-		TriggerClientEvent('fsn_notify:displayNotification', src, 'No player found with number <b>'..tonumber(toNumber), 'centerRight', 3000, 'error')		
+		TriggerClientEvent('fsn_notify:displayNotification', src, 'No player found with number <b>'..toNumber, 'centerRight', 3000, 'error')		
 	end
 end)
 
@@ -79,8 +79,8 @@ AddEventHandler('fsn_phone:call:startCall', function(callid)
 	local v = calls[callid]
 	--for k, v in pairs(calls) do
 		v.status = 'incall'
-		local called = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(v.calling))
-		local caller = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(v.caller))
+		local called = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.calling)
+		local caller = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.caller)
 		
 		TriggerClientEvent('fsn_phone:call:effects:isInCall', called, true)
 		TriggerClientEvent('fsn_phone:call:effects:isInCall', caller, true)
@@ -97,8 +97,8 @@ RegisterServerEvent('fsn_phone:call:endCall')
 AddEventHandler('fsn_phone:call:endCall', function(callid)
 	local v = calls[callid]
 	v.status = 'finished'
-	local called = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(v.calling))
-	local caller = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(v.caller))
+	local called = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.calling)
+	local caller = exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.caller)
 		
 	TriggerClientEvent('fsn_phone:call:effects:isInCall', called, false)
 	TriggerClientEvent('fsn_phone:call:effects:isInCall', caller, false)
@@ -114,10 +114,10 @@ RegisterServerEvent('fsn_phone:call:answerCall')
 AddEventHandler('fsn_phone:call:answerCall', function(src)
 	for k,v in pairs(calls) do
 		if v.status == 'calling' then
-			if v.calling == exports.fsn_main:fsn_GetPlayerPhoneNumber(tonumber(src)) then
+			if v.calling == exports.fsn_main:fsn_GetPlayerPhoneNumber(src) then
 				TriggerEvent('fsn_phone:call:startCall', k)
 				TriggerClientEvent('fsn_phone:call:effects:stop', src)
-				TriggerClientEvent('fsn_phone:call:effects:stop', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(v.caller)))
+				TriggerClientEvent('fsn_phone:call:effects:stop', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.caller))
 			end
 		end
 	end
@@ -145,10 +145,10 @@ end)
 AddEventHandler('chatMessage', function(source, auth, msg)
 	local split = fsn_SplitString(msg, ' ')
 	if split[1] == '/call' then
-		if split[2] and tonumber(split[2]) then
-			TriggerEvent('fsn_phone:call:startCalling', source, tonumber(split[2]))
+		if split[2] and string.find(split[2], '-') then
+			TriggerEvent('fsn_phone:call:startCalling', source, split[2])
 		else
-			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_phone:^0^r There was an issue with the number you provided. (Usage: /call {number})')
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_phone:^0^r There was an issue with the number you provided. (Usage: /call 123-123-123)')
 		end 
 	end
 	if split[1] == '/answer' then

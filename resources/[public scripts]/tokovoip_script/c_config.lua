@@ -19,7 +19,8 @@ TokoVoipConfig = {
 		-- TeamSpeak channel name used by the voip
 		-- If the TSChannelWait is enabled, players who are currently in TSChannelWait will be automatically moved
 		-- to the TSChannel once everything is running
-		TSChannel = "SERVER_TOKOVOIP",
+		--TSChannel = "SERVER_TOKOVOIP",
+		TSChannel = "Development Lounge",
 		TSPassword = "M9l3IMVt31RlQm7NtF1Km31ESe5vcN", -- TeamSpeak channel password (can be empty)
 
 		-- Optional: TeamSpeak waiting channel name, players wait in this channel and will be moved to the TSChannel automatically
