@@ -7,3 +7,10 @@ TokoVoipConfig = {
 		{name = "EMS Radio", subscribers = {}},
 	}
 };
+
+RegisterNetEvent('tokovoip_extras:radio:enter')
+AddEventHandler('tokovoip_extras:radio:enter', function(id)
+	if not TokoVoipConfig['channels'][id] then
+		TokoVoipConfig['channels'][id] = {name = "Chnl ["..id.."]", subscribers = {}}
+	end
+end)
