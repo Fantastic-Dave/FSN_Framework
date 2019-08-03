@@ -70,6 +70,10 @@ files({
 	-- App Misc
 	'html/img/Apple/fleeca-bg.png',
 	'html/img/Apple/default-avatar.png',
+	'html/img/Apple/call-in.png',
+	'html/img/Apple/call-out.png',
+	'html/img/Apple/missed-in.png',
+	'html/img/Apple/missed-out.png',
 
 })
 

@@ -17,7 +17,6 @@ function log(msg) {
 // datastore
 var datastore = {};
 
-
 // phone functions
 function changePage(page, phone) { // simple function that disables the css from the previous page and enables it for the new one -- will also show/hide all the pages
 	log('+-------------- changePage --------------+');
@@ -59,6 +58,22 @@ function changePage(page, phone) { // simple function that disables the css from
 	}
 }
 
+function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
+  try {
+    decimalCount = Math.abs(decimalCount);
+    decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+    const negativeSign = amount < 0 ? "-" : "";
+
+    let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+    let j = (i.length > 3) ? i.length % 3 : 0;
+
+    return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+  } catch (e) {
+    console.log(e)
+  }
+};
+
 function updateContact() {
 	var name = $('#editcontact_name').val()
 	var pn = $('#editcontact_number').val()
@@ -86,7 +101,13 @@ function textContact(pn) {
 		$('#dialog_number').val(pn);
 	}
 }
+function callContact(pn) {
+	$.post('http://fsn_phones/callContact', JSON.stringify({
+		'pn':pn
+	}));
+}
 function viewContact(pn) {
+	changePage('contacts', currentPhone)
 	if ($('#editcontact_error')) { $('#editcontact_error').remove() }
 	$('#viewcontact_delete').hide()
 	if (pn) {
@@ -96,9 +117,9 @@ function viewContact(pn) {
 			$('#editcontact_name').val(ctc.name)
 			$('#editcontact_number').val(pn)
 		} else {
-			$('#app-section-add-contact').prepend('<div id="editcontact_error" style="color:red;margin-bottom: 10px;text-align:center;"><b>This contact was not found!</b><br>You can re-add them now, ignore this contact until restart.</div>');
+			$('#app-section-add-contact').prepend('<div id="editcontact_error" style="color:red;margin-bottom: 10px;text-align:center;"><b>This contact was not found!</b><br>You can add them now.</div>');
 			$('#editcontact_name').val('')
-			$('#editcontact_number').val('')	
+			$('#editcontact_number').val(pn)	
 		}
 		$('#viewcontact_delete').show()
 		$('#app-section-add-contact').show()
@@ -157,6 +178,9 @@ $(function () {
 			datastore['adverts'] = event.data.adverts;
 			datastore['emails'] = event.data.emails;
 			datastore['contacts'] = event.data.contacts;
+			datastore['balance'] = event.data.balance;
+			datastore['transactions'] = event.data.transactions;
+			datastore['calls'] = event.data.calls;
 		}
 		if (event.data.type == 'status') {
 			if (event.data.display) {
@@ -360,6 +384,7 @@ function processwhitelists() {
 						staff+
 					'</tbody>'+
 				'</table>'+
+				'<button style="margin:5px;width:90%;height:30px;border-radius:5px;color:white;background-color: #303030;font-weight:bold;border:0px;" onclick="clockInWhitelist('+wl.id+')">Clock In/Out</button>'+
 			'</div>'+
 		'</div>'
 	}
@@ -399,6 +424,71 @@ function processcontacts() {
 			'</div>'
 	}
 	$('#insertContacts').html(insertString);	
+}
+
+function processfleeca() {
+	$('#insertTransactions').html('');
+	var bal = formatMoney(datastore['balance']);
+	$('#fleeca_balance').html('$'+bal);
+	
+	var insertString = ''
+	for (var key in datastore['transactions']){
+		var trans = datastore['transactions'][key]
+		insertString = insertString+
+			'<div class="transaction">'+
+				'<div class="transaction-info">'+
+					'<div class="transaction-title">'+trans.title+'</div>'+
+					'<div class="transaction-type">'+trans.trantype+'</div>'+
+				'</div>'+
+				'<div class="transaction-amt '+trans.systype+'">$'+trans.tranamt+'</div>'+
+			'</div>'
+	}
+	$('#insertTransactions').html(insertString);	
+}
+
+function processphone() {
+	console.log('doing some shit')
+	var insertString = ''
+	$('#insertCalls').html('')
+	for (var key in datastore['calls']){
+		var call = datastore['calls'][key]
+		var img = ''
+		if (call.incoming) {
+			if (call.missed) {
+				img = '<img src="img/Apple/missed-in.png">'
+			} else {
+				img = '<img src="img/Apple/call-in.png">'
+			}
+		} else {
+			if (call.missed) {
+				img = '<img src="img/Apple/missed-out.png">'
+			} else {
+				img = '<img src="img/Apple/call-out.png">'
+			}
+		}
+		insertString = insertString+
+			'<div class="call">'+
+				'<div class="call-icon">'+
+					img+
+				'</div>'+
+				'<div class="call-name">'+
+					'<h1>'+call.from+'</h1>'+
+					'<p>'+call.number+'</h1>'+
+				'</div>'+
+				'<div class="call-manage">'+
+					'<div class="call-manage-icon" onclick="textContact(\''+call.number+'\');">'+
+						'<img src="img/Apple/Messages.png">'+
+					'</div>'+
+					'<div class="call-manage-icon" onclick="callContact(\''+call.number+'\');">'+
+						'<img src="img/Apple/Phone.png">'+
+					'</div>'+
+					'<div class="call-manage-icon" onclick="viewContact(\''+call.number+'\');">'+
+						'<img src="img/Apple/Contact.png">'+
+					'</div>'+
+				'</div>'+
+			'</div>'
+	}
+	$('#insertCalls').html(insertString);	
 }
 
 /*
@@ -483,4 +573,11 @@ function addAdvert() {
 	}));
 	changePage('home', currentPhone)
 	$('#advert_textarea').val('')
+}
+
+function clockInWhitelist(id) {
+	log('toggling wl '+id)
+	$.post('http://fsn_phones/toggleWhitelist', JSON.stringify({
+		'id': id
+	}));
 }

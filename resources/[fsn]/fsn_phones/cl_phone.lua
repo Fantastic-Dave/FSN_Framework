@@ -1,5 +1,5 @@
 -- datastores
-local dbug = false -- set to false to remove all default data from the datastore
+local dbug = true -- set to false to remove all default data from the datastore
 local myUsername = 'unset'
 local myNumber = '000-000-000'
 local myName = 'nothing nothing'
@@ -33,15 +33,35 @@ end)
 function init() -- function to check if the character has init'd
 	if myNumber == '000-000-000' then
 		exports['mythic_notify']:DoCustomHudText('error', 'init() == false - head to life invader to get a phone number', 4000)
-		return false -- change to false before live
+		return true -- change to false before live
 	elseif myUsername == 'unset'  then
 		exports['mythic_notify']:DoCustomHudText('error', 'init() == false - your character has not been loaded properly, rejoin the server', 4000)
-		return false -- change to false before live
+		return true -- change to false before live
 	else
 		return true
 	end
 end
 local datastore = {
+	calls = {
+		{
+			from = 'Logan Whitehead',
+			number = '999-999-999',
+			incoming = true,
+			missed = false,
+		},
+		{
+			from = 'Logan Whitehead',
+			number = '999-999-999',
+			incoming = false,
+			missed = true,
+		},
+		{
+			from = '123-123-126',
+			number = '123-123-126',
+			incoming = true,
+			missed = true,
+		},
+	},
 	contacts = {
 		["999-999-999"] = {name = 'Logan Whitehead',status='offline'},
 		["888-888-888"] = {name = 'Andre Awesome',status='online'},
@@ -92,7 +112,8 @@ local datastore = {
 			advert = 'Contact me for a good time xx',
 			number = '999-999-999',
 		}
-	}
+	},
+	transactions = {},
 }
 
 local phoneEnabled = false
@@ -115,12 +136,16 @@ function sendDataStore()
 		whitelists = myWhitelists,
 		emails = datastore['emails'],
 		contacts = datastore['contacts'],
+		transactions = datastore['transactions'],
+		calls = datastore['calls'],
+		balance = exports["fsn_main"]:fsn_GetBank()
 	})
 end
 
 function togglePhone()
 	if not init() then return end -- character has not been initiated
 	if phoneEnabled then
+		ClearPedTasks(GetPlayerPed(-1))
 		SetNuiFocus( false )
 		SendNUIMessage({
 			type = 'status',
@@ -142,6 +167,9 @@ function togglePhone()
 			phonenumber = myNumber,
 			username = myUsername,
 		})
+		if not IsPedInAnyVehicle(GetPlayerPed(-1),  false) then
+			TaskStartScenarioInPlace(GetPlayerPed(-1), "WORLD_HUMAN_STAND_MOBILE", 0, true);
+		end
 		sendDataStore()
 	end
 	phoneEnabled = not phoneEnabled
@@ -150,6 +178,9 @@ end
 -- disable nui focus every time the script is restarted 
 SetNuiFocus( false )
 
+RegisterNUICallback( "callContact", function(data, cb)
+	ExecuteCommand('call '..data.pn)
+end)
 RegisterNUICallback( "removeContact", function(data, cb)
 	if data.pn ~= '' then
 		if datastore['contacts'][data.pn] then
@@ -175,6 +206,11 @@ RegisterNUICallback( "updateAddContact", function(data, cb)
 		exports['mythic_notify']:DoCustomHudText('error', 'Error adding/updating contact:<br>There was an issue with your input.', 4000)
 	end
 	TriggerServerEvent('fsn_phones:SYS:set:details', myNumber, 'contacts', datastore['contacts'])
+end)
+
+RegisterNUICallback( "toggleWhitelist", function(data, cb)
+	exports["fsn_jobs"]:toggleWhitelistClock(data['id'])
+	togglePhone()
 end)
 
 RegisterNUICallback( "sendToServer", function(data, cb)
@@ -215,9 +251,13 @@ RegisterNUICallback( "sendToServer", function(data, cb)
 		TriggerServerEvent('fsn_phones:USE:sendMessage', data.message)
 		exports['mythic_notify']:DoCustomHudText('success', 'Message sent to: '..data.message.to, 4000)
 		TriggerServerEvent('fsn_phones:SYS:set:details', myNumber, 'messages', datastore['messages'])
-	elseif data.advert then
-		TriggerServerEvent('fsn_phones:USE:sendAdvert', data.advert, myName, myNumber)
-		exports['mythic_notify']:DoCustomHudText('success', 'Advert added.', 4000)
+	elseif data.advert then	
+		if data.advert ~= '' then
+			TriggerServerEvent('fsn_phones:USE:sendAdvert', data.advert, myName, myNumber)
+			exports['mythic_notify']:DoCustomHudText('success', 'Advert added.', 4000)
+		else
+			exports['mythic_notify']:DoCustomHudText('error', 'ERROR Adding Advert:<br>No advert entered.', 4000)
+		end
 	end
 end)
 
@@ -309,10 +349,22 @@ AddEventHandler('fsn_phones:USE:Tweet', function(tweet)
 	end
 	sendDataStore()
 end)
+RegisterNetEvent('fsn_phones:SYS:updateAdverts')
+AddEventHandler('fsn_phones:SYS:updateAdverts', function(tbl)
+	datastore['adverts'] = tbl
+	sendDataStore()
+end)
 
 RegisterNetEvent('fsn_phones:SYS:recieve:details')
 AddEventHandler('fsn_phones:SYS:recieve:details', function(details, tbl)
 	datastore[details] = tbl
+	sendDataStore()
+end)
+
+RegisterNetEvent('fsn_phones:SYS:addTransaction')
+AddEventHandler('fsn_phones:SYS:addTransaction', function(tran)
+	print 'got transaction'
+	table.insert(datastore['transactions'], #datastore['transactions']+1, tran)
 	sendDataStore()
 end)
 
@@ -341,6 +393,8 @@ AddEventHandler('fsn_main:character', function(char)
 	
 	if not dbug then
 		datastore['messages'] = {}
+		datastore['transactions'] = {}
+		datastore['calls'] = {}
 		datastore['tweets'] = {}
 		datastore['emails'] = {}
 		datastore['adverts'] = {}

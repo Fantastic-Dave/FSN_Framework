@@ -57,6 +57,7 @@ AddEventHandler('fsn_phones:SYS:newNumber', function(charid)
   local number = createNumber()
   MySQL.Async.execute('UPDATE `fsn_characters` SET `char_phone` = @number WHERE `fsn_characters`.`char_id` = @charid;', {['@charid'] = charid, ['@number'] = number}, function(rowsChanged)
     TriggerClientEvent('fsn_phones:SYS:updateNumber', src, number)
+	TriggerEvent('fsn_main:updateCharNumber', charid, number)
 	TriggerClientEvent('fsn_phones:GUI:notification', src, 'img/Apple/Contact.png', 'PHONE', 'Your phone number has been updated to:<br><b>'..number..'</b>', true)
     TriggerClientEvent('fsn_phones:USE:Email', src, {
 		subject = 'Welcome to LifeInvader!',
@@ -87,10 +88,24 @@ end)
 local ads = {}
 RegisterServerEvent('fsn_phones:USE:sendAdvert')
 AddEventHandler('fsn_phones:USE:sendAdvert', function(ad, name, num)
+	for k, v in pairs(ads) do
+		if v.playerid == source then
+			ads[k] = nil
+		end
+	end
 	table.insert(ads, #ads+1, {
 		playerid = source,
 		name = name,
 		advert = ad,
 		number = num
 	})
+	TriggerClientEvent('fsn_phones:SYS:updateAdverts', -1, ads)
+end)
+AddEventHandler('playerDropped', function()
+	for k, v in pairs(ads) do
+		if v.playerid == source then
+			ads[k] = nil
+			TriggerClientEvent('fsn_phones:SYS:updateAdverts', -1, ads)
+		end
+	end
 end)
