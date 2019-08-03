@@ -510,19 +510,6 @@ AddEventHandler('chatMessage', function(source, auth, msg)
     local action = table.concat( origSplit, ' ', 2, #origSplit )
     TriggerClientEvent('chatMessage', -1, '', {255,255,255}, '^*ooc '..GetPlayerName(source)..'#'..source..' | ^r'.. action)
   end
-  if split[1] == '/tweet' or split[1] == '/twt' then
-    local char = getCharacter(source)
-    local at = '?no_char?'
-	if char then
-		at = string.sub(char.char_fname, 1, 1)..char.char_lname
-	end
-    if char and char.char_twituname ~= 'notset' then
-      at = char.char_twituname
-      --at = 'removed' --char.char_twituname
-	end
-    local tweet = table.concat( origSplit, ' ', 2, #origSplit )
-    TriggerClientEvent('chatMessage', -1, ':tweet: @'..at, {6, 213, 224}, tweet)
-  end
   if split[1] == '/airlift' then
     TriggerClientEvent('fsn_commands:airlift', source)
   end
