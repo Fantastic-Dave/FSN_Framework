@@ -147,6 +147,12 @@ AddEventHandler('fsn_main:money:wallet:Minus', function(ply, amt)
 				TriggerClientEvent('fsn_main:money:updateSilent', ply, v.wallet, v.bank)
 				Citizen.Wait(500)
 				TriggerClientEvent('fsn_main:gui:minusMoney', ply, amt, newamt)
+				TriggerClientEvent('fsn_phones:SYS:addTransaction', ply, {
+					title = os.date("%c"),
+					trantype = 'CREDIT',
+					systype = 'credit',
+					tranamt = amt
+				})
 				TriggerEvent('fsn_main:logging:addLog', ply, 'money', 'Character('..fsn_CharID(ply)..') spent $'..amt..' from their CASH')
 			else
 				print('fsn_main:money:wallet:Minus tried to minus wallet a non numerical value')
@@ -166,6 +172,12 @@ AddEventHandler('fsn_main:money:bank:Minus', function(ply, amt)
 				TriggerClientEvent('fsn_main:money:updateSilent', ply, v.wallet, v.bank)
 				Citizen.Wait(500)
 				TriggerClientEvent('fsn_main:gui:bank:minusMoney', ply, amt, newamt)
+				TriggerClientEvent('fsn_phones:SYS:addTransaction', ply, {
+					title = os.date("%c"),
+					trantype = 'DEBIT',
+					systype = 'debit',
+					tranamt = amt
+				})
 				TriggerEvent('fsn_main:logging:addLog', ply, 'money', 'Character('..fsn_CharID(ply)..') spent $'..amt..' from their BANK')
 			else
 				print('fsn_main:money:bank:Minus tried to minus wallet a non numerical value')
