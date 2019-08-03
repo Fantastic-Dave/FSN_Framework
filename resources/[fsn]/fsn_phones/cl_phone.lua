@@ -1,7 +1,8 @@
 -- datastores
-local dbug = true -- set to false to remove all default data from the datastore
+local dbug = false -- set to false to remove all default data from the datastore
 local myUsername = 'unset'
 local myNumber = '000-000-000'
+local myName = 'nothing nothing'
 local myChar = -1
 
 RegisterNetEvent('fsn_phones:SYS:updateNumber')
@@ -31,15 +32,19 @@ end)
 
 function init() -- function to check if the character has init'd
 	if myNumber == '000-000-000' then
-		return true -- change to false before live
+		exports['mythic_notify']:DoCustomHudText('error', 'init() == false - head to life invader to get a phone number', 4000)
+		return false -- change to false before live
+	elseif myUsername == 'unset'  then
+		exports['mythic_notify']:DoCustomHudText('error', 'init() == false - your character has not been loaded properly, rejoin the server', 4000)
+		return false -- change to false before live
 	else
 		return true
 	end
 end
 local datastore = {
 	contacts = {
-		["999-999-999"] = {name = 'Logan Whitehead'},
-		["888-888-888"] = {name = 'Andre Awesome'},
+		["999-999-999"] = {name = 'Logan Whitehead',status='offline'},
+		["888-888-888"] = {name = 'Andre Awesome',status='online'},
 	},
 	messages = {
 		["999-999-999"] = {
@@ -109,6 +114,7 @@ function sendDataStore()
 		adverts = datastore['adverts'],
 		whitelists = myWhitelists,
 		emails = datastore['emails'],
+		contacts = datastore['contacts'],
 	})
 end
 
@@ -133,33 +139,42 @@ function togglePhone()
 			type = 'status',
 			display = true,
 			phoneType = 'iphone', -- I'll set this dynamically in the future
+			phonenumber = myNumber,
+			username = myUsername,
 		})
 		sendDataStore()
 	end
 	phoneEnabled = not phoneEnabled
 end
 
-
-
 -- disable nui focus every time the script is restarted 
 SetNuiFocus( false )
 
-
--- display the phone
-Citizen.CreateThread(function()
-	while true do Citizen.Wait(0)
-		if not phoneEnabled then
-			togglePhone()
-			if not dbug then
-				datastore['messages'] = {}
-				datastore['tweets'] = {}
-				datastore['emails'] = {}
-				datastore['adverts'] = {}
-				sendDataStore()
-			end
-			break
+RegisterNUICallback( "removeContact", function(data, cb)
+	if data.pn ~= '' then
+		if datastore['contacts'][data.pn] then
+			datastore['contacts'][data.pn] = nil
 		end
+		exports['mythic_notify']:DoCustomHudText('success', 'Contact removed.', 4000)
+		sendDataStore()
+	else
+		exports['mythic_notify']:DoCustomHudText('error', 'Error removing contact:<br>There was an issue with your input.', 4000)
+	end	
+	TriggerServerEvent('fsn_phones:SYS:set:details', myNumber, 'contacts', datastore['contacts'])
+end)
+RegisterNUICallback( "updateAddContact", function(data, cb)
+	if data.pn ~= '' and data.name ~= '' then
+		if datastore['contacts'][data.pn] then
+			datastore['contacts'][data.pn]['name'] = data.name
+		else
+			datastore['contacts'][data.pn] = {name = data.name, status='offline'}
+		end
+		exports['mythic_notify']:DoCustomHudText('success', 'Contact added/updated.', 4000)
+		sendDataStore()
+	else
+		exports['mythic_notify']:DoCustomHudText('error', 'Error adding/updating contact:<br>There was an issue with your input.', 4000)
 	end
+	TriggerServerEvent('fsn_phones:SYS:set:details', myNumber, 'contacts', datastore['contacts'])
 end)
 
 RegisterNUICallback( "sendToServer", function(data, cb)
@@ -199,10 +214,10 @@ RegisterNUICallback( "sendToServer", function(data, cb)
 		sendDataStore()
 		TriggerServerEvent('fsn_phones:USE:sendMessage', data.message)
 		exports['mythic_notify']:DoCustomHudText('success', 'Message sent to: '..data.message.to, 4000)
-	elseif data.contact then
-		-- do datastore stuff on client, then send to update
-		datastore['contacts'][data.contact.number].name = data.contact.name
-		TriggerServerEvent('fsn_phones:SYS:set:details', myNumber, 'contacts', datastore['contacts'])
+		TriggerServerEvent('fsn_phones:SYS:set:details', myNumber, 'messages', datastore['messages'])
+	elseif data.advert then
+		TriggerServerEvent('fsn_phones:USE:sendAdvert', data.advert, myName, myNumber)
+		exports['mythic_notify']:DoCustomHudText('success', 'Advert added.', 4000)
 	end
 end)
 
@@ -232,7 +247,9 @@ end)
 ]]--
 RegisterNetEvent('fsn_phones:USE:Phone')
 AddEventHandler('fsn_phones:USE:Phone', function()
-	togglePhone()
+	if init() then
+		togglePhone()
+	end
 end)
 RegisterNetEvent('fsn_phones:USE:Email')
 AddEventHandler('fsn_phones:USE:Email', function(email)
@@ -273,6 +290,7 @@ AddEventHandler('fsn_phones:USE:Message', function(msg)
 			})
 		end
 		sendDataStore()
+		TriggerServerEvent('fsn_phones:SYS:set:details', myNumber, 'messages', datastore['messages'])
 	end
 end)
 RegisterNetEvent('fsn_phones:USE:Tweet')
@@ -295,10 +313,18 @@ end)
 RegisterNetEvent('fsn_phones:SYS:recieve:details')
 AddEventHandler('fsn_phones:SYS:recieve:details', function(details, tbl)
 	datastore[details] = tbl
+	sendDataStore()
 end)
 
 AddEventHandler('fsn_main:character', function(char)
 	myChar = char.char_id
+	myName = char.char_fname..' '..char.char_lname
+	-- twitter usernames, n stuff
+	if char.char_twituname ~= 'notset' then
+		myUsername = char.char_twituname
+	else 
+		myUsername = string.sub(char.char_fname, 1, 1)..char.char_lname
+	end
 	-- migration from old phone system
 	if char.char_phone and char.char_phone ~= '' then
 		if not string.find(char.char_phone, '-') then
@@ -306,10 +332,22 @@ AddEventHandler('fsn_main:character', function(char)
 		else
 			myNumber = char.char_phone
 			if dbg then print(':fsn_phones: My number is: '..myNumber) end
+			
+			-- request saved data from the server
+			TriggerServerEvent('fsn_phones:SYS:request:details', myNumber, 'contacts')
+			TriggerServerEvent('fsn_phones:SYS:request:details', myNumber, 'messages')
 		end
 	end
+	
+	if not dbug then
+		datastore['messages'] = {}
+		datastore['tweets'] = {}
+		datastore['emails'] = {}
+		datastore['adverts'] = {}
+		datastore['contacts'] = {}
+		sendDataStore()
+	end
 end)
-
 
 --[[
 	Lifeinvader

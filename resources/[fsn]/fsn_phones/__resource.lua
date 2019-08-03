@@ -67,6 +67,10 @@ files({
 	'html/img/Apple/banner_icons/wallet.png',
 	'html/img/Apple/banner_icons/wl.png',
 
+	-- App Misc
+	'html/img/Apple/fleeca-bg.png',
+	'html/img/Apple/default-avatar.png',
+
 })
 
 client_script 'cl_phone.lua'

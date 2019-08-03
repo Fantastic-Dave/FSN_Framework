@@ -2,6 +2,8 @@
 	Global javascript
 */
 var currentPage = 'home';
+var myNumber = '000-000-000';
+var myEmail = 'myUsername@liveinvader.com';
 var currentPhone = 'iphone';
 var pages = ['home', 'adverts', 'call', 'contacts', 'email', 'fleeca', 'messages', 'pay', 'phone', 'twitter', 'whitelists'];
 
@@ -57,6 +59,57 @@ function changePage(page, phone) { // simple function that disables the css from
 	}
 }
 
+function updateContact() {
+	var name = $('#editcontact_name').val()
+	var pn = $('#editcontact_number').val()
+	
+	$.post('http://fsn_phones/updateAddContact', JSON.stringify({
+		'pn':pn,
+		'name':name
+	}));
+	changePage('home', currentPhone);
+}
+function deleteContact() {
+	var pn = $('#editcontact_number').val()
+	$.post('http://fsn_phones/removeContact', JSON.stringify({
+		'pn':pn
+	}));
+	changePage('home', currentPhone);
+}
+function textContact(pn) {
+	changePage('messages', currentPhone);
+	if (datastore['messages'][pn]) {
+		viewMessages(pn)
+	} else {
+		$('.writemessage').toggle();
+		$('.msgplusbutton').toggle();
+		$('#dialog_number').val(pn);
+	}
+}
+function viewContact(pn) {
+	if ($('#editcontact_error')) { $('#editcontact_error').remove() }
+	$('#viewcontact_delete').hide()
+	if (pn) {
+		var ctc = datastore['contacts'][pn]
+		$('#app-section-view-contacts').hide()
+		if (ctc) {
+			$('#editcontact_name').val(ctc.name)
+			$('#editcontact_number').val(pn)
+		} else {
+			$('#app-section-add-contact').prepend('<div id="editcontact_error" style="color:red;margin-bottom: 10px;text-align:center;"><b>This contact was not found!</b><br>You can re-add them now, ignore this contact until restart.</div>');
+			$('#editcontact_name').val('')
+			$('#editcontact_number').val('')	
+		}
+		$('#viewcontact_delete').show()
+		$('#app-section-add-contact').show()
+	} else {
+		$('#app-section-view-contacts').hide()
+		$('#editcontact_name').val('')
+		$('#editcontact_number').val('')	
+		$('#app-section-add-contact').show()
+	}
+}
+
 var viewingMessage = 0
 function viewMessages(pn) {
 	var messages = datastore['messages'][pn]['texts']
@@ -103,6 +156,7 @@ $(function () {
 			datastore['whitelists'] = event.data.whitelists;
 			datastore['adverts'] = event.data.adverts;
 			datastore['emails'] = event.data.emails;
+			datastore['contacts'] = event.data.contacts;
 		}
 		if (event.data.type == 'status') {
 			if (event.data.display) {
@@ -115,6 +169,10 @@ $(function () {
 					changePage('home', 'samsung');
 					currentPhone = 'samsung';
 				}
+				
+				// number/email/twitter stuffs
+				myNumber = event.data.phonenumber;
+				myEmail = event.data.username;
 			} else {
 				$('#phone-iphone').hide();
 				$('#phone-samsung').hide();
@@ -308,6 +366,41 @@ function processwhitelists() {
 	$('#insertWhitelists').html(insertString);
 }
 
+function processcontacts() {
+	$('#app-section-add-contact').hide()
+	$('#app-section-view-contacts').show()
+	$('#myNumber').html('<span>T:</span> '+myNumber)
+	$('#myEmail').html('<span>E:</span> '+myEmail+'@liveinvader.com')
+	
+	$('#insertContacts').html('');
+	var insertString = ''
+	for (var key in datastore['contacts']){
+		var ctc = datastore['contacts'][key]
+		insertString = insertString+
+			'<div class="contact">'+
+				'<div class="contact-picture">'+
+					'<img class="'+ctc.status+'" src="img/Apple/default-avatar.png">'+
+				'</div>'+
+				'<div class="contact-name">'+
+					'<h1>'+ctc.name+'</h1>'+
+					'<p>'+key+'</p>'+
+				'</div>'+
+				'<div class="contact-manage">'+
+					'<div class="contact-manage-icon" onclick="textContact(\''+key+'\');">'+
+						'<img src="img/Apple/Messages.png">'+
+					'</div>'+
+					'<div class="contact-manage-icon" onclick="callContact(\''+key+'\');">'+
+						'<img src="img/Apple/Phone.png">'+	
+					'</div>'+
+					'<div class="contact-manage-icon" onclick="viewContact(\''+key+'\');">'+
+						'<img src="img/Apple/Contact.png">'+
+					'</div>'+
+				'</div>'+
+			'</div>'
+	}
+	$('#insertContacts').html(insertString);	
+}
+
 /*
 	james' notes
 	
@@ -381,4 +474,13 @@ function sendTweet() {
 	}));
 	changePage('home', currentPhone)
 	$('#tweet_textarea').val('')
+}
+
+function addAdvert() {
+	var ad = $('#advert_textarea').val()
+	$.post('http://fsn_phones/sendToServer', JSON.stringify({
+		'advert': ad
+	}));
+	changePage('home', currentPhone)
+	$('#advert_textarea').val('')
 }

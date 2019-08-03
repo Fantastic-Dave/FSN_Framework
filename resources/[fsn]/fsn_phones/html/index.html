@@ -65,7 +65,7 @@
 						<img src="img/Apple/Mail.png">
 						<h1>Mail</h1>
 					</div>
-					<div class="homebutton">
+					<div class="homebutton" onclick="changePage('phone', 'iphone')">
 						<img src="img/Apple/Phone.png">
 						<h1>Phone</h1>
 					</div>
@@ -81,10 +81,12 @@
 						<img src="img/Apple/Contact.png">
 						<h1>Contacts</h1>
 					</div>
+					<!--
 					<div class="homebutton">
 						<img src="img/Apple/Wallet.png">
 						<h1>Wallet</h1>
 					</div>
+					-->
 					<div class="homebutton" onclick="changePage('twitter', 'iphone')">
 						<img src="img/Apple/Twitter.png">
 						<h1>Twitter</h1>
@@ -102,44 +104,67 @@
 						<h1>Alerts</h1>
 					</div>
 				</div>
+				<div id="page-iphone-phone">
+					<div class="iphone-app-titlebar">
+						<img src="img/Apple/banner_icons/contacts.png">
+					</div>
+					<div class="iphone-app-main">
+					
+					</div>
+				</div>
 				<div id="page-iphone-contacts">
 					<div class="iphone-app-titlebar">
 						<img src="img/Apple/banner_icons/contacts.png">
 					</div>
 					<div class="iphone-app-main">
-						<div class="my-contact">
-							<div class="my-contact-picture">
-								<img class="online" src="img/Apple/default-avatar.png">
-							</div>
-							<div class="my-contact-info">
-								<h1>Your contact details:</h1>
-								<p><span>T:</span> 999-999-999</p>
-								<p><span>E:</span> myUsername@lifeinvader.com</p>
-							</div>
+						<div id="app-section-add-contact">
+							<h1>Add/Edit a contact</h1>
+							<p>Name:</p>
+							<input id="editcontact_name" type="text" placeholder="Bobby Joe..."/>
+							<p>Number:</p>
+							<input id="editcontact_number" type="text" placeholder="000-000-000"/>
+							<button onclick="updateContact()">Submit</button>
+							<button id="viewcontact_delete" onclick="deleteContact()" style="background-color:#870000;">DELETE CONTACT</button>
 						</div>
-						<div id="insertContacts">
-							<div class="contact">
-								<div class="contact-picture">
-									<img class="offline" src="img/Apple/default-avatar.png">
+						<div id="app-section-view-contacts">
+							<div class="my-contact">
+								<div class="my-contact-picture">
+									<img class="online" src="img/Apple/default-avatar.png">
 								</div>
-								<div class="contact-name">
-									<h1>Peter Parker</h1>
-									<p>999-999-999</p>
+								<div class="my-contact-info">
+									<h1>Your contact details:</h1>
+									<p id="myNumber"></p>
+									<p id="myEmail"></p>
 								</div>
-								<div class="contact-manage">
-									<div class="contact-manage-icon">
-										<!-- call -->
-										
+							</div>
+							<div id="insertContacts">
+								<!-- 
+								<div class="contact">
+									<div class="contact-picture">
+										<img class="offline" src="img/Apple/default-avatar.png">
 									</div>
-									<div class="contact-manage-icon">
-										<!-- text -->
-										
+									<div class="contact-name">
+										<h1>Peter Parker</h1>
+										<p>999-999-999</p>
 									</div>
-									<div class="contact-manage-icon">
-										<!-- edit -->
-										
+									<div class="contact-manage">
+										<div class="contact-manage-icon" onclick="textContact('000-000-000');">
+											<img src="img/Apple/Messages.png">
+										</div>
+										<div class="contact-manage-icon" onclick="callContact('999-999-999');">
+											<img src="img/Apple/Phone.png">
+											
+										</div>
+										<div class="contact-manage-icon" onclick="viewContact('999-999-999');">
+											<img src="img/Apple/Contact.png">
+											
+										</div>
 									</div>
 								</div>
+								-->
+							</div>
+							<div class="plusbutton" onclick="viewContact(false)"> <!-- z-index 3 -->
+								+
 							</div>
 						</div>
 					</div>
@@ -316,11 +341,11 @@
 						</div>
 						<div class="writeadvert"> <!-- z-index 3 -->
 							Write an advert...
-							<textarea></textarea>
+							<textarea id="advert_textarea"></textarea>
 							<div class="minusbutton" onclick="$('.writeadvert').toggle();$('.plusbutton').toggle();"> <!-- z-index 3 -->
 								-
 							</div>
-							<div class="addbutton"> <!-- z-index 3 -->
+							<div class="addbutton" onclick="addAdvert()"> <!-- z-index 3 -->
 								+
 							</div>
 						</div>

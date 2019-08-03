@@ -33,7 +33,7 @@ AddEventHandler('fsn_phones:SYS:request:details', function(num, details)
     local content = f:read("*all")
     f:close()
 
-	deets = json.decode(deets)
+	deets = json.decode(content)
 	
 	TriggerClientEvent('fsn_phones:SYS:recieve:details', source, details, deets)
 end)
@@ -56,7 +56,6 @@ AddEventHandler('fsn_phones:SYS:newNumber', function(charid)
   local src = source
   local number = createNumber()
   MySQL.Async.execute('UPDATE `fsn_characters` SET `char_phone` = @number WHERE `fsn_characters`.`char_id` = @charid;', {['@charid'] = charid, ['@number'] = number}, function(rowsChanged)
-    --TriggerClientEvent('fsn_notify:displayNotification', src, 'Your new number is: <b>'..number, 'centerLeft', 10000, 'info')
     TriggerClientEvent('fsn_phones:SYS:updateNumber', src, number)
 	TriggerClientEvent('fsn_phones:GUI:notification', src, 'img/Apple/Contact.png', 'PHONE', 'Your phone number has been updated to:<br><b>'..number..'</b>', true)
     TriggerClientEvent('fsn_phones:USE:Email', src, {
@@ -64,20 +63,6 @@ AddEventHandler('fsn_phones:SYS:newNumber', function(charid)
 		image = 'https://vignette.wikia.nocookie.net/gtawiki/images/b/b6/Lifeinvader-GTAV-Logo.png/revision/latest/scale-to-width-down/350?cb=20150929201009',
 		body = 'Hi,<br><br>Welcome to LifeInvader, the home of all things technology. We\'ve just processed your request for a new mobile number and have charged your account $250.<br><br><b>New number: </b>'..number..'<br><br>Regards,<br>LifeInvader Team',
     })
-	--[[
-	TriggerClientEvent('fsn_phones:USE:Message', src, {
-		to = number,
-		from = '999-999-888',
-		body = 'I am a sexy teapotI am a sexy teapotI am a sexy teapotI am a sexy teapotI am a sexy teapot',
-		time = os.time()
-	})
-	TriggerClientEvent('fsn_phones:USE:Message', src, {
-		to = number,
-		from = '888-888-887',
-		body = 'I am fucking terrible at replying...',
-		time = os.time()
-	})
-	]]--
   end)
 end)
 
@@ -97,4 +82,15 @@ RegisterServerEvent('fsn_phones:SYS:sendTweet')
 AddEventHandler('fsn_phones:SYS:sendTweet', function(twt)
 	twt.datetime = os.time()
 	TriggerClientEvent('fsn_phones:USE:Tweet', -1, twt)
+end)
+
+local ads = {}
+RegisterServerEvent('fsn_phones:USE:sendAdvert')
+AddEventHandler('fsn_phones:USE:sendAdvert', function(ad, name, num)
+	table.insert(ads, #ads+1, {
+		playerid = source,
+		name = name,
+		advert = ad,
+		number = num
+	})
 end)
