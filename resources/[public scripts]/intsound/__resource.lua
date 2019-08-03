@@ -22,5 +22,7 @@ files({
     'client/html/index.html',
     -- Begin Sound Files Here...
     -- client/html/sounds/ ... .ogg
-    'client/html/sounds/demo.ogg'
+    'client/html/sounds/demo.ogg',
+    'client/html/sounds/ringtone-iphone.ogg',
+    'client/html/sounds/dialtone.ogg',
 })
