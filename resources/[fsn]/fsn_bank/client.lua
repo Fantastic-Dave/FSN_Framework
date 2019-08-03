@@ -170,6 +170,12 @@ RegisterNUICallback('depositMoney', function(tbl)
     local new_bank = banks + tbl.deposit
     moneys = moneys - tbl.deposit
     banks = banks + tbl.deposit
+	TriggerEvent('fsn_phones:SYS:addTransaction', {
+		title = 'Bank Deposit',
+		trantype = 'CREDIT',
+		systype = 'credit',
+		tranamt = tbl.deposit
+	})
     TriggerEvent('fsn_bank:change:bankandwallet', new_wallet, new_bank)
 	TriggerServerEvent('fsn_main:logging:addLog', GetPlayerServerId(PlayerId()), 'money', 'Character('..exports["fsn_main"]:fsn_CharID(GetPlayerServerId(PlayerId()))..') deposited $'..tbl.deposit)
   else
@@ -195,6 +201,16 @@ RegisterNUICallback('withdrawMoney', function(tbl)
       local new_bank = banks - tbl.withdraw
       moneys = moneys + tbl.withdraw
       banks = banks - tbl.withdraw
+	  local title = 'ATM Withdraw'
+	  if tbl.atbank then
+		title = 'Bank Withdraw'
+	  end
+	  TriggerEvent('fsn_phones:SYS:addTransaction', {
+		title = title,
+		trantype = 'DEBIT',
+		systype = 'debit',
+		tranamt = tbl.withdraw
+	})
       TriggerEvent('fsn_bank:change:bankandwallet', new_wallet, new_bank)
 	  TriggerServerEvent('fsn_main:logging:addLog', GetPlayerServerId(PlayerId()), 'money', 'Character('..exports["fsn_main"]:fsn_CharID(GetPlayerServerId(PlayerId()))..') withdrew $'..tbl.withdraw)
     else
