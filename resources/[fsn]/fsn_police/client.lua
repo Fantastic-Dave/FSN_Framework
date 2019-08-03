@@ -340,199 +340,265 @@ AddEventHandler('fsn_police:command:duty', function()
 end)
 
 --------------------------------------------- Handcuffing
-DecorRegister("hardcuff")
-DecorRegister("softcuff")
-local handCuffed = false
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if DecorGetBool(GetPlayerPed(-1), "softcuff") == 1 then
-      DisableControlAction(1, 18, true)
-      DisableControlAction(1, 24, true)
-      DisableControlAction(1, 69, true)
-      DisableControlAction(1, 92, true)
-      DisableControlAction(1, 106, true)
-      DisableControlAction(1, 122, true)
-      DisableControlAction(1, 135, true)
-      DisableControlAction(1, 142, true)
-      DisableControlAction(1, 144, true)
-      DisableControlAction(1, 176, true)
-      DisableControlAction(1, 223, true)
-      DisableControlAction(1, 229, true)
-      DisableControlAction(1, 237, true)
-      DisableControlAction(1, 257, true)
-      DisableControlAction(1, 329, true)
-      DisableControlAction(1, 80, true)
-      DisableControlAction(1, 140, true)
-      DisableControlAction(1, 250, true)
-      DisableControlAction(1, 263, true)
-      DisableControlAction(1, 310, true)
-      DisableControlAction(1, 22, true)
-      DisableControlAction(1, 55, true)
-      DisableControlAction(1, 76, true)
-      DisableControlAction(1, 102, true)
-      DisableControlAction(1, 114, true)
-      DisableControlAction(1, 143, true)
-      DisableControlAction(1, 179, true)
-      DisableControlAction(1, 193, true)
-      DisableControlAction(1, 203, true)
-      DisableControlAction(1, 216, true)
-      DisableControlAction(1, 255, true)
-      DisableControlAction(1, 298, true)
-      DisableControlAction(1, 321, true)
-      DisableControlAction(1, 328, true)
-      DisableControlAction(1, 331, true)
-      DisableControlAction(0, 63, false)
-      DisableControlAction(0, 64, false)
-      DisableControlAction(0, 59, false)
-      DisableControlAction(0, 278, false)
-      DisableControlAction(0, 279, false)
-      DisableControlAction(0, 68, false)
-      DisableControlAction(0, 69, false)
-      DisableControlAction(0, 75, false)
-      DisableControlAction(0, 76, false)
-      DisableControlAction(0, 102, false)
-      DisableControlAction(0, 81, false)
-      DisableControlAction(0, 82, false)
-      DisableControlAction(0, 83, false)
-      DisableControlAction(0, 84, false)
-      DisableControlAction(0, 85, false)
-      DisableControlAction(0, 86, false)
-      DisableControlAction(0, 106, false)
-      DisableControlAction(0, 25, false)
-      while not HasAnimDictLoaded('mp_arresting') do
-        RequestAnimDict('mp_arresting')
-        Citizen.Wait(5)
-      end
-      if not IsEntityPlayingAnim(GetPlayerPed(-1), 'mp_arresting', 'idle', 3) then
-        TaskPlayAnim(GetPlayerPed(-1), 'mp_arresting', 'idle', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
-      end
-    end
-  end
+
+Keys = {
+	["ESC"] = 322, ["F1"] = 288, ["F2"] = 289, ["F3"] = 170, ["F5"] = 166, ["F6"] = 167, ["F7"] = 168, ["F8"] = 169, ["F9"] = 56, ["F10"] = 57, 
+	["~"] = 243, ["1"] = 157, ["2"] = 158, ["3"] = 160, ["4"] = 164, ["5"] = 165, ["6"] = 159, ["7"] = 161, ["8"] = 162, ["9"] = 163, ["-"] = 84, ["="] = 83, ["BACKSPACE"] = 177, 
+	["TAB"] = 37, ["Q"] = 44, ["W"] = 32, ["E"] = 38, ["R"] = 45, ["T"] = 245, ["Y"] = 246, ["U"] = 303, ["P"] = 199, ["["] = 39, ["]"] = 40, ["ENTER"] = 18,
+	["CAPS"] = 137, ["A"] = 34, ["S"] = 8, ["D"] = 9, ["F"] = 23, ["G"] = 47, ["H"] = 74, ["K"] = 311, ["L"] = 182,
+	["LEFTSHIFT"] = 21, ["Z"] = 20, ["X"] = 73, ["C"] = 26, ["V"] = 0, ["B"] = 29, ["N"] = 249, ["M"] = 244, [","] = 82, ["."] = 81,
+	["LEFTCTRL"] = 36, ["LEFTALT"] = 19, ["SPACE"] = 22, ["RIGHTCTRL"] = 70, 
+	["HOME"] = 213, ["PAGEUP"] = 10, ["PAGEDOWN"] = 11, ["DELETE"] = 178,
+	["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173,
+	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
+}
+
+local cuffed = false
+local cuffed_hard = false
+RegisterNetEvent('fsn_police:cuffs:startCuffed')
+AddEventHandler('fsn_police:cuffs:startCuffed', function(srv_id)
+	if not cuffed then
+		local crimPed = GetPlayerPed(GetPlayerFromServerId(srv_id))
+		SetEntityHeading(GetPlayerPed(-1), GetEntityHeading(crimPed))
+		SetEntityCoords(GetPlayerPed(-1), GetOffsetFromEntityInWorldCoords(crimPed, 0.0, 0.45, 0.0))
+		while not HasAnimDictLoaded('mp_arrest_paired') do
+			RequestAnimDict('mp_arrest_paired')
+			Citizen.Wait(5)
+		end
+		TaskPlayAnim(GetPlayerPed(-1), "mp_arrest_paired", "crook_p2_back_right", 8.0, -8, -1, 32, 0, 0, 0, 0)
+		Citizen.Wait(3500)
+		cuffed = true
+	end
 end)
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(0)
-    if DecorGetBool(GetPlayerPed(-1), "hardcuff") == 1 then
-      for i=1,345 do
-        if i > 10 and i ~= 249 and i ~= 25 and i ~= 245 then
-          DisableControlAction(1, i, true)
-        end
-      end
-      DisableControlAction(0, 63, false)
-      DisableControlAction(0, 64, false)
-      DisableControlAction(0, 59, false)
-      DisableControlAction(0, 278, false)
-      DisableControlAction(0, 279, false)
-      DisableControlAction(0, 68, false)
-      DisableControlAction(0, 69, false)
-      DisableControlAction(0, 75, false)
-      DisableControlAction(0, 76, false)
-      DisableControlAction(0, 102, false)
-      DisableControlAction(0, 81, false)
-      DisableControlAction(0, 82, false)
-      DisableControlAction(0, 83, false)
-      DisableControlAction(0, 84, false)
-      DisableControlAction(0, 85, false)
-      DisableControlAction(0, 86, false)
-      DisableControlAction(0, 106, false)
-      DisableControlAction(0, 25, false)
-      while not HasAnimDictLoaded('mp_arresting') do
-        RequestAnimDict('mp_arresting')
-        Citizen.Wait(5)
-      end
-      if not IsEntityPlayingAnim(GetPlayerPed(-1), 'mp_arresting', 'idle', 3) then
-        TaskPlayAnim(GetPlayerPed(-1), 'mp_arresting', 'idle', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
-      end
-    end
-  end
+RegisterNetEvent('fsn_police:cuffs:startunCuffed')
+AddEventHandler('fsn_police:cuffs:startunCuffed', function(srv_id)
+	local crimPed = GetPlayerPed(GetPlayerFromServerId(srv_id))
+	SetEntityHeading(GetPlayerPed(-1), GetEntityHeading(crimPed))
+	SetEntityCoords(GetPlayerPed(-1), GetOffsetFromEntityInWorldCoords(crimPed, 0.0, 0.45, 0.0))
+	DetachEntity(GetPlayerPed(-1), true, false)
+	Citizen.Wait(2200)
+	cuffed = false
+	cuffed_hard = false
+	escorted = false
+	escorted_id = 0
+	Citizen.Wait(500)
+	ClearPedTasks(GetPlayerPed(-1))
+end)
+RegisterNetEvent('fsn_police:cuffs:startCuffing')
+AddEventHandler('fsn_police:cuffs:startCuffing', function()
+	while not HasAnimDictLoaded('mp_arrest_paired') do
+		RequestAnimDict('mp_arrest_paired')
+		Citizen.Wait(5)
+	end
+	TaskPlayAnim(GetPlayerPed(-1), "mp_arrest_paired", "cop_p2_back_right", 8.0, -8, -1, 48, 0, 0, 0, 0)
+	Citizen.Wait(300)
+	TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2, 'handcuffs', 1.0)
+	Citizen.Wait(2200)	
+end)
+RegisterNetEvent('fsn_police:cuffs:startunCuffing')
+AddEventHandler('fsn_police:cuffs:startunCuffing', function()
+	while not HasAnimDictLoaded('mp_arresting') do
+		RequestAnimDict('mp_arresting')
+		Citizen.Wait(5)
+	end
+	TaskPlayAnim(GetPlayerPed(-1), "mp_arresting", "a_uncuff", 8.0, -8, -1, 48, 0, 0, 0, 0)
+	Citizen.Wait(2500)	
+end)
+RegisterNetEvent('fsn_police:cuffs:toggleHard')
+AddEventHandler('fsn_police:cuffs:toggleHard', function()
+	cuffed_hard = not cuffed_hard
 end)
 
-RegisterNetEvent('fsn_police:handcuffs:hard')
-AddEventHandler('fsn_police:handcuffs:hard', function(pl)
-  local ped = GetPlayerPed(GetPlayerFromServerId(pl))
-    if ped == GetPlayerPed(-1) then
-    if handCuffed then
-      TriggerEvent('fsn_notify:displayNotification', 'You have been unrestrained!', 'centerLeft', 2000, 'info')
-    else
-      TriggerEvent('fsn_notify:displayNotification', 'You have been restrained!', 'centerLeft', 2000, 'info')
-    end
-    handCuffed = not handCuffed
-    if(not handCuffed)then
-      EnableControlAction(1, 329, true)
-      DecorSetBool(ped,  "hardcuff",  false)
-    else
-      SetPedCanSwitchWeapon(ped, false)
-      DecorSetBool(ped,  "hardcuff",  true)
-    end
-
-    if DecorGetBool(ped, "hardcuff") == false then
-      StopAnimTask(ped, 'mp_arresting', 'idle', 1.0)
-      SetPedCanSwitchWeapon(GetPlayerPed(-1),  not handCuffed)
-    end
-
-    if DecorGetBool(ped, "hardcuff") == 1 then
-      Citizen.CreateThread(function()
-        Citizen.Wait(1000)
-        TaskPlayAnim(GetPlayerPed(GetPlayerFromServerId(pl)), 'mp_arresting', 'idle', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
-      end)
-    end
-
-    cuffed[pl] = handCuffed
-  end
-end)
-
-RegisterNetEvent('fsn_police:handcuffs:soft')
-AddEventHandler('fsn_police:handcuffs:soft', function(pl)
-  local ped = GetPlayerPed(GetPlayerFromServerId(pl))
-    if ped == GetPlayerPed(-1) then
-    if handCuffed then
-      TriggerEvent('fsn_notify:displayNotification', 'You have been unrestrained!', 'centerLeft', 2000, 'info')
-    else
-      TriggerEvent('fsn_notify:displayNotification', 'You have been restrained!', 'centerLeft', 2000, 'info')
-    end
-    handCuffed = not handCuffed
-    if(not handCuffed)then
-      EnableControlAction(1, 329, true)
-      DecorSetBool(ped,  "softcuff",  false)
-    else
-      SetPedCanSwitchWeapon(ped, false)
-      DecorSetBool(ped,  "softcuff",  true)
-    end
-
-    if DecorGetBool(ped, "softcuff") == false then
-      StopAnimTask(ped, 'mp_arresting', 'idle', 1.0)
-      SetPedCanSwitchWeapon(GetPlayerPed(-1),  not handCuffed)
-    end
-
-    if DecorGetBool(ped, "softcuff") == 1 then
-      Citizen.CreateThread(function()
-        Citizen.Wait(1000)
-        TaskPlayAnim(GetPlayerPed(GetPlayerFromServerId(pl)), 'mp_arresting', 'idle', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
-      end)
-    end
-
-    cuffed[pl] = handCuffed
-  end
-end)
-
---------------------------------------------- DRAG xx
+local escorting = false
+local escorting_id = 0
 local escorted = false
-RegisterNetEvent('fsn_police:toggleDrag')
-AddEventHandler('fsn_police:toggleDrag', function(officer)
-  if not escorted then
-    local myPed = GetPlayerPed(-1)
-    local pdPed = GetPlayerPed(GetPlayerFromServerId(officer))
-    if IsPedInAnyVehicle(GetPlayerPed(-1)) then
-      TaskLeaveVehicle(GetPlayerPed(-1), GetVehiclePedIsIn(GetPlayerPed(-1)), 16)
-    end
-    AttachEntityToEntity(myPed, pdPed, 4103, 11816, 0.48, 0.00, 0.0, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
-    escorted = true
-  else
-    DetachEntity(GetPlayerPed(-1), true, false)
-    escorted = false
-  end
+local escorted_id = 0
+RegisterNetEvent('fsn_police:pd:toggleDrag')
+AddEventHandler('fsn_police:pd:toggleDrag', function(player)
+	if escorting then
+		escorting = false
+		escorting_player = false
+	else
+		escorting = true
+		escorting_id = player
+	end
 end)
+RegisterNetEvent('fsn_police:ply:toggleDrag')
+AddEventHandler('fsn_police:ply:toggleDrag', function(officer)
+	if not escorted then
+		local myPed = GetPlayerPed(-1)
+		local pdPed = GetPlayerPed(GetPlayerFromServerId(officer))
+		if IsPedInAnyVehicle(GetPlayerPed(-1)) then
+			TaskLeaveVehicle(GetPlayerPed(-1), GetVehiclePedIsIn(GetPlayerPed(-1)), 16)
+		end
+		AttachEntityToEntity(myPed, pdPed, 11816, 0.54, 0.44, 0.0, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
+		escorted = true
+	else
+		DetachEntity(GetPlayerPed(-1), true, false)
+		escorted = false
+	end
+end)
+
+DecorRegister("pd_cuff")
+DecorRegister("pd_cuff_hard")
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(2500)
+		if cuffed and not cuffed_hard then
+			if IsPedRunning(GetPlayerPed(-1)) then
+				SetPedToRagdoll(GetPlayerPed(-1), 1, 1000, 0, 0, 0, 0)
+				Citizen.Wait(math.random(2000,5000))
+			end
+		end
+	end
+end)
+Citizen.CreateThread(function()
+	while true do Citizen.Wait(0)
+		if amicop and pdonduty then
+			for id = 0, 31 do
+				if NetworkIsPlayerActive(id) then
+					local ped = GetPlayerPed(id)
+					if ped ~= GetPlayerPed(-1) then
+						if GetDistanceBetweenCoords(GetEntityCoords(ped, false), GetEntityCoords(GetPlayerPed(-1),false), true) < 2 then
+							if DecorGetBool(ped, "pd_cuff") then
+								if DecorGetBool(ped, "pd_cuff_hard") then
+									Util.DrawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~b~POLICE CUFFED~w~\n[E] Soft Cuff\n[Y] Toggle Escort\n[H] Un-cuff', {255,255,255,255}, 0.25)
+								else
+									Util.DrawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~b~POLICE CUFFED~w~\n[E] Hard Cuff\n[Y] Toggle Escort\n[H] Un-cuff', {255,255,255,255}, 0.25)
+								end
+								if IsControlJustPressed(0, 38) then
+									-- E toggle hard
+									TriggerServerEvent('fsn_police:cuffs:toggleHard', GetPlayerServerId(id))
+								end
+								if IsControlJustPressed(0, 246) then
+									-- Y toggle escort
+									TriggerServerEvent('fsn_police:cuffs:toggleEscort', GetPlayerServerId(id))
+								end
+								if IsControlJustPressed(0, 74) then
+									-- H toggle cuffs
+									TriggerServerEvent('fsn_police:cuffs:requestunCuff', GetPlayerServerId(id))							
+								end
+							else
+								showLoadingPrompt("[SHIFT + Y] to cuff "..GetPlayerServerId(id), 3000, 3)
+								if IsControlPressed(0,21) then
+									if IsControlJustPressed(0, 246) then
+										TriggerServerEvent('fsn_police:cuffs:requestCuff', GetPlayerServerId(id))
+									end
+								end 
+							end 
+						end
+					end
+				end
+			end
+		end
+	end
+end)
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		-- cuff stuff
+		if cuffed then
+			DecorSetBool(GetPlayerPed(-1), "pd_cuff", true)
+			if cuffed_hard then
+				DecorSetBool(GetPlayerPed(-1), "pd_cuff_hard", true)
+				for i=1,345 do
+					if i > 10 and i ~= 249 and i ~= 25 and i ~= 245 then
+						DisableControlAction(1, i, true)
+					end
+				end
+				DisableControlAction(0, 63, false)
+				DisableControlAction(0, 63, false)
+				DisableControlAction(0, 64, false)
+				DisableControlAction(0, 59, false)
+				DisableControlAction(0, 278, false)
+				DisableControlAction(0, 279, false)
+				DisableControlAction(0, 68, false)
+				DisableControlAction(0, 69, false)
+				DisableControlAction(0, 75, false)
+				DisableControlAction(0, 76, false)
+				DisableControlAction(0, 102, false)
+				DisableControlAction(0, 81, false)
+				DisableControlAction(0, 82, false)
+				DisableControlAction(0, 83, false)
+				DisableControlAction(0, 84, false)
+				DisableControlAction(0, 85, false)
+				DisableControlAction(0, 86, false)
+				DisableControlAction(0, 106, false)
+				DisableControlAction(0, 25, false)
+			else
+				DecorSetBool(GetPlayerPed(-1), "pd_cuff_hard", false)
+				DisableControlAction(1, 18, true)
+				DisableControlAction(1, 24, true)
+				DisableControlAction(1, 69, true)
+				DisableControlAction(1, 92, true)
+				DisableControlAction(1, 106, true)
+				DisableControlAction(1, 122, true)
+				DisableControlAction(1, 135, true)
+				DisableControlAction(1, 142, true)
+				DisableControlAction(1, 144, true)
+				DisableControlAction(1, 176, true)
+				DisableControlAction(1, 223, true)
+				DisableControlAction(1, 229, true)
+				DisableControlAction(1, 237, true)
+				DisableControlAction(1, 257, true)
+				DisableControlAction(1, 329, true)
+				DisableControlAction(1, 80, true)
+				DisableControlAction(1, 140, true)
+				DisableControlAction(1, 250, true)
+				DisableControlAction(1, 263, true)
+				DisableControlAction(1, 310, true)
+				DisableControlAction(1, 22, true)
+				DisableControlAction(1, 55, true)
+				DisableControlAction(1, 76, true)
+				DisableControlAction(1, 102, true)
+				DisableControlAction(1, 114, true)
+				DisableControlAction(1, 143, true)
+				DisableControlAction(1, 179, true)
+				DisableControlAction(1, 193, true)
+				DisableControlAction(1, 203, true)
+				DisableControlAction(1, 216, true)
+				DisableControlAction(1, 255, true)
+				DisableControlAction(1, 298, true)
+				DisableControlAction(1, 321, true)
+				DisableControlAction(1, 328, true)
+				DisableControlAction(1, 331, true)
+				DisableControlAction(0, 63, false)
+				DisableControlAction(0, 64, false)
+				DisableControlAction(0, 59, false)
+				DisableControlAction(0, 278, false)
+				DisableControlAction(0, 279, false)
+				DisableControlAction(0, 68, false)
+				DisableControlAction(0, 69, false)
+				DisableControlAction(0, 75, false)
+				DisableControlAction(0, 76, false)
+				DisableControlAction(0, 102, false)
+				DisableControlAction(0, 81, false)
+				DisableControlAction(0, 82, false)
+				DisableControlAction(0, 83, false)
+				DisableControlAction(0, 84, false)
+				DisableControlAction(0, 85, false)
+				DisableControlAction(0, 86, false)
+				DisableControlAction(0, 106, false)
+				DisableControlAction(0, 25, false)
+			end
+			while not HasAnimDictLoaded('mp_arresting') do
+				RequestAnimDict('mp_arresting')
+				Citizen.Wait(5)
+			end
+			if not IsEntityPlayingAnim(GetPlayerPed(-1), 'mp_arresting', 'idle', 3) and not IsPedRagdoll(GetPlayerPed(-1)) then
+				TaskPlayAnim(GetPlayerPed(-1), 'mp_arresting', 'idle', 8.0, 1.0, -1, 49, 1.0, 0, 0, 0)
+			end
+		else
+			DecorSetBool(GetPlayerPed(-1), "pd_cuff", false)
+			DecorSetBool(GetPlayerPed(-1), "pd_cuff_hard", false)
+			if cuffed_hard then
+				cuffed_hard = not cuffed_hard
+			end
+		end
+	end
+end)
+
 --------------------------------------------- No wanted xx
 Citizen.CreateThread(function()
   while true do

@@ -162,3 +162,27 @@ AddEventHandler('fsn_police:search:end:money', function(officerid, money_tbl)
   TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*SEARCH |^0^r Wallet: ^6$'..money_tbl.wallet..'^0, Bank: ^6$'..money_tbl.bank)
   TriggerClientEvent('chatMessage', officerid, '', {255,255,255}, '^1^*SEARCH |^0^r Wallet: ^6$'..money_tbl.wallet..'^0, Bank: ^6$'..money_tbl.bank)
 end)
+
+
+----------- escorting
+RegisterServerEvent('fsn_police:cuffs:toggleEscort')
+AddEventHandler('fsn_police:cuffs:toggleEscort', function(ply)
+	TriggerClientEvent('fsn_police:ply:toggleDrag', ply, source)
+	TriggerClientEvent('fsn_police:pd:toggleDrag', source, ply)
+end)
+
+------------ cuffing
+RegisterServerEvent('fsn_police:cuffs:requestCuff')
+AddEventHandler('fsn_police:cuffs:requestCuff', function(ply)
+	TriggerClientEvent('fsn_police:cuffs:startCuffing', source)
+	TriggerClientEvent('fsn_police:cuffs:startCuffed', ply, source)
+end)
+RegisterServerEvent('fsn_police:cuffs:requestunCuff')
+AddEventHandler('fsn_police:cuffs:requestunCuff', function(ply)
+	TriggerClientEvent('fsn_police:cuffs:startunCuffing', source)
+	TriggerClientEvent('fsn_police:cuffs:startunCuffed', ply, source)
+end)
+RegisterServerEvent('fsn_police:cuffs:toggleHard')
+AddEventHandler('fsn_police:cuffs:toggleHard', function(ply)
+	TriggerClientEvent('fsn_police:cuffs:toggleHard', ply)
+end)
