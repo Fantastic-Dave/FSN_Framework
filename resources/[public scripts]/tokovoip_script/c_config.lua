@@ -56,3 +56,10 @@ AddEventHandler("onClientResourceStart", function(resource)
 		TriggerEvent("initializeVoip"); -- Trigger this event whenever you want to start the voip
 	end
 end)
+
+RegisterNetEvent('tokovoip:toggleStereo')
+AddEventHandler('tokovoip:toggleStereo', function()
+	TokoVoipConfig.enableStereoAudio = not TokoVoipConfig.enableStereoAudio
+	TriggerEvent('fsn_notify:displayNotification', 'enableStereoAudio: '..tostring(TokoVoipConfig.enableStereoAudio), 'centerLeft', 3000, 'info')
+	
+end)

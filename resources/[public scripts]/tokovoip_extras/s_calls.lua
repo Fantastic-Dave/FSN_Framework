@@ -144,6 +144,9 @@ end)
 
 AddEventHandler('chatMessage', function(source, auth, msg)
 	local split = fsn_SplitString(msg, ' ')
+	if split[1] == '/stereo' then
+		TriggerClientEvent('tokovoip:toggleStereo', source)
+	end 
 	if split[1] == '/call' then
 		if split[2] and string.find(split[2], '-') then
 			TriggerEvent('fsn_phone:call:startCalling', source, split[2])
