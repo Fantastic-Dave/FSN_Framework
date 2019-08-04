@@ -94,6 +94,23 @@ function Util.GetPlayers()
 end
 	
 --[[
+	Util.PrependTable(t: table, v: any)
+		Add the value to position one of the original table and return it
+]]--
+function Util.PrependTable(t, v)
+	if not t then print('fsn_main (cl_utils.lua) [Util.PrependTable] - You need to provide a table in argument position 1') return end
+	if not v then print('fsn_main (cl_utils.lua) [Util.PrependTable] - You need to provide a value in argument position 2') return end
+	if #t > 0 and not t[1] then print('fsn_main (cl_utils.lua) [Util.PrependTable] - Table provided is not using numbers for keys.') return end
+	
+	local newt = {}
+	table.insert(newt, 1, v)
+	for i=1,#t do 
+		table.insert(newt, i+1, t[i])
+	end
+	
+	return newt
+end
+--[[
 	Util.GetClosestPlayer()
 		Stolen from Frazzle in #scripting-gated, returns the closest player + how far away they are 
 ]]
