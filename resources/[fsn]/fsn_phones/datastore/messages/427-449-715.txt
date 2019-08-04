@@ -1,1 +1,0 @@
-{"009225687":{"preview":"Asstwat...","texts":[{"from":false,"text":"Asstwat","datetime":999}]},"999-999-999":{"preview":"This is a preview of the text message...","texts":[{"from":true,"text":"this is a text","datetime":999},{"from":false,"text":"i know this is a text","datetime":999},{"from":true,"text":"are you sure? this is a text","datetime":999}]}}
