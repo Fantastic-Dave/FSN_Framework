@@ -8,11 +8,17 @@ AddEventHandler('fsn_criminalmisc:drugs:streetselling:send', function(tbl)
 	for k, v in pairs(tbl) do
 		if v.premium then
 			if exports["fsn_inventory"]:fsn_HasItem('radio_receiver') then
+				--[[
 				TriggerEvent('fsn_phone:recieveMessage', {
 				  sender = 'DarkWeb',
 				  from_number = 666,
 				  to_number = -1,
 				  message = 'We just got word drugs are selling better in: '..v.name
+				})
+				]]--
+				TriggerEvent('fsn_phones:USE:Email', {
+					subject = '[DarkWeb] Update...',
+					body = 'We just got word drugs are selling better in: '..v.name,
 				})
 				print('new premium is '..v.name..' ('..k..') and incity is '..tostring(v.incity))
 			end
