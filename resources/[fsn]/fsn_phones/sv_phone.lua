@@ -1,5 +1,11 @@
-local datastorePath = 'F:/FiveM/zfsn_fxs-server/resources/[fsn]/fsn_phones/datastore/'
+-- path for live server
+local datastorePath = '/home/fivem/live/1/resources/[fsn]/fsn_phones/datastore/'
+
 local dbg = true -- misc notifications for the client
+if dbg then
+	-- path for james' pc
+	datastorePath = 'F:/FiveM/zfsn_fxs-server/resources/[fsn]/fsn_phones/datastore/'
+end
 
 function createNumber()
 	local created = false
