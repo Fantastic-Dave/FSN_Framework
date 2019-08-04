@@ -131,11 +131,11 @@ AddEventHandler('fsn_phone:call:declineCall', function(src)
 				v.status = 'finished'
 				
 				TriggerClientEvent('fsn_phone:call:effects:stop', src)
-				TriggerClientEvent('fsn_phone:call:effects:stop', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(v.caller)))
-				TriggerClientEvent('fsn_phone:call:effects:isInCall', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(v.caller)), false)
+				TriggerClientEvent('fsn_phone:call:effects:stop', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.caller))
+				TriggerClientEvent('fsn_phone:call:effects:isInCall', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.caller), false)
 				
-				TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(v.caller)), '<b>'..tonumber(v.calling)..'</b> is busy, try again later!', 'centerRight', 3000, 'error')
-				TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(tonumber(v.calling)), 'Call declined', 'centerRight', 3000, 'error')
+				TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.caller), '<b>'..v.calling..'</b> is busy, try again later!', 'centerRight', 3000, 'error')
+				TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.calling), 'Call declined', 'centerRight', 3000, 'error')
 			end
 		end
 	end
