@@ -463,13 +463,15 @@ Citizen.CreateThread(function()
 						if GetDistanceBetweenCoords(GetEntityCoords(ped, false), GetEntityCoords(GetPlayerPed(-1),false), true) < 2 then
 							if DecorGetBool(ped, "pd_cuff") then
 								if DecorGetBool(ped, "pd_cuff_hard") then
-									Util.DrawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~b~POLICE CUFFED~w~\n[E] Soft Cuff\n[Y] Toggle Escort\n[H] Un-cuff', {255,255,255,255}, 0.25)
+									Util.DrawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~b~POLICE CUFFED~w~\n[LSHIFT+E] Soft Cuff\n[Y] Toggle Escort\n[H] Un-cuff', {255,255,255,255}, 0.25)
 								else
-									Util.DrawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~b~POLICE CUFFED~w~\n[E] Hard Cuff\n[Y] Toggle Escort\n[H] Un-cuff', {255,255,255,255}, 0.25)
+									Util.DrawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~b~POLICE CUFFED~w~\n[LSHIFT+E] Hard Cuff\n[Y] Toggle Escort\n[H] Un-cuff', {255,255,255,255}, 0.25)
 								end
-								if IsControlJustPressed(0, 38) then
-									-- E toggle hard
-									TriggerServerEvent('fsn_police:cuffs:toggleHard', GetPlayerServerId(id))
+								if IsControlPressed(0,21) then --lshift
+									if IsControlJustPressed(0, 38) then
+										-- E toggle hard
+										TriggerServerEvent('fsn_police:cuffs:toggleHard', GetPlayerServerId(id))
+									end
 								end
 								if IsControlJustPressed(0, 246) then
 									-- Y toggle escort
