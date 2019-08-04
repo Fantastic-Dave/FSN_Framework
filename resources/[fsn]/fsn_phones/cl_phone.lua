@@ -333,8 +333,15 @@ AddEventHandler('fsn_phones:USE:Message', function(msg)
 end)
 RegisterNetEvent('fsn_phones:USE:Tweet')
 AddEventHandler('fsn_phones:USE:Tweet', function(tweet)
+	--[[
 	local id = #datastore['tweets']+1
 	table.insert(datastore['tweets'], id, {
+		username = tweet.username, 
+		tweet = tweet.tweet,
+		datetime = tweet.time
+	})
+	]]
+	datastore['tweets'] = Util.PrependTable(datastore['tweets'], {
 		username = tweet.username, 
 		tweet = tweet.tweet,
 		datetime = tweet.time
@@ -362,7 +369,8 @@ end)
 RegisterNetEvent('fsn_phones:SYS:addTransaction')
 AddEventHandler('fsn_phones:SYS:addTransaction', function(tran)
 	print 'got transaction'
-	table.insert(datastore['transactions'], #datastore['transactions']+1, tran)
+	--table.insert(datastore['transactions'], #datastore['transactions']+1, tran)
+	datastore['transactions'] = Util.PrependTable(datastore['transactions'], tran)
 	sendDataStore()
 end)
 RegisterNetEvent('fsn_phones:SYS:addCall')
@@ -371,12 +379,20 @@ RegisterNetEvent('fsn_phones:SYS:addCall', function(num, incoming, missed)
 	if datastore['contacts'][num] then
 		name = datastore['contacts'][num].name
 	end
+	datastore['calls'] = Util.PrependTable(datastore['calls'], {
+		from = name,
+		number = num,
+		incoming = incoming,
+		missed = missed,
+	})
+	--[[
 	table.insert(datastore['calls'], #datastore['calls']+1, {
 		from = name,
 		number = num,
 		incoming = incoming,
 		missed = missed,
 	})
+	]]--
 	sendDataStore()
 end)
 
