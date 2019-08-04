@@ -38,6 +38,7 @@ client_script 'carwash/client.lua'
 
 -- TRUNK
 client_script 'trunk/client.lua'
+server_script 'trunk/server.lua'
 
 -- HOLDUP
 client_script 'holdup/client.lua'

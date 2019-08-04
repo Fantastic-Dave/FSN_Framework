@@ -1,4 +1,5 @@
 local intrunk = false
+local invehtrunk = false
 local offsets = {
 	[1] = { ["name"] = "taxi", ["yoffset"] = 0.0, ["zoffset"] = -0.5 },
     [2] = { ["name"] = "buccaneer", ["yoffset"] = 0.5, ["zoffset"] = 0.0 },
@@ -39,11 +40,14 @@ function DestroyTrunkCam()
 end
 
 function GetInTrunk(veh)
+	DetachEntity(GetPlayerPed(-1))
 	local d1,d2 = GetModelDimensions(GetEntityModel(veh))
 	if d2["z"] > 1.4 then
 		return
 	end
 
+	invehtrunk = veh
+	
 	RequestAnimDict("fin_ext_p1-7")
 	while not HasAnimDictLoaded("fin_ext_p1-7") do
 		Citizen.Wait(0)
@@ -69,6 +73,37 @@ function GetInTrunk(veh)
 	DoScreenFadeIn(1000)
 end
 
+RegisterNetEvent('fsn_vehiclecontrol:trunk:forceIn')
+AddEventHandler('fsn_vehiclecontrol:trunk:forceIn', function(netid)
+	print'im being forced into a vehicle'
+	if NetworkDoesEntityExistWithNetworkId(netid) then
+		local veh = NetworkGetEntityFromNetworkId(netid)
+		DoScreenFadeOut(500)
+		GetInTrunk(veh)
+		intrunk = veh
+	else
+		print('no entity exists with netid: '..tostring(netid))
+	end
+end)
+
+RegisterNetEvent('fsn_vehiclecontrol:trunk:forceOut')
+AddEventHandler('fsn_vehiclecontrol:trunk:forceOut', function()
+	if intrunk then
+		local d1,d2 = GetModelDimensions(GetEntityModel(invehtrunk))
+		local troonk = GetOffsetFromEntityInWorldCoords(invehtrunk, 0.0,d1["y"]-0.2,0.0)
+	
+		DoScreenFadeOut(500)
+		DetachEntity(GetPlayerPed(-1))
+		ClearPedTasks(GetPlayerPed(-1))
+		SetEntityCoords(GetPlayerPed(-1), troonk.x, troonk.y, troonk.z)
+		if GetEntitySpeed(veh) > 5 then
+			SetPedToRagdoll(GetPlayerPed(-1), 1, 5000, 0, 0, 0, 0)
+		end
+		intrunk = false
+		DestroyTrunkCam()
+	end
+end)
+
 Util.Tick(function()
 	if not IsPedInAnyVehicle(GetPlayerPed(-1)) then
 			local veh = fsn_lookingAt()
@@ -77,11 +112,19 @@ Util.Tick(function()
 					local d1,d2 = GetModelDimensions(GetEntityModel(veh))
 					local troonk = GetOffsetFromEntityInWorldCoords(veh, 0.0,d1["y"]-0.2,0.0)
 					if GetDistanceBetweenCoords(troonk.x, troonk.y, troonk.z, GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
-						Util.DrawText3D(troonk.x, troonk.y, troonk.z, '[E] Get In Trunk', {255, 255, 255, 140}, 0.3)
-						if IsControlJustPressed(0,38) then
-							DoScreenFadeOut(500)
-							GetInTrunk(veh)
-							intrunk = veh
+						if exports["fsn_ems"]:carryingWho() ~= 0  then
+							Util.DrawText3D(troonk.x, troonk.y, troonk.z, '[E] Put '..exports["fsn_ems"]:carryingWho()..' in trunk', {255, 255, 255, 140}, 0.3)
+							if IsControlJustPressed(0,38) then
+								TriggerServerEvent('fsn_ems:carry:end', exports["fsn_ems"]:carryingWho())
+								TriggerServerEvent('fsn_vehiclecontrol:trunk:forceIn', exports["fsn_ems"]:carryingWho(), NetworkGetNetworkIdFromEntity(veh))
+							end
+						else
+							Util.DrawText3D(troonk.x, troonk.y, troonk.z, '[E] Get In Trunk', {255, 255, 255, 140}, 0.3)
+							if IsControlJustPressed(0,38) then
+								DoScreenFadeOut(500)
+								GetInTrunk(veh)
+								intrunk = veh
+							end
 						end
 					end
 				end
