@@ -2,7 +2,7 @@ TokoVoipConfig = {
 	refreshRate = 100, -- Rate at which the data is sent to the TSPlugin
 	networkRefreshRate = 2000, -- Rate at which the network data is updated/reset on the local ped
 	playerListRefreshRate = 5000, -- Rate at which the playerList is updated
-	minVersion = "1.2.4", -- Version of the TS plugin required to play on the server
+	minVersion = "1.2.5", -- Version of the TS plugin required to play on the server
 
 	distance = {
 		15, -- Normal speech distance in gta distance units
@@ -19,8 +19,10 @@ TokoVoipConfig = {
 		-- TeamSpeak channel name used by the voip
 		-- If the TSChannelWait is enabled, players who are currently in TSChannelWait will be automatically moved
 		-- to the TSChannel once everything is running
-		--TSChannel = "SERVER_TOKOVOIP",
-		TSChannel = "Development Lounge",
+		
+		TSChannel = "SERVER_TOKOVOIP",
+		--TSChannel = "Development Lounge",
+		
 		TSPassword = "M9l3IMVt31RlQm7NtF1Km31ESe5vcN", -- TeamSpeak channel password (can be empty)
 
 		-- Optional: TeamSpeak waiting channel name, players wait in this channel and will be moved to the TSChannel automatically
