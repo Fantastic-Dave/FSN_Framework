@@ -447,7 +447,6 @@ function processfleeca() {
 }
 
 function processphone() {
-	console.log('doing some shit')
 	var insertString = ''
 	$('#insertCalls').html('')
 	for (var key in datastore['calls']){
