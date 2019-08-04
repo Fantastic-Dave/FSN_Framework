@@ -365,6 +365,20 @@ AddEventHandler('fsn_phones:SYS:addTransaction', function(tran)
 	table.insert(datastore['transactions'], #datastore['transactions']+1, tran)
 	sendDataStore()
 end)
+RegisterNetEvent('fsn_phones:SYS:addCall')
+RegisterNetEvent('fsn_phones:SYS:addCall', function(num, incoming, missed)
+	local name = num
+	if datastore['contacts'][num] then
+		name = datastore['contacts'][num].name
+	end
+	table.insert(datastore['calls'], #datastore['calls']+1, {
+		from = name,
+		number = num,
+		incoming = incoming,
+		missed = missed,
+	})
+	sendDataStore()
+end)
 
 AddEventHandler('fsn_main:character', function(char)
 	myChar = char.char_id

@@ -108,6 +108,9 @@ AddEventHandler('fsn_phone:call:endCall', function(callid)
 	
 	TriggerClientEvent('TokoVoip:removePlayerFromRadio', called, v.channel)
 	TriggerClientEvent('TokoVoip:removePlayerFromRadio', caller, v.channel)
+	
+	TriggerClientEvent('fsn_phones:SYS:addCall', called, v.caller, true, false)
+	TriggerClientEvent('fsn_phones:SYS:addCall', caller, v.calling, false, false)
 end)
 
 RegisterServerEvent('fsn_phone:call:answerCall')
@@ -136,6 +139,9 @@ AddEventHandler('fsn_phone:call:declineCall', function(src)
 				
 				TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.caller), '<b>'..v.calling..'</b> is busy, try again later!', 'centerRight', 3000, 'error')
 				TriggerClientEvent('fsn_notify:displayNotification', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.calling), 'Call declined', 'centerRight', 3000, 'error')
+				
+				TriggerClientEvent('fsn_phones:SYS:addCall', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.calling), v.caller, true, true)
+				TriggerClientEvent('fsn_phones:SYS:addCall', exports.fsn_main:fsn_GetPlayerFromPhoneNumber(v.caller), v.calling, false, true)
 			end
 		end
 	end
