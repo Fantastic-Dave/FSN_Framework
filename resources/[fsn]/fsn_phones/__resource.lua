@@ -1,5 +1,9 @@
 resource_manifest_version "05cfa83c-a124-4cfa-a768-c24a5811d8f9"
 
+-- GLOBAL UTILS
+client_script '@fsn_main/cl_utils.lua'
+server_script '@fsn_main/sv_utils.lua'
+
 -- gui stuffs
 ui_page 'html/index.html'
 
