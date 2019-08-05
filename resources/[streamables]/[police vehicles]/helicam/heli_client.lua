@@ -223,16 +223,21 @@ function RenderVehicleInfo(vehicle)
 	local model = GetEntityModel(vehicle)
 	local vehname = GetLabelText(GetDisplayNameFromVehicleModel(model))
 	local licenseplate = GetVehicleNumberPlateText(vehicle)
+
+	local playerPos = GetEntityCoords(vehicle, true )
+	local streetA, streetB = Citizen.InvokeNative( 0x2EB41072B4C1E4C0, playerPos.x, playerPos.y, playerPos.z, Citizen.PointerValueInt(), Citizen.PointerValueInt() )
+
+	
 	SetTextFont(0)
 	SetTextProportional(1)
-	SetTextScale(0.0, 0.55)
+	SetTextScale(0.0, 0.45)
 	SetTextColour(255, 255, 255, 255)
 	SetTextDropshadow(0, 0, 0, 0, 255)
 	SetTextEdge(1, 0, 0, 0, 255)
 	SetTextDropShadow()
 	SetTextOutline()
 	SetTextEntry("STRING")
-	AddTextComponentString("Model: "..vehname.."\nPlate: "..licenseplate)
+	AddTextComponentString("Model: "..vehname.."\nPlate: "..licenseplate.."\nStreet: "..GetStreetNameFromHashKey(streetA)..", ".. GetStreetNameFromHashKey(streetB))
 	DrawText(0.45, 0.9)
 end
 
