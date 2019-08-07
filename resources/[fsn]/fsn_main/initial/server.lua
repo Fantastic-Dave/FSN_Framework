@@ -3,6 +3,13 @@ AddEventHandler('fsn_main:validatePlayer', function()
 end)
 ---------------------------- Character Shit
 cur_chars = {}
+AddEventHandler('playerDropped', function()
+	for k, v in pairs(cur_chars) do
+		if v.ply_id == source then
+			cur_chars[k] = nil
+		end
+	end
+end)
 RegisterServerEvent('fsn_main:updateCharacters')
 RegisterServerEvent('fsn_main:createCharacter')
 AddEventHandler('fsn_main:createCharacter', function(data)
