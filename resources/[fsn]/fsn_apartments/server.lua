@@ -30,7 +30,27 @@ local apartments = {
 	[30] = {occupied=false},
 	[31] = {occupied=false},
 	[32] = {occupied=false},
+	[33] = {occupied=false},
+	[34] = {occupied=false},
+	[35] = {occupied=false},
+	[36] = {occupied=false},
+	[37] = {occupied=false},
+	[38] = {occupied=false},
+	[39] = {occupied=false},
+	[40] = {occupied=false},
+	[41] = {occupied=false},
+	[42] = {occupied=false},
+	[43] = {occupied=false},
+	[44] = {occupied=false},
+	[45] = {occupied=false},
+	[46] = {occupied=false},
+	[47] = {occupied=false},
+	[48] = {occupied=false},
+	[49] = {occupied=false},
+	[50] = {occupied=false},
+	[51] = {occupied=false}, 
 }
+
 
 function getAvailableAppt(source)
 	for k, v in pairs(apartments) do
