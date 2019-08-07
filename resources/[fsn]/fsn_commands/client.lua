@@ -15,7 +15,7 @@ end
 
 function fsn_NearestPlayersC(x, y, z, radius)
 	local players = {}
-	for id = 0, 31 do
+	for id = 0, 128 do
 		local ppos = GetEntityCoords(GetPlayerPed(id))
 		if GetDistanceBetweenCoords(ppos.x, ppos.y, ppos.z, x, y, z) < radius then
 			table.insert(players, #players+1, id)
@@ -25,7 +25,7 @@ end
 
 function fsn_NearestPlayersS(x, y, z, radius)
 	local players = {}
-	for id = 0, 32 do
+	for id = 0, 128 do
 		local ppos = GetEntityCoords(GetPlayerPed(id))
 		if GetDistanceBetweenCoords(ppos.x, ppos.y, ppos.z, x, y, z) < radius then
 			table.insert(players, #players+1, GetPlayerServerId(id))
