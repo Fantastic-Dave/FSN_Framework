@@ -76,7 +76,7 @@ Citizen.CreateThread(function()
 		else
 			DecorSetBool(GetPlayerPed(-1), "fsn_ems:dead", false)
 		end
-		for id = 0, 128 do
+		for _, id in ipairs(GetActivePlayers()) do --for id = 0, 128 do
 			local ped = GetPlayerPed(id)
 			if DecorGetBool(ped, "fsn_ems:dead") and ped ~= GetPlayerPed(-1) then
 				if GetDistanceBetweenCoords(GetEntityCoords(ped, false), GetEntityCoords(GetPlayerPed(-1),false), true) < 2 then
