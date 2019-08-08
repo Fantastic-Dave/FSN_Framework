@@ -25,8 +25,8 @@ Citizen.CreateThread(function()
 					SetEntityCollision(ped, false, false)
 				end
 			else
-				SetVehicleDensityMultiplierThisFrame(0.6)
-				SetRandomVehicleDensityMultiplierThisFrame(0.6)
+				SetVehicleDensityMultiplierThisFrame(0.2)
+				SetRandomVehicleDensityMultiplierThisFrame(0.2)
 				local ped = GetPlayerPed(id)
 				if ped ~= GetPlayerPed(-1) then
 					SetEntityVisible(ped, true, 0)
