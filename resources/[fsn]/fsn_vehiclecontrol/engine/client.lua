@@ -199,7 +199,7 @@ AddEventHandler('fsn_vehiclecontrol:giveKeys', function()
 	if IsPedInAnyVehicle(GetPlayerPed(-1)) then
 		if exports.fsn_cargarage:fsn_IsVehicleOwner(GetVehiclePedIsIn(GetPlayerPed(-1), false)) then
 			local ply = false
-			for id = 0, 32 do
+			for _, id in ipairs(GetActivePlayers()) do --for id = 0, 32 do
 	      if NetworkIsPlayerActive(id) then
 	        ped = GetPlayerPed(id)
 					if ped ~= GetPlayerPed(-1) then
