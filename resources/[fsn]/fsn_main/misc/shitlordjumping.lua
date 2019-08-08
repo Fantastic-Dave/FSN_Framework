@@ -18,6 +18,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1)
+		NetworkSessionVoiceLeave()
 		if IsPedJumping(GetPlayerPed(-1)) then
 			if not canJump then
 				SetPedToRagdoll(GetPlayerPed(-1), 1, 1000, 0, 0, 0, 0)
