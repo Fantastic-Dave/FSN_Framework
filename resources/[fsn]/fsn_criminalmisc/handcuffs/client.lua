@@ -134,7 +134,7 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
-		for id = 0, 128 do
+		for _, id in ipairs(GetActivePlayers()) do
 			if NetworkIsPlayerActive(id) then
 				  local ped = GetPlayerPed(id)
 				  if GetDistanceBetweenCoords(GetEntityCoords(ped, false), GetEntityCoords(GetPlayerPed(-1),false), true) < 2 and DecorGetBool(ped, "crim_cuff") then
@@ -200,7 +200,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		if HasHandcuffs() and not exports["fsn_ems"]:fsn_IsDead() and not IsPedInAnyVehicle(GetPlayerPed(-1)) and not exports["fsn_apartments"]:inInstance() then
-			for id = 0, 68 do
+			for _, id in ipairs(GetActivePlayers()) do
 				if NetworkIsPlayerActive(id) then
 				  local ped = GetPlayerPed(id)
 				  if not IsPedInAnyVehicle(ped) and GetDistanceBetweenCoords(GetEntityCoords(ped, false), GetEntityCoords(GetPlayerPed(-1),false), true) < 2 and ped ~= GetPlayerPed(-1) then
