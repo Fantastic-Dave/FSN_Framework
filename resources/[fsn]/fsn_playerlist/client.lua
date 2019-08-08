@@ -44,7 +44,7 @@ end)
 
 function fsn_displayPlayerMenu()
   local players = {}
-  for i=0,49 do
+  for _, i in ipairs(GetActivePlayers()) do --for i=0,49 do
     if NetworkIsPlayerActive(i) then
       local idee = 0
       for k, v in pairs(current_characters) do
