@@ -242,7 +242,7 @@ Citizen.CreateThread(function()
         end
       end
       ]]
-      for id = 0, 32 do
+      for id = 0, 128 do
         if NetworkIsPlayerActive(id) then
           local ped = GetPlayerPed(id)
           if IsPedInAnyVehicle(ped) then
@@ -456,7 +456,7 @@ end)
 Citizen.CreateThread(function()
 	while true do Citizen.Wait(0)
 		if amicop and pdonduty then
-			for id = 0, 31 do
+			for id = 0, 128 do
 				if NetworkIsPlayerActive(id) then
 					local ped = GetPlayerPed(id)
 					if ped ~= GetPlayerPed(-1) then
