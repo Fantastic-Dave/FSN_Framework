@@ -40,6 +40,8 @@ files({
 	'html/pages_css/iphone/phone.css',
 	'html/pages_css/iphone/twitter.css', 
 	'html/pages_css/iphone/whitelists.css',
+	'html/pages_css/iphone/garage.css',
+	'html/pages_css/iphone/darkweb.css',
 	
 	--Home Icons
 	'html/img/Apple/Contact.png',
@@ -54,6 +56,8 @@ files({
 	'html/img/Apple/Whitelist.png',
 	'html/img/Apple/Noti.png',
 	'html/img/Apple/Fleeca.png',
+	'html/img/Apple/Garage.png',
+	'html/img/Apple/darkweb.png',
 	
 	--Phone Info
 	'html/img/Apple/wifi.png',
@@ -70,6 +74,7 @@ files({
 	'html/img/Apple/banner_icons/twitter.png',
 	'html/img/Apple/banner_icons/wallet.png',
 	'html/img/Apple/banner_icons/wl.png',
+	'html/img/Apple/banner_icons/garage.png',
 
 	-- App Misc
 	'html/img/Apple/fleeca-bg.png',
