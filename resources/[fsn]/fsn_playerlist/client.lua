@@ -94,7 +94,7 @@ Citizen.CreateThread(function()
     for i=0,99 do
       N_0x31698aa80e0223f8(i)
     end
-    for id = 0, 31 do
+    for _, id in ipairs(GetActivePlayers()) do --for id = 0, 31 do
       if NetworkIsPlayerActive(id) then
         ped = GetPlayerPed(id)
         x1, y1, z1 = table.unpack( GetEntityCoords( GetPlayerPed( -1 ), true ) )
