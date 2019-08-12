@@ -242,7 +242,7 @@ Citizen.CreateThread(function()
         end
       end
       ]]
-      for id = 0, 128 do
+      for _, id in ipairs(GetActivePlayers()) do
         if NetworkIsPlayerActive(id) then
           local ped = GetPlayerPed(id)
           if IsPedInAnyVehicle(ped) then
