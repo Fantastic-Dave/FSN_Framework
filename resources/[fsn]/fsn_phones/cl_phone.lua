@@ -114,7 +114,14 @@ local datastore = {
 		}
 	},
 	transactions = {},
+	vehicles = {}
 }
+
+RegisterNetEvent('fsn_phones:SYS:receiveGarage')
+AddEventHandler('fsn_phones:SYS:receiveGarage', function(vehtbl)
+	datastore['vehicles'] = vehtbl
+	sendDataStore()
+end)
 
 local phoneEnabled = false
 
@@ -138,6 +145,7 @@ function sendDataStore()
 		contacts = datastore['contacts'],
 		transactions = datastore['transactions'],
 		calls = datastore['calls'],
+		vehicles = datastore['vehicles'],
 		balance = exports["fsn_main"]:fsn_GetBank()
 	})
 end
@@ -168,6 +176,7 @@ function togglePhone()
 		if not IsPedInAnyVehicle(GetPlayerPed(-1),  false) then
 			TaskStartScenarioInPlace(GetPlayerPed(-1), "WORLD_HUMAN_STAND_MOBILE", 0, true);
 		end
+		TriggerServerEvent('fsn_phones:SYS:requestGarage')
 		sendDataStore()
 	end
 	phoneEnabled = not phoneEnabled

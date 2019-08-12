@@ -5,7 +5,7 @@ var currentPage = 'home';
 var myNumber = '000-000-000';
 var myEmail = 'myUsername@liveinvader.com';
 var currentPhone = 'iphone';
-var pages = ['home', 'adverts', 'call', 'contacts', 'email', 'fleeca', 'messages', 'pay', 'phone', 'twitter', 'whitelists'];
+var pages = ['home', 'adverts', 'call', 'contacts', 'email', 'fleeca', 'messages', 'pay', 'phone', 'twitter', 'whitelists', 'garage', 'darkweb'];
 
 var debug = false
 function log(msg) {
@@ -180,6 +180,7 @@ $(function () {
 			datastore['contacts'] = event.data.contacts;
 			datastore['balance'] = event.data.balance;
 			datastore['transactions'] = event.data.transactions;
+			datastore['vehicles'] = event.data.vehicles;
 			datastore['calls'] = event.data.calls;
 		}
 		if (event.data.type == 'status') {
@@ -488,6 +489,64 @@ function processphone() {
 			'</div>'
 	}
 	$('#insertCalls').html(insertString);	
+}
+
+function processgarage() {
+	if (datastore.vehicles.length > 0) {
+		$('#garageApp-error').hide()
+		$('#insertVehicles').show()
+		
+		$('#insertVehicles').html('');		
+		var insertString = ''
+		for (var key in datastore['vehicles']){
+			var veh = datastore['vehicles'][key]
+			var finance = ''
+			veh.veh_finance = JSON.parse(veh.veh_finance)
+			if (veh.veh_finance.length > 0) {
+				if (veh.veh_finance.outright == false) {
+					finance = '<p><b>Payment Information</b></p>'+
+					'<table class="wl-table">'+
+						'<thead>'+
+							'<tr>'+
+								'<th>Date</th>'+
+								'<th>Amount</th>'+
+								'<th>Status</th>'+
+							'</tr>'+
+						'</thead>'+
+						'<tbody>'+
+							'<td>nil</td>'+
+							'<td>price</td>'+
+							'<td><span class="paid">PAID</span></td>'+
+						'</tbody>'+
+					'</table>'
+				} else {
+					finance = '<p><b>Purchased outright</b>: '+veh.veh_finance.buyprice+'</p>';
+				}
+			} else {
+				finance = 'No finance information available for this vehicle.'
+			}
+			insertString = insertString+
+				'<div class="vehicle">'+
+					'<h1>'+veh.veh_displayname+'</h1>'+
+					'<div class="vehicle-info">'+
+						'<p><b>Type</b>: '+veh.veh_type+'</p>'+
+						'<p><b>Plate</b>: '+veh.veh_plate+'</p>'+
+					'</div>'+
+					'<div class="vehicle-info">'+
+						'<p><b>Garage Status</b>: '+veh.veh_status+'</p>'+
+						'<p><b>Stored At</b>: '+veh.veh_garage+'</p>'+
+					'</div>'+
+					'<div class="vehicle-info">'+
+						finance+
+					'</div>'+
+					'<button style="margin:5px;margin-top:20px;width:90%;height:30px;border-radius:5px;color:white;background-color: #303030;font-weight:bold;border:0px;">Restore Vehicle</button>'+
+				'</div>'
+		}
+		$('#insertVehicles').html(insertString);
+	} else {
+		$('#garageApp-error').show()
+		$('#insertVehicles').hide()
+	}
 }
 
 /*

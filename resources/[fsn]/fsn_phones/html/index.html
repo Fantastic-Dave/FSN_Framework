@@ -36,6 +36,8 @@
 		<link href="pages_css/iphone/phone.css" rel="stylesheet" type="text/css" />
 		<link href="pages_css/iphone/twitter.css" rel="stylesheet" type="text/css" />
 		<link href="pages_css/iphone/whitelists.css" rel="stylesheet" type="text/css" />
+		<link href="pages_css/iphone/garage.css" rel="stylesheet" type="text/css" />
+		<link href="pages_css/iphone/darkweb.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<!-- NOTIFICATION STUFF FOR IPHONE-->
@@ -103,6 +105,14 @@
 						<img src="img/Apple/Noti.png">
 						<h1>Alerts</h1>
 					</div>
+					<div class="homebutton" onclick="changePage('garage', 'iphone')">
+						<img src="img/Apple/Garage.png">
+						<h1>Garage</h1>
+					</div>
+					<div class="homebutton" onclick="changePage('darkweb', 'iphone')">
+						<img src="img/Apple/darkweb.png">
+						<h1></h1>
+					</div>
 				</div>
 				<div id="page-iphone-phone">
 					<div class="iphone-app-titlebar">
@@ -134,6 +144,67 @@
 								</div>
 							</div>
 							-->
+						</div>
+					</div>
+				</div>
+				<div id="page-iphone-garage">
+					<div class="iphone-app-titlebar">
+						<img src="img/Apple/banner_icons/garage.png">
+					</div>
+					<div class="iphone-app-main">
+						<div id="garageApp-error" class="connection-error">
+							<h1>500</h1>
+							<h2>An Error Occured</h2>
+							<p>Either you don't own a vehicle, or the app hasn't received them yet. Try again later.</p>
+						</div>
+						<div id="insertVehicles" class="garage-list">
+							<!-- 
+							<div class="vehicle">
+								<h1>Vehicle Name</h1>
+								<div class="vehicle-info">
+									<p><b>Type</b>: </p>
+									<p><b>Plate</b>: </p>
+								</div>
+								<div class="vehicle-info">
+									<p><b>Garage Status</b>: </p>
+									<p><b>Stored At</b>: </p>
+								</div>
+								<div class="vehicle-info">
+									<p><b>Financed</b>: </p>
+									<p><b>Payment Information</b></p>
+									<table class="wl-table">
+										<thead>
+											<tr>
+												<th>Date</th>
+												<th>Amount</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											<td>nil</td>
+											<td>price</td>
+											<td><span class="paid">PAID</span></td>
+										</tbody>
+									</table>
+								</div>
+								<button style="margin:5px;margin-top:20px;width:90%;height:30px;border-radius:5px;color:white;background-color: #303030;font-weight:bold;border:0px;">Restore Vehicle</button>
+							</div>
+							-->
+						</div>
+					</div>
+				</div>
+				<div id="page-iphone-darkweb">
+					<div class="iphone-app-titlebar">
+						<!-- <img src="img/Apple/banner_icons/contacts.png"> -->
+					</div>
+					<div class="iphone-app-main">
+						<div class="connection-error">
+							<h1>403</h1>
+							<h2>Access Denied</h2>
+							<p>The server denied your request, ensure to check ACLs to whitelist your IP address.</p>
+						</div>
+						<div class="darkweb-acl">
+							
 						</div>
 					</div>
 				</div>

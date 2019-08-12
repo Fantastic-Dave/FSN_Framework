@@ -55,6 +55,15 @@ AddEventHandler('fsn_phones:SYS:set:details', function(num, details, tbl)
 	end
 end)
 
+RegisterServerEvent('fsn_phones:SYS:requestGarage')
+AddEventHandler('fsn_phones:SYS:requestGarage', function()
+	local char_id = exports["fsn_main"]:fsn_CharID(source)
+	local src = source
+	MySQL.Async.fetchAll("SELECT * FROM fsn_vehicles where char_id = @charid", {['@charid'] = char_id }, function(tbl)
+		TriggerClientEvent('fsn_phones:SYS:receiveGarage', src, tbl)
+    end)
+end)
+
 --TriggerEvent('fsn_phones:SYS:set:details', '504-262-425', 'contacts', {{name='james',number='999-999-999'},{name='james',number='999-999-999'},{name='james',number='999-999-999'}})
 
 RegisterServerEvent('fsn_phones:SYS:newNumber')
