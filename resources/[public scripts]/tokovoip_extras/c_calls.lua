@@ -27,7 +27,7 @@ Citizen.CreateThread(function()
 		if beingCalled then
 			rings = rings + 1
 			if rings > 5 then
-				ExecuteCommand('/decline')
+				ExecuteCommand('decline')
 				TriggerEvent('fsn_notify:displayNotification', 'Call rejected', 'centerLeft', 3000, 'error')
 			else
 				TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 2, 'ringtone-iphone', 0.3)
