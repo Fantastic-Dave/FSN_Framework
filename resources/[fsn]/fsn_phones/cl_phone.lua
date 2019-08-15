@@ -33,10 +33,10 @@ end)
 function init() -- function to check if the character has init'd
 	if myNumber == '000-000-000' then
 		exports['mythic_notify']:DoCustomHudText('error', 'init() == false - head to life invader to get a phone number', 4000)
-		return false -- change to false before live
+		return true -- change to false before live
 	elseif myUsername == 'unset'  then
 		exports['mythic_notify']:DoCustomHudText('error', 'init() == false - your character has not been loaded properly, rejoin the server', 4000)
-		return false -- change to false before live
+		return true -- change to false before live
 	else
 		return true
 	end
@@ -146,7 +146,9 @@ function sendDataStore()
 		transactions = datastore['transactions'],
 		calls = datastore['calls'],
 		vehicles = datastore['vehicles'],
-		balance = exports["fsn_main"]:fsn_GetBank()
+		balance = exports["fsn_main"]:fsn_GetBank(),
+		vpn1 = exports["fsn_inventory"]:fsn_HasItem('vpn1'),
+		vpn2 = exports["fsn_inventory"]:fsn_HasItem('vpn2')
 	})
 end
 

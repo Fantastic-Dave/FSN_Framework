@@ -17,5 +17,7 @@ exports({
   'fsn_EMSDuty',
   'fsn_getEMSLevel',
   'fsn_Airlift',
+  'ems_isBleeding',
+  'isCrouching',
   'carryingWho'
 })

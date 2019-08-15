@@ -172,6 +172,20 @@ function fsn_computeCurrentSpace()
   return num
 end
 
+function fsn_CanCarry(item, amt)
+	amt = math.floor(amt)
+	local space = fsn_computeMaxSpace()
+	local weight = items_table[item].weight * amt
+	local new_weight = fsn_computeCurrentSpace() + weight
+	if new_weight > space then
+		print(new_weight..' > '..space)
+		return false
+	else
+		print(new_weight..' < '..space)
+		return true
+	end
+end
+
 RegisterNetEvent('fsn_police:search:start:inventory')
 AddEventHandler('fsn_police:search:start:inventory', function(officerid)
   local my_inv = {}

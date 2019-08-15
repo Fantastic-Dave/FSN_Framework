@@ -26,6 +26,8 @@ items_table = {
     weight = 0.4,
     desc = 'Use this to repair yourself.',
     use = function()
+		TriggerEvent('mythic_hospital:client:RemoveBleed')
+			  TriggerEvent('fsn_ems:ad:stopBleeding')
 		  if GetEntityHealth(GetPlayerPed(-1)) < 131 then
 			  TriggerEvent('fsn_inventory:item:take', 'bandage', 1)
 			  while ( not HasAnimDictLoaded( "oddjobs@assassinate@guard" ) ) do
@@ -35,8 +37,7 @@ items_table = {
 			  TaskPlayAnim(GetPlayerPed(-1), "oddjobs@assassinate@guard", "unarmed_fold_arms", 8.0, 1.0, 2500, 2, 0, 0, 0, 0 )  
 			  Citizen.Wait(1500)
 			  SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))+15)
-			  TriggerEvent('mythic_hospital:client:RemoveBleed')
-
+			  
 	  else
 		TriggerEvent('fsn_notify:displayNotification', 'You don\'t need to use a bandage!<br>Visit an EMS personnel or a hospital to heal more.', 'centerLeft', 3500, 'error')
 	  end
@@ -426,6 +427,20 @@ items_table = {
 		else
 			TriggerEvent('fsn_notify:displayNotification', 'Nothing to do with that here', 'centerLeft', 3000, 'error')
 		end
+    end,
+  },
+  ["vpn1"] = {
+    display_name = 'VPN v1.0',
+    weight = 5,
+    desc = 'you dodgy guy',
+    use = function()
+    end,
+  },
+  ["vpn2"] = {
+    display_name = 'VPN v2.0',
+    weight = 5,
+    desc = 'you dodgy guy',
+    use = function()
     end,
   },
 }

@@ -339,13 +339,17 @@ RegisterNUICallback( "inventoryTake", function( data, cb )
 								--TriggerEvent('fsn_apartments:store:item', data.item, res)
 								--print('trying to store '..res..' x '..data.item)
 								if res <= apptdetails["apt_utils"]["inventory"][data] then
-									if apptdetails["apt_utils"]["inventory"][data] == res then
-										TriggerEvent('fsn_inventory:item:add', data, res)
-										--table.remove(apptdetails["apt_utils"]["inventory"], data)
-										apptdetails["apt_utils"]["inventory"][data] = nil
+									if exports["fsn_inventory"]:fsn_CanCarry(data, res) then
+										if apptdetails["apt_utils"]["inventory"][data] == res then
+											TriggerEvent('fsn_inventory:item:add', data, res)
+											--table.remove(apptdetails["apt_utils"]["inventory"], data)
+											apptdetails["apt_utils"]["inventory"][data] = nil
+										else
+											TriggerEvent('fsn_inventory:item:add', data, res)
+											apptdetails["apt_utils"]["inventory"][data] = apptdetails["apt_utils"]["inventory"][data] - res
+										end
 									else
-										TriggerEvent('fsn_inventory:item:add', data, res)
-										apptdetails["apt_utils"]["inventory"][data] = apptdetails["apt_utils"]["inventory"][data] - res
+										TriggerEvent('fsn_notify:displayNotification', 'You cannot carry this, you are not a gym lad.', 'centerLeft', 3000, 'error')
 									end
 								else
 									TriggerEvent('fsn_notify:displayNotification', 'There is not this many stored.', 'centerLeft', 3000, 'error')

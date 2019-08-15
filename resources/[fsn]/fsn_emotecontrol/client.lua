@@ -1050,6 +1050,7 @@ Citizen.CreateThread(function()
 		--end
 	end
 end)
+--[[
 local crouched = false
 
 DecorRegister("player:isCrouched", 2)
@@ -1084,7 +1085,7 @@ Citizen.CreateThread( function()
         end
     end
 end )
-
+]]
 local mp_pointing = false
 local keyPressed = false
 

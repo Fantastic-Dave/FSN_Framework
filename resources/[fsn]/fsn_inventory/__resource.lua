@@ -14,6 +14,7 @@ exports({
   'fsn_HasItem',
   'fsn_GetItemAmount',
   'fsn_GetItemDetails',
+  'fsn_CanCarry',
   'EnumerateObjects'
 })
 
@@ -23,7 +24,7 @@ client_script '_item_misc/drug_selling.lua'
 client_script '_item_misc/dm_laundering.lua'
 client_script '_item_misc/burger_store.lua'
 
-ui_page "gui/ui.html"
+ui_page "gui/index.html"
 
 files {
 	"gui/index.html",

@@ -531,6 +531,7 @@ local LostMCModels = {1330042375,1032073858,850468060,-96953009}
 local start = 0
 RegisterNetEvent('fsn_bankrobbery:LostMC:spawn')
 AddEventHandler('fsn_bankrobbery:LostMC:spawn', function()
+	--[[ bye bye mc spawns
 	local mypeds = {}
 	for k, v in pairs(LostMCSpawns) do
 		local mdl = LostMCModels[math.random(1, #LostMCModels)]
@@ -578,6 +579,7 @@ AddEventHandler('fsn_bankrobbery:LostMC:spawn', function()
 			break
 		end
 	end
+	]]--
 end)
 
 -----------------------

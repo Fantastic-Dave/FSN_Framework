@@ -449,19 +449,8 @@ AddEventHandler('chatMessage', function(source, auth, msg)
       TriggerClientEvent('fsn_notify:displayNotification', source, 'You are not on duty.', 'centerRight', 4000, 'error')
     end
   end
-  if split[1] == '/walk' then
-    if clipsets[split[2]] then
-      TriggerClientEvent('fsn_commands:walk:set', -1, source, clipsets[split[2]])
-    else
-      TriggerClientEvent('fsn_notify:displayNotification', source, '/walktypes for a list of types.', 'centerRight', 4000, 'error')
-    end
-  end
-  if split[1] == '/walktypes' then
-    local str = ''
-    for k, v in pairs(clipsets) do
-      str = str..k..', '
-    end
-    TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Walk types: '..str)
+  if split[1] == '/walktype' then
+	TriggerClientEvent('fsn_ems:set:WalkType', source, split[2])
   end
   if split[1] == '/destroyweapon' then
 	if fsn_policeOnDuty(source) then

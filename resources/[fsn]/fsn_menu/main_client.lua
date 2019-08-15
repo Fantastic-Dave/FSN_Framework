@@ -139,6 +139,8 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
   if ( data == "phone" ) then
 		ToggleActionMenu()
 		ExecuteCommand('p')
+  elseif split[1] == 'walktype' then
+	ExecuteCommand('walktype '..split[3])
   elseif split[1] == 'hdc' then
     if split[2] == 'escort' then
       local ply = fsn_NearestPlayersS(GetEntityCoords(GetPlayerPed(-1)).x, GetEntityCoords(GetPlayerPed(-1)).y, GetEntityCoords(GetPlayerPed(-1)).z, 2)[1]

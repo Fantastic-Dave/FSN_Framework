@@ -182,6 +182,8 @@ $(function () {
 			datastore['transactions'] = event.data.transactions;
 			datastore['vehicles'] = event.data.vehicles;
 			datastore['calls'] = event.data.calls;
+			datastore['vpn1'] = event.data.vpn1;
+			datastore['vpn2'] = event.data.vpn2;
 		}
 		if (event.data.type == 'status') {
 			if (event.data.display) {
@@ -546,6 +548,27 @@ function processgarage() {
 	} else {
 		$('#garageApp-error').show()
 		$('#insertVehicles').hide()
+	}
+}
+
+function processdarkweb() {
+	if (datastore.vpn1 || datastore.vpn2) {
+		// generate pages
+		$('#darkweb-error').hide()
+		$('#darkweb-menu').hide()
+		$('#darkweb-acl').show()
+		
+		$('#darkweb-page2').hide()
+		$('#darkweb-page1').show()
+		
+		if (datastore.vpn2) {
+			$('#darkweb-menu').show()
+			
+		}
+	} else {
+		// no vpn == no access
+		$('#darkweb-acl').hide()
+		$('#darkweb-error').show()
 	}
 }
 

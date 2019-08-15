@@ -1,6 +1,6 @@
 function GetWeaponInfo(hash)	
 	if hashGunToText[tostring(hash)] then
-		tbl = {name = hashGunToText[tostring(hash)].name, hash = hash, isweapon = hashGunToText[tostring(hash)].isweapon} 
+		tbl = {name = hashGunToText[tostring(hash)].name, hash = hash, isweapon = hashGunToText[tostring(hash)].isweapon, ammoType = hashGunToText[tostring(hash)].ammoType, isAuto = hashGunToText[tostring(hash)].isAuto} 
 		return tbl
 	else
 		print('cannot find weaponinfo for '..hash)
@@ -18,6 +18,7 @@ function HoldingWeapon()
 	end
 	return false
 end
+
 local name = ''
 local myWeapons = {}
 function GetWeapons()
@@ -77,6 +78,9 @@ function weaponInfo(hash)
 		TriggerEvent('fsn_notify:displayNotification', 'There is no weaponinfo regarding '..GetSelectedPedWeapon(GetPlayerPed(-1))..' contact a developer', 'centerRight', 10000, 'error')
 		RemoveWeaponFromPed(GetPlayerPed(-1), GetSelectedPedWeapon(GetPlayerPed(-1)))
 	else
+		if weapon == nil then
+			print 'im a dumbass'
+		end
 		return weapon
 	end
 end
@@ -98,6 +102,7 @@ AddEventHandler('fsn_criminalmisc:weapons:add', function(hash, ammo)
 			hash = hash,
 			model = info.model,
 			ammo = ammo,
+			ammoType = info.ammoType,
 			owner = {
 				serial = srl,
 				name = name
@@ -128,6 +133,8 @@ AddEventHandler('fsn_criminalmisc:weapons:add:police', function(hash, ammo)
 			hash = hash,
 			model = info.model,
 			ammo = ammo,
+			ammoType = info.ammoType,
+			isAuto = info.isAuto,
 			owner = {
 				serial = srl,
 				name = name
@@ -158,6 +165,8 @@ AddEventHandler('fsn_criminalmisc:weapons:add:unknown', function(hash, ammo)
 			hash = hash,
 			model = info.model,
 			ammo = ammo,
+			ammoType = info.ammoType,
+			isAuto = true,
 			owner = {
 				serial = 'illegible',
 				name = 'UNKNOWN'

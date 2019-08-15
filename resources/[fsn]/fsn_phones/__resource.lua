@@ -87,5 +87,6 @@ files({
 })
 
 client_script 'cl_phone.lua'
+client_script 'darkweb/cl_order.lua'
 server_script '@mysql-async/lib/MySQL.lua'
 server_script 'sv_phone.lua'

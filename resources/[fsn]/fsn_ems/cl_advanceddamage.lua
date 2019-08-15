@@ -1,5 +1,12 @@
 local isLoggedIn = false
 local isBleeding = 0
+function ems_isBleeding()
+	return isBleeding
+end
+RegisterNetEvent('fsn_ems:ad:stopBleeding')
+AddEventHandler('fsn_ems:ad:stopBleeding', function()
+	isBleeding = false
+end)
 local advanceBleedTimer = 0
 local blackoutTimer = 0
 
@@ -301,13 +308,91 @@ function GetDamagingWeapon(ped)
     return nil
 end
 
+local walktypes = { -- looks to be alright...
+	["default"] = 0,
+	["hurry"] = "move_m@hurry@a",
+	["business"] = "move_m@business@a",
+	["brave"] = "move_m@brave",
+	["slightlydrunk"] = "move_m@drunk@slightlydrunk",
+	["injured"] = "move_m@injured",
+	["tough_guy"] = "move_m@tough_guy@",
+	["sassy"] = "move_m@sassy",
+	["sad"] = "move_m@sad@a",
+	["posh"] = "move_m@posh@",
+	["alien"] = "move_m@alien",
+	["non_chalant"] = "move_m@non_chalant",
+	["hobo"] = "move_m@hobo@a",
+	["money"] = "move_m@money",
+	["swagger"] = "move_m@swagger",
+	["joy"] = "move_m@joy",
+	["powerwalk"] = "move_m@powerwalk",
+	["shadyped"] = "move_m@shadyped@a",
+	["tired"] = "move_m@tired",
+	["sexy"] = "move_f@sexy",
+	["maneater"] = "move_f@maneater",
+	["chichi"] = "move_f@chichi"
+}
+local currentwalktype = walktypes["default"]
+RegisterNetEvent('fsn_ems:set:WalkType')
+AddEventHandler('fsn_ems:set:WalkType', function(wt)
+	if not walktypes[wt] then
+		exports['mythic_notify']:DoCustomHudText('error', 'Walktype ('..wt..') is undefined.', 3000)
+		return
+	end
+	currentwalktype = walktypes[wt]
+	if currentwalktype ~= 0 then
+		RequestAnimSet(currentwalktype)
+		while not HasAnimSetLoaded(currentwalktype) do
+			Citizen.Wait(0)
+			print('loading animset: '..currentwalktype)
+		end
+		SetPedMovementClipset(GetPlayerPed(-1), currentwalktype, true)
+	else
+		ResetPedMovementClipset(GetPlayerPed(-1), 0)
+	end	
+	exports['mythic_notify']:DoCustomHudText('success', 'Walktype updated: '..currentwalktype, 5000)
+end)
+local crouching = false
+function isCrouching()
+	return crouching 
+end
+Citizen.CreateThread(function()
+	while true do Citizen.Wait(0)
+		if IsControlJustPressed(0, 36) then
+			if crouching then
+				ResetPedMovementClipset(GetPlayerPed(-1), 0, 0)
+			else
+				if not HasAnimSetLoaded( "move_ped_crouched" ) then
+					RequestAnimSet( "move_ped_crouched" )
+					while ( not HasAnimSetLoaded( "move_ped_crouched" ) ) do
+						Citizen.Wait(0)
+						print('loading clipset: move_ped_crouched')
+					end
+				end
+				SetPedMovementClipset(GetPlayerPed(-1), "move_ped_crouched", 0)
+			end
+			crouching = not crouching
+		end
+	end
+end)
 function ProcessRunStuff(ped)
     if IsInjuryCausingLimp() and not (onPainKiller > 0)  then
         RequestAnimSet("move_m@injured")
         while not HasAnimSetLoaded("move_m@injured") do
             Citizen.Wait(0)
         end
-        SetPedMovementClipset(ped, "move_m@injured", 1 )
+		if crouching then
+			if not HasAnimSetLoaded( "move_ped_crouched" ) then
+				RequestAnimSet( "move_ped_crouched" )
+				while ( not HasAnimSetLoaded( "move_ped_crouched" ) ) do
+					Citizen.Wait(0)
+					print('loading clipset: move_ped_crouched')
+				end
+			end
+			SetPedMovementClipset(GetPlayerPed(-1), "move_ped_crouched", 0)
+		else
+			SetPedMovementClipset(ped, "move_m@injured", 1 )
+		end
         SetPlayerSprint(PlayerId(), false)
 
         local level = 0
@@ -318,7 +403,6 @@ function ProcessRunStuff(ped)
         end
 
         SetPedMoveRateOverride(ped, MovementRate[level])
-
         if wasOnPainKillers then
             SetPedToRagdoll(PlayerPedId(), 1500, 2000, 3, true, true, false)
             wasOnPainKillers = false
@@ -326,8 +410,33 @@ function ProcessRunStuff(ped)
         end
     else
         SetPedMoveRateOverride(ped, 1.0)
-        ResetPedMovementClipset(ped, 0)
-        if DecorGetInt(ped, 'player_thirst') > 25 or onPainKiller > 0 then
+		
+		--ResetPedMovementClipset(ped, 0)
+		if crouching then
+			if not HasAnimSetLoaded( "move_ped_crouched" ) then
+				RequestAnimSet( "move_ped_crouched" )
+				while ( not HasAnimSetLoaded( "move_ped_crouched" ) ) do
+					Citizen.Wait(0)
+					print('loading clipset: move_ped_crouched')
+				end
+			end
+			SetPedMovementClipset(GetPlayerPed(-1), "move_ped_crouched", 0)
+		else
+			if currentwalktype ~= 0 then
+				if not HasAnimSetLoaded(currentwalktype) then
+					RequestAnimSet(currentwalktype)
+					while not HasAnimSetLoaded(currentwalktype) do
+						Citizen.Wait(0)
+						print('loading animset: '..currentwalktype)
+					end
+				end
+				SetPedMovementClipset(GetPlayerPed(-1), currentwalktype, 0)
+			else
+				ResetPedMovementClipset(GetPlayerPed(-1), 0, 0)
+			end
+		end
+		
+		if DecorGetInt(ped, 'player_thirst') > 25 or onPainKiller > 0 then
             SetPlayerSprint(PlayerId(), true)
         end
 

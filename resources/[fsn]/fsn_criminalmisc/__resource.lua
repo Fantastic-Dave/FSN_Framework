@@ -36,5 +36,6 @@ client_script 'drugs/_effects/client.lua'
 exports {
 	"GetWeapons",
 	"weaponInfo",
-	"HoldingWeapon"
+	"HoldingWeapon",
+	"GetWeaponInfo"
 }

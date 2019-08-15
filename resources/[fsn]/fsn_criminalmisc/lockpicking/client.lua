@@ -220,7 +220,7 @@ AddEventHandler('fsn_criminalmisc:lockpicking', function()
 		if GetDistanceBetweenCoords(lost_safe.x, lost_safe.y, lost_safe.z, GetEntityCoords(GetPlayerPed(-1))) < 2 then
 			print(exports['fsn_police']:fsn_getCopAmt()..' are online')
 			if exports['fsn_police']:fsn_getCopAmt() < 3 then
-				TriggerEvent('fsn_bankrobbery:LostMC:spawn')
+				--TriggerEvent('fsn_bankrobbery:LostMC:spawn')
 				TriggerEvent('fsn_notify:displayNotification', 'There are not enough police to do this heist.', 'centerLeft', 3500, 'error')
 			else
 				picklocking = true
@@ -247,7 +247,14 @@ AddEventHandler('fsn_criminalmisc:lockpicking', function()
 						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
 						if math.random(1, 100) > 50 then TriggerEvent('fsn_inventory:item:add', 'joint', math.random(1,10)) end
 						if math.random(1, 100) > 70 then TriggerEvent('fsn_inventory:item:add', 'packaged_cocaine', math.random(1,5)) end
-						TriggerEvent('fsn_bankrobbery:LostMC:spawn')
+						--TriggerEvent('fsn_bankrobbery:LostMC:spawn')
+						local pos = GetEntityCoords(GetPlayerPed(-1))
+						local coords = {
+						 x = pos.x,
+						 y = pos.y,
+						 z = pos.z
+						}
+						TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-90 | LostMC have reported a robbery at the ganghouse...')
 					else
 						TriggerEvent('fsn_notify:displayNotification', 'You cannot do this yet', 'centerLeft', 3500, 'error')
 					end
