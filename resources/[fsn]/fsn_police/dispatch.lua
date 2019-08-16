@@ -42,8 +42,7 @@ local actions = {
 	blip = 207
   },
   [8] = {
-    name = 'Speeding Vehicle',
-    tencode = '10-98',
+    name = false, -- speeding vehicle
     reward = 500,
 	blip = 315
   },
@@ -83,6 +82,12 @@ local actions = {
     reward = 500,
 	blip = 110
   },
+  [15] = {
+    name = 'Civil Disturbance',
+    tencode = '10-15',
+    reward = 500,
+	blip = 491
+  },
 }
 local dispatch_calls = {}
 local disp_enable = false
@@ -121,20 +126,23 @@ function displayDispatch(x,y,z,id,chatPrint)
     --  z = z
     --})
     if disp_enable then
-      disp_id = #dispatch_calls+1
-      last_disp = current_time
-      table.insert(dispatch_calls, disp_id, {
-        type = actions[id].tencode,
-        cx = x,
-        cy = y
-      })
-	  if id == 7 then
-		TriggerEvent('chatMessage', '', {255,255,255}, '^6^*:fsn_police:^0^r A BANK IS BEING ROBBED @ '..sname)
+		if actions[id].name then
+		  disp_id = #dispatch_calls+1
+		  last_disp = current_time
+		  table.insert(dispatch_calls, disp_id, {
+			type = actions[id].tencode,
+			cx = x,
+			cy = y
+		  })
+		  if id == 7 then
+			TriggerEvent('chatMessage', '', {255,255,255}, '^6^*:fsn_police:^0^r A BANK IS BEING ROBBED @ '..sname)
+		  end
+		  
+		  SetNotificationTextEntry("STRING");
+		  AddTextComponentString('Call: ~r~'..actions[id].tencode..'~w~ ('..actions[id].name..')\nLocation: ~y~'..sname);
+		  SetNotificationMessage("CHAR_DEFAULT", "CHAR_DEFAULT", true, 1, "~g~DISPATCH:~s~", "");
+		  DrawNotification(false, true);
 	  end
-      SetNotificationTextEntry("STRING");
-      AddTextComponentString('Call: ~r~'..actions[id].tencode..'~w~ ('..actions[id].name..')\nLocation: ~y~'..sname);
-      SetNotificationMessage("CHAR_DEFAULT", "CHAR_DEFAULT", true, 1, "~g~DISPATCH:~s~", "");
-      DrawNotification(false, true);
     end
 	if actions[id].blip ~= false then
 		print 'triggering addblip'
@@ -161,6 +169,7 @@ end)
 
 local myGSR = false
 local lastGSR = 0
+local last_Fight = 0
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
@@ -168,6 +177,19 @@ Citizen.CreateThread(function()
 			print 'adding gsr'
 			lastGSR = current_time
 			myGSR = true
+			TriggerEvent('fsn_evidence:ped:addState', 'GSR Residue', 'LFINGER')
+		end
+		if IsPedInMeleeCombat(GetPlayerPed(-1)) and not pdonduty then
+			if last_Fight+10000 < GetGameTimer() then
+				local pos = GetEntityCoords(GetPlayerPed(-1))
+			   local coords = {
+				 x = pos.x,
+				 y = pos.y,
+				 z = pos.z
+			   }
+			   TriggerServerEvent('fsn_police:dispatch', coords, 15)
+				last_Fight = GetGameTimer()
+			end
 		end
 		if lastGSR + 600 < current_time then
 			if myGSR then

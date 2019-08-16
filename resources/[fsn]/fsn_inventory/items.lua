@@ -28,6 +28,8 @@ items_table = {
     use = function()
 		TriggerEvent('mythic_hospital:client:RemoveBleed')
 			  TriggerEvent('fsn_ems:ad:stopBleeding')
+			  
+		TriggerEvent('fsn_evidence:ped:addState', 'Has bandage', 'UPPER_BODY', 20)
 		  if GetEntityHealth(GetPlayerPed(-1)) < 131 then
 			  TriggerEvent('fsn_inventory:item:take', 'bandage', 1)
 			  while ( not HasAnimDictLoaded( "oddjobs@assassinate@guard" ) ) do
@@ -127,6 +129,9 @@ items_table = {
     use = function()
       TriggerEvent('fsn_inventory:use:food', 5)
       TriggerEvent('fsn_inventory:item:take', 'cupcake', 1)
+	  if math.random(1, 100) < 5 then
+		TriggerEvent('fsn_evidence:ped:addState', 'Crumbs down chest', 'UPPER_BODY')
+	  end
     end,
   	price = 1,
     modelhash = -2054442544
@@ -267,7 +272,7 @@ items_table = {
     weight = 2,
     desc = '2g of weed for you.',
     use = function()
-      TriggerEvent('fsn_notify:displayNotification', 'Head to weed crafting to roll a joint', 'centerLeft', 3500, 'error')
+	  TriggerEvent('fsn_notify:displayNotification', 'Head to weed crafting to roll a joint', 'centerLeft', 3500, 'error')
     end,
     modelhash = -1964997422,
     price = 0
@@ -278,6 +283,7 @@ items_table = {
     desc = 'Lets sell this Joint!?',
     use = function()
 		TriggerEvent('fsn_criminalmisc:drugs:effects:weed')
+		TriggerEvent('fsn_evidence:ped:addState', 'Seems agitated', 'UPPER_BODY')
 		TriggerEvent('fsn_inventory:item:take', 'joint', 1)
 	  --TriggerEvent('fsn_notify:displayNotification', 'Sell this joint to locals<br>We\'re working on making these smokable', 'centerLeft', 3500, 'error')
     end,
@@ -311,6 +317,7 @@ items_table = {
     use = function()
 		TriggerEvent('fsn_criminalmisc:drugs:effects:meth')
 		TriggerEvent('fsn_inventory:item:take', 'meth_rocks', 1)
+		TriggerEvent('fsn_evidence:ped:addState', 'Red eyes', 'HEAD')
 		TriggerEvent('mythic_hospital:client:UseAdrenaline')
 	  --TriggerEvent('fsn_notify:displayNotification', 'Sell this meth to locals<br>We\'re working on making these takeable', 'centerLeft', 3500, 'error')
     end,
@@ -323,6 +330,7 @@ items_table = {
     desc = 'sell this to locals',
     use = function()
 		TriggerEvent('fsn_criminalmisc:drugs:effects:cocaine')
+		TriggerEvent('fsn_evidence:ped:addState', 'Grinding jaw', 'HEAD')
 		TriggerEvent('fsn_inventory:item:take', 'packaged_cocaine', 1)
     end,
   },

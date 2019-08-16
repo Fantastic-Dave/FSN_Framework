@@ -296,14 +296,14 @@ Citizen.CreateThread(function()
               if currentlytowing then
                 DisplayHelpText("~r~Remove the vehicle first")
               else
-				if availableTows[string.lower(GetVehicleNumberPlateText(towedvehicle))] then
+				--if availableTows[string.lower(GetVehicleNumberPlateText(towedvehicle))] then
 					DisplayHelpText("Press ~INPUT_CONTEXT~ to impound")
 					if IsControlJustPressed(1,51) then
 					  ImpoundVehicle()
 					end
-				else
-					DisplayHelpText("~r~"..string.lower(GetVehicleNumberPlateText(towedvehicle)).." is not marked for tow<br>The police will be able to help with this.")
-				end
+				--else
+				--	DisplayHelpText("~r~"..string.lower(GetVehicleNumberPlateText(towedvehicle)).." is not marked for tow<br>The police will be able to help with this.")
+				--end
               end
             end
           end

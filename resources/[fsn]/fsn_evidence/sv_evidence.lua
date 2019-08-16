@@ -42,7 +42,7 @@ AddEventHandler('fsn_evidence:drop:casing', function(wep,loc)
 		},
 		expire = os.time() + 300,
 	}
-	TriggerClientEvent('fsn_evidence:receive', -1, evidence)
+	--TriggerClientEvent('fsn_evidence:receive', -1, evidence)
 end)
 
 RegisterServerEvent('fsn_evidence:drop:blood')
@@ -55,8 +55,8 @@ AddEventHandler('fsn_evidence:drop:blood', function(charid,loc)
 			dnastring = charid
 		},
 		expire = os.time() + 300,
-	},
-	TriggerClientEvent('fsn_evidence:receive', -1, evidence)
+	}
+	--TriggerClientEvent('fsn_evidence:receive', -1, evidence)
 end)
 
 Citizen.CreateThread(function()
