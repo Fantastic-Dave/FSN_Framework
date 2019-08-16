@@ -28,7 +28,8 @@ local crafting_stations = {
     },
 	]]
     loc = {x = 1273.991, y = -1711.7100, z = 54.771},
-    cost = 175,
+	state = 'Fuck me you stink\nof weed',
+    cost = 80,
     required = {
       item = '2g_weed',
       itemtitle = '2G Weed',
@@ -37,7 +38,7 @@ local crafting_stations = {
     gives = {
       item = 'joint',
       itemtitle = 'Joint',
-      amount = 3
+      amount = 4
     }
   },
 
@@ -70,7 +71,7 @@ local crafting_stations = {
     },
 	]]
     loc = {x = -586.707, y = -1601.208, z = 27.010},
-    cost = 50,
+    cost = 25,
     required = {
       item = 'acetone',
       itemtitle = 'Acetone',
@@ -90,7 +91,7 @@ local crafting_stations = {
     },
 	]]
     loc = {x = 2431.5795898438, y = 4963.7548828125, z = 42.347560882568},
-    cost = 150,
+    cost = 60,
     required = {
       item = 'phosphorus',
       itemtitle = 'Phosphorus',
@@ -172,9 +173,13 @@ Citizen.CreateThread(function()
           if IsControlJustPressed(0,38) then
             if exports.fsn_main:fsn_GetWallet() >= v.cost then
               if exports.fsn_inventory:fsn_GetItemAmount(v.required.item) >= v.required.amount then
-                local waittime = math.random(26000,30000)
+                local waittime = math.random(4000,10000)
                 TriggerEvent('fsn_notify:displayNotification', 'Gathering ['..v.gives.amount..'X] '..v.gives.itemtitle, 'centerLeft', waittime, 'info')
                 Citizen.Wait(waittime)
+				if v.state then
+					print('addingstate: '..v.state)
+					TriggerEvent('fsn_evidence:ped:addState', v.state, 'UPPER_BODY', 120)
+				end
                 if v.required.item ~= 'none' then
                   TriggerEvent('fsn_inventory:item:take', v.required.item, v.required.amount)
                 end
