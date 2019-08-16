@@ -3,6 +3,9 @@ local mysql = false
 players = {}
 AddEventHandler('playerConnecting', function(playername, setKickReason)
   local admin_lvl = 0
+  local source = source
+  local playername = playername
+  local setKickReason = setKickReason
   local identity = {}
   if mysql then
     identity = GetPlayerIdentifiers(source)
@@ -33,6 +36,13 @@ AddEventHandler('playerConnecting', function(playername, setKickReason)
 		  admin_lvl = user[1].admin_lvl
           table.insert(players, {id=#players+1, name=playername, steamid=identity[1], adminlvl=admin_lvl, banned=false})
         end
+      end
+    end)
+    MySQL.Async.fetchAll("SELECT * FROM fsn_users WHERE steamid = '"..identity[1].."'", {}, function(user)
+      if not user[1] then
+	DropPlayer(source, 'Your user was not entered into the database properly, please try again.')
+	setKickReason('Your user was not entered into the database properly, please try again.')
+	CancelEvent()
       end
     end)
   else
