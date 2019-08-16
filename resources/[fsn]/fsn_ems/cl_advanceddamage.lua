@@ -61,21 +61,21 @@ local MovementRate = {
 }
 
 local BodyParts = {
-    ['HEAD'] = { label = 'Head', causeLimp = false, isDamaged = false, severity = 0 },
-    ['NECK'] = { label = 'Neck', causeLimp = false, isDamaged = false, severity = 0 },
-    ['SPINE'] = { label = 'Spine', causeLimp = true, isDamaged = false, severity = 0 },
-    ['UPPER_BODY'] = { label = 'Upper Body', causeLimp = false, isDamaged = false, severity = 0 },
-    ['LOWER_BODY'] = { label = 'Lower Body', causeLimp = true, isDamaged = false, severity = 0 },
-    ['LARM'] = { label = 'Left Arm', causeLimp = false, isDamaged = false, severity = 0 },
-    ['LHAND'] = { label = 'Left Hand', causeLimp = false, isDamaged = false, severity = 0 },
-    ['LFINGER'] = { label = 'Left Hand Fingers', causeLimp = false, isDamaged = false, severity = 0 },
-    ['LLEG'] = { label = 'Left Leg', causeLimp = true, isDamaged = false, severity = 0 },
-    ['LFOOT'] = { label = 'Left Foot', causeLimp = true, isDamaged = false, severity = 0 },
-    ['RARM'] = { label = 'Right Arm', causeLimp = false, isDamaged = false, severity = 0 },
-    ['RHAND'] = { label = 'Right Hand', causeLimp = false, isDamaged = false, severity = 0 },
-    ['RFINGER'] = { label = 'Right Hand Fingers', causeLimp = false, isDamaged = false, severity = 0 },
-    ['RLEG'] = { label = 'Right Leg', causeLimp = true, isDamaged = false, severity = 0 },
-    ['RFOOT'] = { label = 'Right Foot', causeLimp = true, isDamaged = false, severity = 0 },
+    ['HEAD'] = { label = 'Head', causeLimp = false, isDamaged = false, severity = 0, index = 'BONETAG_HEAD'},
+    ['NECK'] = { label = 'Neck', causeLimp = false, isDamaged = false, severity = 0, index = 'BONETAG_NECK'},
+    ['SPINE'] = { label = 'Spine', causeLimp = true, isDamaged = false, severity = 0, index = 'BONETAG_SPINE'},
+    ['UPPER_BODY'] = { label = 'Upper Body', causeLimp = false, isDamaged = false, severity = 0, index = 'BONETAG_SPINE2'},
+    ['LOWER_BODY'] = { label = 'Lower Body', causeLimp = true, isDamaged = false, severity = 0, index = 'BONETAG_SPINE_ROOT'},
+    ['LARM'] = { label = 'Left Arm', causeLimp = false, isDamaged = false, severity = 0, index = 'BONETAG_L_UPPERARM'},
+    ['LHAND'] = { label = 'Left Hand', causeLimp = false, isDamaged = false, severity = 0, index = 'BONETAG_L_HAND' },
+    ['LFINGER'] = { label = 'Left Hand Fingers', causeLimp = false, isDamaged = false, severity = 0, index = 'BONETAG_L_FINGER01'},
+    ['LLEG'] = { label = 'Left Leg', causeLimp = true, isDamaged = false, severity = 0, index = 'BONETAG_L_CALF'},
+    ['LFOOT'] = { label = 'Left Foot', causeLimp = true, isDamaged = false, severity = 0, index ='BONETAG_L_FOOT'},
+    ['RARM'] = { label = 'Right Arm', causeLimp = false, isDamaged = false, severity = 0, index = 'BONETAG_R_UPPERARM' },
+    ['RHAND'] = { label = 'Right Hand', causeLimp = false, isDamaged = false, severity = 0, index = 'BONETAG_R_HAND' },
+    ['RFINGER'] = { label = 'Right Hand Fingers', causeLimp = false, isDamaged = false, severity = 0, index = 'BONETAG_R_FINGER01' },
+    ['RLEG'] = { label = 'Right Leg', causeLimp = true, isDamaged = false, severity = 0, index = 'BONETAG_R_CALF'},
+    ['RFOOT'] = { label = 'Right Foot', causeLimp = true, isDamaged = false, severity = 0, index = 'BONETAG_R_FOOT' },
 }
 
 RegisterNetEvent('fsn_ems:adamage:request')
@@ -531,7 +531,7 @@ function CheckDamage(ped, bone, weapon)
             BodyParts[parts[bone]].isDamaged = true
             BodyParts[parts[bone]].severity = 1
             exports['mythic_notify']:DoHudText('inform', 'Your ' .. BodyParts[parts[bone]].label .. ' feels ' .. WoundStates[BodyParts[parts[bone]].severity], 5000)
-
+			TriggerEvent('fsn_evidence:ped:updateDamage', BodyParts)
             if weapon == WeaponClasses['SMALL_CALIBER'] or weapon == WeaponClasses['MEDIUM_CALIBER'] or weapon == WeaponClasses['CUTTING'] or weapon == WeaponClasses['WILDLIFE'] or weapon == WeaponClasses['OTHER'] or weapon == WeaponClasses['LIGHT_IMPACT'] then
                 if isBleeding < 4 then
                     isBleeding = tonumber(isBleeding) + 1
@@ -607,6 +607,7 @@ AddEventHandler('mythic_hospital:client:FieldTreatLimbs', function()
             v.severity = BodyParts[parts[bone]].severity
         end
     end
+	TriggerEvent('fsn_evidence:ped:updateDamage', BodyParts)
 end)
 
 RegisterNetEvent('mythic_hospital:client:ResetLimbs')
@@ -617,6 +618,7 @@ AddEventHandler('mythic_hospital:client:ResetLimbs', function()
     end
 
     injured = {}
+	TriggerEvent('fsn_evidence:ped:updateDamage', BodyParts)
 end)
 
 RegisterNetEvent('mythic_hospital:client:FieldTreatBleed')
@@ -624,6 +626,7 @@ AddEventHandler('mythic_hospital:client:FieldTreatBleed', function()
     if isBleeding > 1 then
         isBleeding = tonumber(isBleeding) - 1
     end
+	TriggerEvent('fsn_evidence:ped:updateDamage', BodyParts)
 end)
 
 RegisterNetEvent('mythic_hospital:client:ReduceBleed')
@@ -631,11 +634,14 @@ AddEventHandler('mythic_hospital:client:ReduceBleed', function()
     if isBleeding > 0 then
         isBleeding = tonumber(isBleeding) - 1
     end
+	TriggerEvent('fsn_evidence:ped:updateDamage', BodyParts)
 end)
 
 RegisterNetEvent('mythic_hospital:client:RemoveBleed')
 AddEventHandler('mythic_hospital:client:RemoveBleed', function()
     isBleeding = 0
+	
+	TriggerEvent('fsn_evidence:ped:updateDamage', BodyParts)
 end)
 
 RegisterNetEvent('mythic_hospital:client:UsePainKiller')
@@ -645,6 +651,7 @@ AddEventHandler('mythic_hospital:client:UsePainKiller', function(tier)
     end
 
     exports['mythic_notify']:DoCustomHudText('inform', 'You feel the pain subside temporarily', 5000)
+	TriggerEvent('fsn_evidence:ped:updateDamage', BodyParts)
 end)
 
 RegisterNetEvent('mythic_hospital:client:UseAdrenaline')
@@ -654,6 +661,7 @@ AddEventHandler('mythic_hospital:client:UseAdrenaline', function(tier)
     end
 
     exports['mythic_notify']:DoCustomHudText('inform', 'You\'re Able To Ignore Your Body Failing', 5000)
+	TriggerEvent('fsn_evidence:ped:updateDamage', BodyParts)
 end)  
     
 Citizen.CreateThread(function()
@@ -710,6 +718,13 @@ Citizen.CreateThread(function()
 					--Function.Call(Hash.SET_FLASH, 0, 0, 100, 500, 100);
 				end
 				exports['mythic_notify']:DoCustomHudText('inform', 'You Have ' .. BleedingStates[isBleeding], 25000)
+					local pos = GetEntityCoords(GetPlayerPed(-1))
+					local coords = {
+					 x = pos.x,
+					 y = pos.y,
+					 z = pos.z
+					}
+					TriggerServerEvent('fsn_evidence:drop:blood', exports["fsn_main"]:fsn_CharID(), pos)
                 local bleedDamage = tonumber(isBleeding) * 4
                 ApplyDamageToPed(player, bleedDamage, false)
                 playerHealth = playerHealth - bleedDamage
