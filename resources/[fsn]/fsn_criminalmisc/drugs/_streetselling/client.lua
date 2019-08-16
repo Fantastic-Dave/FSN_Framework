@@ -197,6 +197,13 @@ Citizen.CreateThread(function()
 									end
 								end
 								
+								-- state stuff
+								if drug == 'joint' then
+									TriggerEvent('fsn_evidence:ped:addState', 'Slight aroma of weed', 'UPPER_BODY', 300)
+								elseif drug == 'meth_rocks' then
+									TriggerEvent('fsn_evidence:ped:addState', 'Empty packet with\nmeth residue\nhanging out of\npocket...', 'UPPER_BODY', 60)
+								end
+								
 								-- work out pricing
 								local preece = areas[myarea].drugs[drug].value * 2
 								local mini = preece - math.floor(preece / 2)
