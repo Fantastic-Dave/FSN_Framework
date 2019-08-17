@@ -65,7 +65,8 @@ local pd_cars = {
   -- SUPERCARS
   --------------------
   [2001] = "2015polstang",
-  [2002] = "ghispo2",
+  [2002] = "chaleo",
+  [2003] = "ghispo2",
 }
 
 local emotes = {
