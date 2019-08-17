@@ -183,6 +183,7 @@ local vehshop = {
 				{name = "Blade", costs = 16000, description = {}, model = "blade"},
 				{name = "Buccaneer", costs = 70000, description = {}, model = "buccaneer"},
 				{name = "Chino", costs = 65000, description = {}, model = "chino"},
+				{name = "Chino Custom", costs = 69000, description = {}, model = "chino2"},
 				{name = "Deviant", costs = 100000, description = {}, model = "deviant"},
 				{name = "Dominator", costs = 100000, description = {}, model = "dominator"},
 				{name = "Dominator GTX", costs = 130000, description = {}, model = "dominator3"},
@@ -201,6 +202,8 @@ local vehshop = {
 				{name = "Tampa", costs = 25000, description = {}, model = "tampa"},
 				{name = "Virgo", costs = 35000, description = {}, model = "virgo"},
 				{name = "Vigero", costs = 33000, description = {}, model = "vigero"},
+				{name = "Voodoo", costs = 63000, description = {}, model = "voodoo"},
+				{name = "Voodoo Custom", costs = 67000, description = {}, model = "voodoo2"},
 				{name = "Yosemite", costs = 135000, description = {}, model = "yosemite"},
 			}
 		},
