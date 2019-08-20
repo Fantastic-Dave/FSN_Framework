@@ -4,8 +4,7 @@ items_table = {
     weight = 0.0,
     desc = 'Use this to repair yourself.',
     use = function()
-		TriggerEvent('mythic_hospital:client:UsePainKiller', 2)
-		TriggerEvent('fsn_inventory:item:take', 'painkillers', 1)
+	TriggerEvent('mythic_hospital:client:UsePainKiller', 2)
     end,
     modelhash = -2140074399,
     price = 250
