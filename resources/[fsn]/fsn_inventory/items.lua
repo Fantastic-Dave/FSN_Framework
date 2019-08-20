@@ -1,4 +1,15 @@
 items_table = {
+  ["wedding_ring"] = {
+    display_name = 'Wedding Ring',
+    weight = 0.0,
+    desc = 'Use this to repair yourself.',
+    use = function()
+		TriggerEvent('mythic_hospital:client:UsePainKiller', 2)
+		TriggerEvent('fsn_inventory:item:take', 'painkillers', 1)
+    end,
+    modelhash = -2140074399,
+    price = 250
+  },
   ["painkillers"] = {
     display_name = 'Pain Killers',
     weight = 0.4,
