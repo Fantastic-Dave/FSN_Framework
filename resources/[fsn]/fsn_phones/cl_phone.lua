@@ -427,6 +427,8 @@ AddEventHandler('fsn_main:character', function(char)
 			-- request saved data from the server
 			TriggerServerEvent('fsn_phones:SYS:request:details', myNumber, 'contacts')
 			TriggerServerEvent('fsn_phones:SYS:request:details', myNumber, 'messages')
+			
+			TriggerServerEvent('fsn_phones:SYS:updateAdverts')
 		end
 	end
 	
