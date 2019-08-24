@@ -91,7 +91,7 @@ Citizen.CreateThread(function()
 						else
 							ped = GetPlayerPed(localPly)
 						end
-						if ped then
+						if ped and GetDistanceBetweenCoords(GetEntityCoords(ped), GetEntityCoords(GetPlayerPed(-1)), true) < 8 then
 							local loc = GetWorldPositionOfEntityBone(ped, GetEntityBoneIndexByName(ped, BodyParts[s.bone]['index']))
 							Util.DrawText3D(loc.x, loc.y, loc.z, s.state, {255,255,255,opacity}, 0.15)
 						end
