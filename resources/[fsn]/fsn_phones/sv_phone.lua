@@ -101,6 +101,11 @@ AddEventHandler('fsn_phones:SYS:sendTweet', function(twt)
 end)
 
 local ads = {}
+RegisterServerEvent('fsn_phones:USE:requestAdverts')
+AddEventHandler('c', function()
+	TriggerClientEvent('fsn_phones:SYS:updateAdverts', source, ads)
+end)
+
 RegisterServerEvent('fsn_phones:USE:sendAdvert')
 AddEventHandler('fsn_phones:USE:sendAdvert', function(ad, name, num)
 	for k, v in pairs(ads) do
