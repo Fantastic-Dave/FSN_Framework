@@ -110,6 +110,25 @@ function Util.PrependTable(t, v)
 	
 	return newt
 end
+
+--[[
+	Util.PrintTable(o: table)
+		Return a formatted string of the table
+]]--
+function Util.PrintTable(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
+
 --[[
 	Util.GetClosestPlayer()
 		Stolen from Frazzle in #scripting-gated, returns the closest player + how far away they are 
