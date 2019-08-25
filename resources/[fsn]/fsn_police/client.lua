@@ -143,9 +143,9 @@ local armoryStations = {
   },
   {
     name = "Sandy Shores Armory",
-    x = 1848.2283935547,
-    y = 3689.2102050781,
-    z = 34.267036437988
+    x = 1850.7705078125,
+    y = 3694.2854003906,
+    z = 34.276874542236
   },
   {
     name = "Blaine County Armory",
