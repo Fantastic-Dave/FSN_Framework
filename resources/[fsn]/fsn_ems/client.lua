@@ -178,7 +178,7 @@ function fsn_Airlift()
 end
 
 ------------------------------------------------- EMS system
-amiems = false
+amiems = true
 emsonduty = false ----------------- REMEMBER TO CHANGE THESE
 emslevel = 0
 
@@ -209,8 +209,8 @@ AddEventHandler('fsn_main:character', function(char)
     amiems = true
     emslevel = char.char_ems
   else
-    amiems = false
-    emslevel = 0
+    amiems = true
+    emslevel = 3
   end
 end)
 
