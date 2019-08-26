@@ -346,6 +346,8 @@ function dispatchAlert(veh)
 		colour = vehicle_colours[colour+1]
 		local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(veh))
 		local plate = GetVehicleNumberPlateText(veh)
-		TriggerServerEvent('fsn_police:dispatch', coords, 10, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
+		if plate then
+			TriggerServerEvent('fsn_police:dispatch', coords, 10, '10-60 | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
+		end
 	end
 end
