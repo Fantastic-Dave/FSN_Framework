@@ -119,11 +119,14 @@ Util.Tick(function()
 								TriggerServerEvent('fsn_vehiclecontrol:trunk:forceIn', exports["fsn_ems"]:carryingWho(), NetworkGetNetworkIdFromEntity(veh))
 							end
 						else
-							Util.DrawText3D(troonk.x, troonk.y, troonk.z, '[E] Get In Trunk', {255, 255, 255, 140}, 0.3)
+							Util.DrawText3D(troonk.x, troonk.y, troonk.z+0.5, '[E] Get In\n[H] Access Trunk', {255, 255, 255, 200}, 0.2)
 							if IsControlJustPressed(0,38) then
 								DoScreenFadeOut(500)
 								GetInTrunk(veh)
 								intrunk = veh
+							end
+							if IsControlJustPressed(0,74) then
+								TriggerServerEvent('fsn_inventory:veh:request', GetVehicleNumberPlateText(veh), 'trunk')
 							end
 						end
 					end
