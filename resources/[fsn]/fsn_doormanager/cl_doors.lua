@@ -49,7 +49,7 @@ function ToggleLock(id)
 	locking_start = GetGameTimer()
 	LoadAnimDict( "gestures@f@standing@casual" )
 	TaskPlayAnim(GetPlayerPed(-1), "gestures@f@standing@casual", "gesture_hand_down", 8.0, 1.0, 3, 2, 0, 0, 0, 0 )
-	TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 5, 'door-lock', 0.2)
+	TriggerServerEvent('InteractSound_SV:PlayWithinDistance', 5, 'door-lock', 0.1)
 end
 
 Citizen.CreateThread(function()
