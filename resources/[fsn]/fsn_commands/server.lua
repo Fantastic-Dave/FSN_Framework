@@ -506,6 +506,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- MISC COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/glovebox' or split[1] == '/gb' then
+	TriggerClientEvent('fsn_inventory:veh:glovebox', source)
+  end
   if split[1] == '/window' or split[1] == '/win' then
 	TriggerClientEvent('fsn_commands:window', source)
   end
@@ -606,6 +609,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/dev' and fsn_isDeveloper(source) then
     if split[2] then
+	  if split[2] == 'softlog' then
+		TriggerClientEvent('fsn_main:charMenu', source)
+	  end
 	  if split[2] == 'pedrevive' then
 		TriggerClientEvent('fsn_commands:police:pedrevive', source)
 	  end
