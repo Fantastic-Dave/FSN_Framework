@@ -26,4 +26,5 @@ files({
     'client/html/sounds/ringtone-iphone.ogg',
     'client/html/sounds/dialtone.ogg',
     'client/html/sounds/handcuffs.ogg',
+    'client/html/sounds/door-lock.ogg',
 })
