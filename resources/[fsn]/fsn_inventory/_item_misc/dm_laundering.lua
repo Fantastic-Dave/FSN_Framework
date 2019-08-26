@@ -353,11 +353,7 @@ local launder_deliveries = {
 }
 
 local function fsn_hasDirtyMoney()
-  if inventory["dirty_money"] then
-    return true
-  else
-    return false
-  end
+  return fsn_HasItem('dirty_money')
 end
 
 local function fsn_StartLaundering()
@@ -438,13 +434,13 @@ end
 
 local function fsn_FinishLaundering()
   RemoveBlip(delivery_blip)
-  if inventory["dirty_money"].amount == dm_amount then
-    local amount = inventory["dirty_money"].amount
-    local minus = inventory["dirty_money"].amount / quote[1]
+  if fsn_GetItemAmount('dirty_money') == dm_amount then
+    local amount = fsn_GetItemAmount('dirty_money')
+    local minus = fsn_GetItemAmount('dirty_money') / quote[1]
     amount = amount - math.floor(minus)
     TriggerEvent('fsn_notify:displayNotification', 'Well done, here\'s your cash ($'..amount..')', 'centerLeft', 6000, 'info')
     TriggerEvent('fsn_bank:change:walletAdd', amount)
-    TriggerEvent('fsn_inventory:item:take', 'dirty_money', inventory["dirty_money"].amount)
+    TriggerEvent('fsn_inventory:item:take', 'dirty_money', fsn_GetItemAmount('dirty_money'))
   else
     TriggerEvent('fsn_notify:displayNotification', 'This is not the amount we agreed on!', 'centerLeft', 4000, 'error')
 	TriggerEvent('chatMessage', 'Dealer', {244, 223, 66}, 'The amount of dirty money in your inventory has changed, the dealer will no longer uphold his deal. Try again later.')
@@ -507,8 +503,8 @@ Citizen.CreateThread(function()
               DisplayHelpTextFromStringLabel(0, 0, 1, -1)
               if IsControlJustPressed(0, 38) then
                 --TriggerEvent('chatMessage', 'Dealer', {244, 223, 66}, 'Deliver these '..quote[2]..' drug packages for me, and I\'ll do you '..quote[1]..' on those unmarked bills')
-                local amount = inventory["dirty_money"].amount
-                local minus = inventory["dirty_money"].amount / quote[1]
+                local amount = fsn_GetItemAmount('dirty_money')
+                local minus = fsn_GetItemAmount('dirty_money') / quote[1]
                 amount = amount - math.floor(minus)
                 SetNotificationTextEntry("STRING");
                 AddTextComponentString('Deliver these ~r~'..quote[2]..'~w~ drug packages for me, and you\'ll get ~g~$'..amount..'~w~ (~r~-'..quote[1]..'%~w~) on your ~y~DM');
@@ -516,7 +512,7 @@ Citizen.CreateThread(function()
                 DrawNotification(false, true);
                 quoted = true
                 needed_delivery = quote[2]
-				dm_amount = inventory["dirty_money"].amount
+				dm_amount = fsn_GetItemAmount('dirty_money')
               end
             else
               SetTextComponentFormat("STRING")
