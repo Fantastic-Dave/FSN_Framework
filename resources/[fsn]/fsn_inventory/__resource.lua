@@ -2,14 +2,6 @@
 client_script '@fsn_main/cl_utils.lua'
 server_script '@fsn_main/sv_utils.lua'
 
-client_script 'client.lua'
-client_script 'items.lua'
-
-server_script 'server.lua'
-server_script 'items.lua'
-
-
-
 -- Server scripts
 server_script '@mysql-async/lib/MySQL.lua'
 
@@ -24,17 +16,18 @@ exports({
 
 -- Item scripts
 client_script '_item_misc/binoculars.lua'
-client_script '_item_misc/drug_selling.lua'
 client_script '_item_misc/dm_laundering.lua'
 client_script '_item_misc/burger_store.lua'
 
 ---------------------------------------------------- new script stuff below
-	client_script 'cl_presetItems.lua'
+	client_script 'cl_presets.lua'
 	client_script 'cl_uses.lua'
 	client_script 'cl_inventory.lua'
 	client_script 'cl_dropping.lua'
+	client_script 'cl_vehicles.lua'
 	server_script 'sv_inventory.lua'
 	server_script 'sv_dropping.lua'
+	server_script 'sv_vehicles.lua'
 -- new gui
 ui_page "html/ui.html"
 files {
