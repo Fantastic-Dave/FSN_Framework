@@ -234,7 +234,7 @@ Citizen.CreateThread(function()
 									end
 								end
 								price = price * sold_amount
-								TriggerEvent('fsn_notify:displayNotification', 'They bought '..sold_amount..' '..exports["fsn_inventory"]:fsn_GetItemDetails(drug).display_name..' for '..price..'DM', 'centerLeft', 3000, 'info')
+								TriggerEvent('fsn_notify:displayNotification', 'They bought '..sold_amount..' '..exports["fsn_inventory"]:fsn_GetItemDetails(drug).name..' for '..price..'DM', 'centerLeft', 3000, 'info')
 								TriggerEvent('fsn_inventory:item:add', 'dirty_money', price)
 								TriggerEvent('fsn_inventory:item:take', selling_item, sold_amount)
 
