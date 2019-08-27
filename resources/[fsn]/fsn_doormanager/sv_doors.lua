@@ -381,111 +381,189 @@ local doors = {
 			z = 34.592
 		}},
 	},
-	{ -- [SANDY] main > hall
-		double = true,
-		locked = true,
-		lookingat = true,
-		lockdist = 2,
-		disp = {x = 1850.5668945313, y = 3682.9252929688, z = 34.276859283447},
-		ents = {
-			{
-				mdl = -2023754432,
-				x = 1851.288,
-				y = 3681.868,
-				z = 34.420
-			},
-			{
-				mdl = -2023754432,
-				x = 1849.967,
-				y = 3684.1044,
-				z = 34.420
-			},
-		},
-	},
-	{ -- [SANDY] hall > cells
-		double = true,
-		locked = true,
-		lookingat = true,
-		lockdist = 2,
-		disp = {x = 1844.8298339844, y = 3681.7060546875, z = 34.276866912842},
-		ents = {
-			{
-				mdl = -2023754432,
-				x = 1843.717,
-				y = 3681.074,
-				z = 34.419
-			},
-			{
-				mdl = -2023754432,
-				x = 1845.971,
-				y = 3682.372,
-				z = 34.419
-			},
-		},
-	},
-	{ -- [SANDY] cells > questioning
-		double = true,
-		locked = true,
-		lookingat = true,
-		lockdist = 2,
-		disp = {x = 1841.9870605469, y = 3686.849609375, z = 34.27685546875},
-		ents = {
-			{
-				mdl = -2023754432,
-				x = 1840.832,
-				y = 3686.243,
-				z = 34.419
-			},
-			{
-				mdl = -2023754432,
-				x = 1843.086,
-				y = 3687.539,
-				z = 34.419
-			},
-		},
-	},
-	{ -- [SANDY] halls > questioning watch
-		double = true,
-		locked = true,
-		lookingat = true,
-		lockdist = 2,
-		disp = {x = 1835.2150878906, y = 3682.8361816406, z = 34.276847839355},
-		ents = {
-			{
-				mdl = -2023754432,
-				x = 1834.131,
-				y = 3682.258,
-				z = 34.419
-			},
-			{
-				mdl = -2023754432,
-				x = 1836.385,
-				y = 3683.554,
-				z = 34.419
-			},
-		},
-	},
-	{ -- [SANDY] main > office
-		double = true,
-		locked = true,
-		lookingat = true,
-		lockdist = 2,
-		disp = {x = 1848.2888183594, y = 3690.5307617188, z = 34.276851654053},
-		ents = {
-			{
-				mdl = -2023754432,
-				x = 1847.157,
-				y = 3689.891,
-				z = 34.419
-			},
-			{
-				mdl = -2023754432,
-				x = 1849.409,
-				y = 3691.188,
-				z = 34.419
-			},
-		},
-	},
+	{ -- [SANDY] meeting room
+    double = false,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = 1857.037109375, y = 3690.1330566406, z = 34.27685546875},
+    ents = {{
+      mdl = -1033001619,
+      x = 1856.125,
+      y = 3689.656,
+      z = 34.419
+    }},
+  },
+  { -- [SANDY] evidence / weapon room
+    double = false,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = 1851.7095947266, y = 3695.5925292969, z = 34.276863098145},
+    ents = {{
+      mdl = -1033001619,
+      x = 1851.117,
+      y = 3696.457,
+      z = 34.421
+    }},
+  },
+  { -- [SANDY] main > hall
+    double = true,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = 1850.5668945313, y = 3682.9252929688, z = 34.276859283447},
+    ents = {
+      {
+        mdl = -2023754432,
+        x = 1851.288,
+        y = 3681.868,
+        z = 34.420
+      },
+      {
+        mdl = -2023754432,
+        x = 1849.967,
+        y = 3684.1044,
+        z = 34.420
+      },
+    },
+  },
+  { -- [SANDY] hall > cells
+    double = true,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = 1844.8298339844, y = 3681.7060546875, z = 34.276866912842},
+    ents = {
+      {
+        mdl = -2023754432,
+        x = 1843.717,
+        y = 3681.074,
+        z = 34.419
+      },
+      {
+        mdl = -2023754432,
+        x = 1845.971,
+        y = 3682.372,
+        z = 34.419
+      },
+    },
+  },
+  { -- [SANDY] Cell left first
+    double = false,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = 1842.380859375, y = 3682.3208007813, z = 34.27685546875},
+    ents = {{
+      mdl = 631614199,
+      x = 1841.859,
+      y = 3683.236,
+      z = 34.416
+    }},
+  },
+  { -- [SANDY] Cell left second
+    double = false,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = 1840.8865966797, y = 3684.9274902344, z = 34.27685546875},
+    ents = {{
+      mdl = 631614199,
+      x = 1840.371,
+      y = 3685.841,
+      z = 34.416
+    }},
+  },
+  { -- [SANDY] Cell right first
+    double = false,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = 1845.8293457031, y = 3683.7687988281, z = 34.276878356934},
+    ents = {{
+      mdl = 631614199,
+      x = 1846.336,
+      y = 3682.859,
+      z = 34.416
+    }},
+  },
+  { -- [SANDY] Cell right second
+    double = false,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = 1844.3096923828, y = 3686.3586425781, z = 34.276878356934},
+    ents = {{
+      mdl = 631614199,
+      x = 1844.832,
+      y = 3685.461,
+      z = 34.416
+    }},
+  },
+  { -- [SANDY] cells > questioning
+    double = true,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = 1841.9870605469, y = 3686.849609375, z = 34.27685546875},
+    ents = {
+      {
+        mdl = -2023754432,
+        x = 1840.832,
+        y = 3686.243,
+        z = 34.419
+      },
+      {
+        mdl = -2023754432,
+        x = 1843.086,
+        y = 3687.539,
+        z = 34.419
+      },
+    },
+  },
+  { -- [SANDY] halls > questioning watch
+    double = true,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = 1835.2150878906, y = 3682.8361816406, z = 34.276847839355},
+    ents = {
+      {
+        mdl = -2023754432,
+        x = 1834.131,
+        y = 3682.258,
+        z = 34.419
+      },
+      {
+        mdl = -2023754432,
+        x = 1836.385,
+        y = 3683.554,
+        z = 34.419
+      },
+    },
+  },
+  { -- [SANDY] main > office
+    double = true,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = 1848.2888183594, y = 3690.5307617188, z = 34.276851654053},
+    ents = {
+      {
+        mdl = -2023754432,
+        x = 1847.157,
+        y = 3689.891,
+        z = 34.419
+      },
+      {
+        mdl = -2023754432,
+        x = 1849.409,
+        y = 3691.188,
+        z = 34.419
+      },
+    },
+  },
 	--[[
 		JAIL
 	]]--
@@ -541,6 +619,56 @@ local doors = {
 			z = 44.639
 		}},
 	},
+   --[[
+    Paleto
+  ]]--
+  { -- [Paleto] Cell Door
+    double = false,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = -434.835, y = 6003.869, z = 31.8661},
+    ents = {{
+      mdl = 631614199,
+      x = -433.910,
+      y = 6004.791,
+      z = 31.866
+    }},
+  },
+  { -- [Paleto] Cell Room
+    double = true,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = -441.9548034668, y = 6011.8881835938, z = 31.71639251709},
+    ents = {
+      {
+        mdl = -2023754432,
+        x = -440.987,
+        y = 6012.764,
+        z = 31.866
+      },
+      {
+        mdl = -2023754432,
+        x = -442.826,
+        y = 6010.925,
+        z = 31.866
+      },
+    },
+  },
+  { -- [Paleto] locker room
+    double = false,
+    locked = true,
+    lookingat = true,
+    lockdist = 2,
+    disp = {x = -450.09637451172, y = 6015.6474609375, z = 31.716415405273},
+    ents = {{
+      mdl = -2023754432,
+      x = -450.715,
+      y = 6016.369,
+      z = 31.866
+    }},
+  },
 }
 
 RegisterServerEvent('fsn_doormanager:request')
