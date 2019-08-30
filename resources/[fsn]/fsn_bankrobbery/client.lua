@@ -193,6 +193,36 @@ local bankdoors = {
     closedh= 45.200,
     status = 'closed'
   }, vault={robbed=false, x = -104.92517852783, y = 6476.5268554688, z = 31.626726150513}},
+  -- RT68
+  [4] = {hash=2121050683,x=1175.542,y=2710.861,z=38.22,tx=1175.542,ty=2710.861,tz=38.22,unlocked=false,unlocktime=0,keypad={
+    x = 1175.9526367188,
+    y = 2712.880859375,
+    z = 38.088054656982,
+    crackattempts = 0,
+    code = 0,
+    difficulty = 4 --amount of numbers in the lock
+  }, status={
+    --openh = 1075.216,
+    --closedh = 1169.855,
+    openh = 1075.216,
+    closedh= 1168.855,
+    status = 'closed'
+  }, vault={robbed=false, x = 1173.1298828125, y = 2716.0144042969, z = 38.066310882568}},
+  -- Great Ocean
+  [5] = {hash=-63539571,x=-2958.538,y=482.270,z=15.83,tx=-2958.538,ty=482.270,tz=15.83,unlocked=false,unlocktime=0,keypad={
+    x = -2956.4716796875,
+    y = 481.78286743164,
+    z = 15.69709777832,
+    crackattempts = 0,
+    code = 0,
+    difficulty = 4 --amount of numbers in the lock
+  }, status={
+    --openh = -2975.538,
+    --closedh = -2883.538,
+    openh = -2975.538,
+    closedh= -2883.538,
+    status = 'closed'
+  }, vault={robbed=false, x = -2953.1357421875, y = 484.44955444336, z = 15.675388336182}},
 }
 local banklocations = {
 
