@@ -2,12 +2,16 @@ local vault_doors = {
   [1] = {'closed'},
   [2] = {'closed'},
   [3] = {'closed'},
+  [4] = {'closed'},
+  [5] = {'closed'},
 }
 
 local banks_payout = {
   [1] = 1500000,
   [2] = 2000000,
-  [3] = 800000
+  [3] = 800000,
+  [4] = 1000000,
+  [5] = 1000000
 }
 
 local canrob = true
@@ -32,6 +36,8 @@ AddEventHandler('fsn_main:money:bank:Add', function(ply, amt)
 	banks_payout[1] = banks_payout[1] + randomizer
 	banks_payout[2] = banks_payout[2] + randomizer
 	banks_payout[3] = banks_payout[3] + randomizer
+	banks_payout[4] = banks_payout[4] + randomizer
+	banks_payout[5] = banks_payout[5] + randomizer
 end)
 
 AddEventHandler('fsn_main:money:bank:Minus', function(ply, amt)
@@ -39,6 +45,8 @@ AddEventHandler('fsn_main:money:bank:Minus', function(ply, amt)
 	banks_payout[1] = banks_payout[1] - randomizer
 	banks_payout[2] = banks_payout[2] - randomizer
 	banks_payout[3] = banks_payout[3] - randomizer
+	banks_payout[4] = banks_payout[4] - randomizer
+	banks_payout[5] = banks_payout[5] - randomizer
 end)
 
 RegisterServerEvent('fsn_bankrobbery:vault:open')
