@@ -88,6 +88,18 @@ local actions = {
     reward = 500,
 	blip = 491
   },
+  [16] = {
+    name = 'Road Traffic Collision',
+    tencode = '10-50',
+    reward = 500,
+	blip = 380
+  },
+  [17] = {
+    name = 'Road Traffic Collision (Injured)',
+    tencode = '10-50A',
+    reward = 500,
+	blip = 380
+  },
 }
 local dispatch_calls = {}
 local disp_enable = false
