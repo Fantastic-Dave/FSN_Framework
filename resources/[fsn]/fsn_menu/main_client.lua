@@ -1,5 +1,4 @@
 local menuEnabled = false
-local initialised = true
 
 function fsn_SplitString(inputstr, sep)
     if sep == nil then
@@ -85,7 +84,6 @@ function ToggleActionMenu()
 			local veh = fsn_lookingAt()
 			if DoesEntityExist(veh) then
 				lookingatvehicle = true
-				vehicleinv = json.encode(exports.fsn_vehiclecontrol:GetVehicleInventory(GetVehicleNumberPlateText(veh)))
 			else
 				lookingatvehicle = false
 			end
@@ -139,6 +137,9 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
   if ( data == "phone" ) then
 		ToggleActionMenu()
 		ExecuteCommand('p')
+  elseif ( data == "inventory" ) then
+		ToggleActionMenu()
+		ExecuteCommand('inv')
   elseif split[1] == 'walktype' then
 	ExecuteCommand('walktype '..split[3])
   elseif split[1] == 'hdc' then
@@ -657,97 +658,11 @@ function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
   DrawText(x , y)
 end
 
-RegisterNUICallback( "inventoryAction", function(data, cb)
-	if data.action == 'item_use' then
-		TriggerEvent('fsn_inventory:item:use', data.item)
-	elseif data.action == 'item_store' then
-		ToggleActionMenu()
-		Citizen.CreateThread(function()
-			DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 10)
-			local editOpen = true
-			while UpdateOnscreenKeyboard() == 0 or editOpen do
-				Wait(0)
-				drawTxt('How many '..data.item..' would you like to store?',4,1,0.5,0.35,0.6,255,255,255,255)
-				drawTxt('~r~Enter a number value or "all"',4,1,0.5,0.49,0.4,255,255,255,255)
-				if UpdateOnscreenKeyboard() ~= 0 then
-					editOpen = false
-					if UpdateOnscreenKeyboard() == 1 then
-						res = GetOnscreenKeyboardResult()
-						if not exports["fsn_inventory"]:fsn_HasItem(data.item) then
-							TriggerEvent('fsn_notify:displayNotification', 'How do you not have any '..data.item..'????', 'centerLeft', 3000, 'error')
-							break
-						end
-						local myAMT = exports["fsn_inventory"]:fsn_GetItemAmount(data.item)
-						if res == 'all' then
-							print('(all) you are trying to store '..myAMT..' '..data.item)
-							TriggerEvent('fsn_apartments:store:item', data.item, myAMT)
-							TriggerEvent('fsn_inventory:item:take', data.item, myAMT)
-							TriggerEvent('fsn_notify:displayNotification', 'You stored '..myAMT..' '..data.item, 'centerLeft', 5000, 'success')
-						else
-							if tonumber(res) then
-								local myNUM = tonumber(res)
-								if myNUM > 0 and myNUM < 500 then
-									if myAMT >= myNUM then
-										print('(amt) you are trying to store '..myNUM..' '..data.item)
-										TriggerEvent('fsn_apartments:store:item', data.item, myNUM)
-										TriggerEvent('fsn_inventory:item:take', data.item, myNUM)
-										TriggerEvent('fsn_notify:displayNotification', 'You stored '..myNUM..' '..data.item, 'centerLeft', 5000, 'success')
-									else
-										TriggerEvent('fsn_notify:displayNotification', 'You do not have '..myNUM..' '..data.item..', you have '..myAMT, 'centerLeft', 3000, 'error')
-									end
-								else
-									TriggerEvent('fsn_notify:displayNotification', 'Enter a number between 1-500.', 'centerLeft', 3000, 'error')
-								end
-							else
-								TriggerEvent('fsn_notify:displayNotification', 'You need to enter \'all\' or a number between 1-500.', 'centerLeft', 3000, 'error')
-							end 
-						end
-						break
-						--[[
-						if res == 'all' then
-							TriggerEvent('fsn_apartments:store:item', data.item, exports["fsn_inventory"]:fsn_GetItemAmount(data.item))
-							TriggerEvent('fsn_inventory:item:take', data.item, exports["fsn_inventory"]:fsn_GetItemAmount(data.item))
-							TriggerEvent('fsn_notify:displayNotification', 'You stored '..exports["fsn_inventory"]:fsn_GetItemAmount(data.item)..' '..data.item, 'centerLeft', 5000, 'success')
-						else
-							if tonumber(res) then
-								res = tonumber(res)
-								if res > 0 and res < 500 then
-									if res >= exports["fsn_inventory"]:fsn_GetItemAmount(data.item) then
-										TriggerEvent('fsn_apartments:store:item', data.item, res)
-										TriggerEvent('fsn_inventory:item:take', data.item, res)
-										print('trying to store '..res..' x '..data.item)
-										TriggerEvent('fsn_notify:displayNotification', 'You stored '..res..' '..data.item, 'centerLeft', 5000, 'success')
-									else
-										TriggerEvent('fsn_notify:displayNotification', 'You do not have enough', 'centerLeft', 3000, 'error')
-									end
-								else
-									TriggerEvent('fsn_notify:displayNotification', 'Looks to be an issue with the number you entered', 'centerLeft', 3000, 'error')
-								end
-							else
-								TriggerEvent('fsn_notify:displayNotification', 'You didn\'t enter \'all\' or a number.', 'centerLeft', 3000, 'error')
-							end
-						end
-						break
-						]]
-					end
-				end
-			end
-		end)
-	elseif data.action == 'item_give' then
-		print('you are attempting to GIVE '..data.item)
-	elseif data.action == 'item_drop' then
-  	TriggerEvent('fsn_inventory:item:drop', data.item)
-    ToggleActionMenu()
-	else
-		print(':fsn_menu: something has gone wrong!')
-	end
-end)
 
 Citizen.CreateThread( function()
 	SetNuiFocus( false )
 	while true do
-		if IsControlJustPressed( 1,  288 ) and initialised then
-			TriggerEvent('fsn_menu:requestInventory')
+		if IsControlJustPressed( 1,  288 ) then
 			ToggleActionMenu()
 		end
 	    if ( menuEnabled ) then
@@ -762,21 +677,6 @@ Citizen.CreateThread( function()
 		Citizen.Wait( 0 )
 	end
 end )
-
-AddEventHandler('fsn_inventory:update', function(tbl)
-	SendNUIMessage({
-    type = 'inventory',
-    inventory = json.encode(tbl)
-  })
-end)
-
-AddEventHandler('fsn_inventory:init', function(sendtojs)
-  initialised = true
-  SendNUIMessage({
-    type = 'init',
-    items = sendtojs
-  })
-end)
 
 RegisterNUICallback('escape', function(data, cb) -- NUI to close menu on ESCAPE key pressed.
   ToggleActionMenu()
