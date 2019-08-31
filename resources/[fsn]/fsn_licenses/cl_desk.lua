@@ -22,3 +22,8 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+RegisterNetEvent('fsn_licenses:giveID')
+AddEventHandler('fsn_licenses:giveID', function()
+	TriggerServerEvent('fsn_licenses:id:request', myChar)
+end)
