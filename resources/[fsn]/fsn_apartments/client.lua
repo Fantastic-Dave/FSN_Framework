@@ -109,8 +109,43 @@ AddEventHandler('fsn_apartments:sendApartment', function(tbl)
 		myRoomNumber = tbl.number
 		apptdetails = tbl.apptinfo
 		apptdetails["apt_outfits"] = json.decode(tbl.apptinfo.apt_outfits)
-		apptdetails["apt_inventory"] = json.decode(tbl.apptinfo.apt_inventory)
+		apptdetails["apt_inventory"] = json.decode(tbl.apptinfo.apt_inventory) -- Not sure why this was never used???
+		
 		apptdetails["apt_utils"] = json.decode(tbl.apptinfo.apt_utils)
+		if apptdetails["apt_utils"]["inventory"].newinv ~= true then
+			local new = {
+				newinv = true,
+				table = {{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},}
+			}
+			local id = 1
+			for k,v in pairs(apptdetails["apt_utils"]["inventory"]) do
+				print('doing old item '..k)
+				local item = exports['fsn_inventory']:fsn_GetItemDetails(k)
+				item.amt = v
+				--table.insert(new["table"], #new["table"]+1, item)
+				local placca = false
+				for key, value in ipairs(new["table"]) do
+					if placca == false then
+						if value.index == false then
+							new["table"][key] = item
+							print('putting new item '..item.name..' in slot '..key)
+							placca = true
+						else
+							print(key..' is occupied by: '..value.index)
+						end
+					end
+				end
+				if not placca then
+					TriggerEvent('chatMessage', '', {255,255,255}, 'Your apartment was too full so unfortunately you lost '..v..': '..item.name)
+				end
+				--[[
+				item.amt = v
+				new[id] = item
+				id = id + 1
+				]]--
+			end
+			apptdetails["apt_utils"]["inventory"] = new
+		end
 		init = true
 		TriggerEvent('fsn_notify:displayNotification', 'Your apartment number is: '..tbl.number, 'centerRight', 6000, 'info')
 	else
@@ -257,14 +292,16 @@ function ToggleActionMenu()
 		apptdetails["apt_utils"]["weapons"] = {}
 	end
 	if not apptdetails["apt_utils"]["inventory"] then
-		apptdetails["apt_utils"]["inventory"] = {}
+		apptdetails["apt_utils"]["inventory"] = {
+			newinv = true,
+			table = {{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},}
+		}
 	end
 	if ( menuEnabled ) then
 		SetNuiFocus( true, true )
 		SendNUIMessage({
 			showmenu = true,
-			weapons = json.encode(apptdetails["apt_utils"]["weapons"]),
-			inventory = json.encode(apptdetails["apt_utils"]["inventory"])
+			weapons = json.encode(apptdetails["apt_utils"]["weapons"])
 		})
 	else
 		SetNuiFocus( false )
@@ -276,98 +313,9 @@ end
 
 local last_click = 0
 
-RegisterNetEvent('fsn_apartments:store:item')
-AddEventHandler('fsn_apartments:store:item', function(item, amt)
-	if not apptdetails["apt_utils"]["inventory"] then apptdetails["apt_utils"]["inventory"] = {} end
-	
-	if not apptdetails["apt_utils"]["inventory"][item] then
-		apptdetails["apt_utils"]["inventory"][item] = amt
-		print('stored '..apptdetails["apt_utils"]["inventory"][item]..' '..item)
-	else
-		local newAMT = apptdetails["apt_utils"]["inventory"][item] + amt
-		print('you already have '..apptdetails["apt_utils"]["inventory"][item]..' stored, changing to '..newAMT)
-		apptdetails["apt_utils"]["inventory"][item] = newAMT
-	end
-	--if not apptdetails["apt_utils"]["inventory"] then
-	--	if not apptdetails["apt_utils"]["inventory"][item] then
-	--		apptdetails["apt_utils"]["inventory"][item] = amt
-	--	else
-	--		apptdetails["apt_utils"]["inventory"][item] = apptdetails["apt_utils"]["inventory"][item] + amt	
-	--	end
-	--end	
-	saveApartment()
-	ExecuteCommand('save')
-end)
-
-function drawTxt(text,font,centre,x,y,scale,r,g,b,a)
-  SetTextFont(font)
-  SetTextProportional(0)
-  SetTextScale(scale, scale)
-  SetTextColour(r, g, b, a)
-  SetTextDropShadow(0, 0, 0, 0,255)
-  SetTextEdge(1, 0, 0, 0, 255)
-  SetTextDropShadow()
-  SetTextOutline()
-  SetTextCentre(centre)
-  SetTextEntry("STRING")
-  AddTextComponentString(text)
-  DrawText(x , y)
-end
-RegisterNUICallback( "inventoryTake", function( data, cb )
-	if last_click + 5000 > GetNetworkTime() then print('toosoon') return end
-	ToggleActionMenu()
-	Citizen.CreateThread(function()
-		DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "#ID NUMBER", "", "", "", "", 10)
-		local editOpen = true
-		while UpdateOnscreenKeyboard() == 0 or editOpen do
-			Wait(0)
-			drawTxt('How many '..data..' would you like to take?',4,1,0.5,0.35,0.6,255,255,255,255)
-			drawTxt('~r~Enter a number value or "all"',4,1,0.5,0.49,0.4,255,255,255,255)
-			if UpdateOnscreenKeyboard() ~= 0 then
-				editOpen = false
-				if UpdateOnscreenKeyboard() == 1 then
-					res = GetOnscreenKeyboardResult()
-					if res == 'all' then
-						--TriggerEvent('fsn_apartments:store:item', data.item, exports["fsn_inventory"]:fsn_GetItemAmount())
-						TriggerEvent('fsn_inventory:item:add', data, apptdetails["apt_utils"]["inventory"][data])
-						--table.remove(apptdetails["apt_utils"]["inventory"], data)
-						apptdetails["apt_utils"]["inventory"][data] = nil
-					else
-						if tonumber(res) then
-							res = tonumber(res)
-							if res > 0 and res < 500 then
-								--TriggerEvent('fsn_apartments:store:item', data.item, res)
-								--print('trying to store '..res..' x '..data.item)
-								if res <= apptdetails["apt_utils"]["inventory"][data] then
-									if exports["fsn_inventory"]:fsn_CanCarry(data, res) then
-										if apptdetails["apt_utils"]["inventory"][data] == res then
-											TriggerEvent('fsn_inventory:item:add', data, res)
-											--table.remove(apptdetails["apt_utils"]["inventory"], data)
-											apptdetails["apt_utils"]["inventory"][data] = nil
-										else
-											TriggerEvent('fsn_inventory:item:add', data, res)
-											apptdetails["apt_utils"]["inventory"][data] = apptdetails["apt_utils"]["inventory"][data] - res
-										end
-									else
-										TriggerEvent('fsn_notify:displayNotification', 'You cannot carry this, you are not a gym lad.', 'centerLeft', 3000, 'error')
-									end
-								else
-									TriggerEvent('fsn_notify:displayNotification', 'There is not this many stored.', 'centerLeft', 3000, 'error')
-								end
-							else
-								TriggerEvent('fsn_notify:displayNotification', 'Looks to be an issue with the number you entered.', 'centerLeft', 3000, 'error')
-							end
-						else
-							TriggerEvent('fsn_notify:displayNotification', 'You didn\'t enter \'all\' or a number.', 'centerLeft', 3000, 'error')
-						end
-					end
-					saveApartment()
-					ExecuteCommand('save')
-					break
-				end
-			end
-		end
-	end)
+RegisterNetEvent('fsn_apartments:inv:update')
+AddEventHandler('fsn_apartments:inv:update', function(tbl)
+	apptdetails["apt_utils"]["inventory"]["table"] = tbl
 end)
 
 RegisterNUICallback( "weaponInfo", function( data, cb )
@@ -405,6 +353,12 @@ RegisterNUICallback( "ButtonClick", function( data, cb )
 		print(json.encode(weapon))
 		table.insert(apptdetails["apt_utils"]["weapons"],#apptdetails["apt_utils"]["weapons"]+1, weapon)
 		TriggerEvent('fsn_criminalmisc:weapons:destroy')
+		saveApartment()
+		ExecuteCommand('save')
+	elseif data == 'inventory' then
+		-- open the inventory
+		ToggleActionMenu()
+		TriggerEvent('fsn_inventory:apt:recieve', myRoomNumber, apptdetails["apt_utils"]["inventory"]["table"])
 		saveApartment()
 		ExecuteCommand('save')
 	elseif( data == "exit" ) then
