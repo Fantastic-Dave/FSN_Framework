@@ -218,9 +218,9 @@ input[type=number] {
 	top:0;
 	right:0;
 	height: 20px;
-	width:20px;
+	min-width:20px;
 	font-size:14px;
-	text-align:center;
+	text-align:right;
 	line-height:20px;
 	z-index:10;
     background-color: rgba(17, 5, 17, 0.2);

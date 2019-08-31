@@ -148,7 +148,7 @@ itemUses = {
 		end
 	},
 	["binoculars"] = {
-		takeItem = true,
+		takeItem = false,
 		use = function(item)
 			TriggerEvent('binoculars:Activate')
 		end
