@@ -1,24 +1,5 @@
 local lock = false
-local droppedItems = {
-	{
-		loc = {x = 246.47196960449, y = -584.28149414063, z = 43.042171478271},
-		item = {
-			index="id",
-			name='ID Card (Logan Whitehead)',
-			amt=1,
-			data = {
-			
-			},
-			customData = {
-				Name = 'Logan Whitehead',
-				Occupation = 'Police Officer',
-				DOB = '14/06/1998',
-				Issue = '18/08/2019',
-				CharID = '1381'
-			},
-		},
-	}
-}
+local droppedItems = {}
 
 RegisterNetEvent('fsn_inventory:drops:request')
 AddEventHandler('fsn_inventory:drops:request', function()
