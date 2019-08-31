@@ -9,7 +9,7 @@ end
 	New inventory shit
 ]]--
 local beingused = false
-local firstInventory = {{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},}
+local firstInventory = {{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},}
 local secondInventory_type = 'ply'
 local secondInventory_id = 0
 local secondInventory = {}
@@ -27,7 +27,7 @@ end
 ]]--
 local max_weight = 30
 function fsn_CanCarry(item, amt)
-	if presetItems[item].data and presetItems[item].data.weight then
+	if presetItems[item] and presetItems[item].data and presetItems[item].data.weight then
 		local maff = presetItems[item].data.weight * amt
 		if fsn_CurrentWeight() + maff <= max_weight then
 			return true
@@ -58,6 +58,9 @@ function fsn_HasItem(item)
 		end
 	end
 	return false
+end
+function fsn_HasPhone()
+	return fsn_HasItem('phone')
 end
 function fsn_GetItemAmount(item)
 	local amt = 0
@@ -219,7 +222,11 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 		if data.amt > oldSlot.amt then
 			data.amt = oldSlot.amt
 		end
-		if data.toInv == 'playerInventory' then	
+		if data.toInv == 'playerInventory' then
+			if not fsn_CanCarry(oldSlot.index, oldSlot.amt) then
+				invLog('<span style="color:red">You cannot carry this!</span>')
+				return
+			end
 			if firstInventory[data.toSlot].index then
 				if firstInventory[data.toSlot].index ~= oldSlot.index then
 					invLog('<span style="color:red">This slot is occupied</span>')
@@ -304,6 +311,9 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 	-- send server vehicle update
 	if secondInventory_type == 'trunk' or secondInventory_type == 'glovebox' then
 		TriggerServerEvent('fsn_inventory:veh:update', secondInventory_type, secondInventory_id, secondInventory)
+	end
+	if secondInventory_type == 'apt' then
+		TriggerEvent('fsn_apartments:inv:update', secondInventory)
 	end
 	updateGUI()
 end)
@@ -462,7 +472,17 @@ AddEventHandler('fsn_inventory:veh:glovebox:recieve', function(plate, tbl)
 	end
 	invLog('received glovebox from Vehicle('..plate..')')
 end)
-
+RegisterNetEvent('fsn_inventory:apt:recieve')
+AddEventHandler('fsn_inventory:apt:recieve', function(id, tbl)
+	secondInventory_type = 'apt'
+	secondInventory_id = id
+	secondInventory = tbl
+	updateGUI()
+	if not gui then
+		toggleGUI()
+	end
+	invLog('received glovebox from Apartment('..id..')')
+end)
 --[[
 	Manage items
 ]]--
@@ -515,7 +535,7 @@ AddEventHandler('fsn_inventory:items:add', function(item)
 			end
 		end
 	else
-		exports['mythic_notify']:DoHudText('error', 'You cannot carry this!')
+		exports['mythic_notify']:DoHudText('error', 'You cannot carry '..item.amt..': '..item.name)
 	end
 	if not placed then
 		exports['mythic_notify']:DoHudText('error', 'You do not have a slot free for this!')
@@ -528,6 +548,7 @@ AddEventHandler('fsn_inventory:items:add', function(item)
 	else
 		exports['mythic_notify']:DoHudText('inform', 'You got '..item.amt..' '..item.name)
 	end
+	updateGUI()
 end)
 RegisterNetEvent('fsn_inventory:items:addPreset')
 AddEventHandler('fsn_inventory:items:addPreset', function(item, amt)
@@ -544,27 +565,48 @@ AddEventHandler('fsn_inventory:item:add', function(item, amount)
 	print('legacy adding: '..amount..' '..item)
 	TriggerEvent('fsn_inventory:items:addPreset', item, amount)
 end)
------------------------------------------------------ Store stuffs
+--[[
+	Store stuffs
+]]--
+local prices = {
+	["beef_jerky"] = 4,
+	["cupcake"] = 1,
+	["microwave_burrito"] = 8,
+	["panini"] = 6,
+	["pepsi"] = 5,
+	["pepsi_max"] = 6,
+	["water"] = 3,
+	["coffee"] = 10,
+	["repair_kit"] = 250,
+	["lockpick"] = 200,
+	["zipties"] = 1000,
+	["phone"] = 250,
+	["binoculars"] = 250,
+	["bandage"] = 250,
+}
 RegisterNetEvent('fsn_inventory:prebuy')
 RegisterNetEvent('fsn_inventory:buyItem')
 AddEventHandler('fsn_inventory:prebuy', function(item)
   if not fsn_CanCarry(item, 1) then
     TriggerEvent('fsn_notify:displayNotification', 'You cannot carry this!', 'centerLeft', 3000, 'error')
   else
-    TriggerEvent('fsn_inventory:buyItem', item, 500, 1)
+    TriggerEvent('fsn_inventory:buyItem', item, prices[item], 1)
   end
 end)
 --[[
 	CONVERT OLD INV / GIVE ID CARD ON FIRST JOIN
 ]]--
+intiiated = false
 function init(charTbl)
 	local inventory	= json.decode(charTbl.char_inventory)
 	if inventory.firstSpawned == true then
 		-- you have the new inv very nice
 		firstInventory = inventory.table
+		exports['mythic_notify']:DoHudText('success', 'You already got this system fam!', 8000)
+		intiiated = true
 	else
-		exports['mythic_notify']:DoHudText('inform', 'We have updated our inventory system', 8000)
 		exports['mythic_notify']:DoHudText('inform', 'Trying to update your inventory to the new system', 8000)
+		Citizen.Wait(3000)
 		for key, item in pairs(inventory) do
 			if presetItems[key] then
 				TriggerEvent('fsn_inventory:items:addPreset', key, item.amount)
@@ -572,9 +614,25 @@ function init(charTbl)
 				exports['mythic_notify']:DoHudText('error', 'No preset found for: '..key, 10000)
 			end
 		end
+		Citizen.Wait(500)
+		TriggerEvent('fsn_licenses:giveID')
+		Citizen.Wait(500)
 		exports['mythic_notify']:DoHudText('success', 'Success', 8000)
+		intiiated = true
 	end
 end
 AddEventHandler('fsn_main:character', function(charTbl)
 	init(charTbl)
+end)
+--[[
+	saving :)
+]]--
+AddEventHandler('fsn_main:characterSaving', function()	
+	if intiiated then
+		local inv = {
+			firstSpawned = true,
+			table = firstInventory,
+		}
+		TriggerServerEvent('fsn_inventory:database:update', inv)
+	end
 end)
