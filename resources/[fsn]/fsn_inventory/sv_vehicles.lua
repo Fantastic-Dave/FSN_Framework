@@ -15,8 +15,8 @@ AddEventHandler('fsn_inventory:veh:request', function(plate, type)
 	else
 		vehicles[plate] = {
 			inuse = true,
-			trunk = {{},{},{},{},{},{},{},{},{},{}},
-			glovebox = {{},{},{},{},{}},
+			trunk = {{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},},
+			glovebox = {{index=false},{index=false},{index=false},{index=false},{index=false},},
 		}
 		TriggerClientEvent('fsn_inventory:veh:'..type..':recieve', source, plate, vehicles[plate][type])
 	end	
