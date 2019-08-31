@@ -22,7 +22,6 @@ $( function() {
         if ( item.showmenu ) {
             ResetMenu()
 			weapons = item.weapons
-			inventory = item.inventory
             actionContainer.show();
         }
 
@@ -69,24 +68,6 @@ function parseWeapons(weapons) {
 			'<button class="menuoption" data-action="wepmenu-info-'+i+'" data-spawn="weapon">View Info</button>'+
 			'<button class="menuoption" data-action="wepmenu-equip-'+i+'" data-spawn="weapon">Equip</button>'+
 		'</div>')
-	});
-	
-	$('#actionmenu').append('<button id="exitbutton" class="menuoption" data-action="exit">Exit</button>')
-	init()
-}
-
-function parseItems(items) {
-	$('#inventory').html('');
-	var shit = document.querySelectorAll('[data-spawn="inventory"]')
-	for (var i = 0; i < shit.length; i++) {
-	  var item = shit[i]; 
-	  item.remove();
-	}
-	$('#exitbutton').remove()
-	weps = JSON.parse(inventory)
-	//$('#inventory').append('<button class="menuoption" data-action="weapon-putaway" data-spawn="inventory"><b>Store Weapon</b></button>')
-	jQuery.each(weps, function(i, val) {
-		$('#inventory').append('<button class="menuoption" data-action="takeItem" data-item="'+i+'" data-spawn="inventory">['+val+'X] '+i+'</button>')
 	});
 	
 	$('#actionmenu').append('<button id="exitbutton" class="menuoption" data-action="exit">Exit</button>')
