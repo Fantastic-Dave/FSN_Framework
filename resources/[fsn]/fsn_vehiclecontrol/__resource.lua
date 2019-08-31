@@ -22,6 +22,7 @@ client_script 'carhud/carhud.lua'
 -- DAMAGE
 client_script 'damage/config.lua'
 client_script 'damage/client.lua'
+client_script 'damage/cl_crashes.lua'
 
 -- ENGINE
 client_script 'engine/client.lua'

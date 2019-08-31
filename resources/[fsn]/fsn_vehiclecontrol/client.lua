@@ -96,6 +96,15 @@ Citizen.CreateThread(function()
 				local co = GetEntityCoords(ped)
 				local fw = Fwv(ped)
 				PlaySound(-1, "10_SEC_WARNING", "HUD_MINI_GAME_SOUNDSET", 0, 0, 1)
+				if IsPointOnRoad(GetEntityCoords(GetPlayerPed(-1)), GetVehiclePedIsIn(GetPlayerPed(-1))) then
+					local pos = GetEntityCoords(GetPlayerPed(-1))
+					local coords = {
+					 x = pos.x,
+					 y = pos.y,
+					 z = pos.z
+				   }
+				   TriggerServerEvent('fsn_police:dispatch', coords, 17)
+				end
 				SetEntityCoords(ped, co.x + fw.x, co.y + fw.y, co.z - 0.47, true, true, true)
 				SetEntityVelocity(ped, velBuffer[2].x, velBuffer[2].y, velBuffer[2].z)
 				Citizen.Wait(1)
