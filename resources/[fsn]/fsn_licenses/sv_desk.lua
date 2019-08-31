@@ -11,9 +11,6 @@ AddEventHandler('fsn_licenses:id:request', function(tbl)
 		index="id",
 		name='ID Card ('..tbl.char_fname..' '..tbl.char_lname..')',
 		amt=1,
-		data = {
-		
-		},
 		customData = {
 			Name = tbl.char_fname..' '..tbl.char_lname,
 			Occupation = occu,
