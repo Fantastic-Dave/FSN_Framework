@@ -151,7 +151,7 @@ return {
 	},
 	CHandlingData {
 		
-		HandlingName = "COGNOSCENTI", -- COGNOSC 
+		HandlingName = "COGNOSCENTI", -- COGNOSC  
 		-- Physical
 		Mass               = 2700,
 		InitialDragCoeff   = 6.401,
@@ -161,13 +161,13 @@ return {
 		InertiaMultiplier  = { 1.18, 1.02,    1.78 },
 
 		-- Transmission
-		DriveBiasFront                 = 0.13,
-		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.7, -- Testing
+		DriveBiasFront                 = 0.0,
+		InitialDriveGears              = 5,
+		InitialDriveForce              = 0.26,
 		DriveInertia                   = 1.0,
-		ClutchChangeRateScaleUpShift   = 1.7,
-		ClutchChangeRateScaleDownShift = 1.7,
-		InitialDriveMaxFlatVel         = 500,
+		ClutchChangeRateScaleUpShift   = 2.5,
+		ClutchChangeRateScaleDownShift = 2.5,
+		InitialDriveMaxFlatVel         = 140,
 		SteeringLock                   = 34.8,
 
 		-- Brake
@@ -186,17 +186,17 @@ return {
 		TractionLossMult         = 1.3,
 
 		-- Suspension
-		SuspensionForce       = 2.18,
-		SuspensionCompDamp    = 1.34,
-		SuspensionReboundDamp = 0.47,
-		SuspensionUpperLimit  = 0.121,
-		SuspensionLowerLimit  = -0.133,
+		SuspensionForce       = 1.8,
+		SuspensionCompDamp    = 1.4,
+		SuspensionReboundDamp = 2.0,
+		SuspensionUpperLimit  = 0.135,
+		SuspensionLowerLimit  = -0.115,
 		SuspensionRaise		  = 0.0,
-		SuspensionBiasFront   = 0.481,
-		AntiRollBarForce	  = 0,
+		SuspensionBiasFront   = 0.49,
+		AntiRollBarForce	  = 0.65,
 		AntiRollBarBiasFront  = 0.675,
-		RollCentreHeightFront = 0.408,
-		RollCentreHeightRear  = 0.406,
+		RollCentreHeightFront = 0.2,
+		RollCentreHeightRear  = 0.2,
 
 		-- Damage
 		CollisionDamageMult         = 1.0,
@@ -304,7 +304,7 @@ return {
 		HandlingName = "FACTION3",
 		-- Physical
 		Mass               = 1400,
-		InitialDragCoeff   = 10.0,
+		InitialDragCoeff   = 8.0,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0, 0 },
 		InertiaMultiplier  = { 1, 1,    1.6 },
@@ -312,7 +312,7 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 5,
-		InitialDriveForce              = 0.027,
+		InitialDriveForce              = 0.26,
 		DriveInertia                   = 1,
 		ClutchChangeRateScaleUpShift   = 1.9,
 		ClutchChangeRateScaleDownShift = 1.9,
