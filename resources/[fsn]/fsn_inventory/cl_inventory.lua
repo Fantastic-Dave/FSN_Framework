@@ -505,29 +505,30 @@ end)
 ]]--
 RegisterNetEvent('fsn_inventory:item:take')
 AddEventHandler('fsn_inventory:item:take', function(item, amt)
-	if amt == fsn_GetItemAmount(item) then
-		-- take all
-		for k,v in pairs(firstInventory) do
-			if v.index == item then
-				firstInventory[k] = {}
-			end
-		end
-	else
-		for k,v in pairs(firstInventory) do
-			if v.index == item and amt > 0 then
-				if v.amt == amt then
-					firstInventory[k] = {}
-					amt = 0
-				else
-					if firstInventory[k].amt < amt then
-						local amount = firstInventory[k].amt
-						firstInventory[k].amt = firstInventory[k].amt - amt
-						amt = amt - amount
+	print(':fsn_inventory: removing '..amt..' '..item)
+	local taken = 0
+	for k, v in pairs(firstInventory) do
+		if taken < amt then
+			local remaining = amt - taken 
+			if v.index ~= false then
+				if v.index == item then
+					print(':fsn_inventory: '..v.amt..' '..v.index..' in slot '..k)
+					if v.amt == remaining then
+						-- take all out of 1 slot
+						taken = taken + v.amt
+						firstInventory[k] = {index=false}
+					elseif v.amt > remaining then
+						taken = taken + remaining
+						firstInventory[k].amt = firstInventory[k].amt - remaining
+					elseif v.amt < remaining then
+						taken = taken + firstInventory[k].amt
+						firstInventory[k] = {index=false}
 					end
 				end
 			end
 		end
 	end
+	exports['mythic_notify']:DoHudText('inform', 'Taken: '..taken..' '..item)
 	updateGUI()
 end)
 RegisterNetEvent('fsn_inventory:items:add')
