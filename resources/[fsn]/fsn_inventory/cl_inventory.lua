@@ -315,6 +315,9 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 	if secondInventory_type == 'apt' then
 		TriggerEvent('fsn_apartments:inv:update', secondInventory)
 	end
+	if secondInventory_type == 'prop' then
+		TriggerEvent('fsn_properties:inv:update', secondInventory)
+	end
 	updateGUI()
 end)
 
@@ -393,6 +396,9 @@ function toggleGUI()
 		end
 		if secondInventory_type == 'trunk' or secondInventory_type == 'glovebox' then
 			TriggerServerEvent('fsn_inventory:veh:finished', secondInventory_id)
+		end
+		if secondInventory_type == 'prop' then
+			TriggerEvent('fsn_properties:inv:closed', secondInventory_id)
 		end
 		secondInventory_type = 'ply'
 		secondInventory_id = 0
@@ -481,7 +487,18 @@ AddEventHandler('fsn_inventory:apt:recieve', function(id, tbl)
 	if not gui then
 		toggleGUI()
 	end
-	invLog('received glovebox from Apartment('..id..')')
+	invLog('received inventory from Apartment('..id..')')
+end)
+RegisterNetEvent('fsn_inventory:prop:recieve')
+AddEventHandler('fsn_inventory:prop:recieve', function(id, tbl)
+	secondInventory_type = 'prop'
+	secondInventory_id = id
+	secondInventory = tbl
+	updateGUI()
+	if not gui then
+		toggleGUI()
+	end
+	invLog('received inventory from Property('..id..')')
 end)
 --[[
 	Manage items
@@ -609,7 +626,9 @@ function init(charTbl)
 		Citizen.Wait(3000)
 		for key, item in pairs(inventory) do
 			if presetItems[key] then
-				TriggerEvent('fsn_inventory:items:addPreset', key, item.amount)
+				if fsn_CanCarry(key, item.amount)	then
+					TriggerEvent('fsn_inventory:items:addPreset', key, item.amount)
+				end
 			else
 				exports['mythic_notify']:DoHudText('error', 'No preset found for: '..key, 10000)
 			end
@@ -627,12 +646,16 @@ end)
 --[[
 	saving :)
 ]]--
+RegisterNetEvent('fsn_main:characterSaving')
 AddEventHandler('fsn_main:characterSaving', function()	
 	if intiiated then
+		print(':fsn_inventory: [INFO] Saving inventory')
 		local inv = {
 			firstSpawned = true,
 			table = firstInventory,
 		}
 		TriggerServerEvent('fsn_inventory:database:update', inv)
-	end
+	else
+		print(':fsn_inventory: [ERROR] Your inventory was not initiated so cannot save.')
+	end	
 end)
