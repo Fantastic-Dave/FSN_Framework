@@ -32,8 +32,8 @@
 }
 
 .inventory-left {
-	margin-top: 200px;
-	margin-left: 150px;
+	margin-top: 10%;
+	margin-left: 8%;
 	display:inline;
 	float:left;
     width: 40%;
@@ -64,13 +64,13 @@
 
 .inventory-middle {
 	display:inline;
-	margin-top: 200px;
+	margin-top: 10%;
 	float:left;
     width: 18%;
 }
 
 .inventory-right {
-	margin-top: 200px;
+	margin-top: 10%;
 	float:left;
 	display:inline;
     width: 40%;
@@ -154,7 +154,8 @@
 }
 
 #playerInventory {
-    width: 625px;
+    /* width: 625px; */
+    width: 33%;
     height: 700px;
     float: left;
     overflow-y: scroll
@@ -162,7 +163,7 @@
 
 
 #otherInventory {
-    width: 625px;
+    width: 33%;
     height: 700px;
     float: left;
     overflow-y: scroll
