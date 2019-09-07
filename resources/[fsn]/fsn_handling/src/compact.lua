@@ -523,7 +523,7 @@ return {
 		
 		HandlingName = "RHAPSODY",
 		-- Physical
-		Mass               = 1500,
+		Mass               = 1350,
 		InitialDragCoeff   = 7.99,
 		DownforceModifier  = 1.05,
 		PercentSubmerged   = 78,
@@ -533,11 +533,11 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 4,
-		InitialDriveForce              = 0.1959,
+		InitialDriveForce              = 0.23,
 		DriveInertia                   = 1,
-		ClutchChangeRateScaleUpShift   = 1.14,
-		ClutchChangeRateScaleDownShift = 1.6,
-		InitialDriveMaxFlatVel         = 119,
+		ClutchChangeRateScaleUpShift   = 1.9,
+		ClutchChangeRateScaleDownShift = 1.9,
+		InitialDriveMaxFlatVel         = 125,
 		SteeringLock                   = 33.7,
 
 		-- Brake

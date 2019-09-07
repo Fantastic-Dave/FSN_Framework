@@ -900,23 +900,22 @@ return {
 	},
 	CHandlingData {
 		
-		HandlingName = "FELTZER2",
+		HandlingName = "FELTZER",
 		-- Physical
-		Mass               = 2050,
+		Mass               = 1450,
 		InitialDragCoeff   = 7.85,
-		DownforceModifier  = 1.68,
 		PercentSubmerged   = 78,
-		CentreOfMassOffset = { 0,    -0.121, 0.02 },
-		InertiaMultiplier  = { 1.16, 1,    1.45 },
+		CentreOfMassOffset = { 0,    0, 0 },
+		InertiaMultiplier  = { 1, 1.13,    1.6 },
 
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.3,
+		InitialDriveForce              = 0.38,
 		DriveInertia                   = 0.94,
-		ClutchChangeRateScaleUpShift   = 2.1,
+		ClutchChangeRateScaleUpShift   = 2.0,
 		ClutchChangeRateScaleDownShift = 2.2,
-		InitialDriveMaxFlatVel         = 153,
+		InitialDriveMaxFlatVel         = 160,
 		SteeringLock                   = 32.6,
 
 		-- Brake
@@ -1289,8 +1288,8 @@ return {
 		InitialDriveGears              = 7,
 		InitialDriveForce              = 0.310,
 		DriveInertia                   = 0.98,
-		ClutchChangeRateScaleUpShift   = 7.5,
-		ClutchChangeRateScaleDownShift = 6,
+		ClutchChangeRateScaleUpShift   = 1.5,
+		ClutchChangeRateScaleDownShift = 2,
 		InitialDriveMaxFlatVel         = 173,
 		SteeringLock                   = 33.2,
 

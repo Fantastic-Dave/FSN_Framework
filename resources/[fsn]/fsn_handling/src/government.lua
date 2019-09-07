@@ -457,7 +457,7 @@ return {
 		
 		HandlingName = "RAM", -- Dodge Ram (107)
 		-- Physical
-		Mass               = 1800,
+		Mass               = 2000,
 		InitialDragCoeff   = 2.53,
 		DownforceModifier  = 1.31,
 		PercentSubmerged   = 78,
@@ -471,7 +471,7 @@ return {
 		DriveInertia                   = 0.99,
 		ClutchChangeRateScaleUpShift   = 2.2,
 		ClutchChangeRateScaleDownShift = 2.3,
-		InitialDriveMaxFlatVel         = 138,
+		InitialDriveMaxFlatVel         = 140,
 		SteeringLock                   = 36.1,
 
 		-- Brake
@@ -532,21 +532,21 @@ return {
 		
 		HandlingName = "FRAPTOR", -- Ford Raptor (108)
 		-- Physical
-		Mass               = 1850,
-		InitialDragCoeff   = 2.4,
+		Mass               = 2200,
+		InitialDragCoeff   = 3.41,
 		PercentSubmerged   = 85,
-		CentreOfMassOffset = { 0,    0.065, -0.061 },
-		InertiaMultiplier  = { 1, 1.09,    1.21 },
+		CentreOfMassOffset = { 0,    -0.13, 0.04 },
+		InertiaMultiplier  = { 1.16, 1,    1.41 },
 
 		-- Transmission
 		DriveBiasFront                 = 0.5,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.38,
-		DriveInertia                   = 1.15,
-		ClutchChangeRateScaleUpShift   = 1.2,
-		ClutchChangeRateScaleDownShift = 1.2,
-		InitialDriveMaxFlatVel         = 168,
-		SteeringLock                   = 44.0,
+		InitialDriveForce              = 0.583,
+		DriveInertia                   = 1.20,
+		ClutchChangeRateScaleUpShift   = 1.8,
+		ClutchChangeRateScaleDownShift = 2.2,
+		InitialDriveMaxFlatVel         = 180,
+		SteeringLock                   = 34.6,
 
 		-- Brake
 		BrakeForce     = 0.445,
@@ -564,17 +564,17 @@ return {
 		TractionLossMult         = 0.87,
 
 		-- Suspension
-		SuspensionForce       = 2.0,
-		SuspensionCompDamp    = 1.65,
-		SuspensionReboundDamp = 0.4,
-		SuspensionUpperLimit  = 0.14,
-		SuspensionLowerLimit  = -0.122,
+		SuspensionForce       = 2.28,
+		SuspensionCompDamp    = 1.45,
+		SuspensionReboundDamp = 0.44,
+		SuspensionUpperLimit  = 0.157,
+		SuspensionLowerLimit  = -0.174,
 		SuspensionRaise		  = 0.0,
-		SuspensionBiasFront   = 0.53,
+		SuspensionBiasFront   = 0.469,
 		AntiRollBarForce	  = 0.09,
-		AntiRollBarBiasFront  = 0.53,
-		RollCentreHeightFront = 0.21,
-		RollCentreHeightRear  = 0.2,
+		AntiRollBarBiasFront  = 0.56,
+		RollCentreHeightFront = 0.789,
+		RollCentreHeightRear  = 0.789,
 
 		-- Damage
 		CollisionDamageMult         = 1.0,
@@ -585,9 +585,9 @@ return {
 		OilVolume					= 5.0,
 
 		-- Misc
-		SeatOffsetDistX = 0.1,
-		SeatOffsetDistY = 0,
-		SeatOffsetDistZ = 0,
+		SeatOffsetDistX = 0.0,
+		SeatOffsetDistY = 0.0,
+		SeatOffsetDistZ = 0.0,
 		MonetaryValue   = 75000,
 		ModelFlags		= '240010',
 		HandlingFlags   = "800008",
