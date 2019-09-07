@@ -895,7 +895,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
             if split[4] then
               local char = getCharacter(source)
               local officername = char.char_fname..' '..char.char_lname
-              TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[4]), source)
+              --TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[4]), source)
               TriggerClientEvent('fsn_police:search:start:weapons', tonumber(split[4]), source)
               TriggerClientEvent('fsn_police:search:start:money', tonumber(split[4]), source)
               TriggerClientEvent('fsn_notify:displayNotification', source, 'Searching everything of: <b>'..tonumber(split[4]), 'centerRight', 7000, 'info')
@@ -908,7 +908,8 @@ AddEventHandler('chatMessage', function(source, auth, msg)
             if split[4] then
               local char = getCharacter(source)
               local officername = char.char_fname..' '..char.char_lname
-              TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[4]), source)
+              --TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[4]), source)
+			  TriggerClientEvent('fsn_inventory:ply:request', tonumber(split[4]), source)
               TriggerClientEvent('fsn_notify:displayNotification', source, 'Searching <b>'..tonumber(split[4]), 'centerRight', 7000, 'info')
               TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[4]), 'You are being searched by officer <b>'..officername..'</b><br><i>This search is for inventory items', 'centerRight', 7000, 'info')
             else
