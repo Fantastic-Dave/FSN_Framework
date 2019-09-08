@@ -81,9 +81,9 @@ Citizen.CreateThread(function()
 			if DecorGetBool(ped, "fsn_ems:dead") and ped ~= GetPlayerPed(-1) then
 				if GetDistanceBetweenCoords(GetEntityCoords(ped, false), GetEntityCoords(GetPlayerPed(-1),false), true) < 2 then
 					if not carrying then
-						Util.DrawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~r~Knocked Out~w~\n[LALT + E] Carry\n[LALT + A] Attend', {255,255,255,200}, 0.25)
+						Util.DrawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~r~Knocked Out~w~\n[LALT + C] Carry\n[LALT + A] Attend\n[LALT + E] Search/Rob', {255,255,255,200}, 0.25)
 						if IsControlPressed(0, 19) then
-							if IsControlJustPressed(0, 38) then
+							if IsControlJustPressed(0, 79) then
 								-- carry (C)
 								TriggerServerEvent('fsn_ems:carry:start', GetPlayerServerId(id))
 							end
@@ -91,6 +91,12 @@ Citizen.CreateThread(function()
 							if IsControlJustPressed(0, 34) then
 								-- attend (A)
 								TaskLookAtCoord(GetPlayerPed(-1), GetEntityCoords(ped), 1000, 0, 2)
+								ExecuteCommand('e kneel2')
+							end
+							
+							if IsControlJustPressed(0,38) then
+								-- rob (E)
+								TriggerEvent('fsn_criminalmisc:robbing:startRobbing', id)
 								ExecuteCommand('e kneel2')
 							end
 						end
