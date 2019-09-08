@@ -139,8 +139,8 @@ Citizen.CreateThread(function()
 				  local ped = GetPlayerPed(id)
 				  if GetDistanceBetweenCoords(GetEntityCoords(ped, false), GetEntityCoords(GetPlayerPed(-1),false), true) < 2 and DecorGetBool(ped, "crim_cuff") then
 						if ped ~= GetPlayerPed(-1) then
-							fsn_drawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~r~Ziptied~g~\n[H] to cut free\n[E] to escort\n[F] to rob')
-							if IsControlJustPressed(0, 304) then
+							fsn_drawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~r~Ziptied~g~\n[H] to cut free\n[E] to escort\n[X] to rob')
+							if IsControlJustPressed(0, 304) and not IsPedInAnyVehicle(GetPlayerPed(-1), true) then
 								TriggerServerEvent('fsn_criminalmisc:handcuffs:requestunCuff', GetPlayerServerId(id))
 							end
 							if IsControlJustPressed(0, 38) then
@@ -152,9 +152,9 @@ Citizen.CreateThread(function()
 									TriggerEvent('fsn_notify:displayNotification', 'You do not have a knife to cut these', 'centerLeft', 4000, 'error')
 								end
 							end
-							if IsControlJustPressed(0, 251) then
-								print'iamtrying to rob you'
-								TriggerServerEvent('fsn_criminalmisc:robbing:requesRob', GetPlayerServerId(id)) 
+							if IsControlJustPressed(0, 73) and not IsPedInAnyVehicle(GetPlayerPed(-1), true) then
+								--TriggerServerEvent('fsn_criminalmisc:robbing:requesRob', GetPlayerServerId(id)) 
+								TriggerEvent('fsn_criminalmisc:robbing:startRobbing', id)
 							end
 						else
 							fsn_drawText3D(GetEntityCoords(ped).x, GetEntityCoords(ped).y, GetEntityCoords(ped).z, '~r~Ziptied')
