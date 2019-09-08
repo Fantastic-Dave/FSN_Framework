@@ -218,7 +218,7 @@ AddEventHandler('fsn_vehiclecontrol:damage:repairkit', function()
 					SetVehicleEngineOn(vehicle, true, false )
 					SetVehicleOilLevel(vehicle,(GetVehicleOilLevel(vehicle)/3)-0.5)
 					TriggerEvent('fsn_notify:displayNotification', 'You repaired this vehicle.', 'centerLeft', 4000, 'success')
-					TriggerEvent('fsn_inventory:item:take', 'repair_kit', 1)
+					--TriggerEvent('fsn_inventory:item:take', 'repair_kit', 1)
 				else
 					TriggerEvent('fsn_notify:displayNotification', 'You moved away from the vehicle!', 'centerLeft', 4000, 'error')
 				end
