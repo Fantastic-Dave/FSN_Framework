@@ -1030,13 +1030,6 @@ AddEventHandler('chatMessage', function(source, auth, msg)
           end
           if split[3] == 'take' then
             if split[4] then
-              if split[4] == 'id' then
-                if split[5] then
-                  TriggerClientEvent('fsn_licenses:showid', tonumber(split[5]))
-                else
-                  TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
-                end
-              end
               if split[4] == 'driver' then
                 if split[5] then
                   TriggerClientEvent('fsn_licenses:display', tonumber(split[5]), 'driver')
