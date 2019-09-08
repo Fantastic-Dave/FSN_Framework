@@ -23,11 +23,13 @@ client_script '_item_misc/burger_store.lua'
 	client_script 'cl_presets.lua'
 	client_script 'cl_uses.lua'
 	client_script 'cl_inventory.lua'
+	client_script 'pd_locker/cl_locker.lua'
 	--client_script 'cl_dropping.lua'
 	client_script 'cl_vehicles.lua'
 	server_script 'sv_inventory.lua'
 	--server_script 'sv_dropping.lua'
 	server_script 'sv_vehicles.lua'
+	server_script 'pd_locker/sv_locker.lua'
 -- new gui
 ui_page "html/ui.html"
 files {
