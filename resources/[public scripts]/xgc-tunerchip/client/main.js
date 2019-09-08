@@ -3,10 +3,6 @@ let isGuiOpen = false;
 let defaultVehicleValues = [];
 let currentVehicle = [];
 
-RegisterCommand("tuner", () => {
-  emit("xgc-tuner:openTuner")
-});
-
 RegisterNetEvent("xgc-tuner:openTuner")
 AddEventHandler("xgc-tuner:openTuner", () => {
   if (isGuiOpen) {
