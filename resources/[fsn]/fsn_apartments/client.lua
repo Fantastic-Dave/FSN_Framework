@@ -112,7 +112,12 @@ AddEventHandler('fsn_apartments:sendApartment', function(tbl)
 		apptdetails["apt_inventory"] = json.decode(tbl.apptinfo.apt_inventory) -- Not sure why this was never used???
 		
 		apptdetails["apt_utils"] = json.decode(tbl.apptinfo.apt_utils)
-		if apptdetails["apt_utils"]["inventory"].newinv ~= true then
+		if not apptdetails["apt_utils"]["inventory"] or #apptdetails["apt_utils"]["inventory"] > 1 or apptdetails["apt_utils"]["inventory"] == {} then
+			apptdetails["apt_utils"]["inventory"] = {
+				newinv = true,
+				table = {{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},}
+			}
+		elseif apptdetails["apt_utils"]["inventory"].newinv ~= true then
 			local new = {
 				newinv = true,
 				table = {{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},}
