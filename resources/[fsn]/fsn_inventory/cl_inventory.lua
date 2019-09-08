@@ -25,7 +25,7 @@ end
 --[[
 	Exports
 ]]--
-local max_weight = 30
+local max_weight = 40
 function fsn_CanCarry(item, amt)
 	if exports["fsn_police"]:fsn_PDDuty() then return true end -- no weight limit for cops, only slot limit
 	if presetItems[item] and presetItems[item].data and presetItems[item].data.weight then
