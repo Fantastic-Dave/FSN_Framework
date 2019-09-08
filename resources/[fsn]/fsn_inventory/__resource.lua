@@ -88,4 +88,5 @@ files {
   "html/img/items/vpn2.png",
   "html/img/items/water.png",
   "html/img/items/zipties.png",
+  "html/img/items/tuner_chip.png",
 }

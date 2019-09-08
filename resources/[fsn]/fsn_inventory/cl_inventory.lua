@@ -365,6 +365,8 @@ RegisterNUICallback("useSlot", function(data, cb)
 	local slot = firstInventory[data.fromSlot]
 	if slot.index then
 		if itemUses[slot.index] then
+			toggleGUI()
+			Citizen.Wait(100)
 			itemUses[slot.index].use(slot)
 			if itemUses[slot.index].takeItem then
 				if firstInventory[data.fromSlot].amt ~= 1 then
@@ -377,7 +379,6 @@ RegisterNUICallback("useSlot", function(data, cb)
 			else
 				exports['mythic_notify']:DoHudText('success', 'You used: '..slot.name)
 			end
-			toggleGUI()
 		else
 			invLog('<span style="color:red">This item does not have a use associated</span>')
 			exports['mythic_notify']:DoHudText('error', 'This item does not have a use associated')
