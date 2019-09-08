@@ -20,6 +20,12 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 	end
 end)
 
+
+RegisterServerEvent('fsn_inventory:sys:request')
+AddEventHandler('fsn_inventory:sys:request', function(to, from)
+	TriggerClientEvent('fsn_inventory:ply:request', to, from)
+end)
+
 RegisterServerEvent('fsn_inventory:sys:send')
 AddEventHandler('fsn_inventory:sys:send', function(to, tbl)
 	print('got inventory from '..source..' for '..to)
