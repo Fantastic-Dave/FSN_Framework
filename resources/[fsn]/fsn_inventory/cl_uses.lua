@@ -119,7 +119,7 @@ itemUses = {
 		end
 	},
 	["lockpick"] = {
-		takeItem = true,
+		takeItem = false,
 		use = function(item)
 			print'uselockpick'
 			TriggerEvent('fsn_criminalmisc:lockpicking')
