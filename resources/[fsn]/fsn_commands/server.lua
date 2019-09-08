@@ -609,6 +609,12 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/dev' and fsn_isDeveloper(source) then
     if split[2] then
+	  if split[2] == 'tuner' then
+		TriggerClientEvent('xgc-tuner:openTuner', source)
+	  end
+	  if split[2] == 'inv' then
+		TriggerClientEvent('fsn_inventory:ply:request', tonumber(split[3]), source)
+	  end
 	  if split[2] == 'softlog' then
 		TriggerClientEvent('fsn_main:charMenu', source)
 	  end
