@@ -307,7 +307,7 @@ Citizen.CreateThread(function()
           if IsControlJustPressed(0,38) then
               for k, v in pairs(policeWeapons) do
                 --GiveWeaponToPed(GetPlayerPed(-1), GetHashKey(v), 1000)
-				        TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey(v), 250)
+				TriggerEvent('fsn_criminalmisc:weapons:add:police', GetHashKey(v), 250)
               end
 	            GiveWeaponComponentToPed(GetPlayerPed(-1), 0x5EF9FEC4, 0x359B7AAE)-- Combat Pistol Flashlight
               AddArmourToPed(GetPlayerPed(-1), 100)
@@ -333,6 +333,7 @@ AddEventHandler('fsn_police:command:duty', function()
       pdonduty = true
       TriggerEvent('fsn_notify:displayNotification', 'You have clocked in as <span style="color: #42b6f4">police</span> (lvl: '..policelevel..')', 'centerLeft', 2000, 'info')
       TriggerServerEvent('fsn_police:onDuty', policelevel)
+	  SetPedRelationshipGroupHash(GetPlayerPed(-1),GetHashKey('store_guards'))
     else
       TriggerEvent('fsn_notify:displayNotification', 'You are not a police officer!', 'centerLeft', 6000, 'error')
     end
