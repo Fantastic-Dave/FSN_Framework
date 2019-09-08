@@ -27,6 +27,7 @@ end
 ]]--
 local max_weight = 30
 function fsn_CanCarry(item, amt)
+	if exports["fsn_police"]:fsn_PDDuty() then return true end -- no weight limit for cops, only slot limit
 	if presetItems[item] and presetItems[item].data and presetItems[item].data.weight then
 		local maff = presetItems[item].data.weight * amt
 		if fsn_CurrentWeight() + maff <= max_weight then
@@ -223,7 +224,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 			data.amt = oldSlot.amt
 		end
 		if data.toInv == 'playerInventory' then
-			if not fsn_CanCarry(oldSlot.index, oldSlot.amt) then
+			if not fsn_CanCarry(oldSlot.index, data.amt) then
 				invLog('<span style="color:red">You cannot carry this!</span>')
 				return
 			end
@@ -400,6 +401,9 @@ function toggleGUI()
 		if secondInventory_type == 'prop' then
 			TriggerEvent('fsn_properties:inv:closed', secondInventory_id)
 		end
+		if secondInventory_type == 'pd_locker' then
+			TriggerServerEvent('fsn_inventory:locker:save', secondInventory)
+		end
 		secondInventory_type = 'ply'
 		secondInventory_id = 0
 		secondInventory = {}
@@ -499,6 +503,17 @@ AddEventHandler('fsn_inventory:prop:recieve', function(id, tbl)
 		toggleGUI()
 	end
 	invLog('received inventory from Property('..id..')')
+end)
+RegisterNetEvent('fsn_inventory:pd_locker:recieve')
+AddEventHandler('fsn_inventory:pd_locker:recieve', function(id, tbl)
+	secondInventory_type = 'pd_locker'
+	secondInventory_id = id
+	secondInventory = tbl
+	updateGUI()
+	if not gui then
+		toggleGUI()
+	end
+	invLog('received inventory from pd_locker('..id..')')
 end)
 --[[
 	Manage items
