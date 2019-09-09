@@ -25,8 +25,9 @@ end
 --[[
 	Exports
 ]]--
-local max_weight = 30
+local max_weight = 40
 function fsn_CanCarry(item, amt)
+	if exports["fsn_police"]:fsn_PDDuty() then return true end -- no weight limit for cops, only slot limit
 	if presetItems[item] and presetItems[item].data and presetItems[item].data.weight then
 		local maff = presetItems[item].data.weight * amt
 		if fsn_CurrentWeight() + maff <= max_weight then
@@ -223,7 +224,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 			data.amt = oldSlot.amt
 		end
 		if data.toInv == 'playerInventory' then
-			if not fsn_CanCarry(oldSlot.index, oldSlot.amt) then
+			if not fsn_CanCarry(oldSlot.index, data.amt) then
 				invLog('<span style="color:red">You cannot carry this!</span>')
 				return
 			end
@@ -315,6 +316,9 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 	if secondInventory_type == 'apt' then
 		TriggerEvent('fsn_apartments:inv:update', secondInventory)
 	end
+	if secondInventory_type == 'prop' then
+		TriggerEvent('fsn_properties:inv:update', secondInventory)
+	end
 	updateGUI()
 end)
 
@@ -361,6 +365,8 @@ RegisterNUICallback("useSlot", function(data, cb)
 	local slot = firstInventory[data.fromSlot]
 	if slot.index then
 		if itemUses[slot.index] then
+			toggleGUI()
+			Citizen.Wait(100)
 			itemUses[slot.index].use(slot)
 			if itemUses[slot.index].takeItem then
 				if firstInventory[data.fromSlot].amt ~= 1 then
@@ -373,7 +379,6 @@ RegisterNUICallback("useSlot", function(data, cb)
 			else
 				exports['mythic_notify']:DoHudText('success', 'You used: '..slot.name)
 			end
-			toggleGUI()
 		else
 			invLog('<span style="color:red">This item does not have a use associated</span>')
 			exports['mythic_notify']:DoHudText('error', 'This item does not have a use associated')
@@ -393,6 +398,12 @@ function toggleGUI()
 		end
 		if secondInventory_type == 'trunk' or secondInventory_type == 'glovebox' then
 			TriggerServerEvent('fsn_inventory:veh:finished', secondInventory_id)
+		end
+		if secondInventory_type == 'prop' then
+			TriggerEvent('fsn_properties:inv:closed', secondInventory_id)
+		end
+		if secondInventory_type == 'pd_locker' then
+			TriggerServerEvent('fsn_inventory:locker:save', secondInventory)
 		end
 		secondInventory_type = 'ply'
 		secondInventory_id = 0
@@ -481,36 +492,59 @@ AddEventHandler('fsn_inventory:apt:recieve', function(id, tbl)
 	if not gui then
 		toggleGUI()
 	end
-	invLog('received glovebox from Apartment('..id..')')
+	invLog('received inventory from Apartment('..id..')')
+end)
+RegisterNetEvent('fsn_inventory:prop:recieve')
+AddEventHandler('fsn_inventory:prop:recieve', function(id, tbl)
+	secondInventory_type = 'prop'
+	secondInventory_id = id
+	secondInventory = tbl
+	updateGUI()
+	if not gui then
+		toggleGUI()
+	end
+	invLog('received inventory from Property('..id..')')
+end)
+RegisterNetEvent('fsn_inventory:pd_locker:recieve')
+AddEventHandler('fsn_inventory:pd_locker:recieve', function(id, tbl)
+	secondInventory_type = 'pd_locker'
+	secondInventory_id = id
+	secondInventory = tbl
+	updateGUI()
+	if not gui then
+		toggleGUI()
+	end
+	invLog('received inventory from pd_locker('..id..')')
 end)
 --[[
 	Manage items
 ]]--
 RegisterNetEvent('fsn_inventory:item:take')
 AddEventHandler('fsn_inventory:item:take', function(item, amt)
-	if amt == fsn_GetItemAmount(item) then
-		-- take all
-		for k,v in pairs(firstInventory) do
-			if v.index == item then
-				firstInventory[k] = {}
-			end
-		end
-	else
-		for k,v in pairs(firstInventory) do
-			if v.index == item and amt > 0 then
-				if v.amt == amt then
-					firstInventory[k] = {}
-					amt = 0
-				else
-					if firstInventory[k].amt < amt then
-						local amount = firstInventory[k].amt
-						firstInventory[k].amt = firstInventory[k].amt - amt
-						amt = amt - amount
+	print(':fsn_inventory: removing '..amt..' '..item)
+	local taken = 0
+	for k, v in pairs(firstInventory) do
+		if taken < amt then
+			local remaining = amt - taken 
+			if v.index ~= false then
+				if v.index == item then
+					print(':fsn_inventory: '..v.amt..' '..v.index..' in slot '..k)
+					if v.amt == remaining then
+						-- take all out of 1 slot
+						taken = taken + v.amt
+						firstInventory[k] = {index=false}
+					elseif v.amt > remaining then
+						taken = taken + remaining
+						firstInventory[k].amt = firstInventory[k].amt - remaining
+					elseif v.amt < remaining then
+						taken = taken + firstInventory[k].amt
+						firstInventory[k] = {index=false}
 					end
 				end
 			end
 		end
 	end
+	exports['mythic_notify']:DoHudText('inform', 'Taken: '..taken..' '..item)
 	updateGUI()
 end)
 RegisterNetEvent('fsn_inventory:items:add')
@@ -609,7 +643,9 @@ function init(charTbl)
 		Citizen.Wait(3000)
 		for key, item in pairs(inventory) do
 			if presetItems[key] then
-				TriggerEvent('fsn_inventory:items:addPreset', key, item.amount)
+				if fsn_CanCarry(key, item.amount)	then
+					TriggerEvent('fsn_inventory:items:addPreset', key, item.amount)
+				end
 			else
 				exports['mythic_notify']:DoHudText('error', 'No preset found for: '..key, 10000)
 			end
@@ -627,12 +663,16 @@ end)
 --[[
 	saving :)
 ]]--
+RegisterNetEvent('fsn_main:characterSaving')
 AddEventHandler('fsn_main:characterSaving', function()	
 	if intiiated then
+		print(':fsn_inventory: [INFO] Saving inventory')
 		local inv = {
 			firstSpawned = true,
 			table = firstInventory,
 		}
 		TriggerServerEvent('fsn_inventory:database:update', inv)
-	end
+	else
+		print(':fsn_inventory: [ERROR] Your inventory was not initiated so cannot save.')
+	end	
 end)

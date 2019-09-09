@@ -128,6 +128,19 @@ function Util.PrintTable(o)
    end
 end
 
+--[[
+	Util.TableHasValue(table: table, element: any)
+		Returns true if the table includes any value matching element
+]]--
+function Util.TableHasValue(table, element)
+  for _, value in pairs(table) do
+    if value == element then
+      return true
+    end
+  end
+  return false
+end
+
 
 --[[
 	Util.GetClosestPlayer()

@@ -16,6 +16,7 @@ AddEventHandler('fsn_licenses:id:request', function(tbl)
 			Occupation = occu,
 			DOB = tbl.char_dob,
 			Issue = os.date("%x"),
+			CharID = tbl.char_id
 		},
 	})
 end)

@@ -41,9 +41,9 @@ local pd_cars = {
   [104] = "s1",
   [105] = "state10",
   [106] = "state9",
-  [107] = "leosilv",
+  [107] = "ram",
   [108] = "1raptor",
-  [109] = "cvpi",
+  [109] = "vicleo",
   [110] = "pdbike",
   [111] = "pbus",
   [112] = "PoliceT",
@@ -610,6 +610,12 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   if split[1] == '/dev' and fsn_isDeveloper(source) then
     if split[2] then
+	  if split[2] == 'tuner' then
+		TriggerClientEvent('xgc-tuner:openTuner', source)
+	  end
+	  if split[2] == 'inv' then
+		TriggerClientEvent('fsn_inventory:ply:request', tonumber(split[3]), source)
+	  end
 	  if split[2] == 'softlog' then
 		TriggerClientEvent('fsn_main:charMenu', source)
 	  end
@@ -896,7 +902,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
             if split[4] then
               local char = getCharacter(source)
               local officername = char.char_fname..' '..char.char_lname
-              TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[4]), source)
+              --TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[4]), source)
               TriggerClientEvent('fsn_police:search:start:weapons', tonumber(split[4]), source)
               TriggerClientEvent('fsn_police:search:start:money', tonumber(split[4]), source)
               TriggerClientEvent('fsn_notify:displayNotification', source, 'Searching everything of: <b>'..tonumber(split[4]), 'centerRight', 7000, 'info')
@@ -909,7 +915,8 @@ AddEventHandler('chatMessage', function(source, auth, msg)
             if split[4] then
               local char = getCharacter(source)
               local officername = char.char_fname..' '..char.char_lname
-              TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[4]), source)
+              --TriggerClientEvent('fsn_police:search:start:inventory', tonumber(split[4]), source)
+			  TriggerClientEvent('fsn_inventory:ply:request', tonumber(split[4]), source)
               TriggerClientEvent('fsn_notify:displayNotification', source, 'Searching <b>'..tonumber(split[4]), 'centerRight', 7000, 'info')
               TriggerClientEvent('fsn_notify:displayNotification', tonumber(split[4]), 'You are being searched by officer <b>'..officername..'</b><br><i>This search is for inventory items', 'centerRight', 7000, 'info')
             else
@@ -1024,13 +1031,6 @@ AddEventHandler('chatMessage', function(source, auth, msg)
           end
           if split[3] == 'take' then
             if split[4] then
-              if split[4] == 'id' then
-                if split[5] then
-                  TriggerClientEvent('fsn_licenses:showid', tonumber(split[5]))
-                else
-                  TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'You need to provide a target.')
-                end
-              end
               if split[4] == 'driver' then
                 if split[5] then
                   TriggerClientEvent('fsn_licenses:display', tonumber(split[5]), 'driver')

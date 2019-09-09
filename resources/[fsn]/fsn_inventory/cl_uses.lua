@@ -70,6 +70,12 @@ itemUses = {
 			end
 		end
 	},
+	["tuner_chip"] = {
+		takeItem = false,
+		use = function(item)
+			TriggerEvent('xgc-tuner:openTuner')
+		end
+	},
 	["burger"] = {
 		takeItem = true,
 		use = function(item)
@@ -113,7 +119,7 @@ itemUses = {
 		end
 	},
 	["lockpick"] = {
-		takeItem = true,
+		takeItem = false,
 		use = function(item)
 			print'uselockpick'
 			TriggerEvent('fsn_criminalmisc:lockpicking')

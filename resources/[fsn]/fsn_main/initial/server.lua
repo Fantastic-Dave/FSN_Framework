@@ -123,6 +123,16 @@ function fsn_GetPlayerFromCharacterId(id)
   return idee
 end
 
+function fsn_GetCharacterInfo(id)
+	local idee = false
+	for k, v in pairs(cur_chars) do
+		if v.char_id == tonumber(id) then
+		  idee = v
+		end
+	end
+	return idee
+end
+
 function fsn_CharID(src)
   local charid = 0
   for k, v in pairs(cur_chars) do

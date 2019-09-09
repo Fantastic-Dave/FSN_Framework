@@ -202,14 +202,15 @@ end)
 local gasuse = {x = -628.78393554688, y = -226.52185058594, z = 55.901119232178}
 
 local guardmdls = {'s_m_m_armoured_01', 's_m_m_armoured_02', 's_m_m_chemsec_01'}
-local guardWeapon = 'WEAPON_CARBINERIFLE'
+
+local guardWeapon = 'WEAPON_COMBATPISTOL'
 local guardlocs = {
 	[1] = {x = -631.37310791016, y = -235.05155944824, z = 38.05704498291, h = 308.68231201172, ped=false, tenthirteen=false},
 	[2] = {x = -629.10021972656, y = -238.28601074219, z = 38.05704498291, h = 315.65130615234, ped=false, tenthirteen=false},
-	[3] = {x = -615.44744873047, y = -230.43145751953, z = 38.057022094727, h = 127.00442504883, ped=false, tenthirteen=false},
-	[4] = {x = -619.76403808594, y = -224.42778015137, z = 38.056983947754, h = 128.99319458008, ped=false, tenthirteen=false},
-	[5] = {x = -626.38409423828, y = -228.23585510254, z = 38.057060241699, h = 267.1194152832, ped=false, tenthirteen=false},
-	[6] = {x = -621.15222167969, y = -235.51699829102, z = 38.057048797607, h = 339.47375488281, ped=false, tenthirteen=false},
+	--[3] = {x = -615.44744873047, y = -230.43145751953, z = 38.057022094727, h = 127.00442504883, ped=false, tenthirteen=false},
+	--[4] = {x = -619.76403808594, y = -224.42778015137, z = 38.056983947754, h = 128.99319458008, ped=false, tenthirteen=false},
+	--[5] = {x = -626.38409423828, y = -228.23585510254, z = 38.057060241699, h = 267.1194152832, ped=false, tenthirteen=false},
+	--[6] = {x = -621.15222167969, y = -235.51699829102, z = 38.057048797607, h = 339.47375488281, ped=false, tenthirteen=false},
 }
 local guards = false
 function TriggerGuardAttack()
@@ -225,7 +226,8 @@ function TriggerGuardAttack()
 		end
 	end
 end
-
+local nuff,guardgroup = AddRelationshipGroup('store_guards')
+SetRelationshipBetweenGroups(0,guardgroup,guardgroup)
 local blips = false
 local cases = {
 	{-626.5326, -238.3758, 38.05, blip=false, robbed=false},
@@ -274,7 +276,7 @@ AddEventHandler('fsn_jewellerystore:case:startrob', function(caseid)
 	Citizen.Wait(7500)
 	ClearPedTasks(GetPlayerPed(-1))
 	robbing = false
-	TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(1000,1500))
+	TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(2000,3000))
 	FreezeEntityPosition(GetPlayerPed(-1), false)
 end)
 
@@ -389,9 +391,37 @@ Citizen.CreateThread(function()
 			end
 		end
 		if GetDistanceBetweenCoords(centre.x, centre.y, centre.z, GetEntityCoords(GetPlayerPed(-1)), true) < 30 then
-			if NetworkIsHost() then
-				if not guards then 
-					for key, guard in pairs(guardlocs) do
+			-------- RING SHIT
+			--if GetDistanceBetweenCoords(-622.29168701172, -229.90211486816, 38.057048797607,GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+			--	fsn_drawText3D(-622.29168701172, -229.90211486816, 38.057048797607, '[E] ~g~Purchase:~w~ Ring\n~y~($100,000)')
+			--end
+			-------- NEW GUARD SHIT
+			for key, guard in pairs(guardlocs) do
+				if guard.ped == false then
+					if exports["fsn_entfinder"]:getPedNearCoords(guard.x, guard.y, guard.z,1) then
+						local found = false
+						for k,v in ipairs(guardmdls) do
+							if GetEntityModel(exports["fsn_entfinder"]:getPedNearCoords(guard.x, guard.y, guard.z,2)) == GetHashKey(v) then
+								found = true
+							end
+						end
+						if found then
+							guard.ped = exports["fsn_entfinder"]:getPedNearCoords(guard.x, guard.y, guard.z,2)
+						else
+							local mdl = GetHashKey(guardmdls[math.random(1,#guardmdls)])
+							RequestModel(mdl)
+							print('attempting to spawn mdl '..mdl)
+							while not HasModelLoaded(mdl) do
+								print('cannot load '..mdl)
+								Wait(1)
+							end
+							guard.ped = CreatePed(2, mdl, guard.x, guard.y, guard.z, guard.h, true, true)
+							guard.tenthirteen = false
+							SetPedFleeAttributes(guard.ped, 0, 0)
+							TaskSetBlockingOfNonTemporaryEvents(guard.ped, true)
+							SetPedRelationshipGroupHash(guard.ped,guardgroup)
+						end
+					else
 						local mdl = GetHashKey(guardmdls[math.random(1,#guardmdls)])
 						RequestModel(mdl)
 						print('attempting to spawn mdl '..mdl)
@@ -401,30 +431,26 @@ Citizen.CreateThread(function()
 						end
 						guard.ped = CreatePed(2, mdl, guard.x, guard.y, guard.z, guard.h, true, true)
 						guard.tenthirteen = false
-						--SetBlockingOfNonTemporaryEvents(guard.ped, true)
-						--SetPedCombatAttributes(guard.ped, 46, true)
 						SetPedFleeAttributes(guard.ped, 0, 0)
+						TaskSetBlockingOfNonTemporaryEvents(guard.ped, true)
+						SetPedRelationshipGroupHash(guard.ped,guardgroup)
 					end
-					guards = true
 				else
-					for key, guard in pairs(guardlocs) do
-						if guard.ped and IsEntityDead(guard.ped) then
-							--[[
-							if not guard.tenthirteen then
-								local pos = GetEntityCoords(guard.ped)
-								local coords = {
-									x = pos.x,
-									y = pos.y,
-									z = pos.z
-								}
-								--TriggerServerEvent('fsn_police:dispatch', coords, 4, '10-13 | IMMEDIATE BACKUP REQUESTED AT JEWELRY STORE')
-								guard.tenthirteen = true
+					if not DoesEntityExist(guard.ped) or GetDistanceBetweenCoords(centre.x, centre.y, centre.z, GetEntityCoords(guard.ped), true) > 100 then
+						guard.ped = false
+					else
+						--;SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);SET_PED_FLEE_ATTRIBUTES(ped, 0, 0);SET_PED_COMBAT_ATTRIBUTES(ped, 17, 1)
+						
+						--SetPedCombatAttributes(guard.ped, 17, 1)
+						
+						if IsPlayerFreeAimingAtEntity(PlayerId(), guard.ped) then
+							--print('aiming at guard: '..key)
+							for k,v in pairs(guardlocs) do 
+								TaskSetBlockingOfNonTemporaryEvents(v.ped, false)
+								GiveWeaponToPed(v.ped, GetHashKey(guardWeapon), 50, true, true)
+								TaskCombatPed(v.ped, GetPlayerPed(-1), 0, 18)
 							end
-							]]
-						end
-						if IsPedInMeleeCombat(GetPlayerPed(-1)) or IsPlayerFreeAiming(PlayerId()) then
-							TriggerGuardAttack()
-						end
+						end						
 					end
 				end
 			end

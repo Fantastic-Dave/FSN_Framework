@@ -150,3 +150,11 @@ Citizen.CreateThread(function()
 	end
 end)
 --SetEntityCoords(GetPlayerPed(-1), -774.10675, -9.47164536, 10.1702633)
+
+function IsDoorLocked(id)
+	if doors[id] then
+		return doors[id].locked
+	else
+		return true
+	end
+end

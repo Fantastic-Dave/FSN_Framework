@@ -1,6 +1,7 @@
 local races = {}
 local inrace = false
 local myrace = 0
+local myrace_xy = {}
 local racestarted = false
 local raceblip = false
 
@@ -49,7 +50,7 @@ end)
 
 RegisterNetEvent('fsn_criminalmisc:racing:putmeinrace')
 AddEventHandler('fsn_criminalmisc:racing:putmeinrace', function(id, members)
-	for k, v in pairs(races) do
+	for k, v in ipairs(races) do
 		if v.race_id == id then
 			ClearGpsPlayerWaypoint()
 			SetWaypointOff()
@@ -62,33 +63,47 @@ AddEventHandler('fsn_criminalmisc:racing:putmeinrace', function(id, members)
 			SetBlipRouteColour(raceblip, 1)
 			SetBlipRoute(raceblip,  true)
 			inrace = true
-			myrace = id
+			myrace_xy = v.finish
+			myrace = k
 		end
 	end
-	TriggerEvent('fsn_notify:displayNotification', 'You entered a race with '..#members..' other people', 'centerRight', 4000, 'success')
+	TriggerEvent('fsn_notify:displayNotification', 'You entered a race with '.. #members-1 ..' other people', 'centerRight', 4000, 'success')
 end)
 
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
+		if inrace then
+			if not races[myrace] then
+				TriggerEvent('fsn_notify:displayNotification', 'You lost the race.', 'centerRight', 4000, 'error')
+				if raceblip then
+					RemoveBlip(raceblip)
+				end
+				SetNewWaypoint(myrace_xy.x,myrace_xy.y)
+				myrace = 0
+				inrace = false
+				racestarted = false
+			end
+		end
 		if IsPedInAnyVehicle(GetPlayerPed(-1)) then --and IsPedDiving(GetPlayerPed(-1)) then
-			for key, race in pairs(races) do
-				if GetDistanceBetweenCoords(race.start.x, race.start.y, race.start.z, GetEntityCoords(GetPlayerPed(-1)), false) < 20 and race.status == 'getready' then
-					if not inrace then
-						if exports["fsn_main"]:fsn_CanAfford(race.start.price) then
-							fsn_drawText3D(race.start.x, race.start.y, race.start.z, '[~g~E~w~] to join race ($'..race.start.price..')')
-							if IsControlJustPressed(0, 38) then
-								TriggerServerEvent('fsn_criminalmisc:racing:joinRace', race.race_id) 
-							end
+			for key, race in ipairs(races) do
+				if race.state == 1 then -- waiting for people
+					if GetDistanceBetweenCoords(race.start.x, race.start.y, race.start.z, GetEntityCoords(GetPlayerPed(-1)), false) < 20 then
+						if inrace then
+							-- already in the race
+							fsn_drawText3D(race.start.x, race.start.y, race.start.z, '~y~Waiting~w~ for other racers...\nMoving too far will ~r~forfeit~w~ your signup fee ($'..race.start.price..')! ')
 						else
-							fsn_drawText3D(race.start.x, race.start.y, race.start.z, '~r~You cannot afford to join the race!')
+							if exports["fsn_main"]:fsn_CanAfford(race.start.price) then
+								fsn_drawText3D(race.start.x, race.start.y, race.start.z, '[~g~E~w~] to join race ($'..race.start.price..')')
+								if IsControlJustPressed(0, 38) then
+									TriggerServerEvent('fsn_criminalmisc:racing:joinRace', race.race_id) 
+								end
+							else
+								fsn_drawText3D(race.start.x, race.start.y, race.start.z, '~r~You cannot afford to join the race!')
+							end
 						end
 					else
-						fsn_drawText3D(race.start.x, race.start.y, race.start.z, 'Race is starting shortly, do not move too far')
-					end
-				else
-					if inrace then
-						if not racestarted then
+						if inrace then
 							TriggerEvent('fsn_notify:displayNotification', 'You left the race.', 'centerRight', 4000, 'error')
 							if raceblip then
 								RemoveBlip(raceblip)
@@ -98,6 +113,37 @@ Citizen.CreateThread(function()
 							racestarted = false
 						end
 					end
+				elseif race.state == 2 and key == myrace then -- race starting 
+					if GetDistanceBetweenCoords(race.start.x, race.start.y, race.start.z, GetEntityCoords(GetPlayerPed(-1)), false) < 20 then
+						if inrace then
+							-- already in the race
+							fsn_drawText3D(race.start.x, race.start.y, race.start.z, '~g~The race will begin in less than 20 seconds!~w~\nMoving too far will ~r~forfeit~w~ your signup fee ($'..race.start.price..')! ')
+						end
+					else
+						if inrace then
+							TriggerEvent('fsn_notify:displayNotification', 'You left the race.', 'centerRight', 4000, 'error')
+							if raceblip then
+								RemoveBlip(raceblip)
+							end
+							myrace = 0
+							inrace = false
+							racestarted = false
+						end
+					end
+				elseif race.state == 3 and key == myrace then -- race ongoing
+					fsn_drawText3D(race.finish.x, race.finish.y, race.start.z, 'Race End')
+					if GetDistanceBetweenCoords(race.finish.x, race.finish.y, GetEntityCoords(GetPlayerPed(-1))['x'], GetEntityCoords(GetPlayerPed(-1)), false) < 2 then
+						 TriggerServerEvent('fsn_criminalmisc:racing:win', key)
+						 if raceblip then
+							RemoveBlip(raceblip)
+						end
+						myrace = 0
+						inrace = false
+						racestarted = false
+					end
+				elseif race.state == 4 and key == myrace then -- race ended
+				else -- unknown state??
+				
 				end
 			end
 		end
