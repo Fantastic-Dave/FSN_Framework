@@ -335,7 +335,8 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   if split[1] == '/givecash' or split[1] == '/gc' then
 	if split[2] and split[3] then
 		--AddEventHandler('fsn_main:money:wallet:Set', function(src, ply, amt)
-		TriggerEvent('fsn_main:money:wallet:GiveCash', source, split[2], split[3])
+    TriggerEvent('fsn_main:money:wallet:GiveCash', source, split[2], split[3])
+    --TriggerServerEvent('fsn_main:logging:addLog', source, 'money', 'Character('..getCharacter(source)..') gave $'..split[3]..' to Character('..getCharacter(split[2])..')')
 	else
 		TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Usage: /givecash {PLAYER} {AMOUNT}')
 	end
