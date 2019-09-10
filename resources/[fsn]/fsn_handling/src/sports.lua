@@ -375,7 +375,7 @@ return {
 	},
 	CHandlingData {
 		
-		HandlingName = "COMET2",
+		HandlingName = "COMET",
 		-- Physical
 		Mass               = 1400,
 		InitialDragCoeff   = 6.21,
