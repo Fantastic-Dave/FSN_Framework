@@ -17,7 +17,7 @@
       <fClutchChangeRateScaleUpShift value="2.000000" />
       <fClutchChangeRateScaleDownShift value="2.100000" />
       <fInitialDriveMaxFlatVel value="172.000000" />
-      <fBrakeForce value="0.425000" />
+      <fBrakeForce value="0.410000" />
       <fBrakeBiasFront value="0.425100" />
       <fHandBrakeForce value="0.601000" />
       <fSteeringLock value="45.500000" />
@@ -43,7 +43,7 @@
       <fCollisionDamageMult value="1.000000" />
       <fWeaponDamageMult value="1.000000" />
       <fDeformationDamageMult value="2.000000" />
-      <fEngineDamageMult value="20.000000" />
+      <fEngineDamageMult value="12.000000" />
       <fPetrolTankVolume value="65.000000" />
       <fOilVolume value="5.000000" />
       <fSeatOffsetDistX value="0.000000" />
