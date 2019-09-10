@@ -126,22 +126,26 @@ AddEventHandler('fsn_apartments:sendApartment', function(tbl)
 			for k,v in pairs(apptdetails["apt_utils"]["inventory"]) do
 				print('doing old item '..k)
 				local item = exports['fsn_inventory']:fsn_GetItemDetails(k)
-				item.amt = v
-				--table.insert(new["table"], #new["table"]+1, item)
-				local placca = false
-				for key, value in ipairs(new["table"]) do
-					if placca == false then
-						if value.index == false then
-							new["table"][key] = item
-							print('putting new item '..item.name..' in slot '..key)
-							placca = true
-						else
-							print(key..' is occupied by: '..value.index)
+				if item then
+					item.amt = v
+					--table.insert(new["table"], #new["table"]+1, item)
+					local placca = false
+					for key, value in ipairs(new["table"]) do
+						if placca == false then
+							if value.index == false then
+								new["table"][key] = item
+								print('putting new item '..item.name..' in slot '..key)
+								placca = true
+							else
+								print(key..' is occupied by: '..value.index)
+							end
 						end
 					end
-				end
-				if not placca then
-					TriggerEvent('chatMessage', '', {255,255,255}, 'Your apartment was too full so unfortunately you lost '..v..': '..item.name)
+					if not placca then
+						TriggerEvent('chatMessage', '', {255,255,255}, 'Your apartment was too full so unfortunately you lost '..v..': '..item.name)
+					end
+				else
+					exports['mythic_notify']:DoHudText('error', 'APT: No preset for '..k, 8000)
 				end
 				--[[
 				item.amt = v
