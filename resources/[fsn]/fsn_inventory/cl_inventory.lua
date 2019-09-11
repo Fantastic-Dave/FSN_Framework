@@ -224,9 +224,16 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 			data.amt = oldSlot.amt
 		end
 		if data.toInv == 'playerInventory' then
-			if not fsn_CanCarry(oldSlot.index, data.amt) then
-				invLog('<span style="color:red">You cannot carry this!</span>')
-				return
+			if data.amt == oldSlot.amt or data.amt == -99 then -- moving entire stack
+				if not fsn_CanCarry(oldSlot.index, oldSlot.amt) then
+					invLog('<span style="color:red">You cannot carry this!</span>')
+					return
+				end	
+			else	
+				if not fsn_CanCarry(oldSlot.index, data.amt) then
+					invLog('<span style="color:red">You cannot carry this!</span>')
+					return
+				end
 			end
 			if firstInventory[data.toSlot].index then
 				if firstInventory[data.toSlot].index ~= oldSlot.index then
