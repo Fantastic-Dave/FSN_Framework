@@ -76,47 +76,51 @@ return {
 	},
 	CHandlingData {
 
-		HandlingName = "BUCCANEER",  -- Missing Handling
+		HandlingName = "BUCCANEER",  -- Might be wrong name BUCCANEE
 		-- Physical
-		Mass               = 1400, 
-		InitialDragCoeff   = 5.65,
+		Mass               = 1900, 
+		InitialDragCoeff   = 5.35,
 		PercentSubmerged   = 85,
-		CentreOfMassOffset = { 0,    0.24, 0.192 },
-		InertiaMultiplier  = { 1.15, 1,    1.52 },
+		CentreOfMassOffset = { 0,    0.175, -0.061 },
+		InertiaMultiplier  = { 1.15, 1,    1.55 },
 
 		-- Transmission
 		DriveBiasFront                 = 0.0,
 		InitialDriveGears              = 4,
-		InitialDriveForce              = 0.259,
+		InitialDriveForce              = 0.289,
 		DriveInertia                   = 1.0,
-		ClutchChangeRateScaleUpShift   = 1.25,
-		ClutchChangeRateScaleDownShift = 1.9,
-		InitialDriveMaxFlatVel         = 128,
-		SteeringLock                   = 32.8,
+		ClutchChangeRateScaleUpShift   = 1.3,
+		ClutchChangeRateScaleDownShift = 1.7,
+		InitialDriveMaxFlatVel         = 147,
+		SteeringLock                   = 34.4,
 
 		-- Brake
-		BrakeForce     = 0.495,
-		BrakeBiasFront = 0.5951,
+		BrakeForce     = 0.49,
+		BrakeBiasFront = 0.5731,
 		HandBrakeForce = 0.8,
 
 		-- Traction
-		TractionCurveMax         = 2.08,
-		TractionCurveMin         = 1.86,
+		TractionCurveMax         = 1.9,
+		TractionCurveMin         = 1.78,
+		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.1,
-		LowSpeedTractionLossMult = 1.19,
-		TractionBiasFront        = 0.4779,
-		TractionLossMult         = 1.22,
+		LowSpeedTractionLossMult = 1.01,
+		CamberStiffnesss		 = 0.0,
+		TractionBiasFront        = 0.4829,
+		TractionLossMult         = 1.25,
 
 		-- Suspension
-		SuspensionForce       = 1.77,
-		SuspensionCompDamp    = 1.70,
+		SuspensionForce       = 1.85,
+		SuspensionCompDamp    = 1.6,
 		SuspensionReboundDamp = 0.32,
-		SuspensionUpperLimit  = 0.175,
-		SuspensionLowerLimit  = -0.145,
-		SuspensionBiasFront   = 0.491,
-		AntiRollBarBiasFront  = 0.0,
-		RollCentreHeightFront = 0.480,
-		RollCentreHeightRear  = 0.405,
+		SuspensionUpperLimit  = 0.162,
+		SuspensionLowerLimit  = -0.154,
+		SuspensionRaise		  = 0.0,
+		SuspensionBiasFront   = 0.631,
+		AntiRollBarForce	  = 0.0,
+		AntiRollBarBiasFront  = 0.5,
+		RollCentreHeightFront = 0.1,
+		RollCentreHeightRear  = 0.1,
 
 		-- Damage
 		CollisionDamageMult         = 1.0,
@@ -127,7 +131,7 @@ return {
 		OilVolume					= 5.0,
 
 		-- Misc
-		SeatOffsetDistX = 0.15,
+		SeatOffsetDistX = 0.0,
 		SeatOffsetDistY = 0.0,
 		SeatOffsetDistZ = 0.0,
 		MonetaryValue   = 150000,
