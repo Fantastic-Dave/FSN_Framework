@@ -260,6 +260,12 @@ Field "SubHandlingData" "SubHandlingData"
 		CCarHandlingData {
 			BackEndPopUpCarImpulseMult      = 0.05,
 			BackEndPopUpBuildingImpulseMult = 0.03,
-			BackEndPopUpMaxDeltaSpeed       = 0.6
+			BackEndPopUpMaxDeltaSpeed       = 0.6,
+			ChamberFront			= 0.0,
+			CamberRear			= 0.0,
+			Castor				= 0.0,
+			ToeFront			= 0.0,
+			ToeRear				= 0.0,
+			EngineResistance		= 0.0,
 		}
 	}
