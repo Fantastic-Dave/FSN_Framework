@@ -12,6 +12,7 @@ fsn_handling "src/offroad.lua"
 fsn_handling "src/vans.lua"
 fsn_handling "src/sedans.lua"
 fsn_handling "src/government.lua"
+fsn_handling "src/super.lua"
 --fsn_handling "src/motorcycles.lua"
 
 files { 'out/handling.meta', 'data/handling.meta' }
