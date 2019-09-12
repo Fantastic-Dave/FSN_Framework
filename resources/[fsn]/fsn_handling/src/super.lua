@@ -1506,7 +1506,7 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.0,
 		InitialDriveGears              = 1,
-		InitialDriveForce              = 0.982ww,
+		InitialDriveForce              = 0.982,
 		DriveInertia                   = 1.0,
 		ClutchChangeRateScaleUpShift   = 2.3,
 		ClutchChangeRateScaleDownShift = 1.3,
