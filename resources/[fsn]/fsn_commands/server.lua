@@ -507,6 +507,46 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- MISC COMMANDS
   -------------------------------------------------------------------------------------------------------------------------------------------------
+  if split[1] == '/door' or split[1] == '/d' then
+	--[[
+	0 = Front Left Door  
+	1 = Front Right Door  
+	2 = Back Left Door  
+	3 = Back Right Door  
+	4 = Hood  
+	5 = Trunk  
+	6 = Back  
+	7 = Back2
+	]]--
+	local doors = {
+		["fl"] = 0,
+		["fr"] = 1,
+		["rl"] = 2,
+		["rr"] = 3,
+		["hood"] = 4,
+		["trunk"] = 5,
+		["back1"] = 6,
+		["back2"] = 7,
+	}
+	if split[2] == 'open' or split[2] == 'o' then
+		if doors[split[3]] then
+			TriggerClientEvent('fsn_commands:vehdoor:open', source, doors[split[3]])
+		elseif tonumber(split[3]) and table.contains(doors, tonumber(split[3])) then
+			TriggerClientEvent('fsn_commands:vehdoor:open', source, tonumber(split[3]))
+		else
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^r:FSN:^0^* There was an issue with the arguments you provided.')
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^r:FSN:^0^* FL/0 => Front Left | FR/1 => Front Right | RL/2 => Rear Left | RR/3 => Rear Right | HOOD/4 => Hood | TRUNK/5 => Trunk | BACK1/6 => Back Left | BACK2/7 => Back Right')
+		end
+	elseif split[2] == 'close' or split[2] == 'c' then
+		if doors[split[3]] then
+			TriggerClientEvent('fsn_commands:vehdoor:close', source, doors[split[3]])
+		elseif tonumber(split[3]) and table.contains(doors, tonumber(split[3])) then
+			TriggerClientEvent('fsn_commands:vehdoor:close', source, tonumber(split[3]))
+		else
+			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^r:FSN:^0^* There was an issue with the arguments you provided.')
+		end
+	end
+  end
   if split[1] == '/glovebox' or split[1] == '/gb' then
 	TriggerClientEvent('fsn_inventory:veh:glovebox', source)
   end

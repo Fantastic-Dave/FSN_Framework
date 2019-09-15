@@ -139,6 +139,34 @@ end)
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -- MISC COMMANDS
 -------------------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent('fsn_commands:vehdoor:open')
+AddEventHandler('fsn_commands:vehdoor:open', function(id)
+	local veh = fsn_lookingAt()
+	if veh then
+		while not NetworkHasControlOfEntity(veh) do
+			print'requestingcontrol'
+			NetworkRequestControlOfEntity(veh)
+			Citizen.Wait(1)
+		end
+		print'gotcontrol'
+		SetVehicleDoorOpen(veh, id, false, false)
+		--SetVehicleDoorShut(veh, id, false)
+	end
+end)
+RegisterNetEvent('fsn_commands:vehdoor:close')
+AddEventHandler('fsn_commands:vehdoor:close', function(id)
+	local veh = fsn_lookingAt()
+	if veh then
+		while not NetworkHasControlOfEntity(veh) do
+			print'requestingcontrol'
+			NetworkRequestControlOfEntity(veh)
+			Citizen.Wait(1)
+		end
+		print'gotcontrol'
+		--SetVehicleDoorOpen(car, id, false, false)
+		SetVehicleDoorShut(veh, id, false)
+	end
+end)
 RegisterNetEvent('fsn_commands:window')
 AddEventHandler('fsn_commands:window', function()
 	RollDownWindow(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0)
