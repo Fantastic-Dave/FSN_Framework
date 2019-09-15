@@ -1,9 +1,3 @@
---[[
-Los Santos Customs V1.1 
-Credits - MythicalBro
-/////License/////
-Do not reupload/re release any part of this script without my permission
-]]
 local colors = {
 {name = "Black", colorindex = 0},{name = "Carbon Black", colorindex = 147},
 {name = "Hraphite", colorindex = 1},{name = "Anhracite Black", colorindex = 11},
@@ -75,11 +69,12 @@ local mattecolors = {
 
 
 
-LSC_Config = {}
-LSC_Config.prices = {}
+Config = {}
+Config.XYZ = {x = -210.84934997559, y = -1323.8863525391, z = 30.460493087769}
+Config.prices = {}
 
 --------Prices---------
-LSC_Config.prices = {
+Config.prices = {
 
 ------Window tint------
 	windowtint = {
@@ -697,18 +692,18 @@ LSC_Config.prices = {
 
 ------Model Blacklist--------
 --Does'nt allow specific vehicles to be upgraded
-LSC_Config.ModelBlacklist = {
+Config.ModelBlacklist = {
 	"police",
 }
 
 --Sets if garage will be locked if someone is inside it already
-LSC_Config.lock = false
+Config.lock = false
 
 --Enable/disable old entering way
-LSC_Config.oldenter = false
+Config.oldenter = false
 
 --Menu settings
-LSC_Config.menu = {
+Config.menu = {
 
 -------Controls--------
 	controls = {
