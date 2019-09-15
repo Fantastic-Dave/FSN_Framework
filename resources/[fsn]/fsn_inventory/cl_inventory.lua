@@ -26,6 +26,13 @@ end
 	Exports
 ]]--
 local max_weight = 40
+local secondInventory_limits = {
+	["ply"] = 40,
+	["trunk"] = 40,
+	["glovebox"] = 20,
+	--["glovebox"] = 20,
+}
+
 function fsn_CanCarry(item, amt)
 	if exports["fsn_police"]:fsn_PDDuty() then return true end -- no weight limit for cops, only slot limit
 	if presetItems[item] and presetItems[item].data and presetItems[item].data.weight then
@@ -158,6 +165,24 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 				end
 			end
 		else
+			if secondInventory_limits[secondInventory_type] then
+				-- check if it can carry
+				local cur_weight = 0
+				for k, v in pairs(secondInventory) do
+					if v.index ~= false and v.data and v.data.weight then
+						local maff = v.data.weight * v.amt
+						cur_weight = cur_weight + maff
+					end
+				end
+				if oldSlot.data and oldSlot.data.weight then
+					local new_maff = oldSlot.data.weight * oldSlot.amt
+					local newer_maff = cur_weight + new_maff
+					if newer_maff > secondInventory_limits[secondInventory_type] then
+						invLog('<span style="color:red">This inventory cannot hold more than: '..secondInventory_limits[secondInventory_type]..'</span>')
+						return
+					end
+				end
+			end
 			if secondInventory[data.toSlot].index then
 				if secondInventory[data.toSlot].index ~= oldSlot.index then
 					invLog('<span style="color:red">This slot is occupied</span>')
@@ -250,6 +275,24 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 				end
 			end
 		else
+			if secondInventory_limits[secondInventory_type] then
+				-- check if it can carry
+				local cur_weight = 0
+				for k, v in pairs(secondInventory) do
+					if v.index ~= false and v.data and v.data.weight then
+						local maff = v.data.weight * v.amt
+						cur_weight = cur_weight + maff
+					end
+				end
+				if oldSlot.data and oldSlot.data.weight then
+					local new_maff = oldSlot.data.weight * oldSlot.amt
+					local newer_maff = cur_weight + new_maff
+					if newer_maff > secondInventory_limits[secondInventory_type] then
+						invLog('<span style="color:red">This inventory cannot hold more than: '..secondInventory_limits[secondInventory_type]..'</span>')
+						return
+					end
+				end
+			end
 			if secondInventory[data.toSlot].index then
 				if secondInventory[data.toSlot].index ~= oldSlot.index then
 					invLog('<span style="color:red">This slot is occupied</span>')
@@ -405,6 +448,9 @@ function toggleGUI()
 		end
 		if secondInventory_type == 'trunk' or secondInventory_type == 'glovebox' then
 			TriggerServerEvent('fsn_inventory:veh:finished', secondInventory_id)
+			if secondInventory_type == 'trunk' then
+				ExecuteCommand('d c 5')
+			end
 		end
 		if secondInventory_type == 'prop' then
 			TriggerEvent('fsn_properties:inv:closed', secondInventory_id)
@@ -478,6 +524,7 @@ AddEventHandler('fsn_inventory:veh:trunk:recieve', function(plate, tbl)
 		toggleGUI()
 	end
 	invLog('received trunk from Vehicle('..plate..')')
+	ExecuteCommand('d o 5')
 end)
 RegisterNetEvent('fsn_inventory:veh:glovebox:recieve')
 AddEventHandler('fsn_inventory:veh:glovebox:recieve', function(plate, tbl)
