@@ -506,6 +506,7 @@ AddEventHandler("clothes:spawn", function(data)
 		print('fsn_clothing: no clothing data????')
 	end
 	TriggerEvent('fsn_criminalmisc:weapons:equip')
+	SetPedSuffersCriticalHits(GetPlayerPed(-1),false)
 	SetEntityHealth(GetPlayerPed(-1), helf)
 end)
 
