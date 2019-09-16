@@ -8,7 +8,8 @@ server_script 'handcuffs/server.lua'
 
 -- robbing
 client_script 'robbing/client.lua'
-server_script 'robbing/server.lua'
+client_script 'robbing/cl_houses.lua'
+client_script 'robbing/cl_houses-config.lua'
 
 -- streetracing
 client_script 'streetracing/client.lua'
