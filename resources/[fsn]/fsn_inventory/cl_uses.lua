@@ -1,4 +1,10 @@
 itemUses = {
+	["crowbar"] = {
+		takeItem = false,
+		use = function(item)
+			TriggerEvent('fsn_criminalmisc:houserobbery:try')
+		end,
+	},
 	["id"] = {
 		takeItem = false,
 		use = function(item)
