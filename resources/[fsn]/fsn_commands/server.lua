@@ -35,20 +35,34 @@ local pd_cars = {
   --------------------
   -- LSPD
   --------------------
-  [101] = "state5",
-  [102] = "state6",
-  [103] = "state7",
-  [104] = "s1",
-  [105] = "state10",
-  [106] = "state9",
-  [107] = "ram",
-  [108] = "1raptor",
-  [109] = "vicleo",
+  [101] = "vic",
+  [102] = "taurus",
+  [103] = "caprice",
+  [104] = "fusion",
+  [105] = "explorer13",
+  [106] = "explorer16",
+  [107] = "tahoe",
+  [108] = "charger14",
+  [109] = "charger18",
   [110] = "pdbike",
   [111] = "pbus",
   [112] = "PoliceT",
   [113] = "Predator",
   [114] = "eheli",
+  --------------------
+  -- SASP
+  --------------------
+  [201] = "vicb",
+  [202] = "taurusb",
+  [203] = "capriceb",
+  [204] = "fusionb",
+  [205] = "explorer13b",
+  [206] = "explorer16b",
+  [207] = "tahoeb",
+  [208] = "charger14b",
+  [209] = "charger18b",
+  [210] = "f150s",
+  [211] = "f150",
   --------------------
   -- UNMARKED
   --------------------
