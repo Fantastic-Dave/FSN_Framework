@@ -4,7 +4,7 @@ return {
 		HandlingName = "BLISTA",
 		-- Physical
 		Mass               = 1400,
-		InitialDragCoeff   = 8.24,
+		InitialDragCoeff   = 2.24,
 		DownforceModifier  = 1.29,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.048, -0.251 },
@@ -49,10 +49,10 @@ return {
 		RollCentreHeightRear  = 0.401,
 
 		-- Damage
-		CollisionDamageMult         = 1,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1,
-		DeformationDamageMult		= 2,
-		EngineDamageMult			= 12,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60,
 		OilVolume					= 5,
 
@@ -79,7 +79,7 @@ return {
 		HandlingName = "BLISTA2",
 		-- Physical
 		Mass               = 1050,
-		InitialDragCoeff   = 9.15,
+		InitialDragCoeff   = 2.15,
 		DownforceModifier  = 1.29,
 		PercentSubmerged   = 76,
 		CentreOfMassOffset = { 0,    -0.06, 0.01 },
@@ -124,10 +124,10 @@ return {
 		RollCentreHeightRear  = 0.296,
 
 		-- Damage
-		CollisionDamageMult         = 1,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1,
-		DeformationDamageMult		= 2,
-		EngineDamageMult			= 12,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60,
 		OilVolume					= 5,
 
@@ -154,7 +154,7 @@ return {
 		HandlingName = "BRIOSO",
 		-- Physical
 		Mass               = 980,
-		InitialDragCoeff   = 8.21,
+		InitialDragCoeff   = 2.21,
 		DownforceModifier  = 1.38,
 		PercentSubmerged   = 76,
 		CentreOfMassOffset = { 0,    -0.045, 0.22 },
@@ -198,10 +198,10 @@ return {
 		RollCentreHeightRear  = 0.14,
 
 		-- Damage
-		CollisionDamageMult         = 1,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1,
-		DeformationDamageMult		= 2,
-		EngineDamageMult			= 12,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60,
 		OilVolume					= 5,
 
@@ -228,7 +228,7 @@ return {
 		HandlingName = "DILETTANTE", -- Needs work
 		-- Physical
 		Mass               = 1400,
-		InitialDragCoeff   = 8.5,
+		InitialDragCoeff   = 2.5,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0, 0 },
 		InertiaMultiplier  = { 1, 1,    1.1 },
@@ -273,8 +273,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1,
 		WeaponDamageMult			= 1,
-		DeformationDamageMult		= 2,
-		EngineDamageMult			= 12,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60,
 		OilVolume					= 5,
 
@@ -347,8 +347,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1,
 		WeaponDamageMult			= 1,
-		DeformationDamageMult		= 2,
-		EngineDamageMult			= 12,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60,
 		OilVolume					= 5,
 
@@ -375,7 +375,7 @@ return {
 		HandlingName = "PANTO",
 		-- Physical
 		Mass               = 950,
-		InitialDragCoeff   = 4.72,
+		InitialDragCoeff   = 2.72,
 		DownforceModifier  = 1.19,
 		PercentSubmerged   = 82,
 		CentreOfMassOffset = { 0,    0.088, -0.052 },
@@ -421,8 +421,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1,
 		WeaponDamageMult			= 1,
-		DeformationDamageMult		= 2,
-		EngineDamageMult			= 12,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60,
 		OilVolume					= 5,
 
@@ -449,7 +449,7 @@ return {
 		HandlingName = "PRAIRIE",
 		-- Physical
 		Mass               = 1400,
-		InitialDragCoeff   = 8.03,
+		InitialDragCoeff   = 2.03,
 		DownforceModifier  = 1.34,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    -0.133, 0.005 },
@@ -496,8 +496,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1,
 		WeaponDamageMult			= 1,
-		DeformationDamageMult		= 2,
-		EngineDamageMult			= 12,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60,
 		OilVolume					= 5,
 
@@ -524,7 +524,7 @@ return {
 		HandlingName = "RHAPSODY",
 		-- Physical
 		Mass               = 1350,
-		InitialDragCoeff   = 7.99,
+		InitialDragCoeff   = 1.99,
 		DownforceModifier  = 1.05,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    0.24, -0.071 },
@@ -571,8 +571,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1,
 		WeaponDamageMult			= 1,
-		DeformationDamageMult		= 2,
-		EngineDamageMult			= 12,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60,
 		OilVolume					= 5,
 

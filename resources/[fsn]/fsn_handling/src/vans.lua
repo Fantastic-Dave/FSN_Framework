@@ -4,7 +4,7 @@ return {
 		HandlingName = "BISON",
 		-- Physical
 		Mass               = 3200,
-		InitialDragCoeff   = 7.58,
+		InitialDragCoeff   = 2.58,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0.27, -0.148 },
 		InertiaMultiplier  = { 1.16, 1,    1.18 },
@@ -50,8 +50,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 70.0,
 		OilVolume					= 6.5,
 
@@ -78,7 +78,7 @@ return {
 		HandlingName = "BOBCATXl",
 		-- Physical
 		Mass               = 2600,
-		InitialDragCoeff   = 8.51,
+		InitialDragCoeff   = 2.51,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0.13, -0.22 },
 		InertiaMultiplier  = { 0.85, 0.85,    0.88 },
@@ -124,8 +124,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 6.5,
 
@@ -152,7 +152,7 @@ return {
 		HandlingName = "CAMPER", 
 		-- Physical
 		Mass               = 3600,
-		InitialDragCoeff   = 9.32,
+		InitialDragCoeff   = 2.32,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    -0.42, 0.47 },
 		InertiaMultiplier  = { 1, 1.1,    1.2 },
@@ -198,8 +198,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -224,7 +224,7 @@ return {
 		HandlingName = "GBURRITO",
 		-- Physical
 		Mass               = 2750,
-		InitialDragCoeff   = 9.3,
+		InitialDragCoeff   = 2.3,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    0, 0.01 },
 		InertiaMultiplier  = { 1, 1.11,    1.46 },
@@ -270,8 +270,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -298,7 +298,7 @@ return {
 		HandlingName = "GBURRITO2",
 		-- Physical
 		Mass               = 2750,
-		InitialDragCoeff   = 9.3,
+		InitialDragCoeff   = 2.3,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    0, 0.01 },
 		InertiaMultiplier  = { 1, 1.11,    1.46 },
@@ -344,8 +344,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.4,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -370,7 +370,7 @@ return {
 		HandlingName = "JOURNEY",
 		-- Physical
 		Mass               = 4000,
-		InitialDragCoeff   = 9.0,
+		InitialDragCoeff   = 2.0,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    0, 0 },
 		InertiaMultiplier  = { 1, 1.4,    1.5 },
@@ -416,8 +416,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 
@@ -442,7 +442,7 @@ return {
 		HandlingName = "MINIVAN",
 		-- Physical
 		Mass               = 2000,
-		InitialDragCoeff   = 8.05,
+		InitialDragCoeff   = 2.05,
 		DownforceModifier  = 1.18,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    -0.151, 0.01 },
@@ -489,8 +489,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -517,7 +517,7 @@ return {
 		HandlingName = "MINIVAN2",
 		-- Physical
 		Mass               = 2100,
-		InitialDragCoeff   = 8.24,
+		InitialDragCoeff   = 2.24,
 		DownforceModifier  = 1.21,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.131, -0.04 },
@@ -564,8 +564,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 
@@ -592,7 +592,7 @@ return {
 		HandlingName = "PARADISE",
 		-- Physical
 		Mass               = 2500,
-		InitialDragCoeff   = 9.32,
+		InitialDragCoeff   = 2.32,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    -0.12, -0.142 },
 		InertiaMultiplier  = { 1,   1.13,    1.51 },
@@ -638,8 +638,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 
@@ -666,7 +666,7 @@ return {
 		HandlingName = "RUMPO",
 		-- Physical
 		Mass               = 2600,
-		InitialDragCoeff   = 9.31,
+		InitialDragCoeff   = 2.31,
 		DownforceModifier  = 1.14,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    -0.12, -0.14 },
@@ -713,8 +713,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -739,7 +739,7 @@ return {
 		HandlingName = "SLAMVAN",
 		-- Physical
 		Mass               = 1800,
-		InitialDragCoeff   = 8.93,
+		InitialDragCoeff   = 2.93,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0.215, -0.251 },
 		InertiaMultiplier  = { 0.88, 0.91,    0.92 },
@@ -785,8 +785,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -811,7 +811,7 @@ return {
 		HandlingName = "SLAMVAN2",
 		-- Physical
 		Mass               = 1950,
-		InitialDragCoeff   = 8.73,
+		InitialDragCoeff   = 2.73,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0.2001, -0.211 },
 		InertiaMultiplier  = { 0.89, 0.02,    0.93 },
@@ -857,8 +857,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -883,7 +883,7 @@ return {
 		HandlingName = "SLAMVAN3",
 		-- Physical
 		Mass               = 1400,
-		InitialDragCoeff   = 10.0,
+		InitialDragCoeff   = 2.0,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0.0, -0.15 },
 		InertiaMultiplier  = { 1, 1,    1 },
@@ -929,8 +929,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -955,7 +955,7 @@ return {
 		HandlingName = "RUMPO3",
 		-- Physical
 		Mass               = 2250,
-		InitialDragCoeff   = 8.0,
+		InitialDragCoeff   = 2.0,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0, -0.275 },
 		InertiaMultiplier  = { 1.3, 1.6,    1.3 },
@@ -1001,8 +1001,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -1029,7 +1029,7 @@ return {
 		HandlingName = "SURFER",
 		-- Physical
 		Mass               = 1350,
-		InitialDragCoeff   = 9.95,
+		InitialDragCoeff   = 2.95,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    0, -0.16 },
 		InertiaMultiplier  = { 0.96, 0.96,     1.44 },
@@ -1075,8 +1075,8 @@ return {
 		-- Damage
 		CollisionDamageMult   = 1.0,
 		WeaponDamageMult	  = 1.0,
-		DeformationDamageMult = 2.0,
-		EngineDamageMult	  = 15.0,
+		DeformationDamageMult = 0.8,
+		EngineDamageMult	  = 1.5,
 		PetrolTankVolume	  = 60.0,
 		OilVolume			  = 5.0,
 
@@ -1101,7 +1101,7 @@ return {
 		HandlingName = "YOUGA",
 		-- Physical
 		Mass               = 2500,
-		InitialDragCoeff   = 6.87,
+		InitialDragCoeff   = 2.87,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    0.1, 0.02 },
 		InertiaMultiplier  = { 1.17, 1,    1.65 },
@@ -1147,8 +1147,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 

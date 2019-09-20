@@ -4,7 +4,7 @@ return {
 		HandlingName = "COGCABRIO",
 		-- Physical
 		Mass               = 2550, 
-		InitialDragCoeff   = 6.32,
+		InitialDragCoeff   = 2.02,
 		DownforceModifier  = 1.28,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    -0.1, 0.04 },
@@ -51,8 +51,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 
@@ -79,7 +79,7 @@ return {
 		HandlingName = "EXEMPLAR",
 		-- Physical
 		Mass               = 2000, 
-		InitialDragCoeff   = 6.36,
+		InitialDragCoeff   = 2.36,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.34, 0.02 },
 		InertiaMultiplier  = { 1.18, 1,    1.62 },
@@ -125,8 +125,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 
@@ -153,7 +153,7 @@ return {
 		HandlingName = "FELON",
 		-- Physical
 		Mass               = 1800,
-		InitialDragCoeff   = 5.49,
+		InitialDragCoeff   = 2.49,
 		DownforceModifier  = 1.31,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.155, 0.02 },
@@ -199,8 +199,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 
@@ -227,7 +227,7 @@ return {
 		HandlingName = "FELON2",
 		-- Physical
 		Mass               = 1800,
-		InitialDragCoeff   = 5.49,
+		InitialDragCoeff   = 2.49,
 		DownforceModifier  = 1.31,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.155, 0.02 },
@@ -274,8 +274,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.2,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 
@@ -302,7 +302,7 @@ return {
 		HandlingName = "F620",
 		-- Physical
 		Mass               = 1700,
-		InitialDragCoeff   = 5.81,
+		InitialDragCoeff   = 2.81,
 		DownforceModifier  = 1.45,
 		PercentSubmerged   = 76,
 		CentreOfMassOffset = { 0,    -0.13, 0.02 },
@@ -349,8 +349,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -377,7 +377,7 @@ return {
 		HandlingName = "JACKAL",
 		-- Physical
 		Mass               = 1950,
-		InitialDragCoeff   = 5.68,
+		InitialDragCoeff   = 2.68,
 		DownforceModifier  = 1.34,
 		PercentSubmerged   = 76,
 		CentreOfMassOffset = { 0,    -0.135, 0.02 },
@@ -424,8 +424,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -452,7 +452,7 @@ return {
 		HandlingName = "ORACLE",
 		-- Physical
 		Mass               = 1900,
-		InitialDragCoeff   = 7.74,
+		InitialDragCoeff   = 2.74,
 		DownforceModifier  = 1.28,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.105, 0.02 },
@@ -499,8 +499,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.5,
 
@@ -527,7 +527,7 @@ return {
 		HandlingName = "ORACLE2",
 		-- Physical
 		Mass               = 1950,
-		InitialDragCoeff   = 5.76,
+		InitialDragCoeff   = 2.76,
 		DownforceModifier  = 1.35,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.18, 0.02 },
@@ -574,8 +574,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.5,
 
@@ -602,7 +602,7 @@ return {
 		HandlingName = "SENTINEL",
 		-- Physical
 		Mass               = 1900,
-		InitialDragCoeff   = 5.63,
+		InitialDragCoeff   = 2.63,
 		DownforceModifier  = 1.45,
 		PercentSubmerged   = 76,
 		CentreOfMassOffset = { 0,    -0.08, 0.02 },
@@ -615,7 +615,7 @@ return {
 		DriveInertia                   = 1.02,
 		ClutchChangeRateScaleUpShift   = 1.8,
 		ClutchChangeRateScaleDownShift = 1.8,
-		InitialDriveMaxFlatVel         = 168,
+		InitialDriveMaxFlatVel         = 152,
 		SteeringLock                   = 33.2,
 
 		-- Brake
@@ -649,8 +649,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5,
 
@@ -677,7 +677,7 @@ return {
 		HandlingName = "SENTINEL2",
 		-- Physical
 		Mass               = 1500,
-		InitialDragCoeff   = 4.3,
+		InitialDragCoeff   = 2.3,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0, 0 },
 		InertiaMultiplier  = { 1.2, 1.4,    1.6 },
@@ -689,7 +689,7 @@ return {
 		DriveInertia                   = 1.4,
 		ClutchChangeRateScaleUpShift   = 1.7,
 		ClutchChangeRateScaleDownShift = 1.1,
-		InitialDriveMaxFlatVel         = 156,
+		InitialDriveMaxFlatVel         = 154,
 		SteeringLock                   = 33,
 
 		-- Brake
@@ -723,8 +723,82 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
+		PetrolTankVolume			= 65.0,
+		OilVolume					= 5,
+
+		-- Misc
+		SeatOffsetDistX = 0.05,
+		SeatOffsetDistY = -0.1,
+		SeatOffsetDistZ = 0.05,
+		MonetaryValue   = 25000,
+		ModelFlags		= '440010',
+		HandlingFlags   = "0",
+		DamageFlags		= "0",
+		AIHandling		= "AVERAGE",
+
+		SubHandling = {
+			CCarHandlingData {
+				BackEndPopUpCarImpulseMult      = 0.1,
+				BackEndPopUpBuildingImpulseMult = 0.03,
+				BackEndPopUpMaxDeltaSpeed       = 0.6,
+			}
+		}
+	},
+	CHandlingData {
+		
+		HandlingName = "SENTINEL3",
+		-- Physical
+		Mass               = 1500,
+		InitialDragCoeff   = 2.3,
+		PercentSubmerged   = 85,
+		CentreOfMassOffset = { 0,    0, 0 },
+		InertiaMultiplier  = { 1.2, 1.4,    1.6 },
+
+		-- Transmission
+		DriveBiasFront                 = 0,
+		InitialDriveGears              = 9,
+		InitialDriveForce              = 0.6,
+		DriveInertia                   = 1.4,
+		ClutchChangeRateScaleUpShift   = 1.7,
+		ClutchChangeRateScaleDownShift = 1.1,
+		InitialDriveMaxFlatVel         = 154,
+		SteeringLock                   = 33,
+
+		-- Brake
+		BrakeForce     = 0.52,
+		BrakeBiasFront = 0.65,
+		HandBrakeForce = 0.3,
+
+		-- Traction
+		TractionCurveMax         = 2,
+		TractionCurveMin         = 1.92,
+		TractionCurveLateral	 = 17,
+		TractionSpringDeltaMax   = 0.13,
+		LowSpeedTractionLossMult = 0.6,
+		CamberStiffnesss		 = 0,
+		TractionBiasFront        = 0.49,
+		TractionLossMult         = 1.2,
+
+		-- Suspension
+		SuspensionForce       = 1.4,
+		SuspensionCompDamp    = 1.2,
+		SuspensionReboundDamp = 1.3,
+		SuspensionUpperLimit  = 0.1,
+		SuspensionLowerLimit  = -0.18,
+		SuspensionRaise		  = 0,
+		SuspensionBiasFront   = 0.5,
+		AntiRollBarForce	  = 0.6,
+		AntiRollBarBiasFront  = 0.65,
+		RollCentreHeightFront = 0.36,
+		RollCentreHeightRear  = 0.36,
+
+		-- Damage
+		CollisionDamageMult         = 1.0,
+		WeaponDamageMult			= 1.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5,
 
@@ -752,7 +826,7 @@ return {
 	
 		-- Physical
 		Mass               = 2800,
-		InitialDragCoeff   = 5.372,
+		InitialDragCoeff   = 2.372,
 		DownforceModifier  = 1.23,
 		PercentSubmerged   = 82,
 		CentreOfMassOffset = { 0,    -0.03, 0.05 },
@@ -799,8 +873,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.5,
 
@@ -827,7 +901,7 @@ return {
 		HandlingName = "WINDSOR2",
 		-- Physical
 		Mass               = 3000,
-		InitialDragCoeff   = 5.28,
+		InitialDragCoeff   = 2.28,
 		DownforceModifier  = 1.21,
 		PercentSubmerged   = 82,
 		CentreOfMassOffset = { 0,    -0.221, 0.04 },
@@ -874,8 +948,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5,
 
@@ -902,7 +976,7 @@ return {
 		HandlingName = "ZION",
 		-- Physical
 		Mass               = 1900,
-		InitialDragCoeff   = 5.78,
+		InitialDragCoeff   = 2.78,
 		DownforceModifier  = 1.39,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.13, 0.02 },
@@ -949,8 +1023,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.5,
 
@@ -977,7 +1051,7 @@ return {
 		HandlingName = "ZION2", -- No handling
 		-- Physical
 		Mass               = 1900,
-		InitialDragCoeff   = 5.78,
+		InitialDragCoeff   = 2.78,
 		DownforceModifier  = 1.39,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.13, 0.02 },
@@ -1024,8 +1098,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.7,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.5,
 
@@ -1052,7 +1126,7 @@ return {
 		HandlingName = "FUTO",
 		-- Physical
 		Mass               = 1050,
-		InitialDragCoeff   = 5.69,
+		InitialDragCoeff   = 2.69,
 		DownforceModifier  = 1.29,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    0.05, 0.03 },
@@ -1099,8 +1173,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 2.0,
-		EngineDamageMult			= 15.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5,
 
