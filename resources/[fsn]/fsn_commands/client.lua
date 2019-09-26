@@ -142,6 +142,9 @@ end)
 RegisterNetEvent('fsn_commands:vehdoor:open')
 AddEventHandler('fsn_commands:vehdoor:open', function(id)
 	local veh = fsn_lookingAt()
+	if IsPedInAnyVehicle(GetPlayerPed(-1)) then
+		veh = GetVehiclePedIsIn(GetPlayerPed(-1),false)		
+	end
 	if veh then
 		while not NetworkHasControlOfEntity(veh) do
 			print'requestingcontrol'
@@ -156,6 +159,9 @@ end)
 RegisterNetEvent('fsn_commands:vehdoor:close')
 AddEventHandler('fsn_commands:vehdoor:close', function(id)
 	local veh = fsn_lookingAt()
+	if IsPedInAnyVehicle(GetPlayerPed(-1)) then
+		veh = GetVehiclePedIsIn(GetPlayerPed(-1),false)		
+	end
 	if veh then
 		while not NetworkHasControlOfEntity(veh) do
 			print'requestingcontrol'
