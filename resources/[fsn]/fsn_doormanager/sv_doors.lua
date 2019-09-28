@@ -22,9 +22,9 @@ local doors = {
 		lockdist = 2,
 		disp = {x = 453.07046508789, y = -982.51171875, z = 30.689443588257},
 		ents = {{
-			mdl = 749848321,
-			x = 453.079,
-			y = -983.189,
+			mdl = -1033001619,
+			x = 453.093,
+			y = -983.229,
 			z = 30.839
 		}},
 	},
@@ -49,9 +49,9 @@ local doors = {
 		disp = {x = 451.92156982422, y = -987.48687744141, z = 30.68943977356},
 		ents = {{
 			mdl = -2023754432,
-			x = 452.624,
-			y = -987.362,
-			z = 30.839
+			x = 451.325,
+			y = -987.365,
+			z = 30.840
 		}},
 	},
 	{ -- [MRPD] helipad door
@@ -67,6 +67,19 @@ local doors = {
 			z = 43.834
 		}},
 	},
+	{ -- [MRPD] Staircase to roof second floor door
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 463.57946777344, y = -984.06402587891, z = 35.931091308594},
+		ents = {{
+			mdl = -131296141,
+			x = 463.699,
+			y = -983.379,
+			z = 35.994
+		}},
+	},
 	{ -- [MRPD] lobby double doors
 		double = true,
 		locked = true,
@@ -75,20 +88,20 @@ local doors = {
 		disp = {x = 444.72122192383, y = -989.41009521484, z = 30.68989944458},
 		ents = {
 			{
-				mdl = -131296141,
+				mdl = 185711165,
 				x = 446.007,
 				y = -989.445,
 				z = 30.839
 			},
 			{
-				mdl = -131296141,
+				mdl = 185711165,
 				x = 443.407,
 				y = -989.445,
 				z = 30.839
 			},
 		},
 	},
-	{ -- [MRPD] meeting room doors
+	{ -- [MRPD] Stair case
 		double = true,
 		locked = true,
 		lookingat = true,
@@ -109,28 +122,109 @@ local doors = {
 			},
 		},
 	},
-	{ -- [MRPD] whiteboard room doors
+	{ -- [MRPD] Outside lot doors
 		double = true,
 		locked = true,
 		lookingat = true,
 		lockdist = 2,
-		disp = {x = 446.53750610352, y = -986.53735351563, z = 26.674192428589},
+		disp = {x = 445.74417114258, y = -999.00347900391, z = 30.493221282959},
 		ents = {
 			{
-				mdl = 185711165,
-				x = 446.147,
-				y = -987.802,
-				z = 26.830
+				mdl = -1033001619,
+				x = 447.218,
+				y = -999.002,
+				z = 30.789
 			},
 			{
-				mdl = 185711165,
-				x = 446.144,
-				y = -985.199,
-				z = 26.830
+				mdl = -1033001619,
+				x = 444.621,
+				y = -999.001,
+				z = 30.788
 			},
 		},
 	},
-	{ -- [MRPD] downstairs waiting area doors
+	{ -- [MRPD] Outside lot Roof
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 463.40081787109, y = -1010.9543457031, z = 32.983413696289},
+		ents = {{
+			mdl = 507213820,
+			x = 464.158,
+			y = -1011.260,
+			z = 33.011
+		}},
+	},
+	{ -- [MRPD] lot doors inside
+		double = true,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 445.70690917969, y = -997.20983886719, z = 30.689517974854},
+		ents = {
+			{
+				mdl = -2023754432,
+				x = 447.230,
+				y = -997.044,
+				z = 30.843
+			},
+			{
+				mdl = -2023754432,
+				x = 444.629,
+				y = -997.044,
+				z = 30.843
+			},
+		},
+	},
+	{ -- [MRPD] Photo room doors
+		double = true,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 445.81692504883, y = -986.64923095703, z = 26.674175262451},
+		ents = {
+			{
+				mdl = -543497392,
+				x = 446.120,
+				y = -985.185,
+				z = 26.819
+			},
+			{
+				mdl = -543497392,
+				x = 446.130,
+				y = -987.794,
+				z = 26.823
+			},
+		},
+	},
+	{ -- [MRPD] Photo suspect room
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 443.60104370117, y = -988.56866455078, z = 26.674114227295},
+		ents = {{
+			mdl = -131296141,
+			x = 442.662,
+			y = -988.241,
+			z = 26.819
+		}},
+	},
+	{ -- [MRPD] Photo officer room room
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 442.02255249023, y = -985.90533447266, z = 26.683330535889},
+		ents = {{
+			mdl = -131296141,
+			x = 442.047,
+			y = -986.612,
+			z = 26.819
+		}},
+	},
+	{ -- [MRPD] Ass chief & medical
 		double = true,
 		locked = true,
 		lookingat = true,
@@ -138,90 +232,129 @@ local doors = {
 		disp = {x = 452.09020996094, y = -983.94927978516, z = 26.674201965332},
 		ents = {
 			{
-				mdl = 1557126584,
-				x = 450.797,
-				y = -983.919,
-				z = 26.811
+				mdl = -543497392,
+				x = 450.789,
+				y = -983.887,
+				z = 26.844
 			},
 			{
-				mdl = 1557126584,
-				x = 453.402,
-				y = -983.906,
-				z = 26.830
+				mdl = -543497392,
+				x = 453.388,
+				y = -983.887,
+				z = 26.844
 			},
 		},
 	},
-	{ -- [MRPD] break room
+	{ -- [MRPD] Briefing
 		double = false,
 		locked = true,
 		lookingat = true,
 		lockdist = 2,
-		disp = {x = 454.86215209961, y = -976.67810058594, z = 26.674203872681},
+		disp = {x = 451.68701171875, y = -979.55944824219, z = 26.668546676636},
 		ents = {{
-			mdl = 1557126584,
-			x = 454.192,
-			y = -976.644,
+			mdl = -543497392,
+			x = 452.637,
+			y = -979.554,
 			z = 26.819
 		}},
 	},
-	{ -- [MRPD] lower hallway entrance
+	{ -- [MRPD] office
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 445.09066772461, y = -979.56427001953, z = 26.668546676636},
+		ents = {{
+			mdl = -543497392,
+			x = 444.194,
+			y = -979.552,
+			z = 26.818
+		}},
+	},
+	{ -- [MRPD] Medical
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 439.07339477539, y = -979.66955566406, z = 26.544178009033},
+		ents = {{
+			mdl = -543497392,
+			x = 438.470,
+			y = -979.552,
+			z = 26.822
+		}},
+	},
+	{ -- [MRPD] Storage/server/lab
 		double = true,
 		locked = true,
 		lookingat = true,
 		lockdist = 2,
-		disp = {x = 465.73602294922, y = -989.98968505859, z = 24.915092468262},
+		disp = {x = 465.25653076172, y = -990.05004882813, z = 24.81471824646},
 		ents = {
 			{
-				mdl = -131296141,
-				x = 465.578,
-				y = -988.698,
-				z = 25.057
+				mdl = -543497392,
+				x = 465.568,
+				y = -988.703,
+				z = 25.068
 			},
 			{
-				mdl = -131296141,
-				x = 465.578,
-				y = -991.300,
-				z = 25.058
+				mdl = -543497392,
+				x = 465.568,
+				y = -991.304,
+				z = 25.068
 			},
 		},
 	},
-	{ -- [MRPD] cell room (cell 1 (from left))
+	{ -- [MRPD] Storge
 		double = false,
 		locked = true,
 		lookingat = true,
 		lockdist = 2,
-		disp = {x = 474.00863647461, y = -982.97302246094, z = 24.915077209473},
+		disp = {x = 471.23779296875, y = -985.24664306641, z = 24.91471862793},
 		ents = {{
-			mdl = 631614199,
-			x = 474.081,
-			y = -982.139,
-			z = 25.03
+			mdl = -131296141,
+			x = 471.315,
+			y = -986.109,
+			z = 25.057
 		}},
 	},
-	{ -- [MRPD] cell room (cell 2 (from left))
+	{ -- [MRPD] cage
 		double = false,
 		locked = true,
 		lookingat = true,
 		lockdist = 2,
-		disp = {x = 474.06011962891, y = -986.49401855469, z = 24.91508102417},
+		disp = {x = 475.73379516602, y = -985.47198486328, z = 24.915878295898},
 		ents = {{
-			mdl = 631614199,
-			x = 474.124,
-			y = -985.543,
-			z = 25.03
+			mdl = 91564889,
+			x = 475.474,
+			y = -987.100259,
+			z = 25.226
 		}},
 	},
-	{ -- [MRPD] cell room (cell 3 (from left))
+	{ -- [MRPD] Server
 		double = false,
 		locked = true,
 		lookingat = true,
 		lockdist = 2,
-		disp = {x = 474.154296875, y = -989.86730957031, z = 24.915079116821},
+		disp = {x = 468.52621459961, y = -977.94940185547, z = 24.914705276489},
 		ents = {{
-			mdl = 631614199,
-			x = 474.111,
-			y = -988.949,
-			z = 25.03
+			mdl = -131296141,
+			x = 467.593,
+			y = -977.993,
+			z = 25.057
+		}},
+	},
+	{ -- [MRPD] Lab
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 463.51782226563, y = -981.49456787109, z = 24.914699554443},
+		ents = {{
+			mdl = -131296141,
+			x = 463.614,
+			y = -980.581,
+			z = 25.057
 		}},
 	},
 	{ -- [MRPD] inner holding cells gate
@@ -237,7 +370,7 @@ local doors = {
 			z = 25.06
 		}},
 	},
-	{ -- [MRPD] holding cell 1 (from left)
+	{ -- [MRPD] cell 1 (from left)
 		double = false,
 		locked = true,
 		lookingat = true,
@@ -250,7 +383,7 @@ local doors = {
 			z = 25.06
 		}},
 	},
-	{ -- [MRPD] holding cell 2 (from left)
+	{ -- [MRPD] cell 2 (from left)
 		double = false,
 		locked = true,
 		lookingat = true,
@@ -263,7 +396,7 @@ local doors = {
 			z = 25.06
 		}},
 	},
-	{ -- [MRPD] holding cell 3 (from left)
+	{ -- [MRPD] cell 3 (from left)
 		double = false,
 		locked = true,
 		lookingat = true,
@@ -275,6 +408,131 @@ local doors = {
 			y = -994.408,
 			z = 25.06
 		}},
+	},
+	{ -- [MRPD] holding cells 1
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 468.16009521484, y = -996.60192871094, z = 24.914691925049},
+		ents = {{
+			mdl = -1033001619,
+			x = 467.192,
+			y = -996.459,
+			z = 25.005
+		}},
+	},
+	{ -- [MRPD] holding cells 2
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 472.35980224609, y = -996.560546875, z = 24.914691925049},
+		ents = {{
+			mdl = -1033001619,
+			x = 471.475,
+			y = -996.459,
+			z = 25.005
+		}},
+	},
+	{ -- [MRPD] holding cells 3
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 476.78530883789, y = -996.525390625, z = 24.914691925049},
+		ents = {{
+			mdl = -1033001619,
+			x = 475.754,
+			y = -996.459,
+			z = 25.005
+		}},
+	},
+	{ -- [MRPD] holding cells 4
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 480.99395751953, y = -996.51000976563, z = 24.914691925049},
+		ents = {{
+			mdl = -1033001619,
+			x = 480.030,
+			y = -996.459,
+			z = 25.005
+		}},
+	},
+	{ -- [MRPD] Interview 1
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 467.51254272461, y = -1003.4966430664, z = 24.914693832397},
+		ents = {{
+			mdl = -1033001619,
+			x = 468.487,
+			y = -1003.547,
+			z = 25.013
+		}},
+	},
+	{ -- [MRPD] Interview 2
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 472.38497924805, y = -1003.4737548828, z = 24.914693832397},
+		ents = {{
+			mdl = -1033001619,
+			x = 471.474,
+			y = -1003.538,
+			z = 25.012
+		}},
+	},
+	{ -- [MRPD] Interview 3
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 476.08471679688, y = -1003.5630493164, z = 24.914693832397},
+		ents = {{
+			mdl = -1033001619,
+			x = 477.049,
+			y = -1003.552,
+			z = 25.012
+		}},
+	},
+	{ -- [MRPD] Interview 4
+		double = false,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 480.99353027344, y = -1003.4977416992, z = 24.914693832397},
+		ents = {{
+			mdl = -1033001619,
+			x = 480.030,
+			y = -1003.538,
+			z = 25.005
+		}},
+	},
+	{ -- [MRPD] Meeting room next to back door
+		double = true,
+		locked = true,
+		lookingat = true,
+		lockdist = 2,
+		disp = {x = 469.93054199219, y = -1010.3154296875, z = 26.386299133301},
+		ents = {
+			{
+				mdl = -543497392,
+				x = 470.020,
+				y = -1009.145,
+				z = 26.540
+			},
+			{
+				mdl = -543497392,
+				x = 470.016,
+				y = -1011.741,
+				z = 26.540
+			},
+		},
 	},
 	{ -- [MRPD] holding cells rear door
 		double = false,
@@ -288,48 +546,6 @@ local doors = {
 			y = -1003.538,
 			z = 25.005
 		}},
-	},
-	{ -- [MRPD] questioning room
-		double = true,
-		locked = true,
-		lookingat = true,
-		lockdist = 2,
-		disp = {x = 477.87393188477, y = -1007.869934082, z = 26.386611938477},
-		ents = {
-			{
-				mdl = -131296141,
-				x = 476.580,
-				y = -1007.839,
-				z = 26.53
-			},
-			{
-				mdl = -131296141,
-				x = 479.177,
-				y = -1007.874,
-				z = 26.537
-			},
-		},
-	},
-	{ -- [MRPD] questioning room (watching)
-		double = true,
-		locked = true,
-		lookingat = true,
-		lockdist = 2,
-		disp = {x = 472.4235534668, y = -1007.7745361328, z = 26.387144088745},
-		ents = {
-			{
-				mdl = -131296141,
-				x = 471.229,
-				y = -1007.812,
-				z = 26.53
-			},
-			{
-				mdl = -131296141,
-				x = 473.833,
-				y = -1007.873,
-				z = 26.537
-			},
-		},
 	},
 	{ -- [MRPD] rear entrance
 		double = true,
