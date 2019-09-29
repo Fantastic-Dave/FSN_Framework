@@ -995,7 +995,7 @@ return {
 		DriveInertia                   = 1.09,
 		ClutchChangeRateScaleUpShift   = 2,
 		ClutchChangeRateScaleDownShift = 2.1,
-		InitialDriveMaxFlatVel         = 173,
+		InitialDriveMaxFlatVel         = 163,
 		SteeringLock                   = 36.1,
 
 		-- Brake
