@@ -5,6 +5,7 @@ server_script '@fsn_main/sv_utils.lua'
 
 client_script 'client.lua'
 client_script 'cl_advanceddamage.lua'
+client_script 'cl_volunteering.lua'
 client_script 'cl_carrydead.lua'
 client_script 'beds/client.lua'
 
