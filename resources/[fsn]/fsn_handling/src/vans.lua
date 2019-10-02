@@ -565,7 +565,7 @@ return {
 		CollisionDamageMult         = 1.0,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.8,
-		EngineDamageMult			= 1.5,
+		EngineDamageMult			= 1.0,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 

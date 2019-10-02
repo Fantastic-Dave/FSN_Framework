@@ -457,10 +457,10 @@ return {
 		InitialDriveGears              = 6,
 		InitialDriveForce              = 0.375,
 		DriveInertia                   = 1.0,
-		ClutchChangeRateScaleUpShift   = 1.5,
-		ClutchChangeRateScaleDownShift = 1.5,
-		InitialDriveMaxFlatVel         = 180,
-		SteeringLock                   = 34.1,
+		ClutchChangeRateScaleUpShift   = 1.6,
+		ClutchChangeRateScaleDownShift = 2.2,
+		InitialDriveMaxFlatVel         = 188,
+		SteeringLock                   = 28.4,
 
 		-- Brake
 		BrakeForce     = 0.282,
@@ -469,7 +469,7 @@ return {
 
 		-- Traction
 		TractionCurveMax         = 1.49,
-		TractionCurveMin         = 1.27,
+		TractionCurveMin         = 1.26,
 		TractionCurveLateral	 = 14.2,
 		TractionSpringDeltaMax   = 0.09,
 		LowSpeedTractionLossMult = 0.01,
@@ -1425,9 +1425,9 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.0,
 		InitialDriveGears              = 4,
-		InitialDriveForce              = 0.201,
+		InitialDriveForce              = 0.225,
 		DriveInertia                   = 1.0,
-		ClutchChangeRateScaleUpShift   = 1.15,
+		ClutchChangeRateScaleUpShift   = 1.5,
 		ClutchChangeRateScaleDownShift = 1.2,
 		InitialDriveMaxFlatVel         = 148,
 		SteeringLock                   = 34.2,
