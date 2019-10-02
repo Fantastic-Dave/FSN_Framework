@@ -175,12 +175,18 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 					end
 				end
 				if oldSlot.data and oldSlot.data.weight then
-					local new_maff = oldSlot.data.weight * oldSlot.amt
-					local newer_maff = cur_weight + new_maff
-					if newer_maff > secondInventory_limits[secondInventory_type] then
+					local moving_amt = data.amt
+					if data.amt == -99 then moving_amt = oldSlot.amt end
+					local added_weight = oldSlot.data.weight * moving_amt
+					added_weight = cur_weight + added_weight
+					if added_weight > secondInventory_limits[secondInventory_type] then
 						invLog('<span style="color:red">This inventory cannot hold more than: '..secondInventory_limits[secondInventory_type]..'</span>')
 						return
+					else
+						invLog('secondInventory weight: '..cur_weight..', new weight: '..added_weight)	
 					end
+				else
+					invLog('This item does not have any weight or data associated.')		
 				end
 			end
 			if secondInventory[data.toSlot].index then
