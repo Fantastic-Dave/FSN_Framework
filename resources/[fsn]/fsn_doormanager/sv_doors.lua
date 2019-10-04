@@ -156,48 +156,6 @@ local doors = {
 			z = 33.011
 		}},
 	},
-	{ -- [MRPD] lot doors inside
-		double = true,
-		locked = true,
-		lookingat = true,
-		lockdist = 2,
-		disp = {x = 445.70690917969, y = -997.20983886719, z = 30.689517974854},
-		ents = {
-			{
-				mdl = -2023754432,
-				x = 447.230,
-				y = -997.044,
-				z = 30.843
-			},
-			{
-				mdl = -2023754432,
-				x = 444.629,
-				y = -997.044,
-				z = 30.843
-			},
-		},
-	},
-	{ -- [MRPD] Photo room doors
-		double = true,
-		locked = true,
-		lookingat = true,
-		lockdist = 2,
-		disp = {x = 445.81692504883, y = -986.64923095703, z = 26.674175262451},
-		ents = {
-			{
-				mdl = -543497392,
-				x = 446.120,
-				y = -985.185,
-				z = 26.819
-			},
-			{
-				mdl = -543497392,
-				x = 446.130,
-				y = -987.794,
-				z = 26.823
-			},
-		},
-	},
 	{ -- [MRPD] Photo suspect room
 		double = false,
 		locked = true,
@@ -223,27 +181,6 @@ local doors = {
 			y = -986.612,
 			z = 26.819
 		}},
-	},
-	{ -- [MRPD] Ass chief & medical
-		double = true,
-		locked = true,
-		lookingat = true,
-		lockdist = 2,
-		disp = {x = 452.09020996094, y = -983.94927978516, z = 26.674201965332},
-		ents = {
-			{
-				mdl = -543497392,
-				x = 450.789,
-				y = -983.887,
-				z = 26.844
-			},
-			{
-				mdl = -543497392,
-				x = 453.388,
-				y = -983.887,
-				z = 26.844
-			},
-		},
 	},
 	{ -- [MRPD] Briefing
 		double = false,
@@ -534,19 +471,19 @@ local doors = {
 			},
 		},
 	},
-	{ -- [MRPD] holding cells rear door
-		double = false,
-		locked = true,
-		lookingat = true,
-		lockdist = 2,
-		disp = {x = 464.18118286133, y = -1003.5407714844, z = 24.915071487427},
-		ents = {{
-			mdl = -1033001619,
-			x = 463.478,
-			y = -1003.538,
-			z = 25.005
-		}},
-	},
+--	{ -- [MRPD] holding cells rear door
+--		double = false,
+--		locked = true,
+--		lookingat = true,
+--		lockdist = 2,
+--		disp = {x = 464.18118286133, y = -1003.5407714844, z = 24.915071487427},
+--		ents = {{
+--			mdl = -1033001619,
+--			x = 463.478,
+--			y = -1003.538,
+--			z = 25.005
+--		}},
+--	},
 	{ -- [MRPD] rear entrance
 		double = true,
 		locked = true,
