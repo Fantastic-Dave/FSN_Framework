@@ -4,7 +4,7 @@
    
    <Sirens>
 		<Item>
-		  <id value="1776"/> <!--Custom siren settingstower-->
+		  <id value="177689"/> <!--Custom siren settingstower-->
 		  <name>fusionb</name>
 		  <timeMultiplier value="1.00000000"/>
 		  <lightFalloffMax value="120.00000000"/>

@@ -4,7 +4,7 @@
    
    <Sirens>
 		<Item>
-		  <id value="3810"/> <!--Custom siren settingstower-->
+		  <id value="381089"/> <!--Custom siren settingstower-->
 		  <name>taurusb</name>
 		  <timeMultiplier value="1.00000000"/>
 		  <lightFalloffMax value="120.00000000"/>

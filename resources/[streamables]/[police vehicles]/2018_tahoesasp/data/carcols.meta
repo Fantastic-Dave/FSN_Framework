@@ -4,7 +4,7 @@
    
    <Sirens>
 		<Item>
-		  <id value="9810"/> <!--Custom siren settingstower-->
+		  <id value="981089"/> <!--Custom siren settingstower-->
 		  <name>tahoeb</name>
 		  <timeMultiplier value="1.00000000"/>
 		  <lightFalloffMax value="120.00000000"/>
