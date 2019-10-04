@@ -445,12 +445,11 @@ return {
 
 		HandlingName = "DOMINATOR3",
 		-- Physical
-		Mass               = 1500,
+		Mass               = 1670,
 		InitialDragCoeff   = 1.5,
-		DownforceModifier  = 1.45,
 		PercentSubmerged   = 85,
-		CentreOfMassOffset = { 0,    0.189, -0.118 },
-		InertiaMultiplier  = { 0.96, 0.99,    1.45 },
+		CentreOfMassOffset = { 0,    0, -0.15 },
+		InertiaMultiplier  = { 1, 1,    1.6 },
 
 		-- Transmission
 		DriveBiasFront                 = 0.0,
@@ -459,35 +458,35 @@ return {
 		DriveInertia                   = 1.0,
 		ClutchChangeRateScaleUpShift   = 1.6,
 		ClutchChangeRateScaleDownShift = 2.2,
-		InitialDriveMaxFlatVel         = 188,
+		InitialDriveMaxFlatVel         = 158,
 		SteeringLock                   = 28.4,
 
 		-- Brake
-		BrakeForce     = 0.282,
+		BrakeForce     = 0.982,
 		BrakeBiasFront = 0.635,
 		HandBrakeForce = 0.8,
 
 		-- Traction
-		TractionCurveMax         = 1.49,
-		TractionCurveMin         = 1.26,
+		TractionCurveMax         = 2.57,
+		TractionCurveMin         = 2.35,
 		TractionCurveLateral	 = 14.2,
-		TractionSpringDeltaMax   = 0.09,
-		LowSpeedTractionLossMult = 0.01,
+		TractionSpringDeltaMax   = 0.15,
+		LowSpeedTractionLossMult = 1.05,
 		CamberStiffnesss		 = 0.0,
 		TractionBiasFront        = 0.4824,
 		TractionLossMult         = 1.21,
 
 		-- Suspension
-		SuspensionForce       = 2.43,
-		SuspensionCompDamp    = 1.25,
+		SuspensionForce       = 1.4,
+		SuspensionCompDamp    = 1.1,
 		SuspensionReboundDamp = 0.48,
 		SuspensionUpperLimit  = 0.091,
 		SuspensionLowerLimit  = -0.133,
 		SuspensionRaise		  = 0.0,
-		SuspensionBiasFront   = 0.559,
-		AntiRollBarBiasFront  = 0.0,
-		RollCentreHeightFront = 0.53,
-		RollCentreHeightRear  = 0.0,
+		SuspensionBiasFront   = 0.55,
+		AntiRollBarBiasFront  = 0.3,
+		RollCentreHeightFront = 0.1,
+		RollCentreHeightRear  = 0.1,
 
 		-- Damage
 		CollisionDamageMult         = 1.0,
