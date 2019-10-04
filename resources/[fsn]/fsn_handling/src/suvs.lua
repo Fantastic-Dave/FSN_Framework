@@ -445,6 +445,80 @@ return {
 	},
 	CHandlingData {
 		
+		HandlingName = "DUBSTA",
+		-- Physical
+		Mass               = 2600,
+		InitialDragCoeff   = 1.91,
+		PercentSubmerged   = 80,
+		CentreOfMassOffset = { 0,    -0.11, 0.19 },
+		InertiaMultiplier  = { 1.18, 1,    1.71 },
+
+		-- Transmission
+		DriveBiasFront                 = 0.265,
+		InitialDriveGears              = 6,
+		InitialDriveForce              = 0.319,
+		DriveInertia                   = 1.09,
+		ClutchChangeRateScaleUpShift   = 2,
+		ClutchChangeRateScaleDownShift = 2.1,
+		InitialDriveMaxFlatVel         = 163,
+		SteeringLock                   = 34.6,
+
+		-- Brake
+		BrakeForce     = 0.521,
+		BrakeBiasFront = 0.5029,
+		HandBrakeForce = 0.75,
+
+		-- Traction
+		TractionCurveMax         = 1.93,
+		TractionCurveMin         = 1.79,
+		TractionCurveLateral	 = 16.5,
+		TractionSpringDeltaMax   = 0.134,
+		LowSpeedTractionLossMult = 1.19,
+		CamberStiffnesss		 = 0.0,
+		TractionBiasFront        = 0.4851,
+		TractionLossMult         = 1.04,
+
+		-- Suspension
+		SuspensionForce       = 1.6,
+		SuspensionCompDamp    = 1,
+		SuspensionReboundDamp = 1.6,
+		SuspensionUpperLimit  = 0.1,
+		SuspensionLowerLimit  = -0.24,
+		SuspensionRaise		  = 0.0,
+		SuspensionBiasFront   = 0.52,
+		AntiRollBarForce	  = 0.6,
+		AntiRollBarBiasFront  = 0.65,
+		RollCentreHeightFront = 0.4,
+		RollCentreHeightRear  = 0.4,
+
+		-- Damage
+		CollisionDamageMult         = 1.0,
+		WeaponDamageMult			= 1.0,
+		DeformationDamageMult		= 0.8,
+		EngineDamageMult			= 1.5,
+		PetrolTankVolume			= 65.0,
+		OilVolume					= 5.0,
+
+		-- Misc
+		SeatOffsetDistX = 0.0,
+		SeatOffsetDistY = 0.0,
+		SeatOffsetDistZ = 0.05,
+		MonetaryValue   = 50000,
+		ModelFlags		= '440010',
+		HandlingFlags   = "0",
+		DamageFlags		= "0",
+		AIHandling		= "AVERAGE",
+
+		SubHandling = {
+			CCarHandlingData {
+				BackEndPopUpCarImpulseMult      = 0.06,
+				BackEndPopUpBuildingImpulseMult = 0.03,
+				BackEndPopUpMaxDeltaSpeed       = 0.6
+			}
+		}
+	},
+	CHandlingData {
+		
 		HandlingName = "FQ2",
 		-- Physical
 		Mass               = 2200,
