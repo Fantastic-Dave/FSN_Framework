@@ -500,9 +500,13 @@ end)
 ]]--
 RegisterNetEvent('fsn_inventory:ply:request')
 AddEventHandler('fsn_inventory:ply:request', function(to)
-	beingused = true
-	updateGUI()
-	TriggerServerEvent('fsn_inventory:sys:send', to, firstInventory)
+	if beingused then
+		exports['mythic_notify']:DoHudText('error', 'Your inventory cannot be accessed while it is currently in use.')
+	else
+		beingused = true
+		updateGUI()
+		TriggerServerEvent('fsn_inventory:sys:send', to, firstInventory)
+	end
 end)
 RegisterNetEvent('fsn_inventory:ply:done')
 AddEventHandler('fsn_inventory:ply:done', function()
