@@ -174,6 +174,7 @@ local vehicles = {
 		{name = "BeeJay", costs = 25000, description = {}, model = "BJXL"},
 		{name = "Cavalcade", costs = 50000, description = {}, model = "cavalcade"},
 		{name = "Cavalcade 2", costs = 60000, description = {}, model = "cavalcade2"},
+		{name = "Dubsta", costs = 315000, description = {}, model = "dubsta"},
 		{name = "FQ2", costs = 9000, description = {}, model = "fq2"},
 		{name = "Granger", costs = 25000, description = {}, model = "granger"},
 		{name = "Huntley S", costs = 125000, description = {}, model = "huntley"},
