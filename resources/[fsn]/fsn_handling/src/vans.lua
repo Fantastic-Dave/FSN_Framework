@@ -370,7 +370,7 @@ return {
 		HandlingName = "JOURNEY",
 		-- Physical
 		Mass               = 4000,
-		InitialDragCoeff   = 2.0,
+		InitialDragCoeff   = 6.0,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    0, 0 },
 		InertiaMultiplier  = { 1, 1.4,    1.5 },
@@ -378,11 +378,11 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 1.0,
 		InitialDriveGears              = 4,
-		InitialDriveForce              = 0.16,
+		InitialDriveForce              = 0.13,
 		DriveInertia                   = 0.7,
 		ClutchChangeRateScaleUpShift   = 1.3,
 		ClutchChangeRateScaleDownShift = 1.3,
-		InitialDriveMaxFlatVel         = 130,
+		InitialDriveMaxFlatVel         = 110,
 		SteeringLock                   = 40.0,
 
 		-- Brake
@@ -391,8 +391,8 @@ return {
 		HandBrakeForce = 0.3,
 
 		-- Traction
-		TractionCurveMax         = 1.9,
-		TractionCurveMin         = 1.7,
+		TractionCurveMax         = 1.4,
+		TractionCurveMin         = 1.3,
 		TractionCurveLateral	 = 15.0,
 		TractionSpringDeltaMax   = 0.15,
 		LowSpeedTractionLossMult = 1.0,

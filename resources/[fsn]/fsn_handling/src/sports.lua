@@ -1360,11 +1360,11 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.405,
-		DriveInertia                   = 1.2,
+		InitialDriveForce              = 0.480,
+		DriveInertia                   = 1.25,
 		ClutchChangeRateScaleUpShift   = 1.8,
 		ClutchChangeRateScaleDownShift = 2.4,
-		InitialDriveMaxFlatVel         = 195,
+		InitialDriveMaxFlatVel         = 225,
 		SteeringLock                   = 32.8,
 
 		-- Brake
