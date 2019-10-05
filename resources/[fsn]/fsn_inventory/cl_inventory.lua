@@ -146,7 +146,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 	end
 	if data.fromInv == 'playerInventory' then
 		local oldSlot = firstInventory[data.fromSlot]
-		if data.amt > oldSlot.amt then
+		if data.amt > oldSlot.amt or data.amt == -99 then
 			data.amt = oldSlot.amt
 		end
 		if data.toInv == 'playerInventory' then	
@@ -165,6 +165,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 				end
 			end
 		else
+			--[[
 			if secondInventory_limits[secondInventory_type] then
 				-- check if it can carry
 				local cur_weight = 0
@@ -187,6 +188,27 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 					end
 				else
 					invLog('This item does not have any weight or data associated.')		
+				end
+			end
+			]]--
+			if secondInventory_limits[secondInventory_type] then
+				-- check if it can carry
+				local cur_weight = 0
+				for k, v in ipairs(secondInventory) do
+					if v.index ~= false and v.data and v.data.weight then
+						local maff = v.data.weight * v.amt
+						cur_weight = cur_weight + maff
+					end
+				end
+				if oldSlot.data and oldSlot.data.weight then
+					local new_maff = oldSlot.data.weight * data.amt
+					local newer_maff = cur_weight + new_maff
+					if newer_maff > secondInventory_limits[secondInventory_type] then
+						invLog('<span style="color:red">This inventory cannot hold more than: '..secondInventory_limits[secondInventory_type]..'</span>')
+						return
+					else
+						invLog('Old weight: '..cur_weight..' | New weight: '..newer_maff..' | Added: '..new_maff..' ('..oldSlot.data.weight..' * '..data.amt..')')
+					end
 				end
 			end
 			if secondInventory[data.toSlot].index then
@@ -231,6 +253,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 						index = firstInventory[data.fromSlot].index,
 						name = firstInventory[data.fromSlot].name,
 						amt = data.amt,
+						data = firstInventory[data.fromSlot].data,
 					}
 				end
 				firstInventory[data.fromSlot].amt = firstInventory[data.fromSlot].amt - data.amt
@@ -243,6 +266,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 						index = firstInventory[data.fromSlot].index,
 						name = firstInventory[data.fromSlot].name,
 						amt = data.amt,
+						data = firstInventory[data.fromSlot].data,
 					}
 				end
 				firstInventory[data.fromSlot].amt = firstInventory[data.fromSlot].amt - data.amt
@@ -281,6 +305,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 				end
 			end
 		else
+			--[[ idk why this is here
 			if secondInventory_limits[secondInventory_type] then
 				-- check if it can carry
 				local cur_weight = 0
@@ -299,6 +324,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 					end
 				end
 			end
+			]]--
 			if secondInventory[data.toSlot].index then
 				if secondInventory[data.toSlot].index ~= oldSlot.index then
 					invLog('<span style="color:red">This slot is occupied</span>')
