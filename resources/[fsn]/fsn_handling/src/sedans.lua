@@ -992,10 +992,10 @@ return {
 		DriveBiasFront                 = 0.2,
 		InitialDriveGears              = 6,
 		InitialDriveForce              = 0.319,
-		DriveInertia                   = 1.09,
+		DriveInertia                   = 1.05,
 		ClutchChangeRateScaleUpShift   = 2,
 		ClutchChangeRateScaleDownShift = 2.1,
-		InitialDriveMaxFlatVel         = 163,
+		InitialDriveMaxFlatVel         = 160,
 		SteeringLock                   = 36.1,
 
 		-- Brake
@@ -1348,7 +1348,7 @@ return {
 		DriveInertia                   = 0.8,
 		ClutchChangeRateScaleUpShift   = 1.8,
 		ClutchChangeRateScaleDownShift = 2.4,
-		InitialDriveMaxFlatVel         = 165,
+		InitialDriveMaxFlatVel         = 145,
 		SteeringLock                   = 35.2,
 
 		-- Brake

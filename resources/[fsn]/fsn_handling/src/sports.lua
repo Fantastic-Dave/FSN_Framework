@@ -1500,12 +1500,12 @@ return {
 		
 		HandlingName = "LYNX",
 		-- Physical
-		Mass               = 1700,
+		Mass               = 1725,
 		InitialDragCoeff   = 2.745,
 		DownforceModifier  = 1.54,
-		PercentSubmerged   = 74,
-		CentreOfMassOffset = { 0,    -0.17, -0.17 },
-		InertiaMultiplier  = { 1.16, 1,    1.59 },
+		PercentSubmerged   = 85,
+		CentreOfMassOffset = { 0,  -0.07, -0.2 },
+		InertiaMultiplier  = { 1.2, 1.2,    1.4 },
 
 		-- Transmission
 		DriveBiasFront                 = 0,
@@ -1533,7 +1533,7 @@ return {
 		TractionLossMult         = 1.32,
 
 		-- Suspension
-		SuspensionForce       = 3.14,
+		SuspensionForce       = 2.14,
 		SuspensionCompDamp    = 1.26,
 		SuspensionReboundDamp = 0.555,
 		SuspensionUpperLimit  = 0.093,
