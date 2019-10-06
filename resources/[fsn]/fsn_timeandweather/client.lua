@@ -47,6 +47,9 @@ end)
 Citizen.CreateThread(function()
     local hour = 0
     local minute = 0
+	function getTime()
+		return {hour, minute}
+	end
     while true do
         Citizen.Wait(0)
         local newBaseTime = baseTime

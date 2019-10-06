@@ -37,3 +37,6 @@ files {
 	'w_thunder.xml',
 	'w_xmas.xml'
 }
+exports({
+  'getTime',
+})
