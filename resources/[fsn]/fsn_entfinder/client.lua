@@ -35,7 +35,7 @@ end
 local datastore = {
   peds = {},
   objects = false,
-  vehicles = false,
+  vehicles = {},
   pickups = false,
   nearby = {
     peds = {},
