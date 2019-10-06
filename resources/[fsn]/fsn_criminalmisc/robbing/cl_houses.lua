@@ -36,7 +36,7 @@ Citizen.CreateThread(function()
 								},
 							})
 					else
-						print 'still crafting'
+						--print 'still crafting'
 						--exports["fsn_progress"]:removeBar()
 					end
 				else
