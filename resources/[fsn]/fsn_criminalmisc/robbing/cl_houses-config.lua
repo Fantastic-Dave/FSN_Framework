@@ -1,3 +1,125 @@
+
+unique_items = {
+	{
+		index = 'goldwatch',
+		name = 'Gold Watch',
+		data = {
+			weight = 1,
+		},
+	},
+	{
+		index = 'iphone',
+		name = 'iPhone',
+		data = {
+			weight = 0.5,
+		},
+	},
+	{
+		index = 'necklace',
+		name = 'Necklace',
+		data = {
+			weight = 0.5,
+		},
+	},
+	{
+		index = 'ring',
+		name = 'Ring',
+		data = {
+			weight = 0.5,
+		},
+	},
+	{
+		index = 'diamondring',
+		name = 'Diamond Ring',
+		data = {
+			weight = 0.5,
+		},
+	},
+	{
+		index = 'bracelet',
+		name = 'Bracelet',
+		data = {
+			weight = 0.5,
+		},
+	},
+	{
+		index = 'iphone',
+		name = 'iPhone',
+		data = {
+			weight = 0.5,
+		},
+	},
+}
+
+inside = {
+	["fridge"] = {
+		xyz = {x = 344.06497192383, y = -1001.393737793, z = -99.196258544922},
+		name = "Fridge",
+		items = {{preset=true,item='meth_rocks'},{preset=true,item='water'},{preset=true,item='pepsi_max'},{preset=true,item='panini'},{preset=true,item='beef_jerky'},{preset=true,item='microwave_burrito'},{preset=true,item='cupcake'},},
+		cash = 0,
+	},
+	["bookshelf1"] = {
+		xyz = {x = 345.35159301758, y = -997.00799560547, z = -99.196258544922},
+		name = "Bookshelf 1",
+		items = {{preset=true,item='2g_weed'},{preset=true,item='phone'},},
+		cash = 50,
+	},
+	["bookshelf2"] ={
+		xyz = {x = 345.34854125977, y = -994.53411865234, z = -99.196258544922},
+		name = "Bookshelf 2",
+		items = {},
+		cash = 100,
+	},
+	["tvstand"] = {
+		xyz = {x = 338.14416503906, y = -996.66595458984, z = -99.196258544922},
+		name = "TV Stand",
+		items = {},
+		cash = 20,
+	},
+	["cabinet"] = {
+		xyz = {x = 346.17391967773, y = -1001.6838378906, z = -99.196250915527},
+		name = "Cabinet",
+		items = {},
+		cash = 400,
+	},
+	["wardrobe"] = {
+		xyz = {x = 351.27578735352, y = -993.71813964844, z = -99.196182250977},
+		name = "Wardrobe",
+		items = {},
+		cash = 60,
+	},
+	["chest"] = {
+		xyz = {x = 351.89221191406, y = -998.76373291016, z = -99.196182250977},
+		name = "Chest",
+		items = {},
+		cash = 800,
+	},
+	["bedside"] = {
+		xyz = {x = 349.24594116211, y = -994.86651611328, z = -99.196182250977},
+		name = "Bedside Table",
+		items = {},
+		cash = 10,
+	},
+	["underbed"] = {
+		xyz = {x = 350.04409790039, y = -997.490234375, z = -99.1962890625},
+		name = "Under Bed",
+		items = {},
+		cash = 0,
+	},
+	["bathroom"] = {
+		xyz = {x = 347.23071289063, y = -994.20123291016, z = -99.196174621582},
+		name = "Sink Cabinet",
+		items = {},
+		cash = 0,
+	},
+	["coffeetable"] = {
+		xyz = {x = 342.15270996094, y = -996.16278076172, z = -99.196174621582},
+		name = "Coffee Table",
+		items = {},
+		cash = 200
+	}
+}
+
 robbables = {
 [1] =  { ['x'] = 1061.04,['y'] = -378.61,['z'] = 68.24,['h'] = 37.87, ['info'] = ' West Mirror Drive 1', ['apt'] = 2 },
 [2] =  { ['x'] = 1029.42,['y'] = -408.96,['z'] = 65.95,['h'] = 38.91, ['info'] = ' West Mirror Drive 2', ['apt'] = 2 },
