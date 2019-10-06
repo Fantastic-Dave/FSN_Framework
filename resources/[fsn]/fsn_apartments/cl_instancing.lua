@@ -3,7 +3,7 @@
 -- _seriously idk why this is here_
 -------------------
 local instanced = false
-local instance_debug = true
+local instance_debug = false
 local myinstance = {}
 function instanceMe(state)
 	print'thiswasremoved'
