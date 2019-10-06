@@ -74,6 +74,17 @@ Citizen.CreateThread(function()
             required = false
             lastjob = 0
             TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(5000,12000))
+			
+			if math.random(1,100) < 50 then
+				TriggerEvent('fsn_inventory:items:add', {
+					index = 'steel',
+					name = 'Steel',
+					amt = math.random(1,2),
+					data = {
+						weight = 2.0
+					},
+				})
+			end
           end
         else
           SetTextComponentFormat("STRING")
