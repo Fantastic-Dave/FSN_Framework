@@ -153,7 +153,7 @@ AddEventHandler('fsn_criminalmisc:houserobbery:try', function()
 	end
 	if exports["fsn_police"]:fsn_getCopAmt() < 1 then
 		exports['mythic_notify']:DoCustomHudText('error', 'No PD.', 4000)
-		return 
+		--return 
 	end
 	if exports["fsn_inventory"]:fsn_HasItem('crowbar') then
 		if robbing then return end
@@ -167,6 +167,7 @@ AddEventHandler('fsn_criminalmisc:houserobbery:try', function()
 		
 		if robbing_id then
 			-- cooldown stuff
+				
 			if robbables[robbing_id].cooldown then
 				if robbables[robbing_id].cooldown+18000 > GetGameTimer() then
 					exports['mythic_notify']:DoCustomHudText('error', 'This is not ready yet.', 4000)
@@ -174,6 +175,28 @@ AddEventHandler('fsn_criminalmisc:houserobbery:try', function()
 				end
 			end
 			robbables[robbing_id].cooldown = GetGameTimer()
+			
+			-- pd call
+			local pos = GetEntityCoords(GetPlayerPed(-1))
+			local coords = {
+				x = pos.x,
+				y = pos.y,
+				z = pos.z
+			}
+			TriggerServerEvent('fsn_police:dispatch', coords, 18, 'I think /'..robbables[robbing_id].info..'/ is currently being broken into!')
+			
+			-- animation
+			RequestAnimDict("veh@break_in@0h@p_m_one@")
+			while not HasAnimDictLoaded("veh@break_in@0h@p_m_one@") do
+				Citizen.Wait(0)
+			end
+			if not IsEntityPlayingAnim(GetPlayerPed(-1), "veh@break_in@0h@p_m_one@", "low_force_entry_ds", 3) then
+				TaskPlayAnim(GetPlayerPed(-1), "veh@break_in@0h@p_m_one@", "low_force_entry_ds", 1.0, 1.0, 1.0, 1, 0.0, 0, 0, 0)
+				Citizen.Wait(8000)
+				ClearPedTasks(GetPlayerPed(-1))
+			end
+			Citizen.Wait(1)		
+			ClearPedTasks(GetPlayerPed(-1))
 			
 			-- instance stuff
 			TriggerServerEvent('fsn_apartments:instance:new')
