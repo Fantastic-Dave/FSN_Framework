@@ -86,7 +86,49 @@ Citizen.CreateThread(function()
 	end
 end)
 
-
+--[[
+	Gathering
+]]--
+	local gathering_spots = {
+		{x = -3174.7419433594, y = 3028.3059082031, z = -33.588928222656},
+		{x = -3180.1616210938, y = 3047.1909179688, z = -38.609729766846},
+		{x = -3182.7651367188, y = 3055.8120117188, z = -38.639709472656},
+		{x = -3178.3395996094, y = 3040.2111816406, z = -34.352951049805},
+		{x = -3173.0275878906, y = 3037.5463867188, z = -34.205795288086},
+		{x = -3173.3486328125, y = 3017.4841308594, z = -39.274028778076},
+		{x = -3172.7990722656, y = 3020.6306152344, z = -34.81258392334},
+		{x = -3182.83984375, y = 3009.8308105469, z = -40.095069885254},
+		{x = -3176.0131835938, y = 3021.3854980469, z = -39.140880584717},
+		{x = -3199.40234375, y = 3035.2478027344, z = -37.261611938477}
+	}
+	local bleep = AddBlipForCoord(gathering_spots[1].x, gathering_spots[1].y, gathering_spots[1].z)
+	SetBlipSprite(bleep, 353)
+	SetBlipAsShortRange(bleep, true)
+	BeginTextCommandSetBlipName("STRING")
+	AddTextComponentString("offshore")
+	EndTextCommandSetBlipName(bleep)
+	current_gathering = math.random(1,#gathering_spots)
+	Citizen.CreateThread(function()
+		while true do Citizen.Wait(0)
+			local g = gathering_spots[current_gathering]
+			if GetDistanceBetweenCoords(g.x,g.y,g.z,GetEntityCoords(GetPlayerPed(-1)),false) < 50 then
+				DrawMarker(1,g.x, g.y, g.z,0,0,0,0,0,0,1.001,1.0001,0.4001,0,155,255,175,0,0,0,0)
+				if GetDistanceBetweenCoords(g.x,g.y,g.z,GetEntityCoords(GetPlayerPed(-1)),true) < 1 then
+					TriggerEvent('fsn_inventory:items:add', {
+						index = 'aluminium',
+						name = 'Aluminium',
+						amt = math.random(1,2),
+						data = {
+							weight = 2.0
+						},
+					})
+					Citizen.Wait(500)
+					current_gathering = math.random(1,#gathering_spots)
+				end
+			end
+		end
+	end)
+	
 --[[
 	Robbery stuff
 ]]--
