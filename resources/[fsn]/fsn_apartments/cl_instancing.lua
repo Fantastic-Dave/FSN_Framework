@@ -3,11 +3,10 @@
 -- _seriously idk why this is here_
 -------------------
 local instanced = false
-local instance_debug = false
+local instance_debug = true
 local myinstance = {}
 function instanceMe(state)
-	instanced = state
-	TriggerEvent('tokovoip_extras:muteall', state)
+	print'thiswasremoved'
 end
 function inInstance()
 	return instanced	
@@ -15,6 +14,14 @@ end
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
+		if instance_debug then
+			local xyz = GetEntityCoords(GetPlayerPed(-1))
+			if instanced then
+				Util.DrawText3D(xyz.x, xyz.y, xyz.z, 'InstanceID: '..myinstance.id..'\nPlayers: '..table.concat(myinstance.players, ', ')..'\nCreated: '..myinstance.created, {0,255,0,255}, 0.3)
+			else
+				Util.DrawText3D(xyz.x, xyz.y, xyz.z, 'No instance', {255,0,0,255}, 0.3)
+			end
+		end
 		for _, id in ipairs(GetActivePlayers()) do
 			if instanced then
 				SetVehicleDensityMultiplierThisFrame(0.0)
@@ -46,23 +53,25 @@ Citizen.CreateThread(function()
 end)
 
 RegisterNetEvent('fsn_apartments:instance:join')
-AddEventHandler('fsn_apartments:instance:join', function(id, inst)
-	
+AddEventHandler('fsn_apartments:instance:join', function(inst)
+	instanced = true
+	myinstance = inst
 end)
 
 RegisterNetEvent('fsn_apartments:instance:update')
 AddEventHandler('fsn_apartments:instance:update', function(inst)
-	
+	myinstance = inst
 end)
 
 RegisterNetEvent('fsn_apartments:instance:leave')
-AddEventHandler('fsn_apartments:instance:leave', function(id)
-	
+AddEventHandler('fsn_apartments:instance:leave', function()
+	instanced = false
+	myinstance = {}
 end)
 
 RegisterNetEvent('fsn_apartments:instance:debug')
 AddEventHandler('fsn_apartments:instance:debug', function()
-	
+	instance_debug = not instance_debug
 end)
 
 function table.contains(table, element)
