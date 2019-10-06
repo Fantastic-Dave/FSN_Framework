@@ -701,6 +701,9 @@ AddEventHandler('chatMessage', function(source, auth, msg)
       if split[2] == 'debug' then
         TriggerClientEvent('fsn_dev:debug', source)
       end
+	  if split[2] == 'insdbg' then
+        TriggerClientEvent('fsn_apartments:instance:debug', source)
+      end
       if split[2] == 'mdt' then
         TriggerClientEvent('fsn_police:MDT:toggle', source)
       end
