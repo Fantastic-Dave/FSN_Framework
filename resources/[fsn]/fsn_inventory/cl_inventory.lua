@@ -649,6 +649,14 @@ end)
 RegisterNetEvent('fsn_inventory:items:add')
 AddEventHandler('fsn_inventory:items:add', function(item)
 	local placed = false
+	if item.data and item.data.weight then
+		local maff = item.data.weight * item.amt
+		if fsn_CurrentWeight() + maff <= max_weight then
+		else
+			exports['mythic_notify']:DoHudText('error', 'You cannot carry '..item.amt..': '..item.name)
+			return
+		end
+	end
 	if fsn_CanCarry(item.index, item.amt) then
 		for k, slot in pairs(firstInventory) do
 			if not placed then 
