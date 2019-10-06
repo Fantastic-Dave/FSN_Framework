@@ -22,10 +22,29 @@ local animStates = {}
 local displayingPluginScreen = false;
 local HeadBone = 0x796e;
 
-local muteall = false
-RegisterNetEvent('tokovoip_extras:muteall')
-AddEventHandler('tokovoip_extras:muteall', function(state)
-	muteall = state
+--[[
+	:FSN: edits
+		instancing
+]]--
+
+local ininstance = false
+local myinstance = {}
+
+RegisterNetEvent('fsn_apartments:instance:join')
+AddEventHandler('fsn_apartments:instance:join', function(id, inst)
+	ininstance = true
+	myinstance = {}
+end)
+
+RegisterNetEvent('fsn_apartments:instance:update')
+AddEventHandler('fsn_apartments:instance:update', function(inst)
+	myinstance = inst
+end)
+
+RegisterNetEvent('fsn_apartments:instance:leave')
+AddEventHandler('fsn_apartments:instance:leave', function()
+	ininstance = false
+	myinstance = {}
 end)
 
 --------------------------------------------------------------------------------
