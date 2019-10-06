@@ -57,7 +57,7 @@ Citizen.CreateThread(function()
 							TriggerEvent('fsn_inventory:item:take', 'steel', 5)
 						else
 							exports['mythic_notify']:DoCustomHudText('error', 'You are missing a required resource.', 4000)
-							
+							--[[
 							TriggerEvent('fsn_inventory:items:add', {
 								index = 'aluminium',
 								name = 'Aluminium',
@@ -74,7 +74,7 @@ Citizen.CreateThread(function()
 									weight = 2.0
 								},
 							})
-							
+							]]--
 						end
 					end
 				end
