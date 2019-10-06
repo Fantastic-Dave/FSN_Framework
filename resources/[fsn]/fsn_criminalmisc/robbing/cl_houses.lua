@@ -153,7 +153,7 @@ AddEventHandler('fsn_criminalmisc:houserobbery:try', function()
 	end
 	if exports["fsn_police"]:fsn_getCopAmt() < 1 then
 		exports['mythic_notify']:DoCustomHudText('error', 'No PD.', 4000)
-		--return 
+		return 
 	end
 	if exports["fsn_inventory"]:fsn_HasItem('crowbar') then
 		if robbing then return end
@@ -215,6 +215,15 @@ AddEventHandler('fsn_criminalmisc:houserobbery:try', function()
 			robbing = true
 			Citizen.CreateThread(function()
 				while robbing do Citizen.Wait(0)
+					if GetDistanceBetweenCoords(347.04724121094,-1000.2844848633,-99.194671630859, GetEntityCoords(GetPlayerPed(-1)), true) > 100 then
+						-- instance stuff
+						TriggerServerEvent('fsn_apartments:instance:leave')
+						
+						SetEntityCoords(GetPlayerPed(-1), robbables[robbing_id].x, robbables[robbing_id].y, robbables[robbing_id].z)
+						robbing = false
+						robbing_id = false
+						searching = false 
+					end
 					DrawMarker(25, leave.x, leave.y, leave.z - 0.95, 0, 0, 0, 0, 0, 0, 0.50, 0.50, 10.3, 245, 179, 66, 140, 0, 0, 1, 0, 0, 0, 0)
 					if GetDistanceBetweenCoords(leave.x, leave.y, leave.z, GetEntityCoords(GetPlayerPed(-1)),true) < 1 then
 						Util.DrawText3D(leave.x, leave.y, leave.z, '[E] Leave', {255,255,255,200}, 0.3)
