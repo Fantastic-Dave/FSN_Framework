@@ -172,7 +172,7 @@ return {
 		SteeringLock                   = 41.2,
 
 		-- Brake
-		BrakeForce     = 0.8641,
+		BrakeForce     = 1.2641,
 		BrakeBiasFront = 0.5573,
 		HandBrakeForce = 0.77,
 
