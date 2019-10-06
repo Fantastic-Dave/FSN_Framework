@@ -12,6 +12,7 @@ AddEventHandler('fsn_apartments:instance:leave', function()
 			if value == source then
 				instances[k].players[key] = nil
 				TriggerClientEvent('fsn_apartments:instance:leave', source)
+				print(source..' has left instance '..k)
 				for kee, vaa in pairs(v.players) do
 					TriggerClientEvent('fsn_apartments:instance:update', vaa, instances[k])
 				end
@@ -21,9 +22,11 @@ AddEventHandler('fsn_apartments:instance:leave', function()
 end)
 
 AddEventHandler('fsn_apartments:instance:new', function()
+	print(source..' is creating a new instance')
 	for k, v in pairs(instances) do
 		if table.contains(v.players, source) then
 			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:fsn_apartments:^0^r You are already in an instance.')
+			print(source..' is already in an instance!')
 			return
 		end
 	end
@@ -33,7 +36,7 @@ AddEventHandler('fsn_apartments:instance:new', function()
 		players = {source},
 		created = os.time()
 	})
-	TriggerClientEvent('fsn_apartments:instance:join', ins_id, instances[ins_id])
+	TriggerClientEvent('fsn_apartments:instance:join', source, instances[ins_id])
 end)
 
 AddEventHandler('fsn_apartments:instance:join', function(id)
