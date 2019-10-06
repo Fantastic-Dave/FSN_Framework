@@ -19,10 +19,18 @@ Citizen.CreateThread(function()
 			if instanced then
 				SetVehicleDensityMultiplierThisFrame(0.0)
 				SetRandomVehicleDensityMultiplierThisFrame(0.0)
-				local ped = GetPlayerPed(id)
-				if ped ~= GetPlayerPed(-1) then
-					SetEntityVisible(ped, false, 0)
-					SetEntityCollision(ped, false, false)
+				if table.contains(myinstance.players, GetPlayerServerId(id)) then
+					-- can see/hear
+					local ped = GetPlayerPed(id)
+					SetEntityVisible(ped, true, 0)
+					SetEntityCollision(ped, true, true)
+				else
+					-- cannot see/hear
+					local ped = GetPlayerPed(id)
+					if ped ~= GetPlayerPed(-1) then
+						SetEntityVisible(ped, false, 0)
+						SetEntityCollision(ped, false, false)
+					end
 				end
 			else
 				SetVehicleDensityMultiplierThisFrame(0.2)
@@ -38,7 +46,12 @@ Citizen.CreateThread(function()
 end)
 
 RegisterNetEvent('fsn_apartments:instance:join')
-AddEventHandler('fsn_apartments:instance:join', function(id)
+AddEventHandler('fsn_apartments:instance:join', function(id, inst)
+	
+end)
+
+RegisterNetEvent('fsn_apartments:instance:update')
+AddEventHandler('fsn_apartments:instance:update', function(inst)
 	
 end)
 
@@ -52,3 +65,11 @@ AddEventHandler('fsn_apartments:instance:debug', function()
 	
 end)
 
+function table.contains(table, element)
+  for _, value in pairs(table) do
+    if value == element then
+      return true
+    end
+  end
+  return false
+end
