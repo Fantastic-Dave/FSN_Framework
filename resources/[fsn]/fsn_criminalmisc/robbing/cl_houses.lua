@@ -24,8 +24,7 @@ Citizen.CreateThread(function()
 						print 'crafting false'
 						crafting = false
 						exports["fsn_progress"]:removeBar()
-						TriggerEvent('fsn_inventory:item:take', 'aluminium', 2)
-						TriggerEvent('fsn_inventory:item:take', 'steel', 5)
+						
 						
 						TriggerEvent('fsn_inventory:items:add', {
 								index = 'crowbar',
@@ -54,9 +53,11 @@ Citizen.CreateThread(function()
 							crafting = true
 							crafting_start = GetGameTimer()
 							exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'Crafting',5)
+							TriggerEvent('fsn_inventory:item:take', 'aluminium', 2)
+							TriggerEvent('fsn_inventory:item:take', 'steel', 5)
 						else
 							exports['mythic_notify']:DoCustomHudText('error', 'You are missing a required resource.', 4000)
-							--[[
+							
 							TriggerEvent('fsn_inventory:items:add', {
 								index = 'aluminium',
 								name = 'Aluminium',
@@ -73,7 +74,7 @@ Citizen.CreateThread(function()
 									weight = 2.0
 								},
 							})
-							]]--
+							
 						end
 					end
 				end
@@ -144,6 +145,16 @@ local searching_start = 0
 
 RegisterNetEvent('fsn_criminalmisc:houserobbery:try')
 AddEventHandler('fsn_criminalmisc:houserobbery:try', function()
+	local tyme = exports["fsn_timeandweather"]:getTime()
+	print('current time is: '..tyme[1]..':'..tyme[2])
+	if tyme[1] > 6 and tyme[1] < 18 then
+		exports['mythic_notify']:DoCustomHudText('inform', 'This action is restricted to night.', 4000)
+		return
+	end
+	if exports["fsn_police"]:fsn_getCopAmt() < 1 then
+		exports['mythic_notify']:DoCustomHudText('error', 'No PD.', 4000)
+		return 
+	end
 	if exports["fsn_inventory"]:fsn_HasItem('crowbar') then
 		if robbing then return end
 		for k, v in pairs(robbables) do
@@ -154,7 +165,16 @@ AddEventHandler('fsn_criminalmisc:houserobbery:try', function()
 			end
 		end
 		
-		if robbing_id then			
+		if robbing_id then
+			-- cooldown stuff
+			if robbables[robbing_id].cooldown then
+				if robbables[robbing_id].cooldown+18000 > GetGameTimer() then
+					exports['mythic_notify']:DoCustomHudText('error', 'This is not ready yet.', 4000)
+					return
+				end
+			end
+			robbables[robbing_id].cooldown = GetGameTimer()
+			
 			-- instance stuff
 			TriggerServerEvent('fsn_apartments:instance:new')
 			SetEntityCoords(GetPlayerPed(-1), 347.04724121094,-1000.2844848633,-99.194671630859)
