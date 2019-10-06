@@ -103,7 +103,7 @@ Citizen.CreateThread(function()
           if IsControlJustPressed(0,38) then
             required = cars[math.random(1, #cars)]
             lastjob = GetNetworkTime()
-            TriggerEvent('chatMessage', '', {255,255,255}, '^5^*DARK WEB |^0^r We need you to find us a '..required)
+            TriggerEvent('chatMessage', '', {255,255,255}, '^5^*DARK WEB |^0^r We need you to find us a '..GetDisplayNameFromVehicleModel(required))
           end
         else
           if lastjob + 20 > GetNetworkTime() then
@@ -111,9 +111,11 @@ Citizen.CreateThread(function()
             AddTextComponentString("Press ~INPUT_PICKUP~ to request a new job.")
             DisplayHelpTextFromStringLabel(0, 0, 1, -1)
             if IsControlJustPressed(0,38) then
-              required = cars[math.random(1, #cars)]
+              local vehs = exports["fsn_entfinder"]:getVehicles(false)
+			  local veh = vehs[math.random(1,#vehs)]
+			  required = GetEntityModel(veh)
               lastjob = GetNetworkTime()
-              TriggerEvent('chatMessage', '', {255,255,255}, '^5^*DARK WEB |^0^r We need you to find us a '..required)
+              TriggerEvent('chatMessage', '', {255,255,255}, '^5^*DARK WEB |^0^r We need you to find us a '..GetDisplayNameFromVehicleModel(required))
             end
           else
             SetTextComponentFormat("STRING")
