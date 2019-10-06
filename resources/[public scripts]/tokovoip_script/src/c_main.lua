@@ -47,6 +47,15 @@ AddEventHandler('fsn_apartments:instance:leave', function()
 	myinstance = {}
 end)
 
+function table.contains(table, element)
+  for _, value in pairs(table) do
+    if value == element then
+      return true
+    end
+  end
+  return false
+end
+
 --------------------------------------------------------------------------------
 --	Plugin functions
 --------------------------------------------------------------------------------
@@ -137,16 +146,26 @@ local function clientProcessing()
 			--
 
 			-- Process proximity
-			if muteall then
+			--
+			if (dist >= voip.distance[mode]) then
 				tbl.muted = 1;
 			else
-				if (dist >= voip.distance[mode]) then
-					tbl.muted = 1;
-				else
+				tbl.volume = volume;
+				tbl.muted = 0;
+			end
+			
+			--[[
+				:FSN: instancing
+			]]--
+			if ininstance then
+				if table.contains(myinstance.players, playerServerId) then
 					tbl.volume = volume;
 					tbl.muted = 0;
+				else
+					tbl.muted = 1;
 				end
 			end
+			
 			--
 			-- Process channels
 			local remotePlayerUsingRadio = getPlayerData(playerServerId, "radio:talking");
