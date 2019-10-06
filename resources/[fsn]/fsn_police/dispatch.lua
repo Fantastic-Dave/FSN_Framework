@@ -100,6 +100,12 @@ local actions = {
     reward = 500,
 	blip = 380
   },
+  [18] = {
+    name = 'Domestic Report',
+    tencode = '10-16',
+    reward = 500,
+	blip = 461
+  },
 }
 local dispatch_calls = {}
 local disp_enable = false
