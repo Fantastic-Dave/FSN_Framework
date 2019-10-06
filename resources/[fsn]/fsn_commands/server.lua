@@ -403,6 +403,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 	else
 		if tonumber(split[2]) then
 			TriggerClientEvent('fsn_commands:service:pingStart', source, tonumber(split[2]))
+			TriggerClientEvent('fsn_commands:me', source, 'hits ping button')
 		else
 			TriggerClientEvent('chatMessage', source, '', {255,255,255}, '^1^*:FSN:^0^r Provide a target!')
 		end
