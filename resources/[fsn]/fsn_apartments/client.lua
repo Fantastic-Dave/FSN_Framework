@@ -385,7 +385,10 @@ Citizen.CreateThread(function()
 						inappt = false
 						DoScreenFadeIn(3000)
 						FreezeEntityPosition(GetPlayerPed(-1), false)
-						instanceMe(false)
+						
+						-- instance stuff, leave
+						--instanceMe(false)
+						TriggerServerEvent('fsn_apartments:instance:leave')
 					end
 				end
 					
@@ -399,7 +402,10 @@ Citizen.CreateThread(function()
 						inappt = false
 						DoScreenFadeIn(3000)
 						FreezeEntityPosition(GetPlayerPed(-1), false)
-						instanceMe(false)		
+						
+						-- instance stuff, leave
+						--instanceMe(false)
+						TriggerServerEvent('fsn_apartments:instance:leave')
 					end
 				end
 			else
@@ -421,7 +427,9 @@ function EnterRoom(id)
 	DoScreenFadeOut(0)
 	SetEntityCoords(GetPlayerPed(-1), 152.09986877441 , -1004.7946166992, -98.999984741211)
 	DoScreenFadeIn(3000)
-	instanceMe(true)
+	-- instance stuff, create new instance for me
+	--instanceMe(true)
+	TriggerServerEvent('fsn_apartments:instance:new')
 	FreezeEntityPosition(GetPlayerPed(-1), false)
 	Citizen.Wait(1000)
 	inappt = true
@@ -439,8 +447,10 @@ AddEventHandler('fsn_apartments:characterCreation', function()
 	FreezeEntityPosition(GetPlayerPed(-1), true)
 	TriggerEvent('fsn_clothing:menu')
 	creating = true
-	instanceMe(true)
 	
+	-- instance stuff, create new instance for me
+	--instanceMe(true)
+	TriggerServerEvent('fsn_apartments:instance:new')
 	
 	Citizen.CreateThread(function()
 		while creating do
