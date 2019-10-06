@@ -159,9 +159,11 @@ local function clientProcessing()
 			]]--
 			if ininstance then
 				if table.contains(myinstance.players, playerServerId) then
+					-- can hear
 					tbl.volume = volume;
 					tbl.muted = 0;
 				else
+					-- cannot hear
 					tbl.muted = 1;
 				end
 			end
