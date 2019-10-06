@@ -3,7 +3,8 @@ local errprefix = "^3[fsn_builders]^7 ^1ERROR:^7 "
 	Translators
 ]]
 local CCarHandlingData = LoadSchema("CCarHandlingData", "ccarhandlingdata.lua")
-local CHandlingData    = LoadSchema("CHandlingData",    "chandlingdata.lua")
+local CBikeHandlingData = LoadSchema("CBikeHandlingData", "cbikehandlingdata.lua")
+local CHandlingData    = LoadSchema("CHandlingData", "chandlingdata.lua")
 
 local function load_file(res, file)
 	local err = errprefix.."Failed to %s ^0'^5@"..res.."/"..file.."^0'^7"

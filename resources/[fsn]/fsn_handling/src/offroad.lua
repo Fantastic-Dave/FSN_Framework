@@ -97,27 +97,27 @@ return {
 		HandBrakeForce = 0.5,
 
 		-- Traction
-		TractionCurveMax         = 2.7,
-		TractionCurveMin         = 2.5,
-		TractionCurveLateral	 = 20.5,
-		TractionSpringDeltaMax   = 0.09,
-		LowSpeedTractionLossMult = 1.0,
+		TractionCurveMax         = 1.22,
+		TractionCurveMin         = 1.0,
+		TractionCurveLateral	 = 16.5,
+		TractionSpringDeltaMax   = 0.11,
+		LowSpeedTractionLossMult = 0.09,
 		CamberStiffnesss		 = 0,
-		TractionBiasFront        = 0.43,
-		TractionLossMult         = 0.1,
+		TractionBiasFront        = 0.454,
+		TractionLossMult         = 0.45,
 
 		-- Suspension
-		SuspensionForce       = 3.8,
+		SuspensionForce       = 2.8,
 		SuspensionCompDamp    = 2.0,
-		SuspensionReboundDamp = 2.5,
-		SuspensionUpperLimit  = 0.12,
-		SuspensionLowerLimit  = -0.13,
-		SuspensionRaise		  = 0,
-		SuspensionBiasFront   = 0.5,
-		AntiRollBarForce	  = 0,
+		SuspensionReboundDamp = 1.5,
+		SuspensionUpperLimit  = 0.15,
+		SuspensionLowerLimit  = -0.08,
+		SuspensionRaise		  = 0.0,
+		SuspensionBiasFront   = 0.53,
+		AntiRollBarForce	  = 0.5,
 		AntiRollBarBiasFront  = 0.55,
-		RollCentreHeightFront = 0,
-		RollCentreHeightRear  = 0,
+		RollCentreHeightFront = 0.2,
+		RollCentreHeightRear  = 0.2,
 
 		-- Damage
 		CollisionDamageMult         = 1.0,
@@ -138,8 +138,27 @@ return {
 		AIHandling		= "AVERAGE",
 
 		SubHandling = {
-			CCarHandlingData {
-
+			CBikeHandlingData {
+				fLeanFwdCOMMult			= 0.15,
+				fLeanFwdForceMult		= 1.0,
+				fLeanBakCOMMult			= 0.2,
+				fLeanBakForceMult		= 1.0,
+				fMaxBankAngle			= 25.0,
+				fFullAnimAngle			= 0.0,
+				fDesLeanReturnFrac		= 0.11,
+				fStickLeanMult			= 0.5,
+				fBrakingStabilityMult	= 0.0,
+				fInAirSteerMult			= -1.2,
+				fWheelieBalancePoint	= 0.0,
+				fStoppieBalancePoint	= 0.0,
+				fWheelieSteerMult		= 0.0,
+				fRearBalanceMult		= 0.0,
+				fFrontBalanceMult		= 0.0,
+				fBikeGroundSideFrictionMult		= 1.4,
+				fBikeWheelGroundSideFrictionMult= 1.1,
+				fBikeOnStandLeanAngle			= 0.0,
+				fBikeOnStandSteerAngle			= 0.0,
+				fJumpForce						= 0.0
 			}
 		}
 	},
@@ -210,8 +229,27 @@ return {
 		AIHandling		= "AVERAGE",
 
 		SubHandling = {
-			CCarHandlingData {
-				
+			CBikeHandlingData {
+				fLeanFwdCOMMult			= 0.15,
+				fLeanFwdForceMult		= 1.0,
+				fLeanBakCOMMult			= 0.2,
+				fLeanBakForceMult		= 1.0,
+				fMaxBankAngle			= 25.0,
+				fFullAnimAngle			= 0.0,
+				fDesLeanReturnFrac		= 0.11,
+				fStickLeanMult			= 0.5,
+				fBrakingStabilityMult	= 0.0,
+				fInAirSteerMult			= -1.2,
+				fWheelieBalancePoint	= 0.0,
+				fStoppieBalancePoint	= 0.0,
+				fWheelieSteerMult		= 0.0,
+				fRearBalanceMult		= 0.0,
+				fFrontBalanceMult		= 0.0,
+				fBikeGroundSideFrictionMult		= 1.4,
+				fBikeWheelGroundSideFrictionMult= 1.1,
+				fBikeOnStandLeanAngle			= 0.0,
+				fBikeOnStandSteerAngle			= 0.0,
+				fJumpForce						= 0.0
 			}
 		}
 	},
