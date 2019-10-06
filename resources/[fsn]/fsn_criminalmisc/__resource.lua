@@ -1,4 +1,9 @@
 resource_manifest_version "44febabe-d386-4d18-afbe-5e627f4af937"
+
+-- GLOBAL UTILS
+client_script '@fsn_main/cl_utils.lua'
+server_script '@fsn_main/sv_utils.lua'
+
 -- client
 client_script 'client.lua'
 
@@ -10,6 +15,7 @@ server_script 'handcuffs/server.lua'
 client_script 'robbing/client.lua'
 client_script 'robbing/cl_houses.lua'
 client_script 'robbing/cl_houses-config.lua'
+client_script 'robbing/cl_houses-build.lua'
 
 -- streetracing
 client_script 'streetracing/client.lua'
