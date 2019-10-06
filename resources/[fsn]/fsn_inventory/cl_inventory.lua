@@ -43,8 +43,17 @@ function fsn_CanCarry(item, amt)
 			return false
 		end
 	else
-		print('no preset weight data for '..item)
-		return true
+		if item.data and item.data.weight then
+			local maff = item.data.weight * amt
+			if fsn_CurrentWeight() + maff <= max_weight then
+				return true
+			else
+				return false
+			end
+		else
+			print('no weight data for '..item)
+			return true
+		end
 	end
 end
 function fsn_CurrentWeight()
