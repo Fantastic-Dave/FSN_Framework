@@ -4,13 +4,13 @@ Citizen.CreateThread(function()
 	local craft_spot = {x = 2358.9116210938, y = 3136.5368652344, z = 48.208744049072}
 	--while true do Citizen.Wait(0)
 		for k, v in pairs(robbables) do
-			local bleep = AddBlipForCoord(v.x, v.y, v.z)
-			SetBlipSprite(bleep, 1)
-			SetBlipColour(bleep, 3)
-			SetBlipAsShortRange(bleep, true)
-			BeginTextCommandSetBlipName("STRING")
-			AddTextComponentString("Robbable Property")
-			EndTextCommandSetBlipName(bleep)
+			--local bleep = AddBlipForCoord(v.x, v.y, v.z)
+			--SetBlipSprite(bleep, 1)
+			--SetBlipColour(bleep, 3)
+			--SetBlipAsShortRange(bleep, true)
+			--BeginTextCommandSetBlipName("STRING")
+			--AddTextComponentString("Robbable Property")
+			--EndTextCommandSetBlipName(bleep)
 		end
 	--end
 	while true do Citizen.Wait(0)
