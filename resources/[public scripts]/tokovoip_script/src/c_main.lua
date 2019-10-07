@@ -158,10 +158,15 @@ local function clientProcessing()
 				:FSN: instancing
 			]]--
 			if ininstance then
-				if table.contains(myinstance.players, playerServerId) then
-					-- can hear
-					tbl.volume = volume;
-					tbl.muted = 0;
+				if myinstance.players then
+					if table.contains(myinstance.players, playerServerId) then
+						-- can hear
+						tbl.volume = volume;
+						tbl.muted = 0;
+					else
+						-- cannot hear
+						tbl.muted = 1;
+					end
 				else
 					-- cannot hear
 					tbl.muted = 1;
