@@ -8,6 +8,7 @@ client_script 'cl_advanceddamage.lua'
 client_script 'cl_volunteering.lua'
 client_script 'cl_carrydead.lua'
 client_script 'beds/client.lua'
+client_script 'blip.lua'
 
 server_script 'server.lua'
 server_script 'sv_carrydead.lua'
