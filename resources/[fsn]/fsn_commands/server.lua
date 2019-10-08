@@ -616,7 +616,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
   end
   if msg == '/props' then
     TriggerClientEvent('chatMessage', source, ':FSN Props (1/2)', {255,0,0}, 'notes, callphone-2, umbrella, brief-2, cigar-2, joint, cig, holdcigar, holdcig, holdjoint, box, pizza, drug-3, wine, beer, shopping, soda, burger-2, burgershot-5,')
-    TriggerClientEvent('chatMessage', source, ':FSN Props (2/2)', {255,0,0}, 'shot, boxing, drill, pot, smoke, coffee, bong, rose, cane, protext, backpack, hiking, dead-4, bum hurt-3, layfront, layback, bumper-2, tire-3, toolbox-3')
+    TriggerClientEvent('chatMessage', source, ':FSN Props (2/2)', {255,0,0}, 'shot, boxing, drill, pot, smoke, coffee, bong, rose, cane, protext, backpack, dead-4, bum hurt-3, layfront, layback, bumper-2, tire-3, toolbox-3')
   end
   -------------------------------------------------------------------------------------------------------------------------------------------------
   -- INVENTORY COMMANDS
