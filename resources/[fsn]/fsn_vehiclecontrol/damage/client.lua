@@ -211,7 +211,7 @@ AddEventHandler('fsn_vehiclecontrol:damage:repairkit', function()
 				SetVehicleDoorShut(vehicle, 4, false)
 				if GetDistanceBetweenCoords(moveto, GetEntityCoords(GetPlayerPed(-1)), true) < 2 and not IsPedInAnyVehicle(GetPlayerPed(-1)) then
 					SetVehicleUndriveable(vehicle,false)
-					SetVehicleEngineHealth(vehicle, cfg.cascadingFailureThreshold + 5)
+					SetVehicleEngineHealth(vehicle, cfg.cascadingFailureThreshold + 25)
 					SetVehiclePetrolTankHealth(vehicle, 750.0)
 					healthEngineLast=cfg.cascadingFailureThreshold +5
 					healthPetrolTankLast=750.0
