@@ -2614,7 +2614,7 @@ RegisterCommand("ce",function(source, args)
 					end 
 				end
 				
-			elseif argh == 'hiking' then
+			--[[elseif argh == 'hiking' then
 				local ad = "move_m@hiking"
 				
 				local prop_name = prop_name or 'prop_luggage_09a'
@@ -2637,7 +2637,7 @@ RegisterCommand("ce",function(source, args)
 						print(GetEntityCollisonDisabled(prop))
 						TaskPlayAnim( player, ad, "idle", 3.0, -8, -1, 63, 0, 0, 0, 0 )
 					end 
-				end
+				end--]]
 			
 			elseif argh == 'think' then
 				local ad = "anim@amb@board_room@whiteboard@"
