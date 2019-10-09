@@ -272,10 +272,10 @@ end
 
 function fsn_isDeveloper(source)
   local devid = {
-    'steam:11000010c5872c4',
     'steam:11000010e0828a9',
     'steam:1100001041313be',
     'steam:110000109e85e9a',
+    'steam:110000106f35cce'
   }
   local steamid = GetPlayerIdentifiers(source)[1]
   return table.contains(devid, steamid)
