@@ -27,7 +27,7 @@ local crafting_stations = {
       id = 496
     },
 	]]
-    loc = {x = 1273.991, y = -1711.7100, z = 54.771},
+    loc = {x = -76.807876586914, y = -1397.0086669922, z = 29.35998916626},
 	state = 'Fuck me you stink\nof weed',
     cost = 80,
     required = {
