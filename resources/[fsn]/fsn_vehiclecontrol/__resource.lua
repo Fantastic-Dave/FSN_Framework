@@ -44,6 +44,9 @@ server_script 'trunk/server.lua'
 -- HOLDUP
 client_script 'holdup/client.lua'
 
+-- Aircontrol
+client_script 'aircontrol/aircontrol.lua'
+
 exports({
   'GetVehicleInventory'
 })
