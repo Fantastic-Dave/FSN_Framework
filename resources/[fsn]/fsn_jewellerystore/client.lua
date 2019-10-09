@@ -276,7 +276,7 @@ AddEventHandler('fsn_jewellerystore:case:startrob', function(caseid)
 	Citizen.Wait(7500)
 	ClearPedTasks(GetPlayerPed(-1))
 	robbing = false
-	TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(2000,3000))
+	TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(1800,2800))
 	FreezeEntityPosition(GetPlayerPed(-1), false)
 end)
 
