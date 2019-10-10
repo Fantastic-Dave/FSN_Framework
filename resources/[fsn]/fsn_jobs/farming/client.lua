@@ -36,7 +36,7 @@ local farms = {
       quittext = "Press ~INPUT_CONTEXT~ to ~r~quit ~g~farming",
       finishtext = "Press ~INPUT_CONTEXT~ to collect payment",
     },
-    payrate = 200,
+    payrate = 300,
     name = "Farming",
     time = 200000,
     blip = 280,
@@ -133,7 +133,7 @@ Citizen.CreateThread(function()
                 finished = false
                 hasseeds = false
                 --TriggerServerEvent('jFarm:payme', v.payrate)
-                TriggerEvent('fsn_bank:change:walletAdd', math.random(v.payrate-300, v.payrate+250))
+                TriggerEvent('fsn_bank:change:walletAdd', math.random(v.payrate-100, v.payrate+250))
                 DeleteTractor()
   						end
             end
