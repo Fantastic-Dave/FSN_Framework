@@ -733,7 +733,7 @@ area_table = {
 	["SLAB"] = {
         name = "Stab City",
         enabled = true,
-        callpercentage = 40,
+        callpercentage = 50,
         sellpercentage = 50,
         premium = false,
         incity = false,
@@ -745,7 +745,7 @@ area_table = {
 	["STAD"] = {
         name = "Maze Bank Arena",
         enabled = true,
-        callpercentage = 60,
+        callpercentage = 70,
         sellpercentage = 50,
         premium = false,
         incity = true,
@@ -757,7 +757,7 @@ area_table = {
 	["STRAW"] = {
         name = "Strawberry",
         enabled = true,
-        callpercentage = 50,
+        callpercentage = 60,
         sellpercentage = 50,
         premium = false,
         incity = true,
@@ -831,25 +831,25 @@ area_table = {
 	["VESP"] = {
         name = "Vespucci",
         enabled = true,
-        callpercentage = 50,
+        callpercentage = 70,
         sellpercentage = 50,
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,7)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(70,90),avg=math.random(1,7)},
+            ["meth_rocks"]={value=math.random(80,100),avg=math.random(1,5)},
         },
     },
 	["VINE"] = {
         name = "Vinewood",
         enabled = true,
-        callpercentage = 60,
+        callpercentage = 70,
         sellpercentage = 50,
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,7)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
+            ["joint"]={value=math.random(70,90),avg=math.random(1,7)},
+            ["meth_rocks"]={value=math.random(80,100),avg=math.random(1,5)},
         },
     },
 	["WINDF"] = {
@@ -861,18 +861,18 @@ area_table = {
         incity = false,
         drugs = {
             ["joint"]={value=math.random(80,100),avg=math.random(1,7)},
-            ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
+            ["meth_rocks"]={value=math.random(80,100),avg=math.random(1,5)},
         },
     },
 	["WVINE"] = {
         name = "West Vinewood",
         enabled = true,
-        callpercentage = 50,
+        callpercentage = 70,
         sellpercentage = 50,
         premium = false,
         incity = true,
         drugs = {
-            ["joint"]={value=math.random(80,100),avg=math.random(1,7)},
+            ["joint"]={value=math.random(70,90),avg=math.random(1,7)},
             ["meth_rocks"]={value=math.random(90,110),avg=math.random(1,5)},
         },
     },
