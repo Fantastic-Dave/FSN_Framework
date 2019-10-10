@@ -7,7 +7,7 @@ local crafting_stations = {
       id = 496
     },
 	]]
-    loc = {x = 2219.7758789063, y = 5577.4584960938, z = 53.845291137695},
+    loc = {x = 2219.7758789063, y = 5577.4584960938, z = 52.845291137695},
     cost = 5,
     required = {
       item = 'none',
@@ -27,7 +27,7 @@ local crafting_stations = {
       id = 496
     },
 	]]
-    loc = {x = -76.807876586914, y = -1397.0086669922, z = 29.35998916626},
+    loc = {x = -76.807876586914, y = -1397.0086669922, z = 28.35998916626},
 	state = 'Fuck me you stink\nof weed',
     cost = 80,
     required = {
@@ -50,7 +50,7 @@ local crafting_stations = {
       id = 403
     },
 	]]
-    loc = {x = 3623.6965332031, y = 3738.8859863281, z = 28.690086364746},
+    loc = {x = 3609.7397460938, y = 3744.591796875, z = 28.390095901489},
     cost = 15,
     required = {
       item = 'none',
@@ -70,7 +70,7 @@ local crafting_stations = {
       id = 403
     },
 	]]
-    loc = {x = -586.707, y = -1601.208, z = 27.010},
+    loc = {x = -331.44189453125, y = -2445.2722167969, z = 6.341233253479},
     cost = 25,
     required = {
       item = 'acetone',
