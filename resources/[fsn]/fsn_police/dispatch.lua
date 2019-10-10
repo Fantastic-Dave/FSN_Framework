@@ -101,8 +101,8 @@ local actions = {
 	blip = 380
   },
   [18] = {
-    name = 'Domestic Report',
-    tencode = '10-16',
+    name = 'Burglary in Progress',
+    tencode = '10-31a',
     reward = 500,
 	blip = 461
   },
