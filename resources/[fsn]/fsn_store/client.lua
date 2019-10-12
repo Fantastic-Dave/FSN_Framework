@@ -180,7 +180,7 @@ Citizen.CreateThread(function()
 										 y = pos.y,
 										 z = pos.z
 										}
-										TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-90 | ARMED ROBBERY IN PROGRESS')
+										TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-31b | ARMED ROBBERY IN PROGRESS')
 									end
 								else
 									TaskCombatPed(v.ped, GetPlayerPed(-1), 0, 16)
@@ -191,7 +191,7 @@ Citizen.CreateThread(function()
 										 y = pos.y,
 										 z = pos.z
 										}
-										TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-90 | ARMED ROBBERY IN PROGRESS')
+										TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-31b | ARMED ROBBERY IN PROGRESS')
 									end
 									robbing = false
 								end
@@ -203,7 +203,7 @@ Citizen.CreateThread(function()
 								 y = pos.y,
 								 z = pos.z
 								}
-								TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-90 | Attempted armed store robbery')
+								TriggerServerEvent('fsn_police:dispatch', coords, 12, '10-31b | Attempted armed store robbery')
 								Citizen.Wait(6000)
 							end
 						end
