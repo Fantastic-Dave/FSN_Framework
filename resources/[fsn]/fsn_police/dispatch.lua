@@ -6,7 +6,7 @@ local actions = {
 	blip = 110
   },
   [2] = {
-    name = "Car Theft",
+    name = "Carjacking",
     tencode = '10-60',
     reward = 800,
 	blip = 380
@@ -53,7 +53,7 @@ local actions = {
 	blip = 310
   },
   [10] = {
-    name = "Attempted Car Theft",
+    name = "Attempted Carjacking",
     tencode = '10-60',
     reward = 800,
 	blip = 380
@@ -65,14 +65,14 @@ local actions = {
 	blip = 304
   },
   [12] = {
-    name = 'Store Robbery',
-    tencode = '10-90',
+    name = 'Robbery in progress',
+    tencode = '10-31b',
     reward = 500,
 	blip = 103
   },
   [13] = {
     name = 'Suspicious Vehicle',
-    tencode = '10-94',
+    tencode = '10-37',
     reward = 500,
 	blip = 147
   },
