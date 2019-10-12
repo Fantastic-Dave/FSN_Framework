@@ -222,7 +222,7 @@ Citizen.CreateThread(function()
 						exports["fsn_progress"]:fsn_ProgressBar(58, 133, 255,'Holding up',9)
 						if not holdingnotif then 
 							TriggerEvent('fsn_notify:displayNotification', 'Holding up for keys...', 'centerRight', 3000, 'info')
-							if math.random(1,100) < 40 then
+							if math.random(1,100) < 85 then
 								local pos = GetEntityCoords(GetPlayerPed(-1))
 								local coords = {
 									x = pos.x,
@@ -234,7 +234,7 @@ Citizen.CreateThread(function()
 								colour = vehicle_colours[colour+1]
 								local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(holdingcar))
 								local plate = GetVehicleNumberPlateText(holdingcar)
-								TriggerServerEvent('fsn_police:dispatch', coords, 10, '10-60 (ARMED) | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
+								TriggerServerEvent('fsn_police:dispatch', coords, 10, '10-60 (ARMED Carjacking) | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
 							end
 							holdingnotif = true
 						end
@@ -256,7 +256,7 @@ Citizen.CreateThread(function()
 							if maff < curtime then
 								table.insert(heldpeds, #heldpeds+1, {holdingped, true})
 								if holdingcar then
-									if math.random(0,100) > 60 then
+									if math.random(0,100) > 25 then
 										table.insert(myKeys, {GetVehicleNumberPlateText(holdingcar),true})
 										TriggerEvent('fsn_notify:displayNotification', 'You got keys to the car!', 'centerRight', 3000, 'success')
 										holding = false
