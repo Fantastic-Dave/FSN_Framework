@@ -264,7 +264,7 @@ AddEventHandler('fsn_jewellerystore:case:startrob', function(caseid)
 		y = pos.y,
 		z = pos.z
 	}
-	TriggerServerEvent('fsn_police:dispatch', coords, 7)
+	TriggerServerEvent('fsn_police:dispatch', coords, 12)
 		
 	local anims = {'smash_case', 'smash_case_b', 'smash_case_c', 'smash_case_d'}
 	RequestAnimDict('missheist_jewel')
@@ -324,7 +324,7 @@ Citizen.CreateThread(function()
 				colour = vehicle_colours[colour+1]
 				local vehicle = GetDisplayNameFromVehicleModel(GetEntityModel(holdingcar))
 				local plate = GetVehicleNumberPlateText(holdingcar)
-				TriggerServerEvent('fsn_police:dispatch', coords, 13, '10-94 (SUS VEH) | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
+				TriggerServerEvent('fsn_police:dispatch', coords, 13, '10-37 (SUS VEH) | Vehicle: '..vehicle..' | Plate: '..plate..' | Color: '..colour)
 				Citizen.Wait(10000)
 			end
 		end
