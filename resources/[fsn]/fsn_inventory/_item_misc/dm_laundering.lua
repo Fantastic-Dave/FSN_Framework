@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------- LAUNDERING
 local laundering = false
-local salepos = {x = 85.76220703125, y = -1959.5466308594, z = 21.121669769287}
+local salepos = {x = 83.407676696777, y = -1964.8062744141, z = 21.11789894104}
 local garagepos = {x = 88.83975982666, y = -1966.9367675781, z = 20.456882476807}
 local laundervan = false
 local laundering_complete = false
