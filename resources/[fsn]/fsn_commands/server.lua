@@ -1284,12 +1284,27 @@ end)
 
 RegisterServerEvent('fsn_commands:printxyz')
 AddEventHandler('fsn_commands:printxyz', function(x,y,z,h)
+  print('')
+  print('XYZ Lua table:')
   print("{x = "..x..", y = "..y..", z = "..z.."}")
+  print('')
+  
+  print('')
+  print('XYZ JSON table:')
   print(json.encode({x=x,y=y,z=z}))
+  
+  print('')
+  print('XYZH Lua table:')
   print("{x = "..x..", y = "..y..", z = "..z..", h = "..h.."}")
-  print(json.encode("{x = "..x..", y = "..y..", z = "..z..", h = "..h.."}"))
+  
+  print('')
+  print('XYZH JSON table:')
   print(json.encode({x=x,y=y,z=z,h=h}))
+  
+  print('')
+  print('XYZ GetCoords format:')
   print(x..", "..y..", "..z)
+  print('')
 end)
 
 RegisterServerEvent('fsn_commands:police:booted')
