@@ -222,6 +222,11 @@ RegisterNUICallback( "toggleWhitelist", function(data, cb)
 	togglePhone()
 end)
 
+RegisterNUICallback( "whitelistUser", function(data, cb)
+	exports["fsn_jobs"]:addToWhitelist(data.wl, data.charid, data.lvl)
+	togglePhone()
+end)
+
 RegisterNUICallback( "sendToServer", function(data, cb)
 	if data.tweet then
 		if dbug then print(':fsn_phones: new tweet: '..data.tweet) end

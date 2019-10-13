@@ -164,6 +164,18 @@ function viewMessages(pn) {
 	$('#insertMessages').html(msgHtml);
 }
 
+function WLUser(id) {
+	var usr = $('#charid-'+id).val()
+	var lvl = $('#lvl-'+id).val()
+	var wl = id+1 // always plus one for lua communication
+	console.log('whitelisting '+usr+' as '+lvl+' in '+datastore['whitelists'][id].title+' ('+id+')')
+	$.post('http://fsn_phones/whitelistUser', JSON.stringify({
+		'charid': usr,
+		'lvl': lvl,
+		'wl': wl
+	}));
+}
+
 $(function () {
 	window.addEventListener('message', function (event) {
 		if (event.data.type == 'notification') {
@@ -373,7 +385,7 @@ function processwhitelists() {
 				'<div style="width:92%;">'+
 					'<input type="text"></input><button>Deposit</button>'+
 					'<input type="text"></input><button>Withdraw</button>'+
-					'<input type="text" style="width:50%;"></input><input type="text" style="width:25%;"></input><button>Whitelist</button>'+
+					'<input id="charid-'+key+'" type="text" style="width:50%;" placeholder="CharID"></input><input type="text" id="lvl-'+key+'" style="width:25%;" placeholder="Lvl"></input><button onclick="WLUser('+key+')">Whitelist</button>'+
 				'</div>'+
 				'<p>Staff:</p>'+
 				'<table class="wl-table">'+
