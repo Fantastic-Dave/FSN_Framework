@@ -10,6 +10,13 @@ end)
 local loc = {x = -1164.76171875, y = -1586.4027099609, z = 4.3897089958191}
 
 Citizen.CreateThread(function()
+	local bleep = AddBlipForCoord(loc.x, loc.y, loc.z)
+	SetBlipSprite(bleep, 597)
+	SetBlipColour(bleep, 0)
+	SetBlipAsShortRange(bleep, true)
+	BeginTextCommandSetBlipName("STRING")
+	AddTextComponentString("Scuba Store")
+	EndTextCommandSetBlipName(bleep)
 	while true do Citizen.Wait(0)
 		if equipped then
 			SetPedMaxTimeUnderwater(GetPlayerPed(-1), 400.00)
