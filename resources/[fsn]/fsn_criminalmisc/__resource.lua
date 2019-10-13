@@ -40,6 +40,9 @@ server_script 'drugs/_streetselling/server.lua'
 client_script 'drugs/_weedprocess/client.lua'
 client_script 'drugs/_effects/client.lua'
 
+-- pawnstore
+client_script 'pawnstore/cl_pawnstore.lua'
+
 exports {
 	"GetWeapons",
 	"weaponInfo",
