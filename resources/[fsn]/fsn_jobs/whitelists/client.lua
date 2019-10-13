@@ -38,6 +38,20 @@ function inAnyWhitelist()
 	end
 end
 
+function addToWhitelist(wlid, charid, level)
+	if Whitelists[wlid].owner == exports["fsn_main"]:fsn_CharID() then
+		if level ~= '' then
+			TriggerServerEvent('fsn_jobs:whitelist:add', wlid, charid, level)
+			exports['mythic_notify']:DoCustomHudText('inform', 'Adding '..charid..' to '..Whitelists[wlid].title..' at '..level, 4000)
+		else
+			TriggerServerEvent('fsn_jobs:whitelist:remove', wlid, charid)
+			exports['mythic_notify']:DoCustomHudText('inform', 'Removing '..charid..' from '..Whitelists[wlid].title, 4000)
+		end
+	else
+		exports['mythic_notify']:DoCustomHudText('error', 'ERROR: WL owned by '..Whitelists[wlid].owner, 4000)
+	end
+end 
+
 ----------------------------------------------
 -- CLOCKIN SHIT
 ----------------------------------------------

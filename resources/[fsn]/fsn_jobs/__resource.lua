@@ -50,6 +50,7 @@ exports({
   'getWhitelistDetails',
   'inAnyWhitelist',
   'toggleWhitelistClock',
-  'isWhitelistClockedIn'
+  'isWhitelistClockedIn',
+  'addToWhitelist'
 })
 server_export 'isPlayerClockedInWhitelist'
