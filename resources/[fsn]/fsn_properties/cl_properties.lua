@@ -63,6 +63,12 @@ AddEventHandler('fsn_properties:access', function(id, p)
 		current_p_Owner = false
 		current_p_Keys = false
 	end
+	for k, v in pairs(current_p.keys) do
+		if v.id == exports["fsn_main"]:fsn_CharID() then
+			current_p_Owner = false
+			current_p_Keys = true
+		end
+	end
 	if keez then hasKeys = true else hasKeys = false end
 	if exports["fsn_police"]:fsn_getPDLevel() > 5 then isPoPoCMD = false else isPoPoCMD = false end
 	ToggleActionMenu()
