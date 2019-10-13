@@ -18,6 +18,7 @@ exports({
 client_script '_item_misc/binoculars.lua'
 client_script '_item_misc/dm_laundering.lua'
 client_script '_item_misc/burger_store.lua'
+client_script '_item_misc/cl_breather.lua'
 
 ---------------------------------------------------- new script stuff below
 	client_script 'cl_presets.lua'

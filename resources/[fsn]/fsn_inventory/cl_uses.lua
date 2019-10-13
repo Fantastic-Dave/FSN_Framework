@@ -5,6 +5,12 @@ itemUses = {
 			TriggerEvent('fsn_criminalmisc:houserobbery:try')
 		end,
 	},
+	["scuba"] = {
+		takeItem = true,
+		use = function(item)
+			TriggerEvent('fsn_inventory:rebreather:use')
+		end,
+	},
 	["id"] = {
 		takeItem = false,
 		use = function(item)

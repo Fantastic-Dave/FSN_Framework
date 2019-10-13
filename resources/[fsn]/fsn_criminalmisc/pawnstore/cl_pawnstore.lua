@@ -20,7 +20,7 @@ Citizen.CreateThread(function()
 				DrawMarker(25,loc.x, loc.y, loc.z - 0.95, 0, 0, 0, 0, 0, 0, 1.0, 1.0, 1.0, 255, 255, 255, 150, 0, 0, 2, 0, 0, 0, 0)
 				if GetDistanceBetweenCoords(loc.x, loc.y, loc.z, GetEntityCoords(GetPlayerPed(-1)), false) < 1 then
 					Util.DrawText3D(loc.x, loc.y, loc.z, '[E] Sell ~y~stolen items', {255,255,255,200}, 0.25)
-					if IsControlJustPressed(0,38) do
+					if IsControlJustPressed(0,38) then
 						for k,v in pairs(unique_items) do
 							if exports["fsn_inventory"]:fsn_HasItem(v.index) then
 								local amt = exports["fsn_inventory"]:fsn_GetItemAmount(v.index)
@@ -34,7 +34,7 @@ Citizen.CreateThread(function()
 			end
 		else
 			--print'not'
-			print(tyme[1])
+			--print(tyme[1])
 			if bleep ~= false and DoesBlipExist(bleep) then
 				RemoveBlip(bleep)
 				bleep = false

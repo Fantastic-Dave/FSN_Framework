@@ -27,13 +27,13 @@ Citizen.CreateThread(function()
 						
 						
 						TriggerEvent('fsn_inventory:items:add', {
-								index = 'crowbar',
-								name = 'Crowbar',
-								amt = 2,
-								data = {
-									weight = 3.0
-								},
-							})
+							index = 'crowbar',
+							name = 'Crowbar',
+							amt = 2,
+							data = {
+								weight = 3.0
+							},
+						})
 					else
 						--print 'still crafting'
 						--exports["fsn_progress"]:removeBar()
