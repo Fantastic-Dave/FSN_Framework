@@ -301,7 +301,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 						cur_weight = cur_weight + maff
 					end
 				end
-				if oldSlot.data and oldSlot.data.weight then
+				if oldSlot.data and oldSlot.data.weight and not exports["fsn_police"]:fsn_PDDuty() then
 					local new_maff = oldSlot.data.weight * oldSlot.amt
 					local newer_maff = cur_weight + new_maff
 					if newer_maff > secondInventory_limits[secondInventory_type] then
@@ -324,7 +324,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 						cur_weight = cur_weight + maff
 					end
 				end
-				if oldSlot.data and oldSlot.data.weight then
+				if oldSlot.data and oldSlot.data.weight and not exports["fsn_police"]:fsn_PDDuty() then
 					local new_maff = oldSlot.data.weight * data.amt
 					local newer_maff = cur_weight + new_maff
 					if newer_maff > secondInventory_limits[secondInventory_type] then
@@ -350,26 +350,6 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 				end
 			end
 		else
-			--[[ idk why this is here
-			if secondInventory_limits[secondInventory_type] then
-				-- check if it can carry
-				local cur_weight = 0
-				for k, v in pairs(secondInventory) do
-					if v.index ~= false and v.data and v.data.weight then
-						local maff = v.data.weight * v.amt
-						cur_weight = cur_weight + maff
-					end
-				end
-				if oldSlot.data and oldSlot.data.weight then
-					local new_maff = oldSlot.data.weight * oldSlot.amt
-					local newer_maff = cur_weight + new_maff
-					if newer_maff > secondInventory_limits[secondInventory_type] then
-						invLog('<span style="color:red">This inventory cannot hold more than: '..secondInventory_limits[secondInventory_type]..'</span>')
-						return
-					end
-				end
-			end
-			]]--
 			if secondInventory[data.toSlot].index then
 				if secondInventory[data.toSlot].index ~= oldSlot.index then
 					invLog('<span style="color:red">This slot is occupied</span>')
