@@ -292,11 +292,47 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 				if not fsn_CanCarry(oldSlot.index, oldSlot.amt) then
 					invLog('<span style="color:red">You cannot carry this!</span>')
 					return
-				end	
+				end
+				
+				local cur_weight = 0
+				for k, v in pairs(firstInventory) do
+					if v.index ~= false and v.data and v.data.weight then
+						local maff = v.data.weight * v.amt
+						cur_weight = cur_weight + maff
+					end
+				end
+				if oldSlot.data and oldSlot.data.weight then
+					local new_maff = oldSlot.data.weight * oldSlot.amt
+					local newer_maff = cur_weight + new_maff
+					if newer_maff > secondInventory_limits[secondInventory_type] then
+						invLog('<span style="color:red">This inventory cannot hold more than: 30</span>')
+						return
+					else
+						invLog('Old weight: '..cur_weight..' | New weight: '..newer_maff..' | Added: '..new_maff..' ('..oldSlot.data.weight..' * '..data.amt..')')
+					end
+				end
 			else	
 				if not fsn_CanCarry(oldSlot.index, data.amt) then
 					invLog('<span style="color:red">You cannot carry this!</span>')
 					return
+				end
+				
+				local cur_weight = 0
+				for k, v in pairs(firstInventory) do
+					if v.index ~= false and v.data and v.data.weight then
+						local maff = v.data.weight * v.amt
+						cur_weight = cur_weight + maff
+					end
+				end
+				if oldSlot.data and oldSlot.data.weight then
+					local new_maff = oldSlot.data.weight * data.amt
+					local newer_maff = cur_weight + new_maff
+					if newer_maff > secondInventory_limits[secondInventory_type] then
+						invLog('<span style="color:red">This inventory cannot hold more than: 30</span>')
+						return
+					else
+						invLog('Old weight: '..cur_weight..' | New weight: '..newer_maff..' | Added: '..new_maff..' ('..oldSlot.data.weight..' * '..data.amt..')')
+					end
 				end
 			end
 			if firstInventory[data.toSlot].index then
