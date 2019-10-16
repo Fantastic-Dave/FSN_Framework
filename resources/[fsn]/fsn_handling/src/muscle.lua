@@ -446,7 +446,7 @@ return {
 		HandlingName = "DOMINATOR3",
 		-- Physical
 		Mass               = 1670,
-		InitialDragCoeff   = 1.5,
+		InitialDragCoeff   = 2.9,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0, -0.15 },
 		InertiaMultiplier  = { 1, 1,    1.6 },
@@ -600,26 +600,26 @@ return {
 		InertiaMultiplier  = { 1, 1,    1.6 },
 
 		-- Transmission
-		DriveBiasFront                 = 0.0,
+		DriveBiasFront                 = 0.49,
 		InitialDriveGears              = 5,
-		InitialDriveForce              = 0.375,
+		InitialDriveForce              = 0.290,
 		DriveInertia                   = 1.0,
 		ClutchChangeRateScaleUpShift   = 1.5,
 		ClutchChangeRateScaleDownShift = 1.5,
 		InitialDriveMaxFlatVel         = 183,
-		SteeringLock                   = 35.0,
+		SteeringLock                   = 24.0,
 
 		-- Brake
 		BrakeForce     = 0.5,
-		BrakeBiasFront = 0.5,
+		BrakeBiasFront = 0.55,
 		HandBrakeForce = 0.72,
 
 		-- Traction
-		TractionCurveMax         = 1.905,
-		TractionCurveMin         = 1.805,
+		TractionCurveMax         = 1.996,
+		TractionCurveMin         = 1.894,
 		TractionCurveLateral	 = 22.5,
 		TractionSpringDeltaMax   = 0.15,
-		LowSpeedTractionLossMult = 0.7,
+		LowSpeedTractionLossMult = 1.33,
 		CamberStiffnesss		 = 0.0,
 		TractionBiasFront        = 0.5,
 		TractionLossMult         = 1.3,
@@ -638,7 +638,7 @@ return {
 		RollCentreHeightRear  = 0.1,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.8,
 		EngineDamageMult			= 1.5,
@@ -975,24 +975,24 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.0,
 		InitialDriveGears              = 5,
-		InitialDriveForce              = 0.29,
+		InitialDriveForce              = 0.305,
 		DriveInertia                   = 1.0,
 		ClutchChangeRateScaleUpShift   = 1.9,
 		ClutchChangeRateScaleDownShift = 2.0,
-		InitialDriveMaxFlatVel         = 160,
+		InitialDriveMaxFlatVel         = 155,
 		SteeringLock                   = 34.2,
 
 		-- Brake
-		BrakeForce     = 0.67,
+		BrakeForce     = 0.59,
 		BrakeBiasFront = 0.62,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
 		TractionCurveMax         = 1.98,
 		TractionCurveMin         = 1.89,
 		TractionCurveLateral	 = 16.6,
 		TractionSpringDeltaMax   = 0.13,
-		LowSpeedTractionLossMult = 1.1,
+		LowSpeedTractionLossMult = 1.0,
 		CamberStiffnesss		 = 0.0,
 		TractionBiasFront        = 0.4809,
 		TractionLossMult         = 1.2,

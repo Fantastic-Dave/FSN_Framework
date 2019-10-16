@@ -86,9 +86,9 @@ return {
 		InertiaMultiplier  = { 1.16, 1,    1.46 },
 
 		-- Transmission
-		DriveBiasFront                 = 1,
-		InitialDriveGears              = 5,
-		InitialDriveForce              = 0.231,
+		DriveBiasFront                 = 0.99,
+		InitialDriveGears              = 7,
+		InitialDriveForce              = 0.259,
 		DriveInertia                   = 1,
 		ClutchChangeRateScaleUpShift   = 1.6,
 		ClutchChangeRateScaleDownShift = 1.6,
@@ -105,10 +105,10 @@ return {
 		TractionCurveMin         = 1.84,
 		TractionCurveLateral	 = 16.8,
 		TractionSpringDeltaMax   = 0.131,
-		LowSpeedTractionLossMult = 0.96,
+		LowSpeedTractionLossMult = 0.0,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4778,
-		TractionLossMult         = 1.24,
+		TractionLossMult         = 0.0,
 		
 		-- Suspension
 		SuspensionForce       = 2.75,

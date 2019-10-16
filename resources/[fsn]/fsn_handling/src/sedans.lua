@@ -1419,24 +1419,24 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.187,
+		InitialDriveForce              = 0.265,
 		DriveInertia                   = 0.98,
 		ClutchChangeRateScaleUpShift   = 1.7,
 		ClutchChangeRateScaleDownShift = 1.9,
 		InitialDriveMaxFlatVel         = 160,
-		SteeringLock                   = 33.8,
+		SteeringLock                   = 19.8,
 
 		-- Brake
-		BrakeForce     = 0.525,
+		BrakeForce     = 0.415,
 		BrakeBiasFront = 0.50873,
-		HandBrakeForce = 0.7,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 2.19,
-		TractionCurveMin         = 1.99,
+		TractionCurveMax         = 2.008,
+		TractionCurveMin         = 1.82,
 		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.133,
-		LowSpeedTractionLossMult = 1.19,
+		LowSpeedTractionLossMult = 0.19,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4821,
 		TractionLossMult         = 1.29,
@@ -1455,7 +1455,7 @@ return {
 		RollCentreHeightRear  = 0.334,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.5,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,

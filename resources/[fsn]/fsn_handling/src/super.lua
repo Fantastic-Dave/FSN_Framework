@@ -838,24 +838,24 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.155,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.4,
+		InitialDriveForce              = 0.470,
 		DriveInertia                   = 0.94,
 		ClutchChangeRateScaleUpShift   = 9.2,
 		ClutchChangeRateScaleDownShift = 8.0,
-		InitialDriveMaxFlatVel         = 217,
+		InitialDriveMaxFlatVel         = 215,
 		SteeringLock                   = 33.1,
 
 		-- Brake
-		BrakeForce     = 0.574,
+		BrakeForce     = 0.5,
 		BrakeBiasFront = 0.45898,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
 		TractionCurveMax         = 2.18,
 		TractionCurveMin         = 1.98,
 		TractionCurveLateral	 = 16.6,
 		TractionSpringDeltaMax   = 0.125,
-		LowSpeedTractionLossMult = 1.1,
+		LowSpeedTractionLossMult = 1.45,
 		CamberStiffnesss		 = 0.0,
 		TractionBiasFront        = 0.4841,
 		TractionLossMult         = 1.36,
@@ -874,7 +874,7 @@ return {
 		RollCentreHeightRear  = 0.1888,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,
@@ -911,29 +911,29 @@ return {
 		InertiaMultiplier  = { 1.17, 0.99,    1.47 },
 
 		-- Transmission
-		DriveBiasFront                 = 0.0,
-		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.431,
-		DriveInertia                   = 0.95,
-		ClutchChangeRateScaleUpShift   = 7.5,
-		ClutchChangeRateScaleDownShift = 6.0,
-		InitialDriveMaxFlatVel         = 210,
-		SteeringLock                   = 33.2,
+        DriveBiasFront                 = 0.1,
+        InitialDriveGears              = 6,
+        InitialDriveForce              = 0.38,
+        DriveInertia                   = 1.00,
+        ClutchChangeRateScaleUpShift   = 7.5,
+        ClutchChangeRateScaleDownShift = 6.0,
+        InitialDriveMaxFlatVel         = 225,
+        SteeringLock                   = 33.2,
 
-		-- Brake
-		BrakeForce     = 0.338,
-		BrakeBiasFront = 0.38458,
-		HandBrakeForce = 0.6,
+        -- Brake
+        BrakeForce     = 1.97,
+        BrakeBiasFront = 0.4,
+        HandBrakeForce = 1.4,
 
-		-- Traction
-		TractionCurveMax         = 1.47,
-		TractionCurveMin         = 1.192,
-		TractionCurveLateral	 = 16.5,
-		TractionSpringDeltaMax   = 0.139,
-		LowSpeedTractionLossMult = 0.19,
-		CamberStiffnesss		 = 0.0,
-		TractionBiasFront        = 0.4791,
-		TractionLossMult         = 1.32,
+        -- Traction
+        TractionCurveMax         = 2.4,
+        TractionCurveMin         = 2.2,
+        TractionCurveLateral     = 16.5,
+        TractionSpringDeltaMax   = 0.139,
+        LowSpeedTractionLossMult = 0.19,
+        CamberStiffnesss         = 0.0,
+        TractionBiasFront        = 0.4791,
+        TractionLossMult         = 1.32,
 
 		-- Suspension
 		SuspensionForce       = 3.03,
@@ -949,7 +949,7 @@ return {
 		RollCentreHeightRear  = 0.496,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,
@@ -1055,50 +1055,50 @@ return {
 	CHandlingData {
 		HandlingName = "SULTANRS",
 		-- Physical
-		Mass               = 1400,
-		InitialDragCoeff   = 2.45,
-		DownforceModifier  = 1.35,
-		PercentSubmerged   = 76,
-		CentreOfMassOffset = { 0,    -0.071, 0.01 },
-		InertiaMultiplier  = { 1.12, 1,    1.55 },
+		Mass               = 1550,
+		InitialDragCoeff   = 2.05,
+		DownforceModifier  = 1.28,
+		PercentSubmerged   = 80,
+		CentreOfMassOffset = { 0,    0.136, -0.023 },
+		InertiaMultiplier  = { 0.99, 1.03,    1.74 },
 
 		-- Transmission
-		DriveBiasFront                 = 0.215,
+		DriveBiasFront                 = 0.155,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.361,
-		DriveInertia                   = 1.01,
-		ClutchChangeRateScaleUpShift   = 2.0,
-		ClutchChangeRateScaleDownShift = 2.0,
-		InitialDriveMaxFlatVel         = 198,
-		SteeringLock                   = 34.3,
+		InitialDriveForce              = 0.42,
+		DriveInertia                   = 0.8,
+		ClutchChangeRateScaleUpShift   = 1.8,
+		ClutchChangeRateScaleDownShift = 2.4,
+		InitialDriveMaxFlatVel         = 195,
+		SteeringLock                   = 35.2,
 
 		-- Brake
-		BrakeForce     = 0.587,
-		BrakeBiasFront = 0.45609,
-		HandBrakeForce = 0.67,
+		BrakeForce     = 0.766,
+		BrakeBiasFront = 0.5573,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 2.5,
-		TractionCurveMin         = 2.0,
-		TractionCurveLateral	 = 22.5,
-		TractionSpringDeltaMax   = 0.15,
-		LowSpeedTractionLossMult = 1.0,
-		CamberStiffnesss		 = 0.0,
-		TractionBiasFront        = 0.4873,
-		TractionLossMult         = 1.04,
+		TractionCurveMax         = 2.3,
+		TractionCurveMin         = 2.1,
+		TractionCurveLateral	 = 14.4,
+		TractionSpringDeltaMax   = 0.1,
+		LowSpeedTractionLossMult = 1.01,
+		CamberStiffnesss		 = 0,
+		TractionBiasFront        = 0.4789,
+		TractionLossMult         = 1.0,
 
 		-- Suspension
-		SuspensionForce       = 2.98,
-		SuspensionCompDamp    = 1.42,
-		SuspensionReboundDamp = 0.63,
-		SuspensionUpperLimit  = 0.093,
-		SuspensionLowerLimit  = -0.121,
-		SuspensionRaise		  = 0.026,
-		SuspensionBiasFront   = 0.515,
-		AntiRollBarForce	  = 0.0,
-		AntiRollBarBiasFront  = 0.25,
-		RollCentreHeightFront = 0.249,
-		RollCentreHeightRear  = 0.247,
+		SuspensionForce       = 1.82,
+		SuspensionCompDamp    = 1.5,
+		SuspensionReboundDamp = 0.4,
+		SuspensionUpperLimit  = 0.157,
+		SuspensionLowerLimit  = -0.165,
+		SuspensionRaise		  = 0.0,
+		SuspensionBiasFront   = 0.557,
+		AntiRollBarForce	  = 1,
+		AntiRollBarBiasFront  = 0.53,
+		RollCentreHeightFront = 0.24,
+		RollCentreHeightRear  = 0.25,
 
 		-- Damage
 		CollisionDamageMult         = 1.0,
@@ -1110,14 +1110,14 @@ return {
 
 		-- Misc
 		SeatOffsetDistX = 0.0,
-		SeatOffsetDistY = -0.275,
+		SeatOffsetDistY = 0.0,
 		SeatOffsetDistZ = 0.05,
-		MonetaryValue   = 115000,
-		ModelFlags		= '440000',
+		MonetaryValue   = 35000,
+		ModelFlags		= '440010',
 		HandlingFlags   = "0",
 		DamageFlags		= "0",
 		AIHandling		= "AVERAGE",
-
+		
 		SubHandling = {
 			CCarHandlingData {
 				BackEndPopUpCarImpulseMult      = 0.05,
@@ -1497,7 +1497,7 @@ return {
 		HandlingName = "VOLTIC",
 		-- Physical
 		Mass               = 1250,
-		InitialDragCoeff   = 3.1,
+		InitialDragCoeff   = 7.1,
 		DownforceModifier  = 1.46,
 		PercentSubmerged   = 70,
 		CentreOfMassOffset = { 0,    -0.121, 0.01 },
@@ -1506,15 +1506,15 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.0,
 		InitialDriveGears              = 1,
-		InitialDriveForce              = 0.982,
+		InitialDriveForce              = 0.61,
 		DriveInertia                   = 1.0,
 		ClutchChangeRateScaleUpShift   = 2.3,
 		ClutchChangeRateScaleDownShift = 1.3,
-		InitialDriveMaxFlatVel         = 182,
+		InitialDriveMaxFlatVel         = 150,
 		SteeringLock                   = 33.6,
 
 		-- Brake
-		BrakeForce     = 0.621,
+		BrakeForce     = 0.721,
 		BrakeBiasFront = 0.48885,
 		HandBrakeForce = 0.8,
 

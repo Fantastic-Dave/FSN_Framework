@@ -517,7 +517,7 @@ return {
 		HandlingName = "JB700",
 		-- Physical
 		Mass               = 1600,
-		InitialDragCoeff   = 2.0,
+		InitialDragCoeff   = 3.6,
 		DownforceModifier  = 1.22,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0.155, -0.015 },
@@ -526,7 +526,7 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 5,
-		InitialDriveForce              = 0.26,
+		InitialDriveForce              = 0.28,
 		DriveInertia                   = 0.8,
 		ClutchChangeRateScaleUpShift   = 1.6,
 		ClutchChangeRateScaleDownShift = 2.2,
@@ -536,14 +536,14 @@ return {
 		-- Brake
 		BrakeForce     = 0.58,
 		BrakeBiasFront = 0.5677,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
 		TractionCurveMax         = 1.92,
 		TractionCurveMin         = 1.8,
 		TractionCurveLateral	 = 14.3,
 		TractionSpringDeltaMax   = 0.09,
-		LowSpeedTractionLossMult = 1.01,
+		LowSpeedTractionLossMult = 1.0,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4728,
 		TractionLossMult         = 1.2,
@@ -556,13 +556,13 @@ return {
 		SuspensionLowerLimit  = -0.15,
 		SuspensionRaise		  = 0,
 		SuspensionBiasFront   = 0.521,
-		AntiRollBarForce	  = 0,
+		AntiRollBarForce	  = 1.0,
 		AntiRollBarBiasFront  = 0.52,
 		RollCentreHeightFront = 0.38,
 		RollCentreHeightRear  = 0.4,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,
