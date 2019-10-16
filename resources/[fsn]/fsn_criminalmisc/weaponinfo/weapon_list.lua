@@ -130,7 +130,7 @@ hashGunToText = {
  
  
 ------------------------------------
-['171789620'] = {name = "Combat PDW", isweapon = true, ammoType = '9mm', isAuto = false},
+['171789620'] = {name = "Combat PDW", isweapon = false, ammoType = '9mm', isAuto = false},
  
  
 ------------------------------------
