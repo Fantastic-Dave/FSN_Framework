@@ -310,33 +310,7 @@ Citizen.CreateThread(function()
 end)
 
 function NextWeatherStage()
-    if CurrentWeather == "CLEAR" or CurrentWeather == "CLOUDS" or CurrentWeather == "EXTRASUNNY"  then
-        local new = math.random(1,2)
-        if new == 1 then
-            CurrentWeather = "CLEARING"
-        else
-            CurrentWeather = "OVERCAST"
-        end
-    elseif CurrentWeather == "CLEARING" or CurrentWeather == "OVERCAST" then
-        local new = math.random(1,23)
-        if new == 1 then
-            if CurrentWeather == "CLEARING" then CurrentWeather = "FOGGY" else CurrentWeather = "RAIN" end
-        elseif new == 2 then
-            CurrentWeather = "CLOUDS"
-        elseif new == 3 then
-            CurrentWeather = "CLEAR"
-        elseif new == 4 then
-            CurrentWeather = "EXTRASUNNY"
-        elseif new == 5 then
-            CurrentWeather = "SMOG"
-        else
-            CurrentWeather = "FOGGY"
-        end
-    elseif CurrentWeather == "THUNDER" or CurrentWeather == "RAIN" then
-        CurrentWeather = "CLEARING"
-    elseif CurrentWeather == "SMOG" or CurrentWeather == "FOGGY" then
-        CurrentWeather = "CLEAR"
-    end
+    CurrentWeather = 'EXTRASUNNY'
     TriggerEvent("fsn_timeandweather:requestSync")
     if debugprint then
         print(":fsn_timeandweather: New random weather type has been generated: " .. CurrentWeather .. ".\n")
