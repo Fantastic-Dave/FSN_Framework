@@ -304,7 +304,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 				if oldSlot.data and oldSlot.data.weight and not exports["fsn_police"]:fsn_PDDuty() then
 					local new_maff = oldSlot.data.weight * oldSlot.amt
 					local newer_maff = cur_weight + new_maff
-					if newer_maff > secondInventory_limits[secondInventory_type] then
+					if newer_maff > max_weight then
 						invLog('<span style="color:red">This inventory cannot hold more than: 30</span>')
 						return
 					else
@@ -327,7 +327,7 @@ RegisterNUICallback( "dragToSlot", function(data, cb)
 				if oldSlot.data and oldSlot.data.weight and not exports["fsn_police"]:fsn_PDDuty() then
 					local new_maff = oldSlot.data.weight * data.amt
 					local newer_maff = cur_weight + new_maff
-					if newer_maff > secondInventory_limits[secondInventory_type] then
+					if newer_maff > max_weight then
 						invLog('<span style="color:red">This inventory cannot hold more than: 30</span>')
 						return
 					else
