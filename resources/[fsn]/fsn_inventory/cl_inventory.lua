@@ -724,7 +724,7 @@ AddEventHandler('fsn_inventory:item:add', function(item, amount)
 end)
 
 RegisterNetEvent('fsn_inventory:items:emptyinv')
-AddEventHandleer('fsn_inventory:items:emptyinv', function()
+AddEventHandler('fsn_inventory:items:emptyinv', function()
 	firstInventory = {{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},{index=false},}	
 end)
 
