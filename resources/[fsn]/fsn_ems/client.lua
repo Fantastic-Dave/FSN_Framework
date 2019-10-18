@@ -140,7 +140,8 @@ function fsn_Airlift()
     canRespawn = false
     DoScreenFadeOut(200)
     TriggerEvent('fsn_bank:change:bankandwallet', 0, false)
-    TriggerEvent('fsn_inventory:empty')
+    TriggerEvent('fsn_inventory:items:emptyinv')
+		
     local hospital = {
       {x = 337.21597290039, y = -1396.1442871094, z = 32.5090675354},
       {x = 355.52011108398, y = -598.32464599609, z = 28.774812698364},
