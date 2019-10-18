@@ -112,7 +112,7 @@ local vehicles = {
 		{name = "Osiris", costs = 7000000, description = {}, model = "osiris"},
 		{name = "Pariah", costs = 750000, description = {}, model = "pariah"},
 		{name = "Pfister 811", costs = 750000, description = {}, model = "pfister811"},
-		{name = "Reaper", costs = 600000, description = {}, model = "reaper"},
+		{name = "Reaper", costs = 1100000, description = {}, model = "reaper"},
 		{name = "SC1", costs = 2500000, description = {}, model = "sc1"},
 		{name = "Sultan RS", costs = 325000, description = {}, model = "sultanrs"},
 		{name = "T20", costs = 6700000, description = {}, model = "t20"},
