@@ -264,7 +264,7 @@ AddEventHandler('fsn_jewellerystore:case:startrob', function(caseid)
 		y = pos.y,
 		z = pos.z
 	}
-	TriggerServerEvent('fsn_police:dispatch', coords, 12)
+	TriggerServerEvent('fsn_police:dispatch', coords, 7)
 		
 	local anims = {'smash_case', 'smash_case_b', 'smash_case_c', 'smash_case_d'}
 	RequestAnimDict('missheist_jewel')
