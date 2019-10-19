@@ -1424,16 +1424,16 @@ return {
 		ClutchChangeRateScaleUpShift   = 1.7,
 		ClutchChangeRateScaleDownShift = 1.9,
 		InitialDriveMaxFlatVel         = 160,
-		SteeringLock                   = 19.8,
+		SteeringLock                   = 23.8,
 
 		-- Brake
-		BrakeForce     = 0.415,
+		BrakeForce     = 0.515,
 		BrakeBiasFront = 0.50873,
 		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 2.008,
-		TractionCurveMin         = 1.82,
+		TractionCurveMax         = 2.2,
+		TractionCurveMin         = 1.95,
 		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.133,
 		LowSpeedTractionLossMult = 0.19,
@@ -1455,7 +1455,7 @@ return {
 		RollCentreHeightRear  = 0.334,
 
 		-- Damage
-		CollisionDamageMult         = 0.5,
+		CollisionDamageMult         = 0.35,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,
@@ -1782,7 +1782,7 @@ return {
 		HandlingName = "WASHINGTON",
 		-- Physical
 		Mass               = 2000,
-		InitialDragCoeff   = 2.76,
+		InitialDragCoeff   = 2.66,
 		DownforceModifier  = 1.19,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    0.01, 0.02 },
@@ -1791,27 +1791,27 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.0,
 		InitialDriveGears              = 4,
-		InitialDriveForce              = 0.2569,
+		InitialDriveForce              = 0.2769,
 		DriveInertia                   = 0.99,
 		ClutchChangeRateScaleUpShift   = 1.4,
 		ClutchChangeRateScaleDownShift = 1.7,
-		InitialDriveMaxFlatVel         = 145,
+		InitialDriveMaxFlatVel         = 155,
 		SteeringLock                   = 34.2,
 
 		-- Brake
-		BrakeForce     = 0.501,
+		BrakeForce     = 0.610,
 		BrakeBiasFront = 0.4974,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 2.13,
-		TractionCurveMin         = 1.98,
+		TractionCurveMax         = 2.23,
+		TractionCurveMin         = 2.06,
 		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.131,
-		LowSpeedTractionLossMult = 1.21,
+		LowSpeedTractionLossMult = 0.0,
 		CamberStiffnesss		 = 0,
-		TractionBiasFront        = 0.4821,
-		TractionLossMult         = 1.25,
+		TractionBiasFront        = 0.4921,
+		TractionLossMult         = 0,
 
 		-- Suspension
 		SuspensionForce       = 1.91,
@@ -1827,7 +1827,7 @@ return {
 		RollCentreHeightRear  = 0.316,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,

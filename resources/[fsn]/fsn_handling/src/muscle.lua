@@ -594,7 +594,7 @@ return {
 		HandlingName = "ELLIE",
 		-- Physical
 		Mass               = 1370,
-		InitialDragCoeff   = 2.15,
+		InitialDragCoeff   = 3.10,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0.1, -0.25 },
 		InertiaMultiplier  = { 1, 1,    1.6 },
@@ -602,24 +602,24 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.49,
 		InitialDriveGears              = 5,
-		InitialDriveForce              = 0.290,
+		InitialDriveForce              = 0.296,
 		DriveInertia                   = 1.0,
 		ClutchChangeRateScaleUpShift   = 1.5,
 		ClutchChangeRateScaleDownShift = 1.5,
 		InitialDriveMaxFlatVel         = 183,
-		SteeringLock                   = 24.0,
+		SteeringLock                   = 29.3,
 
 		-- Brake
-		BrakeForce     = 0.5,
+		BrakeForce     = 0.780,
 		BrakeBiasFront = 0.55,
-		HandBrakeForce = 0.72,
+		HandBrakeForce = 1.00,
 
 		-- Traction
-		TractionCurveMax         = 1.996,
-		TractionCurveMin         = 1.894,
+		TractionCurveMax         = 2.002,
+		TractionCurveMin         = 1.901,
 		TractionCurveLateral	 = 22.5,
 		TractionSpringDeltaMax   = 0.15,
-		LowSpeedTractionLossMult = 1.33,
+		LowSpeedTractionLossMult = 1.63,
 		CamberStiffnesss		 = 0.0,
 		TractionBiasFront        = 0.5,
 		TractionLossMult         = 1.3,

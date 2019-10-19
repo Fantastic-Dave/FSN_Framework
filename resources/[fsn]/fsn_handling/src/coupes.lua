@@ -452,7 +452,7 @@ return {
 		HandlingName = "ORACLE",
 		-- Physical
 		Mass               = 1900,
-		InitialDragCoeff   = 2.74,
+		InitialDragCoeff   = 2.84,
 		DownforceModifier  = 1.28,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.105, 0.02 },
@@ -461,11 +461,11 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.255,
+		InitialDriveForce              = 0.285,
 		DriveInertia                   = 1,
 		ClutchChangeRateScaleUpShift   = 1.7,
 		ClutchChangeRateScaleDownShift = 1.8,
-		InitialDriveMaxFlatVel         = 155,
+		InitialDriveMaxFlatVel         = 140,
 		SteeringLock                   = 38,
 
 		-- Brake
@@ -527,7 +527,7 @@ return {
 		HandlingName = "ORACLE2",
 		-- Physical
 		Mass               = 1950,
-		InitialDragCoeff   = 2.76,
+		InitialDragCoeff   = 3.40,
 		DownforceModifier  = 1.35,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.18, 0.02 },
@@ -536,21 +536,21 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.280,
+		InitialDriveForce              = 0.315,
 		DriveInertia                   = 1.01,
 		ClutchChangeRateScaleUpShift   = 1.8,
 		ClutchChangeRateScaleDownShift = 1.9,
-		InitialDriveMaxFlatVel         = 167,
+		InitialDriveMaxFlatVel         = 160,
 		SteeringLock                   = 34.2,
 
 		-- Brake
-		BrakeForce     = 0.580,
+		BrakeForce     = 0.630,
 		BrakeBiasFront = 0.468,
 		HandBrakeForce = 0.8,
 
 		-- Traction
-		TractionCurveMax         = 1.9,
-		TractionCurveMin         = 1.922,
+		TractionCurveMax         = 2.1,
+		TractionCurveMin         = 1.988,
 		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.132,
 		LowSpeedTractionLossMult = 0.0,

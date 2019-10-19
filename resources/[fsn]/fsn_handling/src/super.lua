@@ -904,7 +904,7 @@ return {
 		HandlingName = "REAPER",
 		-- Physical
 		Mass               = 1550,
-		InitialDragCoeff   = 1.76,
+		InitialDragCoeff   = 2.46,
 		DownforceModifier  = 1.62,
 		PercentSubmerged   = 76,
 		CentreOfMassOffset = { 0,    -0.09, 0.0 },
@@ -913,15 +913,15 @@ return {
 		-- Transmission
         DriveBiasFront                 = 0.1,
         InitialDriveGears              = 6,
-        InitialDriveForce              = 0.38,
+        InitialDriveForce              = 0.437,
         DriveInertia                   = 1.00,
         ClutchChangeRateScaleUpShift   = 7.5,
         ClutchChangeRateScaleDownShift = 6.0,
         InitialDriveMaxFlatVel         = 225,
-        SteeringLock                   = 33.2,
+        SteeringLock                   = 37.2,
 
         -- Brake
-        BrakeForce     = 1.97,
+        BrakeForce     = 2.52,
         BrakeBiasFront = 0.4,
         HandBrakeForce = 1.4,
 
@@ -1101,7 +1101,7 @@ return {
 		RollCentreHeightRear  = 0.25,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,
@@ -1431,27 +1431,27 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.175,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.3401,
+		InitialDriveForce              = 0.341,
 		DriveInertia                   = 0.96,
 		ClutchChangeRateScaleUpShift   = 2.1,
 		ClutchChangeRateScaleDownShift = 2.5,
 		InitialDriveMaxFlatVel         = 211,
-		SteeringLock                   = 32.3,
+		SteeringLock                   = 34.3,
 
 		-- Brake
-		BrakeForce     = 0.3201,
+		BrakeForce     = 0.88,
 		BrakeBiasFront = 0.43438,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 1.45,
-		TractionCurveMin         = 1.18,
+		TractionCurveMax         = 2.06,
+		TractionCurveMin         = 1.68,
 		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.128,
 		LowSpeedTractionLossMult = 0.19,
 		CamberStiffnesss		 = 0.0,
 		TractionBiasFront        = 0.4836,
-		TractionLossMult         = 1.35,
+		TractionLossMult         = 1.10,
 
 		-- Suspension
 		SuspensionForce       = 3.15,
@@ -1467,7 +1467,7 @@ return {
 		RollCentreHeightRear  = 0.384,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,
@@ -1497,7 +1497,7 @@ return {
 		HandlingName = "VOLTIC",
 		-- Physical
 		Mass               = 1250,
-		InitialDragCoeff   = 7.1,
+		InitialDragCoeff   = 8.8,
 		DownforceModifier  = 1.46,
 		PercentSubmerged   = 70,
 		CentreOfMassOffset = { 0,    -0.121, 0.01 },
@@ -1506,7 +1506,7 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.0,
 		InitialDriveGears              = 1,
-		InitialDriveForce              = 0.61,
+		InitialDriveForce              = 0.490,
 		DriveInertia                   = 1.0,
 		ClutchChangeRateScaleUpShift   = 2.3,
 		ClutchChangeRateScaleDownShift = 1.3,
@@ -1514,7 +1514,7 @@ return {
 		SteeringLock                   = 33.6,
 
 		-- Brake
-		BrakeForce     = 0.721,
+		BrakeForce     = 1.221,
 		BrakeBiasFront = 0.48885,
 		HandBrakeForce = 0.8,
 
@@ -1523,7 +1523,7 @@ return {
 		TractionCurveMin         = 2.071,
 		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.128,
-		LowSpeedTractionLossMult = 1.23,
+		LowSpeedTractionLossMult = 0.23,
 		CamberStiffnesss		 = 0.0,
 		TractionBiasFront        = 0.4872,
 		TractionLossMult         = 1.28,

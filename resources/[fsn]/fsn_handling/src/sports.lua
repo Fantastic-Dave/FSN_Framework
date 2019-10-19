@@ -452,7 +452,7 @@ return {
 		HandlingName = "COMET3",
 		-- Physical
 		Mass               = 1200,
-		InitialDragCoeff   = 2.21,
+		InitialDragCoeff   = 2.18,
 		DownforceModifier  = 1.61,
 		PercentSubmerged   = 72,
 		CentreOfMassOffset = { 0,    -0.13, 0.025 },
@@ -466,19 +466,19 @@ return {
 		ClutchChangeRateScaleUpShift   = 2.2,
 		ClutchChangeRateScaleDownShift = 2.35,
 		InitialDriveMaxFlatVel         = 152,
-		SteeringLock                   = 32.7,
+		SteeringLock                   = 33.7,
 
 		-- Brake
-		BrakeForce     = 0.526,
+		BrakeForce     = 0.826,
 		BrakeBiasFront = 0.406,
 		HandBrakeForce = 0.85,
 
 		-- Traction
-		TractionCurveMax         = 2.01,
-		TractionCurveMin         = 1.914,
+		TractionCurveMax         = 2.20,
+		TractionCurveMin         = 1.987,
 		TractionCurveLateral	 = 16.55,
 		TractionSpringDeltaMax   = 0.136,
-		LowSpeedTractionLossMult = 1.145,
+		LowSpeedTractionLossMult = 0.8,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.48345,
 		TractionLossMult         = 1.19,
@@ -497,7 +497,7 @@ return {
 		RollCentreHeightRear  = 0.266,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,
@@ -752,7 +752,7 @@ return {
 		HandlingName = "ELEGY",
 		-- Physical
 		Mass               = 1550,
-		InitialDragCoeff   = 2.25,
+		InitialDragCoeff   = 2.09,
 		DownforceModifier  = 1.43,
 		PercentSubmerged   = 72,
 		CentreOfMassOffset = { 0,    -0.095, 0.038 },
@@ -761,21 +761,21 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.468,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.303,
+		InitialDriveForce              = 0.333,
 		DriveInertia                   = 1.04,
 		ClutchChangeRateScaleUpShift   = 1.9,
 		ClutchChangeRateScaleDownShift = 2.0,
-		InitialDriveMaxFlatVel         = 156,
+		InitialDriveMaxFlatVel         = 185,
 		SteeringLock                   = 35.2,
 
 		-- Brake
-		BrakeForce     = 0.523,
+		BrakeForce     = 0.780,
 		BrakeBiasFront = 0.478,
-		HandBrakeForce = 0.85,
+		HandBrakeForce = 1.05,
 
 		-- Traction
-		TractionCurveMax         = 1.98,
-		TractionCurveMin         = 1.895,
+		TractionCurveMax         = 2.51,
+		TractionCurveMin         = 1.802,
 		TractionCurveLateral	 = 17.0,
 		TractionSpringDeltaMax   = 0.141,
 		LowSpeedTractionLossMult = 1.01,
@@ -797,7 +797,7 @@ return {
 		RollCentreHeightRear  = 0.253,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.8,
 		EngineDamageMult			= 1.5,
@@ -827,7 +827,7 @@ return {
 		HandlingName = "ELEGY2",
 		-- Physical
 		Mass               = 1700,
-		InitialDragCoeff   = 2.39,
+		InitialDragCoeff   = 1.92,
 		DownforceModifier  = 1.39,
 		PercentSubmerged   = 76,
 		CentreOfMassOffset = { 0,    -0.132, 0.017 },
@@ -836,27 +836,27 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.156,
 		InitialDriveGears              = 5,
-		InitialDriveForce              = 0.325,
+		InitialDriveForce              = 0.312,
 		DriveInertia                   = 1.02,
 		ClutchChangeRateScaleUpShift   = 2.7,
 		ClutchChangeRateScaleDownShift = 2.6,
-		InitialDriveMaxFlatVel         = 165,
-		SteeringLock                   = 32.4,
+		InitialDriveMaxFlatVel         = 185,
+		SteeringLock                   = 33.4,
 
 		-- Brake
-		BrakeForce     = 0.495,
+		BrakeForce     = 0.830,
 		BrakeBiasFront = 0.461,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.1,
 
 		-- Traction
-		TractionCurveMax         = 1.98,
-		TractionCurveMin         = 1.873,
+		TractionCurveMax         = 2.82,
+		TractionCurveMin         = 2.4,
 		TractionCurveLateral	 = 16.4,
 		TractionSpringDeltaMax   = 0.133,
-		LowSpeedTractionLossMult = 1.09,
+		LowSpeedTractionLossMult = 1.37,
 		CamberStiffnesss		 = 0,
-		TractionBiasFront        = 0.4839,
-		TractionLossMult         = 1.23,
+		TractionBiasFront        = 0.5,
+		TractionLossMult         = 1.03,
 
 		-- Suspension
 		SuspensionForce       = 3.03,
@@ -867,7 +867,7 @@ return {
 		SuspensionRaise		  = -0.009,
 		SuspensionBiasFront   = 0.485,
 		AntiRollBarForce	  = 0,
-		AntiRollBarBiasFront  = 0.5,
+		AntiRollBarBiasFront  = 0.,
 		RollCentreHeightFront = 0.219,
 		RollCentreHeightRear  = 0.217,
 
@@ -1585,7 +1585,7 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 8,
-		InitialDriveForce              = 0.291,
+		InitialDriveForce              = 0.258,
 		DriveInertia                   = 1.01,
 		ClutchChangeRateScaleUpShift   = 2.1,
 		ClutchChangeRateScaleDownShift = 2.0,
@@ -1593,19 +1593,19 @@ return {
 		SteeringLock                   = 33.3,
 
 		-- Brake
-		BrakeForce     = 0.509,
+		BrakeForce     = 0.588,
 		BrakeBiasFront = 0.489,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
 		TractionCurveMax         = 1.984,
 		TractionCurveMin         = 1.858,
 		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.132,
-		LowSpeedTractionLossMult = 1.02,
+		LowSpeedTractionLossMult = 0.0,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4841,
-		TractionLossMult         = 1.3,
+		TractionLossMult         = 1.38,
 
 		-- Suspension
 		SuspensionForce       = 2.81,
@@ -1696,7 +1696,7 @@ return {
 		RollCentreHeightRear  = 0.7,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,
@@ -1951,7 +1951,7 @@ return {
 		HandlingName = "OMNIS",
 		-- Physical
 		Mass               = 1100,
-		InitialDragCoeff   = 2.17,
+		InitialDragCoeff   = 2.67,
 		DownforceModifier  = 1.49,
 		PercentSubmerged   = 72,
 		CentreOfMassOffset = { 0,    -0.05, 0 },
@@ -1959,44 +1959,44 @@ return {
 
 		-- Transmission
 		DriveBiasFront                 = 0.245,
-		InitialDriveGears              = 8,
-		InitialDriveForce              = 0.371,
+		InitialDriveGears              = 6,
+		InitialDriveForce              = 0.361,
 		DriveInertia                   = 1,
 		ClutchChangeRateScaleUpShift   = 2,
 		ClutchChangeRateScaleDownShift = 2.1,
-		InitialDriveMaxFlatVel         = 156,
-		SteeringLock                   = 34.1,
+		InitialDriveMaxFlatVel         = 149,
+		SteeringLock                   = 30.1,
 
 		-- Brake
-		BrakeForce     = 0.597,
-		BrakeBiasFront = 0.486,
-		HandBrakeForce = 0.8,
+		BrakeForce     = 0.840,
+		BrakeBiasFront = 0.470,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 2.12,
-		TractionCurveMin         = 1.843,
+		TractionCurveMax         = 2.32,
+		TractionCurveMin         = 1.943,
 		TractionCurveLateral	 = 16.9,
 		TractionSpringDeltaMax   = 0.138,
-		LowSpeedTractionLossMult = 1.06,
+		LowSpeedTractionLossMult = 1.16,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4833,
-		TractionLossMult         = 0.88,
+		TractionLossMult         = 1.0,
 
 		-- Suspension
 		SuspensionForce       = 2.94,
-		SuspensionCompDamp    = 1.42,
-		SuspensionReboundDamp = 0.66,
+		SuspensionCompDamp    = 1.0,
+		SuspensionReboundDamp = 1.0,
 		SuspensionUpperLimit  = 0.072,
 		SuspensionLowerLimit  = -0.118,
 		SuspensionRaise		  = 0,
 		SuspensionBiasFront   = 0.5,
-		AntiRollBarForce	  = 0.283,
+		AntiRollBarForce	  = 0.,
 		AntiRollBarBiasFront  = 0.282,
 		RollCentreHeightFront = 0.7,
 		RollCentreHeightRear  = 0.7,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,

@@ -1037,7 +1037,7 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.0,
 		InitialDriveGears              = 4,
-		InitialDriveForce              = 0.1835,
+		InitialDriveForce              = 0.1985,
 		DriveInertia                   = 0.9,
 		ClutchChangeRateScaleUpShift   = 1.3,
 		ClutchChangeRateScaleDownShift = 1.5,
@@ -1050,11 +1050,11 @@ return {
 		HandBrakeForce = 0.6,
 
 		-- Traction
-		TractionCurveMax         = 1.87,
-		TractionCurveMin         = 1.70,
+		TractionCurveMax         = 1.97,
+		TractionCurveMin         = 1.80,
 		TractionCurveLateral     = 15.5,
 		TractionSpringDeltaMax   = 0.1,
-		LowSpeedTractionLossMult = 1.21,
+		LowSpeedTractionLossMult = 0.0,
 		CamberStiffnesss         = 0.0,
 		TractionBiasFront        = 0.4801,
 		TractionLossMult         = 1.16,
