@@ -258,6 +258,11 @@ end)
 
 RegisterNetEvent('fsn_jewellerystore:case:startrob')
 AddEventHandler('fsn_jewellerystore:case:startrob', function(caseid)
+	if not HasAnimDictLoaded('missheist_jewel') then
+		exports['mythic_notify']:DoHudText('error', 'Try again')
+		RequestAnimDict('missheist_jewel')
+		return
+	end
 	local pos = GetEntityCoords(GetPlayerPed(-1))
 	local coords = {
 		x = pos.x,
@@ -269,7 +274,7 @@ AddEventHandler('fsn_jewellerystore:case:startrob', function(caseid)
 	local anims = {'smash_case', 'smash_case_b', 'smash_case_c', 'smash_case_d'}
 	RequestAnimDict('missheist_jewel')
 	while not HasAnimDictLoaded('missheist_jewel') do
-		Citizen.Wait(7500)
+		Citizen.Wait(1)
 	end
 	TaskPlayAnim(GetPlayerPed(-1), "missheist_jewel", anims[math.random(1,#anims)], 4.0, -4, -1, 1, 0, 0, 0, 0)
 	robbing = true
@@ -478,14 +483,16 @@ Citizen.CreateThread(function()
 				end
 			end
 			for key, case in pairs(cases) do
-				local inzone = false
-				if GetDistanceBetweenCoords(case[1],case[2],case[3], GetEntityCoords(GetPlayerPed(-1)), true) < 0.7 then
-					inzone = true
+				--local inzone = false
+				if GetDistanceBetweenCoords(case[1],case[2],case[3], GetEntityCoords(GetPlayerPed(-1)), true) < 1 then
+					--inzone = true
 					if robbing then
-						fsn_drawText3D(case[1],case[2],case[3], 'Looting...')
+						--print'robbing'
+						DisableControlAction(0,288)
+						fsn_drawText3D(GetEntityCoords(GetPlayerPed(-1)).x,GetEntityCoords(GetPlayerPed(-1)).y,GetEntityCoords(GetPlayerPed(-1)).z, 'Looting...')
 						FreezeEntityPosition(GetPlayerPed(-1), true)
 					elseif case.robbed == false then 
-						if exports["fsn_police"]:fsn_getCopAmt() > 2 then
+						if true == true then --exports["fsn_police"]:fsn_getCopAmt() > 2 then
 							fsn_drawText3D(case[1],case[2],case[3], '[E] Loot Case')
 							if IsControlJustPressed(0,38) then
 								-- e is pressed
@@ -498,10 +505,14 @@ Citizen.CreateThread(function()
 					else
 						fsn_drawText3D(case[1],case[2],case[3], 'Already looted')
 					end
+				else
+					--if robbing then
+					--	print'robbing'
+					--	DisableControlAction(0,288)
+					--	fsn_drawText3D(GetEntityCoords(GetPlayerPed(-1)).x,GetEntityCoords(GetPlayerPed(-1)).y,GetEntityCoords(GetPlayerPed(-1)).z, 'Looting...')
+					--	FreezeEntityPosition(GetPlayerPed(-1), true)
+					--end
 				end
-			end
-			if robbing and not inzone then
-				robbing = false
 			end
 		else
 			if blips then

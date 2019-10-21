@@ -3,7 +3,7 @@ local lastrobbery = 0
 local currenttime = 0
 
 local cases = {
-	{-626.5326, -238.3758, 38.05, blip=false, robbed=false, lastrob=0},
+	{-626.5326, -238.3758, 38.05, blip=false, robbed=true, lastrob=0},
 	{ -625.6032, -237.5273, 38.05, blip=false, robbed=false, lastrob=0},
 	{-626.9178, -235.5166, 38.05, blip=false, robbed=false, lastrob=0},
 	{-625.6701, -234.6061, 38.05, blip=false, robbed=false, lastrob=0},
@@ -59,6 +59,11 @@ AddEventHandler('fsn_jewellerystore:case:rob', function(case)
 		TriggerClientEvent('fsn_jewellerystore:case:startrob', source, case)
 		TriggerClientEvent('fsn_jewellerystore:cases:update', -1, cases)
 	end
+end)
+
+RegisterServerEvent('fsn_jewellerystore:cases:request')
+AddEventHandler('fsn_jewellerystore:cases:request', function()
+	TriggerClientEvent('fsn_jewellerystore:cases:update', -1, cases)
 end)
 
 Citizen.CreateThread(function()
