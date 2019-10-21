@@ -24,66 +24,70 @@ Citizen.CreateThread(function()
           AddTextComponentString("Press ~INPUT_PICKUP~ to scrap this vehicle")
           DisplayHelpTextFromStringLabel(0, 0, 1, -1)
           if IsControlJustPressed(0,38) then
-            TaskLeaveVehicle(GetPlayerPed(-1), car, 1)
-            SetVehicleDoorsLockedForAllPlayers(car, true)
-            SetVehicleEngineHealth(car, -4000)
-            SetVehicleEngineOn(car, false, true, false)
+			if exports["fsn_cargarage"]:fsn_IsVehicleOwner(car) then
+				TriggerEvent('chatMessage', '', {255,255,255}, '^5^*DARK WEB |^0^r You want to scrap your own car? Fuck off on that traceable shit.')
+			else 
+				TaskLeaveVehicle(GetPlayerPed(-1), car, 1)
+				SetVehicleDoorsLockedForAllPlayers(car, true)
+				SetVehicleEngineHealth(car, -4000)
+				SetVehicleEngineOn(car, false, true, false)
 
-            SetVehicleDoorOpen(car, 7, false, false)
-            Wait(500)
-            SetVehicleDoorOpen(car, 6, false, false)
-            SetVehicleTyreBurst(car, 0, true, 1000)
-            Wait(500)
-            SetVehicleDoorOpen(car, 5, false, false)
-            SetVehicleTyreBurst(car, 1, true, 1000)
-            Wait(500)
-            SetVehicleDoorOpen(car, 4, false, false)
-            SetVehicleTyreBurst(car, 2, true, 1000)
-            Wait(500)
-            SetVehicleDoorOpen(car, 3, false, false)
-            SetVehicleTyreBurst(car, 3, true, 1000)
-            Wait(500)
-            SetVehicleDoorOpen(car, 2, false, false)
-            SetVehicleTyreBurst(car, 4, true, 1000)
-            Wait(500)
-            SetVehicleDoorOpen(car, 1, false, false)
-            SetVehicleTyreBurst(car, 5, true, 1000)
-            Wait(500)
-            SetVehicleDoorOpen(car, 0, false, false)
-            Wait(500)
+				SetVehicleDoorOpen(car, 7, false, false)
+				Wait(500)
+				SetVehicleDoorOpen(car, 6, false, false)
+				SetVehicleTyreBurst(car, 0, true, 1000)
+				Wait(500)
+				SetVehicleDoorOpen(car, 5, false, false)
+				SetVehicleTyreBurst(car, 1, true, 1000)
+				Wait(500)
+				SetVehicleDoorOpen(car, 4, false, false)
+				SetVehicleTyreBurst(car, 2, true, 1000)
+				Wait(500)
+				SetVehicleDoorOpen(car, 3, false, false)
+				SetVehicleTyreBurst(car, 3, true, 1000)
+				Wait(500)
+				SetVehicleDoorOpen(car, 2, false, false)
+				SetVehicleTyreBurst(car, 4, true, 1000)
+				Wait(500)
+				SetVehicleDoorOpen(car, 1, false, false)
+				SetVehicleTyreBurst(car, 5, true, 1000)
+				Wait(500)
+				SetVehicleDoorOpen(car, 0, false, false)
+				Wait(500)
 
-            SetVehicleDoorBroken(car, 7, true)
-            Wait(500)
-            SetVehicleDoorBroken(car, 6, true)
-            Wait(500)
-            SetVehicleDoorBroken(car, 5, true)
-            Wait(500)
-            SetVehicleDoorBroken(car, 4, true)
-            Wait(500)
-            SetVehicleDoorBroken(car, 3, true)
-            Wait(500)
-            SetVehicleDoorBroken(car, 2, true)
-            Wait(500)
-            SetVehicleDoorBroken(car, 1, true)
-            Wait(500)
-            SetVehicleDoorBroken(car, 0, true)
-            Wait(500)
-            SetEntityAsMissionEntity( car, true, true )
-            Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( car ) )
+				SetVehicleDoorBroken(car, 7, true)
+				Wait(500)
+				SetVehicleDoorBroken(car, 6, true)
+				Wait(500)
+				SetVehicleDoorBroken(car, 5, true)
+				Wait(500)
+				SetVehicleDoorBroken(car, 4, true)
+				Wait(500)
+				SetVehicleDoorBroken(car, 3, true)
+				Wait(500)
+				SetVehicleDoorBroken(car, 2, true)
+				Wait(500)
+				SetVehicleDoorBroken(car, 1, true)
+				Wait(500)
+				SetVehicleDoorBroken(car, 0, true)
+				Wait(500)
+				SetEntityAsMissionEntity( car, true, true )
+				Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( car ) )
 
-            required = false
-            lastjob = 0
-            TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(5000,12000))
-			
-			if math.random(1,100) < 50 then
-				TriggerEvent('fsn_inventory:items:add', {
-					index = 'steel',
-					name = 'Steel',
-					amt = math.random(1,2),
-					data = {
-						weight = 2.0
-					},
-				})
+				required = false
+				lastjob = 0
+				TriggerEvent('fsn_inventory:item:add', 'dirty_money', math.random(5000,12000))
+				
+				if math.random(1,100) < 50 then
+					TriggerEvent('fsn_inventory:items:add', {
+						index = 'steel',
+						name = 'Steel',
+						amt = math.random(1,2),
+						data = {
+							weight = 2.0
+						},
+					})
+				end
 			end
           end
         else
