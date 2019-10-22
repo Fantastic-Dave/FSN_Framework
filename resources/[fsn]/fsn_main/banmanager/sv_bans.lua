@@ -112,10 +112,11 @@ function checkBan(source, setKickReason)
 				local reason = 'your ban is weirdly formatted, ask jamessc0tt'
 				if check[1]['ban_expire'] == -1 then
 					print(':fsn_main: (sv_bans.lua) - Player('..src..') is PERM banned, Identifier('..v..') - dropping player.')
-					reason = ':FSN: You are banned from Fusion Roleplay. \n\nIdentifier: '..v..'\nReason: '..check[1]['ban_reason']..'\nExpires: Never\n\nAppeal this ban @ fsn.life/forums\n\n'
+					reason = ':FSN: You are banned from Fusion Roleplay. \n\nBanID: '..check[1]['ban_id']..'\nReason: '..check[1]['ban_reason']..'\nExpires: Never\n\nAppeal this ban @ fsn.life/forums\n\n'
 				else
 					print(':fsn_main: (sv_bans.lua) - Player('..src..') is banned until Date('..check[1]['ban_expire']..'), Identifier('..v..') - dropping player.')
-					reason = ':FSN: You are banned from Fusion Roleplay. \n\nIdentifier: '..v..'\nReason: '..check[1]['ban_reason']..'\nExpires: '..check[1]['ban_expire']..'\n\nAppeal this ban @ fsn.life/forums\n\n'
+                    reason = ':FSN: You are banned from Fusion Roleplay. \n\nBanID: '..check[1]['ban_id']..'\nReason: '..check[1]['ban_reason']..'\nExpires: '..check[1]['ban_expire']..'\n\nAppeal this ban @ fsn.life/forums\n\n'
+                    -- unban date needs to be formatted properly jamesy
 				end
 				DropPlayer(src, reason)
 				if setKickReason then
