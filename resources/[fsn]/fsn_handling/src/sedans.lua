@@ -21,16 +21,16 @@ return {
 		SteeringLock                   = 32.8,
 
 		-- Brake
-		BrakeForce     = 0.475,
+		BrakeForce     = 0.575,
 		BrakeBiasFront = 0.478,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
 		TractionCurveMax         = 1.94,
 		TractionCurveMin         = 1.801,
 		TractionCurveLateral	 = 16.4,
 		TractionSpringDeltaMax   = 0.128,
-		LowSpeedTractionLossMult = 1.05,
+		LowSpeedTractionLossMult = 0.05,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.481,
 		TractionLossMult         = 1.25,
@@ -49,10 +49,10 @@ return {
 		RollCentreHeightRear  = 0.343,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.5,
-		EngineDamageMult			= 1.5,
+		EngineDamageMult			= 0.7,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -1457,8 +1457,8 @@ return {
 		-- Damage
 		CollisionDamageMult         = 0.35,
 		WeaponDamageMult			= 1.0,
-		DeformationDamageMult		= 0.7,
-		EngineDamageMult			= 1.5,
+		DeformationDamageMult		= 0.3,
+		EngineDamageMult			= 0.4,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 

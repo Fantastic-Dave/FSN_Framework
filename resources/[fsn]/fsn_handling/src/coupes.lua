@@ -4,7 +4,7 @@ return {
 		HandlingName = "COGCABRIO",
 		-- Physical
 		Mass               = 2550, 
-		InitialDragCoeff   = 2.02,
+		InitialDragCoeff   = 1.96,
 		DownforceModifier  = 1.28,
 		PercentSubmerged   = 80,
 		CentreOfMassOffset = { 0,    -0.1, 0.04 },
@@ -13,24 +13,24 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.11,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.283,
+		InitialDriveForce              = 0.293,
 		DriveInertia                   = 0.97,
 		ClutchChangeRateScaleUpShift   = 1.7,
 		ClutchChangeRateScaleDownShift = 1.8,
-		InitialDriveMaxFlatVel         = 156,
+		InitialDriveMaxFlatVel         = 176,
 		SteeringLock                   = 33.9,
 
 		-- Brake
-		BrakeForce     = 0.531,
+		BrakeForce     = 0.731,
 		BrakeBiasFront = 0.47188,
-		HandBrakeForce = 0.75,
+		HandBrakeForce = 1.0,
 
 		-- Traction
 		TractionCurveMax         = 2.053,
 		TractionCurveMin         = 1.95,
 		TractionCurveLateral	 = 16.6,
 		TractionSpringDeltaMax   = 0.142,
-		LowSpeedTractionLossMult = 0.93,
+		LowSpeedTractionLossMult = 0.43,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4824,
 		TractionLossMult         = 1.26,
@@ -49,10 +49,10 @@ return {
 		RollCentreHeightRear  = 0.351,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
-		EngineDamageMult			= 1.5,
+		EngineDamageMult			= 0.7,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 
@@ -153,7 +153,7 @@ return {
 		HandlingName = "FELON",
 		-- Physical
 		Mass               = 1800,
-		InitialDragCoeff   = 2.49,
+		InitialDragCoeff   = 2.09,
 		DownforceModifier  = 1.31,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.155, 0.02 },
@@ -162,24 +162,24 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.276,
+		InitialDriveForce              = 0.310,
 		DriveInertia                   = 1,
 		ClutchChangeRateScaleUpShift   = 2.1,
 		ClutchChangeRateScaleDownShift = 2,
-		InitialDriveMaxFlatVel         = 160,
+		InitialDriveMaxFlatVel         = 170,
 		SteeringLock                   = 33.6,
 
 		-- Brake
-		BrakeForce     = 0.558,
+		BrakeForce     = 0.758,
 		BrakeBiasFront = 0.48623,
-		HandBrakeForce = 0.7,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 2.1,
-		TractionCurveMin         = 1.937,
+		TractionCurveMax         = 2.3,
+		TractionCurveMin         = 2.1,
 		TractionCurveLateral	 = 16.6,
 		TractionSpringDeltaMax   = 0.13,
-		LowSpeedTractionLossMult = 1.23,
+		LowSpeedTractionLossMult = 0.23,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4842,
 		TractionLossMult         = 1.29,
@@ -197,10 +197,10 @@ return {
 		RollCentreHeightRear  = 0.495,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
-		EngineDamageMult			= 1.5,
+		EngineDamageMult			= 0.7,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 
@@ -227,7 +227,7 @@ return {
 		HandlingName = "FELON2",
 		-- Physical
 		Mass               = 1800,
-		InitialDragCoeff   = 2.49,
+		InitialDragCoeff   = 2.08,
 		DownforceModifier  = 1.31,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.155, 0.02 },
@@ -236,24 +236,24 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.276,
+		InitialDriveForce              = 0.305,
 		DriveInertia                   = 1,
 		ClutchChangeRateScaleUpShift   = 2.1,
 		ClutchChangeRateScaleDownShift = 2,
-		InitialDriveMaxFlatVel         = 160,
+		InitialDriveMaxFlatVel         = 176,
 		SteeringLock                   = 33.6,
 
 		-- Brake
-		BrakeForce     = 0.556,
+		BrakeForce     = 0.756,
 		BrakeBiasFront = 0.48623,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 2.15,
-		TractionCurveMin         = 1.94,
+		TractionCurveMax         = 2.35,
+		TractionCurveMin         = 2.14,
 		TractionCurveLateral	 = 16.6,
 		TractionSpringDeltaMax   = 0.13,
-		LowSpeedTractionLossMult = 1.23,
+		LowSpeedTractionLossMult = 0.67,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4842,
 		TractionLossMult         = 1.29,
@@ -272,10 +272,10 @@ return {
 		RollCentreHeightRear  = 0.494,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.2,
-		EngineDamageMult			= 1.5,
+		EngineDamageMult			= 0.7,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 
@@ -302,7 +302,7 @@ return {
 		HandlingName = "F620",
 		-- Physical
 		Mass               = 1700,
-		InitialDragCoeff   = 2.81,
+		InitialDragCoeff   = 1.93,
 		DownforceModifier  = 1.45,
 		PercentSubmerged   = 76,
 		CentreOfMassOffset = { 0,    -0.13, 0.02 },
@@ -311,27 +311,27 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.311,
+		InitialDriveForce              = 0.325,
 		DriveInertia                   = 1,
 		ClutchChangeRateScaleUpShift   = 2.1,
 		ClutchChangeRateScaleDownShift = 2.1,
-		InitialDriveMaxFlatVel         = 164,
+		InitialDriveMaxFlatVel         = 190,
 		SteeringLock                   = 32.9,
 
 		-- Brake
-		BrakeForce     = 0.595,
+		BrakeForce     = 0.695,
 		BrakeBiasFront = 0.517,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 2.09,
-		TractionCurveMin         = 1.98,
+		TractionCurveMax         = 2.39,
+		TractionCurveMin         = 2.1,
 		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.133,
-		LowSpeedTractionLossMult = 1.19,
+		LowSpeedTractionLossMult = 0.68,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4843,
-		TractionLossMult         = 1.3,
+		TractionLossMult         = 1.0,
 
 		-- Suspension
 		SuspensionForce       = 2.77,
@@ -347,10 +347,10 @@ return {
 		RollCentreHeightRear  = 0.4075,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
-		EngineDamageMult			= 1.5,
+		EngineDamageMult			= 1.0,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -386,7 +386,7 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.262,
+		InitialDriveForce              = 0.272,
 		DriveInertia                   = 1,
 		ClutchChangeRateScaleUpShift   = 1.9,
 		ClutchChangeRateScaleDownShift = 2,
@@ -394,16 +394,16 @@ return {
 		SteeringLock                   = 33.2,
 
 		-- Brake
-		BrakeForce     = 0.501,
+		BrakeForce     = 0.670,
 		BrakeBiasFront = 0.507,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 2.10,
-		TractionCurveMin         = 1.99,
+		TractionCurveMax         = 2.30,
+		TractionCurveMin         = 2.05,
 		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.131,
-		LowSpeedTractionLossMult = 1.21,
+		LowSpeedTractionLossMult = 0.60,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4838,
 		TractionLossMult         = 1.28,
@@ -422,10 +422,10 @@ return {
 		RollCentreHeightRear  = 0.553,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
-		EngineDamageMult			= 1.5,
+		EngineDamageMult			= 1.0,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -602,7 +602,7 @@ return {
 		HandlingName = "SENTINEL",
 		-- Physical
 		Mass               = 1900,
-		InitialDragCoeff   = 2.63,
+		InitialDragCoeff   = 2.33,
 		DownforceModifier  = 1.45,
 		PercentSubmerged   = 76,
 		CentreOfMassOffset = { 0,    -0.08, 0.02 },
@@ -611,24 +611,24 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.2711,
+		InitialDriveForce              = 0.2911,
 		DriveInertia                   = 1.02,
 		ClutchChangeRateScaleUpShift   = 1.8,
 		ClutchChangeRateScaleDownShift = 1.8,
-		InitialDriveMaxFlatVel         = 152,
+		InitialDriveMaxFlatVel         = 177,
 		SteeringLock                   = 33.2,
 
 		-- Brake
-		BrakeForce     = 0.461,
+		BrakeForce     = 0.561,
 		BrakeBiasFront = 0.473,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 1.9,
-		TractionCurveMin         = 1.883,
+		TractionCurveMax         = 2.3,
+		TractionCurveMin         = 2.1,
 		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.129,
-		LowSpeedTractionLossMult = 1.125,
+		LowSpeedTractionLossMult = 0.36,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4827,
 		TractionLossMult         = 1.29,
@@ -769,11 +769,11 @@ return {
 		-- Brake
 		BrakeForce     = 0.82,
 		BrakeBiasFront = 0.65,
-		HandBrakeForce = 0.3,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 2,
-		TractionCurveMin         = 1.92,
+		TractionCurveMax         = 2.3,
+		TractionCurveMin         = 2.1,
 		TractionCurveLateral	 = 17,
 		TractionSpringDeltaMax   = 0.13,
 		LowSpeedTractionLossMult = 0.6,
@@ -826,7 +826,7 @@ return {
 	
 		-- Physical
 		Mass               = 2800,
-		InitialDragCoeff   = 2.372,
+		InitialDragCoeff   = 2.11,
 		DownforceModifier  = 1.23,
 		PercentSubmerged   = 82,
 		CentreOfMassOffset = { 0,    -0.03, 0.05 },
@@ -835,27 +835,27 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.26022,
+		InitialDriveForce              = 0.319,
 		DriveInertia                   = 0.99,
 		ClutchChangeRateScaleUpShift   = 1.9,
 		ClutchChangeRateScaleDownShift = 1.9,
-		InitialDriveMaxFlatVel         = 157,
+		InitialDriveMaxFlatVel         = 177,
 		SteeringLock                   = 34.2,
 
 		-- Brake
-		BrakeForce     = 0.534,
-		BrakeBiasFront = 0.502,
-		HandBrakeForce = 0.65,
+		BrakeForce     = 0.634,
+		BrakeBiasFront = 0.4678,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 1.36,
-		TractionCurveMin         = 1.108,
+		TractionCurveMax         = 2.36,
+		TractionCurveMin         = 2.108,
 		TractionCurveLateral	 = 16.6,
 		TractionSpringDeltaMax   = 0.142,
-		LowSpeedTractionLossMult = 0.322,
+		LowSpeedTractionLossMult = 0.0,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4831394,
-		TractionLossMult         = 1.22,
+		TractionLossMult         = 1.0,
 
 		-- Suspension
 		SuspensionForce       = 2.3157,
@@ -900,50 +900,50 @@ return {
 		
 		HandlingName = "WINDSOR2",
 		-- Physical
-		Mass               = 3000,
-		InitialDragCoeff   = 2.28,
-		DownforceModifier  = 1.21,
+		Mass               = 2800,
+		InitialDragCoeff   = 2.31,
+		DownforceModifier  = 1.23,
 		PercentSubmerged   = 82,
-		CentreOfMassOffset = { 0,    -0.221, 0.04 },
-		InertiaMultiplier  = { 1.23, 1.02,    1.54 },
+		CentreOfMassOffset = { 0,    -0.03, 0.05 },
+		InertiaMultiplier  = { 1.22, 1.02,    1.49 },
 
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.260,
+		InitialDriveForce              = 0.309,
 		DriveInertia                   = 0.99,
 		ClutchChangeRateScaleUpShift   = 1.9,
 		ClutchChangeRateScaleDownShift = 1.9,
-		InitialDriveMaxFlatVel         = 157,
+		InitialDriveMaxFlatVel         = 177,
 		SteeringLock                   = 34.2,
 
 		-- Brake
-		BrakeForce     = 0.472,
-		BrakeBiasFront = 0.502,
-		HandBrakeForce = 0.7,
+		BrakeForce     = 0.634,
+		BrakeBiasFront = 0.4678,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 1.36,
-		TractionCurveMin         = 1.10,
+		TractionCurveMax         = 2.36,
+		TractionCurveMin         = 2.108,
 		TractionCurveLateral	 = 16.6,
-		TractionSpringDeltaMax   = 0.144,
-		LowSpeedTractionLossMult = 0.322,
+		TractionSpringDeltaMax   = 0.142,
+		LowSpeedTractionLossMult = 0.0,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4831394,
-		TractionLossMult         = 1.2,
+		TractionLossMult         = 1.0,
 
 		-- Suspension
-		SuspensionForce       = 2.49,
+		SuspensionForce       = 2.3157,
 		SuspensionCompDamp    = 1.29,
-		SuspensionReboundDamp = 0.47,
-		SuspensionUpperLimit  = 0.145,
-		SuspensionLowerLimit  = -0.152,
+		SuspensionReboundDamp = 0.46,
+		SuspensionUpperLimit  = 0.144,
+		SuspensionLowerLimit  = -0.151,
 		SuspensionRaise		  = 0.003,
-		SuspensionBiasFront   = 0.488,
+		SuspensionBiasFront   = 0.493,
 		AntiRollBarForce	  = 0,
 		AntiRollBarBiasFront  = 0.5,
-		RollCentreHeightFront = 0.277,
-		RollCentreHeightRear  = 0.255,
+		RollCentreHeightFront = 0.254,
+		RollCentreHeightRear  = 0.252,
 
 		-- Damage
 		CollisionDamageMult         = 1.0,
@@ -951,13 +951,13 @@ return {
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,
 		PetrolTankVolume			= 65.0,
-		OilVolume					= 5,
+		OilVolume					= 5.5,
 
 		-- Misc
-		SeatOffsetDistX = 0,
-		SeatOffsetDistY = 0,
+		SeatOffsetDistX = 0.05,
+		SeatOffsetDistY = -0.2,
 		SeatOffsetDistZ = 0,
-		MonetaryValue   = 95000,
+		MonetaryValue   = 105000,
 		ModelFlags		= '440010',
 		HandlingFlags   = "0",
 		DamageFlags		= "0",
@@ -976,7 +976,7 @@ return {
 		HandlingName = "ZION",
 		-- Physical
 		Mass               = 1900,
-		InitialDragCoeff   = 2.78,
+		InitialDragCoeff   = 2.28,
 		DownforceModifier  = 1.39,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    -0.13, 0.02 },
@@ -993,16 +993,16 @@ return {
 		SteeringLock                   = 33.2,
 
 		-- Brake
-		BrakeForce     = 0.548,
-		BrakeBiasFront = 0.490,
-		HandBrakeForce = 0.8,
+		BrakeForce     = 0.648,
+		BrakeBiasFront = 0.499,
+		HandBrakeForce = 1.0,
 
 		-- Traction
 		TractionCurveMax         = 2.9,
-		TractionCurveMin         = 1.96,
+		TractionCurveMin         = 2.3,
 		TractionCurveLateral	 = 16.5,
 		TractionSpringDeltaMax   = 0.134,
-		LowSpeedTractionLossMult = 1.23,
+		LowSpeedTractionLossMult = 0.23,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4834,
 		TractionLossMult         = 1.28,
@@ -1021,10 +1021,10 @@ return {
 		RollCentreHeightRear  = 0.204,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
-		EngineDamageMult			= 1.5,
+		EngineDamageMult			= 0.7,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.5,
 

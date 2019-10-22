@@ -464,7 +464,7 @@ return {
 		-- Brake
 		BrakeForce     = 0.982,
 		BrakeBiasFront = 0.635,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
 		TractionCurveMax         = 2.57,
@@ -594,7 +594,7 @@ return {
 		HandlingName = "ELLIE",
 		-- Physical
 		Mass               = 1370,
-		InitialDragCoeff   = 3.10,
+		InitialDragCoeff   = 2.89,
 		PercentSubmerged   = 85,
 		CentreOfMassOffset = { 0,    0.1, -0.25 },
 		InertiaMultiplier  = { 1, 1,    1.6 },

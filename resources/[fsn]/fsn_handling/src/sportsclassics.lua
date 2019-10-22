@@ -740,7 +740,7 @@ return {
 		HandlingName = "RAPIDGT3",
 		-- Physical
 		Mass               = 1850,
-		InitialDragCoeff   = 2.83,
+		InitialDragCoeff   = 2.73,
 		DownforceModifier  = 1.35,
 		PercentSubmerged   = 78,
 		CentreOfMassOffset = { 0,    0, -0.22 },
@@ -749,24 +749,24 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0,
 		InitialDriveGears              = 5,
-		InitialDriveForce              = 0.305,
+		InitialDriveForce              = 0.315,
 		DriveInertia                   = 1,
 		ClutchChangeRateScaleUpShift   = 1.2,
 		ClutchChangeRateScaleDownShift = 1.3,
-		InitialDriveMaxFlatVel         = 148,
+		InitialDriveMaxFlatVel         = 155,
 		SteeringLock                   = 32.4,
 
 		-- Brake
 		BrakeForce     = 0.575,
 		BrakeBiasFront = 0.49252,
-		HandBrakeForce = 0.8,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 1.954,
-		TractionCurveMin         = 1.822,
+		TractionCurveMax         = 2.1,
+		TractionCurveMin         = 1.944,
 		TractionCurveLateral	 = 17.0,
 		TractionSpringDeltaMax   = 0.15,
-		LowSpeedTractionLossMult = 1.19,
+		LowSpeedTractionLossMult = 0.89,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4792,
 		TractionLossMult         = 1.27,
@@ -785,10 +785,10 @@ return {
 		RollCentreHeightRear  = 0.308,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
-		EngineDamageMult			= 1.5,
+		EngineDamageMult			= 0.7,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 

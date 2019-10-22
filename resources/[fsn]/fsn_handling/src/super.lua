@@ -904,7 +904,7 @@ return {
 		HandlingName = "REAPER",
 		-- Physical
 		Mass               = 1550,
-		InitialDragCoeff   = 2.46,
+		InitialDragCoeff   = 1.30,
 		DownforceModifier  = 1.62,
 		PercentSubmerged   = 76,
 		CentreOfMassOffset = { 0,    -0.09, 0.0 },
@@ -913,7 +913,7 @@ return {
 		-- Transmission
         DriveBiasFront                 = 0.1,
         InitialDriveGears              = 6,
-        InitialDriveForce              = 0.437,
+        InitialDriveForce              = 0.380,
         DriveInertia                   = 1.00,
         ClutchChangeRateScaleUpShift   = 7.5,
         ClutchChangeRateScaleDownShift = 6.0,
@@ -921,13 +921,13 @@ return {
         SteeringLock                   = 37.2,
 
         -- Brake
-        BrakeForce     = 2.52,
+        BrakeForce     = 3.40,
         BrakeBiasFront = 0.4,
         HandBrakeForce = 1.4,
 
         -- Traction
-        TractionCurveMax         = 2.4,
-        TractionCurveMin         = 2.2,
+        TractionCurveMax         = 2.6,
+        TractionCurveMin         = 2.3,
         TractionCurveLateral     = 16.5,
         TractionSpringDeltaMax   = 0.139,
         LowSpeedTractionLossMult = 0.19,
@@ -952,7 +952,7 @@ return {
 		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
-		EngineDamageMult			= 1.5,
+		EngineDamageMult			= 0.7,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -1362,11 +1362,11 @@ return {
 		DriveInertia                   = 0.95,
 		ClutchChangeRateScaleUpShift   = 2.3,
 		ClutchChangeRateScaleDownShift = 2.7,
-		InitialDriveMaxFlatVel         = 220,
+		InitialDriveMaxFlatVel         = 210,
 		SteeringLock                   = 32.1,
 
 		-- Brake
-		BrakeForce     = 0.744,
+		BrakeForce     = 1.444,
 		BrakeBiasFront = 0.38949,
 		HandBrakeForce = 0.8,
 
@@ -1375,7 +1375,7 @@ return {
 		TractionCurveMin         = 1.974,
 		TractionCurveLateral	 = 16.4,
 		TractionSpringDeltaMax   = 0.113,
-		LowSpeedTractionLossMult = 1.18,
+		LowSpeedTractionLossMult = 0.68,
 		CamberStiffnesss		 = 0.0,
 		TractionBiasFront        = 0.4842,
 		TractionLossMult         = 1.38,

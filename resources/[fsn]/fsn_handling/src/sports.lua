@@ -752,7 +752,7 @@ return {
 		HandlingName = "ELEGY",
 		-- Physical
 		Mass               = 1550,
-		InitialDragCoeff   = 2.09,
+		InitialDragCoeff   = 2.19,
 		DownforceModifier  = 1.43,
 		PercentSubmerged   = 72,
 		CentreOfMassOffset = { 0,    -0.095, 0.038 },
@@ -761,7 +761,7 @@ return {
 		-- Transmission
 		DriveBiasFront                 = 0.468,
 		InitialDriveGears              = 6,
-		InitialDriveForce              = 0.333,
+		InitialDriveForce              = 0.23,
 		DriveInertia                   = 1.04,
 		ClutchChangeRateScaleUpShift   = 1.9,
 		ClutchChangeRateScaleDownShift = 2.0,
@@ -875,7 +875,7 @@ return {
 		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
-		EngineDamageMult			= 1.5,
+		EngineDamageMult			= 0.7,
 		PetrolTankVolume			= 65.0,
 		OilVolume					= 5.0,
 
@@ -1740,26 +1740,26 @@ return {
 		ClutchChangeRateScaleUpShift   = 9,
 		ClutchChangeRateScaleDownShift = 9,
 		InitialDriveMaxFlatVel         = 156,
-		SteeringLock                   = 32.8,
+		SteeringLock                   = 33.8,
 
 		-- Brake
-		BrakeForce     = 0.53,
-		BrakeBiasFront = 0.481,
-		HandBrakeForce = 0.8,
+		BrakeForce     = 0.63,
+		BrakeBiasFront = 0.499,
+		HandBrakeForce = 1.0,
 
 		-- Traction
-		TractionCurveMax         = 2.25,
-		TractionCurveMin         = 1.917,
+		TractionCurveMax         = 2.45,
+		TractionCurveMin         = 2.317,
 		TractionCurveLateral	 = 16.7,
 		TractionSpringDeltaMax   = 0.14,
-		LowSpeedTractionLossMult = 1.05,
+		LowSpeedTractionLossMult = 0.070,
 		CamberStiffnesss		 = 0,
 		TractionBiasFront        = 0.4026,
 		TractionLossMult         = 1.32,
 
 		-- Suspension
 		SuspensionForce       = 2.92,
-		SuspensionCompDamp    = 1.01,
+		SuspensionCompDamp    = 1.61,
 		SuspensionReboundDamp = 0.89,
 		SuspensionUpperLimit  = 0.062,
 		SuspensionLowerLimit  = -0.125,
@@ -1771,7 +1771,7 @@ return {
 		RollCentreHeightRear  = 0.343,
 
 		-- Damage
-		CollisionDamageMult         = 1.0,
+		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.7,
 		EngineDamageMult			= 1.5,
@@ -2447,7 +2447,7 @@ return {
 		CollisionDamageMult         = 0.7,
 		WeaponDamageMult			= 1.0,
 		DeformationDamageMult		= 0.6,
-		EngineDamageMult			= 1.3,
+		EngineDamageMult			= 0.7,
 		PetrolTankVolume			= 60.0,
 		OilVolume					= 5.0,
 		
