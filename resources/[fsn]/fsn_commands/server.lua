@@ -1251,7 +1251,7 @@ AddEventHandler('chatMessage', function(source, auth, msg)
 				local char = getCharacter(tonumber(split[3]))
 				local perpname = char.char_fname..' '..char.char_lname
 				
-				TriggerClientEvent('chatMessage', -1, '', {255,255,255}, perpname..' was jailed for ^4'..split[4]..'^0 by: '..officername)
+				TriggerClientEvent('chatMessage', -1, '', {255,255,255}, perpname..' was jailed for ^4'..split[4]..'^0 months by: '..officername)
                 TriggerEvent('fsn_jail:sendsuspect', source, split[3], jailtime)
               else
                 TriggerClientEvent('chatMessage', source, ':FSN:', {255,0,0}, 'There was an issue with the arguments you provided.')
