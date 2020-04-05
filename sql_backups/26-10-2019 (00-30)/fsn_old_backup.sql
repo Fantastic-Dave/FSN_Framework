@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2020 at 11:42 PM
+-- Generation Time: Apr 05, 2020 at 11:58 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -79,18 +79,6 @@ CREATE TABLE `fsn_characters` (
   `char_weapons` text NOT NULL,
   `char_police` int(11) NOT NULL DEFAULT 0,
   `char_ems` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `fsn_jailreturn`
---
-
-CREATE TABLE `fsn_jailreturn` (
-  `char_id` int(11) NOT NULL,
-  `return_inventory` text DEFAULT NULL,
-  `returned` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -247,12 +235,6 @@ ALTER TABLE `fsn_bans`
 ALTER TABLE `fsn_characters`
   ADD PRIMARY KEY (`char_id`),
   ADD KEY `char_id` (`char_id`);
-
---
--- Indexes for table `fsn_jailreturn`
---
-ALTER TABLE `fsn_jailreturn`
-  ADD PRIMARY KEY (`char_id`);
 
 --
 -- Indexes for table `fsn_properties`
